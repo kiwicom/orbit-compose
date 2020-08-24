@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.0'
 }
 
 java {
@@ -11,4 +12,5 @@ java {
 dependencies {
     implementation "com.squareup:kotlinpoet:1.6.0"
     implementation "com.android.tools:sdk-common:27.0.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC"
 }
