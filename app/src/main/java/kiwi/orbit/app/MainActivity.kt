@@ -2,40 +2,78 @@ package kiwi.orbit.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.ExperimentalLayout
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
-import androidx.ui.tooling.preview.Preview
-import kiwi.orbit.app.ui.DemoTheme
+import androidx.compose.ui.unit.dp
+import kiwi.orbit.OrbitTheme
+import kiwi.orbit.app.screens.ButtonsScreen
+import kiwi.orbit.app.screens.ProfileScreen
+import kiwi.orbit.app.ui.AppTheme
 
 class MainActivity : AppCompatActivity() {
+    @OptIn(ExperimentalLayout::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DemoTheme {
+            AppTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Column {
-                        Greeting("Android")
-                    }
-                }
+                Scaffold(
+                    topBar = {
+                        TopAppBar(backgroundColor = OrbitTheme.colors.surfaceSecondary) {
+                            Text(
+                                text = "Compose Demo",
+                                modifier = Modifier.gravity(Alignment.CenterVertically)
+                            )
+                        }
+                    },
+                    bodyContent = { MainContent() }
+                )
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MainContent() {
+    val tabIndex = remember { mutableStateOf(0) }
+
+    Column {
+        TabRow(selectedTabIndex = tabIndex.value, backgroundColor = OrbitTheme.colors.surface) {
+            AppTab("Profile", 0, tabIndex)
+            AppTab("Buttons", 1, tabIndex)
+        }
+
+        ScrollableColumn(Modifier.fillMaxWidth()) {
+            when (tabIndex.value) {
+                0 -> ProfileScreen()
+                1 -> ButtonsScreen()
+            }
+        }
+    }
 }
 
-@Preview(showBackground = true)
+
 @Composable
-fun DefaultPreview() {
-    DemoTheme {
-        Greeting("Android")
+fun AppTab(text: String, index: Int, tabIndex: MutableState<Int>) {
+    Tab(selected = tabIndex.value == index, onClick = { tabIndex.value = index }) {
+        Text(
+            text,
+            Modifier.padding(8.dp)
+        )
     }
 }

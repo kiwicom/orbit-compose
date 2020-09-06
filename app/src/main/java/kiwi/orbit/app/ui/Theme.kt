@@ -1,37 +1,26 @@
 package kiwi.orbit.app.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import kiwi.orbit.foundation.colors.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.font
+import androidx.compose.ui.text.font.fontFamily
+import kiwi.orbit.OrbitTheme
+import kiwi.orbit.app.R
+import kiwi.orbit.foundation.Typography
 
-
-private val DarkColorPalette = darkColors(
-    primary = Color.ProductNormal,
-    primaryVariant = Color.ProductDark,
-    secondary = Color.ProductDarker
-)
-
-private val LightColorPalette = lightColors(
-    primary = Color.ProductNormal,
-    primaryVariant = Color.ProductDark,
-    secondary = Color.ProductDarker
+val fonts = fontFamily(
+    font(R.font.circular_pro_book, FontWeight.Normal),
+    font(R.font.circular_pro_medium, FontWeight.Medium),
+    font(R.font.circular_pro_bold, FontWeight.Bold),
 )
 
 @Composable
-fun DemoTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+fun AppTheme(
+    content: @Composable () -> Unit
+) {
+    OrbitTheme(
+        typography = Typography(defaultFontFamily = fonts),
+    ) {
+        content()
     }
-
-    MaterialTheme(
-        colors = colors,
-        typography = typography,
-        shapes = shapes,
-        content = content
-    )
 }
