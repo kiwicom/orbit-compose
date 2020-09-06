@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.screens.ButtonsScreen
 import kiwi.orbit.app.screens.ProfileScreen
+import kiwi.orbit.app.screens.StepperScreen
 import kiwi.orbit.app.ui.AppTheme
 
 class MainActivity : AppCompatActivity() {
@@ -56,12 +57,14 @@ fun MainContent() {
         TabRow(selectedTabIndex = tabIndex.value, backgroundColor = OrbitTheme.colors.surface) {
             AppTab("Profile", 0, tabIndex)
             AppTab("Buttons", 1, tabIndex)
+            AppTab("Stepper", 2, tabIndex)
         }
 
         ScrollableColumn(Modifier.fillMaxWidth()) {
             when (tabIndex.value) {
                 0 -> ProfileScreen()
                 1 -> ButtonsScreen()
+                2 -> StepperScreen()
             }
         }
     }
