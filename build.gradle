@@ -3,23 +3,31 @@ buildscript {
         compose_version = '1.0.0-alpha02'
     }
     ext.kotlin_version = "1.4.0"
+
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.0-alpha08"
+        classpath "com.android.tools.build:gradle:4.2.0-alpha09"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-allprojects {
+subprojects {
     repositories {
         google()
         jcenter()
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = '1.8'
+            allWarningsAsErrors = true
+            freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
+            // Opt-in to experimental compose APIs
+            freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+        }
+    }
 }
