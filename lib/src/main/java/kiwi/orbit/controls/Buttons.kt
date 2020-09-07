@@ -17,7 +17,7 @@ import androidx.compose.material.Button as MaterialButton
 import androidx.compose.material.TextButton as MaterialTextButton
 
 @Composable
-internal fun Button(
+private fun Button(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -26,7 +26,7 @@ internal fun Button(
     shape: Shape = MaterialTheme.shapes.small,
     border: BorderStroke? = null,
     backgroundColor: Color = OrbitTheme.colors.primary,
-    disabledBackgroundColor: Color = ButtonConstants.defaultDisabledBackgroundColor,
+    disabledBackgroundColor: Color = OrbitTheme.colors.surfaceDisabled,
     contentColor: Color = contentColorFor(backgroundColor),
     disabledContentColor: Color = ButtonConstants.defaultDisabledContentColor,
     contentPadding: InnerPadding = ButtonConstants.DefaultContentPadding,
