@@ -18,7 +18,7 @@ fun StepperScreen() {
             Modifier.padding(16.dp).fillMaxWidth()
         ) {
             var value by remember { mutableStateOf(1) }
-            Stepper(value = value, onValueChanged = { value = it })
+            Stepper(value = value, onValueChanged = { value = it }, maxValue = 8)
         }
     }
 }

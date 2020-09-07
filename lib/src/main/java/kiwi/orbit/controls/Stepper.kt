@@ -27,13 +27,30 @@ fun Stepper(
 ) {
     check(value in minValue..maxValue) { "Provided value is out of required bounds." }
 
+    Stepper(
+        value = value,
+        modifier = modifier,
+        onValueChanged = onValueChanged,
+        valueValidator = { newValue ->
+            newValue in minValue..maxValue
+        }
+    )
+}
+
+@Composable
+fun Stepper(
+    value: Int,
+    modifier: Modifier = Modifier,
+    onValueChanged: ((Int) -> Unit)? = null,
+    valueValidator: ((Int) -> Boolean)? = null,
+) {
     Row(
         modifier = modifier,
         verticalGravity = Alignment.CenterVertically,
     ) {
         StepperButton(
             onClick = { onValueChanged?.invoke(value - 1) },
-            enabled = value > minValue,
+            enabled = valueValidator?.invoke(value - 1) ?: true,
         ) {
             Icon(Icon.Minus)
         }
@@ -48,7 +65,7 @@ fun Stepper(
 
         StepperButton(
             onClick = { onValueChanged?.invoke(value + 1) },
-            enabled = value < maxValue,
+            enabled = valueValidator?.invoke(value + 1) ?: true,
         ) {
             Icon(Icon.Plus)
         }
