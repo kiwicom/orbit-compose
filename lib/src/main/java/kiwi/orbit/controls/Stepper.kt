@@ -21,7 +21,7 @@ import kiwi.orbit.icons.Plus
 fun Stepper(
     value: Int,
     modifier: Modifier = Modifier,
-    onValueChanged: ((Int) -> Unit)? = null,
+    onValueChange: (Int) -> Unit,
     minValue: Int = 0,
     maxValue: Int = Int.MAX_VALUE,
 ) {
@@ -30,7 +30,7 @@ fun Stepper(
     Stepper(
         value = value,
         modifier = modifier,
-        onValueChanged = onValueChanged,
+        onValueChange = onValueChange,
         valueValidator = { newValue ->
             newValue in minValue..maxValue
         }
@@ -41,7 +41,7 @@ fun Stepper(
 fun Stepper(
     value: Int,
     modifier: Modifier = Modifier,
-    onValueChanged: ((Int) -> Unit)? = null,
+    onValueChange: (Int) -> Unit,
     valueValidator: ((Int) -> Boolean)? = null,
 ) {
     Row(
@@ -49,7 +49,7 @@ fun Stepper(
         verticalGravity = Alignment.CenterVertically,
     ) {
         StepperButton(
-            onClick = { onValueChanged?.invoke(value - 1) },
+            onClick = { onValueChange.invoke(value - 1) },
             enabled = valueValidator?.invoke(value - 1) ?: true,
         ) {
             Icon(Icon.Minus)
@@ -64,7 +64,7 @@ fun Stepper(
         )
 
         StepperButton(
-            onClick = { onValueChanged?.invoke(value + 1) },
+            onClick = { onValueChange.invoke(value + 1) },
             enabled = valueValidator?.invoke(value + 1) ?: true,
         ) {
             Icon(Icon.Plus)
