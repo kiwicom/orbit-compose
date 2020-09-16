@@ -72,7 +72,7 @@ fun MenuItem(
             text = text,
             modifier = Modifier
                 .padding(start = 16.dp)
-                .gravity(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically)
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis
         )

@@ -1,11 +1,13 @@
 package kiwi.orbit.controls
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.InnerPadding
+import androidx.compose.foundation.InteractionState
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ButtonConstants
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -21,15 +23,17 @@ private fun Button(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    elevation: Dp = 2.dp,
-    disabledElevation: Dp = 0.dp,
+    interactionState: InteractionState = remember { InteractionState() },
+    elevation: Dp = ButtonConstants.defaultAnimatedElevation(
+        interactionState = interactionState,
+        enabled = enabled,
+        defaultElevation = 2.dp,
+    ).value,
     shape: Shape = MaterialTheme.shapes.small,
     border: BorderStroke? = null,
-    backgroundColor: Color = OrbitTheme.colors.primary,
-    disabledBackgroundColor: Color = OrbitTheme.colors.surfaceDisabled,
-    contentColor: Color = contentColorFor(backgroundColor),
-    disabledContentColor: Color = ButtonConstants.defaultDisabledContentColor,
-    contentPadding: InnerPadding = ButtonConstants.DefaultContentPadding,
+    backgroundColor: Color = if (enabled) OrbitTheme.colors.primary else OrbitTheme.colors.surfaceDisabled,
+    contentColor: Color = if (enabled) contentColorFor(backgroundColor) else ButtonConstants.defaultDisabledContentColor,
+    contentPadding: PaddingValues = ButtonConstants.DefaultContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
     MaterialButton(
@@ -37,13 +41,10 @@ private fun Button(
         modifier = modifier,
         enabled = enabled,
         elevation = elevation,
-        disabledElevation = disabledElevation,
         shape = shape,
         border = border,
         backgroundColor = backgroundColor,
-        disabledBackgroundColor = disabledBackgroundColor,
         contentColor = contentColor,
-        disabledContentColor = disabledContentColor,
         contentPadding = contentPadding,
         content = content,
     )
@@ -54,7 +55,7 @@ fun ButtonPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: InnerPadding = ButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = ButtonConstants.DefaultContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -63,7 +64,7 @@ fun ButtonPrimary(
         enabled = enabled,
         contentPadding = contentPadding,
         content = content,
-        backgroundColor = OrbitTheme.colors.primary
+        backgroundColor = if (enabled) OrbitTheme.colors.primary else OrbitTheme.colors.surfaceDisabled
     )
 }
 
@@ -72,7 +73,7 @@ fun ButtonPrimarySubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: InnerPadding = ButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = ButtonConstants.DefaultContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -81,7 +82,7 @@ fun ButtonPrimarySubtle(
         enabled = enabled,
         contentPadding = contentPadding,
         content = content,
-        backgroundColor = OrbitTheme.colors.primaryBg,
+        backgroundColor = if (enabled) OrbitTheme.colors.primaryBg else OrbitTheme.colors.surfaceDisabled,
         elevation = 1.dp
     )
 }
@@ -91,7 +92,7 @@ fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: InnerPadding = ButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = ButtonConstants.DefaultContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -100,7 +101,7 @@ fun ButtonSecondary(
         enabled = enabled,
         contentPadding = contentPadding,
         content = content,
-        backgroundColor = OrbitTheme.colors.surfaceSecondary,
+        backgroundColor = if (enabled) OrbitTheme.colors.surfaceSecondary else OrbitTheme.colors.surfaceDisabled,
         elevation = 1.dp
     )
 }
@@ -110,7 +111,7 @@ fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: InnerPadding = ButtonConstants.DefaultTextContentPadding,
+    contentPadding: PaddingValues = ButtonConstants.DefaultTextContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
     MaterialTextButton(
@@ -121,8 +122,7 @@ fun ButtonLink(
         shape = MaterialTheme.shapes.small,
         border = null,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.primary,
-        disabledContentColor = ButtonConstants.defaultDisabledContentColor,
+        contentColor = if (enabled) OrbitTheme.colors.primary else ButtonConstants.defaultDisabledContentColor,
         contentPadding = contentPadding,
         content = content
     )

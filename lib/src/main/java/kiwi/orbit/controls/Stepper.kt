@@ -46,7 +46,7 @@ fun Stepper(
 ) {
     Row(
         modifier = modifier,
-        verticalGravity = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         StepperButton(
             onClick = { onValueChange.invoke(value - 1) },
@@ -100,7 +100,7 @@ private fun StepperButton(
                     .indication(interactionState, IndicationAmbient.current())
                     .padding(4.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalGravity = Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically,
                 children = content,
             )
         }

@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                         TopAppBar(backgroundColor = OrbitTheme.colors.surfaceSecondary) {
                             Text(
                                 text = "Compose Demo",
-                                modifier = Modifier.gravity(Alignment.CenterVertically)
+                                modifier = Modifier.align(Alignment.CenterVertically)
                             )
                         }
                     },
