@@ -24,11 +24,7 @@ private fun Button(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionState: InteractionState = remember { InteractionState() },
-    elevation: Dp = ButtonConstants.defaultAnimatedElevation(
-        interactionState = interactionState,
-        enabled = enabled,
-        defaultElevation = 2.dp,
-    ).value,
+    elevation: Dp = ButtonConstants.animateDefaultElevation(interactionState, enabled),
     shape: Shape = MaterialTheme.shapes.small,
     border: BorderStroke? = null,
     backgroundColor: Color = if (enabled) OrbitTheme.colors.primary else OrbitTheme.colors.surfaceDisabled,
