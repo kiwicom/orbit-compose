@@ -147,6 +147,66 @@ fun lightColors(
     true
 )
 
+/**
+ * Dark Orbit color variant.
+ */
+fun darkColors(
+    surface: Color = ColorTokens.InkNormal,
+    surfaceBackground: Color = Color.Black,
+    surfaceSecondary: Color = ColorTokens.InkLight,
+    surfaceDisabled: Color = ColorTokens.InkLighter,
+    surfaceFgPrimary: Color = ColorTokens.CloudLight,
+    surfaceFgSecondary: Color = ColorTokens.CloudDark,
+    surfaceFgTertiary: Color = ColorTokens.CloudLight,
+
+    primary: Color = ColorTokens.ProductNormal,
+    primaryFg: Color = Color.Black,
+    primaryBg: Color = ColorTokens.ProductLight,
+    primaryVariant: Color = ColorTokens.ProductDark,
+
+    secondary: Color = ColorTokens.BlueNormal,
+    secondaryFg: Color = Color.Black,
+    secondaryBg: Color = ColorTokens.BlueLight,
+    secondaryVariant: Color = ColorTokens.BlueDark,
+
+    success: Color = ColorTokens.GreenNormal,
+    successFg: Color = ColorTokens.White,
+    successBg: Color = ColorTokens.GreenLight,
+
+    warning: Color = ColorTokens.OrangeNormal,
+    warningFg: Color = ColorTokens.White,
+    warningBg: Color = ColorTokens.GreenLight,
+
+    critical: Color = ColorTokens.RedNormal,
+    criticalFg: Color = Color.Black,
+    criticalBg: Color = ColorTokens.RedLight,
+): Colors = Colors(
+    surface,
+    surfaceBackground,
+    surfaceSecondary,
+    surfaceFgPrimary,
+    surfaceFgSecondary,
+    surfaceFgTertiary,
+    primary,
+    primaryFg,
+    primaryBg,
+    primaryVariant,
+    secondary,
+    secondaryFg,
+    secondaryBg,
+    secondaryVariant,
+    success,
+    successFg,
+    successBg,
+    warning,
+    warningFg,
+    warningBg,
+    critical,
+    criticalFg,
+    criticalBg,
+    false
+)
+
 fun Colors.contentColorFor(color: Color): Color {
     return when (color) {
         surface -> surfaceFgPrimary
