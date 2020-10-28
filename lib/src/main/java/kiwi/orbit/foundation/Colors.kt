@@ -154,7 +154,6 @@ fun darkColors(
     surface: Color = ColorTokens.InkNormal,
     surfaceBackground: Color = Color.Black,
     surfaceSecondary: Color = ColorTokens.InkLight,
-    surfaceDisabled: Color = ColorTokens.InkLighter,
     surfaceFgPrimary: Color = ColorTokens.CloudLight,
     surfaceFgSecondary: Color = ColorTokens.CloudDark,
     surfaceFgTertiary: Color = ColorTokens.CloudLight,

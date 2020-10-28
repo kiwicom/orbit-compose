@@ -7,6 +7,8 @@ import androidx.compose.ui.text.font.fontFamily
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.R
 import kiwi.orbit.foundation.Typography
+import kiwi.orbit.foundation.darkColors
+import kiwi.orbit.foundation.lightColors
 
 val fonts = fontFamily(
     font(R.font.circular_pro_book, FontWeight.Normal),
@@ -16,10 +18,12 @@ val fonts = fontFamily(
 
 @Composable
 fun AppTheme(
+    isLightTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
     OrbitTheme(
         typography = Typography(defaultFontFamily = fonts),
+        colors = if (isLightTheme) lightColors() else darkColors(),
     ) {
         content()
     }
