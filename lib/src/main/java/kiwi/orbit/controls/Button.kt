@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.contentColorFor
@@ -111,7 +113,9 @@ object ButtonConstants {
     @Composable
     fun defaultButtonColors(
         backgroundColor: Color = OrbitTheme.colors.primary,
-        disabledBackgroundColor: Color = OrbitTheme.colors.surfaceDisabled, // TODO: .compositeOver(MaterialTheme.colors.surface),
+        // We utilize here the secondary color since it has more "color hue" than the primary.
+        disabledBackgroundColor: Color = OrbitTheme.colors.surfaceFgSecondary.copy(alpha = 0.12f)
+            .compositeOver(OrbitTheme.colors.surface),
         contentColor: Color = contentColorFor(backgroundColor),
         disabledContentColor: Color = AmbientEmphasisLevels.current.disabled
             .applyEmphasis(contentColor)

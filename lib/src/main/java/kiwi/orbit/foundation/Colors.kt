@@ -13,7 +13,6 @@ import androidx.compose.material.Colors as MaterialColors
  * @property surface Color used for surfaces such as cards and sheets over the background.
  * @property surfaceBackground Color used for background, behind scrollable content.
  * @property surfaceSecondary Color used for surfaces with subtle emphasis such as buttons over an other surface color.
- * @property surfaceDisabled Color used for disabled surfaces, such as buttons.
  * @property surfaceFgPrimary Color used for text & icons display on top of a surface color, strong accent.
  * @property surfaceFgSecondary Color used for text & icons display on top of a surface color, medium accent.
  * @property surfaceFgTertiary Color used for text & icons display on top of a surface color, weak accent.
@@ -42,7 +41,6 @@ data class Colors(
     val surface: Color,
     val surfaceBackground: Color,
     val surfaceSecondary: Color,
-    val surfaceDisabled: Color,
     val surfaceFgPrimary: Color,
     val surfaceFgSecondary: Color,
     val surfaceFgTertiary: Color,
@@ -97,7 +95,6 @@ fun lightColors(
     surface: Color = Color.White,
     surfaceBackground: Color = ColorTokens.CloudLight,
     surfaceSecondary: Color = ColorTokens.CloudDark,
-    surfaceDisabled: Color = ColorTokens.CloudLight,
     surfaceFgPrimary: Color = ColorTokens.InkNormal,
     surfaceFgSecondary: Color = ColorTokens.InkLight,
     surfaceFgTertiary: Color = ColorTokens.InkLighter,
@@ -127,7 +124,6 @@ fun lightColors(
     surface,
     surfaceBackground,
     surfaceSecondary,
-    surfaceDisabled,
     surfaceFgPrimary,
     surfaceFgSecondary,
     surfaceFgTertiary,
