@@ -1,6 +1,6 @@
 package kiwi.orbit.foundation
 
-import androidx.compose.foundation.contentColor
+import androidx.compose.foundation.AmbientContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticAmbientOf
@@ -168,12 +168,12 @@ fun Colors.contentColorFor(color: Color): Color {
         warningBg -> warning
         critical -> criticalFg
         criticalBg -> critical
-        else -> Color.Unset
+        else -> Color.Unspecified
     }
 }
 
 @Composable
 fun contentColorFor(color: Color) =
-    OrbitTheme.colors.contentColorFor(color).useOrElse { contentColor() }
+    OrbitTheme.colors.contentColorFor(color).useOrElse { AmbientContentColor.current }
 
 internal val ColorsAmbient = staticAmbientOf { lightColors() }

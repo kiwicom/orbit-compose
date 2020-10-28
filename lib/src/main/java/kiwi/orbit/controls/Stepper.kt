@@ -97,7 +97,7 @@ private fun StepperButton(
         ) {
             Row(
                 Modifier
-                    .indication(interactionState, IndicationAmbient.current())
+                    .indication(interactionState, AmbientIndication.current())
                     .padding(4.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
