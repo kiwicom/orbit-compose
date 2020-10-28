@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,7 +51,9 @@ fun ButtonPrimarySubtle(
         modifier = modifier,
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
-            backgroundColor = OrbitTheme.colors.primaryBg
+            backgroundColor = OrbitTheme.colors.primary.copy(0.12f)
+                .compositeOver(OrbitTheme.colors.surface),
+            contentColor = OrbitTheme.colors.primary,
         ),
         elevation = MaterialButtonConstants.defaultElevation(
             defaultElevation = 1.dp

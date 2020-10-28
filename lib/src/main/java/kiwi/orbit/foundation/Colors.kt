@@ -18,12 +18,10 @@ import androidx.compose.material.Colors as MaterialColors
  * @property surfaceFgTertiary Color used for text & icons display on top of a surface color, weak accent.
  * @property primary Primary app color, used for navigation and CTA actions. May be used for both background & foreground (text & icon) colors.
  * @property primaryFg Color used for text & icons display on top of the [primary] color.
- * @property primaryBg Color used as primary background with weak accent. Use [primary] as its foreground.
- * @property primaryVariant Color used used as a [primary]'s variant to distinguish two elements. Internal.
+ * @property primaryVariant Color used used as a [primary]'s variant to distinguish two elements. Mainly for Material color conversion.
  * @property secondary Secondary app color, used for dynamic state and actions. May be used for both background & foreground (text & icon) colors.
  * @property secondaryFg Color used for text & icons display on top of the [secondary] color.
- * @property secondaryBg Color used as secondary background with weak accent. Use [secondary] as its foreground.
- * @property secondaryVariant Color used used as a [secondary]'s variant to distinguish two elements. Internal.
+ * @property secondaryVariant Color used used as a [secondary]'s variant to distinguish two elements. Mainly for Material color conversion.
  * @property success Color used for success state. May be used for both background & foreground (text & icon) colors.
  * @property successFg Color used for text & icons display on top of the [success] color.
  * @property successBg Color used as success background with weak accent. Use [success] as its foreground.
@@ -47,12 +45,10 @@ data class Colors(
 
     val primary: Color,
     val primaryFg: Color,
-    val primaryBg: Color,
     val primaryVariant: Color,
 
     val secondary: Color,
     val secondaryFg: Color,
-    val secondaryBg: Color,
     val secondaryVariant: Color,
 
     val success: Color,
@@ -101,12 +97,10 @@ fun lightColors(
 
     primary: Color = ColorTokens.ProductNormal,
     primaryFg: Color = Color.White,
-    primaryBg: Color = ColorTokens.ProductLight,
     primaryVariant: Color = ColorTokens.ProductDark,
 
     secondary: Color = ColorTokens.BlueNormal,
     secondaryFg: Color = Color.White,
-    secondaryBg: Color = ColorTokens.BlueLight,
     secondaryVariant: Color = ColorTokens.BlueDark,
 
     success: Color = ColorTokens.GreenNormal,
@@ -129,11 +123,9 @@ fun lightColors(
     surfaceFgTertiary,
     primary,
     primaryFg,
-    primaryBg,
     primaryVariant,
     secondary,
     secondaryFg,
-    secondaryBg,
     secondaryVariant,
     success,
     successFg,
@@ -160,12 +152,10 @@ fun darkColors(
 
     primary: Color = ColorTokens.ProductNormal,
     primaryFg: Color = Color.Black,
-    primaryBg: Color = ColorTokens.ProductLight,
     primaryVariant: Color = ColorTokens.ProductDark,
 
     secondary: Color = ColorTokens.BlueNormal,
     secondaryFg: Color = Color.Black,
-    secondaryBg: Color = ColorTokens.BlueLight,
     secondaryVariant: Color = ColorTokens.BlueDark,
 
     success: Color = ColorTokens.GreenNormal,
@@ -188,11 +178,9 @@ fun darkColors(
     surfaceFgTertiary,
     primary,
     primaryFg,
-    primaryBg,
     primaryVariant,
     secondary,
     secondaryFg,
-    secondaryBg,
     secondaryVariant,
     success,
     successFg,
@@ -213,10 +201,8 @@ fun Colors.contentColorFor(color: Color): Color {
         surfaceSecondary -> surfaceFgPrimary
         primary -> primaryFg
         primaryVariant -> primaryFg
-        primaryBg -> primary
         secondary -> secondaryFg
         secondaryVariant -> secondaryFg
-        secondaryBg -> secondary
         success -> successFg
         successBg -> success
         warning -> warningFg
