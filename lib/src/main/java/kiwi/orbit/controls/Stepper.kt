@@ -1,8 +1,18 @@
 package kiwi.orbit.controls
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.ButtonConstants
+import androidx.compose.foundation.AmbientIndication
+import androidx.compose.foundation.InteractionState
+import androidx.compose.foundation.ProvideTextStyle
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSizeConstraints
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -12,10 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
-import kiwi.orbit.foundation.contentColorFor
 import kiwi.orbit.icons.Icon
 import kiwi.orbit.icons.Minus
 import kiwi.orbit.icons.Plus
+import androidx.compose.material.ButtonConstants as MaterialButtonConstants
 
 @Composable
 fun Stepper(
@@ -59,8 +69,7 @@ fun Stepper(
             text = value.toString(),
             style = OrbitTheme.typography.title4,
             textAlign = TextAlign.Center,
-            modifier = Modifier
-                .defaultMinSizeConstraints(44.dp),
+            modifier = Modifier.defaultMinSizeConstraints(44.dp),
         )
 
         StepperButton(
@@ -72,6 +81,7 @@ fun Stepper(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun StepperButton(
     onClick: () -> Unit,
@@ -79,18 +89,24 @@ private fun StepperButton(
     content: @Composable RowScope.() -> Unit,
 ) {
     val interactionState = remember { InteractionState() }
+    val colors = ButtonConstants.defaultButtonColors(
+        backgroundColor = OrbitTheme.colors.surfaceSecondary,
+    )
+    val elevation = MaterialButtonConstants.defaultElevation(
+        defaultElevation = 0.dp,
+    )
 
     Surface(
-        shape = MaterialTheme.shapes.small,
-        color = if (enabled) OrbitTheme.colors.surfaceSecondary else OrbitTheme.colors.surfaceDisabled,
-        contentColor = if (enabled) contentColorFor(OrbitTheme.colors.surfaceSecondary) else ButtonConstants.defaultDisabledContentColor,
-        elevation = if (enabled) 1.dp else 0.dp,
         modifier = Modifier.clickable(
             onClick = onClick,
             enabled = enabled,
             interactionState = interactionState,
             indication = null,
-        )
+        ),
+        shape = MaterialTheme.shapes.small,
+        color = colors.backgroundColor(enabled),
+        contentColor = colors.contentColor(enabled),
+        elevation = elevation.elevation(enabled, interactionState),
     ) {
         ProvideTextStyle(
             value = MaterialTheme.typography.button
