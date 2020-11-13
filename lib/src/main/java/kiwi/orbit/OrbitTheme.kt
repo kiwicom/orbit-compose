@@ -1,10 +1,14 @@
 package kiwi.orbit
 
-import androidx.compose.foundation.ProvideTextStyle
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
-import kiwi.orbit.foundation.*
+import kiwi.orbit.foundation.Colors
+import kiwi.orbit.foundation.ColorsAmbient
+import kiwi.orbit.foundation.Shapes
+import kiwi.orbit.foundation.Typography
+import kiwi.orbit.foundation.TypographyAmbient
 
 @Composable
 fun OrbitTheme(

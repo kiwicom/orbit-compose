@@ -2,8 +2,8 @@ package kiwi.orbit.controls
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.ButtonColors
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,9 +29,8 @@ fun ButtonPrimary(
         modifier = modifier,
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
-            disabledContentColor = AmbientEmphasisLevels.current.disabled.applyEmphasis(
-                OrbitTheme.colors.surfaceFgSecondary
-            )
+            disabledContentColor = OrbitTheme.colors.surfaceFgSecondary
+                .copy(alpha = ContentAlpha.disabled)
         ),
         contentPadding = contentPadding,
         content = content,
@@ -118,8 +117,7 @@ object ButtonConstants {
         disabledBackgroundColor: Color = OrbitTheme.colors.surfaceFgSecondary.copy(alpha = 0.12f)
             .compositeOver(OrbitTheme.colors.surface),
         contentColor: Color = contentColorFor(backgroundColor),
-        disabledContentColor: Color = AmbientEmphasisLevels.current.disabled
-            .applyEmphasis(contentColor)
+        disabledContentColor: Color = contentColor.copy(alpha = ContentAlpha.disabled)
     ): ButtonColors = MaterialButtonConstants.defaultButtonColors(
         backgroundColor = backgroundColor,
         disabledContentColor = disabledContentColor,

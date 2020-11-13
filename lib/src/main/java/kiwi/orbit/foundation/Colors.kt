@@ -1,6 +1,6 @@
 package kiwi.orbit.foundation
 
-import androidx.compose.foundation.AmbientContentColor
+import androidx.compose.material.AmbientContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticAmbientOf
