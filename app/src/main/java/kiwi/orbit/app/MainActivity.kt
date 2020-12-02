@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                                 },
                                 modifier = Modifier.align(Alignment.CenterVertically)
                             ) {
-                                Icon(asset = Icons.Default.BrightnessMedium)
+                                Icon(Icons.Default.BrightnessMedium)
                             }
                         }
                     },

@@ -117,7 +117,7 @@ private fun StepperButton(
                     .padding(4.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                children = content,
+                content = content,
             )
         }
     }

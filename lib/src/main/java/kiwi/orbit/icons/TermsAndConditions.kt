@@ -1,16 +1,16 @@
 package kiwi.orbit.icons
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import kiwi.orbit.R
 
 @Composable
-val Icon.TermsAndConditions: VectorAsset
+val Icon.TermsAndConditions: ImageVector
 	get() {
 		if (icon != null) return icon!!
 		icon = vectorResource(id = R.drawable.ic_terms_and_conditions)
 		return icon!!
 	}
 
-private var icon: VectorAsset? = null
+private var icon: ImageVector? = null

@@ -82,7 +82,7 @@ class IconsGenerator {
     private fun generateClass(icons: List<Pair<String, String>>, dir: Path) {
         val iconClass = ClassName("kiwi.orbit.icons", "Icon")
         val composable = ClassName("androidx.compose.runtime", "Composable")
-        val vectorAssetType = ClassName("androidx.compose.ui.graphics.vector", "VectorAsset")
+        val vectorAssetType = ClassName("androidx.compose.ui.graphics.vector", "ImageVector")
         val vectorAssetTypeNullable = vectorAssetType.copy(nullable = true)
 
         icons.forEach { (iconName, iconResource) ->

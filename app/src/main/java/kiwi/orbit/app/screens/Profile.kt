@@ -17,7 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
@@ -69,14 +69,14 @@ fun ProfileScreen() {
 @Composable
 fun MenuItem(
     text: String,
-    icon: VectorAsset,
+    icon: ImageVector,
 ) {
     Row(
         modifier = Modifier
             .clickable(onClick = {})
             .padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp)
     ) {
-        Icon(asset = icon, tint = ColorTokens.InkLight)
+        Icon(icon, tint = ColorTokens.InkLight)
         Text(
             text = text,
             modifier = Modifier
