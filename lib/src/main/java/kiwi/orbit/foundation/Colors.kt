@@ -217,4 +217,4 @@ fun Colors.contentColorFor(color: Color): Color {
 fun contentColorFor(color: Color) =
     OrbitTheme.colors.contentColorFor(color).useOrElse { AmbientContentColor.current }
 
-internal val ColorsAmbient = staticAmbientOf { lightColors() }
+internal val AmbientColors = staticAmbientOf { lightColors() }

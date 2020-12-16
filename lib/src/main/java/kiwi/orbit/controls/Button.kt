@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.contentColorFor
 import androidx.compose.material.Button as MaterialButton
-import androidx.compose.material.ButtonConstants as MaterialButtonConstants
+import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
 import androidx.compose.material.TextButton as MaterialTextButton
 
 @Composable
@@ -21,7 +21,7 @@ fun ButtonPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: PaddingValues = MaterialButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     MaterialButton(
@@ -42,7 +42,7 @@ fun ButtonPrimarySubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: PaddingValues = MaterialButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     MaterialButton(
@@ -54,7 +54,7 @@ fun ButtonPrimarySubtle(
                 .compositeOver(OrbitTheme.colors.surface),
             contentColor = OrbitTheme.colors.primary,
         ),
-        elevation = MaterialButtonConstants.defaultElevation(
+        elevation = MaterialButtonDefaults.elevation(
             defaultElevation = 1.dp
         ),
         contentPadding = contentPadding,
@@ -67,7 +67,7 @@ fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: PaddingValues = MaterialButtonConstants.DefaultContentPadding,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     MaterialButton(
@@ -77,7 +77,7 @@ fun ButtonSecondary(
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.surfaceSecondary,
         ),
-        elevation = MaterialButtonConstants.defaultElevation(
+        elevation = MaterialButtonDefaults.elevation(
             defaultElevation = 1.dp
         ),
         contentPadding = contentPadding,
@@ -90,7 +90,7 @@ fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    contentPadding: PaddingValues = MaterialButtonConstants.DefaultTextContentPadding,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
     MaterialTextButton(
@@ -118,7 +118,7 @@ object ButtonConstants {
             .compositeOver(OrbitTheme.colors.surface),
         contentColor: Color = contentColorFor(backgroundColor),
         disabledContentColor: Color = contentColor.copy(alpha = ContentAlpha.disabled)
-    ): ButtonColors = MaterialButtonConstants.defaultButtonColors(
+    ): ButtonColors = MaterialButtonDefaults.buttonColors(
         backgroundColor = backgroundColor,
         disabledContentColor = disabledContentColor,
         contentColor = contentColor,

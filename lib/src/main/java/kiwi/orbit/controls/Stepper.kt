@@ -25,7 +25,7 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.icons.Icon
 import kiwi.orbit.icons.Minus
 import kiwi.orbit.icons.Plus
-import androidx.compose.material.ButtonConstants as MaterialButtonConstants
+import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
 
 @Composable
 fun Stepper(
@@ -92,7 +92,7 @@ private fun StepperButton(
     val colors = ButtonConstants.defaultButtonColors(
         backgroundColor = OrbitTheme.colors.surfaceSecondary,
     )
-    val elevation = MaterialButtonConstants.defaultElevation(
+    val elevation = MaterialButtonDefaults.elevation(
         defaultElevation = 0.dp,
     )
 

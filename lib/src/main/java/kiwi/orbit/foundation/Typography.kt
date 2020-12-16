@@ -97,4 +97,4 @@ private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {
     return if (fontFamily != null) this else copy(fontFamily = default)
 }
 
-internal val TypographyAmbient = staticAmbientOf { Typography() }
+internal val AmbientTypography = staticAmbientOf { Typography() }
