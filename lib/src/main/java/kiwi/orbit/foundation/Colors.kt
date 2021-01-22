@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticAmbientOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.useOrElse
+import androidx.compose.ui.graphics.takeOrElse
 import kiwi.orbit.OrbitTheme
 import androidx.compose.material.Colors as MaterialColors
 
@@ -215,6 +215,6 @@ fun Colors.contentColorFor(color: Color): Color {
 
 @Composable
 fun contentColorFor(color: Color) =
-    OrbitTheme.colors.contentColorFor(color).useOrElse { AmbientContentColor.current }
+    OrbitTheme.colors.contentColorFor(color).takeOrElse { AmbientContentColor.current }
 
 internal val AmbientColors = staticAmbientOf { lightColors() }
