@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
+import kiwi.orbit.R
 import kiwi.orbit.icons.Icon
 import kiwi.orbit.icons.Minus
 import kiwi.orbit.icons.Plus
@@ -50,8 +52,10 @@ fun Stepper(
 @Composable
 fun Stepper(
     value: Int,
-    modifier: Modifier = Modifier,
     onValueChange: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    addContentDescription: String = stringResource(id = R.string.cd_stepper_add),
+    removeContentDescription: String = stringResource(id = R.string.cd_stepper_remove),
     valueValidator: ((Int) -> Boolean)? = null,
 ) {
     Row(
@@ -62,7 +66,7 @@ fun Stepper(
             onClick = { onValueChange.invoke(value - 1) },
             enabled = valueValidator?.invoke(value - 1) ?: true,
         ) {
-            Icon(Icon.Minus)
+            Icon(Icon.Minus, contentDescription = removeContentDescription)
         }
 
         Text(
@@ -76,7 +80,7 @@ fun Stepper(
             onClick = { onValueChange.invoke(value + 1) },
             enabled = valueValidator?.invoke(value + 1) ?: true,
         ) {
-            Icon(Icon.Plus)
+            Icon(Icon.Plus, contentDescription = addContentDescription)
         }
     }
 }
@@ -104,9 +108,9 @@ private fun StepperButton(
             indication = null,
         ),
         shape = MaterialTheme.shapes.small,
-        color = colors.backgroundColor(enabled),
-        contentColor = colors.contentColor(enabled),
-        elevation = elevation.elevation(enabled, interactionState),
+        color = colors.backgroundColor(enabled).value,
+        contentColor = colors.contentColor(enabled).value,
+        elevation = elevation.elevation(enabled, interactionState).value,
     ) {
         ProvideTextStyle(
             value = MaterialTheme.typography.button

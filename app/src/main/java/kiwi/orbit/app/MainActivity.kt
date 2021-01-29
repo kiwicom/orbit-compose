@@ -2,11 +2,13 @@ package kiwi.orbit.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -53,7 +55,10 @@ class MainActivity : AppCompatActivity() {
                                 },
                                 modifier = Modifier.align(Alignment.CenterVertically)
                             ) {
-                                Icon(Icons.Default.BrightnessMedium)
+                                Icon(
+                                    Icons.Default.BrightnessMedium,
+                                    contentDescription = "Toggle light/dark mode"
+                                )
                             }
                         }
                     },
@@ -75,7 +80,11 @@ fun MainContent() {
             AppTab("Stepper", 2, tabIndex)
         }
 
-        ScrollableColumn(Modifier.fillMaxWidth()) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+        ) {
             when (tabIndex.value) {
                 0 -> ProfileScreen()
                 1 -> ButtonsScreen()

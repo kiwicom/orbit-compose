@@ -76,7 +76,7 @@ fun MenuItem(
             .clickable(onClick = {})
             .padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp)
     ) {
-        Icon(icon, tint = ColorTokens.InkLight)
+        Icon(icon, tint = ColorTokens.InkLight, contentDescription = text)
         Text(
             text = text,
             modifier = Modifier

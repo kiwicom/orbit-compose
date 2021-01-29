@@ -1,19 +1,19 @@
 package kiwi.orbit.app.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.font
-import androidx.compose.ui.text.font.fontFamily
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.R
 import kiwi.orbit.foundation.Typography
 import kiwi.orbit.foundation.darkColors
 import kiwi.orbit.foundation.lightColors
 
-val fonts = fontFamily(
-    font(R.font.circular_pro_book, FontWeight.Normal),
-    font(R.font.circular_pro_medium, FontWeight.Medium),
-    font(R.font.circular_pro_bold, FontWeight.Bold),
+val fonts = FontFamily(
+    Font(R.font.circular_pro_book, FontWeight.Normal),
+    Font(R.font.circular_pro_medium, FontWeight.Medium),
+    Font(R.font.circular_pro_bold, FontWeight.Bold),
 )
 
 @Composable
