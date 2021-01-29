@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import kiwi.orbit.R
 
-@Composable
-val Icon.Terminal: ImageVector
+@get:Composable
+val Icons.Terminal: ImageVector
 	get() {
 		if (icon != null) return icon!!
 		icon = vectorResource(id = R.drawable.ic_terminal)

@@ -1,3 +1,3 @@
 package kiwi.orbit.icons
 
-object Icon
+object Icons

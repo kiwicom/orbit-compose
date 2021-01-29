@@ -1,10 +1,16 @@
 package kiwi.orbit.generator.icons
 
 import com.android.ide.common.vectordrawable.Svg2Vector
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.net.URL
-import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.*
@@ -19,7 +25,7 @@ class IconsGenerator {
 
     private fun removeOldIcons(kotlinDir: Path, resourceDir: Path) {
         kotlinDir.toFile().listFiles()
-            ?.filter { it.name == "OrbitIcons.kt" }
+            ?.filter { it.name != "Icons.kt" }
             ?.forEach { it.delete() }
 
         resourceDir.toFile().listFiles()
@@ -80,10 +86,14 @@ class IconsGenerator {
     }
 
     private fun generateClass(icons: List<Pair<String, String>>, dir: Path) {
-        val iconClass = ClassName("kiwi.orbit.icons", "Icon")
-        val composable = ClassName("androidx.compose.runtime", "Composable")
+        val iconClass = ClassName("kiwi.orbit.icons", "Icons")
         val vectorAssetType = ClassName("androidx.compose.ui.graphics.vector", "ImageVector")
         val vectorAssetTypeNullable = vectorAssetType.copy(nullable = true)
+
+        val composable = ClassName("androidx.compose.runtime", "Composable")
+        val composableAnnotation = AnnotationSpec.builder(composable)
+            .useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
+            .build()
 
         icons.forEach { (iconName, iconResource) ->
             val objectBuilder = TypeSpec.objectBuilder(iconName)
@@ -97,7 +107,7 @@ class IconsGenerator {
 
             val property = PropertySpec.builder(iconName, vectorAssetType)
                 .receiver(iconClass)
-                .addAnnotation(composable)
+                .addAnnotation(composableAnnotation)
                 .getter(
                     FunSpec.getterBuilder()
                         .addStatement(

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.ColorTokens
-import kiwi.orbit.icons.Icon
+import kiwi.orbit.icons.Icons
 import kiwi.orbit.icons.Messages
 import kiwi.orbit.icons.Notification
 import kiwi.orbit.icons.Passengers
@@ -38,17 +38,17 @@ fun ProfileScreen() {
             Column {
                 MenuItem(
                     text = "Messages",
-                    icon = Icon.Messages
+                    icon = Icons.Messages
                 )
                 MenuItemSeparator()
                 MenuItem(
                     text = "Price Alerts",
-                    icon = Icon.Notification
+                    icon = Icons.Notification
                 )
                 MenuItemSeparator()
                 MenuItem(
                     text = "Refer a Friend",
-                    icon = Icon.Passengers
+                    icon = Icons.Passengers
                 )
             }
         }

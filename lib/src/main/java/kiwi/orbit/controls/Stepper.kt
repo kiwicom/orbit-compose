@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
-import kiwi.orbit.icons.Icon
+import kiwi.orbit.icons.Icons
 import kiwi.orbit.icons.Minus
 import kiwi.orbit.icons.Plus
 import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
@@ -66,7 +66,7 @@ fun Stepper(
             onClick = { onValueChange.invoke(value - 1) },
             enabled = valueValidator?.invoke(value - 1) ?: true,
         ) {
-            Icon(Icon.Minus, contentDescription = removeContentDescription)
+            Icon(Icons.Minus, contentDescription = removeContentDescription)
         }
 
         Text(
@@ -80,7 +80,7 @@ fun Stepper(
             onClick = { onValueChange.invoke(value + 1) },
             enabled = valueValidator?.invoke(value + 1) ?: true,
         ) {
-            Icon(Icon.Plus, contentDescription = addContentDescription)
+            Icon(Icons.Plus, contentDescription = addContentDescription)
         }
     }
 }
