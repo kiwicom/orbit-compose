@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSizeConstraints
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -16,6 +17,8 @@ import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Providers
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -97,8 +100,9 @@ private fun StepperButton(
         backgroundColor = OrbitTheme.colors.surfaceSecondary,
     )
     val elevation = MaterialButtonDefaults.elevation(
-        defaultElevation = 0.dp,
+        defaultElevation = 1.dp,
     )
+    val contentColor by colors.contentColor(enabled)
 
     Surface(
         modifier = Modifier.clickable(
@@ -109,20 +113,22 @@ private fun StepperButton(
         ),
         shape = MaterialTheme.shapes.small,
         color = colors.backgroundColor(enabled).value,
-        contentColor = colors.contentColor(enabled).value,
+        contentColor = contentColor.copy(alpha = 1f),
         elevation = elevation.elevation(enabled, interactionState).value,
     ) {
-        ProvideTextStyle(
-            value = MaterialTheme.typography.button
-        ) {
-            Row(
-                Modifier
-                    .indication(interactionState, AmbientIndication.current())
-                    .padding(4.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                content = content,
-            )
+        Providers(AmbientContentAlpha provides contentColor.alpha) {
+            ProvideTextStyle(
+                value = MaterialTheme.typography.button
+            ) {
+                Row(
+                    Modifier
+                        .indication(interactionState, AmbientIndication.current())
+                        .padding(4.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = content,
+                )
+            }
         }
     }
 }
