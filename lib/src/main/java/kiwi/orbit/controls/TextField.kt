@@ -21,6 +21,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +40,7 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
 import kiwi.orbit.icons.AlertCircle
 import kiwi.orbit.icons.Icons
+import kotlinx.coroutines.delay
 
 @Composable
 fun TextField(
@@ -146,22 +148,33 @@ fun TextField(
             }
         )
 
+        var errorState by remember { mutableStateOf(error) }
+        if (error == null) {
+            LaunchedEffect(this) {
+                delay(AnimationDuration.toLong())
+                errorState = null
+            }
+        } else {
+            errorState = error
+        }
+
         Row(
             modifier = Modifier
+                .fillMaxWidth()
                 .alpha(errorAlpha.value)
                 .animateContentSize()
         ) {
-            Icon(
-                Icons.AlertCircle,
-                contentDescription = stringResource(id = R.string.orbit_cd_text_field_error_icon),
-                modifier = Modifier
-                    .padding(2.dp)
-                    .size(18.dp),
-                tint = OrbitTheme.colors.critical,
-            )
-            if (error != null) {
+            if (errorState != null) {
+                Icon(
+                    Icons.AlertCircle,
+                    contentDescription = stringResource(id = R.string.orbit_cd_text_field_error_icon),
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .size(18.dp),
+                    tint = OrbitTheme.colors.critical,
+                )
                 ProvideTextStyle(value = TextStyle.Default.copy(color = OrbitTheme.colors.critical)) {
-                    error()
+                    errorState?.invoke()
                 }
             }
         }
