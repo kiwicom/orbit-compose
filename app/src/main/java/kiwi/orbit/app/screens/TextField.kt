@@ -20,9 +20,9 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.controls.PasswordTextField
 import kiwi.orbit.controls.TextField
 import kiwi.orbit.icons.Email
 import kiwi.orbit.icons.Icons
@@ -70,16 +70,14 @@ fun TextFieldScreen() {
             Spacer(Modifier.height(8.dp))
 
             var password by remember { mutableStateOf("") }
-            TextField(
+            PasswordTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password:") },
                 leadingIcon = { Icon(Icons.Security, contentDescription = null) },
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
-                    autoCorrect = false
                 ),
-                visualTransformation = PasswordVisualTransformation(),
                 onImeActionPerformed = {
                     bioFocusRequester.requestFocus()
                 },

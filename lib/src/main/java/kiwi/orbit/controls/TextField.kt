@@ -9,6 +9,7 @@ import androidx.compose.foundation.Interaction
 import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -33,8 +35,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -43,6 +49,8 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
 import kiwi.orbit.icons.AlertCircle
 import kiwi.orbit.icons.Icons
+import kiwi.orbit.icons.Visibility
+import kiwi.orbit.icons.VisibilityOff
 import kotlinx.coroutines.delay
 
 @Composable
@@ -239,6 +247,71 @@ fun TextField(
     }
 }
 
+@Composable
+fun PasswordTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    textStyle: TextStyle = MaterialTheme.typography.subtitle1,
+    label: (@Composable () -> Unit)? = null,
+    error: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    singleLine: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    onImeActionPerformed: (ImeAction) -> Unit = {},
+    interactionState: InteractionState = remember { InteractionState() },
+) {
+    var showRawInput by remember { mutableStateOf(false) }
+
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        enabled = enabled,
+        readOnly = readOnly,
+        textStyle = textStyle,
+        label = label,
+        error = error,
+        placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        trailingIcon = {
+            Icon(
+                when (showRawInput) {
+                    true -> Icons.VisibilityOff
+                    false -> Icons.Visibility
+                },
+                contentDescription = when (showRawInput) {
+                    true -> stringResource(id = R.string.orbit_cd_text_field_hide_password)
+                    false -> stringResource(id = R.string.orbit_cd_text_field_show_password)
+                },
+                Modifier.clickable(
+                    onClick = { showRawInput = !showRawInput },
+                    role = Role.Button,
+                    interactionState = remember { InteractionState() },
+                    indication = rememberRipple(bounded = false, radius = RippleRadius)
+                )
+            )
+        },
+        keyboardOptions = keyboardOptions.copy(
+            capitalization = KeyboardCapitalization.None,
+            autoCorrect = false,
+            keyboardType = KeyboardType.Password,
+        ),
+        singleLine = singleLine,
+        maxLines = maxLines,
+        onImeActionPerformed = onImeActionPerformed,
+        visualTransformation = when (showRawInput) {
+            true -> VisualTransformation.None
+            false -> PasswordVisualTransformation()
+        },
+        interactionState = interactionState,
+    )
+}
+
 private enum class InputState {
     Normal,
     NormalError,
@@ -247,3 +320,4 @@ private enum class InputState {
 }
 
 private const val AnimationDuration = 150
+private val RippleRadius = 20.dp
