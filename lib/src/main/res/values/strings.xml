@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cd_stepper_add">Add</string>
-    <string name="cd_stepper_remove">Remove</string>
+    <string name="orbit_cd_stepper_add">Add</string>
+    <string name="orbit_cd_stepper_remove">Remove</string>
 </resources>

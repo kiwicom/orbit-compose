@@ -54,8 +54,8 @@ fun Stepper(
     value: Int,
     onValueChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    addContentDescription: String = stringResource(id = R.string.cd_stepper_add),
-    removeContentDescription: String = stringResource(id = R.string.cd_stepper_remove),
+    addContentDescription: String = stringResource(id = R.string.orbit_cd_stepper_add),
+    removeContentDescription: String = stringResource(id = R.string.orbit_cd_stepper_remove),
     valueValidator: ((Int) -> Boolean)? = null,
 ) {
     Row(
