@@ -26,16 +26,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
+import androidx.compose.ui.unit.offset
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
 import kiwi.orbit.icons.AlertCircle
@@ -121,7 +124,10 @@ fun TextField(
                     onValueChange(it.text)
                 }
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(1.dp, borderColor.value, MaterialTheme.shapes.small)
+                .background(backgroundColor.value, MaterialTheme.shapes.small),
             enabled = enabled,
             readOnly = readOnly,
             textStyle = textStyle,
@@ -132,18 +138,70 @@ fun TextField(
             visualTransformation = visualTransformation,
             interactionState = interactionState,
             decorationBox = { innerTextField ->
-                Box(
-                    Modifier
-                        .border(1.dp, borderColor.value, MaterialTheme.shapes.small)
-                        .background(backgroundColor.value, MaterialTheme.shapes.small)
-                        .padding(12.dp)
-                ) {
-                    if (placeholder != null && textFieldValue.text.isEmpty()) {
-                        Box(Modifier.zIndex(1f)) {
-                            ProvideTextStyle(textStyle, placeholder)
+                Layout(
+                    content = {
+                        if (leadingIcon != null) {
+                            Box(Modifier.layoutId("leading")) {
+                                leadingIcon()
+                            }
                         }
+                        if (trailingIcon != null) {
+                            Box(Modifier.layoutId("trailing")) {
+                                trailingIcon()
+                            }
+                        }
+                        if (placeholder != null && textFieldValue.text.isEmpty()) {
+                            Box(Modifier.layoutId("placeholder")) {
+                                ProvideTextStyle(textStyle, placeholder)
+                            }
+                        }
+                        Box(Modifier.layoutId("textField")) {
+                            innerTextField()
+                        }
+                    },
+                ) { measurables, incomingConstraints ->
+                    val constraints = incomingConstraints.copy(minWidth = 0, minHeight = 0)
+                    val padding = 12.dp.toIntPx()
+
+                    val leadingPlaceable = measurables.find { it.layoutId == "leading" }
+                        ?.measure(constraints)
+                    val leadingWidth = leadingPlaceable?.width?.plus(padding) ?: 0
+
+                    val trailingPlaceable = measurables.find { it.layoutId == "trailing" }
+                        ?.measure(constraints.offset(horizontal = -leadingWidth))
+                    val trailingWidth = trailingPlaceable?.width?.plus(padding) ?: 0
+
+                    val occupiedHorizontally = padding * 2 + leadingWidth + trailingWidth
+                    val textFieldConstraints = incomingConstraints
+                        .copy(minHeight = 0)
+                        .offset(horizontal = -occupiedHorizontally)
+
+                    val placeholderPlaceable =
+                        measurables.find { it.layoutId == "placeholder" }?.measure(textFieldConstraints)
+                    val textFieldPlaceable =
+                        measurables.first { it.layoutId == "textField" }.measure(textFieldConstraints)
+
+                    val width = constraints.maxWidth
+                    val height = textFieldPlaceable.height + padding * 2
+
+                    val textVerticalPosition = if (singleLine) {
+                        Alignment.CenterVertically.align(textFieldPlaceable.height, height)
+                    } else {
+                        padding
                     }
-                    innerTextField()
+
+                    layout(width, height) {
+                        leadingPlaceable?.placeRelative(
+                            padding,
+                            Alignment.CenterVertically.align(leadingPlaceable.height, height)
+                        )
+                        trailingPlaceable?.placeRelative(
+                            width - trailingWidth,
+                            Alignment.CenterVertically.align(trailingPlaceable.height, height)
+                        )
+                        placeholderPlaceable?.placeRelative(padding + leadingWidth, textVerticalPosition, zIndex = 1f)
+                        textFieldPlaceable.placeRelative(padding + leadingWidth, textVerticalPosition)
+                    }
                 }
             }
         )
@@ -167,7 +225,7 @@ fun TextField(
             if (errorState != null) {
                 Icon(
                     Icons.AlertCircle,
-                    contentDescription = stringResource(id = R.string.orbit_cd_text_field_error_icon),
+                    contentDescription = null,
                     modifier = Modifier
                         .padding(2.dp)
                         .size(18.dp),
