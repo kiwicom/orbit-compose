@@ -2,4 +2,5 @@
 <resources>
     <string name="orbit_cd_stepper_add">Add</string>
     <string name="orbit_cd_stepper_remove">Remove</string>
+    <string name="orbit_cd_text_field_error_icon">Input has an error</string>
 </resources>

@@ -32,6 +32,7 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.screens.ButtonsScreen
 import kiwi.orbit.app.screens.ProfileScreen
 import kiwi.orbit.app.screens.StepperScreen
+import kiwi.orbit.app.screens.TextFieldScreen
 import kiwi.orbit.app.ui.AppTheme
 
 class MainActivity : AppCompatActivity() {
@@ -77,7 +78,8 @@ fun MainContent() {
         TabRow(selectedTabIndex = tabIndex.value, backgroundColor = OrbitTheme.colors.surface) {
             AppTab("Profile", 0, tabIndex)
             AppTab("Buttons", 1, tabIndex)
-            AppTab("Stepper", 2, tabIndex)
+            AppTab("TextField", 2, tabIndex)
+            AppTab("Stepper", 3, tabIndex)
         }
 
         Box(
@@ -88,7 +90,8 @@ fun MainContent() {
             when (tabIndex.value) {
                 0 -> ProfileScreen()
                 1 -> ButtonsScreen()
-                2 -> StepperScreen()
+                2 -> TextFieldScreen()
+                3 -> StepperScreen()
             }
         }
     }
