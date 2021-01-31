@@ -1,5 +1,6 @@
 package kiwi.orbit.app.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,10 +27,16 @@ import kiwi.orbit.icons.Icons
 import kiwi.orbit.icons.Messages
 import kiwi.orbit.icons.Notification
 import kiwi.orbit.icons.Passengers
+import kiwi.orbit.illustrations.Illustrations
+import kiwi.orbit.illustrations.WomanWithPhone
 
 @Composable
 fun ProfileScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
+        Image(Illustrations.WomanWithPhone, contentDescription = null)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text(text = "My Kiwi.com", style = OrbitTheme.typography.bodySmall)
 
         Spacer(modifier = Modifier.height(8.dp))
