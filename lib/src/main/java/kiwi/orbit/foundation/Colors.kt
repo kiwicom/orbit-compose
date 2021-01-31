@@ -104,12 +104,12 @@ fun lightColors(
     secondaryVariant: Color = ColorTokens.BlueDark,
 
     success: Color = ColorTokens.GreenNormal,
-    successFg: Color = ColorTokens.White,
+    successFg: Color = Color.White,
     successBg: Color = ColorTokens.GreenLight,
 
     warning: Color = ColorTokens.OrangeNormal,
-    warningFg: Color = ColorTokens.White,
-    warningBg: Color = ColorTokens.GreenLight,
+    warningFg: Color = Color.White,
+    warningBg: Color = ColorTokens.OrangeLight,
 
     critical: Color = ColorTokens.RedNormal,
     criticalFg: Color = Color.White,
@@ -159,16 +159,16 @@ fun darkColors(
     secondaryVariant: Color = ColorTokens.BlueDark,
 
     success: Color = ColorTokens.GreenNormal,
-    successFg: Color = ColorTokens.White,
-    successBg: Color = ColorTokens.GreenLight,
+    successFg: Color = Color.Black,
+    successBg: Color = ColorTokens.GreenDarker,
 
     warning: Color = ColorTokens.OrangeNormal,
-    warningFg: Color = ColorTokens.White,
-    warningBg: Color = ColorTokens.GreenLight,
+    warningFg: Color = Color.Black,
+    warningBg: Color = ColorTokens.OrangeDarker,
 
     critical: Color = ColorTokens.RedNormal,
     criticalFg: Color = Color.Black,
-    criticalBg: Color = ColorTokens.RedLight,
+    criticalBg: Color = ColorTokens.RedDarker,
 ): Colors = Colors(
     surface,
     surfaceBackground,
