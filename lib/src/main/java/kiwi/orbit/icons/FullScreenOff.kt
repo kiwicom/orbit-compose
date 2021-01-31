@@ -6,7 +6,7 @@ import androidx.compose.ui.res.vectorResource
 import kiwi.orbit.R
 
 @get:Composable
-val Icons.FullScreenOff: ImageVector
+public val Icons.FullScreenOff: ImageVector
 	get() {
 		if (icon != null) return icon!!
 		icon = vectorResource(id = R.drawable.ic_full_screen_off)

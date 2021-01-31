@@ -6,7 +6,7 @@ import androidx.compose.ui.res.vectorResource
 import kiwi.orbit.R
 
 @get:Composable
-val Icons.CarRental: ImageVector
+public val Icons.CarRental: ImageVector
 	get() {
 		if (icon != null) return icon!!
 		icon = vectorResource(id = R.drawable.ic_car_rental)

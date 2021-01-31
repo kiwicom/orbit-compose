@@ -6,7 +6,7 @@ import androidx.compose.ui.res.vectorResource
 import kiwi.orbit.R
 
 @get:Composable
-val Icons.CircleSmall: ImageVector
+public val Icons.CircleSmall: ImageVector
 	get() {
 		if (icon != null) return icon!!
 		icon = vectorResource(id = R.drawable.ic_circle_small)

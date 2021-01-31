@@ -33,7 +33,7 @@ import kiwi.orbit.icons.Plus
 import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
 
 @Composable
-fun Stepper(
+public fun Stepper(
     value: Int,
     modifier: Modifier = Modifier,
     onValueChange: (Int) -> Unit,
@@ -53,7 +53,7 @@ fun Stepper(
 }
 
 @Composable
-fun Stepper(
+public fun Stepper(
     value: Int,
     onValueChange: (Int) -> Unit,
     modifier: Modifier = Modifier,

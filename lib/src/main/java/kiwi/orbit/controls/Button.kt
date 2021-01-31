@@ -17,7 +17,7 @@ import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
 import androidx.compose.material.TextButton as MaterialTextButton
 
 @Composable
-fun ButtonPrimary(
+public fun ButtonPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -38,7 +38,7 @@ fun ButtonPrimary(
 }
 
 @Composable
-fun ButtonPrimarySubtle(
+public fun ButtonPrimarySubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -63,7 +63,7 @@ fun ButtonPrimarySubtle(
 }
 
 @Composable
-fun ButtonSecondary(
+public fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -86,7 +86,7 @@ fun ButtonSecondary(
 }
 
 @Composable
-fun ButtonLink(
+public fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -108,7 +108,7 @@ fun ButtonLink(
 }
 
 
-object ButtonConstants {
+internal object ButtonConstants {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     fun defaultButtonColors(

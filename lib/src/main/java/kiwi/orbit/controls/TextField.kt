@@ -54,7 +54,7 @@ import kiwi.orbit.icons.VisibilityOff
 import kotlinx.coroutines.delay
 
 @Composable
-fun TextField(
+public fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -248,7 +248,7 @@ fun TextField(
 }
 
 @Composable
-fun PasswordTextField(
+public fun PasswordTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,

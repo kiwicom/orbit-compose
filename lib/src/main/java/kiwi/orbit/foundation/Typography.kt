@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material.Typography as MaterialTypography
 
 @Immutable
-data class Typography internal constructor(
+public data class Typography internal constructor(
     val displayTitle: TextStyle,
     val displaySubtitle: TextStyle,
     val title1: TextStyle,
@@ -21,7 +21,7 @@ data class Typography internal constructor(
     val bodyNormal: TextStyle,
     val bodySmall: TextStyle,
 ) {
-    constructor(
+    public constructor(
         defaultFontFamily: FontFamily = FontFamily.Default,
         displayTitle: TextStyle = TextStyle(
             fontWeight = FontWeight.Bold,
@@ -77,7 +77,7 @@ data class Typography internal constructor(
         bodySmall = bodySmall.withDefaultFontFamily(defaultFontFamily),
     )
 
-    fun toMaterialTypography(): MaterialTypography =
+    internal fun toMaterialTypography(): MaterialTypography =
         MaterialTypography(
             defaultFontFamily = displayTitle.fontFamily ?: FontFamily.Default,
             h3 = displayTitle,

@@ -35,7 +35,7 @@ import androidx.compose.material.Colors as MaterialColors
  */
 // TODO: consider using mutable state as properties to optimize recomposition when one particular color is changed.
 @Immutable
-data class Colors(
+public data class Colors(
     val surface: Color,
     val surfaceBackground: Color,
     val surfaceSecondary: Color,
@@ -65,7 +65,7 @@ data class Colors(
 
     val isLight: Boolean,
 ) {
-    fun toMaterialColors(): MaterialColors {
+    internal fun toMaterialColors(): MaterialColors {
         return MaterialColors(
             primary = primary,
             primaryVariant = primaryVariant,
@@ -87,7 +87,7 @@ data class Colors(
 /**
  * Light Orbit color variant.
  */
-fun lightColors(
+public fun lightColors(
     surface: Color = Color.White,
     surfaceBackground: Color = ColorTokens.CloudLight,
     surfaceSecondary: Color = ColorTokens.CloudDark,
@@ -142,7 +142,7 @@ fun lightColors(
 /**
  * Dark Orbit color variant.
  */
-fun darkColors(
+public fun darkColors(
     surface: Color = ColorTokens.InkNormal,
     surfaceBackground: Color = Color.Black,
     surfaceSecondary: Color = ColorTokens.InkLight,
@@ -194,7 +194,7 @@ fun darkColors(
     false
 )
 
-fun Colors.contentColorFor(color: Color): Color {
+public fun Colors.contentColorFor(color: Color): Color {
     return when (color) {
         surface -> surfaceFgPrimary
         surfaceBackground -> surfaceFgPrimary
@@ -214,7 +214,7 @@ fun Colors.contentColorFor(color: Color): Color {
 }
 
 @Composable
-fun contentColorFor(color: Color) =
+public fun contentColorFor(color: Color): Color =
     OrbitTheme.colors.contentColorFor(color).takeOrElse { AmbientContentColor.current }
 
 internal val AmbientColors = staticAmbientOf { lightColors() }

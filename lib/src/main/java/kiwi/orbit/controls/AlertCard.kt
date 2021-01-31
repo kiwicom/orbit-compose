@@ -25,7 +25,7 @@ import kiwi.orbit.icons.InformationCircle
 import kiwi.orbit.icons.Visa
 
 @Composable
-fun AlertSuccessCard(
+public fun AlertSuccessCard(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
@@ -47,7 +47,7 @@ fun AlertSuccessCard(
 }
 
 @Composable
-fun AlertInfoCard(
+public fun AlertInfoCard(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
@@ -69,7 +69,7 @@ fun AlertInfoCard(
 }
 
 @Composable
-fun AlertWarningCard(
+public fun AlertWarningCard(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Visa,
     content: @Composable ColumnScope.() -> Unit,
@@ -91,7 +91,7 @@ fun AlertWarningCard(
 }
 
 @Composable
-fun AlertCriticalCard(
+public fun AlertCriticalCard(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.AlertCircle,
     content: @Composable ColumnScope.() -> Unit,

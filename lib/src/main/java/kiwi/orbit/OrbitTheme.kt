@@ -11,7 +11,7 @@ import kiwi.orbit.foundation.Shapes
 import kiwi.orbit.foundation.Typography
 
 @Composable
-fun OrbitTheme(
+public fun OrbitTheme(
     colors: Colors = OrbitTheme.colors,
     typography: Typography = OrbitTheme.typography,
     content: @Composable () -> Unit,
@@ -31,18 +31,18 @@ fun OrbitTheme(
     }
 }
 
-object OrbitTheme {
+public object OrbitTheme {
     /**
      * Retrieves the current [Colors] at the call site's position in the hierarchy.
      */
-    @Composable
-    val colors: Colors
+    @get:Composable
+    public val colors: Colors
         get() = AmbientColors.current
 
     /**
      * Retrieves the current [Typography] at the call site's position in the hierarchy.
      */
-    @Composable
-    val typography: Typography
+    @get:Composable
+    public val typography: Typography
         get() = AmbientTypography.current
 }

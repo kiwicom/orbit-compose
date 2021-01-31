@@ -1,3 +1,3 @@
 package kiwi.orbit.illustrations
 
-object Illustrations
+public object Illustrations
