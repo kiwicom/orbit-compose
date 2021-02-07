@@ -1,16 +1,16 @@
 package kiwi.orbit.icons
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
 @get:Composable
-public val Icons.CalendarAnytime: ImageVector
+public val Icons.CalendarAnytime: Painter
 	get() {
 		if (icon != null) return icon!!
-		icon = vectorResource(id = R.drawable.ic_calendar_anytime)
+		icon = painterResource(R.drawable.ic_calendar_anytime)
 		return icon!!
 	}
 
-private var icon: ImageVector? = null
+private var icon: Painter? = null

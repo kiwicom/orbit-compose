@@ -18,7 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
@@ -72,11 +72,10 @@ fun ProfileScreen() {
     }
 }
 
-
 @Composable
 fun MenuItem(
     text: String,
-    icon: ImageVector,
+    icon: Painter,
 ) {
     Row(
         modifier = Modifier

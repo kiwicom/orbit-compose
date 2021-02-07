@@ -1,16 +1,16 @@
 package kiwi.orbit.icons
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
 @get:Composable
-public val Icons.GpsNotFixed: ImageVector
+public val Icons.GpsNotFixed: Painter
 	get() {
 		if (icon != null) return icon!!
-		icon = vectorResource(id = R.drawable.ic_gps_not_fixed)
+		icon = painterResource(R.drawable.ic_gps_not_fixed)
 		return icon!!
 	}
 
-private var icon: ImageVector? = null
+private var icon: Painter? = null

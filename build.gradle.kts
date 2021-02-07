@@ -16,8 +16,12 @@ buildscript {
 subprojects {
     repositories {
         google()
+        jcenter()
         mavenCentral()
         maven { url = uri("https://kotlin.bintray.com/kotlinx/") }
+        if (Libs.AndroidX.Compose.snapshot.isNotEmpty()) {
+            maven { url = uri(Urls.composeSnapshotRepo) }
+        }
     }
 
     tasks.withType<KotlinCompile>().configureEach {
@@ -29,8 +33,18 @@ subprojects {
                 add("-Xopt-in=kotlin.RequiresOptIn")
                 add("-Xopt-in=kotlinx.coroutines.FlowPreview")
                 add("-Xskip-prerelease-check")
-                add("-Xallow-jvm-ir-dependencies")
             }.toList()
+        }
+    }
+
+    configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "androidx.lifecycle" && requested.name != "lifecycle-viewmodel-compose") {
+                useVersion("2.3.0-rc01")
+            }
+            if (requested.group == "androidx.savedstate") {
+                useVersion("1.1.0-rc01")
+            }
         }
     }
 }

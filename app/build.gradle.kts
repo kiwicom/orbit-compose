@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
+    kotlin("android")
 }
 
 android {
@@ -47,6 +46,7 @@ dependencies {
     implementation(project(":lib"))
 
     implementation(Libs.AndroidX.core)
+    implementation(Libs.AndroidX.activityCompose)
     implementation(Libs.AndroidX.appcompat)
 
     implementation(Libs.AndroidX.Compose.animation)
@@ -58,5 +58,6 @@ dependencies {
     implementation(Libs.AndroidX.Compose.runtimeLivedata)
     implementation(Libs.AndroidX.Compose.tooling)
 
+    implementation(Libs.Kotlin.stdlib)
     implementation(Libs.KotlinX.Datetime.datetime)
 }

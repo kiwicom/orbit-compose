@@ -1,7 +1,7 @@
 package kiwi.orbit.foundation
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticAmbientOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -89,7 +89,6 @@ public data class Typography internal constructor(
             body1 = bodyLarge,
             body2 = bodyNormal,
             button = bodyNormal,
-
         )
 }
 
@@ -97,4 +96,4 @@ private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {
     return if (fontFamily != null) this else copy(fontFamily = default)
 }
 
-internal val AmbientTypography = staticAmbientOf { Typography() }
+internal val LocalTypography = staticCompositionLocalOf { Typography() }

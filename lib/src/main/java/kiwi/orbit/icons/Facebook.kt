@@ -1,16 +1,16 @@
 package kiwi.orbit.icons
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
 @get:Composable
-public val Icons.Facebook: ImageVector
+public val Icons.Facebook: Painter
 	get() {
 		if (icon != null) return icon!!
-		icon = vectorResource(id = R.drawable.ic_facebook)
+		icon = painterResource(R.drawable.ic_facebook)
 		return icon!!
 	}
 
-private var icon: ImageVector? = null
+private var icon: Painter? = null

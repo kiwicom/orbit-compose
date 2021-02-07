@@ -115,8 +115,8 @@ class IllustrationsGenerator {
 
     private fun generateClass(illustrations: List<Pair<String, String>>, dir: Path) {
         val iconClass = ClassName("kiwi.orbit.illustrations", "Illustrations")
-        val vectorAssetType = ClassName("androidx.compose.ui.graphics", "ImageBitmap")
-        val vectorAssetTypeNullable = vectorAssetType.copy(nullable = true)
+        val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
+        val painterTypeNullable = painterType.copy(nullable = true)
 
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable)
@@ -126,14 +126,14 @@ class IllustrationsGenerator {
         illustrations.forEach { (illustrationName, illustrationResource) ->
             val objectBuilder = TypeSpec.objectBuilder(illustrationName)
 
-            val backingProperty = PropertySpec.builder("illustration", vectorAssetTypeNullable)
+            val backingProperty = PropertySpec.builder("illustration", painterTypeNullable)
                 .mutable()
                 .addModifiers(KModifier.PRIVATE)
                 .initializer("null")
                 .build()
             objectBuilder.addProperty(backingProperty)
 
-            val property = PropertySpec.builder(illustrationName, vectorAssetType)
+            val property = PropertySpec.builder(illustrationName, painterType)
                 .receiver(iconClass)
                 .addAnnotation(composableAnnotation)
                 .getter(
@@ -144,9 +144,9 @@ class IllustrationsGenerator {
                             "illustration"
                         )
                         .addStatement(
-                            "%N = %M(id = %L)",
+                            "%N = %M(%L)",
                             backingProperty.name,
-                            MemberName("androidx.compose.ui.res", "imageResource"),
+                            MemberName("androidx.compose.ui.res", "painterResource"),
                             "R.drawable.$illustrationResource"
                         )
                         .addStatement(

@@ -5,7 +5,7 @@ object Libs {
     const val androidSdkCommon = "com.android.tools:sdk-common:27.1.2"
 
     object Kotlin {
-        private const val version = "1.4.21-2"
+        const val version = "1.4.30"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
@@ -22,16 +22,22 @@ object Libs {
             private const val version = "0.1.1"
             const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:$version"
         }
+
+        object Serialization {
+            private const val version = "1.0.1"
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:$version"
+        }
     }
 
     object AndroidX {
+        const val activityCompose = "androidx.activity:activity-compose:1.3.0-SNAPSHOT"
         const val appcompat = "androidx.appcompat:appcompat:1.3.0-beta01"
         const val core = "androidx.core:core-ktx:1.5.0-beta01"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-SNAPSHOT"
 
         object Compose {
-            const val snapshot = ""
-            const val version = "1.0.0-alpha11"
-
+            const val snapshot = "7129581"
+            const val version = "1.0.0-SNAPSHOT"
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"

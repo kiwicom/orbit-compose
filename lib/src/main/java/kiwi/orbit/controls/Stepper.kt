@@ -1,7 +1,7 @@
 package kiwi.orbit.controls
 
-import androidx.compose.foundation.AmbientIndication
 import androidx.compose.foundation.InteractionState
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.layout.Arrangement
@@ -9,15 +9,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSizeConstraints
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -116,13 +116,13 @@ private fun StepperButton(
         contentColor = contentColor.copy(alpha = 1f),
         elevation = elevation.elevation(enabled, interactionState).value,
     ) {
-        Providers(AmbientContentAlpha provides contentColor.alpha) {
+        CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
             ProvideTextStyle(
                 value = MaterialTheme.typography.button
             ) {
                 Row(
                     Modifier
-                        .indication(interactionState, AmbientIndication.current())
+                        .indication(interactionState, LocalIndication.current)
                         .padding(4.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,

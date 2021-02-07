@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
-    id("kotlin")
+    kotlin("jvm")
+    kotlin("plugin.serialization") version "1.4.10"
 }
 
 java {
@@ -11,4 +12,6 @@ java {
 dependencies {
     implementation(Libs.kotlinPoet)
     implementation(Libs.androidSdkCommon)
+    implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.KotlinX.Serialization.serialization)
 }

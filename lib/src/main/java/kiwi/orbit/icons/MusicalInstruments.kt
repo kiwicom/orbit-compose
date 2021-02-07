@@ -1,16 +1,16 @@
 package kiwi.orbit.icons
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
 @get:Composable
-public val Icons.MusicalInstruments: ImageVector
+public val Icons.MusicalInstruments: Painter
 	get() {
 		if (icon != null) return icon!!
-		icon = vectorResource(id = R.drawable.ic_musical_instruments)
+		icon = painterResource(R.drawable.ic_musical_instruments)
 		return icon!!
 	}
 
-private var icon: ImageVector? = null
+private var icon: Painter? = null

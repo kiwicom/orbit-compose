@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    kotlin("android")
 }
 
 android {
@@ -24,9 +24,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.version
     }
+
+    kotlinOptions {
+        freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
+            add("-Xexplicit-api=strict")
+        }.toList()
+    }
 }
 
 dependencies {
+    implementation(Libs.Kotlin.stdlib)
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.tooling)

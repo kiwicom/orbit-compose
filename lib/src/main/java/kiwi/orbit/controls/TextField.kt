@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -61,15 +62,15 @@ public fun TextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = MaterialTheme.typography.subtitle1,
-    label: (@Composable () -> Unit)? = null,
+    label: @Composable (() -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    onImeActionPerformed: (ImeAction) -> Unit = {},
     visualTransformation: VisualTransformation = VisualTransformation.None,
     interactionState: InteractionState = remember { InteractionState() },
 ) {
@@ -140,9 +141,9 @@ public fun TextField(
             readOnly = readOnly,
             textStyle = textStyle,
             keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
             singleLine = singleLine,
             maxLines = maxLines,
-            onImeActionPerformed = onImeActionPerformed,
             visualTransformation = visualTransformation,
             interactionState = interactionState,
             decorationBox = { innerTextField ->
@@ -169,7 +170,7 @@ public fun TextField(
                     },
                 ) { measurables, incomingConstraints ->
                     val constraints = incomingConstraints.copy(minWidth = 0, minHeight = 0)
-                    val padding = 12.dp.toIntPx()
+                    val padding = 12.dp.roundToPx()
 
                     val leadingPlaceable = measurables.find { it.layoutId == "leading" }
                         ?.measure(constraints)
@@ -260,9 +261,9 @@ public fun PasswordTextField(
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    onImeActionPerformed: (ImeAction) -> Unit = {},
     interactionState: InteractionState = remember { InteractionState() },
 ) {
     var showRawInput by remember { mutableStateOf(false) }
@@ -301,9 +302,9 @@ public fun PasswordTextField(
             autoCorrect = false,
             keyboardType = KeyboardType.Password,
         ),
+        keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
-        onImeActionPerformed = onImeActionPerformed,
         visualTransformation = when (showRawInput) {
             true -> VisualTransformation.None
             false -> PasswordVisualTransformation()

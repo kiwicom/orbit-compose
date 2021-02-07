@@ -1,16 +1,16 @@
 package kiwi.orbit.illustrations
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
 @get:Composable
-public val Illustrations.NoNotification: ImageBitmap
+public val Illustrations.NoNotification: Painter
 	get() {
 		if (illustration != null) return illustration!!
-		illustration = imageResource(id = R.drawable.il_no_notification)
+		illustration = painterResource(R.drawable.il_no_notification)
 		return illustration!!
 	}
 
-private var illustration: ImageBitmap? = null
+private var illustration: Painter? = null

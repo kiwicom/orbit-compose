@@ -12,12 +12,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
-import kiwi.orbit.foundation.AmbientColors
+import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.icons.AlertCircle
 import kiwi.orbit.icons.CheckCircle
 import kiwi.orbit.icons.Icons
@@ -27,12 +27,12 @@ import kiwi.orbit.icons.Visa
 @Composable
 public fun AlertSuccessCard(
     modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.CheckCircle,
+    icon: Painter = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
-    Providers(
-        AmbientColors provides colors.copy(
+    CompositionLocalProvider(
+        LocalColors provides colors.copy(
             surfaceBackground = colors.successBg,
             primary = colors.success,
             primaryFg = colors.successFg,
@@ -49,12 +49,12 @@ public fun AlertSuccessCard(
 @Composable
 public fun AlertInfoCard(
     modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.InformationCircle,
+    icon: Painter = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
-    Providers(
-        AmbientColors provides colors.copy(
+    CompositionLocalProvider(
+        LocalColors provides colors.copy(
             surfaceBackground = colors.secondary.copy(alpha = 0.12f),
             primary = colors.secondary,
             primaryFg = colors.secondaryFg,
@@ -71,12 +71,12 @@ public fun AlertInfoCard(
 @Composable
 public fun AlertWarningCard(
     modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.Visa,
+    icon: Painter = Icons.Visa,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
-    Providers(
-        AmbientColors provides colors.copy(
+    CompositionLocalProvider(
+        LocalColors provides colors.copy(
             surfaceBackground = colors.warningBg,
             primary = colors.warning,
             primaryFg = colors.warningFg,
@@ -93,12 +93,12 @@ public fun AlertWarningCard(
 @Composable
 public fun AlertCriticalCard(
     modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.AlertCircle,
+    icon: Painter = Icons.AlertCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
-    Providers(
-        AmbientColors provides colors.copy(
+    CompositionLocalProvider(
+        LocalColors provides colors.copy(
             surfaceBackground = colors.criticalBg,
             primary = colors.critical,
             primaryFg = colors.criticalFg,
@@ -114,7 +114,7 @@ public fun AlertCriticalCard(
 
 @Composable
 private fun AlertCard(
-    icon: ImageVector,
+    icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {

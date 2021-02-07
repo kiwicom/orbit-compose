@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -61,9 +62,11 @@ fun TextFieldScreen() {
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next,
                 ),
-                onImeActionPerformed = {
-                    passwordFocusRequester.requestFocus()
-                },
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        passwordFocusRequester.requestFocus()
+                    },
+                ),
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -78,9 +81,11 @@ fun TextFieldScreen() {
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
                 ),
-                onImeActionPerformed = {
-                    bioFocusRequester.requestFocus()
-                },
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        bioFocusRequester.requestFocus()
+                    },
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .focusRequester(passwordFocusRequester),

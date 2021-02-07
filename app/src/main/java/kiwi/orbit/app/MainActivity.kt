@@ -1,6 +1,7 @@
 package kiwi.orbit.app
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.screens.AlertCardScreen
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     },
-                    bodyContent = { MainContent() }
+                    content = { MainContent() }
                 )
             }
         }

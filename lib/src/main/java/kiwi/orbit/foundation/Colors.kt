@@ -1,9 +1,9 @@
 package kiwi.orbit.foundation
 
-import androidx.compose.material.AmbientContentColor
+import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticAmbientOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import kiwi.orbit.OrbitTheme
@@ -215,6 +215,6 @@ public fun Colors.contentColorFor(color: Color): Color {
 
 @Composable
 public fun contentColorFor(color: Color): Color =
-    OrbitTheme.colors.contentColorFor(color).takeOrElse { AmbientContentColor.current }
+    OrbitTheme.colors.contentColorFor(color).takeOrElse { LocalContentColor.current }
 
-internal val AmbientColors = staticAmbientOf { lightColors() }
+internal val LocalColors = staticCompositionLocalOf { lightColors() }

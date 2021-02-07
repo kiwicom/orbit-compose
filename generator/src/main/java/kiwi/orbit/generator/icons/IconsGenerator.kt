@@ -87,8 +87,8 @@ class IconsGenerator {
 
     private fun generateClass(icons: List<Pair<String, String>>, dir: Path) {
         val iconClass = ClassName("kiwi.orbit.icons", "Icons")
-        val vectorAssetType = ClassName("androidx.compose.ui.graphics.vector", "ImageVector")
-        val vectorAssetTypeNullable = vectorAssetType.copy(nullable = true)
+        val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
+        val painterTypeNullable = painterType.copy(nullable = true)
 
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable)
@@ -98,14 +98,14 @@ class IconsGenerator {
         icons.forEach { (iconName, iconResource) ->
             val objectBuilder = TypeSpec.objectBuilder(iconName)
 
-            val backingProperty = PropertySpec.builder("icon", vectorAssetTypeNullable)
+            val backingProperty = PropertySpec.builder("icon", painterTypeNullable)
                 .mutable()
                 .addModifiers(KModifier.PRIVATE)
                 .initializer("null")
                 .build()
             objectBuilder.addProperty(backingProperty)
 
-            val property = PropertySpec.builder(iconName, vectorAssetType)
+            val property = PropertySpec.builder(iconName, painterType)
                 .receiver(iconClass)
                 .addAnnotation(composableAnnotation)
                 .getter(
@@ -116,9 +116,9 @@ class IconsGenerator {
                             "icon"
                         )
                         .addStatement(
-                            "%N = %M(id = %L)",
+                            "%N = %M(%L)",
                             backingProperty.name,
-                            MemberName("androidx.compose.ui.res", "vectorResource"),
+                            MemberName("androidx.compose.ui.res", "painterResource"),
                             "R.drawable.$iconResource"
                         )
                         .addStatement(
