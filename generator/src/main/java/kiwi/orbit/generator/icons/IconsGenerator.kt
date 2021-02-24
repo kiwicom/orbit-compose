@@ -5,7 +5,6 @@ import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -86,55 +85,35 @@ class IconsGenerator {
     }
 
     private fun generateClass(icons: List<Pair<String, String>>, dir: Path) {
-        val iconClass = ClassName("kiwi.orbit.icons", "Icons")
+        val iconClassType = ClassName("kiwi.orbit.icons", "Icons")
         val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
-        val painterTypeNullable = painterType.copy(nullable = true)
-
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
-        icons.forEach { (iconName, iconResource) ->
-            val objectBuilder = TypeSpec.objectBuilder(iconName)
+        val iconClass = TypeSpec.objectBuilder(iconClassType)
 
-            val backingProperty = PropertySpec.builder("icon", painterTypeNullable)
-                .mutable()
-                .addModifiers(KModifier.PRIVATE)
-                .initializer("null")
-                .build()
-            objectBuilder.addProperty(backingProperty)
-
+        icons.sortedBy { it.first }.forEach { (iconName, iconResource) ->
             val property = PropertySpec.builder(iconName, painterType)
-                .receiver(iconClass)
                 .getter(
                     FunSpec.getterBuilder()
                         .addAnnotation(composableAnnotation)
                         .addStatement(
-                            "if (%N != null) return %N!!",
-                            "icon",
-                            "icon"
-                        )
-                        .addStatement(
-                            "%N = %M(%L)",
-                            backingProperty.name,
+                            "return %M(%L)",
                             MemberName("androidx.compose.ui.res", "painterResource"),
                             "R.drawable.$iconResource"
-                        )
-                        .addStatement(
-                            "return %N!!",
-                            backingProperty.name
                         )
                         .build()
                 )
                 .build()
-
-            val file = FileSpec.builder("kiwi.orbit.icons", iconName)
-                .addProperty(property)
-                .addProperty(backingProperty)
-                .indent("\t")
-                .addImport("kiwi.orbit", "R")
-                .build()
-
-            file.writeTo(dir)
+            iconClass.addProperty(property)
         }
+
+        val file = FileSpec.builder("kiwi.orbit.icons", "Icons")
+            .addType(iconClass.build())
+            .indent("    ")
+            .addImport("kiwi.orbit", "R")
+            .build()
+
+        file.writeTo(dir)
     }
 }
