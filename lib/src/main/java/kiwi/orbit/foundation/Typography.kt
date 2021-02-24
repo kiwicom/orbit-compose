@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.Typography as MaterialTypography
 
+// TODO: remove data class to allow maintain better binary compatibility
 @Immutable
 public data class Typography internal constructor(
     val displayTitle: TextStyle,
