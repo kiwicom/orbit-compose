@@ -4,11 +4,9 @@ import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
-import java.awt.image.BufferedImage
 import java.io.File
 import java.net.URL
 import java.nio.file.Path
@@ -27,6 +25,25 @@ class IllustrationsGenerator {
     ) {
         removeOldIllustrations(kotlinOutDir, resourceOutDir)
         val icons = downloadAndResizeIllustrations(listUrl, prefixUrl, resourceOutDir)
+        generateClass(icons, kotlinOutDir)
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    fun buildImplOnly(
+        kotlinOutDir: Path,
+        resourceOutDir: Path,
+    ) {
+        val icons = buildList {
+            File(resourceOutDir.toFile(), "drawable-xxxhdpi")
+                .listFiles()
+                .orEmpty()
+                .filter { it.name.startsWith("il_") }
+                .forEach {
+                    val resource = it.nameWithoutExtension
+                    val name = resource.removePrefix("il_").toTitleCase()
+                    add(Pair(name, resource))
+                }
+        }
         generateClass(icons, kotlinOutDir)
     }
 
@@ -99,72 +116,39 @@ class IllustrationsGenerator {
         return illustrations
     }
 
-    private fun resize(
-        inputImage: BufferedImage,
-        scaledWidth: Int,
-        scaledHeight: Int
-    ): BufferedImage {
-        val outputImage = BufferedImage(scaledWidth, scaledHeight, inputImage.type)
-
-        val g2d = outputImage.createGraphics()
-        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null)
-        g2d.dispose()
-
-        return outputImage
-    }
-
     private fun generateClass(illustrations: List<Pair<String, String>>, dir: Path) {
-        val iconClass = ClassName("kiwi.orbit.illustrations", "Illustrations")
+        val illustrationClassType = ClassName("kiwi.orbit.illustrations", "Illustrations")
         val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
-        val painterTypeNullable = painterType.copy(nullable = true)
-
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
-        illustrations.forEach { (illustrationName, illustrationResource) ->
-            val objectBuilder = TypeSpec.objectBuilder(illustrationName)
+        val illustrationClass = TypeSpec.objectBuilder(illustrationClassType)
 
-            val backingProperty = PropertySpec.builder("illustration", painterTypeNullable)
-                .mutable()
-                .addModifiers(KModifier.PRIVATE)
-                .initializer("null")
-                .build()
-            objectBuilder.addProperty(backingProperty)
-
+        illustrations.sortedBy { it.first }.forEach { (illustrationName, illustrationResource) ->
             val property = PropertySpec.builder(illustrationName, painterType)
-                .receiver(iconClass)
                 .getter(
                     FunSpec.getterBuilder()
                         .addAnnotation(composableAnnotation)
                         .addStatement(
-                            "if (%N != null) return %N!!",
-                            "illustration",
-                            "illustration"
-                        )
-                        .addStatement(
-                            "%N = %M(%L)",
-                            backingProperty.name,
+                            "return %M(%L)",
                             MemberName("androidx.compose.ui.res", "painterResource"),
                             "R.drawable.$illustrationResource"
-                        )
-                        .addStatement(
-                            "return %N!!",
-                            backingProperty.name
                         )
                         .build()
                 )
                 .build()
-
-            val file = FileSpec.builder("kiwi.orbit.illustrations", illustrationName)
-                .addProperty(property)
-                .addProperty(backingProperty)
-                .indent("\t")
-                .addImport("kiwi.orbit", "R")
-                .build()
-
-            file.writeTo(dir)
+            illustrationClass.addProperty(property)
         }
+
+        val file = FileSpec.builder("kiwi.orbit.illustrations", "Illustrations")
+            .addType(illustrationClass.build())
+            .indent("    ")
+            .addImport("kiwi.orbit", "R")
+            .build()
+
+        file.writeTo(dir)
     }
 
-    private fun String.toSnakeCase() = replace(humps, "_").toLowerCase(Locale.ROOT)
+    private fun String.toSnakeCase(): String = replace(humps, "_").toLowerCase(Locale.ROOT)
+    private fun String.toTitleCase(): String = split("_").joinToString("") { it.capitalize(Locale.getDefault()) }
 }
