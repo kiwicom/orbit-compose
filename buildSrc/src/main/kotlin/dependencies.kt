@@ -1,5 +1,5 @@
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha05"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
 
     const val kotlinPoet = "com.squareup:kotlinpoet:1.7.2"
     const val androidSdkCommon = "com.android.tools:sdk-common:27.1.2"
