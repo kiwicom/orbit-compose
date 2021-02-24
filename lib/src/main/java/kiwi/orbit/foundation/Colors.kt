@@ -2,8 +2,12 @@ package kiwi.orbit.foundation
 
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import kiwi.orbit.OrbitTheme
@@ -33,38 +37,148 @@ import androidx.compose.material.Colors as MaterialColors
  * @property criticalBg Color used as critical background with weak accent. Use [critical] as its foreground.
  * @property isLight Whether this Colors is considered as a 'light' or 'dark' set of colors. This affects elevation provider's behavior.
  */
-// TODO: consider using mutable state as properties to optimize recomposition when one particular color is changed.
-@Immutable
-public data class Colors(
-    val surface: Color,
-    val surfaceBackground: Color,
-    val surfaceSecondary: Color,
-    val surfaceFgPrimary: Color,
-    val surfaceFgSecondary: Color,
-    val surfaceFgTertiary: Color,
+@Stable
+public class Colors(
+    surface: Color,
+    surfaceBackground: Color,
+    surfaceSecondary: Color,
+    surfaceFgPrimary: Color,
+    surfaceFgSecondary: Color,
+    surfaceFgTertiary: Color,
 
-    val primary: Color,
-    val primaryFg: Color,
-    val primaryVariant: Color,
+    primary: Color,
+    primaryFg: Color,
+    primaryVariant: Color,
 
-    val secondary: Color,
-    val secondaryFg: Color,
-    val secondaryVariant: Color,
+    secondary: Color,
+    secondaryFg: Color,
+    secondaryVariant: Color,
 
-    val success: Color,
-    val successFg: Color,
-    val successBg: Color,
+    success: Color,
+    successFg: Color,
+    successBg: Color,
 
-    val warning: Color,
-    val warningFg: Color,
-    val warningBg: Color,
+    warning: Color,
+    warningFg: Color,
+    warningBg: Color,
 
-    val critical: Color,
-    val criticalFg: Color,
-    val criticalBg: Color,
+    critical: Color,
+    criticalFg: Color,
+    criticalBg: Color,
 
-    val isLight: Boolean,
+    isLight: Boolean,
 ) {
+    public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
+        internal set
+    public var surfaceBackground: Color by mutableStateOf(surfaceBackground, structuralEqualityPolicy())
+        internal set
+    public var surfaceSecondary: Color by mutableStateOf(surfaceSecondary, structuralEqualityPolicy())
+        internal set
+    public var surfaceFgPrimary: Color by mutableStateOf(surfaceFgPrimary, structuralEqualityPolicy())
+        internal set
+    public var surfaceFgSecondary: Color by mutableStateOf(surfaceFgSecondary, structuralEqualityPolicy())
+        internal set
+    public var surfaceFgTertiary: Color by mutableStateOf(surfaceFgTertiary, structuralEqualityPolicy())
+        internal set
+
+    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
+        internal set
+    public var primaryFg: Color by mutableStateOf(primaryFg, structuralEqualityPolicy())
+        internal set
+    public var primaryVariant: Color by mutableStateOf(primaryVariant, structuralEqualityPolicy())
+        internal set
+
+    public var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
+        internal set
+    public var secondaryFg: Color by mutableStateOf(secondaryFg, structuralEqualityPolicy())
+        internal set
+    public var secondaryVariant: Color by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
+        internal set
+
+    public var success: Color by mutableStateOf(success, structuralEqualityPolicy())
+        internal set
+    public var successFg: Color by mutableStateOf(successFg, structuralEqualityPolicy())
+        internal set
+    public var successBg: Color by mutableStateOf(successBg, structuralEqualityPolicy())
+        internal set
+
+    public var warning: Color by mutableStateOf(warning, structuralEqualityPolicy())
+        internal set
+    public var warningFg: Color by mutableStateOf(warningFg, structuralEqualityPolicy())
+        internal set
+    public var warningBg: Color by mutableStateOf(warningBg, structuralEqualityPolicy())
+        internal set
+
+    public var critical: Color by mutableStateOf(critical, structuralEqualityPolicy())
+        internal set
+    public var criticalFg: Color by mutableStateOf(criticalFg, structuralEqualityPolicy())
+        internal set
+    public var criticalBg: Color by mutableStateOf(criticalBg, structuralEqualityPolicy())
+        internal set
+
+    public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy())
+        internal set
+
+    public fun copy(
+        surface: Color = this.surface,
+        surfaceBackground: Color = this.surfaceBackground,
+        surfaceSecondary: Color = this.surfaceSecondary,
+        surfaceFgPrimary: Color = this.surfaceFgPrimary,
+        surfaceFgSecondary: Color = this.surfaceFgSecondary,
+        surfaceFgTertiary: Color = this.surfaceFgTertiary,
+
+        primary: Color = this.primary,
+        primaryFg: Color = this.primaryFg,
+        primaryVariant: Color = this.primaryVariant,
+
+        secondary: Color = this.secondary,
+        secondaryFg: Color = this.secondaryFg,
+        secondaryVariant: Color = this.secondaryVariant,
+
+        success: Color = this.success,
+        successFg: Color = this.successFg,
+        successBg: Color = this.successBg,
+
+        warning: Color = this.warning,
+        warningFg: Color = this.warningFg,
+        warningBg: Color = this.warningBg,
+
+        critical: Color = this.critical,
+        criticalFg: Color = this.criticalFg,
+        criticalBg: Color = this.criticalBg,
+
+        isLight: Boolean = this.isLight,
+    ): Colors = Colors(
+        surface,
+        surfaceBackground,
+        surfaceSecondary,
+        surfaceFgPrimary,
+        surfaceFgSecondary,
+        surfaceFgTertiary,
+
+        primary,
+        primaryFg,
+        primaryVariant,
+
+        secondary,
+        secondaryFg,
+        secondaryVariant,
+
+        success,
+        successFg,
+        successBg,
+
+        warning,
+        warningFg,
+        warningBg,
+
+        critical,
+        criticalFg,
+        criticalBg,
+
+        isLight,
+    )
+
     internal fun toMaterialColors(): MaterialColors {
         return MaterialColors(
             primary = primary,
@@ -85,7 +199,7 @@ public data class Colors(
 }
 
 /**
- * Light Orbit color variant.
+ * Light Orbit color public variant.
  */
 public fun lightColors(
     surface: Color = Color.White,
