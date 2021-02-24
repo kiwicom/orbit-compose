@@ -9,11 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +26,7 @@ import kiwi.orbit.illustrations.Illustrations
 @Composable
 fun ProfileScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
-        Image(Illustrations.WomanWithPhone, contentDescription = null)
+        Image(painter = Illustrations.WomanWithPhone, contentDescription = null, Modifier.fillMaxWidth())
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -53,16 +50,6 @@ fun ProfileScreen() {
                     text = "Refer a Friend",
                     icon = Icons.Passengers
                 )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column {
-                Switch(checked = true, onCheckedChange = {})
-                Checkbox(checked = true, onCheckedChange = {})
-                RadioButton(selected = true, onClick = {})
             }
         }
     }
