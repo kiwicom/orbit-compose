@@ -119,9 +119,7 @@ class IllustrationsGenerator {
         val painterTypeNullable = painterType.copy(nullable = true)
 
         val composable = ClassName("androidx.compose.runtime", "Composable")
-        val composableAnnotation = AnnotationSpec.builder(composable)
-            .useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
-            .build()
+        val composableAnnotation = AnnotationSpec.builder(composable).build()
 
         illustrations.forEach { (illustrationName, illustrationResource) ->
             val objectBuilder = TypeSpec.objectBuilder(illustrationName)
@@ -135,9 +133,9 @@ class IllustrationsGenerator {
 
             val property = PropertySpec.builder(illustrationName, painterType)
                 .receiver(iconClass)
-                .addAnnotation(composableAnnotation)
                 .getter(
                     FunSpec.getterBuilder()
+                        .addAnnotation(composableAnnotation)
                         .addStatement(
                             "if (%N != null) return %N!!",
                             "illustration",

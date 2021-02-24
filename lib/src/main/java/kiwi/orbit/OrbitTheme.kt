@@ -35,14 +35,14 @@ public object OrbitTheme {
     /**
      * Retrieves the current [Colors] at the call site's position in the hierarchy.
      */
-    @get:Composable
     public val colors: Colors
+        @Composable
         get() = LocalColors.current
 
     /**
      * Retrieves the current [Typography] at the call site's position in the hierarchy.
      */
-    @get:Composable
     public val typography: Typography
+        @Composable
         get() = LocalTypography.current
 }

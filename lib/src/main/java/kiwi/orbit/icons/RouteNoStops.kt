@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
-@get:Composable
 public val Icons.RouteNoStops: Painter
+	@Composable
 	get() {
 		if (icon != null) return icon!!
 		icon = painterResource(R.drawable.ic_route_no_stops)

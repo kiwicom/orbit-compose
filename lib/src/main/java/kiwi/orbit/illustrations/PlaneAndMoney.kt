@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
-@get:Composable
 public val Illustrations.PlaneAndMoney: Painter
+	@Composable
 	get() {
 		if (illustration != null) return illustration!!
 		illustration = painterResource(R.drawable.il_plane_and_money)

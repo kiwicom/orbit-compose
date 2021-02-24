@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import kiwi.orbit.R
 
-@get:Composable
 public val Icons.Walk: Painter
+	@Composable
 	get() {
 		if (icon != null) return icon!!
 		icon = painterResource(R.drawable.ic_walk)

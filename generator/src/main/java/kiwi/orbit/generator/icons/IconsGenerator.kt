@@ -91,9 +91,7 @@ class IconsGenerator {
         val painterTypeNullable = painterType.copy(nullable = true)
 
         val composable = ClassName("androidx.compose.runtime", "Composable")
-        val composableAnnotation = AnnotationSpec.builder(composable)
-            .useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
-            .build()
+        val composableAnnotation = AnnotationSpec.builder(composable).build()
 
         icons.forEach { (iconName, iconResource) ->
             val objectBuilder = TypeSpec.objectBuilder(iconName)
@@ -107,9 +105,9 @@ class IconsGenerator {
 
             val property = PropertySpec.builder(iconName, painterType)
                 .receiver(iconClass)
-                .addAnnotation(composableAnnotation)
                 .getter(
                     FunSpec.getterBuilder()
+                        .addAnnotation(composableAnnotation)
                         .addStatement(
                             "if (%N != null) return %N!!",
                             "icon",
