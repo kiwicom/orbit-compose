@@ -18,11 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
-import kiwi.orbit.icons.AlertCircle
-import kiwi.orbit.icons.CheckCircle
 import kiwi.orbit.icons.Icons
-import kiwi.orbit.icons.InformationCircle
-import kiwi.orbit.icons.Visa
 
 @Composable
 public fun AlertSuccessCard(

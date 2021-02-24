@@ -24,11 +24,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.ColorTokens
 import kiwi.orbit.icons.Icons
-import kiwi.orbit.icons.Messages
-import kiwi.orbit.icons.Notification
-import kiwi.orbit.icons.Passengers
 import kiwi.orbit.illustrations.Illustrations
-import kiwi.orbit.illustrations.WomanWithPhone
 
 @Composable
 fun ProfileScreen() {

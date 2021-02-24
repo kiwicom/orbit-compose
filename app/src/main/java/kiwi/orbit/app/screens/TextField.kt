@@ -25,10 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.controls.PasswordTextField
 import kiwi.orbit.controls.TextField
-import kiwi.orbit.icons.Email
 import kiwi.orbit.icons.Icons
-import kiwi.orbit.icons.Linkedin
-import kiwi.orbit.icons.Security
 
 @Preview
 @Composable

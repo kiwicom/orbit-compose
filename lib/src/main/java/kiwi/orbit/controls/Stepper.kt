@@ -28,8 +28,6 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
 import kiwi.orbit.icons.Icons
-import kiwi.orbit.icons.Minus
-import kiwi.orbit.icons.Plus
 import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
 
 @Composable

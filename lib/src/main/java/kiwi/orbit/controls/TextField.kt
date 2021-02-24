@@ -47,10 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.R
-import kiwi.orbit.icons.AlertCircle
 import kiwi.orbit.icons.Icons
-import kiwi.orbit.icons.Visibility
-import kiwi.orbit.icons.VisibilityOff
 import kotlinx.coroutines.delay
 
 @Composable
