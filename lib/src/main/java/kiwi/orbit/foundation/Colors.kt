@@ -257,12 +257,12 @@ public fun lightColors(
  * Dark Orbit color variant.
  */
 public fun darkColors(
-    surface: Color = ColorTokens.InkNormal,
+    surface: Color = Color.Black.copy(0.9f),
     surfaceBackground: Color = Color.Black,
     surfaceSecondary: Color = ColorTokens.InkLight,
-    surfaceFgPrimary: Color = ColorTokens.CloudLight,
-    surfaceFgSecondary: Color = ColorTokens.CloudDark,
-    surfaceFgTertiary: Color = ColorTokens.CloudLight,
+    surfaceFgPrimary: Color = ColorTokens.InkLighter,
+    surfaceFgSecondary: Color = ColorTokens.InkLight,
+    surfaceFgTertiary: Color = ColorTokens.InkNormal,
 
     primary: Color = ColorTokens.ProductNormal,
     primaryFg: Color = Color.Black,

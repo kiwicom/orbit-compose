@@ -12,8 +12,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -32,6 +32,7 @@ import kiwi.orbit.app.screens.AlertCardScreen
 import kiwi.orbit.app.screens.ButtonsScreen
 import kiwi.orbit.app.screens.ProfileScreen
 import kiwi.orbit.app.screens.StepperScreen
+import kiwi.orbit.app.screens.SwitchScreen
 import kiwi.orbit.app.screens.TextFieldScreen
 import kiwi.orbit.app.ui.AppTheme
 
@@ -74,12 +75,13 @@ fun MainContent() {
     val tabIndex = remember { mutableStateOf(0) }
 
     Column {
-        TabRow(selectedTabIndex = tabIndex.value, backgroundColor = OrbitTheme.colors.surface) {
+        ScrollableTabRow(selectedTabIndex = tabIndex.value, backgroundColor = OrbitTheme.colors.surface) {
             AppTab("Profile", 0, tabIndex)
             AppTab("Buttons", 1, tabIndex)
             AppTab("TextField", 2, tabIndex)
-            AppTab("Stepper", 3, tabIndex)
-            AppTab("Alert", 4, tabIndex)
+            AppTab("Switch", 3, tabIndex)
+            AppTab("Stepper", 4, tabIndex)
+            AppTab("Alert", 5, tabIndex)
         }
 
         Box(
@@ -91,8 +93,9 @@ fun MainContent() {
                 0 -> ProfileScreen()
                 1 -> ButtonsScreen()
                 2 -> TextFieldScreen()
-                3 -> StepperScreen()
-                4 -> AlertCardScreen()
+                3 -> SwitchScreen()
+                4 -> StepperScreen()
+                5 -> AlertCardScreen()
             }
         }
     }
