@@ -13,5 +13,6 @@ dependencies {
     implementation(Libs.kotlinPoet)
     implementation(Libs.androidSdkCommon)
     implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.Kotlin.reflect)
     implementation(Libs.KotlinX.Serialization.serialization)
 }

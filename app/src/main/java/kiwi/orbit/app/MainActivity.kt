@@ -5,7 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -37,7 +36,6 @@ import kiwi.orbit.app.screens.TextFieldScreen
 import kiwi.orbit.app.ui.AppTheme
 
 class MainActivity : AppCompatActivity() {
-    @OptIn(ExperimentalLayout::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

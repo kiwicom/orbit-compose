@@ -5,11 +5,11 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.Interaction
-import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +38,6 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -72,7 +71,7 @@ public fun TextField(
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    interactionState: InteractionState = remember { InteractionState() },
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     Column(modifier) {
         var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -85,7 +84,7 @@ public fun TextField(
         }
 
         @Suppress("MoveVariableDeclarationIntoWhen")
-        val isFocused = interactionState.contains(Interaction.Focused)
+        val isFocused = interactionSource.collectIsFocusedAsState().value
         val inputState: InputState = when (isFocused) {
             true -> when (error != null) {
                 true -> InputState.FocusedError
@@ -145,7 +144,7 @@ public fun TextField(
             singleLine = singleLine,
             maxLines = maxLines,
             visualTransformation = visualTransformation,
-            interactionState = interactionState,
+            interactionSource = interactionSource,
             decorationBox = { innerTextField ->
                 Layout(
                     content = {
@@ -264,7 +263,7 @@ public fun PasswordTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    interactionState: InteractionState = remember { InteractionState() },
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     var showRawInput by remember { mutableStateOf(false) }
 
@@ -292,7 +291,7 @@ public fun PasswordTextField(
                 Modifier.clickable(
                     onClick = { showRawInput = !showRawInput },
                     role = Role.Button,
-                    interactionState = remember { InteractionState() },
+                    interactionSource = remember { MutableInteractionSource() },
                     indication = rememberRipple(bounded = false, radius = RippleRadius)
                 )
             )
@@ -309,7 +308,7 @@ public fun PasswordTextField(
             true -> VisualTransformation.None
             false -> PasswordVisualTransformation()
         },
-        interactionState = interactionState,
+        interactionSource = interactionSource,
     )
 }
 

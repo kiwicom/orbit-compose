@@ -1,13 +1,13 @@
 package kiwi.orbit.controls
 
-import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.defaultMinSizeConstraints
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
@@ -76,7 +76,7 @@ public fun Stepper(
             text = value.toString(),
             style = OrbitTheme.typography.title4,
             textAlign = TextAlign.Center,
-            modifier = Modifier.defaultMinSizeConstraints(44.dp),
+            modifier = Modifier.defaultMinSize(44.dp),
         )
 
         StepperButton(
@@ -95,7 +95,7 @@ private fun StepperButton(
     enabled: Boolean = true,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val interactionState = remember { InteractionState() }
+    val interactionSource = remember { MutableInteractionSource() }
     val colors = ButtonConstants.defaultButtonColors(
         backgroundColor = OrbitTheme.colors.surfaceSecondary,
     )
@@ -108,13 +108,13 @@ private fun StepperButton(
         modifier = Modifier.clickable(
             onClick = onClick,
             enabled = enabled,
-            interactionState = interactionState,
+            interactionSource = interactionSource,
             indication = null,
         ),
         shape = MaterialTheme.shapes.small,
         color = colors.backgroundColor(enabled).value,
         contentColor = contentColor.copy(alpha = 1f),
-        elevation = elevation.elevation(enabled, interactionState).value,
+        elevation = elevation.elevation(enabled, interactionSource).value,
     ) {
         CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
             ProvideTextStyle(
@@ -122,7 +122,7 @@ private fun StepperButton(
             ) {
                 Row(
                     Modifier
-                        .indication(interactionState, LocalIndication.current)
+                        .indication(interactionSource, LocalIndication.current)
                         .padding(4.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
