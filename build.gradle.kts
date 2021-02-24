@@ -31,7 +31,6 @@ subprojects {
             allWarningsAsErrors = true
             freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
                 add("-Xopt-in=kotlin.RequiresOptIn")
-                add("-Xopt-in=kotlinx.coroutines.FlowPreview")
                 add("-Xskip-prerelease-check")
             }.toList()
         }
