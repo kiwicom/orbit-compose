@@ -14,8 +14,6 @@ import java.util.*
 class ColorsGenerator {
     companion object {
         private const val COLOR_PREFIX = "palette"
-        private const val COLOR_HOVER_SUFFIX = "Hover"
-        private const val COLOR_ACTIVE_SUFFIX = "Active"
     }
 
     fun build(svgUrl: String, kotlinOutDir: Path) {
@@ -36,7 +34,6 @@ class ColorsGenerator {
         val parsed = parser.decodeFromString<Map<String, String>>(inputText)
         return parsed
             .filter { it.key.startsWith(COLOR_PREFIX) }
-            .filter { !it.key.endsWith(COLOR_HOVER_SUFFIX) && !it.key.endsWith(COLOR_ACTIVE_SUFFIX) }
             .toList()
             .sortedBy { it.first }
     }
