@@ -390,6 +390,46 @@ public fun Colors.contentColorFor(color: Color): Color {
     }
 }
 
+public fun Colors.withInteractive(): Colors =
+    copy(
+        surface = interactiveSubtle,
+        primary = interactive,
+        primaryContent = interactiveContent,
+        primarySubtle = interactiveAltSubtle,
+        primaryAlt = interactiveAlt,
+        primaryAltSubtle = interactiveAltSubtle,
+    )
+
+public fun Colors.withSuccess(): Colors =
+    copy(
+        surface = successSubtle,
+        primary = success,
+        primaryContent = successContent,
+        primarySubtle = successAltSubtle,
+        primaryAlt = successAlt,
+        primaryAltSubtle = successAltSubtle,
+    )
+
+public fun Colors.withWarning(): Colors =
+    copy(
+        surface = warningSubtle,
+        primary = warning,
+        primaryContent = warningContent,
+        primarySubtle = warningAltSubtle,
+        primaryAlt = warningAlt,
+        primaryAltSubtle = warningAltSubtle,
+    )
+
+public fun Colors.withCritical(): Colors =
+    copy(
+        surface = criticalSubtle,
+        primary = critical,
+        primaryContent = criticalContent,
+        primarySubtle = criticalAltSubtle,
+        primaryAlt = criticalAlt,
+        primaryAltSubtle = criticalAltSubtle,
+    )
+
 @Composable
 public fun contentColorFor(color: Color): Color =
     OrbitTheme.colors.contentColorFor(color).takeOrElse { LocalContentColor.current }

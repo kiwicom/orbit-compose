@@ -21,6 +21,10 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.foundation.LocalElevationEnabled
+import kiwi.orbit.foundation.withCritical
+import kiwi.orbit.foundation.withInteractive
+import kiwi.orbit.foundation.withSuccess
+import kiwi.orbit.foundation.withWarning
 import kiwi.orbit.icons.Icons
 import kotlin.math.roundToInt
 
@@ -30,16 +34,8 @@ public fun AlertInfo(
     icon: Painter? = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val colors = OrbitTheme.colors
     CompositionLocalProvider(
-        LocalColors provides colors.copy(
-            surfaceBackground = colors.interactiveSubtle,
-            primary = colors.interactive,
-            primaryContent = colors.interactiveContent,
-            primarySubtle = colors.interactiveAltSubtle,
-            primaryAlt = colors.interactiveAlt,
-            primaryAltSubtle = colors.interactiveAltSubtle,
-        ),
+        LocalColors provides OrbitTheme.colors.withInteractive(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -56,16 +52,8 @@ public fun AlertSuccess(
     icon: Painter? = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val colors = OrbitTheme.colors
     CompositionLocalProvider(
-        LocalColors provides colors.copy(
-            surfaceBackground = colors.successSubtle,
-            primary = colors.success,
-            primaryContent = colors.successContent,
-            primarySubtle = colors.successAltSubtle,
-            primaryAlt = colors.successAlt,
-            primaryAltSubtle = colors.successAltSubtle,
-        ),
+        LocalColors provides OrbitTheme.colors.withSuccess(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -82,16 +70,8 @@ public fun AlertWarning(
     icon: Painter? = Icons.Visa,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val colors = OrbitTheme.colors
     CompositionLocalProvider(
-        LocalColors provides colors.copy(
-            surfaceBackground = colors.warningSubtle,
-            primary = colors.warning,
-            primaryContent = colors.warningContent,
-            primarySubtle = colors.warningAltSubtle,
-            primaryAlt = colors.warningAlt,
-            primaryAltSubtle = colors.warningAltSubtle,
-        ),
+        LocalColors provides OrbitTheme.colors.withWarning(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -108,16 +88,8 @@ public fun AlertCritical(
     icon: Painter? = Icons.AlertCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val colors = OrbitTheme.colors
     CompositionLocalProvider(
-        LocalColors provides colors.copy(
-            surfaceBackground = colors.criticalSubtle,
-            primary = colors.critical,
-            primaryContent = colors.criticalContent,
-            primarySubtle = colors.criticalAltSubtle,
-            primaryAlt = colors.criticalAlt,
-            primaryAltSubtle = colors.criticalAltSubtle,
-        ),
+        LocalColors provides OrbitTheme.colors.withCritical(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -165,7 +137,7 @@ private fun Alert(
     Box(
         modifier
             .border(1.dp, OrbitTheme.colors.primaryAltSubtle, MaterialTheme.shapes.medium)
-            .background(OrbitTheme.colors.surfaceBackground, MaterialTheme.shapes.medium)
+            .background(OrbitTheme.colors.surface, MaterialTheme.shapes.medium)
             .padding(12.dp)
     ) {
         if (icon != null) {
