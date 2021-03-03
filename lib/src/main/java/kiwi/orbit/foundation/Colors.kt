@@ -3,10 +3,10 @@ package kiwi.orbit.foundation
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
@@ -394,4 +394,4 @@ public fun Colors.contentColorFor(color: Color): Color {
 public fun contentColorFor(color: Color): Color =
     OrbitTheme.colors.contentColorFor(color).takeOrElse { LocalContentColor.current }
 
-internal val LocalColors = staticCompositionLocalOf { lightColors() }
+internal val LocalColors = compositionLocalOf { lightColors() }
