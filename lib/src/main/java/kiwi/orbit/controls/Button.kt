@@ -26,7 +26,7 @@ public fun ButtonPrimary(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier.defaultMinSize(minHeight = 44.dp),
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primary,
         ),
@@ -44,7 +44,7 @@ public fun ButtonPrimarySubtle(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier.defaultMinSize(minHeight = 44.dp),
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
@@ -67,7 +67,7 @@ public fun ButtonSecondary(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier.defaultMinSize(minHeight = 44.dp),
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.surfaceAlt,
@@ -82,6 +82,52 @@ public fun ButtonSecondary(
 }
 
 @Composable
+public fun ButtonCritical(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
+    content: @Composable RowScope.() -> Unit,
+) {
+    MaterialButton(
+        onClick = onClick,
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
+        enabled = enabled,
+        colors = ButtonConstants.defaultButtonColors(
+            backgroundColor = OrbitTheme.colors.critical,
+        ),
+        contentPadding = contentPadding,
+        content = content,
+    )
+}
+
+
+@Composable
+public fun ButtonCriticalSubtle(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
+    content: @Composable RowScope.() -> Unit,
+) {
+    MaterialButton(
+        onClick = onClick,
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
+        enabled = enabled,
+        colors = ButtonConstants.defaultButtonColors(
+            backgroundColor = OrbitTheme.colors.criticalSubtle,
+        ),
+        elevation = MaterialButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
+        ),
+        contentPadding = contentPadding,
+        content = content,
+    )
+}
+
+
+@Composable
 public fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,7 +137,7 @@ public fun ButtonLink(
 ) {
     MaterialTextButton(
         onClick = onClick,
-        modifier = modifier.defaultMinSize(minHeight = 44.dp),
+        modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = Color.Transparent,
@@ -117,3 +163,5 @@ internal object ButtonConstants {
         disabledBackgroundColor = backgroundColor,
     )
 }
+
+private val ButtonMinHeight = 44.dp

@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
+import kiwi.orbit.controls.ButtonCritical
+import kiwi.orbit.controls.ButtonCriticalSubtle
 import kiwi.orbit.controls.ButtonLink
 import kiwi.orbit.controls.ButtonPrimary
 import kiwi.orbit.controls.ButtonPrimarySubtle
@@ -34,6 +36,14 @@ fun ButtonsScreen() {
 
             Block("Secondary Button") {
                 ButtonSecondary(onClick = {}, maxWidth) { Text("Secondary Button") }
+            }
+
+            Block("Critical Button") {
+                ButtonCritical(onClick = {}, maxWidth) { Text("Critical Button") }
+            }
+
+            Block("Critical Subtle Button") {
+                ButtonCriticalSubtle(onClick = {}, maxWidth) { Text("Critical Subtle Button") }
             }
 
             Block("Link Button") {
