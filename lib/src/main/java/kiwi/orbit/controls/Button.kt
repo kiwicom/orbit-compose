@@ -2,6 +2,7 @@ package kiwi.orbit.controls
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
@@ -25,7 +26,7 @@ public fun ButtonPrimary(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minHeight = 44.dp),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primary,
         ),
@@ -43,7 +44,7 @@ public fun ButtonPrimarySubtle(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minHeight = 44.dp),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
@@ -66,7 +67,7 @@ public fun ButtonSecondary(
 ) {
     MaterialButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minHeight = 44.dp),
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.surfaceAlt,
@@ -90,7 +91,7 @@ public fun ButtonLink(
 ) {
     MaterialTextButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minHeight = 44.dp),
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = Color.Transparent,
