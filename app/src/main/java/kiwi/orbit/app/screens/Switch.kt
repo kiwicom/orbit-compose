@@ -25,7 +25,7 @@ fun SwitchScreen() {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-            var value by remember { mutableStateOf(false) }
+            var value by remember { mutableStateOf(true) }
             Switch(checked = value, onCheckedChange = { value = it })
 
             Spacer(Modifier.height(8.dp))
