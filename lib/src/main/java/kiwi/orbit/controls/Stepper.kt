@@ -95,7 +95,7 @@ private fun StepperButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val colors = ButtonConstants.defaultButtonColors(
-        backgroundColor = OrbitTheme.colors.surfaceSecondary,
+        backgroundColor = OrbitTheme.colors.surfaceAlt,
     )
     val elevation = MaterialButtonDefaults.elevation(
         defaultElevation = 1.dp,

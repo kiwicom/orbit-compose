@@ -4,177 +4,179 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
+import androidx.core.graphics.ColorUtils
 import kiwi.orbit.OrbitTheme
 import androidx.compose.material.Colors as MaterialColors
 
-/**
- * @property surface Color used for surfaces such as cards and sheets over the background.
- * @property surfaceBackground Color used for background, behind scrollable content.
- * @property surfaceSecondary Color used for surfaces with subtle emphasis such as buttons over an other surface color.
- * @property surfaceFgPrimary Color used for text & icons display on top of a surface color, strong accent.
- * @property surfaceFgSecondary Color used for text & icons display on top of a surface color, medium accent.
- * @property surfaceFgTertiary Color used for text & icons display on top of a surface color, weak accent.
- * @property primary Primary app color, used for navigation and CTA actions. May be used for both background & foreground (text & icon) colors.
- * @property primaryFg Color used for text & icons display on top of the [primary] color.
- * @property primaryVariant Color used used as a [primary]'s variant to distinguish two elements. Mainly for Material color conversion.
- * @property secondary Secondary app color, used for dynamic state and actions. May be used for both background & foreground (text & icon) colors.
- * @property secondaryFg Color used for text & icons display on top of the [secondary] color.
- * @property secondaryVariant Color used used as a [secondary]'s variant to distinguish two elements. Mainly for Material color conversion.
- * @property success Color used for success state. May be used for both background & foreground (text & icon) colors.
- * @property successFg Color used for text & icons display on top of the [success] color.
- * @property successBg Color used as success background with weak accent. Use [success] as its foreground.
- * @property warning Color used for warning state. May be used for both background & foreground (text & icon) colors.
- * @property warningFg Color used for text & icons display on top of the [warning] color.
- * @property warningBg Color used as warning background with weak accent. Use [warning] as its foreground.
- * @property critical Color used for warning state. May be used for both background & foreground (text & icon) colors.
- * @property criticalFg Color used for text & icons display on top of the [critical] color.
- * @property criticalBg Color used as critical background with weak accent. Use [critical] as its foreground.
- * @property isLight Whether this Colors is considered as a 'light' or 'dark' set of colors. This affects elevation provider's behavior.
- */
+@Suppress("MemberVisibilityCanBePrivate")
 @Stable
 public class Colors(
-    surface: Color,
     surfaceBackground: Color,
-    surfaceSecondary: Color,
-    surfaceFgPrimary: Color,
-    surfaceFgSecondary: Color,
-    surfaceFgTertiary: Color,
+    surface: Color,
+    surfaceAlt: Color,
+
+    surfaceContent: Color,
+    surfaceContentAlt: Color,
+    surfaceContentTertiary: Color,
 
     primary: Color,
-    primaryFg: Color,
-    primaryVariant: Color,
+    primaryContent: Color,
+    primarySubtle: Color,
+    primaryAlt: Color,
+    primaryAltSubtle: Color,
 
-    secondary: Color,
-    secondaryFg: Color,
-    secondaryVariant: Color,
+    interactive: Color,
+    interactiveContent: Color,
+    interactiveSubtle: Color,
+    interactiveAlt: Color,
+    interactiveAltSubtle: Color,
 
     success: Color,
-    successFg: Color,
-    successBg: Color,
+    successContent: Color,
+    successSubtle: Color,
+    successAlt: Color,
+    successAltSubtle: Color,
 
     warning: Color,
-    warningFg: Color,
-    warningBg: Color,
+    warningSubtle: Color,
+    warningContent: Color,
+    warningAlt: Color,
+    warningAltSubtle: Color,
 
     critical: Color,
-    criticalFg: Color,
-    criticalBg: Color,
+    criticalSubtle: Color,
+    criticalContent: Color,
+    criticalAlt: Color,
+    criticalAltSubtle: Color,
 
     isLight: Boolean,
 ) {
-    public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
-        internal set
-    public var surfaceBackground: Color by mutableStateOf(surfaceBackground, structuralEqualityPolicy())
-        internal set
-    public var surfaceSecondary: Color by mutableStateOf(surfaceSecondary, structuralEqualityPolicy())
-        internal set
-    public var surfaceFgPrimary: Color by mutableStateOf(surfaceFgPrimary, structuralEqualityPolicy())
-        internal set
-    public var surfaceFgSecondary: Color by mutableStateOf(surfaceFgSecondary, structuralEqualityPolicy())
-        internal set
-    public var surfaceFgTertiary: Color by mutableStateOf(surfaceFgTertiary, structuralEqualityPolicy())
-        internal set
+    // @formatter:off
+    public var surfaceBackground: Color by mutableStateOf(surfaceBackground, structuralEqualityPolicy()); internal set
+    public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy()); internal set
+    public var surfaceAlt: Color by mutableStateOf(surfaceAlt, structuralEqualityPolicy()); internal set
 
-    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
-        internal set
-    public var primaryFg: Color by mutableStateOf(primaryFg, structuralEqualityPolicy())
-        internal set
-    public var primaryVariant: Color by mutableStateOf(primaryVariant, structuralEqualityPolicy())
-        internal set
+    public var surfaceContent: Color by mutableStateOf(surfaceContent, structuralEqualityPolicy()); internal set
+    public var surfaceContentAlt: Color by mutableStateOf(surfaceContentAlt, structuralEqualityPolicy()); internal set
+    public var surfaceContentTertiary: Color by mutableStateOf(surfaceContentTertiary, structuralEqualityPolicy()); internal set
 
-    public var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
-        internal set
-    public var secondaryFg: Color by mutableStateOf(secondaryFg, structuralEqualityPolicy())
-        internal set
-    public var secondaryVariant: Color by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
-        internal set
+    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy()); internal set
+    public var primaryContent: Color by mutableStateOf(primaryContent, structuralEqualityPolicy()); internal set
+    public var primarySubtle: Color by mutableStateOf(primarySubtle, structuralEqualityPolicy()); internal set
+    public var primaryAlt: Color by mutableStateOf(primaryAlt, structuralEqualityPolicy()); internal set
+    public var primaryAltSubtle: Color by mutableStateOf(primaryAltSubtle, structuralEqualityPolicy()); internal set
 
-    public var success: Color by mutableStateOf(success, structuralEqualityPolicy())
-        internal set
-    public var successFg: Color by mutableStateOf(successFg, structuralEqualityPolicy())
-        internal set
-    public var successBg: Color by mutableStateOf(successBg, structuralEqualityPolicy())
-        internal set
+    public var interactive: Color by mutableStateOf(interactive, structuralEqualityPolicy()); internal set
+    public var interactiveContent: Color by mutableStateOf(interactiveContent, structuralEqualityPolicy()); internal set
+    public var interactiveSubtle: Color by mutableStateOf(interactiveSubtle, structuralEqualityPolicy()); internal set
+    public var interactiveAlt: Color by mutableStateOf(interactiveAlt, structuralEqualityPolicy()); internal set
+    public var interactiveAltSubtle: Color by mutableStateOf(interactiveAltSubtle, structuralEqualityPolicy()); internal set
 
-    public var warning: Color by mutableStateOf(warning, structuralEqualityPolicy())
-        internal set
-    public var warningFg: Color by mutableStateOf(warningFg, structuralEqualityPolicy())
-        internal set
-    public var warningBg: Color by mutableStateOf(warningBg, structuralEqualityPolicy())
-        internal set
+    public var success: Color by mutableStateOf(success, structuralEqualityPolicy()); internal set
+    public var successContent: Color by mutableStateOf(successContent, structuralEqualityPolicy()); internal set
+    public var successSubtle: Color by mutableStateOf(successSubtle, structuralEqualityPolicy()); internal set
+    public var successAlt: Color by mutableStateOf(successAlt, structuralEqualityPolicy()); internal set
+    public var successAltSubtle: Color by mutableStateOf(successAltSubtle, structuralEqualityPolicy()); internal set
 
-    public var critical: Color by mutableStateOf(critical, structuralEqualityPolicy())
-        internal set
-    public var criticalFg: Color by mutableStateOf(criticalFg, structuralEqualityPolicy())
-        internal set
-    public var criticalBg: Color by mutableStateOf(criticalBg, structuralEqualityPolicy())
-        internal set
+    public var warning: Color by mutableStateOf(warning, structuralEqualityPolicy()); internal set
+    public var warningContent: Color by mutableStateOf(warningContent, structuralEqualityPolicy()); internal set
+    public var warningSubtle: Color by mutableStateOf(warningSubtle, structuralEqualityPolicy()); internal set
+    public var warningAlt: Color by mutableStateOf(warningAlt, structuralEqualityPolicy()); internal set
+    public var warningAltSubtle: Color by mutableStateOf(warningAltSubtle, structuralEqualityPolicy()); internal set
 
-    public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy())
-        internal set
+    public var critical: Color by mutableStateOf(critical, structuralEqualityPolicy()); internal set
+    public var criticalContent: Color by mutableStateOf(criticalContent, structuralEqualityPolicy()); internal set
+    public var criticalSubtle: Color by mutableStateOf(criticalSubtle, structuralEqualityPolicy()); internal set
+    public var criticalAlt: Color by mutableStateOf(criticalAlt, structuralEqualityPolicy()); internal set
+    public var criticalAltSubtle: Color by mutableStateOf(criticalAltSubtle, structuralEqualityPolicy()); internal set
+    // @formatter:on
+
+    public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy()); internal set
 
     public fun copy(
-        surface: Color = this.surface,
         surfaceBackground: Color = this.surfaceBackground,
-        surfaceSecondary: Color = this.surfaceSecondary,
-        surfaceFgPrimary: Color = this.surfaceFgPrimary,
-        surfaceFgSecondary: Color = this.surfaceFgSecondary,
-        surfaceFgTertiary: Color = this.surfaceFgTertiary,
+        surface: Color = this.surface,
+        surfaceAlt: Color = this.surfaceAlt,
+
+        surfaceContent: Color = this.surfaceContent,
+        surfaceContentAlt: Color = this.surfaceContentAlt,
+        surfaceContentTertiary: Color = this.surfaceContentTertiary,
 
         primary: Color = this.primary,
-        primaryFg: Color = this.primaryFg,
-        primaryVariant: Color = this.primaryVariant,
+        primaryContent: Color = this.primaryContent,
+        primarySubtle: Color = this.primarySubtle,
+        primaryAlt: Color = this.primaryAlt,
+        primaryAltSubtle: Color = this.primaryAltSubtle,
 
-        secondary: Color = this.secondary,
-        secondaryFg: Color = this.secondaryFg,
-        secondaryVariant: Color = this.secondaryVariant,
+        interactive: Color = this.interactive,
+        interactiveContent: Color = this.interactiveContent,
+        interactiveSubtle: Color = this.interactiveSubtle,
+        interactiveAlt: Color = this.interactiveAlt,
+        interactiveAltSubtle: Color = this.interactiveAltSubtle,
 
         success: Color = this.success,
-        successFg: Color = this.successFg,
-        successBg: Color = this.successBg,
+        successContent: Color = this.successContent,
+        successSubtle: Color = this.successSubtle,
+        successAlt: Color = this.successAlt,
+        successAltSubtle: Color = this.successAltSubtle,
 
         warning: Color = this.warning,
-        warningFg: Color = this.warningFg,
-        warningBg: Color = this.warningBg,
+        warningSubtle: Color = this.warningSubtle,
+        warningContent: Color = this.warningContent,
+        warningAlt: Color = this.warningAlt,
+        warningAltSubtle: Color = this.warningAltSubtle,
 
         critical: Color = this.critical,
-        criticalFg: Color = this.criticalFg,
-        criticalBg: Color = this.criticalBg,
+        criticalSubtle: Color = this.criticalSubtle,
+        criticalContent: Color = this.criticalContent,
+        criticalAlt: Color = this.criticalAlt,
+        criticalAltSubtle: Color = this.criticalAltSubtle,
 
         isLight: Boolean = this.isLight,
     ): Colors = Colors(
-        surface,
         surfaceBackground,
-        surfaceSecondary,
-        surfaceFgPrimary,
-        surfaceFgSecondary,
-        surfaceFgTertiary,
+        surface,
+        surfaceAlt,
+
+        surfaceContent,
+        surfaceContentAlt,
+        surfaceContentTertiary,
 
         primary,
-        primaryFg,
-        primaryVariant,
+        primaryContent,
+        primarySubtle,
+        primaryAlt,
+        primaryAltSubtle,
 
-        secondary,
-        secondaryFg,
-        secondaryVariant,
+        interactive,
+        interactiveContent,
+        interactiveSubtle,
+        interactiveAlt,
+        interactiveAltSubtle,
 
         success,
-        successFg,
-        successBg,
+        successContent,
+        successSubtle,
+        successAlt,
+        successAltSubtle,
 
         warning,
-        warningFg,
-        warningBg,
+        warningSubtle,
+        warningContent,
+        warningAlt,
+        warningAltSubtle,
 
         critical,
-        criticalFg,
-        criticalBg,
+        criticalSubtle,
+        criticalContent,
+        criticalAlt,
+        criticalAltSubtle,
 
         isLight,
     )
@@ -182,147 +184,208 @@ public class Colors(
     internal fun toMaterialColors(): MaterialColors {
         return MaterialColors(
             primary = primary,
-            primaryVariant = primaryVariant,
-            secondary = secondary,
-            secondaryVariant = secondaryVariant,
+            primaryVariant = primaryAlt,
+            secondary = interactive,
+            secondaryVariant = interactiveAlt,
             background = surfaceBackground,
             surface = surface,
             error = critical,
-            onPrimary = primaryFg,
-            onSecondary = secondaryFg,
-            onBackground = surfaceFgPrimary,
-            onSurface = surfaceFgPrimary,
-            onError = criticalFg,
+            onPrimary = primaryContent,
+            onSecondary = interactiveContent,
+            onBackground = surfaceContent,
+            onSurface = surfaceContent,
+            onError = criticalContent,
             isLight = isLight,
         )
     }
 }
 
 /**
- * Light Orbit color public variant.
+ * Light Orbit color variant.
  */
 public fun lightColors(
-    surface: Color = Color.White,
     surfaceBackground: Color = ColorTokens.CloudLight,
-    surfaceSecondary: Color = ColorTokens.CloudDark,
-    surfaceFgPrimary: Color = ColorTokens.InkNormal,
-    surfaceFgSecondary: Color = ColorTokens.InkLight,
-    surfaceFgTertiary: Color = ColorTokens.InkLighter,
+    surface: Color = ColorTokens.White,
+    surfaceAlt: Color = ColorTokens.CloudDark,
+
+    surfaceContent: Color = ColorTokens.InkNormal,
+    surfaceContentAlt: Color = ColorTokens.InkLight,
+    surfaceContentTertiary: Color = ColorTokens.InkLighter,
 
     primary: Color = ColorTokens.ProductNormal,
-    primaryFg: Color = Color.White,
-    primaryVariant: Color = ColorTokens.ProductDark,
+    primaryContent: Color = ColorTokens.White,
+    primarySubtle: Color = ColorTokens.ProductLight,
+    primaryAlt: Color = ColorTokens.ProductNormalHover,
+    primaryAltSubtle: Color = ColorTokens.ProductLightHover,
 
-    secondary: Color = ColorTokens.BlueNormal,
-    secondaryFg: Color = Color.White,
-    secondaryVariant: Color = ColorTokens.BlueDark,
+    interactive: Color = ColorTokens.BlueNormal,
+    interactiveContent: Color = ColorTokens.White,
+    interactiveSubtle: Color = ColorTokens.BlueLight,
+    interactiveAlt: Color = ColorTokens.BlueNormalHover,
+    interactiveAltSubtle: Color = ColorTokens.BlueLightHover,
 
     success: Color = ColorTokens.GreenNormal,
-    successFg: Color = Color.White,
-    successBg: Color = ColorTokens.GreenLight,
+    successContent: Color = ColorTokens.White,
+    successSubtle: Color = ColorTokens.GreenLight,
+    successAlt: Color = ColorTokens.GreenNormalHover,
+    successAltSubtle: Color = ColorTokens.GreenLightHover,
 
     warning: Color = ColorTokens.OrangeNormal,
-    warningFg: Color = Color.White,
-    warningBg: Color = ColorTokens.OrangeLight,
+    warningContent: Color = ColorTokens.White,
+    warningSubtle: Color = ColorTokens.OrangeLight,
+    warningAlt: Color = ColorTokens.OrangeLightHover,
+    warningAltSubtle: Color = ColorTokens.OrangeLightHover,
 
     critical: Color = ColorTokens.RedNormal,
-    criticalFg: Color = Color.White,
-    criticalBg: Color = ColorTokens.RedLight,
+    criticalContent: Color = Color.White,
+    criticalSubtle: Color = ColorTokens.RedLight,
+    criticalAlt: Color = ColorTokens.RedNormalHover,
+    criticalAltSubtle: Color = ColorTokens.RedLightHover,
 ): Colors = Colors(
-    surface,
     surfaceBackground,
-    surfaceSecondary,
-    surfaceFgPrimary,
-    surfaceFgSecondary,
-    surfaceFgTertiary,
+    surface,
+    surfaceAlt,
+    surfaceContent,
+    surfaceContentAlt,
+    surfaceContentTertiary,
     primary,
-    primaryFg,
-    primaryVariant,
-    secondary,
-    secondaryFg,
-    secondaryVariant,
+    primaryContent,
+    primarySubtle,
+    primaryAlt,
+    primaryAltSubtle,
+    interactive,
+    interactiveContent,
+    interactiveSubtle,
+    interactiveAlt,
+    interactiveAltSubtle,
     success,
-    successFg,
-    successBg,
+    successContent,
+    successSubtle,
+    successAlt,
+    successAltSubtle,
     warning,
-    warningFg,
-    warningBg,
+    warningSubtle,
+    warningContent,
+    warningAlt,
+    warningAltSubtle,
     critical,
-    criticalFg,
-    criticalBg,
+    criticalSubtle,
+    criticalContent,
+    criticalAlt,
+    criticalAltSubtle,
     true
 )
+
+@OptIn(ExperimentalUnsignedTypes::class)
+internal fun Color.invert(): Color {
+    val hsl = floatArrayOf(0f, 0f, 0f)
+    ColorUtils.colorToHSL((value shr 32).toInt(), hsl)
+    hsl[2] = 1 - hsl[2]
+    val colorInt = ColorUtils.HSLToColor(hsl)
+    return Color(colorInt)
+}
 
 /**
  * Dark Orbit color variant.
  */
 public fun darkColors(
-    surface: Color = Color.Black.copy(0.9f),
-    surfaceBackground: Color = Color.Black,
-    surfaceSecondary: Color = ColorTokens.InkLight,
-    surfaceFgPrimary: Color = ColorTokens.InkLighter,
-    surfaceFgSecondary: Color = ColorTokens.InkLight,
-    surfaceFgTertiary: Color = ColorTokens.InkNormal,
+    surfaceBackground: Color = ColorTokens.CloudLight.invert(),
+    surface: Color = ColorTokens.White.invert(),
+    surfaceAlt: Color = ColorTokens.CloudDark.invert(),
+
+    surfaceContent: Color = ColorTokens.InkNormal.invert(),
+    surfaceContentAlt: Color = ColorTokens.InkLight.invert(),
+    surfaceContentTertiary: Color = ColorTokens.InkLighter.invert(),
 
     primary: Color = ColorTokens.ProductNormal,
-    primaryFg: Color = Color.Black,
-    primaryVariant: Color = ColorTokens.ProductDark,
+    primaryContent: Color = ColorTokens.White.invert(),
+    primarySubtle: Color = ColorTokens.ProductLight.invert(),
+    primaryAlt: Color = ColorTokens.ProductNormalHover,
+    primaryAltSubtle: Color = ColorTokens.ProductLightHover.invert(),
 
-    secondary: Color = ColorTokens.BlueNormal,
-    secondaryFg: Color = Color.Black,
-    secondaryVariant: Color = ColorTokens.BlueDark,
+    interactive: Color = ColorTokens.BlueNormal,
+    interactiveContent: Color = ColorTokens.White.invert(),
+    interactiveSubtle: Color = ColorTokens.BlueLight.invert(),
+    interactiveAlt: Color = ColorTokens.BlueNormalHover,
+    interactiveAltSubtle: Color = ColorTokens.BlueLightHover.invert(),
 
     success: Color = ColorTokens.GreenNormal,
-    successFg: Color = Color.Black,
-    successBg: Color = ColorTokens.GreenDarker,
+    successContent: Color = ColorTokens.White.invert(),
+    successSubtle: Color = ColorTokens.GreenLight.invert(),
+    successAlt: Color = ColorTokens.GreenNormalHover,
+    successAltSubtle: Color = ColorTokens.GreenLightHover.invert(),
 
     warning: Color = ColorTokens.OrangeNormal,
-    warningFg: Color = Color.Black,
-    warningBg: Color = ColorTokens.OrangeDarker,
+    warningContent: Color = ColorTokens.White.invert(),
+    warningSubtle: Color = ColorTokens.OrangeLight.invert(),
+    warningAlt: Color = ColorTokens.OrangeLightHover,
+    warningAltSubtle: Color = ColorTokens.OrangeLightHover.invert(),
 
     critical: Color = ColorTokens.RedNormal,
-    criticalFg: Color = Color.Black,
-    criticalBg: Color = ColorTokens.RedDarker,
+    criticalContent: Color = Color.White.invert(),
+    criticalSubtle: Color = ColorTokens.RedLight.invert(),
+    criticalAlt: Color = ColorTokens.RedNormalHover,
+    criticalAltSubtle: Color = ColorTokens.RedLightHover.invert(),
 ): Colors = Colors(
-    surface,
     surfaceBackground,
-    surfaceSecondary,
-    surfaceFgPrimary,
-    surfaceFgSecondary,
-    surfaceFgTertiary,
+    surface,
+    surfaceAlt,
+    surfaceContent,
+    surfaceContentAlt,
+    surfaceContentTertiary,
     primary,
-    primaryFg,
-    primaryVariant,
-    secondary,
-    secondaryFg,
-    secondaryVariant,
+    primaryContent,
+    primarySubtle,
+    primaryAlt,
+    primaryAltSubtle,
+    interactive,
+    interactiveContent,
+    interactiveSubtle,
+    interactiveAlt,
+    interactiveAltSubtle,
     success,
-    successFg,
-    successBg,
+    successContent,
+    successSubtle,
+    successAlt,
+    successAltSubtle,
     warning,
-    warningFg,
-    warningBg,
+    warningSubtle,
+    warningContent,
+    warningAlt,
+    warningAltSubtle,
     critical,
-    criticalFg,
-    criticalBg,
+    criticalSubtle,
+    criticalContent,
+    criticalAlt,
+    criticalAltSubtle,
     false
 )
 
 public fun Colors.contentColorFor(color: Color): Color {
     return when (color) {
-        surface -> surfaceFgPrimary
-        surfaceBackground -> surfaceFgPrimary
-        surfaceSecondary -> surfaceFgPrimary
-        primary -> primaryFg
-        primaryVariant -> primaryFg
-        secondary -> secondaryFg
-        secondaryVariant -> secondaryFg
-        success -> successFg
-        successBg -> success
-        warning -> warningFg
-        warningBg -> warning
-        critical -> criticalFg
-        criticalBg -> critical
+        surface -> surfaceContent
+        surfaceBackground -> surfaceContent
+        surfaceAlt -> surfaceContent
+        primary -> primaryContent
+        primarySubtle -> primary
+        primaryAlt -> primaryContent
+        primaryAltSubtle -> primaryAlt
+        interactive -> interactiveContent
+        interactiveSubtle -> interactive
+        interactiveAlt -> interactiveContent
+        interactiveAltSubtle -> interactiveAlt
+        success -> successContent
+        successSubtle -> success
+        successAlt -> successContent
+        successAltSubtle -> successAlt
+        warning -> warningContent
+        warningSubtle -> warning
+        warningAlt -> warningContent
+        warningAltSubtle -> warningAlt
+        critical -> criticalContent
+        criticalSubtle -> critical
+        criticalAlt -> criticalContent
+        criticalAltSubtle -> criticalAlt
         else -> Color.Unspecified
     }
 }

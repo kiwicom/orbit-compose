@@ -99,7 +99,7 @@ public fun TextField(
         ) {
             when (it) {
                 InputState.Normal -> Color.Transparent
-                InputState.Focused -> OrbitTheme.colors.secondary
+                InputState.Focused -> OrbitTheme.colors.interactive
                 InputState.NormalError -> OrbitTheme.colors.critical
                 InputState.FocusedError -> OrbitTheme.colors.critical
             }
@@ -109,7 +109,7 @@ public fun TextField(
         ) {
             when (it) {
                 InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface
-                else -> OrbitTheme.colors.surfaceSecondary
+                else -> OrbitTheme.colors.surfaceAlt
             }
         }
         val errorAlpha = transition.animateFloat(

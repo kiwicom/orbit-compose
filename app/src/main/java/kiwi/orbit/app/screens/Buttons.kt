@@ -26,26 +26,18 @@ fun ButtonsScreen() {
 
             Block("Primary Button") {
                 ButtonPrimary(onClick = {}, maxWidth) { Text("Primary Button") }
-                Spacer(Modifier.height(8.dp))
-                ButtonPrimary(onClick = {}, maxWidth, enabled = false) { Text("Primary Button") }
             }
 
             Block("Primary Subtle Button") {
                 ButtonPrimarySubtle(onClick = {}, maxWidth) { Text("Primary Subtle Button") }
-                Spacer(Modifier.height(8.dp))
-                ButtonPrimarySubtle(onClick = {}, maxWidth, enabled = false) { Text("Primary Subtle Button") }
             }
 
             Block("Secondary Button") {
                 ButtonSecondary(onClick = {}, maxWidth) { Text("Secondary Button") }
-                Spacer(Modifier.height(8.dp))
-                ButtonSecondary(onClick = {}, maxWidth, enabled = false) { Text("Secondary Button") }
             }
 
             Block("Link Button") {
                 ButtonLink(onClick = {}, maxWidth) { Text("Link Button") }
-                Spacer(Modifier.height(8.dp))
-                ButtonLink(onClick = {}, maxWidth, enabled = false) { Text("Link Button") }
             }
         }
     }

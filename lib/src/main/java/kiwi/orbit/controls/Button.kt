@@ -20,17 +20,14 @@ import androidx.compose.material.TextButton as MaterialTextButton
 public fun ButtonPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     MaterialButton(
         onClick = onClick,
         modifier = modifier,
-        enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
-            disabledContentColor = OrbitTheme.colors.surfaceFgSecondary
-                .copy(alpha = ContentAlpha.disabled)
+            backgroundColor = OrbitTheme.colors.primary,
         ),
         contentPadding = contentPadding,
         content = content,
@@ -41,18 +38,14 @@ public fun ButtonPrimary(
 public fun ButtonPrimarySubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     MaterialButton(
         onClick = onClick,
         modifier = modifier,
-        enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
-            backgroundColor = OrbitTheme.colors.primary.copy(0.12f)
-                .compositeOver(OrbitTheme.colors.surface),
-            contentColor = OrbitTheme.colors.primary,
+            backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
         elevation = MaterialButtonDefaults.elevation(
             defaultElevation = 1.dp
@@ -75,7 +68,7 @@ public fun ButtonSecondary(
         modifier = modifier,
         enabled = enabled,
         colors = ButtonConstants.defaultButtonColors(
-            backgroundColor = OrbitTheme.colors.surfaceSecondary,
+            backgroundColor = OrbitTheme.colors.surfaceAlt,
         ),
         elevation = MaterialButtonDefaults.elevation(
             defaultElevation = 1.dp
@@ -100,7 +93,6 @@ public fun ButtonLink(
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = Color.Transparent,
             contentColor = OrbitTheme.colors.primary,
-            disabledBackgroundColor = Color.Transparent,
         ),
         contentPadding = contentPadding,
         content = content,
@@ -113,15 +105,12 @@ internal object ButtonConstants {
     @Composable
     fun defaultButtonColors(
         backgroundColor: Color = OrbitTheme.colors.primary,
-        // We utilize here the secondary color since it has more "color hue" than the primary.
-        disabledBackgroundColor: Color = OrbitTheme.colors.surfaceFgSecondary.copy(alpha = 0.12f)
-            .compositeOver(OrbitTheme.colors.surface),
         contentColor: Color = contentColorFor(backgroundColor),
         disabledContentColor: Color = contentColor.copy(alpha = ContentAlpha.disabled)
     ): ButtonColors = MaterialButtonDefaults.buttonColors(
         backgroundColor = backgroundColor,
         disabledContentColor = disabledContentColor,
         contentColor = contentColor,
-        disabledBackgroundColor = disabledBackgroundColor,
+        disabledBackgroundColor = backgroundColor,
     )
 }

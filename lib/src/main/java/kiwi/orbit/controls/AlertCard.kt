@@ -20,18 +20,20 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.icons.Icons
 
+
 @Composable
-public fun AlertSuccessCard(
+public fun AlertInfoCard(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.CheckCircle,
+    icon: Painter = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
     CompositionLocalProvider(
         LocalColors provides colors.copy(
-            surfaceBackground = colors.successBg,
-            primary = colors.success,
-            primaryFg = colors.successFg,
+            surfaceBackground = colors.interactiveSubtle,
+            primary = colors.interactive,
+            primaryContent = colors.interactiveContent,
+            primarySubtle = colors.interactiveAltSubtle,
         )
     ) {
         AlertCard(
@@ -43,17 +45,18 @@ public fun AlertSuccessCard(
 }
 
 @Composable
-public fun AlertInfoCard(
+public fun AlertSuccessCard(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.InformationCircle,
+    icon: Painter = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
     CompositionLocalProvider(
         LocalColors provides colors.copy(
-            surfaceBackground = colors.secondary.copy(alpha = 0.12f),
-            primary = colors.secondary,
-            primaryFg = colors.secondaryFg,
+            surfaceBackground = colors.successSubtle,
+            primary = colors.success,
+            primaryContent = colors.successContent,
+            primarySubtle = colors.successAltSubtle
         )
     ) {
         AlertCard(
@@ -73,9 +76,10 @@ public fun AlertWarningCard(
     val colors = OrbitTheme.colors
     CompositionLocalProvider(
         LocalColors provides colors.copy(
-            surfaceBackground = colors.warningBg,
+            surfaceBackground = colors.warningSubtle,
             primary = colors.warning,
-            primaryFg = colors.warningFg,
+            primaryContent = colors.warningContent,
+            primarySubtle = colors.warningAltSubtle,
         )
     ) {
         AlertCard(
@@ -95,9 +99,10 @@ public fun AlertCriticalCard(
     val colors = OrbitTheme.colors
     CompositionLocalProvider(
         LocalColors provides colors.copy(
-            surfaceBackground = colors.criticalBg,
+            surfaceBackground = colors.criticalSubtle,
             primary = colors.critical,
-            primaryFg = colors.criticalFg,
+            primaryContent = colors.criticalContent,
+            primarySubtle = colors.criticalAltSubtle,
         )
     ) {
         AlertCard(

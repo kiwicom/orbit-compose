@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 // A surface container using the 'background' color from the theme
                 Scaffold(
                     topBar = {
-                        TopAppBar(backgroundColor = OrbitTheme.colors.surfaceSecondary) {
+                        TopAppBar(backgroundColor = OrbitTheme.colors.surfaceAlt) {
                             Text(
                                 text = "Compose Demo",
                                 modifier = Modifier.align(Alignment.CenterVertically)
