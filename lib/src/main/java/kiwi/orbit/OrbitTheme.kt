@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import kiwi.orbit.foundation.Colors
 import kiwi.orbit.foundation.LocalColors
+import kiwi.orbit.foundation.LocalElevationEnabled
 import kiwi.orbit.foundation.LocalTypography
 import kiwi.orbit.foundation.Shapes
 import kiwi.orbit.foundation.Typography
@@ -32,17 +33,15 @@ public fun OrbitTheme(
 }
 
 public object OrbitTheme {
-    /**
-     * Retrieves the current [Colors] at the call site's position in the hierarchy.
-     */
     public val colors: Colors
         @Composable
         get() = LocalColors.current
 
-    /**
-     * Retrieves the current [Typography] at the call site's position in the hierarchy.
-     */
     public val typography: Typography
         @Composable
         get() = LocalTypography.current
+
+    public val elevationEnabled: Boolean
+        @Composable
+        get() = LocalElevationEnabled.current
 }

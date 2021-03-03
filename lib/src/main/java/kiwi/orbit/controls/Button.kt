@@ -9,7 +9,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.contentColorFor
@@ -24,12 +23,18 @@ public fun ButtonPrimary(
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val elevation = if (OrbitTheme.elevationEnabled) {
+        MaterialButtonDefaults.elevation()
+    } else {
+        MaterialButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    }
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primary,
         ),
+        elevation = elevation,
         contentPadding = contentPadding,
         content = content,
     )
@@ -42,16 +47,21 @@ public fun ButtonPrimarySubtle(
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val elevation = if (OrbitTheme.elevationEnabled) {
+        MaterialButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
+        )
+    } else {
+        MaterialButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    }
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
-        elevation = MaterialButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 4.dp,
-        ),
+        elevation = elevation,
         contentPadding = contentPadding,
         content = content,
     )
@@ -65,6 +75,14 @@ public fun ButtonSecondary(
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val elevation = if (OrbitTheme.elevationEnabled) {
+        MaterialButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 2.dp,
+        )
+    } else {
+        MaterialButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    }
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
@@ -72,10 +90,7 @@ public fun ButtonSecondary(
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.surfaceAlt,
         ),
-        elevation = MaterialButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 2.dp,
-        ),
+        elevation = elevation,
         contentPadding = contentPadding,
         content = content,
     )
@@ -89,6 +104,11 @@ public fun ButtonCritical(
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val elevation = if (OrbitTheme.elevationEnabled) {
+        MaterialButtonDefaults.elevation()
+    } else {
+        MaterialButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    }
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
@@ -96,6 +116,7 @@ public fun ButtonCritical(
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.critical,
         ),
+        elevation = elevation,
         contentPadding = contentPadding,
         content = content,
     )
@@ -110,6 +131,14 @@ public fun ButtonCriticalSubtle(
     contentPadding: PaddingValues = MaterialButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val elevation = if (OrbitTheme.elevationEnabled) {
+        MaterialButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
+        )
+    } else {
+        MaterialButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    }
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
@@ -117,10 +146,7 @@ public fun ButtonCriticalSubtle(
         colors = ButtonConstants.defaultButtonColors(
             backgroundColor = OrbitTheme.colors.criticalSubtle,
         ),
-        elevation = MaterialButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 4.dp,
-        ),
+        elevation = elevation,
         contentPadding = contentPadding,
         content = content,
     )

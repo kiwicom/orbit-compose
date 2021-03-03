@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
+import kiwi.orbit.foundation.LocalElevationEnabled
 import kiwi.orbit.icons.Icons
 
 
@@ -34,7 +35,8 @@ public fun AlertInfo(
             primary = colors.interactive,
             primaryContent = colors.interactiveContent,
             primarySubtle = colors.interactiveAltSubtle,
-        )
+        ),
+        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -57,7 +59,8 @@ public fun AlertSuccess(
             primary = colors.success,
             primaryContent = colors.successContent,
             primarySubtle = colors.successAltSubtle
-        )
+        ),
+        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -80,7 +83,8 @@ public fun AlertWarning(
             primary = colors.warning,
             primaryContent = colors.warningContent,
             primarySubtle = colors.warningAltSubtle,
-        )
+        ),
+        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -103,7 +107,8 @@ public fun AlertCritical(
             primary = colors.critical,
             primaryContent = colors.criticalContent,
             primarySubtle = colors.criticalAltSubtle,
-        )
+        ),
+        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
