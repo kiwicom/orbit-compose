@@ -48,7 +48,8 @@ public fun ButtonPrimarySubtle(
             backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
         elevation = MaterialButtonDefaults.elevation(
-            defaultElevation = 1.dp
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
         ),
         contentPadding = contentPadding,
         content = content,
@@ -71,7 +72,8 @@ public fun ButtonSecondary(
             backgroundColor = OrbitTheme.colors.surfaceAlt,
         ),
         elevation = MaterialButtonDefaults.elevation(
-            defaultElevation = 1.dp
+            defaultElevation = 1.dp,
+            pressedElevation = 2.dp,
         ),
         contentPadding = contentPadding,
         content = content,
