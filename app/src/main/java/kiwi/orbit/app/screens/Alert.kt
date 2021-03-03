@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -14,16 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.controls.AlertCriticalCard
-import kiwi.orbit.controls.AlertInfoCard
-import kiwi.orbit.controls.AlertSuccessCard
-import kiwi.orbit.controls.AlertWarningCard
+import kiwi.orbit.controls.AlertCritical
+import kiwi.orbit.controls.AlertInfo
+import kiwi.orbit.controls.AlertSuccess
+import kiwi.orbit.controls.AlertWarning
 import kiwi.orbit.controls.ButtonPrimary
 import kiwi.orbit.controls.ButtonPrimarySubtle
 
 @Preview
 @Composable
-fun AlertCardScreen() {
+fun AlertScreen() {
     Surface {
         Column(
             Modifier
@@ -31,7 +30,7 @@ fun AlertCardScreen() {
                 .fillMaxWidth()
         ) {
 
-            AlertSuccessCard(Modifier.fillMaxWidth()) {
+            AlertSuccess(Modifier.fillMaxWidth()) {
                 Text("Your payment was successful.")
                 Spacer(Modifier.height(12.dp))
                 Text("View the receipt in the profile:")
@@ -49,7 +48,7 @@ fun AlertCardScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            AlertInfoCard(Modifier.fillMaxWidth()) {
+            AlertInfo(Modifier.fillMaxWidth()) {
                 Text("Re-check your credentials")
                 Spacer(Modifier.height(12.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
@@ -67,7 +66,7 @@ fun AlertCardScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            AlertWarningCard(Modifier.fillMaxWidth()) {
+            AlertWarning(Modifier.fillMaxWidth()) {
                 Text("Visa requirements check")
                 Spacer(Modifier.height(12.dp))
                 Text("The requirements found here are for reference purposes only. Contact the embassy or your foreign ministry for more information.")
@@ -85,7 +84,7 @@ fun AlertCardScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            AlertCriticalCard(Modifier.fillMaxWidth()) {
+            AlertCritical(Modifier.fillMaxWidth()) {
                 Text("No results loaded")
                 Spacer(Modifier.height(12.dp))
                 Text(" There was an error while processing your request. Refresh the page to load the results.")

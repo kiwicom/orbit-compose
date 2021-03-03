@@ -22,7 +22,7 @@ import kiwi.orbit.icons.Icons
 
 
 @Composable
-public fun AlertInfoCard(
+public fun AlertInfo(
     modifier: Modifier = Modifier,
     icon: Painter = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
@@ -36,7 +36,7 @@ public fun AlertInfoCard(
             primarySubtle = colors.interactiveAltSubtle,
         )
     ) {
-        AlertCard(
+        Alert(
             icon = icon,
             modifier = modifier,
             content = content,
@@ -45,7 +45,7 @@ public fun AlertInfoCard(
 }
 
 @Composable
-public fun AlertSuccessCard(
+public fun AlertSuccess(
     modifier: Modifier = Modifier,
     icon: Painter = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
@@ -59,7 +59,7 @@ public fun AlertSuccessCard(
             primarySubtle = colors.successAltSubtle
         )
     ) {
-        AlertCard(
+        Alert(
             icon = icon,
             modifier = modifier,
             content = content,
@@ -68,7 +68,7 @@ public fun AlertSuccessCard(
 }
 
 @Composable
-public fun AlertWarningCard(
+public fun AlertWarning(
     modifier: Modifier = Modifier,
     icon: Painter = Icons.Visa,
     content: @Composable ColumnScope.() -> Unit,
@@ -82,7 +82,7 @@ public fun AlertWarningCard(
             primarySubtle = colors.warningAltSubtle,
         )
     ) {
-        AlertCard(
+        Alert(
             icon = icon,
             modifier = modifier,
             content = content,
@@ -91,7 +91,7 @@ public fun AlertWarningCard(
 }
 
 @Composable
-public fun AlertCriticalCard(
+public fun AlertCritical(
     modifier: Modifier = Modifier,
     icon: Painter = Icons.AlertCircle,
     content: @Composable ColumnScope.() -> Unit,
@@ -105,7 +105,7 @@ public fun AlertCriticalCard(
             primarySubtle = colors.criticalAltSubtle,
         )
     ) {
-        AlertCard(
+        Alert(
             icon = icon,
             modifier = modifier,
             content = content,
@@ -114,7 +114,7 @@ public fun AlertCriticalCard(
 }
 
 @Composable
-private fun AlertCard(
+private fun Alert(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
