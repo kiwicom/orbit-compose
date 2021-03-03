@@ -16,11 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.foundation.LocalElevationEnabled
 import kiwi.orbit.icons.Icons
+import kotlin.math.roundToInt
 
 @Composable
 public fun AlertInfo(
@@ -123,6 +125,34 @@ public fun AlertCritical(
             modifier = modifier,
             content = content,
         )
+    }
+}
+
+@Composable
+public fun AlertButtons(
+    content: @Composable () -> Unit,
+) {
+    Layout(
+        content = content,
+        Modifier.padding(top = 12.dp)
+    ) { measurables, incomingConstraints ->
+        val buttonPadding = 12.dp.toPx().roundToInt()
+        val buttonsCount = measurables.size
+        val buttonSize = ((incomingConstraints.maxWidth - (buttonPadding * (buttonsCount - 1))) / buttonsCount)
+        val buttonConstraint = incomingConstraints.copy(minWidth = buttonSize, maxWidth = buttonSize)
+
+        val placeables = measurables.map {
+            it.measure(buttonConstraint)
+        }
+
+        val maxHeight = placeables.maxOfOrNull { it.height } ?: 0
+        layout(incomingConstraints.maxWidth, maxHeight) {
+            var x = 0
+            for (placeable in placeables) {
+                placeable.place(x, y = 0)
+                x += buttonSize + buttonPadding
+            }
+        }
     }
 }
 
