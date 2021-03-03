@@ -20,6 +20,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.ripple.rememberRipple
@@ -33,6 +34,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
@@ -93,6 +96,12 @@ public fun TextField(
             }
         }
 
+        // If color is not provided via the text style, use content color as a default
+        val textColor = textStyle.color.takeOrElse {
+            LocalContentColor.current
+        }
+        val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
+
         val transition = updateTransition(inputState)
         val borderColor = transition.animateColor(
             transitionSpec = { tween(durationMillis = AnimationDuration) }
@@ -135,13 +144,14 @@ public fun TextField(
                 .background(backgroundColor.value, MaterialTheme.shapes.small),
             enabled = enabled,
             readOnly = readOnly,
-            textStyle = textStyle,
+            textStyle = mergedTextStyle,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             singleLine = singleLine,
             maxLines = maxLines,
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
+            cursorBrush = SolidColor(OrbitTheme.colors.interactive),
             decorationBox = { innerTextField ->
                 Layout(
                     content = {
