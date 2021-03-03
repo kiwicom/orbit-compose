@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.AndroidX.core)
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.tooling)
