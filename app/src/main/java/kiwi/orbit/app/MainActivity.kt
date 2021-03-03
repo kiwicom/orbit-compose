@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.screens.AlertScreen
+import kiwi.orbit.app.screens.BadgeScreen
 import kiwi.orbit.app.screens.ButtonsScreen
 import kiwi.orbit.app.screens.ProfileScreen
 import kiwi.orbit.app.screens.StepperScreen
@@ -82,6 +83,7 @@ fun MainContent() {
             AppTab("Switch", 3, tabIndex)
             AppTab("Stepper", 4, tabIndex)
             AppTab("Alert", 5, tabIndex)
+            AppTab("Badge", 6, tabIndex)
         }
 
         Box(
@@ -96,6 +98,7 @@ fun MainContent() {
                 3 -> SwitchScreen()
                 4 -> StepperScreen()
                 5 -> AlertScreen()
+                6 -> BadgeScreen()
             }
         }
     }
