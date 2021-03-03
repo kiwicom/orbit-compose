@@ -125,6 +125,53 @@ fun AlertScreen() {
                     }
                 }
             }
+
+            Spacer(Modifier.height(16.dp))
+
+            AlertInfo(Modifier.fillMaxWidth()) {
+                Text("Re-check your credentials")
+                Spacer(Modifier.height(4.dp))
+                Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            AlertInfo(Modifier.fillMaxWidth(), icon = null) {
+                Text("Re-check your credentials")
+                Spacer(Modifier.height(4.dp))
+                Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
+
+                AlertButtons {
+                    ButtonPrimary(onClick = {}) {
+                        Text("More info")
+                    }
+                    ButtonPrimarySubtle(onClick = {}) {
+                        Text("Mark as checked")
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            AlertInfo(Modifier.fillMaxWidth(), icon = null) {
+                Text("Re-check your credentials")
+                Spacer(Modifier.height(4.dp))
+                Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
+
+                AlertButtons {
+                    ButtonPrimarySubtle(onClick = {}) {
+                        Text("Mark as checked")
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            AlertInfo(Modifier.fillMaxWidth(), icon = null) {
+                Text("Re-check your credentials")
+                Spacer(Modifier.height(4.dp))
+                Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
+            }
         }
     }
 }

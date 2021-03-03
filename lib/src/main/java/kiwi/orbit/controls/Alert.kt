@@ -27,7 +27,7 @@ import kotlin.math.roundToInt
 @Composable
 public fun AlertInfo(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.InformationCircle,
+    icon: Painter? = Icons.InformationCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
@@ -53,7 +53,7 @@ public fun AlertInfo(
 @Composable
 public fun AlertSuccess(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.CheckCircle,
+    icon: Painter? = Icons.CheckCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
@@ -79,7 +79,7 @@ public fun AlertSuccess(
 @Composable
 public fun AlertWarning(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.Visa,
+    icon: Painter? = Icons.Visa,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
@@ -105,7 +105,7 @@ public fun AlertWarning(
 @Composable
 public fun AlertCritical(
     modifier: Modifier = Modifier,
-    icon: Painter = Icons.AlertCircle,
+    icon: Painter? = Icons.AlertCircle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = OrbitTheme.colors
@@ -158,7 +158,7 @@ public fun AlertButtons(
 
 @Composable
 private fun Alert(
-    icon: Painter,
+    icon: Painter?,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -168,16 +168,20 @@ private fun Alert(
             .background(OrbitTheme.colors.surfaceBackground, MaterialTheme.shapes.medium)
             .padding(12.dp)
     ) {
-        Row {
-            Icon(
-                icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(top = 2.dp)
-                    .size(16.dp),
-                tint = OrbitTheme.colors.primary,
-            )
-            Spacer(Modifier.width(8.dp))
+        if (icon != null) {
+            Row {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(top = 2.dp)
+                        .size(16.dp),
+                    tint = OrbitTheme.colors.primary,
+                )
+                Spacer(Modifier.width(8.dp))
+                Column(content = content)
+            }
+        } else {
             Column(content = content)
         }
     }
