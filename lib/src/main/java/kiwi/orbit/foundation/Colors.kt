@@ -233,7 +233,7 @@ public fun lightColors(
     warning: Color = ColorTokens.OrangeNormal,
     warningContent: Color = ColorTokens.White,
     warningSubtle: Color = ColorTokens.OrangeLight,
-    warningAlt: Color = ColorTokens.OrangeLightHover,
+    warningAlt: Color = ColorTokens.OrangeNormalHover,
     warningAltSubtle: Color = ColorTokens.OrangeLightHover,
 
     critical: Color = ColorTokens.RedNormal,

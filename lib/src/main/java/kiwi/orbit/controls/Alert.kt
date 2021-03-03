@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -20,7 +21,6 @@ import kiwi.orbit.OrbitTheme
 import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.foundation.LocalElevationEnabled
 import kiwi.orbit.icons.Icons
-
 
 @Composable
 public fun AlertInfo(
@@ -35,6 +35,8 @@ public fun AlertInfo(
             primary = colors.interactive,
             primaryContent = colors.interactiveContent,
             primarySubtle = colors.interactiveAltSubtle,
+            primaryAlt = colors.interactiveAlt,
+            primaryAltSubtle = colors.interactiveAltSubtle,
         ),
         LocalElevationEnabled provides false,
     ) {
@@ -58,7 +60,9 @@ public fun AlertSuccess(
             surfaceBackground = colors.successSubtle,
             primary = colors.success,
             primaryContent = colors.successContent,
-            primarySubtle = colors.successAltSubtle
+            primarySubtle = colors.successAltSubtle,
+            primaryAlt = colors.successAlt,
+            primaryAltSubtle = colors.successAltSubtle,
         ),
         LocalElevationEnabled provides false,
     ) {
@@ -83,6 +87,8 @@ public fun AlertWarning(
             primary = colors.warning,
             primaryContent = colors.warningContent,
             primarySubtle = colors.warningAltSubtle,
+            primaryAlt = colors.warningAlt,
+            primaryAltSubtle = colors.warningAltSubtle,
         ),
         LocalElevationEnabled provides false,
     ) {
@@ -107,6 +113,8 @@ public fun AlertCritical(
             primary = colors.critical,
             primaryContent = colors.criticalContent,
             primarySubtle = colors.criticalAltSubtle,
+            primaryAlt = colors.criticalAlt,
+            primaryAltSubtle = colors.criticalAltSubtle,
         ),
         LocalElevationEnabled provides false,
     ) {
@@ -126,12 +134,19 @@ private fun Alert(
 ) {
     Box(
         modifier
-            .border(1.dp, OrbitTheme.colors.primary, MaterialTheme.shapes.medium)
+            .border(1.dp, OrbitTheme.colors.primaryAltSubtle, MaterialTheme.shapes.medium)
             .background(OrbitTheme.colors.surfaceBackground, MaterialTheme.shapes.medium)
-            .padding(8.dp)
+            .padding(12.dp)
     ) {
         Row {
-            Icon(icon, contentDescription = null, tint = OrbitTheme.colors.primary)
+            Icon(
+                icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .size(16.dp),
+                tint = OrbitTheme.colors.primary,
+            )
             Spacer(Modifier.width(8.dp))
             Column(content = content)
         }
