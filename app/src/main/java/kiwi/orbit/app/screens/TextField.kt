@@ -23,9 +23,20 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.PasswordTextField
 import kiwi.orbit.controls.TextField
 import kiwi.orbit.icons.Icons
+
+@Composable
+fun TextFieldScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Text Field",
+        onUpClick = onUpClick,
+    ) {
+        TextFieldScreen()
+    }
+}
 
 @Preview
 @Composable

@@ -44,6 +44,7 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val material = "androidx.compose.material:material:$version"
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
@@ -52,6 +53,12 @@ object Libs {
             const val uiUtil = "androidx.compose.ui:ui-util:$version"
             const val viewBinding = "androidx.compose.ui:ui-viewbinding:$version"
         }
+    }
+
+    object Accompanist {
+        private const val version = "0.6.0"
+        const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
+        const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"
     }
 }
 

@@ -14,7 +14,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.Switch
+
+@Composable
+fun SwitchScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Switch",
+        onUpClick = onUpClick,
+    ) {
+        SwitchScreen()
+    }
+}
 
 @Preview
 @Composable

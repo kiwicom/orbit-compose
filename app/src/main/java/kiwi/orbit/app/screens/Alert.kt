@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.AlertButtons
 import kiwi.orbit.controls.AlertCritical
 import kiwi.orbit.controls.AlertInfo
@@ -18,6 +19,16 @@ import kiwi.orbit.controls.AlertSuccess
 import kiwi.orbit.controls.AlertWarning
 import kiwi.orbit.controls.ButtonPrimary
 import kiwi.orbit.controls.ButtonPrimarySubtle
+
+@Composable
+fun AlertScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Alert",
+        onUpClick = onUpClick,
+    ) {
+        AlertScreen()
+    }
+}
 
 @Preview
 @Composable
@@ -28,7 +39,6 @@ fun AlertScreen() {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-
 
             AlertInfo(Modifier.fillMaxWidth()) {
                 Text("Re-check your credentials")

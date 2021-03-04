@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.BadgeCritical
 import kiwi.orbit.controls.BadgeCriticalSubtle
 import kiwi.orbit.controls.BadgeInfo
@@ -25,6 +26,16 @@ import kiwi.orbit.controls.BadgeSuccessSubtle
 import kiwi.orbit.controls.BadgeWarning
 import kiwi.orbit.controls.BadgeWarningSubtle
 import kiwi.orbit.icons.Icons
+
+@Composable
+fun BadgeScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Badge",
+        onUpClick = onUpClick,
+    ) {
+        BadgeScreen()
+    }
+}
 
 @Preview
 @Composable

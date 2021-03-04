@@ -17,14 +17,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.foundation.ColorTokens
 import kiwi.orbit.icons.Icons
 import kiwi.orbit.illustrations.Illustrations
 
 @Composable
-fun ProfileScreen() {
+fun XProfileScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Profile",
+        onUpClick = onUpClick,
+        withBackground = false,
+    ) {
+        XProfileScreen()
+    }
+}
+
+@Preview
+@Composable
+fun XProfileScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
         Image(painter = Illustrations.WomanWithPhone, contentDescription = null, Modifier.fillMaxWidth())
 

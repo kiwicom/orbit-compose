@@ -54,10 +54,13 @@ dependencies {
     implementation(Libs.AndroidX.Compose.layout)
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.materialIconsExtended)
+    implementation(Libs.AndroidX.Compose.navigation)
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.runtimeLivedata)
     implementation(Libs.AndroidX.Compose.tooling)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.KotlinX.Datetime.datetime)
+
+    implementation(Libs.Accompanist.insets)
 }

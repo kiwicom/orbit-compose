@@ -1,18 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.Demo" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#00A991</item>
-        <item name="colorPrimaryDark">#007F6D</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
     </style>
-
-    <style name="Theme.Demo.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.Demo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.Demo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

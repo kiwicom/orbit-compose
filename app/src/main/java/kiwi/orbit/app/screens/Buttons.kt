@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
+import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.ButtonCritical
 import kiwi.orbit.controls.ButtonCriticalSubtle
 import kiwi.orbit.controls.ButtonLink
@@ -19,9 +20,19 @@ import kiwi.orbit.controls.ButtonPrimary
 import kiwi.orbit.controls.ButtonPrimarySubtle
 import kiwi.orbit.controls.ButtonSecondary
 
+@Composable
+fun ButtonScreen(onUpClick: () -> Unit) {
+    SubScreen(
+        title = "Button",
+        onUpClick = onUpClick,
+    ) {
+        ButtonScreen()
+    }
+}
+
 @Preview
 @Composable
-fun ButtonsScreen() {
+fun ButtonScreen() {
     Surface {
         Column {
             val maxWidth = Modifier.fillMaxWidth()
