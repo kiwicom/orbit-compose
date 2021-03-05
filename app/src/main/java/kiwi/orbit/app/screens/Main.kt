@@ -18,10 +18,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
+import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
@@ -38,6 +40,10 @@ fun MainScreen(
     actions: MainActions,
     onToggleTheme: () -> Unit,
 ) {
+
+    val foundation = listOf<Triple<String, Any, () -> Unit>>(
+        Triple("Typography", MaterialIcons.FormatSize, actions::showTypography),
+    )
 
     val controls = listOf<Triple<String, Any, () -> Unit>>(
         Triple("Alert", Icons.Alert, actions::showAlert),
@@ -70,6 +76,7 @@ fun MainScreen(
         Column {
 
             Spacer(Modifier.size(16.dp))
+            CardsList("Foundation", foundation)
             CardsList("Controls", controls)
             CardsList("Demos", demos)
 
@@ -87,7 +94,7 @@ private fun CardsList(
     Column {
         Text(
             text = title,
-            style = OrbitTheme.typography.title2,
+            style = OrbitTheme.typography.title3,
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 4.dp)
         )
@@ -103,7 +110,8 @@ private fun CardsList(
                         Modifier
                             .clip(MaterialTheme.shapes.medium)
                             .clickable(onClick = onClick)
-                            .padding(12.dp)
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (icon is Painter) {
                             Icon(painter = icon, contentDescription = null)
@@ -111,7 +119,7 @@ private fun CardsList(
                             Icon(imageVector = icon, contentDescription = null)
                         }
                         Spacer(Modifier.size(8.dp))
-                        Text(text = title, style = OrbitTheme.typography.title3)
+                        Text(text = title, style = OrbitTheme.typography.title4)
                     }
                 }
             }

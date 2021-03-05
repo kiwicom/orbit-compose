@@ -14,6 +14,7 @@ import kiwi.orbit.app.screens.MainScreen
 import kiwi.orbit.app.screens.StepperScreen
 import kiwi.orbit.app.screens.SwitchScreen
 import kiwi.orbit.app.screens.TextFieldScreen
+import kiwi.orbit.app.screens.TypographyScreen
 import kiwi.orbit.app.screens.XProfileScreen
 
 /**
@@ -21,6 +22,7 @@ import kiwi.orbit.app.screens.XProfileScreen
  */
 private object MainDestinations {
     const val MAIN = "main"
+    const val TYPOGRAPHY = "typography"
     const val ALERT = "alert"
     const val BADGE = "badge"
     const val BUTTON = "button"
@@ -44,6 +46,9 @@ fun NavGraph(
     ) {
         composable(MainDestinations.MAIN) {
             MainScreen(actions, onToggleTheme)
+        }
+        composable(MainDestinations.TYPOGRAPHY) {
+            TypographyScreen(actions::navigateUp)
         }
         composable(MainDestinations.ALERT) {
             AlertScreen(actions::navigateUp)
@@ -74,6 +79,10 @@ class MainActions(
 ) {
     fun navigateUp() {
         navController.navigateUp()
+    }
+
+    fun showTypography() {
+        navController.navigate(MainDestinations.TYPOGRAPHY)
     }
 
     fun showAlert() {
