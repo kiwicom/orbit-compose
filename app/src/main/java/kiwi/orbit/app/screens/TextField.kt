@@ -58,7 +58,7 @@ fun TextFieldScreen() {
                     email = it
                     hasError = !Patterns.EMAIL_ADDRESS.matcher(it).matches()
                 },
-                label = { Text("E-mail:") },
+                label = { Text("E-mail") },
                 leadingIcon = { Icon(Icons.Email, contentDescription = null) },
                 error = if (hasError) {
                     { Text("Please use this format: your@email.com") }
@@ -78,13 +78,13 @@ fun TextFieldScreen() {
                 modifier = Modifier.fillMaxWidth(),
             )
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(16.dp))
 
             var password by remember { mutableStateOf("") }
             PasswordTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password:") },
+                label = { Text("Password") },
                 leadingIcon = { Icon(Icons.Security, contentDescription = null) },
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
@@ -99,13 +99,13 @@ fun TextFieldScreen() {
                     .focusRequester(passwordFocusRequester),
             )
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(16.dp))
 
             var bio by remember { mutableStateOf("") }
             TextField(
                 value = bio,
                 onValueChange = { bio = it },
-                label = { Text("Bio:") },
+                label = { Text("Bio") },
                 leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
                 singleLine = false,
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
