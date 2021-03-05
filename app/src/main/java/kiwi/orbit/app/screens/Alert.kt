@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.SubScreen
 import kiwi.orbit.controls.AlertButtons
 import kiwi.orbit.controls.AlertCritical
@@ -41,7 +42,7 @@ fun AlertScreen() {
         ) {
 
             AlertInfo(Modifier.fillMaxWidth()) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
 
@@ -58,7 +59,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertSuccess(Modifier.fillMaxWidth()) {
-                Text("Your payment was successful.")
+                Text("Your payment was successful.", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("View the receipt in the profile:")
 
@@ -75,7 +76,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertWarning(Modifier.fillMaxWidth()) {
-                Text("Visa requirements check")
+                Text("Visa requirements check", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("The requirements found here are for reference purposes only. Contact the embassy or your foreign ministry for more information.")
 
@@ -92,7 +93,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertCritical(Modifier.fillMaxWidth()) {
-                Text("No results loaded")
+                Text("No results loaded", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("There was an error while processing your request. Refresh the page to load the results.")
 
@@ -111,7 +112,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(8.dp))
 
             AlertInfo(Modifier.fillMaxWidth()) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
 
@@ -125,7 +126,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertInfo(Modifier.fillMaxWidth()) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
 
@@ -139,7 +140,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertInfo(Modifier.fillMaxWidth()) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
             }
@@ -147,7 +148,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertInfo(Modifier.fillMaxWidth(), icon = null) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
 
@@ -164,7 +165,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertInfo(Modifier.fillMaxWidth(), icon = null) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
 
@@ -178,7 +179,7 @@ fun AlertScreen() {
             Spacer(Modifier.height(16.dp))
 
             AlertInfo(Modifier.fillMaxWidth(), icon = null) {
-                Text("Re-check your credentials")
+                Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))
                 Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
             }

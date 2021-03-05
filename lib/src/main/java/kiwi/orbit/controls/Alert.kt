@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -136,19 +137,21 @@ private fun Alert(
         modifier = modifier,
         contentPadding = PaddingValues(12.dp),
     ) {
-        if (icon != null) {
-            Icon(
-                icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(top = 2.dp)
-                    .size(16.dp),
-                tint = OrbitTheme.colors.primary,
-            )
-            Spacer(Modifier.width(8.dp))
-            Column(content = content)
-        } else {
-            Column(content = content)
+        ProvideTextStyle(OrbitTheme.typography.bodyNormal) {
+            if (icon != null) {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(top = 2.dp)
+                        .size(16.dp),
+                    tint = OrbitTheme.colors.primary,
+                )
+                Spacer(Modifier.width(8.dp))
+                Column(content = content)
+            } else {
+                Column(content = content)
+            }
         }
     }
 }
