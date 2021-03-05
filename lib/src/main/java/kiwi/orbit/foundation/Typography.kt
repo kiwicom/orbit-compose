@@ -89,9 +89,12 @@ public data class Typography internal constructor(
     internal fun toMaterialTypography(): MaterialTypography =
         MaterialTypography(
             defaultFontFamily = displayTitle.fontFamily ?: FontFamily.Default,
+            h1 = displayTitle.copy(fontSize = 96.sp),
+            h2 = displayTitle.copy(fontSize = 60.sp),
             h3 = displayTitle,
-            h5 = title1,
-            h6 = title2,
+            h4 = title2,
+            h5 = title2,
+            h6 = title3,
             subtitle1 = title3,
             subtitle2 = title4,
             overline = title5,
