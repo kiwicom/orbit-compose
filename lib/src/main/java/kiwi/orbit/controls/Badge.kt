@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.components.ThemedSurface
@@ -202,7 +203,7 @@ private fun Badge(
                 icon()
             }
         }
-        ProvideTextStyle(OrbitTheme.typography.bodySmall) {
+        ProvideTextStyle(OrbitTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium)) {
             content()
         }
     }
