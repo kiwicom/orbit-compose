@@ -89,7 +89,7 @@ public data class Typography internal constructor(
             overline = title5,
             body1 = bodyLarge,
             body2 = bodyNormal,
-            button = bodyNormal,
+            button = title4,
         )
 }
 
