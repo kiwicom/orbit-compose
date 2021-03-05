@@ -35,35 +35,43 @@ public data class Typography internal constructor(
         title1: TextStyle = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
+            lineHeight = 36.sp,
         ),
         title2: TextStyle = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
+            lineHeight = 28.sp,
         ),
         title3: TextStyle = TextStyle(
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
+            lineHeight = 24.sp,
         ),
         title4: TextStyle = TextStyle(
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
+            lineHeight = 20.sp,
         ),
         title5: TextStyle = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 12.sp,
+            lineHeight = 20.sp,
             // TODO: textAllCaps
         ),
         bodyLarge: TextStyle = TextStyle(
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp,
+            lineHeight = 22.sp,
         ),
         bodyNormal: TextStyle = TextStyle(
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp,
+            lineHeight = 20.sp,
         ),
         bodySmall: TextStyle = TextStyle(
             fontWeight = FontWeight.Normal,
             fontSize = 12.sp,
+            lineHeight = 16.sp,
         ),
     ) : this(
         displayTitle = displayTitle.withDefaultFontFamily(defaultFontFamily),
