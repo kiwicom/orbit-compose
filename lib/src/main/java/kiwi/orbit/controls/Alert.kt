@@ -1,17 +1,13 @@
 package kiwi.orbit.controls
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -19,6 +15,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
+import kiwi.orbit.components.ThemedSurface
 import kiwi.orbit.foundation.LocalColors
 import kiwi.orbit.foundation.LocalElevationEnabled
 import kiwi.orbit.foundation.withCritical
@@ -134,25 +131,22 @@ private fun Alert(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Box(
-        modifier
-            .border(1.dp, OrbitTheme.colors.primaryAltSubtle, MaterialTheme.shapes.medium)
-            .background(OrbitTheme.colors.surface, MaterialTheme.shapes.medium)
-            .padding(12.dp)
+    ThemedSurface(
+        subtle = true,
+        modifier = modifier,
+        contentPadding = PaddingValues(12.dp),
     ) {
         if (icon != null) {
-            Row {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                        .size(16.dp),
-                    tint = OrbitTheme.colors.primary,
-                )
-                Spacer(Modifier.width(8.dp))
-                Column(content = content)
-            }
+            Icon(
+                icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .size(16.dp),
+                tint = OrbitTheme.colors.primary,
+            )
+            Spacer(Modifier.width(8.dp))
+            Column(content = content)
         } else {
             Column(content = content)
         }
