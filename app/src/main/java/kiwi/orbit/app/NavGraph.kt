@@ -14,6 +14,7 @@ import kiwi.orbit.app.screens.ColorsScreen
 import kiwi.orbit.app.screens.MainScreen
 import kiwi.orbit.app.screens.StepperScreen
 import kiwi.orbit.app.screens.SwitchScreen
+import kiwi.orbit.app.screens.TagScreen
 import kiwi.orbit.app.screens.TextFieldScreen
 import kiwi.orbit.app.screens.TypographyScreen
 import kiwi.orbit.app.screens.XProfileScreen
@@ -32,6 +33,7 @@ private object MainDestinations {
     const val BUTTON = "button"
     const val STEPPER = "stepper"
     const val SWITCH = "switch"
+    const val TAG = "tag"
     const val TEXT_FIELD = "text_field"
 
     const val X_PROFILE = "x_profile"
@@ -74,6 +76,9 @@ fun NavGraph(
         }
         composable(MainDestinations.SWITCH) {
             SwitchScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.TAG) {
+            TagScreen(actions::navigateUp)
         }
         composable(MainDestinations.TEXT_FIELD) {
             TextFieldScreen(actions::navigateUp)
@@ -118,6 +123,10 @@ class MainActions(
 
     fun showSwitch() {
         navController.navigate(MainDestinations.SWITCH)
+    }
+
+    fun showTag() {
+        navController.navigate(MainDestinations.TAG)
     }
 
     fun showTextField() {

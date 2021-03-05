@@ -21,6 +21,7 @@ import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
+import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
@@ -54,6 +55,7 @@ fun MainScreen(
         Triple("Buttons", MaterialIcons.SmartButton, actions::showButton),
         Triple("Stepper", Icons.PlusCircle, actions::showStepper),
         Triple("Switch", MaterialIcons.ToggleOn, actions::showSwitch),
+        Triple("Tag", MaterialIcons.LabelImportant, actions::showTag),
         Triple("TextField", MaterialIcons.Input, actions::showTextField),
     )
 
