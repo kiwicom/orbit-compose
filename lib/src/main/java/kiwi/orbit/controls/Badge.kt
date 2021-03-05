@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -191,15 +193,17 @@ private fun Badge(
     ThemedSurface(
         subtle = subtle,
         shape = RoundedCornerShape(percent = 50),
-        modifier = modifier.defaultMinSize(minHeight = 32.dp),
+        modifier = modifier.requiredHeight(24.dp),
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(vertical = 4.dp, horizontal = 8.dp),
+        contentPadding = PaddingValues(vertical = 2.dp, horizontal = 8.dp),
     ) {
         if (icon != null) {
             Box(Modifier.size(20.dp)) {
                 icon()
             }
         }
-        content()
+        ProvideTextStyle(OrbitTheme.typography.bodySmall) {
+            content()
+        }
     }
 }
