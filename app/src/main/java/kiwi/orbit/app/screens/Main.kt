@@ -18,8 +18,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
+import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
+import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
 import androidx.compose.runtime.Composable
@@ -42,6 +44,7 @@ fun MainScreen(
 ) {
 
     val foundation = listOf<Triple<String, Any, () -> Unit>>(
+        Triple("Colors", MaterialIcons.Palette, actions::showColors),
         Triple("Typography", MaterialIcons.FormatSize, actions::showTypography),
     )
 

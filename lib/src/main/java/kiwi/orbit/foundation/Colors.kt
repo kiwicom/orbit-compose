@@ -410,22 +410,27 @@ public fun Colors.contentColorFor(color: Color): Color {
         primarySubtle -> primaryStrong
         primaryAlt -> primaryContent
         primaryAltSubtle -> primaryAlt
+        primaryStrong -> primaryContent
         interactive -> interactiveContent
         interactiveSubtle -> interactiveStrong
         interactiveAlt -> interactiveContent
         interactiveAltSubtle -> interactiveAlt
+        interactiveStrong -> interactiveContent
         success -> successContent
         successSubtle -> successStrong
         successAlt -> successContent
         successAltSubtle -> successAlt
+        successStrong -> successContent
         warning -> warningContent
         warningSubtle -> warningStrong
         warningAlt -> warningContent
         warningAltSubtle -> warningAlt
+        warningStrong -> warningContent
         critical -> criticalContent
         criticalSubtle -> criticalStrong
         criticalAlt -> criticalContent
         criticalAltSubtle -> criticalAlt
+        criticalStrong -> criticalContent
         else -> Color.Unspecified
     }
 }
