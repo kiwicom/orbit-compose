@@ -1,0 +1,33 @@
+name: Build
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - run: ./gradlew app:assembleDebug lint lintKotlin
+      - uses: yutailang0119/action-android-lint@v1.0.2
+        name: App Lint errors to annotations
+        if: ${{ failure() }}
+        continue-on-error: true # lint may be ok
+        with:
+          xml_path: app/build/reports/lint-results-debug.xml
+      - uses: yutailang0119/action-android-lint@v1.0.2
+        name: Lib Lint errors to annotations
+        if: ${{ failure() }}
+        continue-on-error: true # lint may be ok
+        with:
+          xml_path: lib/build/reports/lint-results-debug.xml
+      - name: KTLint errors to annotations
+        if: ${{ failure() }}
+        run: |
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=app/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' app/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=generator/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' generator/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=lib/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' lib/build/reports/ktlint/main-lint.json || true
