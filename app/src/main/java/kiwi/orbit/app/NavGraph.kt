@@ -11,6 +11,7 @@ import kiwi.orbit.app.screens.AlertScreen
 import kiwi.orbit.app.screens.BadgeScreen
 import kiwi.orbit.app.screens.ButtonScreen
 import kiwi.orbit.app.screens.ColorsScreen
+import kiwi.orbit.app.screens.IconsScreen
 import kiwi.orbit.app.screens.MainScreen
 import kiwi.orbit.app.screens.StepperScreen
 import kiwi.orbit.app.screens.SwitchScreen
@@ -26,6 +27,7 @@ private object MainDestinations {
     const val MAIN = "main"
 
     const val COLORS = "colors"
+    const val ICONS = "ICONS"
     const val TYPOGRAPHY = "typography"
 
     const val ALERT = "alert"
@@ -57,6 +59,9 @@ fun NavGraph(
 
         composable(MainDestinations.COLORS) {
             ColorsScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.ICONS) {
+            IconsScreen(actions::navigateUp)
         }
         composable(MainDestinations.TYPOGRAPHY) {
             TypographyScreen(actions::navigateUp)
@@ -99,6 +104,10 @@ class MainActions(
 
     fun showColors() {
         navController.navigate(MainDestinations.COLORS)
+    }
+
+    fun showIcons() {
+        navController.navigate(MainDestinations.ICONS)
     }
 
     fun showTypography() {

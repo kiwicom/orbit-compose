@@ -46,6 +46,7 @@ fun MainScreen(
 
     val foundation = listOf<Triple<String, Any, () -> Unit>>(
         Triple("Colors", MaterialIcons.Palette, actions::showColors),
+        Triple("Icons", Icons.Airplane, actions::showIcons),
         Triple("Typography", MaterialIcons.FormatSize, actions::showTypography),
     )
 

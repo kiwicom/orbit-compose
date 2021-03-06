@@ -1,6 +1,7 @@
 package kiwi.orbit.app
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -19,6 +20,7 @@ fun SubScreen(
     title: String,
     onUpClick: () -> Unit,
     withBackground: Boolean = true,
+    scrollable: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -36,11 +38,19 @@ fun SubScreen(
             )
         },
         content = {
-            LazyColumn(
-                modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
-                contentPadding = LocalWindowInsets.current.navigationBars.toPaddingValues()
-            ) {
-                item { content() }
+            if (scrollable) {
+                LazyColumn(
+                    modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
+                    contentPadding = LocalWindowInsets.current.navigationBars.toPaddingValues()
+                ) {
+                    item { content() }
+                }
+            } else {
+                Box(
+                    modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
+                ) {
+                    content()
+                }
             }
         },
     )

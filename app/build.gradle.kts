@@ -60,6 +60,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.tooling)
 
     implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.Kotlin.reflect)
     implementation(Libs.KotlinX.Datetime.datetime)
 
     implementation(Libs.Accompanist.insets)
