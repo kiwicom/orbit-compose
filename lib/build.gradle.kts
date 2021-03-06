@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
 }
 
 android {
@@ -30,6 +31,17 @@ android {
             add("-Xexplicit-api=strict")
         }.toList()
     }
+
+    lint {
+        disable.add("ObsoleteLintCustomCheck")
+        isAbortOnError = true
+        isWarningsAsErrors = true
+    }
+}
+
+kotlinter {
+    reporters = arrayOf("json")
+    experimentalRules = true
 }
 
 dependencies {

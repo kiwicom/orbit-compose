@@ -40,7 +40,6 @@ fun IllustrationsScreen(onUpClick: () -> Unit) {
 @Preview
 @Composable
 fun IllustrationsScreen() {
-
     val illustrations: List<Pair<String, Painter>> = Illustrations::class.memberProperties.map {
         it.name to (it.getter.call(Illustrations, currentComposer, 0) as Painter)
     }
@@ -72,5 +71,4 @@ fun IllustrationsScreen() {
             }
         }
     }
-
 }
