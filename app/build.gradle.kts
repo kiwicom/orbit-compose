@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId("kiwi.orbit.app")
-        minSdkVersion(26)
+        minSdkVersion(23)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
@@ -40,6 +41,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.version
     }
+
+    lint {
+        disable.add("ObsoleteLintCustomCheck")
+        isAbortOnError = true
+        isWarningsAsErrors = true
+    }
+}
+
+kotlinter {
+    reporters = arrayOf("json")
+    experimentalRules = true
 }
 
 dependencies {

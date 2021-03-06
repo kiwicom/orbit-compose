@@ -1,12 +1,18 @@
 plugins {
     id("java-library")
     kotlin("jvm")
-    kotlin("plugin.serialization") version "1.4.10"
+    kotlin(Libs.KotlinX.Serialization.gradlePlugin) version Libs.KotlinX.Serialization.pluginVersion
+    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+kotlinter {
+    reporters = arrayOf("json")
+    experimentalRules = true
 }
 
 dependencies {

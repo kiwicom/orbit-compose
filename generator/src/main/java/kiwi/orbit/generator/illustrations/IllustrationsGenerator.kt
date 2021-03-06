@@ -10,7 +10,7 @@ import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.net.URL
 import java.nio.file.Path
-import java.util.*
+import java.util.Locale
 import javax.imageio.ImageIO
 import kotlin.math.roundToInt
 

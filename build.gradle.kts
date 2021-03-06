@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        gradlePluginPortal()
         mavenCentral()
     }
 

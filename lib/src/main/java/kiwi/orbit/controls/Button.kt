@@ -122,7 +122,6 @@ public fun ButtonCritical(
     )
 }
 
-
 @Composable
 public fun ButtonCriticalSubtle(
     onClick: () -> Unit,
@@ -152,7 +151,6 @@ public fun ButtonCriticalSubtle(
     )
 }
 
-
 @Composable
 public fun ButtonLink(
     onClick: () -> Unit,
@@ -173,7 +171,6 @@ public fun ButtonLink(
         content = content,
     )
 }
-
 
 internal object ButtonConstants {
     @OptIn(ExperimentalMaterialApi::class)
