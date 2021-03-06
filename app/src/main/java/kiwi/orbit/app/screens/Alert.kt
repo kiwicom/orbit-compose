@@ -40,7 +40,6 @@ fun AlertScreen() {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-
             AlertInfo(Modifier.fillMaxWidth()) {
                 Text("Re-check your credentials", style = OrbitTheme.typography.title4)
                 Spacer(Modifier.height(4.dp))

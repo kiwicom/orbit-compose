@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Path
-import java.util.*
+import java.util.Locale
 
 class ColorsGenerator {
     companion object {
@@ -37,7 +37,6 @@ class ColorsGenerator {
             .toList()
             .sortedBy { it.first }
     }
-
 
     private fun getFinalRedirectedUrl(url: String): String {
         val connection = URL(url).openConnection() as HttpURLConnection
@@ -76,9 +75,9 @@ class ColorsGenerator {
             assert(segments.size == 3)
             val (red, green, blue) = segments
             val colorValue = (0xFF shl 24) or
-                    ((red and 0xFF) shl 16) or
-                    ((green and 0xFF) shl 8) or
-                    (blue and 0xFF)
+                ((red and 0xFF) shl 16) or
+                ((green and 0xFF) shl 8) or
+                (blue and 0xFF)
 
             val property = PropertySpec.builder(name, colorType)
                 .initializer(
@@ -93,7 +92,7 @@ class ColorsGenerator {
         val file = FileSpec.builder("kiwi.orbit.foundation", "ColorTokens")
             .addType(objectBuilder.build())
             .addAliasedImport(colorType, "UIColor")
-            .indent("\t")
+            .indent("    ")
             .build()
 
         file.writeTo(dir)

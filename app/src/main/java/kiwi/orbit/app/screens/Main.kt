@@ -18,7 +18,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
-import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
 import androidx.compose.material.icons.rounded.LabelImportant
@@ -43,7 +42,6 @@ fun MainScreen(
     actions: MainActions,
     onToggleTheme: () -> Unit,
 ) {
-
     val foundation = listOf<Triple<String, Any, () -> Unit>>(
         Triple("Colors", MaterialIcons.Palette, actions::showColors),
         Triple("Icons", Icons.Airplane, actions::showIcons),
@@ -79,17 +77,13 @@ fun MainScreen(
         },
         backgroundColor = OrbitTheme.colors.surfaceBackground,
     ) {
-
         Column {
-
             Spacer(Modifier.size(16.dp))
             CardsList("Foundation", foundation)
             CardsList("Controls", controls)
             CardsList("Demos", demos)
-
         }
     }
-
 }
 
 @OptIn(ExperimentalFoundationApi::class)

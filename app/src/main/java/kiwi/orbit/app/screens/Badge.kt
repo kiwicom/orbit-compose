@@ -46,7 +46,6 @@ fun BadgeScreen() {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-
             Row {
                 BadgeNeutral {
                     Text(text = "label")
@@ -243,7 +242,6 @@ fun BadgeScreen() {
                 ) {
                 }
             }
-
         }
     }
 }

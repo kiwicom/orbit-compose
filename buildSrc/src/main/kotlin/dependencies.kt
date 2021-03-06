@@ -1,5 +1,7 @@
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
+    const val ktlintGradlePlugin = "org.jmailen.kotlinter"
+    const val ktlintVersion = "3.3.0"
 
     const val kotlinPoet = "com.squareup:kotlinpoet:1.7.2"
     const val androidSdkCommon = "com.android.tools:sdk-common:27.1.2"
@@ -25,6 +27,8 @@ object Libs {
         }
 
         object Serialization {
+            const val pluginVersion = "1.4.10"
+            const val gradlePlugin = "plugin.serialization"
             private const val version = "1.0.1"
             const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:$version"
         }
@@ -64,5 +68,5 @@ object Libs {
 
 object Urls {
     const val composeSnapshotRepo = "https://androidx.dev/snapshots/builds/" +
-            "${Libs.AndroidX.Compose.snapshot}/artifacts/repository/"
+        "${Libs.AndroidX.Compose.snapshot}/artifacts/repository/"
 }

@@ -21,11 +21,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.SwipeableState
-import androidx.compose.material.SwitchColors
-import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material.swipeable
@@ -221,4 +218,3 @@ private val AnimationSpec = TweenSpec<Float>(durationMillis = 100)
 
 private val ThumbDefaultElevation = 1.dp
 private val ThumbPressedElevation = 6.dp
-

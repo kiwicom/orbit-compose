@@ -12,7 +12,7 @@ import java.io.File
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.*
+import java.util.Locale
 import java.util.zip.ZipInputStream
 
 class IconsGenerator {
