@@ -53,10 +53,11 @@ fun MainScreen(
         Triple("Alert", Icons.Alert, actions::showAlert),
         Triple("Badge", Icons.Deals, actions::showBadge),
         Triple("Buttons", MaterialIcons.SmartButton, actions::showButton),
+        Triple("Radio", Icons.CircleFilled, actions::showRadio),
         Triple("Stepper", Icons.PlusCircle, actions::showStepper),
         Triple("Switch", MaterialIcons.ToggleOn, actions::showSwitch),
         Triple("Tag", MaterialIcons.LabelImportant, actions::showTag),
-        Triple("TextField", MaterialIcons.Input, actions::showTextField),
+        Triple("Text Field", MaterialIcons.Input, actions::showTextField),
     )
 
     val demos = listOf(

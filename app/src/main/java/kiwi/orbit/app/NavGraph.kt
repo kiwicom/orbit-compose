@@ -14,6 +14,7 @@ import kiwi.orbit.app.screens.ColorsScreen
 import kiwi.orbit.app.screens.IconsScreen
 import kiwi.orbit.app.screens.IllustrationsScreen
 import kiwi.orbit.app.screens.MainScreen
+import kiwi.orbit.app.screens.RadioScreen
 import kiwi.orbit.app.screens.StepperScreen
 import kiwi.orbit.app.screens.SwitchScreen
 import kiwi.orbit.app.screens.TagScreen
@@ -35,6 +36,7 @@ private object MainDestinations {
     const val ALERT = "alert"
     const val BADGE = "badge"
     const val BUTTON = "button"
+    const val RADIO = "radio"
     const val STEPPER = "stepper"
     const val SWITCH = "switch"
     const val TAG = "tag"
@@ -80,6 +82,9 @@ fun NavGraph(
         }
         composable(MainDestinations.BUTTON) {
             ButtonScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.RADIO) {
+            RadioScreen(actions::navigateUp)
         }
         composable(MainDestinations.STEPPER) {
             StepperScreen(actions::navigateUp)
@@ -133,6 +138,10 @@ class MainActions(
 
     fun showButton() {
         navController.navigate(MainDestinations.BUTTON)
+    }
+
+    fun showRadio() {
+        navController.navigate(MainDestinations.RADIO)
     }
 
     fun showStepper() {
