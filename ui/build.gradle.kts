@@ -56,6 +56,7 @@ dependencies {
 
     implementation(libs.androidx.core)
 
+    implementation(libs.compose.animationGraphics)
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
     implementation(libs.compose.materialRipple)

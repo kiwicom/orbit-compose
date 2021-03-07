@@ -3,6 +3,8 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -25,9 +27,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 public fun Checkbox(
     checked: Boolean,
@@ -93,14 +96,13 @@ public fun Checkbox(
             drawCheckbox(borderColor, backgroundColor, errorAlpha)
             drawError(errorStrokeColor, errorShadowColor, errorAlpha)
         }
-        if (checked) {
-            Icon(
-                Icons.Check,
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = iconColor,
-            )
-        }
+        val drawable = animatedVectorResource(R.drawable.avd_check)
+        Icon(
+            painter = drawable.painterFor(atEnd = checked),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = iconColor,
+        )
     }
 }
 
