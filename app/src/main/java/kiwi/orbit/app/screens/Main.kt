@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
+import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
 import androidx.compose.material.icons.rounded.LabelImportant
@@ -52,7 +53,8 @@ fun MainScreen(
     val controls = listOf<Triple<String, Any, () -> Unit>>(
         Triple("Alert", Icons.Alert, actions::showAlert),
         Triple("Badge", Icons.Deals, actions::showBadge),
-        Triple("Buttons", MaterialIcons.SmartButton, actions::showButton),
+        Triple("Button", MaterialIcons.SmartButton, actions::showButton),
+        Triple("Checkbox", MaterialIcons.CheckBox, actions::showCheckbox),
         Triple("Radio", Icons.CircleFilled, actions::showRadio),
         Triple("Stepper", Icons.PlusCircle, actions::showStepper),
         Triple("Switch", MaterialIcons.ToggleOn, actions::showSwitch),
