@@ -2,15 +2,15 @@ package kiwi.orbit.app.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -29,9 +29,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.InsetAwareTopAppBar
 import kiwi.orbit.app.MainActions
@@ -43,27 +42,27 @@ fun MainScreen(
     actions: MainActions,
     onToggleTheme: () -> Unit,
 ) {
-    val foundation = listOf<Triple<String, Any, () -> Unit>>(
-        Triple("Colors", MaterialIcons.Palette, actions::showColors),
-        Triple("Icons", Icons.Airplane, actions::showIcons),
-        Triple("Illustrations", Icons.Gallery, actions::showIllustrations),
-        Triple("Typography", MaterialIcons.FormatSize, actions::showTypography),
+    val foundation = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
+        Triple("Colors", { Icon(MaterialIcons.Palette, null) }, actions::showColors),
+        Triple("Icons", { Icon(Icons.Airplane, null) }, actions::showIcons),
+        Triple("Illustrations", { Icon(Icons.Gallery, null) }, actions::showIllustrations),
+        Triple("Typography", { Icon(MaterialIcons.FormatSize, null) }, actions::showTypography),
     )
 
-    val controls = listOf<Triple<String, Any, () -> Unit>>(
-        Triple("Alert", Icons.Alert, actions::showAlert),
-        Triple("Badge", Icons.Deals, actions::showBadge),
-        Triple("Button", MaterialIcons.SmartButton, actions::showButton),
-        Triple("Checkbox", MaterialIcons.CheckBox, actions::showCheckbox),
-        Triple("Radio", Icons.CircleFilled, actions::showRadio),
-        Triple("Stepper", Icons.PlusCircle, actions::showStepper),
-        Triple("Switch", MaterialIcons.ToggleOn, actions::showSwitch),
-        Triple("Tag", MaterialIcons.LabelImportant, actions::showTag),
-        Triple("Text Field", MaterialIcons.Input, actions::showTextField),
+    val controls = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
+        Triple("Alert", { Icon(Icons.Alert, null) }, actions::showAlert),
+        Triple("Badge", { Icon(Icons.Deals, null) }, actions::showBadge),
+        Triple("Button", { Icon(MaterialIcons.SmartButton, null) }, actions::showButton),
+        Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
+        Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
+        Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
+        Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
+        Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
+        Triple("Text Field", { Icon(MaterialIcons.Input, null) }, actions::showTextField),
     )
 
-    val demos = listOf(
-        Triple("Profile", Icons.AccountCircle, actions::showXProfile),
+    val demos = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
+        Triple("Profile", { Icon(Icons.AccountCircle, null) }, actions::showXProfile),
     )
 
     Scaffold(
@@ -80,11 +79,18 @@ fun MainScreen(
         },
         backgroundColor = OrbitTheme.colors.surfaceBackground,
     ) {
-        Column {
-            Spacer(Modifier.size(16.dp))
-            CardsList("Foundation", foundation)
-            CardsList("Controls", controls)
-            CardsList("Demos", demos)
+        BoxWithConstraints {
+            val columns = (maxWidth / 156.dp).toInt().coerceAtLeast(1)
+            Column(
+                Modifier
+                    .verticalScroll(rememberScrollState())
+                    .navigationBarsPadding()
+            ) {
+                Spacer(Modifier.size(16.dp))
+                CardsList("Foundation", foundation, columns)
+                CardsList("Controls", controls, columns)
+                CardsList("Demos", demos, columns)
+            }
         }
     }
 }
@@ -93,40 +99,52 @@ fun MainScreen(
 @Composable
 private fun CardsList(
     title: String,
-    items: List<Triple<String, Any, () -> Unit>>
+    items: List<Triple<String, @Composable () -> Unit, () -> Unit>>,
+    columns: Int,
 ) {
-    Column {
-        Text(
-            text = title,
-            style = OrbitTheme.typography.title3,
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 4.dp)
-        )
-        LazyVerticalGrid(
-            cells = GridCells.Adaptive(156.dp),
-            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
-        ) {
-            items(items) { (title, icon, onClick) ->
-                Card(
-                    Modifier.padding(4.dp),
-                ) {
-                    Row(
-                        Modifier
-                            .clip(MaterialTheme.shapes.medium)
-                            .clickable(onClick = onClick)
-                            .padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        if (icon is Painter) {
-                            Icon(painter = icon, contentDescription = null)
-                        } else if (icon is ImageVector) {
-                            Icon(imageVector = icon, contentDescription = null)
-                        }
-                        Spacer(Modifier.size(8.dp))
-                        Text(text = title, style = OrbitTheme.typography.title4)
-                    }
+    Text(
+        text = title,
+        style = OrbitTheme.typography.title3,
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+    )
+    Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+        for (rowItems in items.chunked(columns)) {
+            Row {
+                Items(rowItems)
+                val missingColumns = columns - rowItems.size
+                if (missingColumns > 0) {
+                    Spacer(Modifier.weight(missingColumns.toFloat()))
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun RowScope.Items(rowItems: List<Triple<String, @Composable () -> Unit, () -> Unit>>) {
+    for (item in rowItems) {
+        Item(item.first, item.second, item.third)
+    }
+}
+
+@Composable
+private fun RowScope.Item(title: String, icon: @Composable () -> Unit, onClick: () -> Unit) {
+    Card(
+        Modifier
+            .padding(4.dp)
+            .weight(1f),
+    ) {
+        Row(
+            Modifier
+                .clip(MaterialTheme.shapes.medium)
+                .clickable(onClick = onClick)
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            icon()
+            Spacer(Modifier.size(8.dp))
+            Text(text = title, style = OrbitTheme.typography.title4)
         }
     }
 }
