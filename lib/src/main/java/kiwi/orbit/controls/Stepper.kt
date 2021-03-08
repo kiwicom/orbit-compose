@@ -109,15 +109,13 @@ private fun StepperButton(
             interactionSource = interactionSource,
             indication = null,
         ),
-        shape = MaterialTheme.shapes.small,
+        shape = OrbitTheme.shapes.small,
         color = colors.backgroundColor(enabled).value,
         contentColor = contentColor.copy(alpha = 1f),
         elevation = elevation.elevation(enabled, interactionSource).value,
     ) {
         CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
-            ProvideTextStyle(
-                value = MaterialTheme.typography.button
-            ) {
+            ProvideTextStyle(MaterialTheme.typography.button) {
                 Row(
                     Modifier
                         .indication(interactionSource, LocalIndication.current)

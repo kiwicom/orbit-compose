@@ -12,7 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -37,7 +36,7 @@ public fun Tag(
         else -> OrbitTheme.colors.surfaceAlt
     }
     val contentColor = contentColorFor(backgroundColor)
-    val shape = MaterialTheme.shapes.medium
+    val shape = OrbitTheme.shapes.normal
 
     CompositionLocalProvider(
         LocalTextStyle provides OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium),
