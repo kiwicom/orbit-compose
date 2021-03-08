@@ -94,7 +94,7 @@ private fun StepperButton(
     content: @Composable RowScope.() -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val colors = ButtonConstants.defaultButtonColors(
+    val colors = ButtonDefaults.buttonColors(
         backgroundColor = OrbitTheme.colors.surfaceAlt,
     )
     val elevation = MaterialButtonDefaults.elevation(
