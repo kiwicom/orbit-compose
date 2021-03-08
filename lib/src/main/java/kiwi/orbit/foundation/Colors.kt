@@ -319,8 +319,8 @@ internal fun Color.invert(): Color {
  * Dark Orbit color variant.
  */
 public fun darkColors(
-    surfaceBackground: Color = ColorTokens.CloudLight.invert(),
-    surface: Color = ColorTokens.White.invert(),
+    surfaceBackground: Color = ColorTokens.White.invert(),
+    surface: Color = ColorTokens.CloudLight.invert(),
     surfaceAlt: Color = ColorTokens.CloudDark.invert(),
 
     surfaceContent: Color = ColorTokens.InkNormal.invert(),
@@ -330,35 +330,35 @@ public fun darkColors(
     primary: Color = ColorTokens.ProductDark,
     primaryContent: Color = ColorTokens.White.invert(),
     primarySubtle: Color = ColorTokens.ProductLight.invert(),
-    primaryStrong: Color = ColorTokens.ProductDark.invert(),
+    primaryStrong: Color = ColorTokens.ProductNormal,
     primaryAlt: Color = ColorTokens.ProductDarkHover,
     primaryAltSubtle: Color = ColorTokens.ProductLightHover.invert(),
 
     interactive: Color = ColorTokens.BlueDark,
     interactiveContent: Color = ColorTokens.White.invert(),
     interactiveSubtle: Color = ColorTokens.BlueLight.invert(),
-    interactiveStrong: Color = ColorTokens.BlueDark.invert(),
+    interactiveStrong: Color = ColorTokens.BlueNormal,
     interactiveAlt: Color = ColorTokens.BlueDarkHover,
     interactiveAltSubtle: Color = ColorTokens.BlueLightHover.invert(),
 
     success: Color = ColorTokens.GreenDark,
     successContent: Color = ColorTokens.White.invert(),
     successSubtle: Color = ColorTokens.GreenLight.invert(),
-    successStrong: Color = ColorTokens.GreenDark.invert(),
+    successStrong: Color = ColorTokens.GreenNormal,
     successAlt: Color = ColorTokens.GreenDarkHover,
     successAltSubtle: Color = ColorTokens.GreenLightHover.invert(),
 
     warning: Color = ColorTokens.OrangeDark,
     warningContent: Color = ColorTokens.White.invert(),
     warningSubtle: Color = ColorTokens.OrangeLight.invert(),
-    warningStrong: Color = ColorTokens.OrangeDark.invert(),
+    warningStrong: Color = ColorTokens.OrangeNormal,
     warningAlt: Color = ColorTokens.OrangeDarkHover,
     warningAltSubtle: Color = ColorTokens.OrangeLightHover.invert(),
 
     critical: Color = ColorTokens.RedDark,
     criticalContent: Color = ColorTokens.White.invert(),
     criticalSubtle: Color = ColorTokens.RedLight.invert(),
-    criticalStrong: Color = ColorTokens.RedDark.invert(),
+    criticalStrong: Color = ColorTokens.RedNormal,
     criticalAlt: Color = ColorTokens.RedDarkHover,
     criticalAltSubtle: Color = ColorTokens.RedLightHover.invert(),
 ): Colors = Colors(
