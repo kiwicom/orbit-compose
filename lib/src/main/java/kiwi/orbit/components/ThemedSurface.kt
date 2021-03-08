@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -24,7 +23,7 @@ import kiwi.orbit.foundation.contentColorFor
 public fun ThemedSurface(
     subtle: Boolean,
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.small,
+    shape: Shape = OrbitTheme.shapes.normal,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     contentPadding: PaddingValues = PaddingValues(),

@@ -21,7 +21,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -136,8 +135,8 @@ public fun TextField(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, borderColor.value, MaterialTheme.shapes.small)
-                    .background(backgroundColor.value, MaterialTheme.shapes.small),
+                    .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
+                    .background(backgroundColor.value, OrbitTheme.shapes.normal),
                 enabled = enabled,
                 readOnly = readOnly,
                 textStyle = mergedTextStyle,

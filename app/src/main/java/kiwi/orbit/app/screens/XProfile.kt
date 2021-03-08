@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -91,7 +92,8 @@ fun MenuItem(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.CenterVertically),
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            style = OrbitTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
         )
         if (badge != null) {
             Spacer(Modifier.size(8.dp))

@@ -14,7 +14,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
@@ -137,7 +136,7 @@ private fun RowScope.Item(title: String, icon: @Composable () -> Unit, onClick: 
     ) {
         Row(
             Modifier
-                .clip(MaterialTheme.shapes.medium)
+                .clip(OrbitTheme.shapes.normal)
                 .clickable(onClick = onClick)
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
