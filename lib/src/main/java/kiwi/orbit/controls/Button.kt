@@ -31,7 +31,7 @@ public fun ButtonPrimary(
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = OrbitTheme.colors.primary,
         ),
         elevation = elevation,
@@ -58,7 +58,7 @@ public fun ButtonPrimarySubtle(
     MaterialButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = OrbitTheme.colors.primarySubtle,
         ),
         elevation = elevation,
@@ -87,7 +87,7 @@ public fun ButtonSecondary(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = OrbitTheme.colors.surfaceAlt,
         ),
         elevation = elevation,
@@ -113,7 +113,7 @@ public fun ButtonCritical(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = OrbitTheme.colors.critical,
         ),
         elevation = elevation,
@@ -142,7 +142,7 @@ public fun ButtonCriticalSubtle(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = OrbitTheme.colors.criticalSubtle,
         ),
         elevation = elevation,
@@ -163,7 +163,7 @@ public fun ButtonLink(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = ButtonMinHeight),
         enabled = enabled,
-        colors = ButtonConstants.defaultButtonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
             contentColor = OrbitTheme.colors.primary,
         ),
@@ -172,10 +172,10 @@ public fun ButtonLink(
     )
 }
 
-internal object ButtonConstants {
+internal object ButtonDefaults {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    fun defaultButtonColors(
+    fun buttonColors(
         backgroundColor: Color = OrbitTheme.colors.primary,
         contentColor: Color = contentColorFor(backgroundColor),
         disabledContentColor: Color = contentColor.copy(alpha = ContentAlpha.disabled)
