@@ -1,5 +1,5 @@
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha09"
     const val ktlintGradlePlugin = "org.jmailen.kotlinter"
     const val ktlintVersion = "3.3.0"
 
@@ -7,7 +7,7 @@ object Libs {
     const val androidSdkCommon = "com.android.tools:sdk-common:27.1.2"
 
     object Kotlin {
-        const val version = "1.4.30"
+        const val version = "1.4.31"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -42,7 +42,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.0.0-beta01"
+            const val version = "1.0.0-beta02"
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
