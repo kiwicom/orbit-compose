@@ -69,11 +69,12 @@ dependencies {
     implementation(Libs.AndroidX.Compose.navigation)
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.runtimeLivedata)
-    implementation(Libs.AndroidX.Compose.tooling)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Kotlin.reflect)
     implementation(Libs.KotlinX.Datetime.datetime)
 
     implementation(Libs.Accompanist.insets)
+
+    debugImplementation(Libs.AndroidX.Compose.tooling)
 }
