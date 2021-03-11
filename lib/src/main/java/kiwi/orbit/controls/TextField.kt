@@ -38,6 +38,7 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -75,8 +76,10 @@ public fun TextField(
             val textFieldValue = textFieldValueState.copy(text = value)
 
             if (label != null) {
-                Box(Modifier.padding(bottom = 4.dp)) {
-                    label()
+                ProvideTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium)) {
+                    Box(Modifier.padding(bottom = 4.dp)) {
+                        label()
+                    }
                 }
             }
 
