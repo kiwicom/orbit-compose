@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="immersive_sys_ui">#33000000</color>
-    <color name="nav_bar">@color/immersive_sys_ui</color>
-    <color name="status_bar">#00FFFFFF</color>
-
-</resources>

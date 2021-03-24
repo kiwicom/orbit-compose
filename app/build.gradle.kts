@@ -59,7 +59,6 @@ dependencies {
 
     implementation(Libs.AndroidX.core)
     implementation(Libs.AndroidX.activityCompose)
-    implementation(Libs.AndroidX.appcompat)
 
     implementation(Libs.AndroidX.Compose.animation)
     implementation(Libs.AndroidX.Compose.foundation)
@@ -75,6 +74,7 @@ dependencies {
     implementation(Libs.KotlinX.Datetime.datetime)
 
     implementation(Libs.Accompanist.insets)
+    implementation(Libs.Accompanist.systemController)
 
     debugImplementation(Libs.AndroidX.Compose.tooling)
 }
