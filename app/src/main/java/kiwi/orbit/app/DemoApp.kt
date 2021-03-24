@@ -1,30 +1,39 @@
 package kiwi.orbit.app
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.ViewCompat
+import androidx.compose.ui.graphics.Color
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.systemuicontroller.LocalSystemUiController
+import com.google.accompanist.systemuicontroller.rememberAndroidSystemUiController
 import kiwi.orbit.app.ui.AppTheme
 
 @Composable
 fun DemoApp() {
     ProvideWindowInsets {
-        var isLightTheme by remember { mutableStateOf(true) }
+        val systemUiController = rememberAndroidSystemUiController()
+        CompositionLocalProvider(LocalSystemUiController provides systemUiController) {
+            var isLightTheme by remember { mutableStateOf(true) }
 
-        val view = LocalView.current
-        val insetController = ViewCompat.getWindowInsetsController(view)
-        insetController?.isAppearanceLightStatusBars = isLightTheme
+            SideEffect {
+                systemUiController.setSystemBarsColor(
+                    color = Color.Transparent,
+                    darkIcons = isLightTheme,
+                )
+            }
 
-        AppTheme(isLightTheme = isLightTheme) {
-            NavGraph(
-                onToggleTheme = {
-                    isLightTheme = !isLightTheme
-                }
-            )
+            AppTheme(isLightTheme = isLightTheme) {
+                NavGraph(
+                    onToggleTheme = {
+                        isLightTheme = !isLightTheme
+                    }
+                )
+            }
         }
     }
 }
