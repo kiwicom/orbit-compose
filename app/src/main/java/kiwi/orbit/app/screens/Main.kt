@@ -29,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.navigationBarsPadding
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.InsetAwareTopAppBar
 import kiwi.orbit.app.MainActions
