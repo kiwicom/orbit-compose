@@ -26,13 +26,13 @@ fun RadioScreen(onUpClick: () -> Unit) {
         title = "Radio",
         onUpClick = onUpClick,
     ) {
-        Surface() {
+        Surface {
             Column(
                 Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                RadioScreen()
+                RadioScreenInner()
             }
         }
     }
@@ -40,7 +40,7 @@ fun RadioScreen(onUpClick: () -> Unit) {
 
 @Preview
 @Composable
-fun RadioScreen() {
+fun RadioScreenInner() {
     Column {
         Row {
             var selected by remember { mutableStateOf(true) }

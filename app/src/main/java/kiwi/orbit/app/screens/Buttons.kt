@@ -26,13 +26,13 @@ fun ButtonScreen(onUpClick: () -> Unit) {
         title = "Button",
         onUpClick = onUpClick,
     ) {
-        ButtonScreen()
+        ButtonScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun ButtonScreen() {
+fun ButtonScreenInner() {
     Surface {
         Column {
             val maxWidth = Modifier.fillMaxWidth()

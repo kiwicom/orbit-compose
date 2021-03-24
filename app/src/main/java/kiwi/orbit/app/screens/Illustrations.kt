@@ -32,14 +32,14 @@ fun IllustrationsScreen(onUpClick: () -> Unit) {
         withBackground = false,
         scrollable = false,
     ) {
-        IllustrationsScreen()
+        IllustrationsScreenInner()
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
-fun IllustrationsScreen() {
+fun IllustrationsScreenInner() {
     val illustrations: List<Pair<String, Painter>> = Illustrations::class.memberProperties.map {
         it.name to (it.getter.call(Illustrations, currentComposer, 0) as Painter)
     }

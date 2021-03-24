@@ -21,13 +21,13 @@ fun StepperScreen(onUpClick: () -> Unit) {
         title = "Stepper",
         onUpClick = onUpClick,
     ) {
-        StepperScreen()
+        StepperScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun StepperScreen() {
+fun StepperScreenInner() {
     Surface {
         Column(
             Modifier

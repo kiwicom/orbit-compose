@@ -33,13 +33,13 @@ fun BadgeScreen(onUpClick: () -> Unit) {
         title = "Badge",
         onUpClick = onUpClick,
     ) {
-        BadgeScreen()
+        BadgeScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun BadgeScreen() {
+fun BadgeScreenInner() {
     Surface {
         Column(
             Modifier

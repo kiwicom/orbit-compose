@@ -35,13 +35,13 @@ fun XProfileScreen(onUpClick: () -> Unit) {
         onUpClick = onUpClick,
         withBackground = false,
     ) {
-        XProfileScreen()
+        XProfileScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun XProfileScreen() {
+fun XProfileScreenInner() {
     Column(modifier = Modifier.padding(16.dp)) {
         Image(painter = Illustrations.WomanWithPhone, contentDescription = null, Modifier.fillMaxWidth())
 

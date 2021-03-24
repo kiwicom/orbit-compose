@@ -1,7 +1,6 @@
 package kiwi.orbit.app.screens
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +31,7 @@ fun TagScreen(onUpClick: () -> Unit) {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                TagScreen()
+                TagScreenInner()
             }
         }
     }
@@ -40,7 +39,7 @@ fun TagScreen(onUpClick: () -> Unit) {
 
 @Preview
 @Composable
-fun ColumnScope.TagScreen() {
+fun TagScreenInner() {
     Row {
         Tag {
             Text("Prague")

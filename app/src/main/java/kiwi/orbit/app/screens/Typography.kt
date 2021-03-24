@@ -24,7 +24,7 @@ fun TypographyScreen(onUpClick: () -> Unit) {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                TypographyScreen()
+                TypographyScreenInner()
             }
         }
     }
@@ -32,7 +32,7 @@ fun TypographyScreen(onUpClick: () -> Unit) {
 
 @Preview
 @Composable
-fun TypographyScreen() {
+fun TypographyScreenInner() {
     Text("Display Title", style = OrbitTheme.typography.displayTitle)
     Text("Display Subtitle", style = OrbitTheme.typography.displaySubtitle)
     Text("Title 1", style = OrbitTheme.typography.title1)

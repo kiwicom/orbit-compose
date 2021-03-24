@@ -32,7 +32,7 @@ fun ColorsScreen(onUpClick: () -> Unit) {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                ColorsScreen()
+                ColorsScreenInner()
             }
         }
     }
@@ -40,7 +40,7 @@ fun ColorsScreen(onUpClick: () -> Unit) {
 
 @Preview
 @Composable
-fun ColorsScreen() {
+fun ColorsScreenInner() {
     Text("Primary", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
 
     Card {

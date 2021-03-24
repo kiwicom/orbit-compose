@@ -34,13 +34,13 @@ fun TextFieldScreen(onUpClick: () -> Unit) {
         title = "Text Field",
         onUpClick = onUpClick,
     ) {
-        TextFieldScreen()
+        TextFieldScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun TextFieldScreen() {
+fun TextFieldScreenInner() {
     Surface {
         Column(
             Modifier
