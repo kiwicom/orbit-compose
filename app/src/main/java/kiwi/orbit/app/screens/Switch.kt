@@ -23,13 +23,13 @@ fun SwitchScreen(onUpClick: () -> Unit) {
         title = "Switch",
         onUpClick = onUpClick,
     ) {
-        SwitchScreen()
+        SwitchScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun SwitchScreen() {
+fun SwitchScreenInner() {
     Surface {
         Column(
             Modifier

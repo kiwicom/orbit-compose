@@ -32,7 +32,7 @@ fun CheckboxScreen(onUpClick: () -> Unit) {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                CheckboxScreen()
+                CheckboxScreenInner()
             }
         }
     }
@@ -40,7 +40,7 @@ fun CheckboxScreen(onUpClick: () -> Unit) {
 
 @Preview
 @Composable
-fun CheckboxScreen() {
+fun CheckboxScreenInner() {
     Column {
         Row {
             var checkbox1 by remember { mutableStateOf(true) }

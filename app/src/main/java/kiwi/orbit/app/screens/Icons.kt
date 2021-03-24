@@ -31,14 +31,14 @@ fun IconsScreen(onUpClick: () -> Unit) {
         withBackground = false,
         scrollable = false,
     ) {
-        IconsScreen()
+        IconsScreenInner()
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
-fun IconsScreen() {
+fun IconsScreenInner() {
     val icons: List<Pair<String, Painter>> = Icons::class.memberProperties.map {
         it.name to (it.getter.call(Icons, currentComposer, 0) as Painter)
     }

@@ -27,13 +27,13 @@ fun AlertScreen(onUpClick: () -> Unit) {
         title = "Alert",
         onUpClick = onUpClick,
     ) {
-        AlertScreen()
+        AlertScreenInner()
     }
 }
 
 @Preview
 @Composable
-fun AlertScreen() {
+fun AlertScreenInner() {
     Surface {
         Column(
             Modifier
