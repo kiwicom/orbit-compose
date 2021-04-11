@@ -52,6 +52,7 @@ android {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
+    disabledRules = arrayOf("experimental:argument-list-wrapping") // https://github.com/pinterest/ktlint/issues/1112
 }
 
 dependencies {
