@@ -11,7 +11,6 @@ plugins {
 subprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
         maven { url = uri("https://kotlin.bintray.com/kotlinx/") }
     }
