@@ -1,8 +1,8 @@
 plugins {
     id("java-library")
     kotlin("jvm")
-    kotlin(Libs.KotlinX.Serialization.gradlePlugin) version Libs.KotlinX.Serialization.pluginVersion
-    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
+    kotlin("plugin.serialization")
+    id("org.jmailen.kotlinter")
 }
 
 java {
@@ -13,12 +13,13 @@ java {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
+    disabledRules = arrayOf("experimental:argument-list-wrapping") // https://github.com/pinterest/ktlint/issues/1112
 }
 
 dependencies {
-    implementation(Libs.kotlinPoet)
-    implementation(Libs.androidSdkCommon)
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.Kotlin.reflect)
-    implementation(Libs.KotlinX.Serialization.serialization)
+    implementation(libs.android.sdkCommon)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.square.kotlinPoet)
 }

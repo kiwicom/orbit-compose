@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
+    id("org.jmailen.kotlinter")
 }
 
 android {
@@ -39,7 +39,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.version
+        kotlinCompilerExtensionVersion = libs.versions.compose.main.get()
     }
 
     lint {
@@ -52,29 +52,30 @@ android {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
+    disabledRules = arrayOf("experimental:argument-list-wrapping") // https://github.com/pinterest/ktlint/issues/1112
 }
 
 dependencies {
     implementation(project(":lib"))
 
-    implementation(Libs.AndroidX.core)
-    implementation(Libs.AndroidX.activityCompose)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activityCompose)
 
-    implementation(Libs.AndroidX.Compose.animation)
-    implementation(Libs.AndroidX.Compose.foundation)
-    implementation(Libs.AndroidX.Compose.layout)
-    implementation(Libs.AndroidX.Compose.material)
-    implementation(Libs.AndroidX.Compose.materialIconsExtended)
-    implementation(Libs.AndroidX.Compose.navigation)
-    implementation(Libs.AndroidX.Compose.runtime)
-    implementation(Libs.AndroidX.Compose.runtimeLivedata)
+    implementation(libs.compose.animation)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.layout)
+    implementation(libs.compose.material)
+    implementation(libs.compose.materialIconsExtended)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.runtimeLivedata)
 
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.Kotlin.reflect)
-    implementation(Libs.KotlinX.Datetime.datetime)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.datetime)
 
-    implementation(Libs.Accompanist.insets)
-    implementation(Libs.Accompanist.systemController)
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.systemController)
 
-    debugImplementation(Libs.AndroidX.Compose.tooling)
+    debugImplementation(libs.compose.tooling)
 }
