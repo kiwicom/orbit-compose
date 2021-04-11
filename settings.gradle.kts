@@ -1,4 +1,4 @@
-rootProject.name = "Orbit Compose"
+rootProject.name = "OrbitCompose"
 
 pluginManagement {
     resolutionStrategy {
@@ -20,3 +20,4 @@ include(":lib")
 include(":generator")
 
 enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
