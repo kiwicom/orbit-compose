@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id(Libs.ktlintGradlePlugin) version Libs.ktlintVersion
+    id("org.jmailen.kotlinter")
 }
 
 android {
@@ -23,7 +23,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.version
+        kotlinCompilerExtensionVersion = libs.versions.compose.main.get()
     }
 
     kotlinOptions {
@@ -46,10 +46,10 @@ kotlinter {
 }
 
 dependencies {
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.AndroidX.core)
-    implementation(Libs.AndroidX.Compose.runtime)
-    implementation(Libs.AndroidX.Compose.material)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.androidx.core)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.material)
 
-    debugImplementation(Libs.AndroidX.Compose.tooling)
+    debugImplementation(libs.compose.tooling)
 }
