@@ -27,15 +27,4 @@ subprojects {
             }.toList()
         }
     }
-
-    configurations.configureEach {
-        resolutionStrategy.eachDependency {
-            if (requested.group == "androidx.lifecycle" && requested.name != "lifecycle-viewmodel-compose") {
-                useVersion("2.3.0-rc01")
-            }
-            if (requested.group == "androidx.savedstate") {
-                useVersion("1.1.0-rc01")
-            }
-        }
-    }
 }
