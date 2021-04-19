@@ -1,9 +1,11 @@
 package kiwi.orbit.controls
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -14,6 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.components.ThemedSurface
@@ -28,8 +31,10 @@ import kotlin.math.roundToInt
 
 @Composable
 public fun AlertInfo(
+    title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     icon: Painter? = Icons.InformationCircle,
+    actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -38,7 +43,9 @@ public fun AlertInfo(
     ) {
         Alert(
             icon = icon,
+            title = title,
             modifier = modifier,
+            actions = actions,
             content = content,
         )
     }
@@ -46,8 +53,10 @@ public fun AlertInfo(
 
 @Composable
 public fun AlertSuccess(
+    title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     icon: Painter? = Icons.CheckCircle,
+    actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -56,7 +65,9 @@ public fun AlertSuccess(
     ) {
         Alert(
             icon = icon,
+            title = title,
             modifier = modifier,
+            actions = actions,
             content = content,
         )
     }
@@ -64,8 +75,10 @@ public fun AlertSuccess(
 
 @Composable
 public fun AlertWarning(
+    title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     icon: Painter? = Icons.Visa,
+    actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -74,7 +87,9 @@ public fun AlertWarning(
     ) {
         Alert(
             icon = icon,
+            title = title,
             modifier = modifier,
+            actions = actions,
             content = content,
         )
     }
@@ -82,8 +97,10 @@ public fun AlertWarning(
 
 @Composable
 public fun AlertCritical(
+    title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     icon: Painter? = Icons.AlertCircle,
+    actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -92,19 +109,76 @@ public fun AlertCritical(
     ) {
         Alert(
             icon = icon,
+            title = title,
             modifier = modifier,
+            actions = actions,
             content = content,
         )
     }
 }
 
 @Composable
-public fun AlertButtons(
+private fun Alert(
+    icon: Painter?,
+    title: @Composable ColumnScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    actions: (@Composable () -> Unit)? = null,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    ThemedSurface(
+        subtle = true,
+        modifier = modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(12.dp),
+    ) {
+        if (icon != null) {
+            Icon(
+                icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .size(16.dp),
+                tint = OrbitTheme.colors.primary,
+            )
+            Spacer(Modifier.width(8.dp))
+        }
+
+        AlertContent(
+            title = title,
+            actions = actions,
+            content = content,
+        )
+    }
+}
+
+@Composable
+private fun AlertContent(
+    title: @Composable ColumnScope.() -> Unit,
+    actions: (@Composable () -> Unit)?,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        ProvideTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
+            title()
+        }
+
+        ProvideTextStyle(OrbitTheme.typography.bodyNormal) {
+            content()
+        }
+
+        if (actions != null) {
+            AlertButtons(Modifier.padding(top = 8.dp), actions)
+        }
+    }
+}
+
+@Composable
+private fun AlertButtons(
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
     Layout(
         content = content,
-        Modifier.padding(top = 12.dp)
+        modifier = modifier,
     ) { measurables, incomingConstraints ->
         val buttonPadding = 12.dp.toPx().roundToInt()
         val buttonsCount = measurables.size
@@ -121,36 +195,6 @@ public fun AlertButtons(
             for (placeable in placeables) {
                 placeable.place(x, y = 0)
                 x += buttonSize + buttonPadding
-            }
-        }
-    }
-}
-
-@Composable
-private fun Alert(
-    icon: Painter?,
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    ThemedSurface(
-        subtle = true,
-        modifier = modifier,
-        contentPadding = PaddingValues(12.dp),
-    ) {
-        ProvideTextStyle(OrbitTheme.typography.bodyNormal) {
-            if (icon != null) {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                        .size(16.dp),
-                    tint = OrbitTheme.colors.primary,
-                )
-                Spacer(Modifier.width(8.dp))
-                Column(content = content)
-            } else {
-                Column(content = content)
             }
         }
     }
