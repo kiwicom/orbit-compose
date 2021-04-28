@@ -66,6 +66,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_anywhere)
 
+    public val Apple: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_apple)
+
     public val ArrowDown: Painter
         @Composable
         get() = painterResource(R.drawable.ic_arrow_down)
@@ -90,21 +94,29 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_baggage_cabin_none)
 
-    public val BaggageChecked: Painter
+    public val BaggageChecked10: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_baggage_checked)
+        get() = painterResource(R.drawable.ic_baggage_checked_10)
+
+    public val BaggageChecked20: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_baggage_checked_20)
+
+    public val BaggageChecked30: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_baggage_checked_30)
 
     public val BaggageCheckedNone: Painter
         @Composable
         get() = painterResource(R.drawable.ic_baggage_checked_none)
 
-    public val BaggagePersonalItem: Painter
+    public val BaggagePersonal: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_baggage_personal_item)
+        get() = painterResource(R.drawable.ic_baggage_personal)
 
-    public val BaggagePersonalItemNone: Painter
+    public val BaggagePersonalNone: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_baggage_personal_item_none)
+        get() = painterResource(R.drawable.ic_baggage_personal_none)
 
     public val BaggageRecheck: Painter
         @Composable
@@ -190,6 +202,14 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_check_circle)
 
+    public val ChevronDoubleLeft: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_chevron_double_left)
+
+    public val ChevronDoubleRight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_chevron_double_right)
+
     public val ChevronDown: Painter
         @Composable
         get() = painterResource(R.drawable.ic_chevron_down)
@@ -257,6 +277,10 @@ public object Icons {
     public val Coffee: Painter
         @Composable
         get() = painterResource(R.drawable.ic_coffee)
+
+    public val ColorPicker: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_color_picker)
 
     public val Compare: Painter
         @Composable
@@ -537,6 +561,10 @@ public object Icons {
     public val Map: Painter
         @Composable
         get() = painterResource(R.drawable.ic_map)
+
+    public val Markdown: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_markdown)
 
     public val Meal: Painter
         @Composable
