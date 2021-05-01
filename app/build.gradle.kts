@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
-        applicationId("kiwi.orbit.app")
-        minSdkVersion(23)
-        targetSdkVersion(30)
+        applicationId = "kiwi.orbit.app"
+        minSdk = 23
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled(false)
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
