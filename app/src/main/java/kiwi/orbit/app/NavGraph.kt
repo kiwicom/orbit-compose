@@ -5,7 +5,6 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import kiwi.orbit.app.screens.AlertScreen
 import kiwi.orbit.app.screens.BadgeScreen
@@ -23,9 +22,6 @@ import kiwi.orbit.app.screens.TextFieldScreen
 import kiwi.orbit.app.screens.TypographyScreen
 import kiwi.orbit.app.screens.XProfileScreen
 
-/**
- * Destinations used in the ([OwlApp]).
- */
 private object MainDestinations {
     const val MAIN = "main"
 
