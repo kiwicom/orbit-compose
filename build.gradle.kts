@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.4.32" apply false
     kotlin("android") version "1.4.32" apply false
     kotlin("plugin.serialization") version "1.4.30" apply false
-    id("com.android.application") version "7.0.0-beta01" apply false
+    id("com.android.application") version "7.0.0-beta02" apply false
     id("org.jmailen.kotlinter") version "3.4.0" apply false
 }
 
