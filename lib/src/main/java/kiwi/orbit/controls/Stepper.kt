@@ -1,7 +1,6 @@
 package kiwi.orbit.controls
 
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -103,16 +102,14 @@ private fun StepperButton(
     val contentColor by colors.contentColor(enabled)
 
     Surface(
-        modifier = Modifier.clickable(
-            onClick = onClick,
-            enabled = enabled,
-            interactionSource = interactionSource,
-            indication = null,
-        ),
+        onClick = onClick,
         shape = OrbitTheme.shapes.small,
         color = colors.backgroundColor(enabled).value,
         contentColor = contentColor.copy(alpha = 1f),
         elevation = elevation.elevation(enabled, interactionSource).value,
+        interactionSource = interactionSource,
+        indication = null,
+        enabled = enabled,
     ) {
         CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
             ProvideTextStyle(MaterialTheme.typography.button) {

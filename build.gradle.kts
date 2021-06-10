@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.32" apply false
-    kotlin("android") version "1.4.32" apply false
-    kotlin("plugin.serialization") version "1.4.30" apply false
-    id("com.android.application") version "7.0.0-beta02" apply false
-    id("org.jmailen.kotlinter") version "3.4.0" apply false
+    kotlin("jvm") version "1.5.10" apply false
+    kotlin("android") version "1.5.10" apply false
+    kotlin("plugin.serialization") version "1.5.0" apply false
+    id("com.android.application") version "7.0.0-beta03" apply false
+    id("org.jmailen.kotlinter") version "3.4.4" apply false
 }
 
 subprojects {
@@ -18,7 +18,6 @@ subprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "1.8"
-            useIR = true
             allWarningsAsErrors = true
             freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
                 add("-Xopt-in=kotlin.RequiresOptIn")

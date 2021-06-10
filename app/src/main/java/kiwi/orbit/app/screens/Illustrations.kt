@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.toPaddingValues
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.OrbitTheme
 import kiwi.orbit.app.SubScreen
 import kiwi.orbit.illustrations.Illustrations
@@ -46,9 +46,12 @@ fun IllustrationsScreenInner() {
 
     LazyVerticalGrid(
         cells = GridCells.Adaptive(256.dp),
-        contentPadding = LocalWindowInsets.current.navigationBars.toPaddingValues(
-            additionalHorizontal = 8.dp,
-            additionalVertical = 8.dp
+        contentPadding = rememberInsetsPaddingValues(
+            insets = LocalWindowInsets.current.navigationBars,
+            additionalStart = 8.dp,
+            additionalTop = 8.dp,
+            additionalEnd = 8.dp,
+            additionalBottom = 8.dp
         )
     ) {
         items(illustrations) { (name, icon) ->

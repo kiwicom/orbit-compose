@@ -3,14 +3,17 @@ package kiwi.orbit.controls
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.DragInteraction
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsDraggedAsState
-import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -21,7 +24,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.Surface
 import androidx.compose.material.SwipeableState
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.ripple.rememberRipple
@@ -31,11 +33,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -48,16 +52,15 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.OrbitTheme
 import kotlin.math.roundToInt
+import kotlinx.coroutines.flow.collect
 
-@Suppress("UNUSED_PARAMETER")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
+@OptIn(ExperimentalMaterialApi::class)
 public fun Switch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    locked: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val minBound = 0f
@@ -113,7 +116,7 @@ public fun Switch(
  *  some reason, then the [SwipeableState] will perform a rollback to the previous, correct value.
  */
 @Composable
-@ExperimentalMaterialApi
+@OptIn(ExperimentalMaterialApi::class)
 internal fun <T : Any> rememberSwipeableStateFor(
     value: T,
     onValueChange: (T) -> Unit,
@@ -146,9 +149,22 @@ private fun BoxScope.SwitchImpl(
     thumbValue: State<Float>,
     interactionSource: InteractionSource
 ) {
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val isDragged by interactionSource.collectIsDraggedAsState()
-    val hasInteraction = isPressed || isDragged
+    val interactions = remember { mutableStateListOf<Interaction>() }
+
+    LaunchedEffect(interactionSource) {
+        interactionSource.interactions.collect { interaction ->
+            when (interaction) {
+                is PressInteraction.Press -> interactions.add(interaction)
+                is PressInteraction.Release -> interactions.remove(interaction.press)
+                is PressInteraction.Cancel -> interactions.remove(interaction.press)
+                is DragInteraction.Start -> interactions.add(interaction)
+                is DragInteraction.Stop -> interactions.remove(interaction.start)
+                is DragInteraction.Cancel -> interactions.remove(interaction.start)
+            }
+        }
+    }
+
+    val hasInteraction = interactions.isNotEmpty()
     val elevation = if (hasInteraction) {
         ThumbPressedElevation
     } else {
@@ -169,27 +185,19 @@ private fun BoxScope.SwitchImpl(
     ) {
         drawTrack(mainColor, TrackWidth.toPx(), TrackStrokeWidth.toPx())
     }
-    Surface(
-        shape = CircleShape,
-        color = OrbitTheme.colors.surface,
-        elevation = elevation,
-        modifier = Modifier
+    Spacer(
+        Modifier
             .align(Alignment.CenterStart)
             .offset { IntOffset(thumbValue.value.roundToInt(), 0) }
             .indication(
                 interactionSource = interactionSource,
                 indication = rememberRipple(bounded = false, radius = ThumbRippleRadius)
             )
-            .requiredSize(ThumbDiameter),
-        content = {
-            Surface(
-                shape = CircleShape,
-                color = mainColor,
-                modifier = Modifier
-                    .requiredSize(10.dp),
-                content = {}
-            )
-        }
+            .requiredSize(ThumbDiameter)
+            .shadow(elevation, CircleShape, clip = false)
+            .background(OrbitTheme.colors.surface, CircleShape)
+            .padding((ThumbDiameter - 10.dp) / 2)
+            .background(mainColor, CircleShape)
     )
 }
 

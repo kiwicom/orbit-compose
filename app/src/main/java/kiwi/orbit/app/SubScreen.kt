@@ -12,7 +12,7 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.toPaddingValues
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.OrbitTheme
 
 @Composable
@@ -41,7 +41,9 @@ fun SubScreen(
             if (scrollable) {
                 LazyColumn(
                     modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
-                    contentPadding = LocalWindowInsets.current.navigationBars.toPaddingValues()
+                    contentPadding = rememberInsetsPaddingValues(
+                        insets = LocalWindowInsets.current.navigationBars
+                    )
                 ) {
                     item { content() }
                 }
