@@ -4,12 +4,11 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Path
-import java.util.Locale
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 class ColorsGenerator {
     companion object {
@@ -83,7 +82,7 @@ class ColorsGenerator {
                 .initializer(
                     "%T(0x%L)",
                     colorType,
-                    "%08x".format(colorValue).toUpperCase(Locale.ROOT)
+                    "%08x".format(colorValue).uppercase()
                 )
                 .build()
             objectBuilder.addProperty(property)

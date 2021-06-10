@@ -12,7 +12,6 @@ import java.io.File
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.Locale
 import java.util.zip.ZipInputStream
 
 class IconsGenerator {
@@ -53,7 +52,7 @@ class IconsGenerator {
                 val filenameSvg = "ic_" + entry.name
                     .removePrefix("svg/")
                     .replace("-", "_")
-                    .toLowerCase(Locale.ROOT)
+                    .lowercase()
                 val filenameXml = filenameSvg.replace("svg", "xml")
 
                 val outFileSvg = File(resourceOutDir.toFile(), filenameSvg)
@@ -77,7 +76,7 @@ class IconsGenerator {
                 val iconName = resourceName
                     .removePrefix("ic_")
                     .split("_")
-                    .joinToString("") { it.capitalize(Locale.getDefault()) }
+                    .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
                 icons.add(Pair(iconName, resourceName))
             }
         }

@@ -10,7 +10,6 @@ import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.net.URL
 import java.nio.file.Path
-import java.util.Locale
 import javax.imageio.ImageIO
 import kotlin.math.roundToInt
 
@@ -149,6 +148,7 @@ class IllustrationsGenerator {
         file.writeTo(dir)
     }
 
-    private fun String.toSnakeCase(): String = replace(humps, "_").toLowerCase(Locale.ROOT)
-    private fun String.toTitleCase(): String = split("_").joinToString("") { it.capitalize(Locale.getDefault()) }
+    private fun String.toSnakeCase(): String = replace(humps, "_").lowercase()
+    private fun String.toTitleCase(): String = split("_")
+        .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
 }
