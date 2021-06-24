@@ -29,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.google.accompanist.insets.ui.TopAppBar
 import kiwi.orbit.OrbitTheme
-import kiwi.orbit.app.InsetAwareTopAppBar
 import kiwi.orbit.app.MainActions
 import kiwi.orbit.icons.Icons
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
@@ -66,8 +68,11 @@ fun MainScreen(
 
     Scaffold(
         topBar = {
-            InsetAwareTopAppBar(
+            TopAppBar(
                 title = { Text("Orbit Compose Demo") },
+                contentPadding = rememberInsetsPaddingValues(
+                    insets = LocalWindowInsets.current.statusBars,
+                ),
                 backgroundColor = OrbitTheme.colors.surface,
                 actions = {
                     IconButton(onClick = onToggleTheme) {

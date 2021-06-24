@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.google.accompanist.insets.ui.TopAppBar
 import kiwi.orbit.OrbitTheme
 
 @Composable
@@ -25,8 +26,11 @@ fun SubScreen(
 ) {
     Scaffold(
         topBar = {
-            InsetAwareTopAppBar(
+            TopAppBar(
                 title = { Text(text = title) },
+                contentPadding = rememberInsetsPaddingValues(
+                    insets = LocalWindowInsets.current.statusBars,
+                ),
                 backgroundColor = OrbitTheme.colors.surface,
                 navigationIcon = {
                     IconButton(

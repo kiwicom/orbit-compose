@@ -75,6 +75,7 @@ dependencies {
     implementation(libs.kotlin.datetime)
 
     implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.insetsUi)
     implementation(libs.accompanist.systemController)
 
     debugImplementation(libs.compose.tooling)
