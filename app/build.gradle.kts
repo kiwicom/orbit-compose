@@ -57,6 +57,8 @@ kotlinter {
 
 dependencies {
     implementation(projects.lib)
+    implementation(projects.icons)
+    implementation(projects.illustrations)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.activityCompose)

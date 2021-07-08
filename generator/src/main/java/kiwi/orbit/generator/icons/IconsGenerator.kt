@@ -13,6 +13,7 @@ import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.zip.ZipInputStream
+import kotlin.io.path.createDirectories
 
 class IconsGenerator {
     fun build(svgUrl: String, kotlinOutDir: Path, resourceOutDir: Path) {
@@ -37,6 +38,7 @@ class IconsGenerator {
     ): List<Pair<String, String>> {
         val icons = mutableListOf<Pair<String, String>>()
         val inputStream = URL(url).openConnection().getInputStream().buffered()
+        resourceOutDir.createDirectories()
         ZipInputStream(inputStream).use { zis ->
             while (true) {
                 val entry = zis.nextEntry ?: break
@@ -49,7 +51,7 @@ class IconsGenerator {
                     continue
                 }
 
-                val filenameSvg = "ic_" + entry.name
+                val filenameSvg = "ic_orbit_" + entry.name
                     .removePrefix("svg/")
                     .replace("-", "_")
                     .lowercase()
@@ -74,7 +76,7 @@ class IconsGenerator {
 
                 val resourceName = filenameXml.removeSuffix(".xml")
                 val iconName = resourceName
-                    .removePrefix("ic_")
+                    .removePrefix("ic_orbit_")
                     .split("_")
                     .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
                 icons.add(Pair(iconName, resourceName))
@@ -90,6 +92,11 @@ class IconsGenerator {
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
         val iconClass = TypeSpec.objectBuilder(iconClassType)
+        iconClass.addAnnotation(
+            AnnotationSpec.builder(Suppress::class)
+                .addMember("%S", "unused")
+                .build()
+        )
 
         icons.sortedBy { it.first }.forEach { (iconName, iconResource) ->
             val property = PropertySpec.builder(iconName, painterType)
@@ -110,7 +117,6 @@ class IconsGenerator {
         val file = FileSpec.builder("kiwi.orbit.icons", "Icons")
             .addType(iconClass.build())
             .indent("    ")
-            .addImport("kiwi.orbit", "R")
             .build()
 
         file.writeTo(dir)

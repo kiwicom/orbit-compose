@@ -7,10 +7,15 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import java.awt.Image
+import java.awt.RenderingHints
+import java.awt.image.BufferedImage
 import java.io.File
 import java.net.URL
 import java.nio.file.Path
 import javax.imageio.ImageIO
+import kotlin.io.path.createDirectories
+import kotlin.io.path.div
 import kotlin.math.roundToInt
 
 class IllustrationsGenerator {
@@ -39,7 +44,7 @@ class IllustrationsGenerator {
                 .filter { it.name.startsWith("il_") }
                 .forEach {
                     val resource = it.nameWithoutExtension
-                    val name = resource.removePrefix("il_").toTitleCase()
+                    val name = resource.removePrefix("il_orbit_").toTitleCase()
                     add(Pair(name, resource))
                 }
         }
@@ -82,33 +87,39 @@ class IllustrationsGenerator {
             "xxxhdpi" to 340 * 4,
         )
 
+        (resourceOutDir / "drawable").createDirectories()
+        sizes.forEach { (size) ->
+            (resourceOutDir / "drawable-$size").createDirectories()
+        }
+
         val illustrations = mutableListOf<Pair<String, String>>()
         for (name in names) {
             val nameLowered = name.toSnakeCase()
             val url = "$prefixUrl/$name.png"
-            val inFile = File(resourceOutDir.toFile(), "drawable/il_$nameLowered.png")
-            val inPath = inFile.absolutePath
+            val inFile = File(resourceOutDir.toFile(), "drawable/il_orbit_$nameLowered.png")
             inFile.outputStream().use {
                 URL(url).openConnection().getInputStream().copyTo(it)
             }
 
             val inImage = ImageIO.read(inFile)
             if (inImage.width != 2200) {
-                println("Skipping $name")
+                println("Skipping $name (not big enough, width ${inImage.width}px)")
                 inFile.delete()
                 continue
             }
 
             sizes.map { (sizeName, expectedWidth) ->
-                val outPath = File(resourceOutDir.toFile(), "drawable-$sizeName/il_$nameLowered.png").absolutePath
-                Runtime.getRuntime().exec("magick convert $inPath -geometry ${expectedWidth}x $outPath").waitFor()
+                val outPath = File(resourceOutDir.toFile(), "drawable-$sizeName/il_orbit_$nameLowered.png")
+                val image = ImageIO.read(inFile)
+                val resized = resize(image, width = expectedWidth, height = 0)
+                ImageIO.write(resized, "PNG", outPath)
                 Runtime.getRuntime().exec("pngquant --skip-if-larger -f --strip -o $outPath $outPath")
             }.forEach { process ->
                 process.waitFor()
             }
 
             inFile.delete()
-            illustrations.add(Pair(name, "il_$nameLowered"))
+            illustrations.add(Pair(name, "il_orbit_$nameLowered"))
             println("Rendered: $name")
         }
 
@@ -122,6 +133,11 @@ class IllustrationsGenerator {
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
         val illustrationClass = TypeSpec.objectBuilder(illustrationClassType)
+        illustrationClass.addAnnotation(
+            AnnotationSpec.builder(Suppress::class)
+                .addMember("%S", "unused")
+                .build()
+        )
 
         illustrations.sortedBy { it.first }.forEach { (illustrationName, illustrationResource) ->
             val property = PropertySpec.builder(illustrationName, painterType)
@@ -142,10 +158,27 @@ class IllustrationsGenerator {
         val file = FileSpec.builder("kiwi.orbit.illustrations", "Illustrations")
             .addType(illustrationClass.build())
             .indent("    ")
-            .addImport("kiwi.orbit", "R")
             .build()
 
         file.writeTo(dir)
+    }
+
+    @Suppress("NAME_SHADOWING", "SameParameterValue")
+    private fun resize(sourceImage: BufferedImage, width: Int, height: Int): BufferedImage {
+        var width = width
+        var height = height
+        val ratio = sourceImage.width.toDouble() / sourceImage.height
+        if (width < 1) {
+            width = (height * ratio + 0.4).toInt()
+        } else if (height < 1) {
+            height = (width / ratio + 0.4).toInt()
+        }
+        val scaled = sourceImage.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING)
+        val bufferedScaled = BufferedImage(scaled.getWidth(null), scaled.getHeight(null), BufferedImage.TYPE_INT_ARGB)
+        val g2d = bufferedScaled.createGraphics()
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
+        g2d.drawImage(scaled, 0, 0, width, height, null)
+        return bufferedScaled
     }
 
     private fun String.toSnakeCase(): String = replace(humps, "_").lowercase()

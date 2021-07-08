@@ -7,12 +7,11 @@ fun main() {
     val processor = IllustrationsGenerator()
 
     // Install into PATH:
-    // - magick - ImageMagick https://imagemagick.org/script/download.php
-    // - pngquant - PngQuant https://pngquant.org/
+    // - pngquant - PngQuant https://pngquant.org/ (on Windows Visual Studio 2015 Redistributable needed)
 
     val root = Paths.get("").toAbsolutePath().toFile().absolutePath
-    val kotlinOutDir = Paths.get("$root/lib/src/main/java/")
-    val resourceOutDir = Paths.get("$root/lib/src/main/res/")
+    val kotlinOutDir = Paths.get("$root/illustrations/src/main/kotlin/")
+    val resourceOutDir = Paths.get("$root/illustrations/src/main/res/")
     val urlIllustrationList =
         "https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-components/src/Illustration/consts.js"
     val urlIllustrationPrefix = "https://images.kiwi.com/illustrations/originals"
