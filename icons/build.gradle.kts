@@ -46,12 +46,9 @@ kotlinter {
 }
 
 dependencies {
-    implementation(projects.icons)
-
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.compose.runtime)
-    implementation(libs.compose.material)
 
     debugImplementation(libs.compose.tooling)
 }

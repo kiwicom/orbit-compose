@@ -17,6 +17,7 @@ pluginManagement {
 
 include(":app")
 include(":lib")
+include(":icons")
 include(":generator")
 
 enableFeaturePreview("VERSION_CATALOGS")
