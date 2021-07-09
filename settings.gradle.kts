@@ -15,8 +15,8 @@ pluginManagement {
     }
 }
 
-include(":app")
-include(":lib")
+include(":catalog")
+include(":ui")
 include(":icons")
 include(":illustrations")
 include(":generator")
