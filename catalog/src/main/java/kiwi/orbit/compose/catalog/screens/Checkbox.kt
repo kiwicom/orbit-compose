@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.ui.controls.Checkbox
 import kiwi.orbit.compose.ui.controls.CheckboxLayout
+import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun CheckboxScreen(onUpClick: () -> Unit) {

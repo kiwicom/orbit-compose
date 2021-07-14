@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Modifier
@@ -22,6 +20,8 @@ import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Text
 import kotlin.reflect.full.memberProperties
 
 @Composable
