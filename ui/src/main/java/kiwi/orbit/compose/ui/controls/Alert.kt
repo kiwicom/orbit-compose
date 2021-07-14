@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -20,13 +18,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.components.ThemedSurface
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
-import kiwi.orbit.compose.ui.foundation.withCritical
-import kiwi.orbit.compose.ui.foundation.withInteractive
-import kiwi.orbit.compose.ui.foundation.withSuccess
-import kiwi.orbit.compose.ui.foundation.withWarning
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.foundation.asCriticalTheme
+import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
+import kiwi.orbit.compose.ui.foundation.asSuccessTheme
+import kiwi.orbit.compose.ui.foundation.asWarningTheme
 import kotlin.math.roundToInt
 
 @Composable
@@ -38,7 +36,7 @@ public fun AlertInfo(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withInteractive(),
+        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -60,7 +58,7 @@ public fun AlertSuccess(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withSuccess(),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -82,7 +80,7 @@ public fun AlertWarning(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withWarning(),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -104,7 +102,7 @@ public fun AlertCritical(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withCritical(),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
         LocalElevationEnabled provides false,
     ) {
         Alert(
@@ -137,7 +135,6 @@ private fun Alert(
                 modifier = Modifier
                     .padding(top = 2.dp)
                     .size(16.dp),
-                tint = OrbitTheme.colors.primary,
             )
             Spacer(Modifier.width(8.dp))
         }
@@ -157,11 +154,11 @@ private fun AlertContent(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        ProvideTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
             title()
         }
 
-        ProvideTextStyle(OrbitTheme.typography.bodyNormal) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             content()
         }
 

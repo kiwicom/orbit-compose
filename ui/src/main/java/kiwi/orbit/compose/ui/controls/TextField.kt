@@ -19,11 +19,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,6 +47,10 @@ import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kotlinx.coroutines.delay
 
 @Composable
@@ -71,12 +73,12 @@ public fun TextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     Column(modifier) {
-        ProvideTextStyle(OrbitTheme.typography.bodyNormal) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
             val textFieldValue = textFieldValueState.copy(text = value)
 
             if (label != null) {
-                ProvideTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium)) {
+                ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium)) {
                     Box(Modifier.padding(bottom = 4.dp)) {
                         label()
                     }
@@ -98,29 +100,32 @@ public fun TextField(
 
             // If color is not provided via the text style, use content color as a default
             val textStyle = LocalTextStyle.current
-            val mergedTextStyle = textStyle.copy(color = OrbitTheme.colors.surfaceContent)
+            val mergedTextStyle = textStyle.copy(color = OrbitTheme.colors.content.normal)
 
-            val transition = updateTransition(inputState)
+            val transition = updateTransition(inputState, "stateTransition")
             val borderColor = transition.animateColor(
-                transitionSpec = { tween(durationMillis = AnimationDuration) }
+                transitionSpec = { tween(durationMillis = AnimationDuration) },
+                label = "borderColor"
             ) {
                 when (it) {
                     InputState.Normal -> Color.Transparent
-                    InputState.Focused -> OrbitTheme.colors.interactive
-                    InputState.NormalError -> OrbitTheme.colors.critical
-                    InputState.FocusedError -> OrbitTheme.colors.critical
+                    InputState.Focused -> OrbitTheme.colors.interactive.main
+                    InputState.NormalError -> OrbitTheme.colors.critical.main
+                    InputState.FocusedError -> OrbitTheme.colors.critical.main
                 }
             }
             val backgroundColor = transition.animateColor(
-                transitionSpec = { tween(durationMillis = AnimationDuration) }
+                transitionSpec = { tween(durationMillis = AnimationDuration) },
+                label = "backgroundColor"
             ) {
                 when (it) {
-                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface
-                    else -> OrbitTheme.colors.surfaceAlt
+                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface.main
+                    else -> OrbitTheme.colors.surface.strong
                 }
             }
             val errorAlpha = transition.animateFloat(
-                transitionSpec = { tween(durationMillis = AnimationDuration) }
+                transitionSpec = { tween(durationMillis = AnimationDuration) },
+                label = "errorAlpha"
             ) {
                 when (it) {
                     InputState.NormalError, InputState.FocusedError -> 1f
@@ -149,7 +154,7 @@ public fun TextField(
                 maxLines = maxLines,
                 visualTransformation = visualTransformation,
                 interactionSource = interactionSource,
-                cursorBrush = SolidColor(OrbitTheme.colors.interactive),
+                cursorBrush = SolidColor(OrbitTheme.colors.interactive.main),
                 decorationBox = { innerTextField ->
                     Layout(
                         content = {
@@ -165,9 +170,9 @@ public fun TextField(
                             }
                             if (placeholder != null && textFieldValue.text.isEmpty()) {
                                 Box(Modifier.layoutId("placeholder")) {
-                                    ProvideTextStyle(
-                                        textStyle.copy(color = OrbitTheme.colors.surfaceContentAlt),
-                                        placeholder
+                                    CompositionLocalProvider(
+                                        LocalContentEmphasis provides ContentEmphasis.Minor,
+                                        content = placeholder
                                     )
                                 }
                             }
@@ -250,9 +255,9 @@ public fun TextField(
                         modifier = Modifier
                             .padding(top = 2.dp, end = 4.dp)
                             .size(16.dp),
-                        tint = OrbitTheme.colors.critical,
+                        tint = OrbitTheme.colors.critical.main,
                     )
-                    ProvideTextStyle(textStyle.copy(color = OrbitTheme.colors.critical)) {
+                    ProvideMergedTextStyle(textStyle.copy(color = OrbitTheme.colors.critical.main)) {
                         errorState?.invoke()
                     }
                 }

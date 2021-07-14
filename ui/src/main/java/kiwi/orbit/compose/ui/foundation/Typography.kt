@@ -1,12 +1,12 @@
 package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.Typography as MaterialTypography
 
 // TODO: remove data class to allow maintain better binary compatibility
 @Immutable
@@ -85,27 +85,10 @@ public data class Typography internal constructor(
         bodyNormal = bodyNormal.withDefaultFontFamily(defaultFontFamily),
         bodySmall = bodySmall.withDefaultFontFamily(defaultFontFamily),
     )
-
-    internal fun toMaterialTypography(): MaterialTypography =
-        MaterialTypography(
-            defaultFontFamily = displayTitle.fontFamily ?: FontFamily.Default,
-            h1 = displayTitle.copy(fontSize = 96.sp),
-            h2 = displayTitle.copy(fontSize = 60.sp),
-            h3 = displayTitle,
-            h4 = title2,
-            h5 = title2,
-            h6 = title3,
-            subtitle1 = title3,
-            subtitle2 = title4,
-            overline = title5,
-            body1 = bodyNormal,
-            body2 = bodySmall,
-            button = title4,
-        )
 }
 
 private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {
     return if (fontFamily != null) this else copy(fontFamily = default)
 }
 
-internal val LocalTypography = staticCompositionLocalOf { Typography() }
+internal val LocalTypography: ProvidableCompositionLocal<Typography> = staticCompositionLocalOf { Typography() }

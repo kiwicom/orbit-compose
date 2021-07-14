@@ -1,4 +1,4 @@
-package kiwi.orbit.compose.ui.components
+package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -16,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -30,15 +29,14 @@ public fun ThemedSurface(
     content: @Composable RowScope.() -> Unit,
 ) {
     val backgroundColor = when (subtle) {
-        true -> OrbitTheme.colors.surface
-        false -> OrbitTheme.colors.primary
+        true -> OrbitTheme.colors.surface.background
+        false -> OrbitTheme.colors.primary.main
     }
     val contentColor = contentColorFor(backgroundColor)
-
     val surfaceModifier = when (subtle) {
         true -> {
             Modifier
-                .border(1.dp, OrbitTheme.colors.primaryAltSubtle, shape)
+                .border(1.dp, OrbitTheme.colors.surface.strong, shape)
                 .background(backgroundColor, shape)
         }
         false -> {
@@ -49,7 +47,6 @@ public fun ThemedSurface(
 
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
-        LocalContentAlpha provides contentColor.alpha,
         LocalElevationEnabled provides false,
     ) {
         Row(

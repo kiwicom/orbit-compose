@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.triStateToggleable
-import androidx.compose.material.Icon
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +20,6 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -41,29 +39,23 @@ public fun Checkbox(
 ) {
     val borderColor by animateColorAsState(
         targetValue = when {
-            !checked -> OrbitTheme.colors.surfaceContentTertiary
+            !checked -> OrbitTheme.colors.content.subtle
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
-            !enabled && !checked -> OrbitTheme.colors.surfaceContentTertiary.copy(0.19f)
-            !enabled -> OrbitTheme.colors.surfaceContentTertiary
-            checked -> OrbitTheme.colors.interactive
+            !enabled && !checked -> OrbitTheme.colors.surface.disabled
+            !enabled -> OrbitTheme.colors.content.subtle
+            checked -> OrbitTheme.colors.interactive.main
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
     val iconColor = when (enabled) {
-        true -> {
-            OrbitTheme.colors.interactiveContent
-        }
-        false -> {
-            OrbitTheme.colors.surfaceContentTertiary
-                .copy(0.19f)
-                .compositeOver(OrbitTheme.colors.surface)
-        }
+        true -> OrbitTheme.colors.interactive.onMain
+        false -> OrbitTheme.colors.surface.disabled
     }
     val selectableModifier =
         if (onCheckedChange != null) {

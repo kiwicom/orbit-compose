@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -14,12 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.components.ThemedSurface
 import kiwi.orbit.compose.ui.foundation.LocalColors
-import kiwi.orbit.compose.ui.foundation.withCritical
-import kiwi.orbit.compose.ui.foundation.withInteractive
-import kiwi.orbit.compose.ui.foundation.withSuccess
-import kiwi.orbit.compose.ui.foundation.withWarning
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.foundation.asCriticalTheme
+import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
+import kiwi.orbit.compose.ui.foundation.asSuccessTheme
+import kiwi.orbit.compose.ui.foundation.asWarningTheme
 
 @Composable
 public fun BadgeNeutral(
@@ -29,8 +28,10 @@ public fun BadgeNeutral(
 ) {
     val colors = with(OrbitTheme.colors) {
         copy(
-            primary = surfaceContent,
-            primaryContent = surface,
+            primary = primary.copy(
+                main = this.content.normal,
+                onMain = surface.main,
+            )
         )
     }
     CompositionLocalProvider(
@@ -48,8 +49,7 @@ public fun BadgeNeutralSubtle(
 ) {
     val colors = with(OrbitTheme.colors) {
         copy(
-            primary = surfaceContent,
-            primaryAltSubtle = surfaceAlt,
+            surface = surface.copy(background = surface.main),
         )
     }
     CompositionLocalProvider(
@@ -67,9 +67,7 @@ public fun BadgeSecondary(
 ) {
     val colors = with(OrbitTheme.colors) {
         copy(
-            surface = surfaceBackground,
-            primary = surfaceContent,
-            primaryAltSubtle = surfaceAlt,
+            surface = surface.copy(main = surface.background),
         )
     }
     CompositionLocalProvider(
@@ -86,7 +84,7 @@ public fun BadgeInfo(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withInteractive(),
+        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
     ) {
         Badge(subtle = false, modifier, icon, content)
     }
@@ -99,7 +97,7 @@ public fun BadgeInfoSubtle(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withInteractive(),
+        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
     ) {
         Badge(subtle = true, modifier, icon, content)
     }
@@ -112,7 +110,7 @@ public fun BadgeSuccess(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withSuccess(),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
     ) {
         Badge(subtle = false, modifier, icon, content)
     }
@@ -125,7 +123,7 @@ public fun BadgeSuccessSubtle(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withSuccess(),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
     ) {
         Badge(subtle = true, modifier, icon, content)
     }
@@ -138,7 +136,7 @@ public fun BadgeWarning(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withWarning(),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(),
     ) {
         Badge(subtle = false, modifier, icon, content)
     }
@@ -151,7 +149,7 @@ public fun BadgeWarningSubtle(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withWarning(),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(),
     ) {
         Badge(subtle = true, modifier, icon, content)
     }
@@ -164,7 +162,7 @@ public fun BadgeCritical(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withCritical(),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
     ) {
         Badge(subtle = false, modifier, icon, content)
     }
@@ -177,7 +175,7 @@ public fun BadgeCriticalSubtle(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.withCritical(),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
     ) {
         Badge(subtle = true, modifier, icon, content)
     }
@@ -202,7 +200,7 @@ private fun Badge(
                 icon()
             }
         }
-        ProvideTextStyle(OrbitTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium)) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium)) {
             content()
         }
     }
