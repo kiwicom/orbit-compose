@@ -26,7 +26,6 @@ import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.foundation.ColorTokens
 
 @Composable
 fun XProfileScreen(onUpClick: () -> Unit) {
@@ -86,7 +85,7 @@ fun MenuItem(
             .clickable(onClick = {})
             .padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp)
     ) {
-        Icon(icon, tint = ColorTokens.InkLight, contentDescription = text)
+        Icon(icon, tint = OrbitTheme.colors.content.minor, contentDescription = text)
         Text(
             text = text,
             modifier = Modifier

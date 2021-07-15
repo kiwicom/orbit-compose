@@ -2,6 +2,7 @@ package kiwi.orbit.compose.generator.colors
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.net.HttpURLConnection
@@ -58,9 +59,10 @@ class ColorsGenerator {
     }
 
     private fun generateClass(colors: List<Pair<String, String>>, dir: Path) {
-        val colorClass = ClassName("kiwi.orbit.compose.ui.foundation", "ColorTokens")
+        val colorClass = ClassName("kiwi.orbit.compose.ui.foundation.tokens", "ColorTokens")
         val colorType = ClassName("androidx.compose.ui.graphics", "Color")
         val objectBuilder = TypeSpec.objectBuilder(colorClass)
+            .addModifiers(KModifier.INTERNAL)
 
         colors.forEach { (colorName, colorString) ->
             val name = colorName
@@ -88,7 +90,7 @@ class ColorsGenerator {
             objectBuilder.addProperty(property)
         }
 
-        val file = FileSpec.builder("kiwi.orbit.compose.ui.foundation", "ColorTokens")
+        val file = FileSpec.builder("kiwi.orbit.compose.ui.foundation.tokens", "ColorTokens")
             .addType(objectBuilder.build())
             .addAliasedImport(colorType, "UIColor")
             .indent("    ")

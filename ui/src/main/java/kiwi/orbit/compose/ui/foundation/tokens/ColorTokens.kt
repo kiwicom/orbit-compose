@@ -1,8 +1,8 @@
-package kiwi.orbit.compose.ui.foundation
+package kiwi.orbit.compose.ui.foundation.tokens
 
 import androidx.compose.ui.graphics.Color as UIColor
 
-public object ColorTokens {
+internal object ColorTokens {
     public val BlueDark: UIColor = UIColor(0xFF005AA3)
 
     public val BlueDarkActive: UIColor = UIColor(0xFF003E70)
