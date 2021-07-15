@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +16,8 @@ import kiwi.orbit.compose.ui.controls.AlertSuccess
 import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
+import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun AlertScreen(onUpClick: () -> Unit) {

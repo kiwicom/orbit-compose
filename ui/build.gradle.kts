@@ -51,7 +51,8 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.compose.runtime)
-    implementation(libs.compose.material)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.materialRipple)
 
     debugImplementation(libs.compose.tooling)
 }

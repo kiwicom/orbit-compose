@@ -66,7 +66,6 @@ dependencies {
     implementation(libs.compose.animation)
     implementation(libs.compose.foundation)
     implementation(libs.compose.layout)
-    implementation(libs.compose.material)
     implementation(libs.compose.materialIconsExtended)
     implementation(libs.compose.navigation)
     implementation(libs.compose.runtime)
@@ -77,7 +76,6 @@ dependencies {
     implementation(libs.kotlin.datetime)
 
     implementation(libs.accompanist.insets)
-    implementation(libs.accompanist.insetsUi)
     implementation(libs.accompanist.systemController)
 
     debugImplementation(libs.compose.tooling)

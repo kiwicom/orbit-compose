@@ -8,16 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
-import androidx.compose.material.ButtonDefaults as MaterialButtonDefaults
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
 @Composable
 public fun Stepper(
@@ -85,7 +79,6 @@ public fun Stepper(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun StepperButton(
     onClick: () -> Unit,
@@ -93,35 +86,31 @@ private fun StepperButton(
     content: @Composable RowScope.() -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val colors = ButtonDefaults.buttonColors(
-        backgroundColor = OrbitTheme.colors.surfaceAlt,
-    )
-    val elevation = MaterialButtonDefaults.elevation(
+    val elevation = ButtonDefaults.elevation(
         defaultElevation = 1.dp,
     )
-    val contentColor by colors.contentColor(enabled)
-
     Surface(
         onClick = onClick,
         shape = OrbitTheme.shapes.small,
-        color = colors.backgroundColor(enabled).value,
-        contentColor = contentColor.copy(alpha = 1f),
+        color = OrbitTheme.colors.surface.strong,
+        contentColor = OrbitTheme.colors.content.normal,
         elevation = elevation.elevation(enabled, interactionSource).value,
         interactionSource = interactionSource,
         indication = null,
         enabled = enabled,
     ) {
-        CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
-            ProvideTextStyle(MaterialTheme.typography.button) {
-                Row(
-                    Modifier
-                        .indication(interactionSource, LocalIndication.current)
-                        .padding(4.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = content,
-                )
-            }
+        CompositionLocalProvider(
+            LocalTextStyle provides OrbitTheme.typography.bodyNormal,
+            LocalContentEmphasis provides if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled,
+        ) {
+            Row(
+                Modifier
+                    .indication(interactionSource, LocalIndication.current)
+                    .padding(4.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                content = content,
+            )
         }
     }
 }

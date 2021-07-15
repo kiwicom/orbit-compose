@@ -7,11 +7,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -21,6 +16,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalContentColor
+import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
@@ -31,9 +30,9 @@ public fun Tag(
     content: @Composable RowScope.() -> Unit,
 ) {
     val backgroundColor = when {
-        selected -> OrbitTheme.colors.interactive
-        onRemove != null -> OrbitTheme.colors.interactiveSubtle
-        else -> OrbitTheme.colors.surfaceAlt
+        selected -> OrbitTheme.colors.interactive.main
+        onRemove != null -> OrbitTheme.colors.interactive.subtle
+        else -> OrbitTheme.colors.surface.strong
     }
     val contentColor = contentColorFor(backgroundColor)
     val shape = OrbitTheme.shapes.normal
@@ -41,7 +40,7 @@ public fun Tag(
     CompositionLocalProvider(
         LocalTextStyle provides OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium),
         LocalContentColor provides contentColor,
-        LocalContentAlpha provides 1f,
+        LocalContentEmphasis provides ContentEmphasis.Normal,
     ) {
         Row(
             Modifier
@@ -56,8 +55,8 @@ public fun Tag(
 
             if (onRemove != null) {
                 val iconColor = when (selected) {
-                    true -> OrbitTheme.colors.interactiveContent
-                    false -> OrbitTheme.colors.interactiveStrong
+                    true -> OrbitTheme.colors.interactive.onMain
+                    false -> OrbitTheme.colors.interactive.strong
                 }
                 IconButton(
                     onClick = onRemove,

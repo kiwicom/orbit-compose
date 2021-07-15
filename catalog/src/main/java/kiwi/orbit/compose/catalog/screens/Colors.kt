@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +15,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.foundation.FeatureColors
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
@@ -26,7 +27,7 @@ fun ColorsScreen(onUpClick: () -> Unit) {
         title = "Colors",
         onUpClick = onUpClick,
     ) {
-        Surface() {
+        Surface {
             Column(
                 Modifier
                     .padding(16.dp)
@@ -41,92 +42,29 @@ fun ColorsScreen(onUpClick: () -> Unit) {
 @Preview
 @Composable
 fun ColorsScreenInner() {
-    Text("Primary", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
+    FeatureColors(OrbitTheme.colors.primary, name = "Primary")
+    FeatureColors(OrbitTheme.colors.interactive, name = "Interactive")
+    FeatureColors(OrbitTheme.colors.success, name = "Success")
+    FeatureColors(OrbitTheme.colors.warning, name = "Warning")
+    FeatureColors(OrbitTheme.colors.critical, name = "Critical")
+}
+
+@Composable
+private fun FeatureColors(colors: FeatureColors, name: String) {
+    Text(name, Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
 
     Card {
         Column {
             Row {
-                Color(OrbitTheme.colors.primarySubtle, "Primary Subtle")
-                Color(OrbitTheme.colors.primaryAltSubtle, "Primary Alt Subtle")
+                Color(colors.subtle, "$name Subtle")
+                Color(colors.subtleAlt, "$name Subtle Alt")
             }
             Row {
-                Color(OrbitTheme.colors.primary, "Primary")
-                Color(OrbitTheme.colors.primaryAlt, "Primary Alt")
+                Color(colors.main, "$name Main")
+                Color(colors.mainAlt, "$name Main Alt")
             }
             Row {
-                Color(OrbitTheme.colors.primaryStrong, "Primary Strong")
-            }
-        }
-    }
-
-    Text("Interactive", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
-
-    Card {
-        Column {
-            Row {
-                Color(OrbitTheme.colors.interactiveSubtle, "Interactive Subtle")
-                Color(OrbitTheme.colors.interactiveAltSubtle, "Interactive Alt Subtle")
-            }
-            Row {
-                Color(OrbitTheme.colors.interactive, "Interactive")
-                Color(OrbitTheme.colors.interactiveAlt, "Interactive Alt")
-            }
-            Row {
-                Color(OrbitTheme.colors.interactiveStrong, "Interactive Strong")
-            }
-        }
-    }
-
-    Text("Success", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
-
-    Card {
-        Column {
-            Row {
-                Color(OrbitTheme.colors.successSubtle, "Success Subtle")
-                Color(OrbitTheme.colors.successAltSubtle, "Success Alt Subtle")
-            }
-            Row {
-                Color(OrbitTheme.colors.success, "Success")
-                Color(OrbitTheme.colors.successAlt, "Success Alt")
-            }
-            Row {
-                Color(OrbitTheme.colors.successStrong, "Success Strong")
-            }
-        }
-    }
-
-    Text("Warning", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
-
-    Card {
-        Column {
-            Row {
-                Color(OrbitTheme.colors.warningSubtle, "Warning Subtle")
-                Color(OrbitTheme.colors.warningAltSubtle, "Warning Alt Subtle")
-            }
-            Row {
-                Color(OrbitTheme.colors.warning, "Warning")
-                Color(OrbitTheme.colors.warningAlt, "Warning Alt")
-            }
-            Row {
-                Color(OrbitTheme.colors.warningStrong, "Warning Strong")
-            }
-        }
-    }
-
-    Text("Critical", Modifier.padding(top = 16.dp, bottom = 4.dp), style = OrbitTheme.typography.title4)
-
-    Card {
-        Column {
-            Row {
-                Color(OrbitTheme.colors.criticalSubtle, "Critical Subtle")
-                Color(OrbitTheme.colors.criticalAltSubtle, "Critical Alt Subtle")
-            }
-            Row {
-                Color(OrbitTheme.colors.critical, "Critical")
-                Color(OrbitTheme.colors.criticalAlt, "Critical Alt")
-            }
-            Row {
-                Color(OrbitTheme.colors.criticalStrong, "Critical Strong")
+                Color(colors.strong, "$name Strong")
             }
         }
     }

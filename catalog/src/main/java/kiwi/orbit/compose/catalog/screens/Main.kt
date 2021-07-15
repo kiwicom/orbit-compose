@@ -11,11 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.FormatSize
@@ -32,10 +27,15 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.google.accompanist.insets.ui.TopAppBar
 import kiwi.orbit.compose.catalog.MainActions
+import kiwi.orbit.compose.catalog.components.Scaffold
+import kiwi.orbit.compose.catalog.components.TopAppBar
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.IconButton
+import kiwi.orbit.compose.ui.controls.Text
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
 @Composable
@@ -73,7 +73,6 @@ fun MainScreen(
                 contentPadding = rememberInsetsPaddingValues(
                     insets = LocalWindowInsets.current.statusBars,
                 ),
-                backgroundColor = OrbitTheme.colors.surface,
                 actions = {
                     IconButton(onClick = onToggleTheme) {
                         Icon(MaterialIcons.BrightnessMedium, contentDescription = null)
@@ -81,7 +80,7 @@ fun MainScreen(
                 }
             )
         },
-        backgroundColor = OrbitTheme.colors.surfaceBackground,
+        backgroundColor = OrbitTheme.colors.surface.background,
     ) {
         BoxWithConstraints {
             val columns = (maxWidth / 156.dp).toInt().coerceAtLeast(1)

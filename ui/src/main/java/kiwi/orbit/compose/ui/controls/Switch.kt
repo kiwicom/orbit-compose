@@ -1,6 +1,5 @@
 package kiwi.orbit.compose.ui.controls
 
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -21,20 +20,12 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.SwipeableState
-import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
@@ -51,11 +42,13 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.internal.FractionalThreshold
+import kiwi.orbit.compose.ui.internal.rememberSwipeableStateFor
+import kiwi.orbit.compose.ui.internal.swipeable
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collect
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
 public fun Switch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
@@ -107,41 +100,6 @@ public fun Switch(
     }
 }
 
-/**
- * Create and [remember] a [SwipeableState] which is kept in sync with another state, i.e:
- *  1. Whenever the [value] changes, the [SwipeableState] will be animated to that new value.
- *  2. Whenever the value of the [SwipeableState] changes (e.g. after a swipe), the owner of the
- *  [value] will be notified to update their state to the new value of the [SwipeableState] by
- *  invoking [onValueChange]. If the owner does not update their state to the provided value for
- *  some reason, then the [SwipeableState] will perform a rollback to the previous, correct value.
- */
-@Composable
-@OptIn(ExperimentalMaterialApi::class)
-internal fun <T : Any> rememberSwipeableStateFor(
-    value: T,
-    onValueChange: (T) -> Unit,
-    animationSpec: AnimationSpec<Float>,
-): SwipeableState<T> {
-    val swipeableState = rememberSwipeableState(
-        initialValue = value,
-        animationSpec = animationSpec
-    )
-    val forceAnimationCheck = remember { mutableStateOf(false) }
-    LaunchedEffect(value, forceAnimationCheck.value) {
-        if (value != swipeableState.currentValue) {
-            swipeableState.animateTo(value)
-        }
-    }
-    DisposableEffect(swipeableState.currentValue) {
-        if (value != swipeableState.currentValue) {
-            onValueChange(swipeableState.currentValue)
-            forceAnimationCheck.value = !forceAnimationCheck.value
-        }
-        onDispose { }
-    }
-    return swipeableState
-}
-
 @Composable
 private fun BoxScope.SwitchImpl(
     checked: Boolean,
@@ -172,10 +130,10 @@ private fun BoxScope.SwitchImpl(
     }
     val mainColor by rememberUpdatedState(
         if (enabled) {
-            if (checked) OrbitTheme.colors.interactive else OrbitTheme.colors.surfaceContentTertiary
+            if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.content.subtle
         } else {
-            (if (checked) OrbitTheme.colors.interactive else OrbitTheme.colors.surfaceContentTertiary)
-                .copy(alpha = ContentAlpha.disabled)
+            (if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.content.subtle)
+            // .copy(alpha = ContentAlpha.disabled)
         }
     )
     Canvas(
@@ -195,7 +153,7 @@ private fun BoxScope.SwitchImpl(
             )
             .requiredSize(ThumbDiameter)
             .shadow(elevation, CircleShape, clip = false)
-            .background(OrbitTheme.colors.surface, CircleShape)
+            .background(OrbitTheme.colors.surface.main, CircleShape)
             .padding((ThumbDiameter - 10.dp) / 2)
             .background(mainColor, CircleShape)
     )

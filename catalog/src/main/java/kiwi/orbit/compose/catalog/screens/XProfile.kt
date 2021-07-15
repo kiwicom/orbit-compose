@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +22,10 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.BadgeInfo
+import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.Separator
+import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.foundation.ColorTokens
 
 @Composable
@@ -106,5 +106,5 @@ fun MenuItem(
 
 @Composable
 fun MenuItemSeparator() {
-    Divider(startIndent = 32.dp + 24.dp, thickness = 0.5.dp)
+    Separator(startIndent = 32.dp + 24.dp, thickness = 0.5.dp)
 }

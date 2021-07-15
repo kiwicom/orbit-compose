@@ -3,14 +3,14 @@ package kiwi.orbit.compose.catalog.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun TypographyScreen(onUpClick: () -> Unit) {
@@ -18,7 +18,7 @@ fun TypographyScreen(onUpClick: () -> Unit) {
         title = "Typography",
         onUpClick = onUpClick,
     ) {
-        Surface() {
+        Surface {
             Column(
                 Modifier
                     .padding(16.dp)

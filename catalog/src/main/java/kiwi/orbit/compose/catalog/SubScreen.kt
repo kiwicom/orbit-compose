@@ -2,19 +2,20 @@ package kiwi.orbit.compose.catalog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.google.accompanist.insets.ui.TopAppBar
+import kiwi.orbit.compose.catalog.components.Scaffold
+import kiwi.orbit.compose.catalog.components.TopAppBar
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.IconButton
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun SubScreen(
@@ -31,7 +32,6 @@ fun SubScreen(
                 contentPadding = rememberInsetsPaddingValues(
                     insets = LocalWindowInsets.current.statusBars,
                 ),
-                backgroundColor = OrbitTheme.colors.surface,
                 navigationIcon = {
                     IconButton(
                         onClick = onUpClick,
@@ -44,7 +44,10 @@ fun SubScreen(
         content = {
             if (scrollable) {
                 LazyColumn(
-                    modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
+                    modifier = if (withBackground) Modifier
+                        .background(OrbitTheme.colors.surface.main)
+                        .fillMaxHeight()
+                    else Modifier,
                     contentPadding = rememberInsetsPaddingValues(
                         insets = LocalWindowInsets.current.navigationBars
                     )
@@ -53,7 +56,10 @@ fun SubScreen(
                 }
             } else {
                 Box(
-                    modifier = if (withBackground) Modifier.background(OrbitTheme.colors.surface) else Modifier,
+                    modifier = if (withBackground) Modifier
+                        .background(OrbitTheme.colors.surface.main)
+                        .fillMaxHeight()
+                    else Modifier,
                 ) {
                     content()
                 }

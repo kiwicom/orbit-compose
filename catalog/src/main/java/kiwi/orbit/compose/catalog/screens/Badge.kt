@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +23,9 @@ import kiwi.orbit.compose.ui.controls.BadgeSuccess
 import kiwi.orbit.compose.ui.controls.BadgeSuccessSubtle
 import kiwi.orbit.compose.ui.controls.BadgeWarning
 import kiwi.orbit.compose.ui.controls.BadgeWarningSubtle
+import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun BadgeScreen(onUpClick: () -> Unit) {
