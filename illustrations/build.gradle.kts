@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jmailen.kotlinter")
+    id("com.vanniktech.maven.publish")
 }
 
 android {
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.compose.runtime)
+    implementation(libs.compose.ui)
 
     debugImplementation(libs.compose.tooling)
 }
