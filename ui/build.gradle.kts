@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
     implementation(libs.compose.materialRipple)
+    implementation(libs.compose.material)
 
     debugImplementation(libs.compose.tooling)
 }

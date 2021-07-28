@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -20,12 +21,19 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FractionalThreshold
+import androidx.compose.material.SwipeableDefaults
+import androidx.compose.material.SwipeableState
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
@@ -42,12 +50,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.internal.FractionalThreshold
-import kiwi.orbit.compose.ui.internal.rememberSwipeableStateFor
-import kiwi.orbit.compose.ui.internal.swipeable
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collect
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 public fun Switch(
     checked: Boolean,
@@ -169,6 +175,38 @@ private fun DrawScope.drawTrack(trackColor: Color, trackWidth: Float, strokeWidt
         StrokeCap.Round
     )
 }
+
+@Suppress("SameParameterValue")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun <T : Any> rememberSwipeableStateFor(
+    value: T,
+    onValueChange: (T) -> Unit,
+    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec
+): SwipeableState<T> {
+    val swipeableState = remember {
+        SwipeableState(
+            initialValue = value,
+            animationSpec = animationSpec,
+            confirmStateChange = { true }
+        )
+    }
+    val forceAnimationCheck = remember { mutableStateOf(false) }
+    LaunchedEffect(value, forceAnimationCheck.value) {
+        if (value != swipeableState.currentValue) {
+            swipeableState.animateTo(value)
+        }
+    }
+    DisposableEffect(swipeableState.currentValue) {
+        if (value != swipeableState.currentValue) {
+            onValueChange(swipeableState.currentValue)
+            forceAnimationCheck.value = !forceAnimationCheck.value
+        }
+        onDispose { }
+    }
+    return swipeableState
+}
+
 
 private val SwitchPadding = 2.dp
 private val SwitchWidth = 54.dp
