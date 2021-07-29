@@ -207,7 +207,6 @@ private fun <T : Any> rememberSwipeableStateFor(
     return swipeableState
 }
 
-
 private val SwitchPadding = 2.dp
 private val SwitchWidth = 54.dp
 private val SwitchHeight = 32.dp
