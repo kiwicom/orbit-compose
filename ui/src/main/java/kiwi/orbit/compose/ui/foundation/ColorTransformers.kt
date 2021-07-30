@@ -13,6 +13,7 @@ private fun Colors.themeWith(featureColors: FeatureColors): Colors =
         surface = SurfaceColors(
             background = featureColors.subtle,
             main = featureColors.subtleAlt,
+            subtle = featureColors.subtle,
             strong = featureColors.subtleAlt,
             disabled = surface.disabled,
         ),

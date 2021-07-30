@@ -120,7 +120,7 @@ public fun TextField(
             ) {
                 when (it) {
                     InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface.main
-                    else -> OrbitTheme.colors.surface.strong
+                    else -> OrbitTheme.colors.surface.subtle
                 }
             }
             val errorAlpha = transition.animateFloat(
