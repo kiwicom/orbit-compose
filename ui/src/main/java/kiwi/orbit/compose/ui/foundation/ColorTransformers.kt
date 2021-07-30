@@ -11,8 +11,8 @@ public fun Colors.asCriticalTheme(): Colors = themeWith(critical)
 private fun Colors.themeWith(featureColors: FeatureColors): Colors =
     copy(
         surface = SurfaceColors(
-            background = featureColors.subtle,
             main = featureColors.subtleAlt,
+            background = featureColors.subtle,
             subtle = featureColors.subtle,
             strong = featureColors.subtleAlt,
             disabled = surface.disabled,
