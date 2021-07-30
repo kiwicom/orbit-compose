@@ -241,24 +241,25 @@ public fun TextField(
                 errorState = error
             }
 
-            Row(
+            Box(
                 modifier = Modifier
-                    .padding(top = 6.dp)
                     .fillMaxWidth()
                     .alpha(errorAlpha.value)
                     .animateContentSize()
             ) {
                 if (errorState != null) {
-                    Icon(
-                        Icons.AlertCircle,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(top = 2.dp, end = 4.dp)
-                            .size(16.dp),
-                        tint = OrbitTheme.colors.critical.main,
-                    )
-                    ProvideMergedTextStyle(textStyle.copy(color = OrbitTheme.colors.critical.main)) {
-                        errorState?.invoke()
+                    Row(Modifier.padding(top = 6.dp)) {
+                        Icon(
+                            Icons.AlertCircle,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(top = 2.dp, end = 4.dp)
+                                .size(16.dp),
+                            tint = OrbitTheme.colors.critical.main,
+                        )
+                        ProvideMergedTextStyle(textStyle.copy(color = OrbitTheme.colors.critical.main)) {
+                            errorState?.invoke()
+                        }
                     }
                 }
             }
