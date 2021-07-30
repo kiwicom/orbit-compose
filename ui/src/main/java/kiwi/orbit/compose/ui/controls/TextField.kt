@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
@@ -19,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -35,7 +33,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -64,7 +61,9 @@ public fun TextField(
     error: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
+    onLeadingIconClick: (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
+    onTrailingIconClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
@@ -160,12 +159,30 @@ public fun TextField(
                         content = {
                             if (leadingIcon != null) {
                                 Box(Modifier.layoutId("leading")) {
-                                    leadingIcon()
+                                    if (onLeadingIconClick != null) {
+                                        IconButton(
+                                            onClick = onLeadingIconClick,
+                                            rippleRadius = RippleRadius,
+                                        ) {
+                                            leadingIcon()
+                                        }
+                                    } else {
+                                        leadingIcon()
+                                    }
                                 }
                             }
                             if (trailingIcon != null) {
                                 Box(Modifier.layoutId("trailing")) {
-                                    trailingIcon()
+                                    if (onTrailingIconClick != null) {
+                                        IconButton(
+                                            onClick = onTrailingIconClick,
+                                            rippleRadius = RippleRadius,
+                                        ) {
+                                            trailingIcon()
+                                        }
+                                    } else {
+                                        trailingIcon()
+                                    }
                                 }
                             }
                             if (placeholder != null && textFieldValue.text.isEmpty()) {
@@ -188,9 +205,12 @@ public fun TextField(
                             ?.measure(constraints)
                         val leadingWidth = leadingPlaceable?.width?.plus(padding) ?: 0
 
+                        val iconPaddingWidth = (24.dp - RippleRadius) * 2
+                        val trailingPadding =
+                            if (onTrailingIconClick != null) padding - iconPaddingWidth.roundToPx() else padding
                         val trailingPlaceable = measurables.find { it.layoutId == "trailing" }
                             ?.measure(constraints.offset(horizontal = -leadingWidth))
-                        val trailingWidth = trailingPlaceable?.width?.plus(padding) ?: 0
+                        val trailingWidth = trailingPlaceable?.width?.plus(trailingPadding) ?: 0
 
                         val occupiedHorizontally = padding * 2 + leadingWidth + trailingWidth
                         val textFieldConstraints = incomingConstraints
@@ -306,14 +326,9 @@ public fun PasswordTextField(
                     true -> stringResource(id = R.string.orbit_cd_text_field_hide_password)
                     false -> stringResource(id = R.string.orbit_cd_text_field_show_password)
                 },
-                Modifier.clickable(
-                    onClick = { showRawInput = !showRawInput },
-                    role = Role.Button,
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(bounded = false, radius = RippleRadius)
-                )
             )
         },
+        onTrailingIconClick = { showRawInput = !showRawInput },
         keyboardOptions = keyboardOptions.copy(
             capitalization = KeyboardCapitalization.None,
             autoCorrect = false,
