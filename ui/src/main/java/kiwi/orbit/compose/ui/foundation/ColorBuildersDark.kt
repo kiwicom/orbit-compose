@@ -24,13 +24,15 @@ public fun darkColors(
 )
 
 public fun darkSurfaceColors(
-    background: Color = ColorTokens.White.invert(),
     main: Color = ColorTokens.CloudLight.invert(),
+    background: Color = ColorTokens.White.invert(),
+    subtle: Color = ColorTokens.CloudNormal.invert(),
     strong: Color = ColorTokens.CloudDark.invert(),
     disabled: Color = ColorTokens.CloudNormal.invert(),
 ): SurfaceColors = SurfaceColors(
-    background = background,
     main = main,
+    background = background,
+    subtle = subtle,
     strong = strong,
     disabled = disabled,
 )

@@ -12,8 +12,9 @@ import androidx.compose.ui.graphics.Color
 
 @Immutable
 public data class SurfaceColors(
-    public val background: Color,
     public val main: Color,
+    public val background: Color,
+    public val subtle: Color,
     public val strong: Color,
     public val disabled: Color,
 )

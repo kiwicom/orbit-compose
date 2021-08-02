@@ -23,13 +23,15 @@ public fun lightColors(
 )
 
 public fun lightSurfaceColors(
-    background: Color = ColorTokens.CloudLight,
     main: Color = ColorTokens.White,
+    background: Color = ColorTokens.CloudLight,
+    subtle: Color = ColorTokens.CloudNormal,
     strong: Color = ColorTokens.CloudDark,
     disabled: Color = ColorTokens.CloudNormal,
 ): SurfaceColors = SurfaceColors(
-    background = background,
     main = main,
+    background = background,
+    subtle = subtle,
     strong = strong,
     disabled = disabled,
 )

@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -20,6 +21,7 @@ public fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    rippleRadius: Dp = RippleRadius,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit
 ) {
@@ -30,9 +32,9 @@ public fun IconButton(
                 enabled = enabled,
                 role = Role.Button,
                 interactionSource = interactionSource,
-                indication = rememberRipple(bounded = false, radius = RippleRadius)
+                indication = rememberRipple(bounded = false, radius = rippleRadius)
             )
-            .then(IconButtonSizeModifier),
+            .size(rippleRadius * 2),
         contentAlignment = Alignment.Center
     ) {
         val contentEmphasis = if (enabled) LocalContentEmphasis.current else ContentEmphasis.Disabled
@@ -41,4 +43,3 @@ public fun IconButton(
 }
 
 private val RippleRadius = 24.dp
-private val IconButtonSizeModifier = Modifier.size(48.dp)
