@@ -159,29 +159,37 @@ public fun TextField(
                         content = {
                             if (leadingIcon != null) {
                                 Box(Modifier.layoutId("leading")) {
-                                    if (onLeadingIconClick != null) {
-                                        IconButton(
-                                            onClick = onLeadingIconClick,
-                                            rippleRadius = RippleRadius,
-                                        ) {
+                                    CompositionLocalProvider(
+                                        LocalContentEmphasis provides ContentEmphasis.Minor
+                                    ) {
+                                        if (onLeadingIconClick != null) {
+                                            IconButton(
+                                                onClick = onLeadingIconClick,
+                                                rippleRadius = RippleRadius,
+                                            ) {
+                                                leadingIcon()
+                                            }
+                                        } else {
                                             leadingIcon()
                                         }
-                                    } else {
-                                        leadingIcon()
                                     }
                                 }
                             }
                             if (trailingIcon != null) {
                                 Box(Modifier.layoutId("trailing")) {
-                                    if (onTrailingIconClick != null) {
-                                        IconButton(
-                                            onClick = onTrailingIconClick,
-                                            rippleRadius = RippleRadius,
-                                        ) {
+                                    CompositionLocalProvider(
+                                        LocalContentEmphasis provides ContentEmphasis.Minor
+                                    ) {
+                                        if (onTrailingIconClick != null) {
+                                            IconButton(
+                                                onClick = onTrailingIconClick,
+                                                rippleRadius = RippleRadius,
+                                            ) {
+                                                trailingIcon()
+                                            }
+                                        } else {
                                             trailingIcon()
                                         }
-                                    } else {
-                                        trailingIcon()
                                     }
                                 }
                             }
