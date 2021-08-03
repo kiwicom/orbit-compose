@@ -160,37 +160,29 @@ public fun TextField(
                         content = {
                             if (leadingIcon != null) {
                                 Box(Modifier.layoutId("leading")) {
-                                    CompositionLocalProvider(
-                                        LocalContentEmphasis provides ContentEmphasis.Minor
-                                    ) {
-                                        if (onLeadingIconClick != null) {
-                                            IconButton(
-                                                onClick = onLeadingIconClick,
-                                                rippleRadius = RippleRadius,
-                                            ) {
-                                                leadingIcon()
-                                            }
-                                        } else {
+                                    if (onLeadingIconClick != null) {
+                                        IconButton(
+                                            onClick = onLeadingIconClick,
+                                            rippleRadius = RippleRadius,
+                                        ) {
                                             leadingIcon()
                                         }
+                                    } else {
+                                        leadingIcon()
                                     }
                                 }
                             }
                             if (trailingIcon != null) {
                                 Box(Modifier.layoutId("trailing")) {
-                                    CompositionLocalProvider(
-                                        LocalContentEmphasis provides ContentEmphasis.Minor
-                                    ) {
-                                        if (onTrailingIconClick != null) {
-                                            IconButton(
-                                                onClick = onTrailingIconClick,
-                                                rippleRadius = RippleRadius,
-                                            ) {
-                                                trailingIcon()
-                                            }
-                                        } else {
+                                    if (onTrailingIconClick != null) {
+                                        IconButton(
+                                            onClick = onTrailingIconClick,
+                                            rippleRadius = RippleRadius,
+                                        ) {
                                             trailingIcon()
                                         }
+                                    } else {
+                                        trailingIcon()
                                     }
                                 }
                             }
