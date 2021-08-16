@@ -1,10 +1,13 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -28,12 +31,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -51,6 +54,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kotlinx.coroutines.delay
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 public fun TextField(
     value: String,
@@ -60,6 +64,7 @@ public fun TextField(
     readOnly: Boolean = false,
     label: @Composable (() -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
+    info: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     onLeadingIconClick: (() -> Unit)? = null,
@@ -110,8 +115,7 @@ public fun TextField(
                 when (it) {
                     InputState.Normal -> Color.Transparent
                     InputState.Focused -> OrbitTheme.colors.interactive.main
-                    InputState.NormalError -> OrbitTheme.colors.critical.main
-                    InputState.FocusedError -> OrbitTheme.colors.critical.main
+                    InputState.NormalError, InputState.FocusedError -> OrbitTheme.colors.critical.main
                 }
             }
             val backgroundColor = transition.animateColor(
@@ -121,15 +125,6 @@ public fun TextField(
                 when (it) {
                     InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface.main
                     else -> OrbitTheme.colors.surface.subtle
-                }
-            }
-            val errorAlpha = transition.animateFloat(
-                transitionSpec = { tween(durationMillis = AnimationDuration) },
-                label = "errorAlpha"
-            ) {
-                when (it) {
-                    InputState.NormalError, InputState.FocusedError -> 1f
-                    else -> 0f
                 }
             }
 
@@ -260,36 +255,54 @@ public fun TextField(
                 }
             )
 
-            var errorState by remember { mutableStateOf(error) }
-            if (error == null) {
+            var retainedMessage by remember { mutableStateOf<Message?>(null) }
+            if (error == null && info == null) {
                 LaunchedEffect(this) {
                     delay(AnimationDuration.toLong())
-                    errorState = null
+                    retainedMessage = null
                 }
             } else {
-                errorState = error
+                retainedMessage = error?.let { Message.Error(it) } ?: info?.let { Message.Info(it) }
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .alpha(errorAlpha.value)
-                    .animateContentSize()
-            ) {
-                if (errorState != null) {
-                    Row(Modifier.padding(top = 6.dp)) {
-                        Icon(
-                            Icons.AlertCircle,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(top = 2.dp, end = 4.dp)
-                                .size(16.dp),
-                            tint = OrbitTheme.colors.critical.main,
-                        )
-                        ProvideMergedTextStyle(textStyle.copy(color = OrbitTheme.colors.critical.main)) {
-                            errorState?.invoke()
-                        }
-                    }
+            Message(retainedMessage, textStyle)
+        }
+    }
+}
+
+@ExperimentalAnimationApi
+@Composable
+private fun Message(
+    state: Message?,
+    textStyle: TextStyle
+) {
+    AnimatedContent(
+        targetState = state,
+        transitionSpec = {
+            fadeIn(animationSpec = tween(durationMillis = AnimationDuration)) with
+                fadeOut(animationSpec = tween(durationMillis = AnimationDuration))
+        },
+    ) { message ->
+        if (message != null) {
+            Row(Modifier.padding(top = 6.dp)) {
+                val icon = when (message) {
+                    is Message.Error -> Icons.AlertCircle
+                    is Message.Info -> Icons.InformationCircle
+                }
+                val tintColor = when (message) {
+                    is Message.Error -> OrbitTheme.colors.critical.main
+                    is Message.Info -> OrbitTheme.colors.interactive.main
+                }
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(top = 2.dp, end = 4.dp)
+                        .size(16.dp),
+                    tint = tintColor,
+                )
+                ProvideMergedTextStyle(textStyle.copy(color = tintColor)) {
+                    message.content.invoke()
                 }
             }
         }
@@ -305,6 +318,7 @@ public fun PasswordTextField(
     readOnly: Boolean = false,
     label: (@Composable () -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
+    info: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -323,6 +337,7 @@ public fun PasswordTextField(
         readOnly = readOnly,
         label = label,
         error = error,
+        info = info,
         placeholder = placeholder,
         leadingIcon = leadingIcon,
         trailingIcon = {
@@ -359,6 +374,13 @@ private enum class InputState {
     NormalError,
     Focused,
     FocusedError,
+}
+
+private sealed class Message(
+    open val content: @Composable (() -> Unit)
+) {
+    data class Error(override val content: @Composable () -> Unit) : Message(content)
+    data class Info(override val content: @Composable () -> Unit) : Message(content)
 }
 
 private const val AnimationDuration = 150
