@@ -75,7 +75,7 @@ internal object ColorTokens {
 
     public val InkNormalHover: UIColor = UIColor(0xFF181B20)
 
-    public val OrangeDark: UIColor = UIColor(0xFFA25100)
+    public val OrangeDark: UIColor = UIColor(0xFFAE5700)
 
     public val OrangeDarkActive: UIColor = UIColor(0xFF753A00)
 
