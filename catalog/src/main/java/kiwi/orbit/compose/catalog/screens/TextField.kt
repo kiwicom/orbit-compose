@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -49,6 +50,7 @@ fun TextFieldScreenInner() {
         ) {
             val passwordFocusRequester = FocusRequester()
             val bioFocusRequester = FocusRequester()
+            val nationalityFocusRequester = FocusRequester()
 
             var hasError by remember { mutableStateOf(false) }
             var email by remember { mutableStateOf("") }
@@ -101,17 +103,50 @@ fun TextFieldScreenInner() {
 
             Spacer(Modifier.height(16.dp))
 
-            var bio by remember { mutableStateOf("") }
+            var bio by rememberSaveable { mutableStateOf("") }
             TextField(
                 value = bio,
                 onValueChange = { bio = it },
                 label = { Text("Bio") },
+                info = { Text("Three words about you.") },
                 leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
                 singleLine = false,
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        nationalityFocusRequester.requestFocus()
+                    },
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .focusRequester(bioFocusRequester),
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            var isNationalityError by remember { mutableStateOf(false) }
+            var nationality by remember { mutableStateOf("") }
+            TextField(
+                value = nationality,
+                onValueChange = {
+                    nationality = it
+                    isNationalityError = it.length < 3
+                },
+                label = { Text("Nationality") },
+                leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
+                error = if (isNationalityError) {
+                    { Text("Nationality must have at least 3 letters.") }
+                } else {
+                    null
+                },
+                info = { Text("A nationality code or full name.") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(nationalityFocusRequester),
             )
         }
     }
