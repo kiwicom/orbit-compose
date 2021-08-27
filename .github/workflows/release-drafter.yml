@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
@@ -14,16 +17,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - run: |
           TAG_NAME="${{ steps.create_release.outputs.tag_name }}"
           VERSION_NAME="${TAG_NAME:1}"
           sed -i "s/VERSION_NAME=[0-9]\+.[0-9]\+.[0-9]\+/VERSION_NAME=$VERSION_NAME/g" gradle.properties
-      - name: Commit files
+          if git diff --exit-code; then
+            echo "::set-env name=changes_exist::false"
+          else
+            echo "::set-env name=changes_exist::true"
+            echo "::set-env name=VERSION_NAME::$VERSION_NAME"
+          fi
+      - name: Commit and push files
+        if: ${{ env.changes_exist == 'true' }}
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.GH_ACTION_DEPLOY_PRIVATE_KEY }}"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -m "Bump version to $VERSION_NAME" -a
-      - uses: ad-m/github-push-action@master
-        with:
-          branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git push git@github.com:$GITHUB_REPOSITORY.git
