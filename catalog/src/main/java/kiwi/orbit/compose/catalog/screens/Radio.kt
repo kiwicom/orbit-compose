@@ -43,12 +43,16 @@ fun RadioScreen(onUpClick: () -> Unit) {
 fun RadioScreenInner() {
     Column {
         Row {
-            var selected by remember { mutableStateOf(true) }
-            Radio(selected = selected, onClick = { selected = true })
+            var selected by remember { mutableStateOf(0) }
+            Radio(selected = selected == 0, onClick = { selected = 0 })
 
             Spacer(Modifier.size(32.dp))
 
-            Radio(selected = !selected, onClick = { selected = false })
+            Radio(selected = selected == 1, onClick = { selected = 1 })
+
+            Spacer(Modifier.size(32.dp))
+
+            Radio(selected = selected == 2, onClick = { selected = 2 }, error = true)
 
             Spacer(Modifier.size(32.dp))
 
@@ -57,6 +61,10 @@ fun RadioScreenInner() {
             Spacer(Modifier.size(32.dp))
 
             Radio(selected = false, enabled = false, onClick = {})
+
+            Spacer(Modifier.size(32.dp))
+
+            Radio(selected = false, enabled = false, onClick = {}, error = true)
         }
 
         Spacer(Modifier.size(32.dp))
@@ -102,6 +110,7 @@ fun RadioScreenInner() {
             selected = selected2 == 1,
             onClick = { selected2 = 1 },
             modifier = Modifier.fillMaxWidth(),
+            error = true,
             description = { Text("May the Force be with you.") },
         ) {
             Text("Star Wars")
@@ -134,6 +143,7 @@ fun RadioScreenInner() {
             onClick = { selected3 = 1 },
             modifier = Modifier.fillMaxWidth(),
             enabled = false,
+            error = true,
             description = { Text("May the Force be with you.") },
         ) {
             Text("Star Wars")

@@ -2,6 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -30,6 +31,7 @@ public fun Radio(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    error: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val borderWidth by animateDpAsState(
@@ -67,6 +69,13 @@ public fun Radio(
             Modifier
         }
 
+    val errorAlpha by animateFloatAsState(
+        targetValue = if (error && enabled) 1f else 0f,
+        animationSpec = tween(durationMillis = RadioAnimationDuration)
+    )
+    val errorStrokeColor = OrbitTheme.colors.critical.main
+    val errorShadowColor = OrbitTheme.colors.critical.subtle
+
     Canvas(
         modifier
             .then(selectableModifier)
@@ -75,6 +84,7 @@ public fun Radio(
             .requiredSize(RadioSize)
     ) {
         drawRadio(borderWidth, borderColor, backgroundColor)
+        drawError(errorStrokeColor, errorShadowColor, errorAlpha)
     }
 }
 
@@ -84,9 +94,23 @@ private fun DrawScope.drawRadio(borderWidth: Dp, borderColor: Color, backgroundC
     drawCircle(borderColor, RadioRadiusSize.toPx() - borderWidthPx / 2, style = Stroke(borderWidthPx))
 }
 
+private fun DrawScope.drawError(strokeColor: Color, shadowColor: Color, alpha: Float) {
+    if (alpha != 0f) {
+        val shadowWidth = 4.dp.toPx()
+        val shadowRadius = ErrorShadowRadius.toPx() - shadowWidth / 2
+        drawCircle(shadowColor, shadowRadius, alpha = alpha, style = Stroke(shadowWidth))
+
+        val strokeWidth = 2.dp.toPx()
+        val strokeRadius = RadioRadiusSize.toPx() - strokeWidth / 2
+        drawCircle(strokeColor, strokeRadius, alpha = alpha, style = Stroke(strokeWidth))
+    }
+}
+
 private const val RadioAnimationDuration = 100
 
 private val RadioSize = 20.dp
 private val RadioRadiusSize = RadioSize / 2
 private val RadioPadding = 2.dp
 private val RadioRippleRadius = 20.dp
+private val ErrorShadowSize = 24.dp
+private val ErrorShadowRadius = ErrorShadowSize / 2
