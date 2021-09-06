@@ -69,7 +69,7 @@ fun MainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Orbit Compose Demo") },
+                title = { Text("Orbit Compose Catalog") },
                 contentPadding = rememberInsetsPaddingValues(
                     insets = LocalWindowInsets.current.statusBars,
                 ),

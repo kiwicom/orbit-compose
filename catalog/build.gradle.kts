@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "kiwi.orbit.compose.catalog"
-        minSdk = 23
-        targetSdk = 30
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
