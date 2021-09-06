@@ -1,11 +1,11 @@
 name: Release
 
 on:
-  create:
+  release:
+    types: [ published ]
 
 jobs:
   deploy:
-    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     env:
       TERM: dumb
