@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.loadProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -11,15 +13,36 @@ android {
         applicationId = "kiwi.orbit.compose.catalog"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
+        versionName = project.findProperty("VERSION_NAME").toString()
+
+        val bits = versionName!!.split('.').map { it.toInt() }
+        check(bits.size == 3)
+        versionCode = bits[0] * 1_00_00 + bits[1] * 1_00 + bits[2]
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            val propertiesFile = File("$projectDir/../release/signing.properties")
+            if (!propertiesFile.exists()) return@create
+
+            val properties = loadProperties(propertiesFile.absolutePath)
+            storeFile = properties.getProperty("store.path")?.let { file(it) }
+            storePassword = properties.getProperty("store.password")
+            keyAlias = properties.getProperty("key.alias")
+            keyPassword = properties.getProperty("key.password")
+        }
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -70,6 +93,7 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.compose.runtime)
     implementation(libs.compose.runtimeLivedata)
+    implementation(libs.compose.tooling)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
@@ -77,6 +101,4 @@ dependencies {
 
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
-
-    debugImplementation(libs.compose.tooling)
 }

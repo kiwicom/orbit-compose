@@ -51,6 +51,5 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
-
-    debugImplementation(libs.compose.tooling)
+    implementation(libs.compose.tooling)
 }

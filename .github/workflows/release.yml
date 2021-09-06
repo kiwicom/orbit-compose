@@ -1,11 +1,11 @@
 name: Release
 
 on:
-  create:
+  release:
+    types: [ published ]
 
 jobs:
   deploy:
-    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     env:
       TERM: dumb
@@ -24,6 +24,20 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+      - name: Build AAB & APK
+        run: |
+          ./gradlew :catalog:bundleRelease :catalog:assembleRelease
+      - name: Upload APK to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            catalog/build/outputs/apk/release/catalog-release.apk
+      - name: Store AAB output
+        uses: actions/upload-artifact@v2
+        with:
+          name: aab-build
+          path: catalog/build/outputs/bundle/release/catalog-release.aab
+          retention-days: 2
       - name: Clean secrets
         if: always()
         run: release/signing-cleanup.sh
