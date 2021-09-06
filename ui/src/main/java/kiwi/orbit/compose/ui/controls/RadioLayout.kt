@@ -23,6 +23,7 @@ public fun RadioLayout(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    error: Boolean = false,
     description: (@Composable () -> Unit)? = null,
     label: @Composable ColumnScope.() -> Unit,
 ) {
@@ -48,6 +49,7 @@ public fun RadioLayout(
             onClick = onClick,
             modifier = Modifier.padding(end = 10.dp),
             enabled = enabled,
+            error = error,
             interactionSource = interactionSource,
         )
         Column(Modifier.padding(top = 2.dp)) {
