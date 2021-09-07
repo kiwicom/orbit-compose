@@ -22,7 +22,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
 @Composable
-public fun RadioLayout(
+public fun RadioField(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
