@@ -23,7 +23,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
 @Composable
-public fun CheckboxLayout(
+public fun CheckboxField(
     checked: Boolean,
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,

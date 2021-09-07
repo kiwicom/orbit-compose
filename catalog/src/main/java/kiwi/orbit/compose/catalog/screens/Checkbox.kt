@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.ui.controls.Checkbox
-import kiwi.orbit.compose.ui.controls.CheckboxLayout
+import kiwi.orbit.compose.ui.controls.CheckboxField
 import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.controls.Text
 
@@ -62,7 +62,7 @@ fun CheckboxScreenInner() {
         Spacer(Modifier.size(32.dp))
 
         var checkbox1 by remember { mutableStateOf(true) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox1,
             onCheckedChange = { checkbox1 = !checkbox1 },
             modifier = Modifier.fillMaxWidth(),
@@ -70,7 +70,7 @@ fun CheckboxScreenInner() {
             Text("Star Trek")
         }
         var checkbox2 by remember { mutableStateOf(false) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox2,
             onCheckedChange = { checkbox2 = !checkbox2 },
             modifier = Modifier.fillMaxWidth(),
@@ -78,7 +78,7 @@ fun CheckboxScreenInner() {
             Text("Star Wars")
         }
         var checkbox3 by remember { mutableStateOf(false) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox3,
             onCheckedChange = { checkbox3 = !checkbox3 },
             modifier = Modifier.fillMaxWidth(),
@@ -89,7 +89,7 @@ fun CheckboxScreenInner() {
         Spacer(Modifier.size(32.dp))
 
         var checkbox4 by remember { mutableStateOf(true) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox4,
             onCheckedChange = { checkbox4 = !checkbox4 },
             modifier = Modifier.fillMaxWidth(),
@@ -98,7 +98,7 @@ fun CheckboxScreenInner() {
             Text("Star Trek")
         }
         var checkbox5 by remember { mutableStateOf(false) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox5,
             onCheckedChange = { checkbox5 = !checkbox5 },
             modifier = Modifier.fillMaxWidth(),
@@ -107,7 +107,7 @@ fun CheckboxScreenInner() {
             Text("Star Wars")
         }
         var checkbox6 by remember { mutableStateOf(false) }
-        CheckboxLayout(
+        CheckboxField(
             checked = checkbox6,
             onCheckedChange = { checkbox6 = !checkbox6 },
             modifier = Modifier.fillMaxWidth(),
@@ -118,7 +118,7 @@ fun CheckboxScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        CheckboxLayout(
+        CheckboxField(
             checked = true,
             onCheckedChange = { },
             modifier = Modifier.fillMaxWidth(),
@@ -127,7 +127,7 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        CheckboxLayout(
+        CheckboxField(
             checked = false,
             onCheckedChange = { },
             modifier = Modifier.fillMaxWidth(),
@@ -136,7 +136,7 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        CheckboxLayout(
+        CheckboxField(
             checked = false,
             onCheckedChange = { },
             modifier = Modifier.fillMaxWidth(),
