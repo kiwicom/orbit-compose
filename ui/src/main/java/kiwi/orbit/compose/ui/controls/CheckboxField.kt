@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -37,7 +38,7 @@ public fun CheckboxField(
         Modifier
             .triStateToggleable(
                 interactionSource = interactionSource,
-                indication = null,
+                indication = LocalIndication.current,
                 enabled = enabled,
                 onClick = onCheckedChange,
                 state = if (checked) ToggleableState.On else ToggleableState.Off,
@@ -56,15 +57,15 @@ public fun CheckboxField(
     ) {
         Checkbox(
             checked = checked,
-            onCheckedChange = onCheckedChange,
+            onCheckedChange = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - 2.dp).coerceAtLeast(0.dp),
+                top = (contentPadding.calculateTopPadding() - 3.dp).coerceAtLeast(0.dp),
                 end = 10.dp
             ),
             enabled = enabled,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(2.dp)
+        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(3.dp)
         val bottomPadding = contentPadding.calculateBottomPadding()
         Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
             CompositionLocalProvider(
