@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -14,6 +15,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
@@ -36,11 +38,12 @@ public fun RadioField(
     val selectable = if (onClick != null) {
         Modifier
             .selectable(
-                interactionSource = interactionSource,
-                indication = null,
-                enabled = enabled,
-                onClick = onClick,
                 selected = selected,
+                onClick = onClick,
+                enabled = enabled,
+                role = Role.RadioButton,
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
             )
     } else {
         Modifier
@@ -56,16 +59,16 @@ public fun RadioField(
     ) {
         Radio(
             selected = selected,
-            onClick = onClick,
+            onClick = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - 2.dp).coerceAtLeast(0.dp),
+                top = (contentPadding.calculateTopPadding() - 3.dp).coerceAtLeast(0.dp),
                 end = 10.dp
             ),
             enabled = enabled,
             error = error,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(2.dp)
+        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(3.dp)
         val bottomPadding = contentPadding.calculateBottomPadding()
         Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
             CompositionLocalProvider(
