@@ -29,7 +29,6 @@ fun RadioScreen(onUpClick: () -> Unit) {
         Surface {
             Column(
                 Modifier
-                    .padding(16.dp)
                     .fillMaxWidth()
             ) {
                 RadioScreenInner()
@@ -42,7 +41,7 @@ fun RadioScreen(onUpClick: () -> Unit) {
 @Composable
 fun RadioScreenInner() {
     Column {
-        Row {
+        Row(Modifier.padding(16.dp)) {
             var selected by remember { mutableStateOf(0) }
             Radio(selected = selected == 0, onClick = { selected = 0 })
 
@@ -77,7 +76,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected == 1,
             onClick = { selected = 1 },
@@ -85,7 +83,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected == 2,
             onClick = { selected = 2 },
@@ -105,7 +102,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected2 == 1,
             onClick = { selected2 = 1 },
@@ -115,7 +111,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected2 == 2,
             onClick = { selected2 = 2 },
@@ -137,7 +132,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected3 == 1,
             onClick = { selected3 = 1 },
@@ -148,7 +142,6 @@ fun RadioScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         RadioLayout(
             selected = selected3 == 2,
             onClick = { selected3 = 2 },
