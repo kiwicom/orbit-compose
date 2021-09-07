@@ -74,9 +74,9 @@ public fun Checkbox(
             Modifier
         }
 
-    Box {
+    Box(modifier) {
         Canvas(
-            modifier
+            Modifier
                 .then(selectableModifier)
                 .wrapContentSize(Alignment.Center)
                 .padding(CheckboxButtonPadding)

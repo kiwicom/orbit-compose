@@ -29,7 +29,6 @@ fun CheckboxScreen(onUpClick: () -> Unit) {
         Surface {
             Column(
                 Modifier
-                    .padding(16.dp)
                     .fillMaxWidth()
             ) {
                 CheckboxScreenInner()
@@ -42,7 +41,7 @@ fun CheckboxScreen(onUpClick: () -> Unit) {
 @Composable
 fun CheckboxScreenInner() {
     Column {
-        Row {
+        Row(Modifier.padding(16.dp)) {
             var checkbox1 by remember { mutableStateOf(true) }
             Checkbox(checked = checkbox1, onCheckedChange = { checkbox1 = !checkbox1 })
 
@@ -70,7 +69,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         var checkbox2 by remember { mutableStateOf(false) }
         CheckboxLayout(
             checked = checkbox2,
@@ -79,7 +77,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         var checkbox3 by remember { mutableStateOf(false) }
         CheckboxLayout(
             checked = checkbox3,
@@ -100,7 +97,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         var checkbox5 by remember { mutableStateOf(false) }
         CheckboxLayout(
             checked = checkbox5,
@@ -110,7 +106,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         var checkbox6 by remember { mutableStateOf(false) }
         CheckboxLayout(
             checked = checkbox6,
@@ -132,7 +127,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
         CheckboxLayout(
             checked = false,
             onCheckedChange = { },
@@ -142,7 +136,6 @@ fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
         CheckboxLayout(
             checked = false,
             onCheckedChange = { },
