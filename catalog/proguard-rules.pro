@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class kiwi.orbit.compose.icons.Icons {
+    public *;
+}
+
+-keep class kiwi.orbit.compose.illustrations.Illustrations {
+    public *;
+}
