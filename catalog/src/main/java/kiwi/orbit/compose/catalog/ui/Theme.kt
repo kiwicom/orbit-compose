@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.Typography
 import kiwi.orbit.compose.ui.foundation.darkColors
 import kiwi.orbit.compose.ui.foundation.lightColors
@@ -17,6 +18,8 @@ fun AppTheme(
     isLightTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    LocalContentEmphasis.current
+
     val context = LocalContext.current
     val fontFamily = remember { createFontFamily(context) }
     OrbitTheme(
