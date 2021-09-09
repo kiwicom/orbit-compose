@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
 import kiwi.orbit.compose.ui.controls.Radio
-import kiwi.orbit.compose.ui.controls.RadioLayout
+import kiwi.orbit.compose.ui.controls.RadioField
 import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.controls.Text
 
@@ -29,7 +29,6 @@ fun RadioScreen(onUpClick: () -> Unit) {
         Surface {
             Column(
                 Modifier
-                    .padding(16.dp)
                     .fillMaxWidth()
             ) {
                 RadioScreenInner()
@@ -42,7 +41,7 @@ fun RadioScreen(onUpClick: () -> Unit) {
 @Composable
 fun RadioScreenInner() {
     Column {
-        Row {
+        Row(Modifier.padding(16.dp)) {
             var selected by remember { mutableStateOf(0) }
             Radio(selected = selected == 0, onClick = { selected = 0 })
 
@@ -70,23 +69,21 @@ fun RadioScreenInner() {
         Spacer(Modifier.size(32.dp))
 
         var selected by remember { mutableStateOf(0) }
-        RadioLayout(
+        RadioField(
             selected = selected == 0,
             onClick = { selected = 0 },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected == 1,
             onClick = { selected = 1 },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected == 2,
             onClick = { selected = 2 },
             modifier = Modifier.fillMaxWidth(),
@@ -97,7 +94,7 @@ fun RadioScreenInner() {
         Spacer(Modifier.size(32.dp))
 
         var selected2 by remember { mutableStateOf(0) }
-        RadioLayout(
+        RadioField(
             selected = selected2 == 0,
             onClick = { selected2 = 0 },
             modifier = Modifier.fillMaxWidth(),
@@ -105,8 +102,7 @@ fun RadioScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected2 == 1,
             onClick = { selected2 = 1 },
             modifier = Modifier.fillMaxWidth(),
@@ -115,8 +111,7 @@ fun RadioScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected2 == 2,
             onClick = { selected2 = 2 },
             modifier = Modifier.fillMaxWidth(),
@@ -128,7 +123,7 @@ fun RadioScreenInner() {
         Spacer(Modifier.size(32.dp))
 
         var selected3 by remember { mutableStateOf(0) }
-        RadioLayout(
+        RadioField(
             selected = selected3 == 0,
             onClick = { selected3 = 0 },
             modifier = Modifier.fillMaxWidth(),
@@ -137,8 +132,7 @@ fun RadioScreenInner() {
         ) {
             Text("Star Trek")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected3 == 1,
             onClick = { selected3 = 1 },
             modifier = Modifier.fillMaxWidth(),
@@ -148,8 +142,7 @@ fun RadioScreenInner() {
         ) {
             Text("Star Wars")
         }
-        Spacer(Modifier.size(8.dp))
-        RadioLayout(
+        RadioField(
             selected = selected3 == 2,
             onClick = { selected3 = 2 },
             modifier = Modifier.fillMaxWidth(),
