@@ -5,7 +5,8 @@ on:
     types: [ published ]
 
 jobs:
-  deploy:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     env:
       TERM: dumb
@@ -16,7 +17,7 @@ jobs:
         with:
           java-version: 11
       - name: Decrypt secrets
-        run: release/signing-unpack.sh ${{ secrets.ENCRYPT_KEY }}
+        run: echo ${{ secrets.ENCRYPT_KEY }} | release/signing-unpack.sh
       - name: Deploy to Sonatype
         run: |
           ./gradlew publish --no-parallel --stacktrace
@@ -29,15 +30,25 @@ jobs:
           ./gradlew :catalog:bundleRelease :catalog:assembleRelease
       - name: Upload APK to release
         uses: softprops/action-gh-release@v1
+        id: release
         with:
           files: |
             catalog/build/outputs/apk/release/catalog-release.apk
-      - name: Store AAB output
-        uses: actions/upload-artifact@v2
+      - name: Prepare Release Notes
+        run: |
+          mkdir whatsnew
+          URL=https://api.github.com/repos/kiwicom/orbit-compose/releases/${{ steps.release.outputs.id }}
+          curl --url $URL --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | jq '.body' > whatsnew/whatsnew-en-US
+          sed -i 's/<table>.*<\/table>//g' whatsnew/whatsnew-en-US
+      - name: Release to Google Play
+        uses: r0adkll/upload-google-play@v1
         with:
-          name: aab-build
-          path: catalog/build/outputs/bundle/release/catalog-release.aab
-          retention-days: 2
+          serviceAccountJson: release/service-account.json
+          packageName: kiwi.orbit.compose.catalog
+          releaseFiles: catalog/build/outputs/bundle/release/catalog-release.aab
+          track: production
+          whatsNewDirectory: whatsnew
+          mappingFile: catalog/build/outputs/mapping/release/mapping.txt
       - name: Clean secrets
         if: always()
         run: release/signing-cleanup.sh
