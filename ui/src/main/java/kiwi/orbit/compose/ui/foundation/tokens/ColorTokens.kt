@@ -25,6 +25,12 @@ internal object ColorTokens {
 
     public val CloudDark: UIColor = UIColor(0xFFE8EDF1)
 
+    public val CloudDarker: UIColor = UIColor(0xFFBAC7D5)
+
+    public val CloudDarkerActive: UIColor = UIColor(0xFF94A8BE)
+
+    public val CloudDarkerHover: UIColor = UIColor(0xFFA6B6C8)
+
     public val CloudLight: UIColor = UIColor(0xFFF5F7F9)
 
     public val CloudLightActive: UIColor = UIColor(0xFFD6DEE6)
@@ -57,17 +63,17 @@ internal object ColorTokens {
 
     public val GreenNormalHover: UIColor = UIColor(0xFF238B31)
 
-    public val InkLight: UIColor = UIColor(0xFF5F738C)
+    public val InkLight: UIColor = UIColor(0xFF4F5E71)
 
-    public val InkLightActive: UIColor = UIColor(0xFF465567)
+    public val InkLightActive: UIColor = UIColor(0xFF324256)
 
-    public val InkLightHover: UIColor = UIColor(0xFF52647A)
+    public val InkLightHover: UIColor = UIColor(0xFF3E4E63)
 
-    public val InkLighter: UIColor = UIColor(0xFFBAC7D5)
+    public val InkLighter: UIColor = UIColor(0xFF697D95)
 
-    public val InkLighterActive: UIColor = UIColor(0xFF94A8BE)
+    public val InkLighterActive: UIColor = UIColor(0xFF4A617C)
 
-    public val InkLighterHover: UIColor = UIColor(0xFFA6B6C8)
+    public val InkLighterHover: UIColor = UIColor(0xFF5D738E)
 
     public val InkNormal: UIColor = UIColor(0xFF252A31)
 

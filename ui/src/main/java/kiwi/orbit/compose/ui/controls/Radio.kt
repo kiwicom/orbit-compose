@@ -40,14 +40,14 @@ public fun Radio(
     )
     val borderColor by animateColorAsState(
         targetValue = when {
-            !enabled || !selected -> OrbitTheme.colors.content.subtle
+            !enabled || !selected -> OrbitTheme.colors.surface.disabled
             else -> OrbitTheme.colors.interactive.main
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration)
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
-            !enabled && !selected -> OrbitTheme.colors.surface.disabled
+            !enabled && !selected -> OrbitTheme.colors.surface.subtle
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration)

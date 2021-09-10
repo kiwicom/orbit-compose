@@ -27,7 +27,7 @@ public fun lightSurfaceColors(
     background: Color = ColorTokens.CloudLight,
     subtle: Color = ColorTokens.CloudNormal,
     strong: Color = ColorTokens.CloudDark,
-    disabled: Color = ColorTokens.CloudNormal,
+    disabled: Color = ColorTokens.CloudDarker,
 ): SurfaceColors = SurfaceColors(
     main = main,
     background = background,
@@ -40,7 +40,7 @@ public fun lightContentColors(
     normal: Color = ColorTokens.InkNormal,
     minor: Color = ColorTokens.InkLight,
     subtle: Color = ColorTokens.InkLighter,
-    disabled: Color = ColorTokens.InkLighterHover,
+    disabled: Color = ColorTokens.CloudDarkerHover,
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,
