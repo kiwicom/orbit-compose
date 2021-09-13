@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -26,6 +27,7 @@ public fun Text(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
+    emphasis: ContentEmphasis = LocalContentEmphasis.current,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -44,6 +46,7 @@ public fun Text(
         AnnotatedString(text),
         modifier,
         color,
+        emphasis,
         fontSize,
         fontStyle,
         fontWeight,
@@ -66,6 +69,7 @@ public fun Text(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
+    emphasis: ContentEmphasis = LocalContentEmphasis.current,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -83,7 +87,7 @@ public fun Text(
 ) {
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
-            LocalContentColor.current.applyEmphasis(LocalContentEmphasis.current)
+            LocalContentColor.current.applyEmphasis(emphasis)
         }
     }
     val mergedStyle = style.merge(
