@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.applyEmphasis
@@ -30,7 +31,8 @@ public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current.applyEmphasis(LocalContentEmphasis.current)
+    emphasis: ContentEmphasis = LocalContentEmphasis.current,
+    tint: Color = LocalContentColor.current.applyEmphasis(emphasis),
 ) {
     Icon(
         painter = rememberVectorPainter(imageVector),
@@ -45,7 +47,8 @@ public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current.applyEmphasis(LocalContentEmphasis.current)
+    emphasis: ContentEmphasis = LocalContentEmphasis.current,
+    tint: Color = LocalContentColor.current.applyEmphasis(emphasis),
 ) {
     val painter = remember(bitmap) { BitmapPainter(bitmap) }
     Icon(
@@ -61,7 +64,8 @@ public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current.applyEmphasis(LocalContentEmphasis.current)
+    emphasis: ContentEmphasis = LocalContentEmphasis.current,
+    tint: Color = LocalContentColor.current.applyEmphasis(emphasis),
 ) {
     val colorFilter = if (tint == Color.Unspecified) null else ColorFilter.tint(tint)
     val semantics = if (contentDescription != null) {
