@@ -22,6 +22,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -68,7 +69,7 @@ fun TopAppBar(
             }
         }
 
-        CompositionLocalProvider(LocalContentEmphasis provides ContentEmphasis.Minor) {
+        ProvideContentEmphasis(ContentEmphasis.Minor) {
             Row(
                 Modifier.fillMaxHeight(),
                 horizontalArrangement = Arrangement.End,
@@ -158,7 +159,7 @@ private fun AppBar(
         shape = RectangleShape,
         modifier = modifier
     ) {
-        CompositionLocalProvider(LocalContentEmphasis provides ContentEmphasis.Minor) {
+        ProvideContentEmphasis(ContentEmphasis.Minor) {
             Row(
                 Modifier
                     .fillMaxWidth()

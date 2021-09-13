@@ -25,7 +25,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,8 +50,8 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
-import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @Composable
@@ -183,10 +182,7 @@ public fun TextField(
                             }
                             if (placeholder != null && textFieldValue.text.isEmpty()) {
                                 Box(Modifier.layoutId("placeholder")) {
-                                    CompositionLocalProvider(
-                                        LocalContentEmphasis provides ContentEmphasis.Minor,
-                                        content = placeholder
-                                    )
+                                    ProvideContentEmphasis(ContentEmphasis.Minor, content = placeholder)
                                 }
                             }
                             Box(Modifier.layoutId("textField")) {

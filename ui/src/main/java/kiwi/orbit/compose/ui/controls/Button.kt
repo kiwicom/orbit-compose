@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
@@ -36,7 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
-import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 import kotlinx.coroutines.flow.collect
@@ -217,8 +216,8 @@ private fun Button(
         interactionSource = interactionSource,
         indication = rememberRipple()
     ) {
-        CompositionLocalProvider(
-            LocalContentEmphasis provides if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled
+        ProvideContentEmphasis(
+            emphasis = if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled
         ) {
             ProvideMergedTextStyle(
                 value = OrbitTheme.typography.title4
