@@ -15,6 +15,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
 import kiwi.orbit.compose.ui.foundation.LocalShapes
 import kiwi.orbit.compose.ui.foundation.LocalTypography
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
 
@@ -31,12 +32,13 @@ public fun OrbitTheme(
         LocalColors provides colors,
         LocalContentColor provides colors.content.normal,
         LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalTypography provides typography,
+        LocalRippleTheme provides MaterialRippleTheme,
         LocalShapes provides shapes,
         LocalIndication provides rippleIndication,
-        LocalRippleTheme provides MaterialRippleTheme,
-        content = content,
-    )
+        LocalTypography provides typography,
+    ) {
+        ProvideMergedTextStyle(typography.bodyNormal, content = content)
+    }
 }
 
 public object OrbitTheme {
