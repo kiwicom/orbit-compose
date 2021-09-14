@@ -30,7 +30,7 @@ public fun RadioField(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     error: Boolean = false,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
     description: (@Composable () -> Unit)? = null,
     label: @Composable ColumnScope.() -> Unit,
 ) {
