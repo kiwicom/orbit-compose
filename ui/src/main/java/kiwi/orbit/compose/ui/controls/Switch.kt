@@ -4,6 +4,7 @@ import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.DragInteraction
@@ -157,9 +158,17 @@ private fun BoxScope.SwitchImpl(
                 indication = rememberRipple(bounded = false, radius = ThumbRippleRadius)
             )
             .requiredSize(ThumbDiameter)
-            .shadow(elevation, CircleShape, clip = false)
+            .border(ThumbStrokeWidth, Color(0x1907405C), CircleShape) // 10% alpha from 255 = 25 dec = 19 hex
+            .padding(ThumbStrokeWidth)
+            .then(
+                if (enabled) {
+                    Modifier.shadow(elevation, CircleShape, clip = false)
+                } else {
+                    Modifier
+                }
+            )
             .background(OrbitTheme.colors.surface.main, CircleShape)
-            .padding((ThumbDiameter - 10.dp) / 2)
+            .padding((ThumbDiameter - ThumbInnerDiameter - ThumbStrokeWidth * 2) / 2)
             .background(mainColor, CircleShape)
     )
 }
@@ -213,10 +222,12 @@ private val SwitchHeight = 32.dp
 private val TrackWidth = SwitchWidth - SwitchPadding * 2
 private val TrackStrokeWidth = SwitchHeight - SwitchPadding * 2
 private val ThumbDiameter = SwitchHeight
+private val ThumbStrokeWidth = 0.5.dp
+private val ThumbInnerDiameter = 10.dp
 private val ThumbPathLength = SwitchWidth - ThumbDiameter
 private val ThumbRippleRadius = 24.dp
 
 private val AnimationSpec = TweenSpec<Float>(durationMillis = 100)
 
-private val ThumbDefaultElevation = 1.dp
+private val ThumbDefaultElevation = 3.dp
 private val ThumbPressedElevation = 6.dp
