@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.SubScreen
+import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.controls.Switch
 
@@ -40,6 +41,12 @@ fun SwitchScreenInner() {
             Switch(checked = value, onCheckedChange = { value = it })
 
             Spacer(Modifier.height(8.dp))
+
+            Switch(checked = !value, onCheckedChange = { value = !it })
+
+            Spacer(Modifier.height(16.dp))
+            Separator()
+            Spacer(Modifier.height(16.dp))
 
             Switch(checked = true, onCheckedChange = {}, enabled = false)
 
