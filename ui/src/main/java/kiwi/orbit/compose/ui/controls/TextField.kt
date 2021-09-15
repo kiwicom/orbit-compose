@@ -182,7 +182,7 @@ public fun TextField(
                             }
                             if (placeholder != null && textFieldValue.text.isEmpty()) {
                                 Box(Modifier.layoutId("placeholder")) {
-                                    ProvideContentEmphasis(ContentEmphasis.Minor, content = placeholder)
+                                    ProvideContentEmphasis(ContentEmphasis.Subtle, content = placeholder)
                                 }
                             }
                             Box(Modifier.layoutId("textField")) {

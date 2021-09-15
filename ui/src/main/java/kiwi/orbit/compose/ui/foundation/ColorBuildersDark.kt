@@ -28,7 +28,7 @@ public fun darkSurfaceColors(
     background: Color = ColorTokens.White.invert(),
     subtle: Color = ColorTokens.CloudNormal.invert(),
     strong: Color = ColorTokens.CloudDark.invert(),
-    disabled: Color = ColorTokens.CloudNormal.invert(),
+    disabled: Color = ColorTokens.CloudDarker.invert(),
 ): SurfaceColors = SurfaceColors(
     main = main,
     background = background,
@@ -41,7 +41,7 @@ public fun darkContentColors(
     normal: Color = ColorTokens.InkNormal.invert(),
     minor: Color = ColorTokens.InkLight.invert(),
     subtle: Color = ColorTokens.InkLighter.invert(),
-    disabled: Color = ColorTokens.InkLighterHover.invert(),
+    disabled: Color = ColorTokens.CloudDarkerHover.invert(),
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,

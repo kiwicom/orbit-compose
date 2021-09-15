@@ -136,10 +136,9 @@ private fun BoxScope.SwitchImpl(
     }
     val mainColor by rememberUpdatedState(
         if (enabled) {
-            if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.content.subtle
+            if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.surface.disabled
         } else {
-            (if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.content.subtle)
-            // .copy(alpha = ContentAlpha.disabled)
+            (if (checked) OrbitTheme.colors.interactive.main else OrbitTheme.colors.surface.disabled).copy(alpha = 0.3f)
         }
     )
     Canvas(

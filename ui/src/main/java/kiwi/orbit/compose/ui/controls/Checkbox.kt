@@ -39,15 +39,15 @@ public fun Checkbox(
 ) {
     val borderColor by animateColorAsState(
         targetValue = when {
-            !checked -> OrbitTheme.colors.content.subtle
+            !checked -> OrbitTheme.colors.surface.disabled
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
-            !enabled && !checked -> OrbitTheme.colors.surface.disabled
-            !enabled -> OrbitTheme.colors.content.subtle
+            !enabled && !checked -> OrbitTheme.colors.surface.subtle
+            !enabled -> OrbitTheme.colors.surface.disabled
             checked -> OrbitTheme.colors.interactive.main
             else -> Color.Transparent
         },
@@ -55,7 +55,7 @@ public fun Checkbox(
     )
     val iconColor = when (enabled) {
         true -> OrbitTheme.colors.interactive.onMain
-        false -> OrbitTheme.colors.surface.disabled
+        false -> OrbitTheme.colors.surface.subtle
     }
     val selectableModifier =
         if (onCheckedChange != null) {
