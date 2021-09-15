@@ -83,7 +83,7 @@ fun CheckboxScreenInner() {
             onCheckedChange = { checkbox3 = !checkbox3 },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
 
         Spacer(Modifier.size(32.dp))
@@ -113,7 +113,7 @@ fun CheckboxScreenInner() {
             modifier = Modifier.fillMaxWidth(),
             description = { Text("Indeed.") },
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
 
         Spacer(Modifier.size(32.dp))
@@ -143,7 +143,7 @@ fun CheckboxScreenInner() {
             enabled = false,
             description = { Text("Indeed.") },
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
     }
 }

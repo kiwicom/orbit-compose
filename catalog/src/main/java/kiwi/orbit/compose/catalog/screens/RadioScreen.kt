@@ -88,7 +88,7 @@ fun RadioScreenInner() {
             onClick = { selected = 2 },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
 
         Spacer(Modifier.size(32.dp))
@@ -117,7 +117,7 @@ fun RadioScreenInner() {
             modifier = Modifier.fillMaxWidth(),
             description = { Text("Indeed.") },
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
 
         Spacer(Modifier.size(32.dp))
@@ -149,7 +149,7 @@ fun RadioScreenInner() {
             enabled = false,
             description = { Text("Indeed.") },
         ) {
-            Text("Star Gate")
+            Text("Stargate")
         }
     }
 }
