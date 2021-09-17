@@ -191,6 +191,7 @@ private fun Badge(
     ThemedSurface(
         subtle = subtle,
         shape = RoundedCornerShape(percent = 50),
+        strokeWidth = 0.5.dp,
         modifier = modifier.requiredHeight(24.dp),
         verticalAlignment = Alignment.CenterVertically,
         contentPadding = PaddingValues(vertical = 2.dp, horizontal = 8.dp),

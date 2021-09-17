@@ -12,6 +12,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
@@ -23,6 +24,7 @@ public fun ThemedSurface(
     subtle: Boolean,
     modifier: Modifier = Modifier,
     shape: Shape = OrbitTheme.shapes.normal,
+    strokeWidth: Dp = 1.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     contentPadding: PaddingValues = PaddingValues(),
@@ -36,7 +38,7 @@ public fun ThemedSurface(
     val surfaceModifier = when (subtle) {
         true -> {
             Modifier
-                .border(1.dp, OrbitTheme.colors.surface.strong, shape)
+                .border(strokeWidth, OrbitTheme.colors.surface.strong, shape)
                 .background(backgroundColor, shape)
         }
         false -> {
