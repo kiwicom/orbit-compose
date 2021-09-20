@@ -5,10 +5,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -74,12 +72,13 @@ public fun Checkbox(
             Modifier
         }
 
-    Box(modifier) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
         Canvas(
             Modifier
                 .then(selectableModifier)
-                .wrapContentSize(Alignment.Center)
-                .padding(CheckboxButtonPadding)
                 .requiredSize(CheckboxButtonSize)
         ) {
             drawCheckbox(borderColor, backgroundColor)
@@ -88,9 +87,7 @@ public fun Checkbox(
             Icon(
                 Icons.Check,
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 4.dp, top = 4.dp)
-                    .size(16.dp),
+                modifier = Modifier.size(16.dp),
                 tint = iconColor,
             )
         }
@@ -120,5 +117,4 @@ private fun DrawScope.drawCheckbox(borderColor: Color, backgroundColor: Color) {
 private const val CheckboxAnimationDuration = 100
 
 private val CheckboxButtonSize = 20.dp
-private val CheckboxButtonPadding = 2.dp
 private val CheckboxRippleRadius = 20.dp

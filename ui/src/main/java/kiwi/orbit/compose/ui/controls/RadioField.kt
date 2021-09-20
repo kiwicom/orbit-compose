@@ -57,18 +57,19 @@ public fun RadioField(
                 end = contentPadding.calculateEndPadding(layoutDirection),
             ),
     ) {
+        val radioVerticalShift = 1.dp
         Radio(
             selected = selected,
             onClick = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - 3.dp).coerceAtLeast(0.dp),
+                top = (contentPadding.calculateTopPadding() - radioVerticalShift).coerceAtLeast(0.dp),
                 end = 10.dp
             ),
             enabled = enabled,
             error = error,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(3.dp)
+        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(radioVerticalShift)
         val bottomPadding = contentPadding.calculateBottomPadding()
         Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
             CompositionLocalProvider(

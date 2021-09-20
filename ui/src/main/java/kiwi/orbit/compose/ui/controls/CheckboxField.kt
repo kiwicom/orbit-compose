@@ -55,17 +55,18 @@ public fun CheckboxField(
                 end = contentPadding.calculateEndPadding(layoutDirection),
             ),
     ) {
+        val checkboxVerticalShift = 1.dp
         Checkbox(
             checked = checked,
             onCheckedChange = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - 3.dp).coerceAtLeast(0.dp),
+                top = (contentPadding.calculateTopPadding() - checkboxVerticalShift).coerceAtLeast(0.dp),
                 end = 10.dp
             ),
             enabled = enabled,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(3.dp)
+        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(checkboxVerticalShift)
         val bottomPadding = contentPadding.calculateBottomPadding()
         Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
             CompositionLocalProvider(
