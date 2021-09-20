@@ -29,6 +29,7 @@ public fun CheckboxField(
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    error: Boolean = false,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
     description: (@Composable () -> Unit)? = null,
     label: @Composable ColumnScope.() -> Unit,
@@ -64,6 +65,7 @@ public fun CheckboxField(
                 end = 10.dp
             ),
             enabled = enabled,
+            error = error,
             interactionSource = interactionSource,
         )
         val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(checkboxVerticalShift)
