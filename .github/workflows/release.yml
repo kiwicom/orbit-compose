@@ -37,9 +37,8 @@ jobs:
       - name: Prepare Release Notes
         run: |
           mkdir whatsnew
-          URL=https://api.github.com/repos/kiwicom/orbit-compose/releases/${{ steps.release.outputs.id }}
-          curl --url $URL --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | jq '.body' > whatsnew/whatsnew-en-US
-          sed -i 's/<table>.*<\/table>//g' whatsnew/whatsnew-en-US
+          URL=${{ steps.release.outputs.url }}
+          echo "See full release notes at $URL" > whatsnew/whatsnew-en-US
       - name: Release to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
