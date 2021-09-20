@@ -55,5 +55,8 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.materialRipple)
     implementation(libs.compose.material)
-    implementation(libs.compose.tooling)
+    implementation(libs.compose.toolingPreview)
+
+    debugImplementation(libs.compose.tooling)
+    debugImplementation(libs.androidx.activityCompose)
 }

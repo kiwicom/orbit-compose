@@ -93,7 +93,7 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.compose.runtime)
     implementation(libs.compose.runtimeLivedata)
-    implementation(libs.compose.tooling)
+    implementation(libs.compose.toolingPreview)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
@@ -101,4 +101,6 @@ dependencies {
 
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
+
+    debugImplementation(libs.compose.tooling)
 }
