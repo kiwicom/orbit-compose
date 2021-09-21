@@ -132,6 +132,14 @@ public class Colors(
     )
 }
 
+@Composable
+public fun ProvideColors(colors: Colors, content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalColors provides colors,
+        content = content
+    )
+}
+
 internal fun Colors.updateColorsFrom(other: Colors) {
     surface.updateColorsFrom(other.surface)
     content.updateColorsFrom(other.content)
