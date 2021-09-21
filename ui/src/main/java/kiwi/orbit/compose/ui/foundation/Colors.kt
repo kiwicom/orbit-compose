@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui.foundation
 
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
@@ -10,51 +11,104 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 
-@Immutable
-public data class SurfaceColors(
-    public val main: Color,
-    public val background: Color,
-    public val subtle: Color,
-    public val strong: Color,
-    public val disabled: Color,
-)
+@Stable
+public class SurfaceColors(
+    main: Color,
+    background: Color,
+    subtle: Color,
+    strong: Color,
+    disabled: Color,
+) {
+    public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
+    public var background: Color by mutableStateOf(background, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
+    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
 
-@Immutable
-public data class ContentColors(
-    public val normal: Color,
-    public val minor: Color,
-    public val subtle: Color,
-    public val disabled: Color,
-)
+    public fun copy(
+        main: Color = this.main,
+        background: Color = this.background,
+        subtle: Color = this.subtle,
+        strong: Color = this.strong,
+        disabled: Color = this.disabled,
+    ): SurfaceColors = SurfaceColors(
+        main,
+        background,
+        subtle,
+        strong,
+        disabled,
+    )
+}
 
-@Immutable
-public data class FeatureColors(
-    public val main: Color,
-    public val mainAlt: Color,
-    public val subtle: Color,
-    public val subtleAlt: Color,
-    public val strong: Color,
-    public val onMain: Color,
-)
+@Stable
+public class ContentColors(
+    normal: Color,
+    minor: Color,
+    subtle: Color,
+    disabled: Color,
+) {
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+    public var minor: Color by mutableStateOf(minor, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
+
+    public fun copy(
+        normal: Color = this.normal,
+        minor: Color = this.minor,
+        subtle: Color = this.subtle,
+        disabled: Color = this.disabled,
+    ): ContentColors = ContentColors(
+        normal,
+        minor,
+        subtle,
+        disabled,
+    )
+}
+
+@Stable
+public class FeatureColors(
+    main: Color,
+    mainAlt: Color,
+    subtle: Color,
+    subtleAlt: Color,
+    strong: Color,
+    onMain: Color,
+) {
+    public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
+    public var mainAlt: Color by mutableStateOf(mainAlt, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy()); internal set
+    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
+    public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy()); internal set
+
+    public fun copy(
+        main: Color = this.main,
+        mainAlt: Color = this.mainAlt,
+        subtle: Color = this.subtle,
+        subtleAlt: Color = this.subtleAlt,
+        strong: Color = this.strong,
+        onMain: Color = this.onMain,
+    ): FeatureColors = FeatureColors(
+        main,
+        mainAlt,
+        subtle,
+        subtleAlt,
+        strong,
+        onMain,
+    )
+}
 
 @Stable
 public class Colors(
-    surface: SurfaceColors,
-    content: ContentColors,
-    primary: FeatureColors,
-    interactive: FeatureColors,
-    success: FeatureColors,
-    warning: FeatureColors,
-    critical: FeatureColors,
+    public val surface: SurfaceColors,
+    public val content: ContentColors,
+    public val primary: FeatureColors,
+    public val interactive: FeatureColors,
+    public val success: FeatureColors,
+    public val warning: FeatureColors,
+    public val critical: FeatureColors,
     isLight: Boolean,
 ) {
-    public var surface: SurfaceColors by mutableStateOf(surface, structuralEqualityPolicy()); internal set
-    public var content: ContentColors by mutableStateOf(content, structuralEqualityPolicy()); internal set
-    public var primary: FeatureColors by mutableStateOf(primary, structuralEqualityPolicy()); internal set
-    public var interactive: FeatureColors by mutableStateOf(interactive, structuralEqualityPolicy()); internal set
-    public var success: FeatureColors by mutableStateOf(success, structuralEqualityPolicy()); internal set
-    public var warning: FeatureColors by mutableStateOf(warning, structuralEqualityPolicy()); internal set
-    public var critical: FeatureColors by mutableStateOf(critical, structuralEqualityPolicy()); internal set
     public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy()); internal set
 
     public fun copy(
@@ -76,6 +130,41 @@ public class Colors(
         critical = critical,
         isLight = isLight,
     )
+}
+
+internal fun Colors.updateColorsFrom(other: Colors) {
+    surface.updateColorsFrom(other.surface)
+    content.updateColorsFrom(other.content)
+    primary.updateColorsFrom(other.primary)
+    interactive.updateColorsFrom(other.interactive)
+    success.updateColorsFrom(other.success)
+    warning.updateColorsFrom(other.warning)
+    critical.updateColorsFrom(other.critical)
+    isLight = other.isLight
+}
+
+internal fun SurfaceColors.updateColorsFrom(other: SurfaceColors) {
+    main = other.main
+    background = other.background
+    subtle = other.subtle
+    strong = other.strong
+    disabled = other.disabled
+}
+
+internal fun ContentColors.updateColorsFrom(other: ContentColors) {
+    normal = other.normal
+    minor = other.minor
+    subtle = other.subtle
+    disabled = other.disabled
+}
+
+internal fun FeatureColors.updateColorsFrom(other: FeatureColors) {
+    main = other.main
+    mainAlt = other.mainAlt
+    subtle = other.subtle
+    subtleAlt = other.subtleAlt
+    strong = other.strong
+    onMain = other.onMain
 }
 
 /**
