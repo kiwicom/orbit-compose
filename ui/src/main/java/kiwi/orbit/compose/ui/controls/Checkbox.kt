@@ -1,14 +1,13 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -35,6 +34,7 @@ public fun Checkbox(
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    error: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val borderColor by animateColorAsState(
@@ -74,51 +74,90 @@ public fun Checkbox(
             Modifier
         }
 
-    Box(modifier) {
+    val errorAlpha by animateFloatAsState(
+        targetValue = if (error && enabled) 1.0f else 0.0f,
+        animationSpec = tween(durationMillis = CheckboxAnimationDuration)
+    )
+    val errorStrokeColor = OrbitTheme.colors.critical.main
+    val errorShadowColor = OrbitTheme.colors.critical.subtle
+
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
         Canvas(
             Modifier
                 .then(selectableModifier)
-                .wrapContentSize(Alignment.Center)
-                .padding(CheckboxButtonPadding)
-                .requiredSize(CheckboxButtonSize)
+                .requiredSize(CheckboxSize)
         ) {
-            drawCheckbox(borderColor, backgroundColor)
+            drawCheckbox(borderColor, backgroundColor, errorAlpha)
+            drawError(errorStrokeColor, errorShadowColor, errorAlpha)
         }
         if (checked) {
             Icon(
                 Icons.Check,
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 4.dp, top = 4.dp)
-                    .size(16.dp),
+                modifier = Modifier.size(16.dp),
                 tint = iconColor,
             )
         }
     }
 }
 
-private fun DrawScope.drawCheckbox(borderColor: Color, backgroundColor: Color) {
-    val size = CheckboxButtonSize.toPx()
-    val cornerRadius = CornerRadius(6.dp.toPx())
-    val strokeWidth = 2.dp.toPx()
-    val halfStrokeWidth = strokeWidth / 2.0f
+private fun DrawScope.drawCheckbox(borderColor: Color, backgroundColor: Color, errorAlpha: Float) {
+    val hasError = errorAlpha != 0.0f
+    val errorShift = if (hasError) 0.5.dp.toPx() else 0f
+
+    val checkboxSize = CheckboxSize.toPx()
+    val checkboxBorderWidth = CheckboxBorderWidth.toPx()
+    val checkboxBorderHalfWidth = checkboxBorderWidth / 2.0f
+    val checkboxCornerRadius = CornerRadius(CheckboxCornerRadius.toPx())
     drawRoundRect(
         color = backgroundColor,
-        size = Size(size, size),
-        cornerRadius = cornerRadius,
+        topLeft = Offset(0f + errorShift, 0f + errorShift),
+        size = Size(checkboxSize - 2 * errorShift, checkboxSize - 2 * errorShift),
+        cornerRadius = checkboxCornerRadius,
         style = Fill,
     )
     drawRoundRect(
         color = borderColor,
-        topLeft = Offset(halfStrokeWidth, halfStrokeWidth),
-        size = Size(size - strokeWidth, size - strokeWidth),
-        cornerRadius = cornerRadius,
-        style = Stroke(strokeWidth),
+        topLeft = Offset(checkboxBorderHalfWidth, checkboxBorderHalfWidth),
+        size = Size(checkboxSize - checkboxBorderWidth, checkboxSize - checkboxBorderWidth),
+        cornerRadius = checkboxCornerRadius,
+        style = Stroke(checkboxBorderWidth),
+    )
+}
+
+private fun DrawScope.drawError(borderColor: Color, shadowColor: Color, alpha: Float) {
+    if (alpha == 0.0f) return
+
+    val shadowRectShift = (ErrorShadowWidth / 2.0f).toPx()
+    val shadowRectSize = (ErrorShadowSize - ErrorShadowWidth).toPx()
+    drawRoundRect(
+        color = shadowColor,
+        topLeft = Offset(-shadowRectShift, -shadowRectShift),
+        size = Size(shadowRectSize, shadowRectSize),
+        cornerRadius = CornerRadius(ErrorShadowCornerRadius.toPx()),
+        style = Stroke(ErrorShadowWidth.toPx()),
+    )
+
+    val errorRectShift = (CheckboxBorderWidth / 2.0f).toPx()
+    val errorRectSize = (CheckboxSize - CheckboxBorderWidth).toPx()
+    drawRoundRect(
+        color = borderColor,
+        topLeft = Offset(errorRectShift, errorRectShift),
+        size = Size(errorRectSize, errorRectSize),
+        cornerRadius = CornerRadius(CheckboxCornerRadius.toPx()),
+        style = Stroke(CheckboxBorderWidth.toPx()),
     )
 }
 
 private const val CheckboxAnimationDuration = 100
 
-private val CheckboxButtonSize = 20.dp
-private val CheckboxButtonPadding = 2.dp
+private val CheckboxSize = 20.dp
+private val CheckboxBorderWidth = 2.dp
+private val CheckboxCornerRadius = 6.dp
 private val CheckboxRippleRadius = 20.dp
+private val ErrorShadowWidth = 2.dp
+private val ErrorShadowSize = CheckboxSize + ErrorShadowWidth * 2
+private val ErrorShadowCornerRadius = CheckboxCornerRadius + ErrorShadowWidth
