@@ -7,6 +7,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalColors
@@ -18,6 +19,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTypography
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
+import kiwi.orbit.compose.ui.foundation.updateColorsFrom
 
 @Composable
 public fun OrbitTheme(
@@ -26,10 +28,13 @@ public fun OrbitTheme(
     shapes: Shapes = OrbitTheme.shapes,
     content: @Composable () -> Unit,
 ) {
+    val rememberedColors = remember { colors.copy() }.apply {
+        updateColorsFrom(colors)
+    }
     val rippleIndication = rememberRipple()
 
     CompositionLocalProvider(
-        LocalColors provides colors,
+        LocalColors provides rememberedColors,
         LocalContentColor provides colors.content.normal,
         LocalContentEmphasis provides ContentEmphasis.Normal,
         LocalRippleTheme provides MaterialRippleTheme,
