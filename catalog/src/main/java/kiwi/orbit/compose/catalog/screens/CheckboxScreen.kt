@@ -53,7 +53,7 @@ fun CheckboxScreenInner() {
             Spacer(Modifier.size(32.dp))
 
             var checkbox3 by remember { mutableStateOf(false) }
-            Checkbox(checked = checkbox3, error = true, onCheckedChange = { checkbox3 = !checkbox3 })
+            Checkbox(checked = checkbox3, isError = true, onCheckedChange = { checkbox3 = !checkbox3 })
 
             Spacer(Modifier.size(32.dp))
 
@@ -65,7 +65,7 @@ fun CheckboxScreenInner() {
 
             Spacer(Modifier.size(32.dp))
 
-            Checkbox(checked = false, enabled = false, error = true, onCheckedChange = {})
+            Checkbox(checked = false, enabled = false, isError = true, onCheckedChange = {})
         }
 
         Spacer(Modifier.size(32.dp))
@@ -111,7 +111,7 @@ fun CheckboxScreenInner() {
             checked = checkbox5,
             onCheckedChange = { checkbox5 = !checkbox5 },
             modifier = Modifier.fillMaxWidth(),
-            error = true,
+            isError = true,
             description = { Text("May the Force be with you.") },
         ) {
             Text("Star Wars")

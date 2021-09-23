@@ -29,7 +29,7 @@ public fun RadioField(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    error: Boolean = false,
+    isError: Boolean = false,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
     description: (@Composable () -> Unit)? = null,
     label: @Composable ColumnScope.() -> Unit,
@@ -66,7 +66,7 @@ public fun RadioField(
                 end = 10.dp
             ),
             enabled = enabled,
-            error = error,
+            isError = isError,
             interactionSource = interactionSource,
         )
         val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(radioVerticalShift)
