@@ -34,7 +34,7 @@ public fun Checkbox(
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    error: Boolean = false,
+    isError: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val borderColor by animateColorAsState(
@@ -75,7 +75,7 @@ public fun Checkbox(
         }
 
     val errorAlpha by animateFloatAsState(
-        targetValue = if (error && enabled) 1.0f else 0.0f,
+        targetValue = if (isError && enabled) 1.0f else 0.0f,
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
     val errorStrokeColor = OrbitTheme.colors.critical.main

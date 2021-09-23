@@ -51,7 +51,7 @@ fun RadioScreenInner() {
 
             Spacer(Modifier.size(32.dp))
 
-            Radio(selected = selected == 2, onClick = { selected = 2 }, error = true)
+            Radio(selected = selected == 2, onClick = { selected = 2 }, isError = true)
 
             Spacer(Modifier.size(32.dp))
 
@@ -63,7 +63,7 @@ fun RadioScreenInner() {
 
             Spacer(Modifier.size(32.dp))
 
-            Radio(selected = false, enabled = false, onClick = {}, error = true)
+            Radio(selected = false, enabled = false, onClick = {}, isError = true)
         }
 
         Spacer(Modifier.size(32.dp))
@@ -106,7 +106,7 @@ fun RadioScreenInner() {
             selected = selected2 == 1,
             onClick = { selected2 = 1 },
             modifier = Modifier.fillMaxWidth(),
-            error = true,
+            isError = true,
             description = { Text("May the Force be with you.") },
         ) {
             Text("Star Wars")
@@ -137,7 +137,7 @@ fun RadioScreenInner() {
             onClick = { selected3 = 1 },
             modifier = Modifier.fillMaxWidth(),
             enabled = false,
-            error = true,
+            isError = true,
             description = { Text("May the Force be with you.") },
         ) {
             Text("Star Wars")

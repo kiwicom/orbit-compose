@@ -28,7 +28,7 @@ public fun Radio(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    error: Boolean = false,
+    isError: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val borderWidth by animateDpAsState(
@@ -67,7 +67,7 @@ public fun Radio(
         }
 
     val errorAlpha by animateFloatAsState(
-        targetValue = if (error && enabled) 1f else 0f,
+        targetValue = if (isError && enabled) 1f else 0f,
         animationSpec = tween(durationMillis = RadioAnimationDuration)
     )
     val errorStrokeColor = OrbitTheme.colors.critical.main
@@ -90,15 +90,15 @@ private fun DrawScope.drawRadio(borderWidth: Dp, borderColor: Color, backgroundC
 }
 
 private fun DrawScope.drawError(strokeColor: Color, shadowColor: Color, alpha: Float) {
-    if (alpha != 0f) {
-        val shadowWidth = 4.dp.toPx()
-        val shadowRadius = ErrorShadowRadius.toPx() - shadowWidth / 2
-        drawCircle(shadowColor, shadowRadius, alpha = alpha, style = Stroke(shadowWidth))
+    if (alpha == 0f) return
 
-        val strokeWidth = 2.dp.toPx()
-        val strokeRadius = RadioRadiusSize.toPx() - strokeWidth / 2
-        drawCircle(strokeColor, strokeRadius, alpha = alpha, style = Stroke(strokeWidth))
-    }
+    val shadowWidth = 4.dp.toPx()
+    val shadowRadius = ErrorShadowRadius.toPx() - shadowWidth / 2
+    drawCircle(shadowColor, shadowRadius, alpha = alpha, style = Stroke(shadowWidth))
+
+    val strokeWidth = 2.dp.toPx()
+    val strokeRadius = RadioRadiusSize.toPx() - strokeWidth / 2
+    drawCircle(strokeColor, strokeRadius, alpha = alpha, style = Stroke(strokeWidth))
 }
 
 private const val RadioAnimationDuration = 100
