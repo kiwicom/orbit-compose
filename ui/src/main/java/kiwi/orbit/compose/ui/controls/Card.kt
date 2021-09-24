@@ -22,7 +22,7 @@ public fun Card(
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
     border: BorderStroke? = null,
-    elevation: Dp = 1.dp,
+    elevation: Dp = 2.dp,
     content: @Composable () -> Unit
 ) {
     Surface(
@@ -44,7 +44,7 @@ public fun Card(
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
     border: BorderStroke? = null,
-    elevation: Dp = 1.dp,
+    elevation: Dp = 2.dp,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     indication: Indication? = LocalIndication.current,
     enabled: Boolean = true,

@@ -102,13 +102,10 @@ private fun Surface(
         Box(
             modifier
                 .shadow(elevation, shape, clip = false)
-                .then(if (border != null) Modifier.border(border, shape) else Modifier)
-                .background(
-                    color = color,
-                    shape = shape
-                )
                 .clip(shape)
-                .then(clickAndSemanticsModifier),
+                .then(clickAndSemanticsModifier)
+                .then(if (border != null) Modifier.border(border, shape) else Modifier)
+                .background(color, shape),
             propagateMinConstraints = true
         ) {
             content()

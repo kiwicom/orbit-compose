@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.FormatSize
@@ -54,6 +55,7 @@ fun MainScreen(
         Triple("Alert", { Icon(Icons.Alert, null) }, actions::showAlert),
         Triple("Badge", { Icon(Icons.Deals, null) }, actions::showBadge),
         Triple("Button", { Icon(MaterialIcons.SmartButton, null) }, actions::showButton),
+        Triple("Cards / Tiles", { Icon(MaterialIcons.Article, null) }, actions::showCards),
         Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),

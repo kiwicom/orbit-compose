@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
 import kiwi.orbit.compose.catalog.screens.ButtonScreen
+import kiwi.orbit.compose.catalog.screens.CardsScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
 import kiwi.orbit.compose.catalog.screens.IconsScreen
@@ -33,6 +34,7 @@ private object MainDestinations {
     const val ALERT = "alert"
     const val BADGE = "badge"
     const val BUTTON = "button"
+    const val CARDS = "cards"
     const val CHECKBOX = "checkbox"
     const val RADIO = "radio"
     const val STEPPER = "stepper"
@@ -80,6 +82,9 @@ fun NavGraph(
         }
         composable(MainDestinations.BUTTON) {
             ButtonScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.CARDS) {
+            CardsScreen(actions::navigateUp)
         }
         composable(MainDestinations.CHECKBOX) {
             CheckboxScreen(actions::navigateUp)
@@ -139,6 +144,10 @@ class MainActions(
 
     fun showButton() {
         navController.navigate(MainDestinations.BUTTON)
+    }
+
+    fun showCards() {
+        navController.navigate(MainDestinations.CARDS)
     }
 
     fun showCheckbox() {
