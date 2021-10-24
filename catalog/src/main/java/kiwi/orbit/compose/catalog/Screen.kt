@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.derivedWindowInsetsTypeOf
 import com.google.accompanist.insets.rememberInsetsPaddingValues
@@ -22,6 +24,7 @@ fun Screen(
     onUpClick: () -> Unit,
     withBackground: Boolean = true,
     toastHostState: ToastHostState = remember { ToastHostState() },
+    topAppBarElevation: Dp = 2.dp,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -30,6 +33,7 @@ fun Screen(
             TopAppBar(
                 title = { Text(text = title) },
                 onNavigateUp = onUpClick,
+                elevation = topAppBarElevation,
             )
         },
         content = {

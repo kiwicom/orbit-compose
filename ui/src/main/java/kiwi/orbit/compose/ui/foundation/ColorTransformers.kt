@@ -1,26 +1,33 @@
 package kiwi.orbit.compose.ui.foundation
 
-public fun Colors.asInteractiveTheme(): Colors = themeWith(interactive)
+public fun Colors.asInteractiveTheme(suppressed: Boolean = false): Colors =
+    themeWith(interactive, suppressed)
 
-public fun Colors.asSuccessTheme(): Colors = themeWith(success)
+public fun Colors.asSuccessTheme(suppressed: Boolean = false): Colors =
+    themeWith(success, suppressed)
 
-public fun Colors.asWarningTheme(): Colors = themeWith(warning)
+public fun Colors.asWarningTheme(suppressed: Boolean = false): Colors =
+    themeWith(warning, suppressed)
 
-public fun Colors.asCriticalTheme(): Colors = themeWith(critical)
+public fun Colors.asCriticalTheme(suppressed: Boolean = false): Colors =
+    themeWith(critical, suppressed)
 
-private fun Colors.themeWith(featureColors: FeatureColors): Colors =
+private fun Colors.themeWith(
+    featureColors: FeatureColors,
+    suppressed: Boolean = false,
+): Colors =
     copy(
-        surface = SurfaceColors(
+        surface = if (!suppressed) SurfaceColors(
             main = featureColors.subtleAlt,
             background = featureColors.subtle,
             subtle = featureColors.subtle,
             strong = featureColors.subtleAlt,
             disabled = surface.disabled,
-        ),
+        ) else surface,
         content = content.copy(
-            normal = featureColors.strong,
+            normal = if (!suppressed) featureColors.strong else content.normal,
         ),
         primary = featureColors.copy(
-            subtle = featureColors.subtleAlt
+            subtle = featureColors.subtleAlt,
         ),
     )

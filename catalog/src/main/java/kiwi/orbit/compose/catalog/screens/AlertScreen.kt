@@ -8,39 +8,114 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import kiwi.orbit.compose.catalog.Screen
+import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.AlertCritical
 import kiwi.orbit.compose.ui.controls.AlertInfo
 import kiwi.orbit.compose.ui.controls.AlertSuccess
 import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
-import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
+import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Text
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AlertScreen(onUpClick: () -> Unit) {
     Screen(
         title = "Alert",
         onUpClick = onUpClick,
+        topAppBarElevation = 0.dp,
     ) {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(it)
-        ) {
-            AlertScreenInner()
+        Column {
+            val state = rememberPagerState(0)
+            val scope = rememberCoroutineScope()
+            TabRow(
+                modifier = Modifier
+                    .shadow(2.dp)
+                    .zIndex(1f),
+                selectedTabIndex = state.currentPage,
+                backgroundColor = OrbitTheme.colors.surface.main,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
+                        color = OrbitTheme.colors.primary.main,
+                    )
+                },
+                divider = {},
+            ) {
+                Tab(
+                    selected = state.currentPage == 0,
+                    onClick = { scope.launch { state.animateScrollToPage(0) } },
+                    text = { Text("Normal") },
+                )
+                Tab(
+                    selected = state.currentPage == 1,
+                    onClick = { scope.launch { state.animateScrollToPage(1) } },
+                    text = { Text("Suppressed") },
+                )
+                Tab(
+                    selected = state.currentPage == 2,
+                    onClick = { scope.launch { state.animateScrollToPage(2) } },
+                    text = { Text("Inline") },
+                )
+            }
+
+            HorizontalPager(
+                count = 3,
+                state = state,
+                modifier = Modifier.fillMaxSize()
+            ) { tabIndex ->
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(it)
+                ) {
+                    when (tabIndex) {
+                        0 -> AlertScreenNormalInner()
+                        1 -> AlertScreenSuppressedInner()
+                        2 -> AlertScreenInlineInner()
+                    }
+                }
+            }
         }
     }
 }
 
 @Preview
 @Composable
-private fun AlertScreenInner() {
+private fun AlertScreenNormalInner() {
+    AlertsInner(suppressed = false)
+}
+
+@Preview
+@Composable
+private fun AlertScreenSuppressedInner() {
+    AlertsInner(suppressed = true)
+}
+
+@Preview
+@Composable
+private fun AlertScreenInlineInner() {
+}
+
+@Composable
+private fun AlertsInner(suppressed: Boolean) {
     Column(Modifier.padding(16.dp)) {
         AlertInfo(
             title = { Text("Re-check your credentials") },
@@ -49,10 +124,11 @@ private fun AlertScreenInner() {
                 ButtonPrimary(onClick = {}) {
                     Text("More info")
                 }
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -64,10 +140,11 @@ private fun AlertScreenInner() {
                 ButtonPrimary(onClick = {}) {
                     Text("Show receipt")
                 }
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Share receipt")
                 }
-            }
+            },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -79,10 +156,11 @@ private fun AlertScreenInner() {
                 ButtonPrimary(onClick = {}) {
                     Text("Check requirements")
                 }
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -94,10 +172,11 @@ private fun AlertScreenInner() {
                 ButtonPrimary(onClick = {}) {
                     Text("Refresh page")
                 }
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Contact support")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -112,6 +191,7 @@ private fun AlertScreenInner() {
                     Text("More info")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -120,10 +200,11 @@ private fun AlertScreenInner() {
             title = { Text("Re-check your credentials") },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
             actions = {
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -131,6 +212,7 @@ private fun AlertScreenInner() {
         AlertInfo(
             title = { Text("Re-check your credentials") },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -143,10 +225,11 @@ private fun AlertScreenInner() {
                 ButtonPrimary(onClick = {}) {
                     Text("More info")
                 }
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -159,10 +242,11 @@ private fun AlertScreenInner() {
                 Text("Alternatively, provide a second paragraph.")
             },
             actions = {
-                ButtonPrimarySubtle(onClick = {}) {
+                ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
                 }
             },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -171,6 +255,7 @@ private fun AlertScreenInner() {
             icon = null,
             title = { Text("Re-check your credentials") },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -179,6 +264,7 @@ private fun AlertScreenInner() {
             icon = null,
             title = { Text("Re-check your credentials") },
             content = { },
+            suppressed = suppressed,
         )
 
         Spacer(Modifier.height(16.dp))
@@ -187,6 +273,7 @@ private fun AlertScreenInner() {
             icon = null,
             title = { },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            suppressed = suppressed,
         )
     }
 }
