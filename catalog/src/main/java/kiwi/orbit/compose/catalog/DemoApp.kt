@@ -9,7 +9,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import kiwi.orbit.compose.catalog.ui.AppTheme
 
 @Composable
 fun DemoApp() {
