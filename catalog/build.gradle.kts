@@ -97,7 +97,6 @@ dependencies {
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
-    implementation(libs.kotlin.datetime)
 
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
