@@ -18,8 +18,7 @@ fun DemoApp() {
 
         SideEffect {
             systemUiController.setSystemBarsColor(
-                color = Color.Transparent,
-                darkIcons = isLightTheme,
+                color = if (isLightTheme) Color(0x70FFFFFF) else Color(0x70000000),
             )
         }
 
