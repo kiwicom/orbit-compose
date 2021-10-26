@@ -1,4 +1,4 @@
-package kiwi.orbit.compose.catalog.ui
+package kiwi.orbit.compose.catalog
 
 import android.content.Context
 import androidx.compose.runtime.Composable

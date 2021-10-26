@@ -9,7 +9,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import kiwi.orbit.compose.catalog.ui.AppTheme
 
 @Composable
 fun DemoApp() {
@@ -19,8 +18,7 @@ fun DemoApp() {
 
         SideEffect {
             systemUiController.setSystemBarsColor(
-                color = Color.Transparent,
-                darkIcons = isLightTheme,
+                color = if (isLightTheme) Color(0x70FFFFFF) else Color(0x70000000),
             )
         }
 
