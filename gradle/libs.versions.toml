@@ -9,9 +9,9 @@ android-sdkCommon = "30.0.3"
 androidx-activityCompose = "1.3.1"
 androidx-core = "1.6.0"
 androidx-constraint-layout = "1.0.0-rc01"
-accompanist-main = "0.20.0"
-compose-main = "1.0.4"
-compose-navigation = "2.4.0-alpha10"
+accompanist-main = "0.21.2-beta"
+compose-main = "1.1.0-beta02"
+compose-navigation = "2.4.0-beta02"
 square-kotlinPoet = "1.10.2"
 
 [libraries]
