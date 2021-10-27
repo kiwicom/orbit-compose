@@ -91,7 +91,6 @@ public fun ButtonPrimarySubtle(
 public fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -107,7 +106,6 @@ public fun ButtonSecondary(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.surface.strong,
         modifier = modifier,
-        enabled = enabled,
         elevation = elevation,
         contentPadding = contentPadding,
         content = content,
@@ -118,7 +116,6 @@ public fun ButtonSecondary(
 public fun ButtonCritical(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -131,7 +128,6 @@ public fun ButtonCritical(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.main,
         modifier = modifier,
-        enabled = enabled,
         elevation = elevation,
         contentPadding = contentPadding,
         content = content,
@@ -142,7 +138,6 @@ public fun ButtonCritical(
 public fun ButtonCriticalSubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -158,7 +153,6 @@ public fun ButtonCriticalSubtle(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.subtle,
         modifier = modifier,
-        enabled = enabled,
         elevation = elevation,
         contentPadding = contentPadding,
         content = content,
@@ -169,7 +163,6 @@ public fun ButtonCriticalSubtle(
 public fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -183,7 +176,6 @@ public fun ButtonLink(
             disabledElevation = 0.dp,
         ),
         modifier = modifier,
-        enabled = enabled,
         contentPadding = contentPadding,
         content = content,
     )
@@ -194,7 +186,6 @@ private fun Button(
     onClick: () -> Unit,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentColor: Color = contentColorFor(backgroundColor),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = ButtonDefaults.elevation(),
@@ -206,18 +197,17 @@ private fun Button(
     Surface(
         modifier = modifier,
         shape = shape,
-        color = if (enabled) backgroundColor else backgroundColor.copy(alpha = 0.48f),
+        color = backgroundColor,
         contentColor = contentColor,
         border = border,
-        elevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
+        elevation = elevation?.elevation(enabled = true, interactionSource)?.value ?: 0.dp,
         onClick = onClick,
-        enabled = enabled,
         role = Role.Button,
         interactionSource = interactionSource,
         indication = rememberRipple()
     ) {
         ProvideContentEmphasis(
-            emphasis = if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled
+            emphasis = ContentEmphasis.Normal
         ) {
             ProvideMergedTextStyle(
                 value = OrbitTheme.typography.title4
