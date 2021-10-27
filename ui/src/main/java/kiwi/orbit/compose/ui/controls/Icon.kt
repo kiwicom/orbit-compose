@@ -100,4 +100,4 @@ private fun Modifier.defaultSizeFor(painter: Painter) =
 
 private fun Size.isInfinite() = width.isInfinite() && height.isInfinite()
 
-private val DefaultIconSizeModifier = Modifier.size(24.dp)
+private val DefaultIconSizeModifier = Modifier.size(16.dp)
