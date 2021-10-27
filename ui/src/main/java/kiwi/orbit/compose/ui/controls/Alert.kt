@@ -18,8 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.LocalAlertScope
 import kiwi.orbit.compose.ui.foundation.LocalColors
-import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
@@ -37,7 +37,6 @@ public fun AlertInfo(
 ) {
     CompositionLocalProvider(
         LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
-        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -59,7 +58,6 @@ public fun AlertSuccess(
 ) {
     CompositionLocalProvider(
         LocalColors provides OrbitTheme.colors.asSuccessTheme(),
-        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -81,7 +79,6 @@ public fun AlertWarning(
 ) {
     CompositionLocalProvider(
         LocalColors provides OrbitTheme.colors.asWarningTheme(),
-        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -103,7 +100,6 @@ public fun AlertCritical(
 ) {
     CompositionLocalProvider(
         LocalColors provides OrbitTheme.colors.asCriticalTheme(),
-        LocalElevationEnabled provides false,
     ) {
         Alert(
             icon = icon,
@@ -154,16 +150,20 @@ private fun AlertContent(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
-            title()
-        }
+        CompositionLocalProvider(
+            LocalAlertScope provides true
+        ) {
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
+                title()
+            }
 
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-            content()
-        }
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+                content()
+            }
 
-        if (actions != null) {
-            AlertButtons(Modifier.padding(top = 8.dp), actions)
+            if (actions != null) {
+                AlertButtons(Modifier.padding(top = 8.dp), actions)
+            }
         }
     }
 }

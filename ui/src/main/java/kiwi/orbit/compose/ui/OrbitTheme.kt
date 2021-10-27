@@ -14,7 +14,6 @@ import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
-import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
 import kiwi.orbit.compose.ui.foundation.LocalShapes
 import kiwi.orbit.compose.ui.foundation.LocalTypography
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -69,11 +68,6 @@ public object OrbitTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalShapes.current
-
-    public val elevationEnabled: Boolean
-        @Composable
-        @ReadOnlyComposable
-        get() = LocalElevationEnabled.current
 }
 
 private object MaterialRippleTheme : RippleTheme {
