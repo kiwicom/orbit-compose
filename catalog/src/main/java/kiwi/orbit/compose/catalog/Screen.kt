@@ -2,8 +2,8 @@ package kiwi.orbit.compose.catalog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
@@ -18,12 +18,11 @@ import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun SubScreen(
+fun Screen(
     title: String,
     onUpClick: () -> Unit,
     withBackground: Boolean = true,
-    scrollable: Boolean = true,
-    content: @Composable () -> Unit,
+    content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -42,27 +41,21 @@ fun SubScreen(
             )
         },
         content = {
-            if (scrollable) {
-                LazyColumn(
-                    modifier = if (withBackground) Modifier
-                        .background(OrbitTheme.colors.surface.main)
-                        .fillMaxHeight()
-                    else Modifier,
-                    contentPadding = rememberInsetsPaddingValues(
-                        insets = LocalWindowInsets.current.navigationBars
+            val contentPadding = rememberInsetsPaddingValues(
+                insets = LocalWindowInsets.current.navigationBars
+            )
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(
+                        if (withBackground) {
+                            OrbitTheme.colors.surface.main
+                        } else {
+                            OrbitTheme.colors.surface.background
+                        }
                     )
-                ) {
-                    item { content() }
-                }
-            } else {
-                Box(
-                    modifier = if (withBackground) Modifier
-                        .background(OrbitTheme.colors.surface.main)
-                        .fillMaxHeight()
-                    else Modifier,
-                ) {
-                    content()
-                }
+            ) {
+                content(contentPadding)
             }
         },
     )

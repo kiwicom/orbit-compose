@@ -2,13 +2,17 @@ package kiwi.orbit.compose.catalog.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.SubScreen
+import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -29,19 +33,26 @@ import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun XProfileScreen(onUpClick: () -> Unit) {
-    SubScreen(
+    Screen(
         title = "Profile",
         onUpClick = onUpClick,
         withBackground = false,
     ) {
-        XProfileScreenInner()
+        Box(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(it)
+        ) {
+            XProfileScreenInner()
+        }
     }
 }
 
 @Preview
 @Composable
-fun XProfileScreenInner() {
-    Column(modifier = Modifier.padding(16.dp)) {
+private fun XProfileScreenInner() {
+    Column(Modifier.padding(16.dp)) {
         Image(painter = Illustrations.WomanWithPhone, contentDescription = null, Modifier.fillMaxWidth())
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -74,7 +85,7 @@ fun XProfileScreenInner() {
 }
 
 @Composable
-fun MenuItem(
+private fun MenuItem(
     text: String,
     icon: Painter,
     badge: String? = null,
@@ -104,6 +115,6 @@ fun MenuItem(
 }
 
 @Composable
-fun MenuItemSeparator() {
+private fun MenuItemSeparator() {
     Separator(startIndent = 32.dp + 24.dp, thickness = 0.5.dp)
 }

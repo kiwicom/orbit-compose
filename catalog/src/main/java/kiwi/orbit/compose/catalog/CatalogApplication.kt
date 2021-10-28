@@ -11,7 +11,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun DemoApp() {
+fun CatalogApplication() {
     ProvideWindowInsets {
         var isLightTheme by remember { mutableStateOf(true) }
         val systemUiController = rememberSystemUiController()
