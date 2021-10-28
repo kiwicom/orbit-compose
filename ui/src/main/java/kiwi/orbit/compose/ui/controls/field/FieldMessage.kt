@@ -14,11 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -26,7 +26,6 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 internal fun FieldMessage(
     error: @Composable (() -> Unit)? = null,
     info: @Composable (() -> Unit)? = null,
-    textStyle: TextStyle
 ) {
     val state = when {
         error != null -> Message.Error(error)
@@ -69,7 +68,7 @@ internal fun FieldMessage(
                         .size(16.dp),
                     tint = tintColor,
                 )
-                ProvideMergedTextStyle(textStyle.copy(color = tintColor)) {
+                ProvideMergedTextStyle(LocalTextStyle.current.copy(color = tintColor)) {
                     message.content.invoke()
                 }
             }

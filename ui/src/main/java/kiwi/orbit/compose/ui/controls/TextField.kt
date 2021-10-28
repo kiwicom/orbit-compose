@@ -143,7 +143,7 @@ public fun TextField(
                 }
             )
 
-            FieldMessage(error, info, textStyle)
+            FieldMessage(error, info)
         }
     }
 }
