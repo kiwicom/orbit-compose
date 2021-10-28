@@ -17,6 +17,7 @@ import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Input
 import androidx.compose.material.icons.rounded.LabelImportant
+import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
@@ -57,6 +58,7 @@ fun MainScreen(
         Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
+        Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
         Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
         Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
         Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
