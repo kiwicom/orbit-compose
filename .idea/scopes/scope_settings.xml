@@ -1,0 +1,5 @@
+<component name="DependencyValidationManager">
+  <state>
+    <deny_rule from_scope="All" to_scope="ComposeMaterial" is_deny="true" />
+  </state>
+</component>
