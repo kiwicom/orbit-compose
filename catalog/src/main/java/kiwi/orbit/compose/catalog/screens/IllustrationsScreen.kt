@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
-import kiwi.orbit.compose.catalog.SubScreen
+import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
@@ -26,11 +26,10 @@ import kotlin.reflect.full.memberProperties
 
 @Composable
 fun IllustrationsScreen(onUpClick: () -> Unit) {
-    SubScreen(
+    Screen(
         title = "Illustrations",
         onUpClick = onUpClick,
         withBackground = false,
-        scrollable = false,
     ) {
         IllustrationsScreenInner()
     }

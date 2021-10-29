@@ -1,11 +1,15 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,32 +18,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.SubScreen
+import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.Checkbox
 import kiwi.orbit.compose.ui.controls.CheckboxField
-import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun CheckboxScreen(onUpClick: () -> Unit) {
-    SubScreen(
+    Screen(
         title = "Checkbox Button",
         onUpClick = onUpClick,
     ) {
-        Surface {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-            ) {
-                CheckboxScreenInner()
-            }
+        Box(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(it)
+        ) {
+            CheckboxScreenInner()
         }
     }
 }
 
 @Preview
 @Composable
-fun CheckboxScreenInner() {
+private fun CheckboxScreenInner() {
     Column {
         Row(Modifier.padding(16.dp)) {
             var checkbox1 by remember { mutableStateOf(true) }
