@@ -25,6 +25,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.Icon
@@ -32,11 +34,12 @@ import kiwi.orbit.compose.ui.controls.PasswordTextField
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TextField
 
+@Destination
 @Composable
-fun TextFieldScreen(onUpClick: () -> Unit) {
+fun TextFieldScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Text Field",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
     ) {
         Box(
             Modifier

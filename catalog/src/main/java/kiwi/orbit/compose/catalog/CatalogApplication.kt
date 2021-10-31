@@ -4,16 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.ramcosta.composedestinations.DestinationsNavHost
+
+var isLightTheme by mutableStateOf(true)
 
 @Composable
 fun CatalogApplication() {
     ProvideWindowInsets {
-        var isLightTheme by remember { mutableStateOf(true) }
         val systemUiController = rememberSystemUiController()
 
         SideEffect {
@@ -23,11 +24,7 @@ fun CatalogApplication() {
         }
 
         AppTheme(isLightTheme = isLightTheme) {
-            NavGraph(
-                onToggleTheme = {
-                    isLightTheme = !isLightTheme
-                }
-            )
+            DestinationsNavHost()
         }
     }
 }

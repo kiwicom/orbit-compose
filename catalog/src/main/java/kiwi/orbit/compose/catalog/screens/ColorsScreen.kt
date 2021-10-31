@@ -17,6 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
@@ -24,11 +26,12 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.foundation.FeatureColors
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
+@Destination
 @Composable
-fun ColorsScreen(onUpClick: () -> Unit) {
+fun ColorsScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Colors",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
         withBackground = false,
     ) {
         Box(

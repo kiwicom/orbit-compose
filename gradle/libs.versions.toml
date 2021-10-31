@@ -12,6 +12,7 @@ androidx-constraint-layout = "1.0.0-rc01"
 accompanist-main = "0.21.2-beta"
 compose-main = "1.1.0-beta02"
 compose-navigation = "2.4.0-beta02"
+raamcosta-composeDestinations = "0.9.4-beta"
 square-kotlinPoet = "1.10.2"
 
 [libraries]
@@ -43,6 +44,8 @@ compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-main" }
 compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-main" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util", version.ref = "compose-main" }
 compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose-main" }
+raamcosta-composeDestinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "raamcosta-composeDestinations" }
+raamcosta-composeDestinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "raamcosta-composeDestinations" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 [bundles]

@@ -16,15 +16,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Switch
 
+@Destination
 @Composable
-fun SwitchScreen(onUpClick: () -> Unit) {
+fun SwitchScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Switch",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
     ) {
         Box(
             Modifier

@@ -10,6 +10,7 @@ plugins {
     id("com.android.application") version "7.0.3" apply false
     id("org.jmailen.kotlinter") version "3.6.0" apply false
     id("com.vanniktech.maven.publish") version "0.18.0" apply false
+    id("com.google.devtools.ksp") version "1.5.31-1.0.0" apply false
 }
 
 subprojects {

@@ -4,11 +4,15 @@ import androidx.compose.material.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import kiwi.orbit.compose.ui.foundation.MaterialIsland
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.DestinationStyle
 
+@Destination(style = DestinationStyle.Dialog::class)
 @Composable
-fun DialogsMaterialDialog(navController: NavController) {
+fun DialogsMaterialDialog(navigator: DestinationsNavigator) {
     DialogsMaterialDialog(
-        onClose = { navController.popBackStack() },
+        onClose = navigator::popBackStack,
     )
 }
 

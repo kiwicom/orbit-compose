@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonCritical
@@ -26,11 +28,12 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.foundation.ProvideColors
 import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
 
+@Destination
 @Composable
-fun ButtonScreen(onUpClick: () -> Unit) {
+fun ButtonScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Button",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
     ) {
         Box(
             Modifier

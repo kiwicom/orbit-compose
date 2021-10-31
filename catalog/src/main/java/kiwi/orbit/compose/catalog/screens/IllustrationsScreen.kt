@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -24,11 +26,12 @@ import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Text
 import kotlin.reflect.full.memberProperties
 
+@Destination
 @Composable
-fun IllustrationsScreen(onUpClick: () -> Unit) {
+fun IllustrationsScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Illustrations",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
         withBackground = false,
     ) {
         IllustrationsScreenInner()

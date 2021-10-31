@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.AlertCritical
 import kiwi.orbit.compose.ui.controls.AlertInfo
@@ -21,11 +23,12 @@ import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
 import kiwi.orbit.compose.ui.controls.Text
 
+@Destination
 @Composable
-fun AlertScreen(onUpClick: () -> Unit) {
+fun AlertScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Alert",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
     ) {
         Box(
             Modifier

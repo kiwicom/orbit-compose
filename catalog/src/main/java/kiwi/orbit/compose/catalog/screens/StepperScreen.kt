@@ -14,14 +14,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.Stepper
 
+@Destination
 @Composable
-fun StepperScreen(onUpClick: () -> Unit) {
+fun StepperScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Stepper",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
     ) {
         Box(
             Modifier

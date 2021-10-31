@@ -9,18 +9,19 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.DialogsMaterialDialogDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.Text
 
+@Destination
 @Composable
-fun DialogsScreen(
-    onUpClick: () -> Unit,
-    onShowMaterialDialog: () -> Unit,
-) {
+fun DialogsScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Dialogs",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
         withBackground = false,
     ) {
         Box(
@@ -29,7 +30,7 @@ fun DialogsScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(it)
         ) {
-            DialogsScreenInner(onShowMaterialDialog)
+            DialogsScreenInner { navigator.navigate(DialogsMaterialDialogDestination) }
         }
     }
 }

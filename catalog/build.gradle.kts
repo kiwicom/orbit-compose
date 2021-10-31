@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
+    id("com.google.devtools.ksp")
     id("com.android.application")
     kotlin("android")
     id("org.jmailen.kotlinter")
@@ -70,6 +71,13 @@ android {
         isAbortOnError = true
         isWarningsAsErrors = true
     }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDir("build/generated/ksp/debug/kotlin")
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+    }
 }
 
 kotlinter {
@@ -101,6 +109,9 @@ dependencies {
 
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
+
+    implementation(libs.raamcosta.composeDestinations.core)
+    ksp(libs.raamcosta.composeDestinations.ksp)
 
     debugImplementation(libs.compose.tooling)
 }

@@ -16,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -23,11 +25,12 @@ import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Text
 import kotlin.reflect.full.memberProperties
 
+@Destination
 @Composable
-fun IconsScreen(onUpClick: () -> Unit) {
+fun IconsScreen(navigator: DestinationsNavigator) {
     Screen(
         title = "Icons",
-        onUpClick = onUpClick,
+        onUpClick = navigator::navigateUp,
         withBackground = false,
     ) {
         IconsScreenInner()

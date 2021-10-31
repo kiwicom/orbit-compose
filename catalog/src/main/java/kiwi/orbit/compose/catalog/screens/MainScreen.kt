@@ -26,8 +26,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
-import kiwi.orbit.compose.catalog.MainActions
+import com.ramcosta.composedestinations.AlertScreenDestination
+import com.ramcosta.composedestinations.BadgeScreenDestination
+import com.ramcosta.composedestinations.ButtonScreenDestination
+import com.ramcosta.composedestinations.CardsScreenDestination
+import com.ramcosta.composedestinations.CheckboxScreenDestination
+import com.ramcosta.composedestinations.ColorsScreenDestination
+import com.ramcosta.composedestinations.DialogsScreenDestination
+import com.ramcosta.composedestinations.IconsScreenDestination
+import com.ramcosta.composedestinations.IllustrationsScreenDestination
+import com.ramcosta.composedestinations.RadioScreenDestination
+import com.ramcosta.composedestinations.StepperScreenDestination
+import com.ramcosta.composedestinations.SwitchScreenDestination
+import com.ramcosta.composedestinations.TagScreenDestination
+import com.ramcosta.composedestinations.TextFieldScreenDestination
+import com.ramcosta.composedestinations.TypographyScreenDestination
+import com.ramcosta.composedestinations.XProfileScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.Routed
 import kiwi.orbit.compose.catalog.components.Scaffold
+import kiwi.orbit.compose.catalog.isLightTheme
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
@@ -37,34 +55,36 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
+@com.ramcosta.composedestinations.annotation.Destination(start = true)
 @Composable
-fun MainScreen(
-    actions: MainActions,
-    onToggleTheme: () -> Unit,
-) {
+fun MainScreen(navigator: DestinationsNavigator) {
+    fun go(destination: () -> Routed): () -> Unit = {
+        navigator.navigate(destination())
+    }
+
     val foundation = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Colors", { Icon(MaterialIcons.Palette, null) }, actions::showColors),
-        Triple("Icons", { Icon(Icons.Airplane, null) }, actions::showIcons),
-        Triple("Illustrations", { Icon(Icons.Gallery, null) }, actions::showIllustrations),
-        Triple("Typography", { Icon(MaterialIcons.FormatSize, null) }, actions::showTypography),
+        Triple("Colors", { Icon(MaterialIcons.Palette, null) }, go { ColorsScreenDestination }),
+        Triple("Icons", { Icon(Icons.Airplane, null) }, go { IconsScreenDestination }),
+        Triple("Illustrations", { Icon(Icons.Gallery, null) }, go { IllustrationsScreenDestination }),
+        Triple("Typography", { Icon(MaterialIcons.FormatSize, null) }, go { TypographyScreenDestination }),
     )
 
     val controls = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Alert", { Icon(Icons.Alert, null) }, actions::showAlert),
-        Triple("Badge", { Icon(Icons.Deals, null) }, actions::showBadge),
-        Triple("Button", { Icon(MaterialIcons.SmartButton, null) }, actions::showButton),
-        Triple("Cards / Tiles", { Icon(MaterialIcons.Article, null) }, actions::showCards),
-        Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
-        Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
-        Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
-        Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
-        Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
-        Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
-        Triple("Text Field", { Icon(MaterialIcons.Input, null) }, actions::showTextField),
+        Triple("Alert", { Icon(Icons.Alert, null) }, go { AlertScreenDestination }),
+        Triple("Badge", { Icon(Icons.Deals, null) }, go { BadgeScreenDestination }),
+        Triple("Button", { Icon(MaterialIcons.SmartButton, null) }, go { ButtonScreenDestination }),
+        Triple("Cards / Tiles", { Icon(MaterialIcons.Article, null) }, go { CardsScreenDestination }),
+        Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, go { CheckboxScreenDestination }),
+        Triple("Dialogs", { Icon(Icons.Chat, null) }, go { DialogsScreenDestination }),
+        Triple("Radio", { Icon(Icons.CircleFilled, null) }, go { RadioScreenDestination }),
+        Triple("Stepper", { Icon(Icons.PlusCircle, null) }, go { StepperScreenDestination }),
+        Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, go { SwitchScreenDestination }),
+        Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, go { TagScreenDestination }),
+        Triple("Text Field", { Icon(MaterialIcons.Input, null) }, go { TextFieldScreenDestination }),
     )
 
     val demos = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Profile", { Icon(Icons.AccountCircle, null) }, actions::showXProfile),
+        Triple("Profile", { Icon(Icons.AccountCircle, null) }, go { XProfileScreenDestination }),
     )
 
     Scaffold(
@@ -72,7 +92,7 @@ fun MainScreen(
             TopAppBar(
                 title = { Text("Orbit Compose Catalog") },
                 actions = {
-                    IconButton(onClick = onToggleTheme) {
+                    IconButton(onClick = { isLightTheme = !isLightTheme }) {
                         Icon(MaterialIcons.BrightnessMedium, contentDescription = null)
                     }
                 }
