@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="orbit_cd_navigate_up">Navigate up</string>
     <string name="orbit_cd_stepper_add">Add</string>
     <string name="orbit_cd_stepper_remove">Remove</string>
     <string name="orbit_cd_text_field_hide_password">Hide password</string>

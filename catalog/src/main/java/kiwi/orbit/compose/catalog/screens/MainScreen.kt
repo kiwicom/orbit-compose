@@ -25,18 +25,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.compose.catalog.MainActions
 import kiwi.orbit.compose.catalog.components.Scaffold
-import kiwi.orbit.compose.catalog.components.TopAppBar
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
 @Composable
@@ -72,9 +70,6 @@ fun MainScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Orbit Compose Catalog") },
-                contentPadding = rememberInsetsPaddingValues(
-                    insets = LocalWindowInsets.current.statusBars,
-                ),
                 actions = {
                     IconButton(onClick = onToggleTheme) {
                         Icon(MaterialIcons.BrightnessMedium, contentDescription = null)

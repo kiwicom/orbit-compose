@@ -50,7 +50,12 @@ dependencies {
     implementation(projects.icons)
 
     implementation(libs.kotlin.stdlib)
+
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.insetsUi)
+
     implementation(libs.androidx.core)
+
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
     implementation(libs.compose.materialRipple)
