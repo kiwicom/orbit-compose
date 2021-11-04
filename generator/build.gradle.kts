@@ -1,5 +1,5 @@
 plugins {
-    id("java-library")
+    id("java")
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("org.jmailen.kotlinter")
@@ -22,4 +22,19 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.serialization)
     implementation(libs.square.kotlinPoet)
+}
+
+tasks.register<JavaExec>("colors") {
+    main = "kiwi.orbit.compose.generator.colors.RunnerKt"
+    classpath = sourceSets.getByName("main").runtimeClasspath
+}
+
+tasks.register<JavaExec>("icons") {
+    main = "kiwi.orbit.compose.generator.icons.RunnerKt"
+    classpath = sourceSets.getByName("main").runtimeClasspath
+}
+
+tasks.register<JavaExec>("illustrations") {
+    main = "kiwi.orbit.compose.generator.illustrations.RunnerKt"
+    classpath = sourceSets.getByName("main").runtimeClasspath
 }
