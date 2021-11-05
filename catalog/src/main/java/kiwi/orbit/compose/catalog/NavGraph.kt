@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
@@ -12,6 +13,8 @@ import kiwi.orbit.compose.catalog.screens.ButtonScreen
 import kiwi.orbit.compose.catalog.screens.CardsScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
+import kiwi.orbit.compose.catalog.screens.DialogsMaterialDialog
+import kiwi.orbit.compose.catalog.screens.DialogsScreen
 import kiwi.orbit.compose.catalog.screens.IconsScreen
 import kiwi.orbit.compose.catalog.screens.IllustrationsScreen
 import kiwi.orbit.compose.catalog.screens.MainScreen
@@ -36,6 +39,8 @@ private object MainDestinations {
     const val BUTTON = "button"
     const val CARDS = "cards"
     const val CHECKBOX = "checkbox"
+    const val DIALOGS = "dialogs"
+    const val DIALOGS_MATERIAL_DIALOG = "dialgos_material_dialog"
     const val RADIO = "radio"
     const val STEPPER = "stepper"
     const val SWITCH = "switch"
@@ -88,6 +93,15 @@ fun NavGraph(
         }
         composable(MainDestinations.CHECKBOX) {
             CheckboxScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.DIALOGS) {
+            DialogsScreen(
+                actions::navigateUp,
+                actions::showDialogsMaterialDialog,
+            )
+        }
+        dialog(MainDestinations.DIALOGS_MATERIAL_DIALOG) {
+            DialogsMaterialDialog(navController)
         }
         composable(MainDestinations.RADIO) {
             RadioScreen(actions::navigateUp)
@@ -152,6 +166,14 @@ class MainActions(
 
     fun showCheckbox() {
         navController.navigate(MainDestinations.CHECKBOX)
+    }
+
+    fun showDialogs() {
+        navController.navigate(MainDestinations.DIALOGS)
+    }
+
+    fun showDialogsMaterialDialog() {
+        navController.navigate(MainDestinations.DIALOGS_MATERIAL_DIALOG)
     }
 
     fun showRadio() {

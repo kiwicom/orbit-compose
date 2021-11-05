@@ -12,6 +12,14 @@ public data class Shapes(
     val small: CornerBasedShape = RoundedCornerShape(4.dp),
     val normal: CornerBasedShape = RoundedCornerShape(6.dp),
     val large: CornerBasedShape = RoundedCornerShape(12.dp),
-)
+) {
+    @Suppress("Dependency")
+    internal fun toMaterialShapes(): androidx.compose.material.Shapes =
+        androidx.compose.material.Shapes(
+            small = small,
+            medium = normal,
+            large = large,
+        )
+}
 
 internal val LocalShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf { Shapes() }
