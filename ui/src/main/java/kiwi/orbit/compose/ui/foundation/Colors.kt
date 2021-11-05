@@ -130,6 +130,24 @@ public class Colors(
         critical = critical,
         isLight = isLight,
     )
+
+    @Suppress("Dependency")
+    internal fun toMaterialColors(): androidx.compose.material.Colors =
+        androidx.compose.material.Colors(
+            primary = primary.main,
+            primaryVariant = primary.strong,
+            secondary = interactive.main,
+            secondaryVariant = interactive.strong,
+            background = surface.background,
+            surface = surface.main,
+            error = critical.main,
+            onPrimary = primary.onMain,
+            onSecondary = interactive.onMain,
+            onBackground = content.normal,
+            onSurface = content.normal,
+            onError = critical.onMain,
+            isLight = isLight,
+        )
 }
 
 @Composable

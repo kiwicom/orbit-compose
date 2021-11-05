@@ -85,6 +85,24 @@ public data class Typography internal constructor(
         bodyNormal = bodyNormal.withDefaultFontFamily(defaultFontFamily),
         bodySmall = bodySmall.withDefaultFontFamily(defaultFontFamily),
     )
+
+    @Suppress("Dependency")
+    internal fun toMaterialTypography(): androidx.compose.material.Typography =
+        androidx.compose.material.Typography(
+            defaultFontFamily = displayTitle.fontFamily ?: FontFamily.Default,
+            h1 = displayTitle.copy(fontSize = 96.sp),
+            h2 = displayTitle.copy(fontSize = 60.sp),
+            h3 = displayTitle,
+            h4 = title2,
+            h5 = title2,
+            h6 = title3,
+            subtitle1 = title3,
+            subtitle2 = title4,
+            overline = title5,
+            body1 = bodyLarge,
+            body2 = bodyNormal,
+            button = title4,
+        )
 }
 
 private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {

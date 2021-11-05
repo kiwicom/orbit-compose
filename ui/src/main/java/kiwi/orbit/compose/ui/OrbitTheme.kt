@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui
 
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material.ripple.rememberRipple
@@ -21,6 +22,7 @@ import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
 import kiwi.orbit.compose.ui.foundation.updateColorsFrom
 
+@Suppress("Dependency")
 @Composable
 public fun OrbitTheme(
     colors: Colors = OrbitTheme.colors,
@@ -42,7 +44,13 @@ public fun OrbitTheme(
         LocalIndication provides rippleIndication,
         LocalTypography provides typography,
     ) {
-        ProvideMergedTextStyle(typography.bodyNormal, content = content)
+        MaterialTheme(
+            colors = rememberedColors.toMaterialColors(),
+            typography = typography.toMaterialTypography(),
+            shapes = shapes.toMaterialShapes(),
+        ) {
+            ProvideMergedTextStyle(typography.bodyNormal, content = content)
+        }
     }
 }
 
