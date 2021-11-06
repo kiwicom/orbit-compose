@@ -27,6 +27,7 @@ accompanist-insets = { module = "com.google.accompanist:accompanist-insets", ver
 accompanist-insetsUi = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist-main" }
 accompanist-systemController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-main" }
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-main" }
+compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose-main" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-main" }
 compose-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose-main" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose-main" }
