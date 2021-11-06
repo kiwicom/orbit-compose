@@ -78,7 +78,7 @@ public object OrbitTheme {
         get() = LocalElevationEnabled.current
 }
 
-private object OrbitRippleTheme : RippleTheme {
+internal object OrbitRippleTheme : RippleTheme {
     @Composable
     override fun defaultColor() = RippleTheme.defaultRippleColor(
         contentColor = LocalContentColor.current,
