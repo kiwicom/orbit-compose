@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui
 
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleTheme
@@ -18,6 +19,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTypography
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
+import kiwi.orbit.compose.ui.foundation.rememberTextSelectionColors
 import kiwi.orbit.compose.ui.foundation.updateColorsFrom
 
 @Suppress("Dependency")
@@ -31,6 +33,7 @@ public fun OrbitTheme(
     val rememberedColors = remember { colors.copy() }.apply {
         updateColorsFrom(colors)
     }
+    val selectionColors = rememberTextSelectionColors(rememberedColors)
 
     MaterialTheme(
         colors = rememberedColors.toMaterialColors(),
@@ -46,6 +49,7 @@ public fun OrbitTheme(
             LocalTypography provides typography,
             // Foundation
             LocalRippleTheme provides OrbitRippleTheme,
+            LocalTextSelectionColors provides selectionColors,
         ) {
             ProvideMergedTextStyle(typography.bodyNormal, content = content)
         }
