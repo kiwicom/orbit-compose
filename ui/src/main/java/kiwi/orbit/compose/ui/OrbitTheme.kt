@@ -1,10 +1,8 @@
 package kiwi.orbit.compose.ui
 
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -33,21 +31,21 @@ public fun OrbitTheme(
     val rememberedColors = remember { colors.copy() }.apply {
         updateColorsFrom(colors)
     }
-    val rippleIndication = rememberRipple()
 
-    CompositionLocalProvider(
-        LocalColors provides rememberedColors,
-        LocalContentColor provides colors.content.normal,
-        LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalRippleTheme provides MaterialRippleTheme,
-        LocalShapes provides shapes,
-        LocalIndication provides rippleIndication,
-        LocalTypography provides typography,
+    MaterialTheme(
+        colors = rememberedColors.toMaterialColors(),
+        typography = typography.toMaterialTypography(),
+        shapes = shapes.toMaterialShapes(),
     ) {
-        MaterialTheme(
-            colors = rememberedColors.toMaterialColors(),
-            typography = typography.toMaterialTypography(),
-            shapes = shapes.toMaterialShapes(),
+        CompositionLocalProvider(
+            // Orbit
+            LocalColors provides rememberedColors,
+            LocalContentColor provides colors.content.normal,
+            LocalContentEmphasis provides ContentEmphasis.Normal,
+            LocalShapes provides shapes,
+            LocalTypography provides typography,
+            // Foundation
+            LocalRippleTheme provides OrbitRippleTheme,
         ) {
             ProvideMergedTextStyle(typography.bodyNormal, content = content)
         }
@@ -76,7 +74,7 @@ public object OrbitTheme {
         get() = LocalElevationEnabled.current
 }
 
-private object MaterialRippleTheme : RippleTheme {
+private object OrbitRippleTheme : RippleTheme {
     @Composable
     override fun defaultColor() = RippleTheme.defaultRippleColor(
         contentColor = LocalContentColor.current,
