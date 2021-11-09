@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
-import kiwi.orbit.compose.ui.foundation.LocalElevationEnabled
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
@@ -49,7 +48,6 @@ public fun ThemedSurface(
 
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
-        LocalElevationEnabled provides false,
     ) {
         Row(
             modifier = modifier

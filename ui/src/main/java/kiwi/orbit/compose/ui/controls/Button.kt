@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalAlertScope
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
@@ -47,16 +48,11 @@ public fun ButtonPrimary(
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val elevation = if (OrbitTheme.elevationEnabled) {
-        ButtonDefaults.elevation()
-    } else {
-        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
-    }
     Button(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.main,
         modifier = modifier,
-        elevation = elevation,
+        elevation = ButtonDefaults.elevation(),
         contentPadding = contentPadding,
         content = content,
     )
@@ -69,19 +65,14 @@ public fun ButtonPrimarySubtle(
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val elevation = if (OrbitTheme.elevationEnabled) {
-        ButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 4.dp,
-        )
-    } else {
-        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
-    }
     Button(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.subtle,
         modifier = modifier,
-        elevation = elevation,
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -91,24 +82,17 @@ public fun ButtonPrimarySubtle(
 public fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val elevation = if (OrbitTheme.elevationEnabled) {
-        ButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 2.dp,
-        )
-    } else {
-        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
-    }
     Button(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.surface.strong,
         modifier = modifier,
-        enabled = enabled,
-        elevation = elevation,
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 2.dp,
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -118,21 +102,14 @@ public fun ButtonSecondary(
 public fun ButtonCritical(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val elevation = if (OrbitTheme.elevationEnabled) {
-        ButtonDefaults.elevation()
-    } else {
-        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
-    }
     Button(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.main,
         modifier = modifier,
-        enabled = enabled,
-        elevation = elevation,
+        elevation = ButtonDefaults.elevation(),
         contentPadding = contentPadding,
         content = content,
     )
@@ -142,24 +119,17 @@ public fun ButtonCritical(
 public fun ButtonCriticalSubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val elevation = if (OrbitTheme.elevationEnabled) {
-        ButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 4.dp,
-        )
-    } else {
-        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
-    }
     Button(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.subtle,
         modifier = modifier,
-        enabled = enabled,
-        elevation = elevation,
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 1.dp,
+            pressedElevation = 4.dp,
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -169,7 +139,6 @@ public fun ButtonCriticalSubtle(
 public fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -183,7 +152,6 @@ public fun ButtonLink(
             disabledElevation = 0.dp,
         ),
         modifier = modifier,
-        enabled = enabled,
         contentPadding = contentPadding,
         content = content,
     )
@@ -194,7 +162,6 @@ private fun Button(
     onClick: () -> Unit,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     contentColor: Color = contentColorFor(backgroundColor),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = ButtonDefaults.elevation(),
@@ -203,21 +170,27 @@ private fun Button(
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
+    val inAlertScope = LocalAlertScope.current
+    val resolvedElevation = if (inAlertScope) {
+        ButtonDefaults.elevation(0.dp, 0.dp, 0.dp)
+    } else {
+        elevation
+    }
+
     Surface(
         modifier = modifier,
         shape = shape,
-        color = if (enabled) backgroundColor else backgroundColor.copy(alpha = 0.48f),
+        color = backgroundColor,
         contentColor = contentColor,
         border = border,
-        elevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
+        elevation = resolvedElevation?.elevation(enabled = true, interactionSource)?.value ?: 0.dp,
         onClick = onClick,
-        enabled = enabled,
         role = Role.Button,
         interactionSource = interactionSource,
         indication = rememberRipple()
     ) {
         ProvideContentEmphasis(
-            emphasis = if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled
+            emphasis = ContentEmphasis.Normal
         ) {
             ProvideMergedTextStyle(
                 value = OrbitTheme.typography.title4
@@ -226,7 +199,10 @@ private fun Button(
                     Modifier
                         .defaultMinSize(
                             minWidth = ButtonDefaults.MinWidth,
-                            minHeight = ButtonDefaults.MinHeight
+                            minHeight = when (inAlertScope) {
+                                true -> ButtonDefaults.MinAlertHeight
+                                false -> ButtonDefaults.MinHeight
+                            }
                         )
                         .padding(contentPadding),
                     horizontalArrangement = Arrangement.Center,
@@ -412,6 +388,8 @@ public object ButtonDefaults {
      * Note that you can override it by applying Modifier.heightIn directly on [Button].
      */
     public val MinHeight: Dp = 44.dp
+
+    public val MinAlertHeight: Dp = 32.dp
 
     // TODO: b/152525426 add support for focused and hovered states
 
