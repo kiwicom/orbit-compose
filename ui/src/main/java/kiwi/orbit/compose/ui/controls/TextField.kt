@@ -137,7 +137,10 @@ public fun TextField(
                 }
             )
 
-            FieldMessage(error, info)
+            FieldMessage(
+                error = error,
+                info = if (isFocused) info else null, // Present info only in focused mode.
+            )
         }
     }
 }
