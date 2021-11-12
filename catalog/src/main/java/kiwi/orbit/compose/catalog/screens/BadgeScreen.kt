@@ -219,13 +219,13 @@ private fun BadgeScreenInner() {
             }
             Spacer(modifier = Modifier.size(8.dp))
             BadgeCritical(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
             Spacer(modifier = Modifier.size(8.dp))
             BadgeCritical(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
         }
@@ -236,13 +236,13 @@ private fun BadgeScreenInner() {
             }
             Spacer(modifier = Modifier.size(8.dp))
             BadgeCriticalSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
             Spacer(modifier = Modifier.size(8.dp))
             BadgeCriticalSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
         }

@@ -1,10 +1,11 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -194,10 +195,11 @@ private fun Badge(
         strokeWidth = 0.5.dp,
         modifier = modifier.requiredHeight(24.dp),
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(vertical = 2.dp, horizontal = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        contentPadding = PaddingValues(horizontal = 8.dp),
     ) {
         if (icon != null) {
-            Box(Modifier.size(20.dp)) {
+            Box(Modifier.sizeIn(maxHeight = 16.dp, maxWidth = 16.dp)) {
                 icon()
             }
         }
