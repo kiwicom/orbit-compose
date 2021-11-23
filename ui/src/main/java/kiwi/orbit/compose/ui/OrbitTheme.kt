@@ -1,10 +1,7 @@
 package kiwi.orbit.compose.ui
 
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -40,12 +37,10 @@ public fun OrbitTheme(
         CompositionLocalProvider(
             // Orbit
             LocalColors provides rememberedColors,
-            LocalContentColor provides colors.content.normal,
             LocalContentEmphasis provides ContentEmphasis.Normal,
             LocalShapes provides shapes,
             LocalTypography provides typography,
             // Foundation
-            LocalRippleTheme provides OrbitRippleTheme,
             LocalTextSelectionColors provides selectionColors,
             content = content
         )
@@ -67,18 +62,4 @@ public object OrbitTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalShapes.current
-}
-
-internal object OrbitRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor() = RippleTheme.defaultRippleColor(
-        contentColor = LocalContentColor.current,
-        lightTheme = OrbitTheme.colors.isLight
-    )
-
-    @Composable
-    override fun rippleAlpha() = RippleTheme.defaultRippleAlpha(
-        contentColor = LocalContentColor.current,
-        lightTheme = OrbitTheme.colors.isLight
-    )
 }
