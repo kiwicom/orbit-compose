@@ -1,8 +1,10 @@
+@file:Suppress("Dependency")
+
 package kiwi.orbit.compose.ui.foundation
 
+import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -41,4 +43,4 @@ private fun FeatureColors.contentColorFor(color: Color): Color? =
 public fun contentColorFor(backgroundColor: Color): Color =
     OrbitTheme.colors.contentColorFor(backgroundColor).takeOrElse { LocalContentColor.current }
 
-public val LocalContentColor: ProvidableCompositionLocal<Color> = compositionLocalOf { Color.Black }
+public val LocalContentColor: ProvidableCompositionLocal<Color> = LocalContentColor
