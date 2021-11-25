@@ -8,7 +8,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -108,7 +107,6 @@ public fun TextField(
                     }
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
                     .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
                     .background(backgroundColor.value, OrbitTheme.shapes.normal),
                 enabled = enabled,
@@ -123,7 +121,7 @@ public fun TextField(
                 cursorBrush = SolidColor(OrbitTheme.colors.interactive.main),
                 decorationBox = { innerTextField ->
                     FieldContent(
-                        innerContent = innerTextField,
+                        fieldContent = innerTextField,
                         placeholder = when (textFieldValue.text.isEmpty()) {
                             true -> placeholder
                             false -> null

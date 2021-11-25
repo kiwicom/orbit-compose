@@ -98,36 +98,12 @@ private fun TextFieldScreenInner() {
             ),
             keyboardActions = KeyboardActions(
                 onNext = {
-                    bioFocusRequester.requestFocus()
-                },
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(passwordFocusRequester),
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        var bio by rememberSaveable { mutableStateOf("") }
-        TextField(
-            value = bio,
-            onValueChange = { bio = it },
-            label = { Text("Bio") },
-            info = { Text("Three words about you.") },
-            leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
-            singleLine = false,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next,
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = {
                     nationalityFocusRequester.requestFocus()
                 },
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(bioFocusRequester),
+                .focusRequester(passwordFocusRequester),
         )
 
         Spacer(Modifier.height(16.dp))
@@ -148,10 +124,37 @@ private fun TextFieldScreenInner() {
                 null
             },
             info = { Text("A nationality code or full name.") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {
+                    bioFocusRequester.requestFocus()
+                },
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(nationalityFocusRequester),
+        )
+
+
+        Spacer(Modifier.height(16.dp))
+
+        var bio by rememberSaveable { mutableStateOf("") }
+        TextField(
+            value = bio,
+            onValueChange = { bio = it },
+            label = { Text("Bio") },
+            info = { Text("Three lines about you.") },
+            leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
+            singleLine = false,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text,
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(bioFocusRequester),
         )
     }
 }
