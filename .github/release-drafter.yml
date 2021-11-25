@@ -10,6 +10,8 @@ categories:
     label: 'chore'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&'
+exclude-labels:
+  - 'skip-changelog'
 version-resolver:
   major:
     labels:
