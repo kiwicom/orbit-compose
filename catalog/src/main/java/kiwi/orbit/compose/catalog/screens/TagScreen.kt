@@ -48,7 +48,7 @@ private fun TagScreenInner() {
             }
             Spacer(Modifier.size(16.dp))
             var selected by remember { mutableStateOf(false) }
-            Tag(selected, onSelect = { selected = !selected }) {
+            Tag(selected = selected, onSelect = { selected = !selected }) {
                 Text("Prague")
             }
         }
@@ -59,7 +59,7 @@ private fun TagScreenInner() {
             }
             Spacer(Modifier.size(16.dp))
             var selected by remember { mutableStateOf(true) }
-            Tag(selected, onSelect = { selected = !selected }) {
+            Tag(selected = selected, onSelect = { selected = !selected }) {
                 Text("Prague")
             }
         }
@@ -72,7 +72,7 @@ private fun TagScreenInner() {
             }
             Spacer(Modifier.size(16.dp))
             var selected by remember { mutableStateOf(false) }
-            Tag(selected, onSelect = { selected = !selected }, onRemove = {}) {
+            Tag(selected = selected, onSelect = { selected = !selected }, onRemove = {}) {
                 Text("Prague")
             }
         }
@@ -83,7 +83,7 @@ private fun TagScreenInner() {
             }
             Spacer(Modifier.size(16.dp))
             var selected by remember { mutableStateOf(true) }
-            Tag(selected, onSelect = { selected = !selected }, onRemove = {}) {
+            Tag(selected = selected, onSelect = { selected = !selected }, onRemove = {}) {
                 Text("Prague")
             }
         }

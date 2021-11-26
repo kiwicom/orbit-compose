@@ -24,6 +24,7 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
 public fun Tag(
+    modifier: Modifier = Modifier,
     selected: Boolean = false,
     onSelect: (() -> Unit)? = null,
     onRemove: (() -> Unit)? = null,
@@ -43,7 +44,7 @@ public fun Tag(
         LocalContentEmphasis provides ContentEmphasis.Normal,
     ) {
         Row(
-            Modifier
+            modifier
                 .requiredHeight(32.dp)
                 .clip(shape)
                 .background(backgroundColor, shape)
