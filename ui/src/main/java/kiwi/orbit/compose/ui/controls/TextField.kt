@@ -7,8 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,6 +25,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
+import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
@@ -52,7 +51,7 @@ public fun TextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    Column(modifier) {
+    ColumnWithMinConstraints(modifier) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
             val textFieldValue = textFieldValueState.copy(text = value)
@@ -108,7 +107,6 @@ public fun TextField(
                     }
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
                     .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
                     .background(backgroundColor.value, OrbitTheme.shapes.normal),
                 enabled = enabled,
@@ -123,7 +121,7 @@ public fun TextField(
                 cursorBrush = SolidColor(OrbitTheme.colors.interactive.main),
                 decorationBox = { innerTextField ->
                     FieldContent(
-                        innerContent = innerTextField,
+                        fieldContent = innerTextField,
                         placeholder = when (textFieldValue.text.isEmpty()) {
                             true -> placeholder
                             false -> null

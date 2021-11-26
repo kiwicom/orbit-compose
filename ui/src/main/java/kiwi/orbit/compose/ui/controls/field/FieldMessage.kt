@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.with
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -72,6 +73,9 @@ internal fun FieldMessage(
                     message.content.invoke()
                 }
             }
+        } else {
+            // Workaround to prevent shrinking in case of propagated min constraints to fill width.
+            Box {}
         }
     }
 }

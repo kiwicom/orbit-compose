@@ -1,13 +1,17 @@
 package kiwi.orbit.compose.catalog.screens
 
 import android.util.Patterns
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -98,36 +102,12 @@ private fun TextFieldScreenInner() {
             ),
             keyboardActions = KeyboardActions(
                 onNext = {
-                    bioFocusRequester.requestFocus()
-                },
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(passwordFocusRequester),
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        var bio by rememberSaveable { mutableStateOf("") }
-        TextField(
-            value = bio,
-            onValueChange = { bio = it },
-            label = { Text("Bio") },
-            info = { Text("Three words about you.") },
-            leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
-            singleLine = false,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next,
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = {
                     nationalityFocusRequester.requestFocus()
                 },
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(bioFocusRequester),
+                .focusRequester(passwordFocusRequester),
         )
 
         Spacer(Modifier.height(16.dp))
@@ -148,10 +128,68 @@ private fun TextFieldScreenInner() {
                 null
             },
             info = { Text("A nationality code or full name.") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {
+                    bioFocusRequester.requestFocus()
+                },
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(nationalityFocusRequester),
         )
+
+        Spacer(Modifier.height(16.dp))
+
+        var bio by rememberSaveable { mutableStateOf("") }
+        TextField(
+            value = bio,
+            onValueChange = { bio = it },
+            label = { Text("Bio") },
+            info = { Text("Three lines about you.") },
+            leadingIcon = { Icon(Icons.Linkedin, contentDescription = null) },
+            singleLine = false,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text,
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(bioFocusRequester),
+        )
+
+        Spacer(Modifier.height(32.dp))
+        Text("Sizing")
+        Spacer(Modifier.height(16.dp))
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            var v1 by remember { mutableStateOf("") }
+            TextField(v1, { v1 = it }, label = { Text("A") })
+
+            var v2 by remember { mutableStateOf("") }
+            TextField(v2, { v2 = it }, label = { Text("B") })
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            var v1 by remember { mutableStateOf("") }
+            TextField(v1, { v1 = it }, label = { Text("A") }, modifier = Modifier.weight(1f))
+
+            var v2 by remember { mutableStateOf("") }
+            TextField(v2, { v2 = it }, label = { Text("B") }, modifier = Modifier.weight(1f))
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.width(IntrinsicSize.Max)) {
+            var v1 by remember { mutableStateOf("") }
+            TextField(v1, { v1 = it }, label = { Text("Long label") }, modifier = Modifier.fillMaxWidth())
+
+            var v2 by remember { mutableStateOf("") }
+            TextField(v2, { v2 = it }, label = { Text("Label") }, modifier = Modifier.fillMaxWidth())
+        }
     }
 }
