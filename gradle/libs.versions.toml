@@ -10,6 +10,7 @@ androidx-activityCompose = "1.3.1"
 androidx-core = "1.6.0"
 androidx-constraint-layout = "1.0.0-rc01"
 accompanist-main = "0.21.2-beta"
+coil = "1.4.0"
 compose-main = "1.1.0-beta02"
 compose-navigation = "2.4.0-beta02"
 square-kotlinPoet = "1.10.2"
@@ -26,6 +27,7 @@ androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayo
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist-main" }
 accompanist-insetsUi = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist-main" }
 accompanist-systemController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-main" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-main" }
 compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose-main" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-main" }
