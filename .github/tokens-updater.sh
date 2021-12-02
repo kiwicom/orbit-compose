@@ -28,5 +28,5 @@ ICONS_STATE=$?
 
 if [[ $COLORS_STATE == 0 ]] || [[ $ICONS_STATE == 0 ]]; then
   git push origin "$BRANCH"
-  gh pr create --title "Design Tokens Update on $TODAY" --body "" --reviewer "kiwicom/orbit-compose" --label "tokens" --base "main" --head "$BRANCH"
+  gh pr create --title "Design Tokens Update on $TODAY" --body "" --label "tokens" --base "main" --head "$BRANCH"
 fi
