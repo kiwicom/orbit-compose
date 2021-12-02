@@ -15,3 +15,5 @@ jobs:
         with:
           java-version: 11
       - run: bash .github/tokens-updater.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
