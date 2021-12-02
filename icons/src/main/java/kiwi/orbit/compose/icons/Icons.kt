@@ -3,6 +3,7 @@ package kiwi.orbit.compose.icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import kotlin.Suppress
 
 @Suppress("unused")
 public object Icons {
@@ -305,6 +306,10 @@ public object Icons {
     public val Deals: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_deals)
+
+    public val DealsV2: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_deals_v2)
 
     public val DeviceDesktop: Painter
         @Composable
