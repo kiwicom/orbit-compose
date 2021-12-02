@@ -2,7 +2,7 @@
 set -o pipefail
 set -u
 
-PR_COUNT=$(gh pr list --json id --label "tokens" --jq length -s open)
+PR_COUNT=$(gh pr list --json id --label "design-tokens-autoupdate" --jq length -s open)
 
 if [[ $PR_COUNT -ne 0 ]]; then
   echo "Design Tokens Update pull-request is already created."
@@ -27,6 +27,6 @@ git commit -m "tokens: update icons on $TODAY"
 ICONS_STATE=$?
 
 if [[ $COLORS_STATE == 0 ]] || [[ $ICONS_STATE == 0 ]]; then
-  git push origin "$BRANCH"
-  gh pr create --title "Design Tokens Update on $TODAY" --body "" --label "tokens" --base "main" --head "$BRANCH"
+  git push -f origin "$BRANCH"
+  gh pr create --title "Design Tokens Update on $TODAY" --body "" --label "design-tokens-autoupdate" --label "feature" --base "main" --head "$BRANCH"
 fi
