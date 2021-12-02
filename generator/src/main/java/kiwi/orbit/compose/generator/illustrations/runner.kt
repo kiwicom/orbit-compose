@@ -9,8 +9,8 @@ fun main() {
     // Install into PATH:
     // - pngquant - PngQuant https://pngquant.org/ (on Windows Visual Studio 2015 Redistributable needed)
 
-    val root = Paths.get("").toAbsolutePath().toFile().absolutePath
-    val kotlinOutDir = Paths.get("$root/illustrations/src/main/java/")
+    val root = Paths.get("").toAbsolutePath().toFile().absolutePath.removeSuffix("generator")
+    val kotlinOutDir = Paths.get(root, "illustrations/src/main/java/")
     val resourceOutDir = Paths.get("$root/illustrations/src/main/res/")
     val urlIllustrationList =
         "https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-components/src/Illustration/consts.js"
