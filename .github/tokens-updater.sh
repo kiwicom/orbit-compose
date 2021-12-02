@@ -27,6 +27,6 @@ git commit -m "tokens: update icons on $TODAY"
 ICONS_STATE=$?
 
 if [[ $COLORS_STATE == 0 ]] || [[ $ICONS_STATE == 0 ]]; then
-  git push -fu
-  gh pr create --title "Design Tokens Update on $TODAY" --body "" --reviewer "kiwicom/orbit-compose" --label "tokens" --base "main" --head $BRANCH
+  git push origin "$BRANCH"
+  gh pr create --title "Design Tokens Update on $TODAY" --body "" --reviewer "kiwicom/orbit-compose" --label "tokens" --base "main" --head "$BRANCH"
 fi
