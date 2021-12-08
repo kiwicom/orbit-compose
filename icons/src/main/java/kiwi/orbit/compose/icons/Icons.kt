@@ -59,6 +59,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_alert_circle)
 
+    public val AlertOctagon: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_alert_octagon)
+
     public val All: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_all)
@@ -626,6 +630,10 @@ public object Icons {
     public val NewWindow: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_new_window)
+
+    public val NoKiwicomGuarantee: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_no_kiwicom_guarantee)
 
     public val Nonstop: Painter
         @Composable
