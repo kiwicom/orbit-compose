@@ -38,7 +38,7 @@ public data class Typography internal constructor(
             lineHeight = 36.sp,
         ),
         title2: TextStyle = TextStyle(
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Medium,
             fontSize = 22.sp,
             lineHeight = 28.sp,
         ),
