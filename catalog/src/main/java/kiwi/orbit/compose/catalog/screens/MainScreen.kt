@@ -58,6 +58,7 @@ fun MainScreen(
         Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
+        Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
         Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
         Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
         Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),

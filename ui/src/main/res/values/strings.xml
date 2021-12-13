@@ -5,4 +5,5 @@
     <string name="orbit_cd_stepper_remove">Remove</string>
     <string name="orbit_cd_text_field_hide_password">Hide password</string>
     <string name="orbit_cd_text_field_show_password">Show password</string>
+    <string name="orbit_seat_price_unavailable">-</string>
 </resources>
