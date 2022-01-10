@@ -55,7 +55,9 @@ private fun SeatScreenInner() {
             SeatLegendUnavailable { Text("Unavailable") }
         }
 
-        Column {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
             Row {
                 var seatSelected by remember { mutableStateOf(false) }
                 SeatExtraLegroom(
