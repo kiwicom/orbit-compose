@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.SeatExtraLegroom
+import kiwi.orbit.compose.ui.controls.SeatLegendExtraLegroom
+import kiwi.orbit.compose.ui.controls.SeatLegendStandard
+import kiwi.orbit.compose.ui.controls.SeatLegendUnavailable
 import kiwi.orbit.compose.ui.controls.SeatStandard
 import kiwi.orbit.compose.ui.controls.SeatUnavailable
 import kiwi.orbit.compose.ui.controls.Text
@@ -44,6 +47,14 @@ private fun SeatScreenInner() {
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            SeatLegendExtraLegroom { Text("Extra legroom ($5.99 – $12.98)") }
+            SeatLegendStandard { Text("Standard ($5.99 – $12.98)") }
+            SeatLegendUnavailable { Text("Unavailable") }
+        }
+
         Column {
             Row {
                 var seatSelected by remember { mutableStateOf(false) }
