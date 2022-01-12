@@ -172,5 +172,21 @@ private fun AlertScreenInner() {
             title = { Text("Re-check your credentials") },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
         )
+
+        Spacer(Modifier.height(16.dp))
+
+        AlertInfo(
+            icon = null,
+            title = { Text("Re-check your credentials") },
+            content = { },
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        AlertInfo(
+            icon = null,
+            title = { },
+            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+        )
     }
 }
