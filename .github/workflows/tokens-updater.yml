@@ -14,6 +14,21 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: bash .github/tokens-updater.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Today env
+        run: echo "TODAY=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Update Tokens
+        run: bash .github/tokens-updater.sh
+      - uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.PRBOT_APP_ID }}
+          private_key: ${{ secrets.PRBOT_PRIVATE_KEY }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          labels: |
+            feature
+            design-tokens-autoupdate
+          title: Design Tokens Update on ${{ env.TODAY }}
+          branch: tokens-autoupdate
