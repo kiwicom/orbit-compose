@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="ic_appbar_arrow_back" type="drawable">@drawable/ic_appbar_arrow_right</item>
+</resources>
