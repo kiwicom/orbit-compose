@@ -26,6 +26,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
@@ -118,9 +119,8 @@ private fun SeatContainer(
     Box(
         modifier = modifier.then(
             Modifier
-                .width(Width)
-                .height(Height)
-                .padding(top = PaddingTop)
+                .width(SeatContainerWidth)
+                .height(SeatContainerHeight)
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     enabled = onClick != null,
@@ -131,9 +131,9 @@ private fun SeatContainer(
         Column(
             modifier = Modifier
                 .padding(
-                    top = LayersMargin,
-                    start = LayersMargin,
-                    end = LayersMargin,
+                    top = SeatContainerLayersMargin,
+                    start = SeatContainerLayersMargin,
+                    end = SeatContainerLayersMargin,
                 )
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -174,7 +174,7 @@ private fun ColumnScope.Seat(
 
     SeatSurface(
         border = BorderStroke(
-            width = BorderWidth,
+            width = SeatBorderWidth,
             color = borderColor,
         ),
     ) {
@@ -196,8 +196,8 @@ private fun ColumnScope.Seat(
         ) {
             val color = when {
                 selected -> OrbitTheme.colors.interactive.onMain
-                isExtraLegroom -> OrbitTheme.colors.interactive.strong.copy(alpha = 0.5f)
-                else -> ColorTokens.ProductDark.copy(alpha = 0.4f)
+                isExtraLegroom -> OrbitTheme.colors.interactive.strong
+                else -> OrbitTheme.colors.primary.strong
             }
             CompositionLocalProvider(
                 LocalContentEmphasis provides when {
@@ -228,19 +228,19 @@ private fun ColumnScope.SeatSurface(
             .weight(1f)
             .drawWithContent {
                 drawContent()
-                val verticalOffset = Height.value + LayersMargin.toPx() - BorderWidth.toPx()
+                val verticalOffset = SeatBorderExtraBottomOffset.toPx()
                 drawLine(
                     brush = border.brush,
-                    start = Offset(BorderWidth.toPx(), verticalOffset),
-                    end = Offset(size.width - BorderWidth.toPx(), verticalOffset),
-                    strokeWidth = 1.dp.toPx(),
+                    start = Offset(SeatBorderWidth.toPx(), verticalOffset),
+                    end = Offset(size.width - SeatBorderWidth.toPx(), verticalOffset),
+                    strokeWidth = SeatBorderWidth.toPx(),
                 )
             },
         shape = RoundedCornerShape(
-            topStart = TopRadius,
-            topEnd = TopRadius,
-            bottomStart = BottomRadius,
-            bottomEnd = BottomRadius,
+            topStart = SeatTopRadius,
+            topEnd = SeatTopRadius,
+            bottomStart = SeatBottomRadius,
+            bottomEnd = SeatBottomRadius,
         ),
         border = border,
         content = content,
@@ -259,8 +259,11 @@ private fun SeatPrice(
         LocalContentEmphasis provides ContentEmphasis.Minor,
     ) {
         Box(
-            modifier = Modifier.height(20.dp),
-            contentAlignment = Alignment.Center,
+            modifier = Modifier.height(SeatPriceHeight),
+            contentAlignment = BiasAlignment(
+                horizontalBias = 0f,
+                verticalBias = 0.6f,
+            ),
         ) {
             content()
         }
@@ -282,11 +285,11 @@ private fun BoxScope.CrossIcon(
             painter = Icons.CloseCircle,
             contentDescription = null,
             modifier = Modifier
-                .padding(0.5.dp)
-                .size(20.dp)
+                .size(22.dp)
+                .padding(0.66.dp)
                 .clip(CircleShape)
                 .background(OrbitTheme.colors.surface.main)
-                .padding(1.dp),
+                .padding(0.5.dp),
             tint = when {
                 isExtraLegroom -> OrbitTheme.colors.interactive.strong
                 else -> OrbitTheme.colors.primary.strong
@@ -295,10 +298,22 @@ private fun BoxScope.CrossIcon(
     }
 }
 
-private val BottomRadius = 4.dp
-private val BorderWidth = 2.dp
-private val Height = 73.dp
-private val LayersMargin = 11.dp
-private val PaddingTop = 4.dp
-private val TopRadius = 10.dp
-private val Width = 54.dp
+// Primary Seat constants
+private val SeatBorderWidth = 2.dp
+private val SeatBottomRadius = 4.dp
+private val SeatHeight = 36.dp
+private val SeatTopRadius = 10.dp
+private val SeatWidth = 32.dp
+
+// Derived Seat constants
+private val SeatBorderExtraBottomOffset = SeatHeight - SeatBorderWidth * 1.5f
+
+// Primary SeatPrice constants
+private val SeatPriceHeight = 16.dp
+
+// Primary SeatContainer constants
+private val SeatContainerLayersMargin = 9.dp
+
+// Derived SeatContainer constants
+private val SeatContainerHeight = SeatHeight + SeatPriceHeight + SeatContainerLayersMargin
+private val SeatContainerWidth = SeatWidth + SeatContainerLayersMargin * 2
