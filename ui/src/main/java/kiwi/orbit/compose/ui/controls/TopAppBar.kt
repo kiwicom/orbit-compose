@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -41,8 +42,8 @@ public fun TopAppBar(
     AccompanistTopAppBar(
         title = {
             ProvideMergedTextStyle(
-                value = OrbitTheme.typography.title2.copy(
-                    fontSize = 20.sp,
+                value = TextStyle(
+                    fontSize = 19.sp,
                     letterSpacing = 0.15.sp,
                     fontWeight = FontWeight.Medium,
                 )
