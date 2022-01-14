@@ -7,15 +7,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.insets.LocalWindowInsets
@@ -41,8 +40,8 @@ public fun TopAppBar(
     AccompanistTopAppBar(
         title = {
             ProvideMergedTextStyle(
-                value = OrbitTheme.typography.title2.copy(
-                    fontSize = 20.sp,
+                value = TextStyle(
+                    fontSize = 19.sp,
                     letterSpacing = 0.15.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -84,8 +83,9 @@ public fun TopAppBar(
 @Composable
 public fun TopAppBar(
     title: @Composable () -> Unit,
-    onBack: () -> Unit,
+    onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
+    icon: Painter = painterResource(R.drawable.ic_appbar_arrow_back),
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
@@ -93,23 +93,15 @@ public fun TopAppBar(
         modifier = modifier,
         navigationIcon = {
             IconButton(
-                onClick = { onBack() },
+                onClick = onNavigateUp,
             ) {
                 Icon(
-                    getBackArrowIcon(),
+                    painter = icon,
                     contentDescription = stringResource(R.string.orbit_cd_navigate_up),
                 )
             }
         },
         actions = actions,
-    )
-}
-
-@Composable
-private fun getBackArrowIcon(): Painter {
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
-    return painterResource(
-        if (isRtl) R.drawable.ic_appbar_arrow_right else R.drawable.ic_appbar_arrow_left
     )
 }
 

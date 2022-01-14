@@ -26,7 +26,7 @@ fun Screen(
         topBar = {
             TopAppBar(
                 title = { Text(text = title) },
-                onBack = onUpClick,
+                onNavigateUp = onUpClick,
             )
         },
         content = {
