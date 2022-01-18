@@ -14,6 +14,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install pngquant
+        run: sudo apt-get install -y pngquant
       - name: Today env
         run: echo "TODAY=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
       - name: Update Tokens

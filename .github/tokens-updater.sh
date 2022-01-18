@@ -19,3 +19,7 @@ git commit -m "tokens: update colors on $TODAY" || true
 ./gradlew generator:icons
 git add --all || true
 git commit -m "tokens: update icons on $TODAY" || true
+
+./gradlew generator:illustrations
+git add --all || true
+git commit -m "tokens: update illustrations on $TODAY" || true

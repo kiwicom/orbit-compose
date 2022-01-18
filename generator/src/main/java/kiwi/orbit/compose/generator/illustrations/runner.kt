@@ -16,6 +16,6 @@ fun main() {
         "https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-components/src/Illustration/consts.js"
     val urlIllustrationPrefix = "https://images.kiwi.com/illustrations/originals"
 
-    // processor.build(urlIllustrationList, urlIllustrationPrefix, kotlinOutDir, resourceOutDir)
-    processor.buildImplOnly(kotlinOutDir, resourceOutDir)
+    processor.build(urlIllustrationList, urlIllustrationPrefix, kotlinOutDir, resourceOutDir)
+    // processor.buildImplOnly(kotlinOutDir, resourceOutDir)
 }

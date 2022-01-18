@@ -102,7 +102,7 @@ class IllustrationsGenerator {
             }
 
             val inImage = ImageIO.read(inFile)
-            if (inImage.width != 2200) {
+            if (inImage.width < 1360) {
                 println("Skipping $name (not big enough, width ${inImage.width}px)")
                 inFile.delete()
                 continue
