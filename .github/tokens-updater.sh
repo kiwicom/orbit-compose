@@ -10,7 +10,6 @@ fi
 
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
-git checkout -B tokens-autoupdate
 
 ./gradlew generator:colors
 git add --all || true
