@@ -20,6 +20,8 @@ jobs:
         run: echo "TODAY=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
       - name: Update Tokens
         run: bash .github/tokens-updater.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: tibdex/github-app-token@v1
         id: generate-token
         with:
