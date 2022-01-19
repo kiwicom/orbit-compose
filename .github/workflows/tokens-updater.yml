@@ -35,5 +35,6 @@ jobs:
             feature
             design-tokens-autoupdate
           title: Design Tokens Update on ${{ env.TODAY }}
+          body: ""
           base: main
           branch: tokens-autoupdate
