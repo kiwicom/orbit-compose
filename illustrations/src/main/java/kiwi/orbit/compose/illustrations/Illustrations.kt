@@ -19,6 +19,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_airport_shuttle)
 
+    public val AirportTransportTaxi: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_airport_transport_taxi)
+
     public val AppQRCode: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_app_q_r_code)
@@ -87,6 +91,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_desktop_search)
 
+    public val EVisa: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_e_visa)
+
     public val EnjoyApp: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_enjoy_app)
@@ -103,9 +111,17 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_fast_track)
 
+    public val FastTrackMan: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_fast_track_man)
+
     public val Feedback: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_feedback)
+
+    public val GroundTransport404: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_ground_transport404)
 
     public val Help: Painter
         @Composable
@@ -214,6 +230,10 @@ public object Illustrations {
     public val PlaneAndMoney: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_plane_and_money)
+
+    public val PlaneDelayed: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_plane_delayed)
 
     public val PriorityBoarding: Painter
         @Composable
