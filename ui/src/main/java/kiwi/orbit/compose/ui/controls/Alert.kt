@@ -73,7 +73,7 @@ public fun AlertSuccess(
 public fun AlertWarning(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
-    icon: Painter? = Icons.Visa,
+    icon: Painter? = Icons.AlertCircle,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -94,7 +94,7 @@ public fun AlertWarning(
 public fun AlertCritical(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
-    icon: Painter? = Icons.AlertCircle,
+    icon: Painter? = Icons.AlertOctagon,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
