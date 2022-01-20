@@ -66,10 +66,6 @@ fun MainScreen(
         Triple("Text Field", { Icon(MaterialIcons.Input, null) }, actions::showTextField),
     )
 
-    val demos = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Profile", { Icon(Icons.AccountCircle, null) }, actions::showXProfile),
-    )
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -93,7 +89,6 @@ fun MainScreen(
                 Spacer(Modifier.size(16.dp))
                 CardsList("Foundation", foundation, columns)
                 CardsList("Controls", controls, columns)
-                CardsList("Demos", demos, columns)
             }
         }
     }
