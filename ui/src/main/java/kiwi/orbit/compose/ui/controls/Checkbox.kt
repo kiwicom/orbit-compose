@@ -5,6 +5,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -96,9 +98,9 @@ public fun Checkbox(
             drawCheckbox(borderColor, backgroundColor, errorAlpha)
             drawError(errorStrokeColor, errorShadowColor, errorAlpha)
         }
-        val drawable = animatedVectorResource(R.drawable.avd_check)
+        val animatedImage = AnimatedImageVector.animatedVectorResource(R.drawable.avd_check)
         Icon(
-            painter = drawable.painterFor(atEnd = checked),
+            painter = rememberAnimatedVectorPainter(animatedImage, atEnd = checked),
             contentDescription = null,
             modifier = Modifier.size(16.dp),
             tint = iconColor,

@@ -4,12 +4,12 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.31" apply false
-    kotlin("android") version "1.5.31" apply false
-    kotlin("plugin.serialization") version "1.5.31" apply false
-    id("com.android.application") version "7.0.3" apply false
-    id("org.jmailen.kotlinter") version "3.6.0" apply false
-    id("com.vanniktech.maven.publish") version "0.18.0" apply false
+    kotlin("jvm") version libs.versions.kotlin.lang.get() apply false
+    kotlin("android") version libs.versions.kotlin.lang.get() apply false
+    kotlin("plugin.serialization") version libs.versions.kotlin.lang.get() apply false
+    id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
+    id("org.jmailen.kotlinter") version libs.versions.kotlinter.get() apply false
+    id("com.vanniktech.maven.publish") version libs.versions.maven.publish.get() apply false
 }
 
 subprojects {
