@@ -193,7 +193,7 @@ private fun Badge(
         subtle = subtle,
         shape = RoundedCornerShape(percent = 50),
         strokeWidth = 0.5.dp,
-        modifier = modifier.requiredHeight(24.dp),
+        modifier = modifier.requiredHeight(BadgeHeight),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         contentPadding = PaddingValues(horizontal = 8.dp),
@@ -208,3 +208,5 @@ private fun Badge(
         }
     }
 }
+
+internal val BadgeHeight = 24.dp
