@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
@@ -34,6 +36,7 @@ public fun ThemedSurface(
         false -> OrbitTheme.colors.primary.main
     }
     val contentColor = contentColorFor(backgroundColor)
+
     val surfaceModifier = when (subtle) {
         true -> {
             Modifier
@@ -46,8 +49,14 @@ public fun ThemedSurface(
         }
     }
 
+    // remove style color to fallback to proper LocalContentColor
+    val textStyle = LocalTextStyle.current.copy(
+        color = Color.Unspecified
+    )
+
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
+        LocalTextStyle provides textStyle,
     ) {
         Row(
             modifier = modifier
