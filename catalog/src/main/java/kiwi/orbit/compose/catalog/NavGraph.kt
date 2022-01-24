@@ -12,6 +12,7 @@ import kiwi.orbit.compose.catalog.screens.BadgeScreen
 import kiwi.orbit.compose.catalog.screens.ButtonScreen
 import kiwi.orbit.compose.catalog.screens.CardsScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
+import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
 import kiwi.orbit.compose.catalog.screens.DialogsMaterialDialog
 import kiwi.orbit.compose.catalog.screens.DialogsScreen
@@ -40,6 +41,7 @@ private object MainDestinations {
     const val BUTTON = "button"
     const val CARDS = "cards"
     const val CHECKBOX = "checkbox"
+    const val CHOICE_TILE = "choice_tile"
     const val DIALOGS = "dialogs"
     const val DIALOGS_MATERIAL_DIALOG = "dialgos_material_dialog"
     const val RADIO = "radio"
@@ -94,6 +96,9 @@ fun NavGraph(
         }
         composable(MainDestinations.CHECKBOX) {
             CheckboxScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.CHOICE_TILE) {
+            ChoiceTileScreen(actions::navigateUp)
         }
         composable(MainDestinations.DIALOGS) {
             DialogsScreen(
@@ -169,6 +174,10 @@ class MainActions(
 
     fun showCheckbox() {
         navController.navigate(MainDestinations.CHECKBOX)
+    }
+
+    fun showChoiceTile() {
+        navController.navigate(MainDestinations.CHOICE_TILE)
     }
 
     fun showDialogs() {
