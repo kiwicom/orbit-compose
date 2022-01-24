@@ -25,12 +25,12 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 @Composable
 public fun ChoiceTile(
     selected: Boolean,
+    onSelect: () -> Unit,
     modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)? = null,
     title: @Composable (RowScope.() -> Unit)? = null,
     description: @Composable (() -> Unit)? = null,
     footer: @Composable (() -> Unit)? = null,
-    onSelect: (() -> Unit)? = null,
     showRadio: Boolean = true,
     content: @Composable (() -> Unit)? = null,
 ) {
@@ -41,7 +41,7 @@ public fun ChoiceTile(
         }
     )
     Card(
-        onClick = onSelect ?: {},
+        onClick = onSelect,
         modifier = modifier,
         border = BorderStroke(2.dp, color)
     ) {
