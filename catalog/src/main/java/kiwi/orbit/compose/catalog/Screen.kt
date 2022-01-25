@@ -13,6 +13,7 @@ import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.ToastHostState
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
@@ -20,9 +21,11 @@ fun Screen(
     title: String,
     onUpClick: () -> Unit,
     withBackground: Boolean = true,
+    toastHostState: ToastHostState = remember { ToastHostState() },
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Scaffold(
+        toastHostState = toastHostState,
         topBar = {
             TopAppBar(
                 title = { Text(text = title) },

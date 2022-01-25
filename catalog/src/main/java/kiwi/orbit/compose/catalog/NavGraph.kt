@@ -26,6 +26,7 @@ import kiwi.orbit.compose.catalog.screens.StepperScreen
 import kiwi.orbit.compose.catalog.screens.SwitchScreen
 import kiwi.orbit.compose.catalog.screens.TagScreen
 import kiwi.orbit.compose.catalog.screens.TextFieldScreen
+import kiwi.orbit.compose.catalog.screens.ToastScreen
 import kiwi.orbit.compose.catalog.screens.TypographyScreen
 
 private object MainDestinations {
@@ -51,6 +52,7 @@ private object MainDestinations {
     const val SWITCH = "switch"
     const val TAG = "tag"
     const val TEXT_FIELD = "text_field"
+    const val TOAST = "toast"
 }
 
 @Composable
@@ -129,6 +131,9 @@ fun NavGraph(
         }
         composable(MainDestinations.TEXT_FIELD) {
             TextFieldScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.TOAST) {
+            ToastScreen(actions::navigateUp)
         }
     }
 }
@@ -214,5 +219,9 @@ class MainActions(
 
     fun showTextField() {
         navController.navigate(MainDestinations.TEXT_FIELD)
+    }
+
+    fun showToast() {
+        navController.navigate(MainDestinations.TOAST)
     }
 }

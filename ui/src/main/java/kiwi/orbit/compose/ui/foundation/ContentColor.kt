@@ -11,6 +11,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 
 public fun Colors.contentColorFor(color: Color): Color =
     surface.contentColorFor(color, content)
+        ?: content.contentColorFor(color, surface)
         ?: primary.contentColorFor(color)
         ?: interactive.contentColorFor(color)
         ?: success.contentColorFor(color)
@@ -26,6 +27,15 @@ private fun SurfaceColors.contentColorFor(
         main -> contentColors.normal
         background -> contentColors.normal
         strong -> contentColors.normal
+        else -> null
+    }
+
+private fun ContentColors.contentColorFor(
+    color: Color,
+    surfaceColors: SurfaceColors,
+): Color? =
+    when (color) {
+        normal -> surfaceColors.main
         else -> null
     }
 
