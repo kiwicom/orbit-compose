@@ -1,22 +1,25 @@
-package kiwi.orbit.compose.catalog.components
+package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-fun Scaffold(
+public fun Scaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
-    backgroundColor: Color = OrbitTheme.colors.surface.background,
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
     content: @Composable () -> Unit
 ) {
-    Surface(modifier = modifier, color = backgroundColor, contentColor = contentColor) {
+    Surface(
+        modifier = modifier,
+        color = backgroundColor,
+        contentColor = contentColor,
+    ) {
         SubcomposeLayout { constraints ->
             val layoutWidth = constraints.maxWidth
             val layoutHeight = constraints.maxHeight
