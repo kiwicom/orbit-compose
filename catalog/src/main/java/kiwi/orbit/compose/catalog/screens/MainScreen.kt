@@ -11,12 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.rounded.Announcement
 import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.Ballot
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.FormatSize
-import androidx.compose.material.icons.rounded.Input
+import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
@@ -29,12 +30,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
 import kiwi.orbit.compose.catalog.MainActions
-import kiwi.orbit.compose.catalog.components.Scaffold
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
@@ -65,7 +66,8 @@ fun MainScreen(
         Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
         Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
         Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
-        Triple("Text Field", { Icon(MaterialIcons.Input, null) }, actions::showTextField),
+        Triple("Text Field", { Icon(MaterialIcons.Keyboard, null) }, actions::showTextField),
+        Triple("Toast", { Icon(MaterialIcons.Announcement, null) }, actions::showToast),
     )
 
     Scaffold(
