@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,9 +24,14 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import kiwi.orbit.compose.catalog.Screen
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.AlertCritical
 import kiwi.orbit.compose.ui.controls.AlertInfo
+import kiwi.orbit.compose.ui.controls.AlertInlineCritical
+import kiwi.orbit.compose.ui.controls.AlertInlineInfo
+import kiwi.orbit.compose.ui.controls.AlertInlineSuccess
+import kiwi.orbit.compose.ui.controls.AlertInlineWarning
 import kiwi.orbit.compose.ui.controls.AlertSuccess
 import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
@@ -112,6 +118,18 @@ private fun AlertScreenSuppressedInner() {
 @Preview
 @Composable
 private fun AlertScreenInlineInner() {
+    Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+        AlertsInlineInner(suppressed = false, withIcon = true)
+        AlertsInlineInner(suppressed = false, withIcon = false)
+        AlertsInlineInner(suppressed = true, withIcon = true)
+        AlertsInlineInner(suppressed = true, withIcon = false)
+        AlertInlineInfo(
+            modifier = Modifier.padding(16.dp),
+            title = { Text("Informational message which is longer than expected. We should try avoid such a long copy.") },
+            action = { Text("Primary") },
+            onActionClick = {},
+        )
+    }
 }
 
 @Composable
@@ -274,6 +292,46 @@ private fun AlertsInner(suppressed: Boolean) {
             title = { },
             content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
             suppressed = suppressed,
+        )
+    }
+}
+
+@Composable
+private fun AlertsInlineInner(suppressed: Boolean, withIcon: Boolean) {
+    Column(
+        Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        AlertInlineInfo(
+            title = { Text("Informational message") },
+            action = { Text("Primary") },
+            onActionClick = {},
+            suppressed = suppressed,
+            icon = if (withIcon) Icons.InformationCircle else null,
+        )
+
+        AlertInlineSuccess(
+            title = { Text("Success message") },
+            action = { Text("Primary") },
+            onActionClick = {},
+            suppressed = suppressed,
+            icon = if (withIcon) Icons.CheckCircle else null,
+        )
+
+        AlertInlineWarning(
+            title = { Text("Warning message") },
+            action = { Text("Primary") },
+            onActionClick = {},
+            suppressed = suppressed,
+            icon = if (withIcon) Icons.AlertCircle else null,
+        )
+
+        AlertInlineCritical(
+            title = { Text("Critical message") },
+            action = { Text("Primary") },
+            onActionClick = {},
+            suppressed = suppressed,
+            icon = if (withIcon) Icons.AlertOctagon else null,
         )
     }
 }
