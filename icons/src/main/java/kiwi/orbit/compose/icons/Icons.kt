@@ -367,6 +367,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_filters)
 
+    public val Flash: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_flash)
+
     public val FlightDirect: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_flight_direct)
