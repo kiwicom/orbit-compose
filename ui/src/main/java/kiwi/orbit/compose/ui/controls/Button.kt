@@ -31,6 +31,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -165,7 +166,7 @@ private fun Button(
     contentColor: Color = contentColorFor(backgroundColor),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = ButtonDefaults.elevation(),
-    shape: Shape = OrbitTheme.shapes.small,
+    shape: Shape = OrbitTheme.shapes.normal,
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
@@ -193,7 +194,7 @@ private fun Button(
             emphasis = ContentEmphasis.Normal
         ) {
             ProvideMergedTextStyle(
-                value = OrbitTheme.typography.title4
+                value = OrbitTheme.typography.title4.copy(textAlign = TextAlign.Center),
             ) {
                 Row(
                     Modifier
