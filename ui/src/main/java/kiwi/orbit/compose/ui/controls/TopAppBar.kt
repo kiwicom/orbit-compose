@@ -35,7 +35,7 @@ public fun TopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
-    elevation: Dp = 2.dp,
+    elevation: Dp = TopAppBarElevation,
 ) {
     AccompanistTopAppBar(
         title = {
@@ -86,6 +86,7 @@ public fun TopAppBar(
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     icon: Painter = painterResource(R.drawable.ic_appbar_arrow_back),
+    elevation: Dp = TopAppBarElevation,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
@@ -102,8 +103,11 @@ public fun TopAppBar(
             }
         },
         actions = actions,
+        elevation = elevation,
     )
 }
+
+private val TopAppBarElevation = 2.dp
 
 public object TopAppBarSemantics {
     public const val Tag: String = "top_app_bar"

@@ -41,11 +41,13 @@ public fun darkContentColors(
     normal: Color = ColorTokens.InkNormal.invert(),
     minor: Color = ColorTokens.InkLight.invert(),
     subtle: Color = ColorTokens.InkLighter.invert(),
+    highlight: Color = ColorTokens.ProductNormal,
     disabled: Color = ColorTokens.CloudDarkerHover.invert(),
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,
     subtle = subtle,
+    highlight = highlight,
     disabled = disabled,
 )
 

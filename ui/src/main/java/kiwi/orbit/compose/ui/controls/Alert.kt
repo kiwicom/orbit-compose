@@ -1,17 +1,19 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.font.FontWeight
@@ -31,12 +33,13 @@ import kotlin.math.roundToInt
 public fun AlertInfo(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
+    suppressed: Boolean = false,
     icon: Painter? = Icons.InformationCircle,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
+        LocalColors provides OrbitTheme.colors.asInteractiveTheme(suppressed),
     ) {
         Alert(
             icon = icon,
@@ -52,12 +55,13 @@ public fun AlertInfo(
 public fun AlertSuccess(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
+    suppressed: Boolean = false,
     icon: Painter? = Icons.CheckCircle,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(suppressed),
     ) {
         Alert(
             icon = icon,
@@ -73,12 +77,13 @@ public fun AlertSuccess(
 public fun AlertWarning(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
+    suppressed: Boolean = false,
     icon: Painter? = Icons.AlertCircle,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(suppressed),
     ) {
         Alert(
             icon = icon,
@@ -94,12 +99,13 @@ public fun AlertWarning(
 public fun AlertCritical(
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
+    suppressed: Boolean = false,
     icon: Painter? = Icons.AlertOctagon,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(suppressed),
     ) {
         Alert(
             icon = icon,
@@ -119,22 +125,41 @@ private fun Alert(
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    ThemedSurface(
-        subtle = true,
-        modifier = modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(12.dp),
+    val bgColor = OrbitTheme.colors.surface.background
+    val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
+    val accentColor = OrbitTheme.colors.primary.main
+    val shape = OrbitTheme.shapes.normal
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .drawBehind {
+                drawRect(bgColor)
+                drawLine(
+                    color = accentColor,
+                    start = Offset.Zero,
+                    end = Offset(size.width, 0f),
+                    strokeWidth = 6.dp.toPx(), // doubled width to account for path offset
+                )
+            }
+            .border(1.dp, borderColor, shape)
+            .padding(
+                top = 12.dp + 3.dp, // stroke width
+                start = if (icon != null) 12.dp else 16.dp,
+                end = 16.dp,
+                bottom = 16.dp,
+            )
     ) {
         if (icon != null) {
             Icon(
                 icon,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(top = 2.dp)
-                    .size(16.dp),
+                    .padding(end = 8.dp)
+                    .size(20.dp),
+                tint = accentColor,
             )
-            Spacer(Modifier.width(8.dp))
         }
-
         AlertContent(
             title = title,
             actions = actions,
@@ -156,13 +181,11 @@ private fun AlertContent(
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
                 title()
             }
-
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
                 content()
             }
-
             if (actions != null) {
-                AlertButtons(Modifier.padding(top = 8.dp), actions)
+                AlertButtons(Modifier.padding(top = 12.dp), actions) // 16.dp-4.dp
             }
         }
     }
@@ -179,8 +202,10 @@ private fun AlertButtons(
     ) { measurables, incomingConstraints ->
         val buttonPadding = 12.dp.toPx().roundToInt()
         val buttonsCount = measurables.size
-        val buttonSize = ((incomingConstraints.maxWidth - (buttonPadding * (buttonsCount - 1))) / buttonsCount)
-        val buttonConstraint = incomingConstraints.copy(minWidth = buttonSize, maxWidth = buttonSize)
+        val buttonSize =
+            ((incomingConstraints.maxWidth - (buttonPadding * (buttonsCount - 1))) / buttonsCount)
+        val buttonConstraint =
+            incomingConstraints.copy(minWidth = buttonSize, maxWidth = buttonSize)
 
         val placeables = measurables.map {
             it.measure(buttonConstraint)

@@ -40,11 +40,13 @@ public fun lightContentColors(
     normal: Color = ColorTokens.InkNormal,
     minor: Color = ColorTokens.InkLight,
     subtle: Color = ColorTokens.InkLighter,
+    highlight: Color = ColorTokens.ProductDark,
     disabled: Color = ColorTokens.CloudDarkerHover,
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,
     subtle = subtle,
+    highlight = highlight,
     disabled = disabled,
 )
 

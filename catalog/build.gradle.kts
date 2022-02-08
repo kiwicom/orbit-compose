@@ -102,6 +102,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
+    implementation(libs.accompanist.pager)
 
     debugImplementation(libs.compose.tooling)
 }
