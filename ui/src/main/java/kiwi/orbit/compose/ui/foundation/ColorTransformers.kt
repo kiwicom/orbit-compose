@@ -26,6 +26,7 @@ private fun Colors.themeWith(
         ) else surface,
         content = content.copy(
             normal = if (!suppressed) featureColors.strong else content.normal,
+            highlight = content.normal,
         ),
         primary = featureColors.copy(
             subtle = featureColors.subtleAlt,

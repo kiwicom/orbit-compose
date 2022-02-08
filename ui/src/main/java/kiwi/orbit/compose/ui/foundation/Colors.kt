@@ -45,22 +45,30 @@ public class ContentColors(
     normal: Color,
     minor: Color,
     subtle: Color,
+    highlight: Color,
     disabled: Color,
 ) {
     public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
     public var minor: Color by mutableStateOf(minor, structuralEqualityPolicy()); internal set
     public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+
+    /**
+     * Color suitable for highlighting links, product dark by default.
+     */
+    public var highlight: Color by mutableStateOf(highlight, structuralEqualityPolicy()); internal set
     public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
 
     public fun copy(
         normal: Color = this.normal,
         minor: Color = this.minor,
         subtle: Color = this.subtle,
+        highlight: Color = this.highlight,
         disabled: Color = this.disabled,
     ): ContentColors = ContentColors(
         normal,
         minor,
         subtle,
+        highlight,
         disabled,
     )
 }

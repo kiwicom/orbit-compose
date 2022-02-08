@@ -17,6 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -137,7 +142,23 @@ private fun AlertsInner(suppressed: Boolean) {
     Column(Modifier.padding(16.dp)) {
         AlertInfo(
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    buildAnnotatedString {
+                        append("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID. ")
+                        withStyle(
+                            SpanStyle(
+                                color = OrbitTheme.colors.content.highlight,
+                                fontWeight = FontWeight.Medium,
+                                textDecoration = TextDecoration.Underline,
+                            )
+                        ) {
+                            append("Some link")
+                        }
+                        append(".")
+                    }
+                )
+            },
             actions = {
                 ButtonPrimary(onClick = {}) {
                     Text("More info")
