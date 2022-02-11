@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 @Stable
@@ -107,6 +108,51 @@ public class FeatureColors(
 }
 
 @Stable
+public class BundleColors(
+    basic: Color,
+    basicGradient: Brush,
+    medium: Color,
+    mediumGradient: Brush,
+    top: Color,
+    topGradient: Brush,
+    onBasic: Color,
+    onMedium: Color,
+    onTop: Color,
+) {
+    public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy()); internal set
+    public var basicGradient: Brush by mutableStateOf(basicGradient, structuralEqualityPolicy()); internal set
+    public var medium: Color by mutableStateOf(medium, structuralEqualityPolicy()); internal set
+    public var mediumGradient: Brush by mutableStateOf(mediumGradient, structuralEqualityPolicy()); internal set
+    public var top: Color by mutableStateOf(top, structuralEqualityPolicy()); internal set
+    public var topGradient: Brush by mutableStateOf(topGradient, structuralEqualityPolicy()); internal set
+    public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy()); internal set
+    public var onMedium: Color by mutableStateOf(onMedium, structuralEqualityPolicy()); internal set
+    public var onTop: Color by mutableStateOf(onTop, structuralEqualityPolicy()); internal set
+
+    public fun copy(
+        basic: Color = this.basic,
+        basicGradient: Brush = this.basicGradient,
+        medium: Color = this.medium,
+        mediumGradient: Brush = this.mediumGradient,
+        top: Color = this.top,
+        topGradient: Brush = this.topGradient,
+        onBasic: Color = this.onBasic,
+        onMedium: Color = this.onMedium,
+        onTop: Color = this.onTop,
+    ): BundleColors = BundleColors(
+        basic,
+        basicGradient,
+        medium,
+        mediumGradient,
+        top,
+        topGradient,
+        onBasic,
+        onMedium,
+        onTop,
+    )
+}
+
+@Stable
 public class Colors(
     public val surface: SurfaceColors,
     public val content: ContentColors,
@@ -115,6 +161,7 @@ public class Colors(
     public val success: FeatureColors,
     public val warning: FeatureColors,
     public val critical: FeatureColors,
+    public val bundle: BundleColors,
     isLight: Boolean,
 ) {
     public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy()); internal set
@@ -127,6 +174,7 @@ public class Colors(
         success: FeatureColors = this.success,
         warning: FeatureColors = this.warning,
         critical: FeatureColors = this.critical,
+        bundle: BundleColors = this.bundle,
         isLight: Boolean = this.isLight,
     ): Colors = Colors(
         surface = surface,
@@ -136,6 +184,7 @@ public class Colors(
         success = success,
         warning = warning,
         critical = critical,
+        bundle = bundle,
         isLight = isLight,
     )
 
@@ -174,6 +223,7 @@ internal fun Colors.updateColorsFrom(other: Colors) {
     success.updateColorsFrom(other.success)
     warning.updateColorsFrom(other.warning)
     critical.updateColorsFrom(other.critical)
+    bundle.updateColorsFrom(other.bundle)
     isLight = other.isLight
 }
 
@@ -199,6 +249,18 @@ internal fun FeatureColors.updateColorsFrom(other: FeatureColors) {
     subtleAlt = other.subtleAlt
     strong = other.strong
     onMain = other.onMain
+}
+
+internal fun BundleColors.updateColorsFrom(other: BundleColors) {
+    basic = other.basic
+    basicGradient = other.basicGradient
+    medium = other.medium
+    mediumGradient = other.mediumGradient
+    top = other.top
+    topGradient = other.topGradient
+    onBasic = other.onBasic
+    onMedium = other.onMedium
+    onTop = other.onTop
 }
 
 /**

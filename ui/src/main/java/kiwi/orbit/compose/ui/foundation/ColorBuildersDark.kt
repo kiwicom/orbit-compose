@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui.foundation
 
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.core.graphics.ColorUtils
 import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
@@ -12,6 +13,7 @@ public fun darkColors(
     success: FeatureColors = darkSuccessColors(),
     warning: FeatureColors = darkWarningColors(),
     critical: FeatureColors = darkCriticalColors(),
+    bundle: BundleColors = darkBundleColors(),
 ): Colors = Colors(
     surface = surface,
     content = content,
@@ -20,6 +22,7 @@ public fun darkColors(
     success = success,
     warning = warning,
     critical = critical,
+    bundle = bundle,
     isLight = false,
 )
 
@@ -129,6 +132,37 @@ public fun darkCriticalColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onMain = onMain,
+)
+
+public fun darkBundleColors(
+    basic: Color = ColorTokens.BundleBasic.invert(),
+    basicGradient: Brush = bundleLinearGradient(
+        ColorTokens.BundleBasicStart.invert(),
+        ColorTokens.BundleBasicEnd.invert()
+    ),
+    medium: Color = ColorTokens.BundleMedium.invert(),
+    mediumGradient: Brush = bundleLinearGradient(
+        ColorTokens.BundleMediumStart.invert(),
+        ColorTokens.BundleMediumEnd.invert()
+    ),
+    top: Color = ColorTokens.InkNormal.invert(),
+    topGradient: Brush = bundleLinearGradient(
+        ColorTokens.BundleTopStart.invert(),
+        ColorTokens.BundleTopEnd.invert()
+    ),
+    onBasic: Color = ColorTokens.White.invert(),
+    onMedium: Color = ColorTokens.White.invert(),
+    onTop: Color = ColorTokens.White.invert(),
+): BundleColors = BundleColors(
+    basic = basic,
+    basicGradient = basicGradient,
+    medium = medium,
+    mediumGradient = mediumGradient,
+    top = top,
+    topGradient = topGradient,
+    onBasic = onBasic,
+    onMedium = onMedium,
+    onTop = onTop,
 )
 
 @OptIn(ExperimentalUnsignedTypes::class)

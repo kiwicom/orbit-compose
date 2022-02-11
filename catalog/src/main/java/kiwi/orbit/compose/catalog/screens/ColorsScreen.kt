@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +22,7 @@ import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.foundation.BundleColors
 import kiwi.orbit.compose.ui.foundation.FeatureColors
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -56,6 +58,7 @@ private fun ColorsScreenInner() {
         FeatureColors(OrbitTheme.colors.success, name = "Success")
         FeatureColors(OrbitTheme.colors.warning, name = "Warning")
         FeatureColors(OrbitTheme.colors.critical, name = "Critical")
+        BundleColors(OrbitTheme.colors.bundle, name = "Bundle")
     }
 }
 
@@ -131,12 +134,52 @@ private fun FeatureColors(colors: FeatureColors, name: String) {
 }
 
 @Composable
+private fun BundleColors(colors: BundleColors, name: String) {
+    Column {
+        Title(name)
+
+        Card {
+            Column {
+                Row {
+                    Color(colors.basicGradient, "Basic Gradient")
+                    Color(colors.basic, "Basic")
+                }
+                Row {
+                    Color(colors.mediumGradient, "Medium Gradient")
+                    Color(colors.medium, "Medium")
+                }
+                Row {
+                    Color(colors.topGradient, "Top Gradient")
+                    Color(colors.top, "Top")
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun Title(name: String) {
     Text(name, Modifier.padding(bottom = 4.dp), style = OrbitTheme.typography.title3)
 }
 
 @Composable
 private fun RowScope.Color(color: Color, name: String, contentColor: Color = Color.Unspecified) {
+    Box(
+        Modifier
+            .background(color)
+            .weight(1f)
+            .height(52.dp)
+    ) {
+        Text(
+            name,
+            Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
+            color = contentColor.takeOrElse { contentColorFor(color) },
+        )
+    }
+}
+
+@Composable
+private fun RowScope.Color(color: Brush, name: String, contentColor: Color = Color.Unspecified) {
     Box(
         Modifier
             .background(color)
