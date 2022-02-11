@@ -23,6 +23,10 @@ internal object ColorTokens {
 
     public val BlueNormalHover: UIColor = UIColor(0xFF0161AC)
 
+    public val BundleBasic: UIColor = UIColor(0xFFD7331C)
+
+    public val BundleMedium: UIColor = UIColor(0xFF3B1EB0)
+
     public val CloudDark: UIColor = UIColor(0xFFE8EDF1)
 
     public val CloudDarker: UIColor = UIColor(0xFFBAC7D5)
