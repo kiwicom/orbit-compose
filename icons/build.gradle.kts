@@ -35,8 +35,8 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
-        isAbortOnError = true
-        isWarningsAsErrors = true
+        abortOnError = true
+        warningsAsErrors = true
     }
 }
 

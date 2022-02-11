@@ -43,7 +43,10 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -67,8 +70,8 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
-        isAbortOnError = true
-        isWarningsAsErrors = true
+        abortOnError = true
+        warningsAsErrors = true
     }
 }
 
