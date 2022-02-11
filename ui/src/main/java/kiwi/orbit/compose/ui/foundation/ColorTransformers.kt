@@ -17,13 +17,17 @@ private fun Colors.themeWith(
     suppressed: Boolean = false,
 ): Colors =
     copy(
-        surface = if (!suppressed) SurfaceColors(
-            main = featureColors.subtleAlt,
-            background = featureColors.subtle,
-            subtle = featureColors.subtle,
-            strong = featureColors.subtleAlt,
-            disabled = surface.disabled,
-        ) else surface,
+        surface = if (!suppressed) {
+            SurfaceColors(
+                main = featureColors.subtleAlt,
+                background = featureColors.subtle,
+                subtle = featureColors.subtle,
+                strong = featureColors.subtleAlt,
+                disabled = surface.disabled,
+            )
+        } else {
+            surface
+        },
         content = content.copy(
             normal = if (!suppressed) featureColors.strong else content.normal,
             highlight = content.normal,
