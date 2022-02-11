@@ -25,7 +25,19 @@ internal object ColorTokens {
 
     public val BundleBasic: UIColor = UIColor(0xFFD7331C)
 
+    public val BundleBasicEnd: UIColor = UIColor(0xFFE87E09)
+
+    public val BundleBasicStart: UIColor = UIColor(0xFFE13E3B)
+
     public val BundleMedium: UIColor = UIColor(0xFF3B1EB0)
+
+    public val BundleMediumEnd: UIColor = UIColor(0xFF8539DB)
+
+    public val BundleMediumStart: UIColor = UIColor(0xFF3719AB)
+
+    public val BundleTopEnd: UIColor = UIColor(0xFF696E73)
+
+    public val BundleTopStart: UIColor = UIColor(0xFF2D2D2E)
 
     public val CloudDark: UIColor = UIColor(0xFFE8EDF1)
 

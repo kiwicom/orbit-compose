@@ -14,6 +14,8 @@ import kotlinx.serialization.json.Json
 class ColorsGenerator {
     companion object {
         private const val COLOR_PREFIX = "palette"
+        private const val BUNDLE_PREFIX = "backgroundButtonBundle"
+        private val DROP_SUFFIXES = arrayOf("Active", "Hover")
     }
 
     fun build(svgUrl: String, kotlinOutDir: Path) {
@@ -32,10 +34,34 @@ class ColorsGenerator {
 
         val parser = Json { isLenient = true }
         val parsed = parser.decodeFromString<Map<String, String>>(inputText)
-        return parsed
-            .filter { it.key.startsWith(COLOR_PREFIX) }
+        val colors = parsed
+            .filter {
+                it.key.startsWith(COLOR_PREFIX) || (
+                    it.key.startsWith(BUNDLE_PREFIX) &&
+                        DROP_SUFFIXES.none { suffix -> it.key.endsWith(suffix) }
+                    )
+            }
             .toList()
             .sortedBy { it.first }
+
+        val pattern =
+            """linear-gradient\(to top right, (#[a-fA-F0-9]{6}) 0%, (#[a-fA-F0-9]{6}) 100%\)""".toRegex()
+        val expanded = colors.flatMap { (key, color) ->
+            if (!color.contains("gradient")) {
+                return@flatMap listOf(
+                    key.removePrefix(COLOR_PREFIX) to color,
+                )
+            }
+
+            val matchResult = pattern.matchEntire(color) ?: return@flatMap emptyList()
+            val matched = matchResult.groupValues.drop(1)
+            val newKey = key.removePrefix("backgroundButton")
+            return@flatMap listOf(
+                "${newKey}Start" to matched.first(),
+                "${newKey}End" to matched.last(),
+            )
+        }
+        return expanded.sortedBy { it.first }
     }
 
     private fun getFinalRedirectedUrl(url: String): String {
@@ -64,21 +90,26 @@ class ColorsGenerator {
         val objectBuilder = TypeSpec.objectBuilder(colorClass)
             .addModifiers(KModifier.INTERNAL)
 
-        colors.forEach { (colorName, colorString) ->
-            val name = colorName
-                .removePrefix(COLOR_PREFIX)
-            val segments = colorString
-                .removePrefix("rgb(")
-                .removeSuffix(")")
-                .split(",\\s*".toRegex())
-                .mapNotNull { it.toIntOrNull() }
-
-            assert(segments.size == 3)
-            val (red, green, blue) = segments
-            val colorValue = (0xFF shl 24) or
-                ((red and 0xFF) shl 16) or
-                ((green and 0xFF) shl 8) or
-                (blue and 0xFF)
+        colors.forEach { (name, colorString) ->
+            val colorValue = when (colorString.contains("rgb")) {
+                true -> {
+                    val segments = colorString
+                        .removePrefix("rgb(")
+                        .removeSuffix(")")
+                        .split(",\\s*".toRegex())
+                        .mapNotNull { it.toIntOrNull() }
+                    assert(segments.size == 3)
+                    val (red, green, blue) = segments
+                    val colorValue = (0xFF shl 24) or
+                        ((red and 0xFF) shl 16) or
+                        ((green and 0xFF) shl 8) or
+                        (blue and 0xFF)
+                    colorValue
+                }
+                false -> {
+                    "FF${colorString.drop(1)}".toLong(radix = 16)
+                }
+            }
 
             val property = PropertySpec.builder(name, colorType)
                 .initializer(
