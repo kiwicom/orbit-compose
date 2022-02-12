@@ -22,16 +22,16 @@ import kiwi.orbit.compose.ui.controls.Tag
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun TagScreen(onUpClick: () -> Unit) {
+fun TagScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Tag",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             TagScreenInner()
         }

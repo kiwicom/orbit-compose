@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.navigationBarsPadding
 import kiwi.orbit.compose.catalog.MainActions
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -82,13 +81,13 @@ fun MainScreen(
             )
         },
         backgroundColor = OrbitTheme.colors.surface.background,
-    ) {
+    ) { contentPadding ->
         BoxWithConstraints {
             val columns = (maxWidth / 156.dp).toInt().coerceAtLeast(1)
             Column(
                 Modifier
                     .verticalScroll(rememberScrollState())
-                    .navigationBarsPadding()
+                    .padding(contentPadding)
             ) {
                 Spacer(Modifier.size(16.dp))
                 CardsList("Foundation", foundation, columns)

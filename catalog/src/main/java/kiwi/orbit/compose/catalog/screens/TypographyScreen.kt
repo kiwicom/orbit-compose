@@ -15,16 +15,16 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun TypographyScreen(onUpClick: () -> Unit) {
+fun TypographyScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Typography",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             TypographyScreenInner()
         }

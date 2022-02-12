@@ -21,19 +21,19 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ToastScreen(
-    onUpClick: () -> Unit,
+    onNavigateUp: () -> Unit,
 ) {
     val toastHostState = remember { ToastHostState() }
     val scope = rememberCoroutineScope()
     Screen(
         title = "Toast",
-        onUpClick = onUpClick,
+        onNavigateUp = onNavigateUp,
         toastHostState = toastHostState,
-    ) {
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(contentPadding)
         ) {
             ToastScreenInner { message, icon ->
                 scope.launch {

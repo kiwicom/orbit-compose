@@ -25,16 +25,16 @@ import kiwi.orbit.compose.ui.controls.SeatUnavailable
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun SeatScreen(onUpClick: () -> Unit) {
+fun SeatScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Seat",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             SeatScreenInner()
         }

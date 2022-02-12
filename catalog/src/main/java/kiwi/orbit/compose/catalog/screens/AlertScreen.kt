@@ -1,9 +1,12 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,8 +26,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -46,44 +51,51 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun AlertScreen(onUpClick: () -> Unit) {
+fun AlertScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Alert",
-        onUpClick = onUpClick,
+        onNavigateUp = onNavigateUp,
         topAppBarElevation = 0.dp,
-    ) {
-        Column {
+    ) { contentPadding ->
+        Column(
+            Modifier.padding(top = contentPadding.calculateTopPadding())
+        ) {
             val state = rememberPagerState(0)
             val scope = rememberCoroutineScope()
-            TabRow(
-                modifier = Modifier
+            Box(
+                Modifier
                     .shadow(2.dp)
-                    .zIndex(1f),
-                selectedTabIndex = state.currentPage,
-                backgroundColor = OrbitTheme.colors.surface.main,
-                indicator = { tabPositions ->
-                    TabRowDefaults.Indicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                        color = OrbitTheme.colors.primary.main,
-                    )
-                },
-                divider = {},
+                    .zIndex(1f)
+                    .background(OrbitTheme.colors.surface.main)
             ) {
-                Tab(
-                    selected = state.currentPage == 0,
-                    onClick = { scope.launch { state.animateScrollToPage(0) } },
-                    text = { Text("Normal") },
-                )
-                Tab(
-                    selected = state.currentPage == 1,
-                    onClick = { scope.launch { state.animateScrollToPage(1) } },
-                    text = { Text("Suppressed") },
-                )
-                Tab(
-                    selected = state.currentPage == 2,
-                    onClick = { scope.launch { state.animateScrollToPage(2) } },
-                    text = { Text("Inline") },
-                )
+                TabRow(
+                    modifier = Modifier.navigationBarsPadding(bottom = false),
+                    selectedTabIndex = state.currentPage,
+                    backgroundColor = OrbitTheme.colors.surface.main,
+                    indicator = { tabPositions ->
+                        TabRowDefaults.Indicator(
+                            modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
+                            color = OrbitTheme.colors.primary.main,
+                        )
+                    },
+                    divider = {},
+                ) {
+                    Tab(
+                        selected = state.currentPage == 0,
+                        onClick = { scope.launch { state.animateScrollToPage(0) } },
+                        text = { Text("Normal") },
+                    )
+                    Tab(
+                        selected = state.currentPage == 1,
+                        onClick = { scope.launch { state.animateScrollToPage(1) } },
+                        text = { Text("Suppressed") },
+                    )
+                    Tab(
+                        selected = state.currentPage == 2,
+                        onClick = { scope.launch { state.animateScrollToPage(2) } },
+                        text = { Text("Inline") },
+                    )
+                }
             }
 
             HorizontalPager(
@@ -95,7 +107,11 @@ fun AlertScreen(onUpClick: () -> Unit) {
                     Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                        .padding(it)
+                        .padding(
+                            start = contentPadding.calculateStartPadding(LayoutDirection.Ltr),
+                            end = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
+                            bottom = contentPadding.calculateBottomPadding(),
+                        )
                 ) {
                     when (tabIndex) {
                         0 -> AlertScreenNormalInner()

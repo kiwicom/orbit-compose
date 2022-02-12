@@ -18,16 +18,16 @@ import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.controls.Stepper
 
 @Composable
-fun StepperScreen(onUpClick: () -> Unit) {
+fun StepperScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Stepper",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             StepperScreenInner()
         }

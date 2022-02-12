@@ -27,16 +27,16 @@ import kiwi.orbit.compose.ui.foundation.ProvideColors
 import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
 
 @Composable
-fun ButtonScreen(onUpClick: () -> Unit) {
+fun ButtonScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Button",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             ButtonScreenInner()
         }

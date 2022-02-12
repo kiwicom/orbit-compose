@@ -15,19 +15,18 @@ import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 fun DialogsScreen(
-    onUpClick: () -> Unit,
+    onNavigateUp: () -> Unit,
     onShowMaterialDialog: () -> Unit,
 ) {
     Screen(
         title = "Dialogs",
-        onUpClick = onUpClick,
-        withBackground = false,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             DialogsScreenInner(onShowMaterialDialog)
         }

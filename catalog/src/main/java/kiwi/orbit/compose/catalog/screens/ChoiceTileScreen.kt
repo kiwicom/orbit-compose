@@ -38,16 +38,16 @@ import kiwi.orbit.compose.ui.controls.Stepper
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun ChoiceTileScreen(onUpClick: () -> Unit) {
+fun ChoiceTileScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "ChoiceTile",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             ChoiceTileScreenInner()
         }
