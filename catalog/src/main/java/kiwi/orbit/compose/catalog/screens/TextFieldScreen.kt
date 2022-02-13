@@ -57,9 +57,9 @@ fun TextFieldScreen(onNavigateUp: () -> Unit) {
 @Composable
 private fun TextFieldScreenInner() {
     Column(Modifier.padding(16.dp)) {
-        val passwordFocusRequester = FocusRequester()
-        val bioFocusRequester = FocusRequester()
-        val nationalityFocusRequester = FocusRequester()
+        val passwordFocusRequester = remember { FocusRequester() }
+        val bioFocusRequester = remember { FocusRequester() }
+        val nationalityFocusRequester = remember { FocusRequester() }
 
         var hasError by remember { mutableStateOf(false) }
         var email by remember { mutableStateOf("") }
