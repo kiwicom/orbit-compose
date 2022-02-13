@@ -17,15 +17,9 @@ fun CatalogApplication() {
         val systemUiController = rememberSystemUiController()
 
         SideEffect {
-            systemUiController.setStatusBarColor(
+            systemUiController.setSystemBarsColor(
                 color = Color.Transparent,
-                darkIcons = isLightTheme
-            )
-            systemUiController.setNavigationBarColor(
-                color = when (isLightTheme) {
-                    true -> Color(0xE3FFFFFF) // semi-transparent white
-                    false -> Color(0xC3000000) // semi-transparent black
-                },
+                darkIcons = isLightTheme,
             )
         }
 
