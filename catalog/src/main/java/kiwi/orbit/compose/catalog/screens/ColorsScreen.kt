@@ -27,17 +27,16 @@ import kiwi.orbit.compose.ui.foundation.FeatureColors
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-fun ColorsScreen(onUpClick: () -> Unit) {
+fun ColorsScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Colors",
-        onUpClick = onUpClick,
-        withBackground = false,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             ColorsScreenInner()
         }

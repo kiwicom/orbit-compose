@@ -21,16 +21,16 @@ import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Switch
 
 @Composable
-fun SwitchScreen(onUpClick: () -> Unit) {
+fun SwitchScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Switch",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             SwitchScreenInner()
         }

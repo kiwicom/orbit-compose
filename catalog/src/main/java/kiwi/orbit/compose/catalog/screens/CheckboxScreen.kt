@@ -24,16 +24,16 @@ import kiwi.orbit.compose.ui.controls.CheckboxField
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun CheckboxScreen(onUpClick: () -> Unit) {
+fun CheckboxScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Checkbox Button",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             CheckboxScreenInner()
         }

@@ -34,16 +34,16 @@ import kiwi.orbit.compose.ui.controls.SelectField
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun SelectFieldScreen(onUpClick: () -> Unit) {
+fun SelectFieldScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Select Field",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             SelectFieldScreenInner()
         }

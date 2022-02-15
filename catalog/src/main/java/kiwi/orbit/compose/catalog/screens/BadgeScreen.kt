@@ -30,16 +30,16 @@ import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun BadgeScreen(onUpClick: () -> Unit) {
+fun BadgeScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Badge",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             BadgeScreenInner()
         }

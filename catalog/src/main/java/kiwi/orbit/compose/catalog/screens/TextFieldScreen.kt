@@ -37,16 +37,16 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TextField
 
 @Composable
-fun TextFieldScreen(onUpClick: () -> Unit) {
+fun TextFieldScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Text Field",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             TextFieldScreenInner()
         }
@@ -184,7 +184,10 @@ private fun TextFieldScreenInner() {
 
         Spacer(Modifier.height(8.dp))
 
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.width(IntrinsicSize.Max)) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.width(IntrinsicSize.Max)
+        ) {
             var v1 by remember { mutableStateOf("") }
             TextField(v1, { v1 = it }, label = { Text("Long label") }, modifier = Modifier.fillMaxWidth())
 

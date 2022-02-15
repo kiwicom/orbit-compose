@@ -25,17 +25,16 @@ import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun CardsScreen(onUpClick: () -> Unit) {
+fun CardsScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Cards / Tiles",
-        onUpClick = onUpClick,
-        withBackground = false,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             CardScreenInner()
         }

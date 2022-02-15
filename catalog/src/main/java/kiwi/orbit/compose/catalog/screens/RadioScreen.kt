@@ -24,16 +24,16 @@ import kiwi.orbit.compose.ui.controls.RadioField
 import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
-fun RadioScreen(onUpClick: () -> Unit) {
+fun RadioScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Radio",
-        onUpClick = onUpClick,
-    ) {
+        onNavigateUp = onNavigateUp,
+    ) { contentPadding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
+                .padding(contentPadding)
         ) {
             RadioScreenInner()
         }
