@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.PasswordTextField
 import kiwi.orbit.compose.ui.controls.Text
@@ -41,6 +42,11 @@ fun TextFieldScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Text Field",
         onNavigateUp = onNavigateUp,
+        action = {
+            ButtonPrimary(onClick = {}, Modifier.fillMaxWidth()) {
+                Text("Primary Action")
+            }
+        }
     ) { contentPadding ->
         Box(
             Modifier

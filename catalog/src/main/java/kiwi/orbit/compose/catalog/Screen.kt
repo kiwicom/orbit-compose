@@ -14,6 +14,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 fun Screen(
     title: String,
     onNavigateUp: () -> Unit,
+    action: @Composable (() -> Unit)? = null,
     toastHostState: ToastHostState = remember { ToastHostState() },
     topAppBarElevation: Dp = 2.dp,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
@@ -26,6 +27,7 @@ fun Screen(
                 elevation = topAppBarElevation,
             )
         },
+        action = action,
         toastHostState = toastHostState,
         content = content,
     )
