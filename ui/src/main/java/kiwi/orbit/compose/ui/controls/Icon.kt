@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
@@ -79,7 +78,7 @@ public fun Icon(
     Box(
         modifier
             .toolingGraphicsLayer()
-            .defaultSizeFor(painter)
+            .size(24.dp)
             .paint(
                 painter,
                 colorFilter = colorFilter,
@@ -88,16 +87,3 @@ public fun Icon(
             .then(semantics)
     )
 }
-
-private fun Modifier.defaultSizeFor(painter: Painter) =
-    this.then(
-        if (painter.intrinsicSize == Size.Unspecified || painter.intrinsicSize.isInfinite()) {
-            DefaultIconSizeModifier
-        } else {
-            Modifier
-        }
-    )
-
-private fun Size.isInfinite() = width.isInfinite() && height.isInfinite()
-
-private val DefaultIconSizeModifier = Modifier.size(24.dp)
