@@ -7,6 +7,8 @@ import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.constrainHeight
+import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.offset
 
 /**
@@ -34,8 +36,8 @@ private data class ExpandModifier(
             vertical = shiftPx * 2,
         )
         val placeable = measurable.measure(expandedConstraints)
-        val width = placeable.width - shiftPx * 2
-        val height = placeable.height - shiftPx * 2
+        val width = constraints.constrainWidth(placeable.width - shiftPx * 2)
+        val height = constraints.constrainHeight(placeable.height - shiftPx * 2)
 
         return layout(width, height) {
             placeable.place(-shiftPx, -shiftPx)
