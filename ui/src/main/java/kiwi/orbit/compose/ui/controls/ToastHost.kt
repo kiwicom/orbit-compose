@@ -91,7 +91,7 @@ public class ToastHostState {
                             delay(it.toLong())
                             this@launch.cancel()
                         } else {
-                            elapsed = started - System.currentTimeMillis()
+                            elapsed += System.currentTimeMillis() - started
                             delay(Long.MAX_VALUE)
                         }
                     }
