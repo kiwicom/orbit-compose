@@ -3,10 +3,12 @@ package kiwi.orbit.compose.catalog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
 import kiwi.orbit.compose.catalog.screens.ButtonScreen
@@ -27,6 +29,7 @@ import kiwi.orbit.compose.catalog.screens.SwitchScreen
 import kiwi.orbit.compose.catalog.screens.TagScreen
 import kiwi.orbit.compose.catalog.screens.TextFieldScreen
 import kiwi.orbit.compose.catalog.screens.ToastScreen
+import kiwi.orbit.compose.catalog.screens.TopAppBarScreen
 import kiwi.orbit.compose.catalog.screens.TypographyScreen
 
 private object MainDestinations {
@@ -44,7 +47,7 @@ private object MainDestinations {
     const val CHECKBOX = "checkbox"
     const val CHOICE_TILE = "choice_tile"
     const val DIALOGS = "dialogs"
-    const val DIALOGS_MATERIAL_DIALOG = "dialgos_material_dialog"
+    const val DIALOGS_MATERIAL_DIALOG = "dialogs_material_dialog"
     const val RADIO = "radio"
     const val SEAT = "seat"
     const val SELECT_FIELD = "select_field"
@@ -53,6 +56,7 @@ private object MainDestinations {
     const val TAG = "tag"
     const val TEXT_FIELD = "text_field"
     const val TOAST = "toast"
+    const val TOP_APP_BAR = "top_app_bar"
 }
 
 @Composable
@@ -134,6 +138,15 @@ fun NavGraph(
         }
         composable(MainDestinations.TOAST) {
             ToastScreen(actions::navigateUp)
+        }
+        composable(
+            route = MainDestinations.TOP_APP_BAR + "/{demoId}",
+            arguments = listOf(
+                navArgument("demoId") { type = NavType.IntType }
+            )
+        ) { entry ->
+            val demoId = requireNotNull(entry.arguments).getInt("demoId")
+            TopAppBarScreen(demoId, actions::navigateUp, actions::showTopAppBar)
         }
     }
 }
@@ -223,5 +236,9 @@ class MainActions(
 
     fun showToast() {
         navController.navigate(MainDestinations.TOAST)
+    }
+
+    fun showTopAppBar(id: Int = 0) {
+        navController.navigate(MainDestinations.TOP_APP_BAR + "/$id")
     }
 }

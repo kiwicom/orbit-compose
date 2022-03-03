@@ -26,6 +26,8 @@
   android: Released
 - component: InputField
   android: Released
+- component: NavigationBar
+  android: Released
 - component: Radio
   android: Released
 - component: Seat
