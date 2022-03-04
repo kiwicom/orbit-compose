@@ -146,7 +146,7 @@ private fun RowScope.Item(title: String, icon: @Composable () -> Unit, onClick: 
         ) {
             icon()
             Spacer(Modifier.size(8.dp))
-            Text(text = title, style = OrbitTheme.typography.title4)
+            Text(text = title, style = OrbitTheme.typography.title5)
         }
     }
 }

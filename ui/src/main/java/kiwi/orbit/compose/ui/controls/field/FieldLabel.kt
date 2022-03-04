@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -13,7 +12,7 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 internal fun FieldLabel(
     content: @Composable () -> Unit
 ) {
-    ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium)) {
+    ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
         Box(Modifier.padding(bottom = 4.dp)) {
             content()
         }

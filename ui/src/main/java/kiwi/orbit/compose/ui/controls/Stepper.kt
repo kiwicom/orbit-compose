@@ -65,7 +65,7 @@ public fun Stepper(
 
         Text(
             text = value.toString(),
-            style = OrbitTheme.typography.title4,
+            style = OrbitTheme.typography.bodyNormalBold,
             textAlign = TextAlign.Center,
             modifier = Modifier.defaultMinSize(44.dp),
         )

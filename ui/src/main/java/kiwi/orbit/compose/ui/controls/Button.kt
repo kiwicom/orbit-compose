@@ -194,7 +194,9 @@ private fun Button(
             emphasis = ContentEmphasis.Normal
         ) {
             ProvideMergedTextStyle(
-                value = OrbitTheme.typography.title4.copy(textAlign = TextAlign.Center),
+                value = OrbitTheme.typography.bodyNormalMedium.copy(
+                    textAlign = TextAlign.Center,
+                ),
             ) {
                 Row(
                     Modifier

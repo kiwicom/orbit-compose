@@ -12,7 +12,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -39,7 +38,7 @@ public fun Tag(
     val shape = OrbitTheme.shapes.normal
 
     CompositionLocalProvider(
-        LocalTextStyle provides OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Medium),
+        LocalTextStyle provides OrbitTheme.typography.bodyNormalMedium,
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
     ) {

@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
-import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -69,7 +68,7 @@ internal fun FieldMessage(
                         .size(16.dp),
                     tint = tintColor,
                 )
-                ProvideMergedTextStyle(LocalTextStyle.current.copy(color = tintColor)) {
+                ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(color = tintColor)) {
                     message.content.invoke()
                 }
             }
