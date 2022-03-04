@@ -73,7 +73,9 @@ private fun ChoiceTileContent(
     ) {
         if (title != null || description != null) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                icon?.invoke()
+                ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+                    icon?.invoke()
+                }
 
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp),

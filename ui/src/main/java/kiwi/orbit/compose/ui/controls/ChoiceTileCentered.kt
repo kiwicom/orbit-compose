@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -44,7 +44,12 @@ public fun ChoiceTileCentered(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .zIndex(1f)
-                    .offset(y = BadgeHeight / -2),
+                    .layout { measurable, constraints ->
+                        val placeable = measurable.measure(constraints)
+                        layout(placeable.width, placeable.height) {
+                            placeable.placeRelative(0, placeable.height / -2)
+                        }
+                    },
                 content = badgeContent,
             )
         }
@@ -87,9 +92,11 @@ private fun ChoiceTileContent(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        icon?.invoke()
-
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyLargeBold) {
+        // Provide default icon size to 24.dp
+        ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+            icon?.invoke()
+        }
+        ProvideMergedTextStyle(OrbitTheme.typography.title3) {
             title()
         }
 
