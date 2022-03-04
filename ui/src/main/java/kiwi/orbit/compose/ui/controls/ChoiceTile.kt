@@ -13,10 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
@@ -83,13 +80,7 @@ private fun ChoiceTileContent(
                 ) {
                     if (title != null) {
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            ProvideMergedTextStyle(
-                                value = TextStyle(
-                                    fontSize = 18.sp,
-                                    lineHeight = 24.sp,
-                                    fontWeight = FontWeight.Medium,
-                                )
-                            ) {
+                            ProvideMergedTextStyle(OrbitTheme.typography.title3) {
                                 title()
                             }
                         }
@@ -123,10 +114,7 @@ private fun ChoiceTileFooter(
             Modifier.weight(1f),
         ) {
             ProvideMergedTextStyle(
-                value = TextStyle(
-                    fontSize = 18.sp,
-                    lineHeight = 24.sp,
-                    fontWeight = FontWeight.Medium,
+                value = OrbitTheme.typography.title3.copy(
                     color = when (selected) {
                         true -> OrbitTheme.colors.interactive.main
                         false -> Color.Unspecified

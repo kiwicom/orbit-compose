@@ -33,7 +33,6 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -204,11 +203,9 @@ private fun ColumnScope.Seat(
                     !enabled -> ContentEmphasis.Disabled
                     else -> ContentEmphasis.Normal
                 },
-                LocalTextStyle provides OrbitTheme.typography.bodyNormal.plus(
-                    TextStyle(
-                        color = color,
-                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
-                    )
+                LocalTextStyle provides OrbitTheme.typography.bodyNormal.copy(
+                    color = color,
+                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
                 )
             ) {
                 content()

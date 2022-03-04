@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -178,7 +177,7 @@ private fun AlertContent(
         CompositionLocalProvider(
             LocalAlertScope provides true
         ) {
-            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)) {
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
                 title()
             }
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {

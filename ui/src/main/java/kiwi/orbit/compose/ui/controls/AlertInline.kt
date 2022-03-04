@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
@@ -164,9 +163,7 @@ private fun AlertInline(
             } else {
                 Spacer(Modifier.width(4.dp))
             }
-            ProvideMergedTextStyle(
-                OrbitTheme.typography.bodyNormal.copy(fontWeight = FontWeight.Bold)
-            ) {
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
                 title()
             }
             CompositionLocalProvider(

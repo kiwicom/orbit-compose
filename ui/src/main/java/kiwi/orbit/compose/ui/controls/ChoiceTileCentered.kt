@@ -13,11 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
@@ -92,7 +89,7 @@ private fun ChoiceTileContent(
     ) {
         icon?.invoke()
 
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyLargeBold) {
             title()
         }
 
@@ -109,10 +106,7 @@ private fun ChoiceTileContent(
         }
 
         ProvideMergedTextStyle(
-            value = TextStyle(
-                fontSize = 18.sp,
-                lineHeight = 24.sp,
-                fontWeight = FontWeight.Medium,
+            value = OrbitTheme.typography.title3.copy(
                 textAlign = TextAlign.Center,
                 color = when (selected) {
                     true -> OrbitTheme.colors.interactive.main

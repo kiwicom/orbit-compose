@@ -72,7 +72,7 @@ public fun CheckboxField(
         val bottomPadding = contentPadding.calculateBottomPadding()
         Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
             CompositionLocalProvider(
-                LocalTextStyle provides OrbitTheme.typography.title4,
+                LocalTextStyle provides OrbitTheme.typography.title5,
                 LocalContentColor provides OrbitTheme.colors.content.normal,
                 LocalContentEmphasis provides if (enabled) ContentEmphasis.Normal else ContentEmphasis.Disabled,
             ) {
