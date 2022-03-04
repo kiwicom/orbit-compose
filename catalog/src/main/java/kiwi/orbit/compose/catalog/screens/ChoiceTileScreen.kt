@@ -144,6 +144,23 @@ private fun ChoiceTileScreenInner() {
             CustomPlaceholder()
         }
 
+        var selectedSmall by remember { mutableStateOf(false) }
+        ChoiceTile(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            title = {
+                Text(
+                    "Multiline long choice title label",
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            description = { Text("Multiline and very long description and lot of words") },
+            icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },
+            selected = selectedSmall,
+            onSelect = { selectedSmall = !selectedSmall },
+            showRadio = true,
+            largeHeading = false,
+        )
+
         var selectedA by remember { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
@@ -219,6 +236,7 @@ private fun ChoiceTileScreenInner() {
                 title = { Text("Plus Support") },
                 description = { Text("Everyone sits together") },
                 price = { Text("+ 10 €") },
+                largeHeading = false,
             )
         }
     }
