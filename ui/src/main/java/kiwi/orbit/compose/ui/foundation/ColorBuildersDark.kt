@@ -61,6 +61,8 @@ public fun darkPrimaryColors(
     subtleAlt: Color = ColorTokens.ProductLightHover.invert(),
     strong: Color = ColorTokens.ProductNormal,
     onNormal: Color = ColorTokens.White.invert(),
+    onSubtle: Color = ColorTokens.White,
+    onSubtleAlt: Color = ColorTokens.White,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -68,6 +70,8 @@ public fun darkPrimaryColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkInfoColors(
@@ -77,6 +81,8 @@ public fun darkInfoColors(
     subtleAlt: Color = ColorTokens.BlueLightHover.invert(),
     strong: Color = ColorTokens.BlueNormal,
     onNormal: Color = ColorTokens.White.invert(),
+    onSubtle: Color = ColorTokens.White,
+    onSubtleAlt: Color = ColorTokens.White,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -84,6 +90,8 @@ public fun darkInfoColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkSuccessColors(
@@ -93,6 +101,8 @@ public fun darkSuccessColors(
     subtleAlt: Color = ColorTokens.GreenLightHover.invert(),
     strong: Color = ColorTokens.GreenNormal,
     onNormal: Color = ColorTokens.White.invert(),
+    onSubtle: Color = ColorTokens.White,
+    onSubtleAlt: Color = ColorTokens.White,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -100,6 +110,8 @@ public fun darkSuccessColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkWarningColors(
@@ -109,6 +121,8 @@ public fun darkWarningColors(
     subtleAlt: Color = ColorTokens.OrangeLightHover.invert(),
     strong: Color = ColorTokens.OrangeNormal,
     onNormal: Color = ColorTokens.White.invert(),
+    onSubtle: Color = ColorTokens.White,
+    onSubtleAlt: Color = ColorTokens.White,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -116,6 +130,8 @@ public fun darkWarningColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkCriticalColors(
@@ -125,6 +141,8 @@ public fun darkCriticalColors(
     subtleAlt: Color = ColorTokens.RedLightHover.invert(),
     strong: Color = ColorTokens.RedNormal,
     onNormal: Color = ColorTokens.White.invert(),
+    onSubtle: Color = ColorTokens.White,
+    onSubtleAlt: Color = ColorTokens.White,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -132,6 +150,8 @@ public fun darkCriticalColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkBundleColors(

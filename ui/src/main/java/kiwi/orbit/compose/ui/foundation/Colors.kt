@@ -164,6 +164,8 @@ public class FeatureColors(
     subtleAlt: Color,
     strong: Color,
     onNormal: Color,
+    onSubtle: Color,
+    onSubtleAlt: Color,
 ) {
     /**
      * Main full color of particular feature color set.
@@ -206,11 +208,25 @@ public class FeatureColors(
     public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
 
     /**
-     * Color fot content for [normal], [strong] shades.
+     * Color for content on [normal], [strong] shades.
      *
      * - Orbit light-theme color example: [ColorTokens.White].
      */
     public var onNormal: Color by mutableStateOf(onNormal, structuralEqualityPolicy()); internal set
+
+    /**
+     * Color for content on [subtle] shades.
+     *
+     * - Orbit light-theme color example: [strong].
+     */
+    public var onSubtle: Color by mutableStateOf(onSubtle, structuralEqualityPolicy()); internal set
+
+    /**
+     * Color for content on [subtleAlt] shades.
+     *
+     * - Orbit light-theme color example: [normalAlt].
+     */
+    public var onSubtleAlt: Color by mutableStateOf(onSubtleAlt, structuralEqualityPolicy()); internal set
 
     public fun copy(
         normal: Color = this.normal,
@@ -219,13 +235,17 @@ public class FeatureColors(
         subtleAlt: Color = this.subtleAlt,
         strong: Color = this.strong,
         onNormal: Color = this.onNormal,
+        onSubtle: Color = this.onSubtle,
+        onSubtleAlt: Color = this.onSubtleAlt,
     ): FeatureColors = FeatureColors(
-        normal,
-        normalAlt,
-        subtle,
-        subtleAlt,
-        strong,
-        onNormal,
+        normal = normal,
+        normalAlt = normalAlt,
+        subtle = subtle,
+        subtleAlt = subtleAlt,
+        strong = strong,
+        onNormal = onNormal,
+        onSubtle = onSubtle,
+        onSubtleAlt = onSubtleAlt,
     )
 }
 
@@ -389,6 +409,8 @@ internal fun FeatureColors.updateColorsFrom(other: FeatureColors) {
     subtleAlt = other.subtleAlt
     strong = other.strong
     onNormal = other.onNormal
+    onSubtle = other.onSubtle
+    onSubtleAlt = other.onSubtleAlt
 }
 
 internal fun BundleColors.updateColorsFrom(other: BundleColors) {
