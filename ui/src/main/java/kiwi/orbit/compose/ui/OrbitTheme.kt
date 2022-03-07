@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalColors
+import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalShapes
 import kiwi.orbit.compose.ui.foundation.LocalTypography
@@ -41,6 +42,7 @@ public fun OrbitTheme(
             LocalShapes provides shapes,
             LocalTypography provides typography,
             // Foundation
+            LocalContentColor provides rememberedColors.content.normal,
             LocalTextSelectionColors provides selectionColors,
             content = content
         )
