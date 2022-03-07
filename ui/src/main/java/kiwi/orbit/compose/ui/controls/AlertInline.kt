@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -151,19 +150,17 @@ private fun AlertInline(
         propagateMinConstraints = true,
     ) {
         AlertInlineContent {
-            if (icon != null) {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(end = 8.dp)
-                        .size(20.dp),
-                    tint = accentColor,
-                )
-            } else {
-                Spacer(Modifier.width(4.dp))
-            }
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
+                if (icon != null) {
+                    Icon(
+                        icon,
+                        contentDescription = null,
+                        modifier = Modifier.padding(end = 8.dp),
+                        tint = accentColor,
+                    )
+                } else {
+                    Spacer(Modifier.width(4.dp))
+                }
                 title()
             }
             CompositionLocalProvider(

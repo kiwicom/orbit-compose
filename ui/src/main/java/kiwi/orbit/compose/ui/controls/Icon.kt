@@ -15,16 +15,23 @@ import androidx.compose.ui.graphics.toolingGraphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.applyEmphasis
 
+/**
+ * Orbit Icon.
+ *
+ * - Size is resolved to current line-height. To modify the size, use [Modifier.size]. Defaults to 20.sp.
+ * - Color is resolved to current text color, possible to change [emphasis] or [tint] icon directly.
+ */
 @Composable
 public fun Icon(
     imageVector: ImageVector,
@@ -37,10 +44,16 @@ public fun Icon(
         painter = rememberVectorPainter(imageVector),
         contentDescription = contentDescription,
         modifier = modifier,
-        tint = tint
+        tint = tint,
     )
 }
 
+/**
+ * Orbit Icon.
+ *
+ * - Size is resolved to current line-height. To modify the size, use [Modifier.size]. Defaults to 20.sp.
+ * - Color is resolved to current text color, possible to change [emphasis] or [tint] icon directly.
+ */
 @Composable
 public fun Icon(
     bitmap: ImageBitmap,
@@ -54,7 +67,7 @@ public fun Icon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier,
-        tint = tint
+        tint = tint,
     )
 }
 
@@ -75,10 +88,14 @@ public fun Icon(
     } else {
         Modifier
     }
+    // Defaults icon size to 20.sp (~20.dp), bodyNormal's line-height.
+    val lineHeight = with(LocalDensity.current) {
+        LocalTextStyle.current.lineHeight.toDp()
+    }
     Box(
         modifier
             .toolingGraphicsLayer()
-            .size(24.dp)
+            .size(lineHeight)
             .paint(
                 painter,
                 colorFilter = colorFilter,

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -149,21 +148,21 @@ private fun Alert(
                 bottom = 16.dp,
             )
     ) {
-        if (icon != null) {
-            Icon(
-                icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(20.dp),
-                tint = accentColor,
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+            if (icon != null) {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    modifier = Modifier.padding(end = 8.dp),
+                    tint = accentColor,
+                )
+            }
+            AlertContent(
+                title = title,
+                actions = actions,
+                content = content,
             )
         }
-        AlertContent(
-            title = title,
-            actions = actions,
-            content = content,
-        )
     }
 }
 
@@ -180,9 +179,7 @@ private fun AlertContent(
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
                 title()
             }
-            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-                content()
-            }
+            content()
             if (actions != null) {
                 AlertButtons(Modifier.padding(top = 12.dp), actions) // 16.dp-4.dp
             }
