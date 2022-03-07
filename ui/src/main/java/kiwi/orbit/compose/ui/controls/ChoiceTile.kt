@@ -28,6 +28,7 @@ public fun ChoiceTile(
     title: @Composable (RowScope.() -> Unit)? = null,
     description: @Composable (() -> Unit)? = null,
     footer: @Composable (() -> Unit)? = null,
+    largeHeading: Boolean = true,
     showRadio: Boolean = true,
     content: @Composable (() -> Unit)? = null,
 ) {
@@ -50,6 +51,7 @@ public fun ChoiceTile(
                 icon = icon,
                 title = title,
                 description = description,
+                largeHeading = largeHeading,
                 content = content,
             )
             ChoiceTileFooter(
@@ -67,13 +69,18 @@ private fun ChoiceTileContent(
     title: @Composable (RowScope.() -> Unit)?,
     description: @Composable (() -> Unit)?,
     content: @Composable (() -> Unit)?,
+    largeHeading: Boolean,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         if (title != null || description != null) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+                val headingStyle = when (largeHeading) {
+                    true -> OrbitTheme.typography.title3
+                    false -> OrbitTheme.typography.title4
+                }
+                ProvideMergedTextStyle(headingStyle) {
                     icon?.invoke()
                 }
 
@@ -82,7 +89,7 @@ private fun ChoiceTileContent(
                 ) {
                     if (title != null) {
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+                            ProvideMergedTextStyle(headingStyle) {
                                 title()
                             }
                         }

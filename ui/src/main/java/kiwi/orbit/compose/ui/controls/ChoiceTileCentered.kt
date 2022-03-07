@@ -31,6 +31,7 @@ public fun ChoiceTileCentered(
     modifier: Modifier = Modifier,
     badgeContent: @Composable (RowScope.() -> Unit)? = null,
     icon: @Composable (() -> Unit)? = null,
+    largeHeading: Boolean = true,
 ) {
     val color by animateColorAsState(
         targetValue = when (selected) {
@@ -71,6 +72,7 @@ public fun ChoiceTileCentered(
                     title = title,
                     description = description,
                     price = price,
+                    largeHeading = largeHeading,
                 )
                 ChoiceTileFooter(
                     selected = selected,
@@ -87,6 +89,7 @@ private fun ChoiceTileContent(
     title: @Composable () -> Unit,
     description: @Composable (() -> Unit)?,
     price: @Composable () -> Unit,
+    largeHeading: Boolean,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -96,7 +99,11 @@ private fun ChoiceTileContent(
         ProvideMergedTextStyle(OrbitTheme.typography.title3) {
             icon?.invoke()
         }
-        ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+        val headingStyle = when (largeHeading) {
+            true -> OrbitTheme.typography.title3
+            false -> OrbitTheme.typography.title4
+        }
+        ProvideMergedTextStyle(headingStyle) {
             title()
         }
 
