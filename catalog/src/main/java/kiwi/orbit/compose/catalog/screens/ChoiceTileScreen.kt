@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
@@ -195,7 +196,6 @@ private fun ChoiceTileScreenInner() {
         var selectedD by remember { mutableStateOf(-1) }
         Row(
             Modifier
-                .horizontalScroll(rememberScrollState())
                 .height(IntrinsicSize.Max)
                 .padding(horizontal = 16.dp)
                 .padding(top = 12.dp) // half of the badge
@@ -203,7 +203,9 @@ private fun ChoiceTileScreenInner() {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             ChoiceTileCentered(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f),
                 selected = selectedD == 0,
                 onSelect = { selectedD = 0 },
                 title = { Text("Plus Support") },
@@ -212,7 +214,9 @@ private fun ChoiceTileScreenInner() {
             )
 
             ChoiceTileCentered(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f),
                 selected = selectedD == 1,
                 onSelect = { selectedD = 1 },
                 icon = {
@@ -228,10 +232,18 @@ private fun ChoiceTileScreenInner() {
             )
 
             ChoiceTileCentered(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f),
                 selected = selectedD == 2,
                 onSelect = { selectedD = 2 },
-                badgeContent = { Text("Recommended") },
+                badgeContent = {
+                    Text(
+                        "Recommended Very Much",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
                 icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },
                 title = { Text("Plus Support") },
                 description = { Text("Everyone sits together") },
