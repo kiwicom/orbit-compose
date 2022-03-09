@@ -39,20 +39,24 @@ public fun ChoiceTileCentered(
             false -> Color.Transparent
         }
     )
-    Box {
+    Box(
+        modifier = modifier,
+        propagateMinConstraints = true,
+    ) {
         if (badgeContent != null) {
-            BadgeInfo(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .zIndex(1f)
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(constraints)
-                        layout(placeable.width, placeable.height) {
-                            placeable.placeRelative(0, placeable.height / -2)
-                        }
-                    },
-                content = badgeContent,
-            )
+            Box(Modifier.zIndex(1f)) {
+                BadgeInfo(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .layout { measurable, constraints ->
+                            val placeable = measurable.measure(constraints)
+                            layout(placeable.width, placeable.height) {
+                                placeable.placeRelative(0, placeable.height / -2)
+                            }
+                        },
+                    content = badgeContent,
+                )
+            }
         }
         Card(
             onClick = onSelect,
@@ -102,7 +106,7 @@ private fun ChoiceTileContent(
         val headingStyle = when (largeHeading) {
             true -> OrbitTheme.typography.title3
             false -> OrbitTheme.typography.title4
-        }
+        }.copy(textAlign = TextAlign.Center)
         ProvideMergedTextStyle(headingStyle) {
             title()
         }
