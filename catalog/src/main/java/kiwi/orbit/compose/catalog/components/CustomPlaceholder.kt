@@ -13,9 +13,11 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-fun CustomPlaceholder() {
+fun CustomPlaceholder(
+    modifier: Modifier = Modifier,
+) {
     Box(
-        Modifier
+        modifier
             .fillMaxWidth()
             .height(100.dp)
             .background(OrbitTheme.colors.primary.subtle),

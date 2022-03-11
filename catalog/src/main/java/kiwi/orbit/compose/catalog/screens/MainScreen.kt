@@ -23,6 +23,7 @@ import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
+import androidx.compose.material.icons.rounded.WebAsset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +37,8 @@ import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.controls.TopAppBar
+import kiwi.orbit.compose.ui.controls.TopAppBarLarge
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
 @Composable
@@ -67,23 +69,24 @@ fun MainScreen(
         Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
         Triple("Text Field", { Icon(MaterialIcons.Keyboard, null) }, actions::showTextField),
         Triple("Toast", { Icon(MaterialIcons.Announcement, null) }, actions::showToast),
+        Triple("TopAppBar", { Icon(MaterialIcons.WebAsset, null) }, { actions.showTopAppBar() }),
     )
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            TopAppBarLarge(
                 title = { Text("Orbit Compose Catalog") },
                 actions = {
                     IconButton(onClick = onToggleTheme) {
                         Icon(MaterialIcons.BrightnessMedium, contentDescription = null)
                     }
-                }
+                },
             )
         },
         backgroundColor = OrbitTheme.colors.surface.background,
     ) { contentPadding ->
         BoxWithConstraints {
-            val columns = (maxWidth / 156.dp).toInt().coerceAtLeast(1)
+            val columns = (maxWidth / 180.dp).toInt().coerceAtLeast(1)
             Column(
                 Modifier
                     .verticalScroll(rememberScrollState())
@@ -144,9 +147,11 @@ private fun RowScope.Item(title: String, icon: @Composable () -> Unit, onClick: 
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            icon()
-            Spacer(Modifier.size(8.dp))
-            Text(text = title, style = OrbitTheme.typography.title5)
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
+                icon()
+                Spacer(Modifier.size(8.dp))
+                Text(title)
+            }
         }
     }
 }
