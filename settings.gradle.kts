@@ -1,5 +1,7 @@
 rootProject.name = "OrbitCompose"
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
@@ -28,6 +30,3 @@ include(":ui")
 include(":icons")
 include(":illustrations")
 include(":generator")
-
-enableFeaturePreview("VERSION_CATALOGS")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
