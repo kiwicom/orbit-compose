@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jmailen.kotlinter")
-    id("com.vanniktech.maven.publish")
+    id("com.vanniktech.maven.publish.base")
 }
 
 android {

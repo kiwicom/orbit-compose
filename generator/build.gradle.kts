@@ -25,16 +25,16 @@ dependencies {
 }
 
 tasks.register<JavaExec>("colors") {
-    main = "kiwi.orbit.compose.generator.colors.RunnerKt"
+    mainClass.set("kiwi.orbit.compose.generator.colors.RunnerKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }
 
 tasks.register<JavaExec>("icons") {
-    main = "kiwi.orbit.compose.generator.icons.RunnerKt"
+    mainClass.set("kiwi.orbit.compose.generator.icons.RunnerKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }
 
 tasks.register<JavaExec>("illustrations") {
-    main = "kiwi.orbit.compose.generator.illustrations.RunnerKt"
+    mainClass.set("kiwi.orbit.compose.generator.illustrations.RunnerKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }

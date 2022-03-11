@@ -1,4 +1,7 @@
-import com.vanniktech.maven.publish.MavenPublishPluginExtension
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -9,7 +12,7 @@ plugins {
     kotlin("plugin.serialization") version libs.versions.kotlin.lang.get() apply false
     id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
     id("org.jmailen.kotlinter") version libs.versions.kotlinter.get() apply false
-    id("com.vanniktech.maven.publish") version libs.versions.maven.publish.get() apply false
+    id("com.vanniktech.maven.publish.base") version libs.versions.maven.publish.get() apply false
 }
 
 subprojects {
@@ -45,9 +48,12 @@ subprojects {
         }
     }
 
-    plugins.withId("com.vanniktech.maven.publish") {
-        configure<MavenPublishPluginExtension> {
-            sonatypeHost = SonatypeHost.S01
-        }
+    extensions.findByType<MavenPublishBaseExtension>()?.apply {
+        group = requireNotNull(project.findProject("GROUP"))
+        version = requireNotNull(project.findProject("VERSION_NAME"))
+        pomFromGradleProperties()
+        publishToMavenCentral(SonatypeHost.S01)
+        signAllPublications()
+        configure(AndroidSingleVariantLibrary())
     }
 }
