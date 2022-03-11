@@ -18,8 +18,8 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.foundation.LocalAlertScope
 import kiwi.orbit.compose.ui.foundation.LocalColors
+import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
@@ -174,7 +174,7 @@ private fun AlertContent(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CompositionLocalProvider(
-            LocalAlertScope provides true
+            LocalSmallButtonScope provides true,
         ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
                 title()

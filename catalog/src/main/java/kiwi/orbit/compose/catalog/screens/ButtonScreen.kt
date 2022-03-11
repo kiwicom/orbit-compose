@@ -24,11 +24,10 @@ import kiwi.orbit.compose.ui.controls.ButtonCriticalSubtle
 import kiwi.orbit.compose.ui.controls.ButtonLink
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
+import kiwi.orbit.compose.ui.controls.ButtonPrimitive
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.ButtonToggleContainer
 import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.foundation.ProvideColors
-import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
 
 @Composable
 fun ButtonScreen(onNavigateUp: () -> Unit) {
@@ -66,8 +65,12 @@ private fun ButtonScreenInner() {
 
         Text("Manually themed", Modifier.padding(top = 16.dp))
 
-        ProvideColors(OrbitTheme.colors.asInteractiveTheme()) {
-            ButtonPrimary(onClick = {}, maxWidth) { Text("Interactive Button") }
+        ButtonPrimitive(
+            onClick = {},
+            modifier = maxWidth,
+            backgroundColor = OrbitTheme.colors.interactive.main,
+        ) {
+            Text("Interactive Button")
         }
 
         Text("Button Toggling", Modifier.padding(top = 16.dp))
