@@ -47,6 +47,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_cabin_baggage)
 
+    public val Chatbot: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_chatbot)
+
     public val CompassCollectPoints: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_compass_collect_points)
@@ -106,6 +110,14 @@ public object Illustrations {
     public val Error404: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_error404)
+
+    public val FareLock: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_fare_lock)
+
+    public val FareLockSuccess: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_fare_lock_success)
 
     public val FastTrack: Painter
         @Composable
