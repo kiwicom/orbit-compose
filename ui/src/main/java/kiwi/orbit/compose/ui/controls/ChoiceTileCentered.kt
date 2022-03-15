@@ -29,6 +29,7 @@ public fun ChoiceTileCentered(
     description: @Composable () -> Unit,
     price: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
     badgeContent: @Composable (RowScope.() -> Unit)? = null,
     icon: @Composable (() -> Unit)? = null,
     largeHeading: Boolean = true,
@@ -80,6 +81,7 @@ public fun ChoiceTileCentered(
                 )
                 ChoiceTileFooter(
                     selected = selected,
+                    isError = isError,
                 )
             }
         }
@@ -140,10 +142,12 @@ private fun ChoiceTileContent(
 @Composable
 private fun ChoiceTileFooter(
     selected: Boolean,
+    isError: Boolean,
 ) {
     Radio(
         selected = selected,
         onClick = null,
+        isError = isError,
         modifier = Modifier
             .padding(top = 12.dp)
             .padding(2.dp)
