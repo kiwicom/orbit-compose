@@ -191,9 +191,20 @@ private fun ChoiceTileScreenInner() {
             content = { },
         )
 
+        var selectedD by remember { mutableStateOf(false) }
+        ChoiceTile(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            title = { Text("ChoiceTile with error") },
+            description = { Text("Simple description") },
+            selected = selectedD,
+            isError = !selectedD,
+            onSelect = { selectedD = !selectedD },
+            content = { },
+        )
+
         // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
         // https://issuetracker.google.com/issues/215652703
-        var selectedD by remember { mutableStateOf(-1) }
+        var selectedE by remember { mutableStateOf(-1) }
         Row(
             Modifier
                 .height(IntrinsicSize.Max)
@@ -206,8 +217,8 @@ private fun ChoiceTileScreenInner() {
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f),
-                selected = selectedD == 0,
-                onSelect = { selectedD = 0 },
+                selected = selectedE == 0,
+                onSelect = { selectedE = 0 },
                 title = { Text("Plus Support") },
                 description = { Text("Everyone sits together") },
                 price = { BadgeSecondary { Text("Included") } },
@@ -217,8 +228,8 @@ private fun ChoiceTileScreenInner() {
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f),
-                selected = selectedD == 1,
-                onSelect = { selectedD = 1 },
+                selected = selectedE == 1,
+                onSelect = { selectedE = 1 },
                 icon = {
                     Image(
                         painter = Illustrations.Boarding,
@@ -235,8 +246,8 @@ private fun ChoiceTileScreenInner() {
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f),
-                selected = selectedD == 2,
-                onSelect = { selectedD = 2 },
+                selected = selectedE == 2,
+                onSelect = { selectedE = 2 },
                 badgeContent = {
                     Text(
                         "Recommended Very Much",

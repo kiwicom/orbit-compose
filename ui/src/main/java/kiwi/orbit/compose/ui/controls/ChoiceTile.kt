@@ -24,6 +24,7 @@ public fun ChoiceTile(
     selected: Boolean,
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
     icon: @Composable (() -> Unit)? = null,
     title: @Composable (RowScope.() -> Unit)? = null,
     description: @Composable (() -> Unit)? = null,
@@ -57,6 +58,7 @@ public fun ChoiceTile(
             ChoiceTileFooter(
                 footer = footer,
                 selected = selected,
+                isError = isError,
                 showRadio = showRadio,
             )
         }
@@ -113,6 +115,7 @@ private fun ChoiceTileContent(
 private fun ChoiceTileFooter(
     footer: @Composable (() -> Unit)?,
     selected: Boolean,
+    isError: Boolean,
     showRadio: Boolean,
 ) {
     Row(
@@ -139,6 +142,7 @@ private fun ChoiceTileFooter(
         if (showRadio) {
             Radio(
                 selected = selected,
+                isError = isError,
                 onClick = null,
                 modifier = Modifier
                     .align(Alignment.Bottom)
