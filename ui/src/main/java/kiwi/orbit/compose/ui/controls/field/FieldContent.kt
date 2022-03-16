@@ -42,10 +42,20 @@ internal fun FieldContent(
     Layout(
         content = {
             if (leadingIcon != null) {
-                FieldIcon(LeadingId, onLeadingIconClick, leadingIcon, Modifier.padding(start = FieldIconPadding))
+                FieldIcon(
+                    LeadingId,
+                    onLeadingIconClick,
+                    leadingIcon,
+                    Modifier.padding(start = FieldIconPadding)
+                )
             }
             if (trailingIcon != null) {
-                FieldIcon(TrailingId, onTrailingIconClick, trailingIcon, Modifier.padding(end = FieldIconPadding))
+                FieldIcon(
+                    TrailingId,
+                    onTrailingIconClick,
+                    trailingIcon,
+                    Modifier.padding(end = FieldIconPadding)
+                )
             }
 
             val padding = Modifier.padding(
@@ -54,14 +64,20 @@ internal fun FieldContent(
             )
 
             if (placeholder != null) {
-                Box(Modifier.layoutId(PlaceholderId).then(padding)) {
+                Box(
+                    Modifier
+                        .layoutId(PlaceholderId)
+                        .then(padding)
+                ) {
                     ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
                         ProvideContentEmphasis(ContentEmphasis.Subtle, content = placeholder)
                     }
                 }
             }
             Box(
-                Modifier.layoutId(FieldId).then(padding),
+                Modifier
+                    .layoutId(FieldId)
+                    .then(padding),
                 propagateMinConstraints = true,
             ) {
                 fieldContent()
@@ -98,9 +114,9 @@ private class FieldContentMeasurePolicy(
             )
         val fieldPlaceable = measurables.first { it.layoutId == FieldId }.measure(fieldConstraints)
 
-        // Placeholder
         val placeholderConstraints = fieldConstraints.copy(minWidth = 0)
-        val placeholderPlaceable = measurables.find { it.layoutId == PlaceholderId }?.measure(placeholderConstraints)
+        val placeholderPlaceable = measurables.find { it.layoutId == PlaceholderId }
+            ?.measure(placeholderConstraints)
 
         val width = calculateWidth(
             fieldWidth = fieldPlaceable.width,
@@ -119,15 +135,23 @@ private class FieldContentMeasurePolicy(
         )
 
         return layout(width, height) {
-            val verticalPaddingPadding = (FieldPadding.value * density).roundToInt()
+            val verticalPaddingPx = FieldPadding.roundToPx()
 
             leadingPlaceable?.placeRelative(
                 x = 0,
-                y = Alignment.CenterVertically.align(leadingPlaceable.height, height)
+                y = if (singleLine) {
+                    Alignment.CenterVertically.align(leadingPlaceable.height, height)
+                } else {
+                    verticalPaddingPx
+                },
             )
             trailingPlaceable?.placeRelative(
                 x = width - trailingPlaceable.width,
-                y = Alignment.CenterVertically.align(trailingPlaceable.height, height)
+                y = if (singleLine) {
+                    Alignment.CenterVertically.align(trailingPlaceable.height, height)
+                } else {
+                    verticalPaddingPx
+                },
             )
 
             // Single line text field without label places its input center vertically. Multiline text
@@ -135,7 +159,7 @@ private class FieldContentMeasurePolicy(
             val fieldVerticalPosition = if (singleLine) {
                 Alignment.CenterVertically.align(fieldPlaceable.height, height)
             } else {
-                verticalPaddingPadding
+                verticalPaddingPx
             }
             fieldPlaceable.placeRelative(
                 x = leadingPlaceable?.width ?: 0,
@@ -148,7 +172,7 @@ private class FieldContentMeasurePolicy(
                 val placeholderVerticalPosition = if (singleLine) {
                     Alignment.CenterVertically.align(placeholderPlaceable.height, height)
                 } else {
-                    verticalPaddingPadding
+                    verticalPaddingPx
                 }
                 placeholderPlaceable.placeRelative(
                     x = leadingPlaceable?.width ?: 0,

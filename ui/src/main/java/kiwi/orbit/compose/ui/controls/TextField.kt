@@ -129,17 +129,8 @@ public fun TextField(
             ) {
                 when (it) {
                     InputState.Normal -> Color.Transparent
-                    InputState.Focused -> OrbitTheme.colors.interactive.main
-                    InputState.NormalError, InputState.FocusedError -> OrbitTheme.colors.critical.main
-                }
-            }
-            val backgroundColor = transition.animateColor(
-                transitionSpec = { tween(durationMillis = AnimationDuration) },
-                label = "backgroundColor"
-            ) {
-                when (it) {
-                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.surface.main
-                    else -> OrbitTheme.colors.surface.subtle
+                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.interactive.main
+                    InputState.NormalError -> OrbitTheme.colors.critical.main
                 }
             }
 
@@ -154,7 +145,7 @@ public fun TextField(
                 modifier = Modifier
                     .then(autoBringIntoViewFocusModifier)
                     .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
-                    .background(backgroundColor.value, OrbitTheme.shapes.normal),
+                    .background(OrbitTheme.colors.surface.subtle, OrbitTheme.shapes.normal),
                 enabled = enabled,
                 readOnly = readOnly,
                 textStyle = mergedTextStyle,
