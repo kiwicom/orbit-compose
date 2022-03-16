@@ -88,10 +88,10 @@ public fun ButtonPrimitive(
 }
 
 public object ButtonDefaults {
-    private val ButtonHorizontalPadding = 16.dp
-    private val ButtonVerticalPadding = 12.dp
-    private val ButtonSmallHorizontalPadding = 8.dp
-    private val ButtonSmallVerticalPadding = 8.dp
+    internal val ButtonHorizontalPadding = 16.dp
+    internal val ButtonVerticalPadding = 12.dp
+    internal val ButtonSmallHorizontalPadding = 8.dp
+    internal val ButtonSmallVerticalPadding = 8.dp
 
     public val ContentPadding: PaddingValues = PaddingValues(
         start = ButtonHorizontalPadding,

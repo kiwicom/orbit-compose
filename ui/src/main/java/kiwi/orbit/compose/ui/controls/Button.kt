@@ -129,22 +129,7 @@ public fun ButtonBundleTop(
 }
 
 @Composable
-public fun ButtonLink(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
-) {
-    ButtonLargePrimitive(
-        onClick = onClick,
-        backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.primary.main,
-        modifier = modifier,
-        content = content,
-    )
-}
-
-@Composable
-private fun ButtonLargePrimitive(
+internal fun ButtonLargePrimitive(
     onClick: () -> Unit,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
