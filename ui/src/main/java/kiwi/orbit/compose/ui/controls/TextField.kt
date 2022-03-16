@@ -129,8 +129,8 @@ public fun TextField(
             ) {
                 when (it) {
                     InputState.Normal -> Color.Transparent
-                    InputState.Focused -> OrbitTheme.colors.interactive.main
-                    InputState.NormalError, InputState.FocusedError -> OrbitTheme.colors.critical.main
+                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.interactive.main
+                    InputState.NormalError -> OrbitTheme.colors.critical.main
                 }
             }
 
