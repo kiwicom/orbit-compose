@@ -48,12 +48,14 @@ subprojects {
         }
     }
 
-    extensions.findByType<MavenPublishBaseExtension>()?.apply {
-        group = requireNotNull(project.findProject("GROUP"))
-        version = requireNotNull(project.findProject("VERSION_NAME"))
-        pomFromGradleProperties()
-        publishToMavenCentral(SonatypeHost.S01)
-        signAllPublications()
-        configure(AndroidSingleVariantLibrary())
+    plugins.withId("com.vanniktech.maven.publish.base") {
+        configure<MavenPublishBaseExtension> {
+            group = requireNotNull(project.findProperty("GROUP"))
+            version = requireNotNull(project.findProperty("VERSION_NAME"))
+            pomFromGradleProperties()
+            publishToMavenCentral(SonatypeHost.S01)
+            signAllPublications()
+            configure(AndroidSingleVariantLibrary())
+        }
     }
 }
