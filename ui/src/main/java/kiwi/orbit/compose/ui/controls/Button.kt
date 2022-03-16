@@ -81,6 +81,54 @@ public fun ButtonCriticalSubtle(
 }
 
 @Composable
+public fun ButtonBundleBasic(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    ButtonLargePrimitive(
+        onClick = onClick,
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.basicGradient,
+        contentColor = OrbitTheme.colors.bundle.onBasic,
+        modifier = modifier,
+        content = content,
+    )
+}
+
+@Composable
+public fun ButtonBundleMedium(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    ButtonLargePrimitive(
+        onClick = onClick,
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.mediumGradient,
+        contentColor = OrbitTheme.colors.bundle.onMedium,
+        modifier = modifier,
+        content = content,
+    )
+}
+
+@Composable
+public fun ButtonBundleTop(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    ButtonLargePrimitive(
+        onClick = onClick,
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.topGradient,
+        contentColor = OrbitTheme.colors.bundle.onTop,
+        modifier = modifier,
+        content = content,
+    )
+}
+
+@Composable
 public fun ButtonLink(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,

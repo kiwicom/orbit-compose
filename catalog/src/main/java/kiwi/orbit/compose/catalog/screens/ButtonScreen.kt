@@ -19,6 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.ButtonBundleBasic
+import kiwi.orbit.compose.ui.controls.ButtonBundleMedium
+import kiwi.orbit.compose.ui.controls.ButtonBundleTop
 import kiwi.orbit.compose.ui.controls.ButtonCritical
 import kiwi.orbit.compose.ui.controls.ButtonCriticalSubtle
 import kiwi.orbit.compose.ui.controls.ButtonLink
@@ -61,6 +64,9 @@ private fun ButtonScreenInner() {
         ButtonSecondary(onClick = {}, maxWidth) { Text("Secondary Button") }
         ButtonCritical(onClick = {}, maxWidth) { Text("Critical Button") }
         ButtonCriticalSubtle(onClick = {}, maxWidth) { Text("Critical Subtle Button") }
+        ButtonBundleBasic(onClick = {}, maxWidth) { Text("Bundle Basic Button") }
+        ButtonBundleMedium(onClick = {}, maxWidth) { Text("Bundle Medium Button") }
+        ButtonBundleTop(onClick = {}, maxWidth) { Text("Bundle Top Button") }
         ButtonLink(onClick = {}, maxWidth) { Text("Link Button") }
 
         Text("Manually themed", Modifier.padding(top = 16.dp))
