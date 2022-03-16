@@ -11,7 +11,7 @@
 - component: ButtonLink
   android: Released
 - component: ButtonPrimitive
-  android: Planned
+  android: Released
 - component: Card
   android: Partially
 - component: Checkbox

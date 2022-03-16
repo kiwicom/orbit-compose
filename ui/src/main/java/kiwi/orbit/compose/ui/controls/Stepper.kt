@@ -86,15 +86,11 @@ private fun StepperButton(
     content: @Composable RowScope.() -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val elevation = ButtonDefaults.elevation(
-        defaultElevation = 1.dp,
-    )
     Surface(
         onClick = onClick,
         shape = OrbitTheme.shapes.small,
         color = OrbitTheme.colors.surface.strong,
         contentColor = OrbitTheme.colors.content.normal,
-        elevation = elevation.elevation(enabled, interactionSource).value,
         interactionSource = interactionSource,
         indication = null,
         enabled = enabled,

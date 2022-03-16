@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.foundation.LocalAlertScope
 import kiwi.orbit.compose.ui.foundation.LocalColors
+import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
@@ -164,7 +164,7 @@ private fun AlertInline(
                 title()
             }
             CompositionLocalProvider(
-                LocalAlertScope provides true
+                LocalSmallButtonScope provides true
             ) {
                 ButtonPrimary(
                     onClick = onActionClick,
