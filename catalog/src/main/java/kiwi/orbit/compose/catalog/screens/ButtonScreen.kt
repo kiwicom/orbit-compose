@@ -174,8 +174,7 @@ private fun ButtonLinkScreenInner() {
         Card {
             Column(Modifier.padding(16.dp)) {
                 Text(
-                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam sit amet magna in magna gravida vehicula. Nam quis nulla. Nam sed tellus id magna elementum tincidunt.",
-                    style = OrbitTheme.typography.bodyNormal
+                    text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam sit amet magna in magna gravida vehicula. Nam quis nulla. Nam sed tellus id magna elementum tincidunt.",
                 )
                 Spacer(Modifier.size(8.dp))
                 ButtonTextLinkPrimary("Translate", onClick = {})

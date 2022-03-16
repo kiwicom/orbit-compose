@@ -191,8 +191,8 @@ public data class Typography internal constructor(
             subtitle1 = title4,
             subtitle2 = title5,
             overline = title6,
-            body1 = bodyLarge,
-            body2 = bodyNormal,
+            body1 = bodyNormal,
+            body2 = bodySmall,
             button = title5,
         )
 }
