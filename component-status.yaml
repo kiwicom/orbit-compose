@@ -14,6 +14,8 @@
   android: Released
 - component: Card
   android: Partially
+- component: ChoiceTile
+  android: Released
 - component: Checkbox
   android: Released
 - component: CountryFlag
