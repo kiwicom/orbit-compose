@@ -86,7 +86,7 @@ dependencies {
     implementation(projects.icons)
     implementation(projects.illustrations)
 
-    implementation(libs.androidx.core)
+    implementation(libs.androidx.coreFixed)
     implementation(libs.androidx.activityCompose)
 
     implementation(libs.compose.animation)
