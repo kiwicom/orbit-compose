@@ -15,6 +15,14 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_account_circle)
 
+    public val Admin: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_admin)
+
+    public val Ai: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_ai)
+
     public val AirConditioning: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_air_conditioning)
@@ -66,6 +74,10 @@ public object Icons {
     public val All: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_all)
+
+    public val Android: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_android)
 
     public val Anywhere: Painter
         @Composable
@@ -287,6 +299,26 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_color_picker)
 
+    public val ColoredFacebook: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_colored_facebook)
+
+    public val ColoredImessage: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_colored_imessage)
+
+    public val ColoredMessenger: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_colored_messenger)
+
+    public val ColoredTwitter: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_colored_twitter)
+
+    public val ColoredWhatsup: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_colored_whatsapp)
+
     public val Compare: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_compare)
@@ -306,6 +338,10 @@ public object Icons {
     public val CustomerSupport: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_customer_support)
+
+    public val Dashboard: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_dashboard)
 
     public val Deals: Painter
         @Composable
