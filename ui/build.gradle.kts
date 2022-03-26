@@ -51,6 +51,7 @@ dependencies {
 
     implementation(libs.accompanist.insets)
     implementation(libs.androidx.core)
+    implementation(libs.coil)
     implementation(libs.compose.animationGraphics)
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)

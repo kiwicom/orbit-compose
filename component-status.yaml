@@ -19,7 +19,7 @@
 - component: Checkbox
   android: Released
 - component: CountryFlag
-  android: Planned
+  android: Released
 - component: Heading
   android: Released
 - component: Icon
