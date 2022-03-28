@@ -7,7 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,6 +16,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
+import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
 
 @Composable
 public fun ClickableField(
@@ -31,7 +31,7 @@ public fun ClickableField(
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
 ) {
-    Column(modifier) {
+    ColumnWithMinConstraints(modifier) {
         if (label != null) {
             FieldLabel(label)
         }
