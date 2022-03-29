@@ -15,9 +15,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -48,9 +52,13 @@ public fun CheckboxField(
         Modifier
     }
     val layoutDirection = LocalLayoutDirection.current
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
     Row(
         modifier = modifier
             .then(selectable)
+            .semantics {
+                if (isError) this.error(errorMessage)
+            }
             .padding(
                 start = contentPadding.calculateStartPadding(layoutDirection),
                 end = contentPadding.calculateEndPadding(layoutDirection),

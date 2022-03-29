@@ -23,38 +23,44 @@ import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
 @Composable
 public fun SeatLegendExtraLegroom(
+    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
         color = ColorTokens.BlueLightActive,
         content = content,
+        modifier = modifier,
     )
 }
 
 @Composable
 public fun SeatLegendStandard(
+    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
         color = ColorTokens.ProductLightActive,
         content = content,
+        modifier = modifier,
     )
 }
 
 @Composable
 public fun SeatLegendUnavailable(
+    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
         color = ColorTokens.CloudLightActive,
         content = content,
+        modifier = modifier,
     )
 }
 
 @Composable
 private fun SeatLegend(
     color: Color,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     Row(

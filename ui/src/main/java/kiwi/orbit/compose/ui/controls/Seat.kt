@@ -33,6 +33,8 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -113,19 +115,20 @@ private fun SeatContainer(
     label: @Composable () -> Unit,
     price: @Composable () -> Unit,
     onClick: (() -> Unit)?,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
 ) {
     Box(
-        modifier = modifier.then(
-            Modifier
-                .width(SeatContainerWidth)
-                .height(SeatContainerHeight)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    enabled = onClick != null,
-                    indication = null,
-                ) { onClick?.invoke() },
-        ),
+        modifier = modifier
+            .width(SeatContainerWidth)
+            .height(SeatContainerHeight)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                enabled = onClick != null,
+                indication = null,
+            ) { onClick?.invoke() }
+            .semantics {
+                this.selected = selected
+            },
     ) {
         Column(
             modifier = Modifier
