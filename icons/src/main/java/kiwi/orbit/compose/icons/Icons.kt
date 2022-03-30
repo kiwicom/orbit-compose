@@ -315,7 +315,7 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_colored_twitter)
 
-    public val ColoredWhatsup: Painter
+    public val ColoredWhatsapp: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_colored_whatsapp)
 
