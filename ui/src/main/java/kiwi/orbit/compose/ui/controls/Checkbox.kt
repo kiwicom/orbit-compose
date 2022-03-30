@@ -26,7 +26,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -85,16 +88,17 @@ public fun Checkbox(
     )
     val errorStrokeColor = OrbitTheme.colors.critical.main
     val errorShadowColor = OrbitTheme.colors.critical.subtle
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
 
     Box(
-        modifier = modifier,
+        modifier = modifier
+            .then(selectableModifier)
+            .semantics {
+                if (isError) this.error(errorMessage)
+            },
         contentAlignment = Alignment.Center
     ) {
-        Canvas(
-            Modifier
-                .then(selectableModifier)
-                .requiredSize(CheckboxSize)
-        ) {
+        Canvas(Modifier.requiredSize(CheckboxSize)) {
             drawCheckbox(borderColor, backgroundColor, errorAlpha)
             drawError(errorStrokeColor, errorShadowColor, errorAlpha)
         }

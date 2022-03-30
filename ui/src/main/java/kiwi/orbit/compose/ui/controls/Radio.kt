@@ -17,10 +17,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 
 @Composable
 public fun Radio(
@@ -72,10 +76,14 @@ public fun Radio(
     )
     val errorStrokeColor = OrbitTheme.colors.critical.main
     val errorShadowColor = OrbitTheme.colors.critical.subtle
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
 
     Canvas(
         modifier
             .then(selectableModifier)
+            .semantics {
+                if (isError) this.error(errorMessage)
+            }
             .requiredSize(RadioSize)
     ) {
         drawRadio(borderWidth, borderColor, backgroundColor)

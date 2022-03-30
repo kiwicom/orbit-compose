@@ -13,10 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -34,6 +39,7 @@ public fun ChoiceTileCentered(
     icon: @Composable (() -> Unit)? = null,
     largeHeading: Boolean = true,
 ) {
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
     val color by animateColorAsState(
         targetValue = when (selected) {
             true -> OrbitTheme.colors.interactive.main
@@ -41,7 +47,11 @@ public fun ChoiceTileCentered(
         }
     )
     Box(
-        modifier = modifier,
+        modifier = modifier
+            .semantics {
+                this.selected = selected
+                if (isError) this.error(errorMessage)
+            },
         propagateMinConstraints = true,
     ) {
         if (badgeContent != null) {
