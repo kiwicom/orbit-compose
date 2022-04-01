@@ -1,13 +1,11 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -52,8 +50,7 @@ internal fun TopAppBarLargeScreen(
 internal fun TopAppBarLargeScrollableScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val decay = rememberSplineBasedDecay<Float>()
-    val scrollBehavior = remember { TopAppBarScrollBehavior.exitUntilCollapsedScrollBehavior(decay) }
+    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -73,8 +70,7 @@ internal fun TopAppBarLargeScrollableScreen(
 internal fun TopAppBarLargeScrollableElevatedScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val decay = rememberSplineBasedDecay<Float>()
-    val scrollBehavior = remember { TopAppBarScrollBehavior.exitUntilCollapsedScrollBehavior(decay) }
+    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -94,8 +90,7 @@ internal fun TopAppBarLargeScrollableElevatedScreen(
 internal fun TopAppBarLargeCustomContentScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val decay = rememberSplineBasedDecay<Float>()
-    val scrollBehavior = remember { TopAppBarScrollBehavior.exitUntilCollapsedScrollBehavior(decay) }
+    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {

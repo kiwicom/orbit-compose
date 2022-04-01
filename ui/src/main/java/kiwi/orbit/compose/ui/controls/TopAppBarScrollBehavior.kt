@@ -6,9 +6,15 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateDecay
 import androidx.compose.animation.core.animateTo
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.rememberSplineBasedDecay
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -66,22 +72,67 @@ public interface TopAppBarScrollBehavior {
     public var contentOffset: Float
 
     public companion object {
-        public fun pinnedScrollBehavior(
+        @Composable
+        public fun rememberPinned(
             canScroll: () -> Boolean = { true }
-        ): TopAppBarScrollBehavior =
-            PinnedScrollBehavior(canScroll)
+        ): TopAppBarScrollBehavior {
+            val saver = remember {
+                TopAppBarScrollBehaviorSaver {
+                    PinnedScrollBehavior(canScroll)
+                }
+            }
+            return rememberSaveable(saver = saver) {
+                PinnedScrollBehavior(canScroll)
+            }
+        }
 
-        public fun enterAlwaysScrollBehavior(
+        @Composable
+        public fun rememberEnterAlways(
             canScroll: () -> Boolean = { true }
-        ): TopAppBarScrollBehavior =
-            EnterAlwaysScrollBehavior(canScroll)
+        ): TopAppBarScrollBehavior {
+            val saver = remember {
+                TopAppBarScrollBehaviorSaver {
+                    EnterAlwaysScrollBehavior(canScroll)
+                }
+            }
+            return rememberSaveable(saver = saver) {
+                EnterAlwaysScrollBehavior(canScroll)
+            }
+        }
 
-        public fun exitUntilCollapsedScrollBehavior(
-            decayAnimationSpec: DecayAnimationSpec<Float>,
+        @Composable
+        public fun rememberExitUntilCollapsed(
+            decayAnimationSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay(),
             canScroll: () -> Boolean = { true },
-        ): TopAppBarScrollBehavior =
-            ExitUntilCollapsedScrollBehavior(decayAnimationSpec, canScroll)
+        ): TopAppBarScrollBehavior {
+            val saver = remember {
+                TopAppBarScrollBehaviorSaver {
+                    ExitUntilCollapsedScrollBehavior(decayAnimationSpec, canScroll)
+                }
+            }
+            return rememberSaveable(saver = saver) {
+                ExitUntilCollapsedScrollBehavior(decayAnimationSpec, canScroll)
+            }
+        }
     }
+}
+
+private class TopAppBarScrollBehaviorSaver(
+    private val factory: () -> TopAppBarScrollBehavior,
+) : Saver<TopAppBarScrollBehavior, List<Float>> {
+    override fun SaverScope.save(value: TopAppBarScrollBehavior): List<Float> =
+        listOf(
+            value.offsetLimit,
+            value.offset,
+            value.contentOffset,
+        )
+
+    override fun restore(value: List<Float>): TopAppBarScrollBehavior =
+        factory().apply {
+            offsetLimit = value[0]
+            offset = value[1]
+            contentOffset = value[2]
+        }
 }
 
 /**

@@ -55,7 +55,7 @@ internal fun TopAppBarNormalScreen(
 internal fun TopAppBarNormalScrollableScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = remember { TopAppBarScrollBehavior.enterAlwaysScrollBehavior() }
+    val scrollBehavior = TopAppBarScrollBehavior.rememberEnterAlways()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -113,7 +113,7 @@ internal fun TopAppBarNormalWithTabsScreen(
 internal fun TopAppBarNormalWithFiltersScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = remember { TopAppBarScrollBehavior.pinnedScrollBehavior() }
+    val scrollBehavior = TopAppBarScrollBehavior.rememberPinned()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
