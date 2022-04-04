@@ -71,7 +71,6 @@ public fun ChoiceTileCentered(
         }
         Card(
             onClick = onSelect,
-            modifier = modifier,
             border = BorderStroke(2.dp, color)
         ) {
             Column(
