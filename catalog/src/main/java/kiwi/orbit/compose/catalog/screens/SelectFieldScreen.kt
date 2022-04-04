@@ -50,6 +50,7 @@ private fun SelectFieldScreenInner() {
             Country("Germany", "de"),
             Country("Austria", "at"),
             Country("Poland", "pl"),
+            Country("Invalid", "invalid"),
         )
 
         SelectField(

@@ -14,6 +14,7 @@ import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
 import coil.size.Scale
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
 /**
@@ -38,6 +39,7 @@ public fun CountryFlag(
             crossfade(true)
             size(OriginalSize)
             scale(Scale.FIT)
+            error(R.drawable.orbit_country_flag_undefined)
         },
         contentDescription = contentDescription,
         modifier = modifier

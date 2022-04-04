@@ -35,6 +35,7 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
+        disable.add("UnusedResources")
         baseline = file("lint-baseline.xml")
         abortOnError = true
         warningsAsErrors = true
