@@ -21,6 +21,7 @@ import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.SignalWifiOff
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.ToggleOn
 import androidx.compose.material.icons.rounded.WebAsset
@@ -61,6 +62,7 @@ fun MainScreen(
         Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
         Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
+        Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
         Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
