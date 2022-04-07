@@ -18,6 +18,7 @@ import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
 import kiwi.orbit.compose.catalog.screens.DialogsMaterialDialog
 import kiwi.orbit.compose.catalog.screens.DialogsScreen
+import kiwi.orbit.compose.catalog.screens.EmptyStateScreen
 import kiwi.orbit.compose.catalog.screens.IconsScreen
 import kiwi.orbit.compose.catalog.screens.IllustrationsScreen
 import kiwi.orbit.compose.catalog.screens.MainScreen
@@ -48,6 +49,7 @@ private object MainDestinations {
     const val CHOICE_TILE = "choice_tile"
     const val DIALOGS = "dialogs"
     const val DIALOGS_MATERIAL_DIALOG = "dialogs_material_dialog"
+    const val EMPTY_STATE = "empty_state"
     const val RADIO = "radio"
     const val SEAT = "seat"
     const val SELECT_FIELD = "select_field"
@@ -114,6 +116,9 @@ fun NavGraph(
         }
         dialog(MainDestinations.DIALOGS_MATERIAL_DIALOG) {
             DialogsMaterialDialog(navController)
+        }
+        composable(MainDestinations.EMPTY_STATE) {
+            EmptyStateScreen(actions::navigateUp)
         }
         composable(MainDestinations.RADIO) {
             RadioScreen(actions::navigateUp)
@@ -204,6 +209,10 @@ class MainActions(
 
     fun showDialogsMaterialDialog() {
         navController.navigate(MainDestinations.DIALOGS_MATERIAL_DIALOG)
+    }
+
+    fun showEmptyState() {
+        navController.navigate(MainDestinations.EMPTY_STATE)
     }
 
     fun showRadio() {
