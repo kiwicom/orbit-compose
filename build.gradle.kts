@@ -13,6 +13,7 @@ plugins {
     id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
     id("org.jmailen.kotlinter") version libs.versions.kotlinter.get() apply false
     id("com.vanniktech.maven.publish.base") version libs.versions.maven.publish.get() apply false
+    id("shot") version libs.versions.shot.get() apply false
 }
 
 subprojects {
