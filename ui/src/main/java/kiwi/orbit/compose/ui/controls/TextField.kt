@@ -27,11 +27,15 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
@@ -94,8 +98,15 @@ public fun TextField(
         autoBringIntoViewFocusModifier = Modifier
     }
 
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
     ColumnWithMinConstraints(
-        modifier.then(autoBringIntoViewSetupModifier)
+        modifier
+            .semantics {
+                if (error != null) {
+                    this.error(errorMessage)
+                }
+            }
+            .then(autoBringIntoViewSetupModifier)
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
