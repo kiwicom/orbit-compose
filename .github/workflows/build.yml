@@ -30,6 +30,8 @@ jobs:
       - name: KTLint errors to annotations
         if: ${{ failure() }}
         run: |
-          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=app/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' app/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=catalog/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' catalog/build/reports/ktlint/main-lint.json || true
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=generator/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' generator/build/reports/ktlint/main-lint.json || true
-          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=lib/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' lib/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=icons/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' icons/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=illustrations/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' illustrations/build/reports/ktlint/main-lint.json || true
+          jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=ui/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' ui/build/reports/ktlint/main-lint.json || true
