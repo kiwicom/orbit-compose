@@ -62,9 +62,9 @@ private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
         )
         Separator(Modifier.padding(vertical = 8.dp))
         EmptyState(
-            illustration = { Image(Illustrations.NoResults, contentDescription = null) },
-            title = { Text(text = "Sorry, we couldn't find that connection.") },
-            description = { Text(text = "Try changing up your search a bit. We'll try harder next time.") },
+            illustration = Illustrations.NoResults,
+            title = "Sorry, we couldn't find that connection.",
+            description = "Try changing up your search a bit. We'll try harder next time.",
             action = {
                 ButtonPrimarySubtle(onClick = { }) {
                     Text(text = "Adjust search")

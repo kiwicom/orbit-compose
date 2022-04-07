@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,12 +13,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+
+@Composable
+public fun EmptyState(
+    illustration: Painter,
+    title: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+    action: (@Composable () -> Unit)? = null,
+) {
+    EmptyState(
+        illustration = { Image(painter = illustration, contentDescription = null) },
+        title = { Text(title) },
+        modifier = modifier,
+        description = description?.let { { Text(description) } },
+        action = action
+    )
+}
 
 @Composable
 public fun EmptyState(
