@@ -129,8 +129,8 @@ private fun Toast(
                     icon(),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(16.dp)
                         .padding(top = 2.dp)
+                        .size(16.dp)
                 )
             }
             Text(message, style = OrbitTheme.typography.bodyNormal)
@@ -226,11 +226,11 @@ private fun ToastPreview() {
             )
             Toast(
                 message = "Message with icon",
-                icon = { Icons.FlightNomad },
+                icon = { Icons.CheckCircle },
             )
             Toast(
                 message = "Message with icon and very long message with many words.",
-                icon = { Icons.FlightNomad },
+                icon = { Icons.CheckCircle },
             )
         }
     }
