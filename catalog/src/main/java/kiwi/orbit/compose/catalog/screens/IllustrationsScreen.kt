@@ -14,20 +14,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
 @Composable
 fun IllustrationsScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Illustrations",
-        onNavigateUp = onNavigateUp,
-    ) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Illustrations") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
+    ) { contentPadding: PaddingValues ->
         IllustrationsScreenInner(contentPadding)
     }
 }

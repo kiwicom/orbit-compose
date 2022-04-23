@@ -28,7 +28,6 @@ android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "an
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist-main" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist-main" }
 accompanist-systemController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-main" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }

@@ -3,10 +3,15 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -29,8 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
@@ -95,10 +98,6 @@ public fun TopAppBar(
             }
         },
         navigationIcon = navigationIcon,
-        contentPadding = rememberInsetsPaddingValues(
-            insets = LocalWindowInsets.current.systemBars,
-            applyBottom = false
-        ),
         actions = {
             Row(
                 horizontalArrangement = Arrangement.End,
@@ -118,7 +117,6 @@ private fun SingleRowTopAppBar(
     title: @Composable () -> Unit,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable () -> Unit,
-    contentPadding: PaddingValues,
     elevation: Dp,
     extraContent: @Composable () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior?,
@@ -128,7 +126,11 @@ private fun SingleRowTopAppBar(
         color = OrbitTheme.colors.surface.main,
         elevation = elevation
     ) {
-        Column(Modifier.padding(contentPadding)) {
+        Column(
+            Modifier
+                .statusBarsPadding()
+                .windowInsetsPadding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal))
+        ) {
             TopAppBarLayout(
                 modifier = when (scrollBehavior) {
                     null -> Modifier

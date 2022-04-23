@@ -15,10 +15,11 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
@@ -46,8 +47,10 @@ import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -77,26 +80,16 @@ public fun TextField(
     val autoBringIntoViewFocusModifier: Modifier
 
     if (bringIntoView) {
-        val coroutineScope = rememberCoroutineScope()
         val bringIntoViewRequester = remember { BringIntoViewRequester() }
         val layoutCoordinates = remember { mutableStateOf<LayoutCoordinates?>(null) }
-        val scaffoldBottomPadding = with(LocalDensity.current) {
-            LocalScaffoldPadding.current.calculateBottomPadding().toPx()
-        }
+        val focused = remember { mutableStateOf(false) }
 
         autoBringIntoViewSetupModifier = Modifier
             .bringIntoViewRequester(bringIntoViewRequester)
             .onGloballyPositioned { layoutCoordinates.value = it }
-        autoBringIntoViewFocusModifier = Modifier.onFocusEvent {
-            if (it.isFocused || it.hasFocus) {
-                coroutineScope.launch {
-                    delay(150) // Bulgarian constant, wait a bit until keyboard gets opened.
-                    val size = layoutCoordinates.value?.size?.toSize() ?: return@launch
-                    val paddedSize = size.copy(height = size.height + scaffoldBottomPadding)
-                    bringIntoViewRequester.bringIntoView(paddedSize.toRect())
-                }
-            }
-        }
+        autoBringIntoViewFocusModifier = Modifier.onFocusEvent { focused.value = it.isFocused }
+
+        BringIntoViewWhenFocused(focused, layoutCoordinates, bringIntoViewRequester)
     } else {
         autoBringIntoViewSetupModifier = Modifier
         autoBringIntoViewFocusModifier = Modifier
@@ -191,6 +184,34 @@ public fun TextField(
                 error = error,
                 info = if (isFocused) info else null, // Present info only in focused mode.
             )
+        }
+    }
+}
+
+@OptIn(FlowPreview::class, ExperimentalFoundationApi::class)
+@Composable
+private fun BringIntoViewWhenFocused(
+    focused: State<Boolean>,
+    layoutCoordinates: State<LayoutCoordinates?>,
+    bringIntoViewRequester: BringIntoViewRequester,
+) {
+    val density = LocalDensity.current
+    val scaffoldBottomPadding = remember {
+        MutableStateFlow(0f)
+    }
+    val height = with(density) {
+        LocalScaffoldPadding.current.calculateBottomPadding().toPx()
+    }
+    LaunchedEffect(height) {
+        scaffoldBottomPadding.emit(height)
+    }
+    LaunchedEffect(focused.value) {
+        if (focused.value) {
+            scaffoldBottomPadding.debounce(100).collectLatest { scaffoldBottomPadding ->
+                val size = layoutCoordinates.value?.size?.toSize() ?: return@collectLatest
+                val paddedSize = size.copy(height = size.height + scaffoldBottomPadding)
+                bringIntoViewRequester.bringIntoView(paddedSize.toRect())
+            }
         }
     }
 }

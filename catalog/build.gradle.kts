@@ -104,7 +104,6 @@ dependencies {
     implementation(libs.kotlin.reflect)
 
     implementation(libs.coil)
-    implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
     implementation(libs.accompanist.pager)
 
