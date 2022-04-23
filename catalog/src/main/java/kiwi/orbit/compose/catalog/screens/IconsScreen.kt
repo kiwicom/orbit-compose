@@ -5,9 +5,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Alignment
@@ -35,7 +35,6 @@ fun IconsScreen(onNavigateUp: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IconsScreenInner(contentPadding: PaddingValues) {
     val icons: List<Pair<String, Painter>> = Icons::class.memberProperties.map {
@@ -43,7 +42,7 @@ fun IconsScreenInner(contentPadding: PaddingValues) {
     }
 
     LazyVerticalGrid(
-        cells = GridCells.Adaptive(120.dp),
+        columns = GridCells.Adaptive(120.dp),
         contentPadding = contentPadding + PaddingValues(8.dp),
     ) {
         items(icons) { (name, icon) ->
