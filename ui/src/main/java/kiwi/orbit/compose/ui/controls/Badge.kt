@@ -17,8 +17,53 @@ import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
 
+/**
+ * Cloud colored Badge.
+ */
 @Composable
 public fun BadgeNeutral(
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    val colors = with(OrbitTheme.colors) {
+        copy(
+            surface = surface.copy(main = surface.background),
+        )
+    }
+    CompositionLocalProvider(
+        LocalColors provides colors,
+    ) {
+        Badge(subtle = true, modifier, icon, content)
+    }
+}
+
+/**
+ * White colored Badge.
+ */
+@Composable
+public fun BadgeNeutralSubtle(
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    val colors = with(OrbitTheme.colors) {
+        copy(
+            surface = surface.copy(background = surface.main),
+        )
+    }
+    CompositionLocalProvider(
+        LocalColors provides colors,
+    ) {
+        Badge(subtle = true, modifier, icon, content)
+    }
+}
+
+/**
+ * Black colored Badge.
+ */
+@Composable
+public fun BadgeNeutralStrong(
     modifier: Modifier = Modifier,
     icon: (@Composable () -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,
@@ -38,42 +83,9 @@ public fun BadgeNeutral(
     }
 }
 
-@Composable
-public fun BadgeNeutralSubtle(
-    modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(background = surface.main),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
-}
-
-@Composable
-public fun BadgeSecondary(
-    modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(main = surface.background),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
-}
-
+/**
+ * Blue normal colored Badge.
+ */
 @Composable
 public fun BadgeInfo(
     modifier: Modifier = Modifier,
@@ -87,6 +99,9 @@ public fun BadgeInfo(
     }
 }
 
+/**
+ * Blue light colored Badge.
+ */
 @Composable
 public fun BadgeInfoSubtle(
     modifier: Modifier = Modifier,
@@ -100,6 +115,9 @@ public fun BadgeInfoSubtle(
     }
 }
 
+/**
+ * Green normal colored Badge.
+ */
 @Composable
 public fun BadgeSuccess(
     modifier: Modifier = Modifier,
@@ -113,6 +131,9 @@ public fun BadgeSuccess(
     }
 }
 
+/**
+ * Green light colored Badge.
+ */
 @Composable
 public fun BadgeSuccessSubtle(
     modifier: Modifier = Modifier,
@@ -126,6 +147,9 @@ public fun BadgeSuccessSubtle(
     }
 }
 
+/**
+ * Orange normal colored Badge.
+ */
 @Composable
 public fun BadgeWarning(
     modifier: Modifier = Modifier,
@@ -139,6 +163,9 @@ public fun BadgeWarning(
     }
 }
 
+/**
+ * Orange light colored Badge.
+ */
 @Composable
 public fun BadgeWarningSubtle(
     modifier: Modifier = Modifier,
@@ -152,6 +179,9 @@ public fun BadgeWarningSubtle(
     }
 }
 
+/**
+ * Red normal colored Badge.
+ */
 @Composable
 public fun BadgeCritical(
     modifier: Modifier = Modifier,
@@ -165,6 +195,9 @@ public fun BadgeCritical(
     }
 }
 
+/**
+ * Red light colored Badge.
+ */
 @Composable
 public fun BadgeCriticalSubtle(
     modifier: Modifier = Modifier,

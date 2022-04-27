@@ -1,8 +1,10 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,13 +17,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.BadgeCritical
 import kiwi.orbit.compose.ui.controls.BadgeCriticalSubtle
 import kiwi.orbit.compose.ui.controls.BadgeInfo
 import kiwi.orbit.compose.ui.controls.BadgeInfoSubtle
 import kiwi.orbit.compose.ui.controls.BadgeNeutral
+import kiwi.orbit.compose.ui.controls.BadgeNeutralStrong
 import kiwi.orbit.compose.ui.controls.BadgeNeutralSubtle
-import kiwi.orbit.compose.ui.controls.BadgeSecondary
 import kiwi.orbit.compose.ui.controls.BadgeSuccess
 import kiwi.orbit.compose.ui.controls.BadgeSuccessSubtle
 import kiwi.orbit.compose.ui.controls.BadgeWarning
@@ -49,202 +52,194 @@ fun BadgeScreen(onNavigateUp: () -> Unit) {
 @Preview
 @Composable
 private fun BadgeScreenInner() {
-    Column(Modifier.padding(16.dp)) {
-        Row {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        BadgeRow("BadgeNeutral") {
             BadgeNeutral {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeNeutral(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeNeutral(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
         }
-        Spacer(modifier = Modifier.size(8.dp))
-        Row {
+        BadgeRow("BadgeNeutralSubtle") {
             BadgeNeutralSubtle {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeNeutralSubtle(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeNeutralSubtle(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
         }
-
-        Spacer(modifier = Modifier.size(32.dp))
-
-        Row {
-            BadgeSecondary {
+        BadgeRow("BadgeNeutralStrong") {
+            BadgeNeutralStrong {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeSecondary(
+            BadgeNeutralStrong(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeSecondary(
+            BadgeNeutralStrong(
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
         }
 
-        Spacer(modifier = Modifier.size(32.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-        Row {
-            BadgeInfo {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeInfo(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeInfo(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-            }
-        }
-        Spacer(modifier = Modifier.size(8.dp))
-        Row {
+        BadgeRow("BadgeInfoSubtle") {
             BadgeInfoSubtle {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeInfoSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeInfoSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+            ) {
+            }
+        }
+        BadgeRow("BadgeInfo") {
+            BadgeInfo {
+                Text(text = "label")
+            }
+            BadgeInfo(
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeInfo(
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
             ) {
             }
         }
 
-        Spacer(modifier = Modifier.size(32.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-        Row {
-            BadgeSuccess {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeSuccess(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeSuccess(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-            }
-        }
-        Spacer(modifier = Modifier.size(8.dp))
-        Row {
+        BadgeRow("BadgeSuccessSubtle") {
             BadgeSuccessSubtle {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeSuccessSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeSuccessSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+            ) {
+            }
+        }
+        BadgeRow("BadgeSuccess") {
+            BadgeSuccess {
+                Text(text = "label")
+            }
+            BadgeSuccess(
+                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeSuccess(
+                icon = { Icon(painter = Icons.Check, contentDescription = null) }
             ) {
             }
         }
 
-        Spacer(modifier = Modifier.size(32.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-        Row {
-            BadgeWarning {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeWarning(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeWarning(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-            }
-        }
-        Spacer(modifier = Modifier.size(8.dp))
-        Row {
+        BadgeRow("BadgeWarningSubtle") {
             BadgeWarningSubtle {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeWarningSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeWarningSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
-            ) {
-            }
-        }
-
-        Spacer(modifier = Modifier.size(32.dp))
-
-        Row {
-            BadgeCritical {
-                Text(text = "label")
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeCritical(
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
-            BadgeCritical(
+            BadgeWarningSubtle(
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
         }
-        Spacer(modifier = Modifier.size(8.dp))
-        Row {
+        BadgeRow("BadgeWarning") {
+            BadgeWarning {
+                Text(text = "label")
+            }
+            BadgeWarning(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeWarning(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+            }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow("BadgeCriticalSubtle") {
             BadgeCriticalSubtle {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeCriticalSubtle(
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
                 Text(text = "label")
             }
-            Spacer(modifier = Modifier.size(8.dp))
             BadgeCriticalSubtle(
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
         }
+        BadgeRow("BadgeCritical") {
+            BadgeCritical {
+                Text(text = "label")
+            }
+            BadgeCritical(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeCritical(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+            }
+        }
+    }
+}
+
+@Composable
+private fun BadgeRow(
+    name: String,
+    content: @Composable RowScope.() -> Unit,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        content()
+        Text(
+            text = name,
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .alignByBaseline(),
+            style = OrbitTheme.typography.bodyNormalMedium,
+        )
     }
 }

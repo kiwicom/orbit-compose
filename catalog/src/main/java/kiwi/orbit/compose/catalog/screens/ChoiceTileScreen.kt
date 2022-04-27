@@ -31,7 +31,7 @@ import kiwi.orbit.compose.catalog.components.CustomPlaceholder
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.controls.BadgeInfoSubtle
-import kiwi.orbit.compose.ui.controls.BadgeSecondary
+import kiwi.orbit.compose.ui.controls.BadgeNeutral
 import kiwi.orbit.compose.ui.controls.ChoiceTile
 import kiwi.orbit.compose.ui.controls.ChoiceTileCentered
 import kiwi.orbit.compose.ui.controls.Icon
@@ -221,7 +221,7 @@ private fun ChoiceTileScreenInner() {
                 onSelect = { selectedE = 0 },
                 title = { Text("Plus Support") },
                 description = { Text("Everyone sits together") },
-                price = { BadgeSecondary { Text("Included") } },
+                price = { BadgeNeutral { Text("Included") } },
             )
 
             ChoiceTileCentered(
