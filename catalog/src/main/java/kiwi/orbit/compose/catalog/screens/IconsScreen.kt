@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.catalog.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -14,11 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
@@ -40,16 +43,23 @@ fun IconsScreenInner(contentPadding: PaddingValues) {
     }
 
     LazyVerticalGrid(
-        cells = GridCells.Adaptive(96.dp),
+        cells = GridCells.Adaptive(120.dp),
         contentPadding = contentPadding + PaddingValues(8.dp),
     ) {
         items(icons) { (name, icon) ->
-            Column(Modifier.padding(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .border(1.dp, OrbitTheme.colors.surface.strong, OrbitTheme.shapes.normal)
+                    .padding(vertical = 8.dp, horizontal = 4.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Icon(painter = icon, contentDescription = name)
                 Text(
                     name,
                     Modifier.padding(top = 4.dp),
-                    style = OrbitTheme.typography.bodySmall,
+                    fontSize = 10.sp,
+                    emphasis = ContentEmphasis.Minor,
                     textAlign = TextAlign.Center,
                 )
             }
