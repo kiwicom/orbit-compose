@@ -8,7 +8,7 @@ public fun lightColors(
     surface: SurfaceColors = lightSurfaceColors(),
     content: ContentColors = lightContentColors(),
     primary: FeatureColors = lightPrimaryColors(),
-    interactive: FeatureColors = lightInteractiveColors(),
+    info: FeatureColors = lightInfoColors(),
     success: FeatureColors = lightSuccessColors(),
     warning: FeatureColors = lightWarningColors(),
     critical: FeatureColors = lightCriticalColors(),
@@ -17,7 +17,7 @@ public fun lightColors(
     surface = surface,
     content = content,
     primary = primary,
-    interactive = interactive,
+    info = info,
     success = success,
     warning = warning,
     critical = critical,
@@ -69,7 +69,7 @@ public fun lightPrimaryColors(
     onNormal = onNormal,
 )
 
-public fun lightInteractiveColors(
+public fun lightInfoColors(
     normal: Color = ColorTokens.BlueNormal,
     normalAlt: Color = ColorTokens.BlueNormalHover,
     subtle: Color = ColorTokens.BlueLight,

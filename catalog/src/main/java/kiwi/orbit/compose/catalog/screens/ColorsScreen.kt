@@ -53,7 +53,7 @@ private fun ColorsScreenInner() {
         SurfaceColors()
         ContentColors()
         FeatureColors(OrbitTheme.colors.primary, name = "Primary")
-        FeatureColors(OrbitTheme.colors.interactive, name = "Interactive")
+        FeatureColors(OrbitTheme.colors.info, name = "Info")
         FeatureColors(OrbitTheme.colors.success, name = "Success")
         FeatureColors(OrbitTheme.colors.warning, name = "Warning")
         FeatureColors(OrbitTheme.colors.critical, name = "Critical")

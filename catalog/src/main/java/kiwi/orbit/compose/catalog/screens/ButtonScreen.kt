@@ -140,9 +140,9 @@ private fun ButtonScreenInner() {
         ButtonPrimitive(
             onClick = {},
             modifier = maxWidth,
-            backgroundColor = OrbitTheme.colors.interactive.normal,
+            backgroundColor = OrbitTheme.colors.info.normal,
         ) {
-            Text("Interactive Button")
+            Text("Info Button")
         }
 
         Text("Button Toggling", Modifier.padding(top = 16.dp))

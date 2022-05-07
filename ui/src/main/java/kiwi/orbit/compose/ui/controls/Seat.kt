@@ -183,8 +183,8 @@ private fun ColumnScope.Seat(
         val background by animateColorAsState(
             when {
                 !enabled -> OrbitTheme.colors.surface.background
-                selected && isExtraLegroom -> OrbitTheme.colors.interactive.normal
-                isExtraLegroom -> OrbitTheme.colors.interactive.subtle
+                selected && isExtraLegroom -> OrbitTheme.colors.info.normal
+                isExtraLegroom -> OrbitTheme.colors.info.subtle
                 selected -> OrbitTheme.colors.primary.normal
                 else -> OrbitTheme.colors.primary.subtle
             }
@@ -197,8 +197,8 @@ private fun ColumnScope.Seat(
             contentAlignment = Alignment.Center,
         ) {
             val color = when {
-                selected -> OrbitTheme.colors.interactive.onNormal
-                isExtraLegroom -> OrbitTheme.colors.interactive.strong
+                selected -> OrbitTheme.colors.info.onNormal
+                isExtraLegroom -> OrbitTheme.colors.info.strong
                 else -> OrbitTheme.colors.primary.strong
             }
             CompositionLocalProvider(
@@ -291,7 +291,7 @@ private fun BoxScope.CrossIcon(
                 .background(OrbitTheme.colors.surface.main)
                 .padding(0.5.dp),
             tint = when {
-                isExtraLegroom -> OrbitTheme.colors.interactive.strong
+                isExtraLegroom -> OrbitTheme.colors.info.strong
                 else -> OrbitTheme.colors.primary.strong
             },
         )

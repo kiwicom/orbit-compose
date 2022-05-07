@@ -157,7 +157,7 @@ public class Colors(
     public val surface: SurfaceColors,
     public val content: ContentColors,
     public val primary: FeatureColors,
-    public val interactive: FeatureColors,
+    public val info: FeatureColors,
     public val success: FeatureColors,
     public val warning: FeatureColors,
     public val critical: FeatureColors,
@@ -170,7 +170,7 @@ public class Colors(
         surface: SurfaceColors = this.surface,
         content: ContentColors = this.content,
         primary: FeatureColors = this.primary,
-        interactive: FeatureColors = this.interactive,
+        info: FeatureColors = this.info,
         success: FeatureColors = this.success,
         warning: FeatureColors = this.warning,
         critical: FeatureColors = this.critical,
@@ -180,7 +180,7 @@ public class Colors(
         surface = surface,
         content = content,
         primary = primary,
-        interactive = interactive,
+        info = info,
         success = success,
         warning = warning,
         critical = critical,
@@ -193,13 +193,13 @@ public class Colors(
         androidx.compose.material.Colors(
             primary = primary.normal,
             primaryVariant = primary.strong,
-            secondary = interactive.normal,
-            secondaryVariant = interactive.strong,
+            secondary = info.normal,
+            secondaryVariant = info.strong,
             background = surface.background,
             surface = surface.main,
             error = critical.normal,
             onPrimary = primary.onNormal,
-            onSecondary = interactive.onNormal,
+            onSecondary = info.onNormal,
             onBackground = content.normal,
             onSurface = content.normal,
             onError = critical.onNormal,
@@ -219,7 +219,7 @@ internal fun Colors.updateColorsFrom(other: Colors) {
     surface.updateColorsFrom(other.surface)
     content.updateColorsFrom(other.content)
     primary.updateColorsFrom(other.primary)
-    interactive.updateColorsFrom(other.interactive)
+    info.updateColorsFrom(other.info)
     success.updateColorsFrom(other.success)
     warning.updateColorsFrom(other.warning)
     critical.updateColorsFrom(other.critical)

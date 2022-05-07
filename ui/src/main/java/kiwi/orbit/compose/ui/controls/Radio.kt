@@ -42,7 +42,7 @@ public fun Radio(
     val borderColor by animateColorAsState(
         targetValue = when {
             !enabled || !selected -> OrbitTheme.colors.surface.disabled
-            else -> OrbitTheme.colors.interactive.normal
+            else -> OrbitTheme.colors.info.normal
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration)
     )

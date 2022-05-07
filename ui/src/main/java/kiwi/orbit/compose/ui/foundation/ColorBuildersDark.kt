@@ -9,7 +9,7 @@ public fun darkColors(
     surface: SurfaceColors = darkSurfaceColors(),
     content: ContentColors = darkContentColors(),
     primary: FeatureColors = darkPrimaryColors(),
-    interactive: FeatureColors = darkInteractiveColors(),
+    info: FeatureColors = darkInfoColors(),
     success: FeatureColors = darkSuccessColors(),
     warning: FeatureColors = darkWarningColors(),
     critical: FeatureColors = darkCriticalColors(),
@@ -18,7 +18,7 @@ public fun darkColors(
     surface = surface,
     content = content,
     primary = primary,
-    interactive = interactive,
+    info = info,
     success = success,
     warning = warning,
     critical = critical,
@@ -70,7 +70,7 @@ public fun darkPrimaryColors(
     onNormal = onNormal,
 )
 
-public fun darkInteractiveColors(
+public fun darkInfoColors(
     normal: Color = ColorTokens.BlueDark,
     normalAlt: Color = ColorTokens.BlueDarkHover,
     subtle: Color = ColorTokens.BlueLight.invert(),

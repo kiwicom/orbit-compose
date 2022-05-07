@@ -140,7 +140,7 @@ public fun TextField(
             ) {
                 when (it) {
                     InputState.Normal -> Color.Transparent
-                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.interactive.normal
+                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.info.normal
                     InputState.NormalError -> OrbitTheme.colors.critical.normal
                 }
             }
@@ -166,7 +166,7 @@ public fun TextField(
                 maxLines = maxLines,
                 visualTransformation = visualTransformation,
                 interactionSource = interactionSource,
-                cursorBrush = SolidColor(OrbitTheme.colors.interactive.normal),
+                cursorBrush = SolidColor(OrbitTheme.colors.info.normal),
                 decorationBox = { innerTextField ->
                     FieldContent(
                         fieldContent = innerTextField,

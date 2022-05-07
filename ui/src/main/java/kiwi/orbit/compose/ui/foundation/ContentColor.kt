@@ -14,7 +14,7 @@ public fun Colors.contentColorFor(color: Color): Color =
     surface.contentColorFor(color, content)
         ?: content.contentColorFor(color, surface)
         ?: primary.contentColorFor(color)
-        ?: interactive.contentColorFor(color)
+        ?: info.contentColorFor(color)
         ?: success.contentColorFor(color)
         ?: warning.contentColorFor(color)
         ?: critical.contentColorFor(color)

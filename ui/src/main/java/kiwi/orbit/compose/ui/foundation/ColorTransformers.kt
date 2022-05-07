@@ -1,7 +1,7 @@
 package kiwi.orbit.compose.ui.foundation
 
-public fun Colors.asInteractiveTheme(suppressed: Boolean = false): Colors =
-    themeWith(interactive, suppressed)
+public fun Colors.asInfoTheme(suppressed: Boolean = false): Colors =
+    themeWith(info, suppressed)
 
 public fun Colors.asSuccessTheme(suppressed: Boolean = false): Colors =
     themeWith(success, suppressed)

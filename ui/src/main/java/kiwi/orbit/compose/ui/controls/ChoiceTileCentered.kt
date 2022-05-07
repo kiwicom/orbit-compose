@@ -42,7 +42,7 @@ public fun ChoiceTileCentered(
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     val color by animateColorAsState(
         targetValue = when (selected) {
-            true -> OrbitTheme.colors.interactive.normal
+            true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
         }
     )
@@ -138,7 +138,7 @@ private fun ChoiceTileContent(
             value = OrbitTheme.typography.title3.copy(
                 textAlign = TextAlign.Center,
                 color = when (selected) {
-                    true -> OrbitTheme.colors.interactive.normal
+                    true -> OrbitTheme.colors.info.normal
                     false -> Color.Unspecified
                 }
             ),
