@@ -76,34 +76,34 @@ public class ContentColors(
 
 @Stable
 public class FeatureColors(
-    main: Color,
-    mainAlt: Color,
+    normal: Color,
+    normalAlt: Color,
     subtle: Color,
     subtleAlt: Color,
     strong: Color,
-    onMain: Color,
+    onNormal: Color,
 ) {
-    public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
-    public var mainAlt: Color by mutableStateOf(mainAlt, structuralEqualityPolicy()); internal set
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy()); internal set
     public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
     public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy()); internal set
     public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
-    public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy()); internal set
+    public var onNormal: Color by mutableStateOf(onNormal, structuralEqualityPolicy()); internal set
 
     public fun copy(
-        main: Color = this.main,
-        mainAlt: Color = this.mainAlt,
+        normal: Color = this.normal,
+        normalAlt: Color = this.normalAlt,
         subtle: Color = this.subtle,
         subtleAlt: Color = this.subtleAlt,
         strong: Color = this.strong,
-        onMain: Color = this.onMain,
+        onNormal: Color = this.onNormal,
     ): FeatureColors = FeatureColors(
-        main,
-        mainAlt,
+        normal,
+        normalAlt,
         subtle,
         subtleAlt,
         strong,
-        onMain,
+        onNormal,
     )
 }
 
@@ -191,18 +191,18 @@ public class Colors(
     @Suppress("Dependency")
     internal fun toMaterialColors(): androidx.compose.material.Colors =
         androidx.compose.material.Colors(
-            primary = primary.main,
+            primary = primary.normal,
             primaryVariant = primary.strong,
-            secondary = interactive.main,
+            secondary = interactive.normal,
             secondaryVariant = interactive.strong,
             background = surface.background,
             surface = surface.main,
-            error = critical.main,
-            onPrimary = primary.onMain,
-            onSecondary = interactive.onMain,
+            error = critical.normal,
+            onPrimary = primary.onNormal,
+            onSecondary = interactive.onNormal,
             onBackground = content.normal,
             onSurface = content.normal,
-            onError = critical.onMain,
+            onError = critical.onNormal,
             isLight = isLight,
         )
 }
@@ -243,12 +243,12 @@ internal fun ContentColors.updateColorsFrom(other: ContentColors) {
 }
 
 internal fun FeatureColors.updateColorsFrom(other: FeatureColors) {
-    main = other.main
-    mainAlt = other.mainAlt
+    normal = other.normal
+    normalAlt = other.normalAlt
     subtle = other.subtle
     subtleAlt = other.subtleAlt
     strong = other.strong
-    onMain = other.onMain
+    onNormal = other.onNormal
 }
 
 internal fun BundleColors.updateColorsFrom(other: BundleColors) {

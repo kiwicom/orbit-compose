@@ -55,83 +55,83 @@ public fun darkContentColors(
 )
 
 public fun darkPrimaryColors(
-    main: Color = ColorTokens.ProductDark,
-    mainAlt: Color = ColorTokens.ProductDarkHover,
+    normal: Color = ColorTokens.ProductDark,
+    normalAlt: Color = ColorTokens.ProductDarkHover,
     subtle: Color = ColorTokens.ProductLight.invert(),
     subtleAlt: Color = ColorTokens.ProductLightHover.invert(),
     strong: Color = ColorTokens.ProductNormal,
-    onMain: Color = ColorTokens.White.invert(),
+    onNormal: Color = ColorTokens.White.invert(),
 ): FeatureColors = FeatureColors(
-    main = main,
-    mainAlt = mainAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
-    onMain = onMain,
+    onNormal = onNormal,
 )
 
 public fun darkInteractiveColors(
-    main: Color = ColorTokens.BlueDark,
-    mainAlt: Color = ColorTokens.BlueDarkHover,
+    normal: Color = ColorTokens.BlueDark,
+    normalAlt: Color = ColorTokens.BlueDarkHover,
     subtle: Color = ColorTokens.BlueLight.invert(),
     subtleAlt: Color = ColorTokens.BlueLightHover.invert(),
     strong: Color = ColorTokens.BlueNormal,
-    onMain: Color = ColorTokens.White.invert(),
+    onNormal: Color = ColorTokens.White.invert(),
 ): FeatureColors = FeatureColors(
-    main = main,
-    mainAlt = mainAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
-    onMain = onMain,
+    onNormal = onNormal,
 )
 
 public fun darkSuccessColors(
-    main: Color = ColorTokens.GreenDark,
-    mainAlt: Color = ColorTokens.GreenDarkHover,
+    normal: Color = ColorTokens.GreenDark,
+    normalAlt: Color = ColorTokens.GreenDarkHover,
     subtle: Color = ColorTokens.GreenLight.invert(),
     subtleAlt: Color = ColorTokens.GreenLightHover.invert(),
     strong: Color = ColorTokens.GreenNormal,
-    onMain: Color = ColorTokens.White.invert(),
+    onNormal: Color = ColorTokens.White.invert(),
 ): FeatureColors = FeatureColors(
-    main = main,
-    mainAlt = mainAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
-    onMain = onMain,
+    onNormal = onNormal,
 )
 
 public fun darkWarningColors(
-    main: Color = ColorTokens.OrangeDark,
-    mainAlt: Color = ColorTokens.OrangeDarkHover,
+    normal: Color = ColorTokens.OrangeDark,
+    normalAlt: Color = ColorTokens.OrangeDarkHover,
     subtle: Color = ColorTokens.OrangeLight.invert(),
     subtleAlt: Color = ColorTokens.OrangeLightHover.invert(),
     strong: Color = ColorTokens.OrangeNormal,
-    onMain: Color = ColorTokens.White.invert(),
+    onNormal: Color = ColorTokens.White.invert(),
 ): FeatureColors = FeatureColors(
-    main = main,
-    mainAlt = mainAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
-    onMain = onMain,
+    onNormal = onNormal,
 )
 
 public fun darkCriticalColors(
-    main: Color = ColorTokens.RedDark,
-    mainAlt: Color = ColorTokens.RedDarkHover,
+    normal: Color = ColorTokens.RedDark,
+    normalAlt: Color = ColorTokens.RedDarkHover,
     subtle: Color = ColorTokens.RedLight.invert(),
     subtleAlt: Color = ColorTokens.RedLightHover.invert(),
     strong: Color = ColorTokens.RedNormal,
-    onMain: Color = ColorTokens.White.invert(),
+    onNormal: Color = ColorTokens.White.invert(),
 ): FeatureColors = FeatureColors(
-    main = main,
-    mainAlt = mainAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
-    onMain = onMain,
+    onNormal = onNormal,
 )
 
 public fun darkBundleColors(
@@ -165,7 +165,6 @@ public fun darkBundleColors(
     onTop = onTop,
 )
 
-@OptIn(ExperimentalUnsignedTypes::class)
 private fun Color.invert(): Color {
     val hsl = floatArrayOf(0f, 0f, 0f)
     ColorUtils.colorToHSL((value shr 32).toInt(), hsl)

@@ -41,7 +41,7 @@ public fun ChoiceTile(
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     val color by animateColorAsState(
         targetValue = when (selected) {
-            true -> OrbitTheme.colors.interactive.main
+            true -> OrbitTheme.colors.interactive.normal
             false -> Color.Transparent
         }
     )
@@ -138,7 +138,7 @@ private fun ChoiceTileFooter(
             ProvideMergedTextStyle(
                 value = OrbitTheme.typography.title3.copy(
                     color = when (selected) {
-                        true -> OrbitTheme.colors.interactive.main
+                        true -> OrbitTheme.colors.interactive.normal
                         false -> Color.Unspecified
                     }
                 ),

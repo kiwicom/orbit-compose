@@ -183,9 +183,9 @@ private fun ColumnScope.Seat(
         val background by animateColorAsState(
             when {
                 !enabled -> OrbitTheme.colors.surface.background
-                selected && isExtraLegroom -> OrbitTheme.colors.interactive.main
+                selected && isExtraLegroom -> OrbitTheme.colors.interactive.normal
                 isExtraLegroom -> OrbitTheme.colors.interactive.subtle
-                selected -> OrbitTheme.colors.primary.main
+                selected -> OrbitTheme.colors.primary.normal
                 else -> OrbitTheme.colors.primary.subtle
             }
         )
@@ -197,7 +197,7 @@ private fun ColumnScope.Seat(
             contentAlignment = Alignment.Center,
         ) {
             val color = when {
-                selected -> OrbitTheme.colors.interactive.onMain
+                selected -> OrbitTheme.colors.interactive.onNormal
                 isExtraLegroom -> OrbitTheme.colors.interactive.strong
                 else -> OrbitTheme.colors.primary.strong
             }

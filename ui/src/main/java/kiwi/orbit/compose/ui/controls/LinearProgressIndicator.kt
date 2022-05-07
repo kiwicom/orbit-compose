@@ -65,7 +65,7 @@ private fun PreviewLinearProgressIndicator() {
                 LinearProgressIndicator(0f)
                 LinearProgressIndicator(
                     progress = 0.5f,
-                    indicatorColor = OrbitTheme.colors.success.main,
+                    indicatorColor = OrbitTheme.colors.success.normal,
                     trackColor = OrbitTheme.colors.surface.subtle,
                 )
             }

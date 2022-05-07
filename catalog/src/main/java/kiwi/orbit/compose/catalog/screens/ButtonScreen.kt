@@ -72,7 +72,7 @@ fun ButtonScreen(onNavigateUp: () -> Unit) {
                         indicator = { tabPositions ->
                             TabRowDefaults.Indicator(
                                 modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                                color = OrbitTheme.colors.primary.main,
+                                color = OrbitTheme.colors.primary.normal,
                             )
                         },
                         divider = {},
@@ -140,7 +140,7 @@ private fun ButtonScreenInner() {
         ButtonPrimitive(
             onClick = {},
             modifier = maxWidth,
-            backgroundColor = OrbitTheme.colors.interactive.main,
+            backgroundColor = OrbitTheme.colors.interactive.normal,
         ) {
             Text("Interactive Button")
         }

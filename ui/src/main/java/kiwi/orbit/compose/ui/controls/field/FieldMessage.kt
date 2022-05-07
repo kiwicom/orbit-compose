@@ -57,8 +57,8 @@ internal fun FieldMessage(
                     is Message.Info -> Icons.InformationCircle
                 }
                 val tintColor = when (message) {
-                    is Message.Error -> OrbitTheme.colors.critical.main
-                    is Message.Info -> OrbitTheme.colors.interactive.main
+                    is Message.Error -> OrbitTheme.colors.critical.normal
+                    is Message.Info -> OrbitTheme.colors.interactive.normal
                 }
                 Icon(
                     icon,

@@ -32,7 +32,7 @@ public fun Tag(
     content: @Composable RowScope.() -> Unit,
 ) {
     val backgroundColor = when {
-        selected -> OrbitTheme.colors.interactive.main
+        selected -> OrbitTheme.colors.interactive.normal
         onRemove != null -> OrbitTheme.colors.interactive.subtle
         else -> OrbitTheme.colors.surface.strong
     }
@@ -60,7 +60,7 @@ public fun Tag(
 
             if (onRemove != null) {
                 val iconColor = when (selected) {
-                    true -> OrbitTheme.colors.interactive.onMain
+                    true -> OrbitTheme.colors.interactive.onNormal
                     false -> OrbitTheme.colors.interactive.strong
                 }
                 IconButton(

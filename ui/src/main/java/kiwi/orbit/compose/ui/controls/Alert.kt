@@ -125,7 +125,7 @@ private fun Alert(
 ) {
     val bgColor = OrbitTheme.colors.surface.background
     val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
-    val accentColor = OrbitTheme.colors.primary.main
+    val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
     Row(
         modifier = modifier

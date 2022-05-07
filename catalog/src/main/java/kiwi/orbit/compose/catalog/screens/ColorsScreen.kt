@@ -121,8 +121,8 @@ private fun FeatureColors(colors: FeatureColors, name: String) {
                     Color(colors.subtleAlt, "$name Subtle Alt")
                 }
                 Row {
-                    Color(colors.main, "$name Main")
-                    Color(colors.mainAlt, "$name Main Alt")
+                    Color(colors.normal, "$name Main")
+                    Color(colors.normalAlt, "$name Main Alt")
                 }
                 Row {
                     Color(colors.strong, "$name Strong")

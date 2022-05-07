@@ -71,8 +71,8 @@ public fun BadgeNeutralStrong(
     val colors = with(OrbitTheme.colors) {
         copy(
             primary = primary.copy(
-                main = this.content.normal,
-                onMain = surface.main,
+                normal = this.content.normal,
+                onNormal = surface.main,
             )
         )
     }
