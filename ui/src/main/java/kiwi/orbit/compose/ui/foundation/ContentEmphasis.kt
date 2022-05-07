@@ -6,11 +6,50 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
+/**
+ * Content emphasis changes content color in a semantic way.
+ *
+ * The main use case is to change [ContentColors.normal] (`InkNormal`) color
+ * other content/ink shades, though the logic is able to handle also other
+ * colors - in such case the color resolution applies opacity.
+ */
 public enum class ContentEmphasis {
+    /**
+     * Normal text color (no color change).
+     */
     Normal,
+
+    /**
+     * Less important text color.
+     *
+     * Represents a text that is rather a comment or an explanation.
+     *
+     * If applied on:
+     * - `content.normal` -> [ContentColors.minor] ([ColorTokens.InkLight])
+     * - else -> opacity 20%
+     */
     Minor,
+
+    /**
+     * Least important text color.
+     *
+     * Represents a suggestion or a placeholder.
+     *
+     * If applied on:
+     * - `content.normal` -> [ContentColors.subtle] ([ColorTokens.InkLighter])
+     * - else -> opacity 34%
+     */
     Subtle,
+
+    /**
+     * Disabled text color.
+     *
+     * If applied on:
+     * - `content.normal` -> [ContentColors.disabled] ([ColorTokens.CloudDarkerHover])
+     * - else -> opacity 52%
+     */
     Disabled,
 }
 
