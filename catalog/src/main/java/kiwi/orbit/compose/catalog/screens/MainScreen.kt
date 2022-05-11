@@ -65,6 +65,7 @@ fun MainScreen(
         Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
+        Triple("Loading", { Icon(Icons.MenuMeatballs, null) }, actions::showLoading),
         Triple(
             "Progress Indicator",
             { Icon(OutlinedMaterialIcons.ToggleOff, null) },
