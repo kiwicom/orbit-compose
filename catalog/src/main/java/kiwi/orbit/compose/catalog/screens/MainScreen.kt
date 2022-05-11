@@ -63,6 +63,7 @@ fun MainScreen(
         Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
+        Triple("Linear Prg. Indicator", { Icon(Icons.Minus, null) }, actions::showLinearProgressIndicator),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
         Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
