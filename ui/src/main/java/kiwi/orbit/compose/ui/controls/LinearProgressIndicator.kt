@@ -6,7 +6,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,11 +13,8 @@ import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
@@ -26,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 public fun LinearProgressIndicator(
@@ -61,42 +56,18 @@ public fun LinearProgressIndicator(
 @Composable
 private fun PreviewLinearProgressIndicator() {
     OrbitTheme {
-        val progressFlow = remember { MutableStateFlow(0.5f) }
-        val progress by progressFlow.collectAsState()
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            LinearProgressIndicator(progress)
-
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+        Surface {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(8.dp)
             ) {
-                ButtonPrimary(
-                    onClick = {
-                        if (progress < 1f) {
-                            progressFlow.value += 0.1f
-                        }
-                    },
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .alpha(if (progress < 1f) 1f else 0.3f),
-                ) {
-                    Text("Increase")
-                }
-
-                ButtonCritical(
-                    onClick = {
-                        if (progress > 0.1f) {
-                            progressFlow.value -= 0.1f
-                        }
-                    },
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .alpha(if (progress > 0.1f) 1f else 0.3f),
-                ) {
-                    Text("Decrease")
-                }
+                LinearProgressIndicator(1f)
+                LinearProgressIndicator(0f)
+                LinearProgressIndicator(
+                    progress = 0.5f,
+                    indicatorColor = OrbitTheme.colors.success.main,
+                    trackColor = OrbitTheme.colors.surface.subtle,
+                )
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.outlined.ToggleOff
 import androidx.compose.material.icons.rounded.Announcement
 import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.Ballot
@@ -40,6 +41,7 @@ import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import androidx.compose.material.icons.Icons.Outlined as OutlinedMaterialIcons
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
 @Composable
@@ -63,7 +65,11 @@ fun MainScreen(
         Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
-        Triple("Linear Prg. Indicator", { Icon(Icons.Minus, null) }, actions::showLinearProgressIndicator),
+        Triple(
+            "Progress Indicator",
+            { Icon(OutlinedMaterialIcons.ToggleOff, null) },
+            actions::showLinearProgressIndicator
+        ),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
         Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
