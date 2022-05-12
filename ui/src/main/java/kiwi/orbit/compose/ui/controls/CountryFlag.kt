@@ -1,6 +1,5 @@
 package kiwi.orbit.compose.ui.controls
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
@@ -8,11 +7,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
-import coil.size.OriginalSize
-import coil.size.Scale
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -34,13 +35,13 @@ public fun CountryFlag(
     val lineHeight = with(LocalDensity.current) {
         LocalTextStyle.current.lineHeight.toDp()
     }
-    Image(
-        painter = rememberImagePainter(url) {
-            crossfade(true)
-            size(OriginalSize)
-            scale(Scale.FIT)
-            error(R.drawable.orbit_country_flag_undefined)
-        },
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(url)
+            .crossfade(true)
+            .build(),
+        error = painterResource(R.drawable.orbit_country_flag_undefined),
+        contentScale = ContentScale.Fit,
         contentDescription = contentDescription,
         modifier = modifier
             .size(lineHeight)

@@ -1,21 +1,20 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import coil.size.OriginalSize
-import coil.size.Scale
-import coil.transform.CircleCropTransformation
-import coil.transition.CrossfadeTransition
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
@@ -85,7 +84,6 @@ internal fun TopAppBarLargeScrollableElevatedScreen(
     )
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 internal fun TopAppBarLargeCustomContentScreen(
     onNavigateUp: () -> Unit,
@@ -108,15 +106,16 @@ internal fun TopAppBarLargeCustomContentScreen(
                                 emphasis = ContentEmphasis.Minor
                             )
                         }
-                        Image(
-                            painter = rememberImagePainter(ArcherPhoto) {
-                                transition(CrossfadeTransition())
-                                transformations(CircleCropTransformation())
-                                size(OriginalSize)
-                                scale(Scale.FIT)
-                            },
+                        AsyncImage(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(CircleShape),
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(ArcherPhoto)
+                                .crossfade(true)
+                                .build(),
+                            contentScale = ContentScale.Crop,
                             contentDescription = null,
-                            modifier = Modifier.size(32.dp)
                         )
                     }
                 },
@@ -124,15 +123,16 @@ internal fun TopAppBarLargeCustomContentScreen(
                     Column {
                         Row {
                             Text("Jonathan Archer", Modifier.weight(1f))
-                            Image(
-                                painter = rememberImagePainter(ArcherPhoto) {
-                                    transition(CrossfadeTransition())
-                                    transformations(CircleCropTransformation())
-                                    size(OriginalSize)
-                                    scale(Scale.FIT)
-                                },
+                            AsyncImage(
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(CircleShape),
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(ArcherPhoto)
+                                    .crossfade(true)
+                                    .build(),
+                                contentScale = ContentScale.Crop,
                                 contentDescription = null,
-                                modifier = Modifier.size(40.dp)
                             )
                         }
                         Text(
