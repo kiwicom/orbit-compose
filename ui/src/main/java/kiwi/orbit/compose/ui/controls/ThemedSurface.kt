@@ -33,7 +33,7 @@ public fun ThemedSurface(
 ) {
     val backgroundColor = when (subtle) {
         true -> OrbitTheme.colors.surface.background
-        false -> OrbitTheme.colors.primary.main
+        false -> OrbitTheme.colors.primary.normal
     }
     val contentColor = contentColorFor(backgroundColor)
 

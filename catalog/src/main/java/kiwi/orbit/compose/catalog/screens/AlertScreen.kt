@@ -75,7 +75,7 @@ fun AlertScreen(onNavigateUp: () -> Unit) {
                     indicator = { tabPositions ->
                         TabRowDefaults.Indicator(
                             modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                            color = OrbitTheme.colors.primary.main,
+                            color = OrbitTheme.colors.primary.normal,
                         )
                     },
                     divider = {},

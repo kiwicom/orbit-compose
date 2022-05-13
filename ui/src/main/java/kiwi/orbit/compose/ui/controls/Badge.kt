@@ -13,7 +13,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
-import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
+import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
 
@@ -71,8 +71,8 @@ public fun BadgeNeutralStrong(
     val colors = with(OrbitTheme.colors) {
         copy(
             primary = primary.copy(
-                main = this.content.normal,
-                onMain = surface.main,
+                normal = this.content.normal,
+                onNormal = surface.main,
             )
         )
     }
@@ -93,7 +93,7 @@ public fun BadgeInfo(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
+        LocalColors provides OrbitTheme.colors.asInfoTheme(),
     ) {
         Badge(subtle = false, modifier, icon, content)
     }
@@ -109,7 +109,7 @@ public fun BadgeInfoSubtle(
     content: @Composable RowScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInteractiveTheme(),
+        LocalColors provides OrbitTheme.colors.asInfoTheme(),
     ) {
         Badge(subtle = true, modifier, icon, content)
     }

@@ -56,13 +56,13 @@ public fun Checkbox(
         targetValue = when {
             !enabled && !checked -> OrbitTheme.colors.surface.subtle
             !enabled -> OrbitTheme.colors.surface.disabled
-            checked -> OrbitTheme.colors.interactive.main
+            checked -> OrbitTheme.colors.info.normal
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
     val iconColor = when (enabled) {
-        true -> OrbitTheme.colors.interactive.onMain
+        true -> OrbitTheme.colors.info.onNormal
         false -> OrbitTheme.colors.surface.subtle
     }
     val selectableModifier =
@@ -86,7 +86,7 @@ public fun Checkbox(
         targetValue = if (isError && enabled) 1.0f else 0.0f,
         animationSpec = tween(durationMillis = CheckboxAnimationDuration)
     )
-    val errorStrokeColor = OrbitTheme.colors.critical.main
+    val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle
     val errorMessage = stringResource(R.string.orbit_field_default_error)
 

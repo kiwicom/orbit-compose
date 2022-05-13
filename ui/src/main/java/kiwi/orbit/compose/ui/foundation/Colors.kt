@@ -11,7 +11,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
+/**
+ * Surface colors suitable for various backgrounds and surfaces.
+ */
 @Stable
 public class SurfaceColors(
     main: Color,
@@ -20,10 +25,46 @@ public class SurfaceColors(
     strong: Color,
     disabled: Color,
 ) {
+    /**
+     * Main white background color.
+     *
+     * This color is used for main surface backgrounds.
+     *
+     * - Orbit light-theme color: [ColorTokens.White].
+     */
     public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
+
+    /**
+     * Secondary background color.
+     *
+     * To let content stand out, use this light gray shade color and put over a card or other UI
+     * with the [main] background color.
+     *
+     * - Orbit light-theme color: [ColorTokens.CloudLight].
+     */
     public var background: Color by mutableStateOf(background, structuralEqualityPolicy()); internal set
+
+    /**
+     * Subtle gray shade of [strong], stronger than [background].
+     *
+     * - Orbit light-theme color: [ColorTokens.CloudNormal].
+     */
     public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+
+    /**
+     * Strong gray background color..
+     *
+     * - Orbit light-theme color: [ColorTokens.CloudDark].
+     */
     public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
+
+    /**
+     * Disabled surface color.
+     *
+     * Use the color for disabled element's background.
+     *
+     * - Orbit light-theme color: [ColorTokens.CloudDarker].
+     */
     public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
 
     public fun copy(
@@ -41,6 +82,9 @@ public class SurfaceColors(
     )
 }
 
+/**
+ * Content colors suitable for various text coloring.
+ */
 @Stable
 public class ContentColors(
     normal: Color,
@@ -49,14 +93,46 @@ public class ContentColors(
     highlight: Color,
     disabled: Color,
 ) {
+    /**
+     * Normal text color.
+     *
+     * - Orbit light-theme color: [ColorTokens.InkNormal].
+     */
     public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+
+    /**
+     * Less important text color.
+     *
+     * Represents a text that is rather a comment or an explanation.
+     *
+     * - Orbit light-theme color: [ColorTokens.InkLight].
+     */
     public var minor: Color by mutableStateOf(minor, structuralEqualityPolicy()); internal set
+
+    /**
+     *
+     * Least important text color.
+     *
+     * Represents a suggestion or a placeholder.
+     *
+     * - Orbit light-theme color: [ColorTokens.InkLighter].
+     */
     public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
 
     /**
-     * Color suitable for highlighting links, product dark by default.
+     * Highlighting text color.
+     *
+     * Use it to highlight a link in a paragraph, etc.
+     *
+     * - Orbit light-theme color: [ColorTokens.ProductDark].
      */
     public var highlight: Color by mutableStateOf(highlight, structuralEqualityPolicy()); internal set
+
+    /**
+     * Disabled text color.
+     *
+     * - Orbit light-theme color: [ColorTokens.CloudDarkerHover].
+     */
     public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
 
     public fun copy(
@@ -74,39 +150,88 @@ public class ContentColors(
     )
 }
 
+/**
+ * Feature color set.
+ *
+ * Represents multiple similar shades for particular color.
+ * The color set is exposed through [OrbitTheme.colors] semantic properties (accessors) on [Colors] class.
+ */
 @Stable
 public class FeatureColors(
-    main: Color,
-    mainAlt: Color,
+    normal: Color,
+    normalAlt: Color,
     subtle: Color,
     subtleAlt: Color,
     strong: Color,
-    onMain: Color,
+    onNormal: Color,
 ) {
-    public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
-    public var mainAlt: Color by mutableStateOf(mainAlt, structuralEqualityPolicy()); internal set
+    /**
+     * Main full color of particular feature color set.
+     *
+     * - Related content color: [onNormal].
+     * - Orbit light-theme color example: [ColorTokens.RedNormal].
+     */
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+
+    /**
+     * Alternative (darker) full color of particular feature color set.
+     *
+     * - Related content color: [onNormal].
+     * - Orbit light-theme color example: [ColorTokens.RedNormalActive].
+     */
+    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy()); internal set
+
+    /**
+     * Light color of particular feature color set.
+     *
+     * - Related content color: [normal].
+     * - Orbit light-theme color example: [ColorTokens.RedLight].
+     */
     public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+
+    /**
+     * Alternative (darker) light color of particular feature color set.
+     *
+     * - Related content color: [normal].
+     * - Orbit light-theme color example: [ColorTokens.RedLightActive].
+     */
     public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy()); internal set
+
+    /**
+     * Dark color of particular feature color set.
+     *
+     * - Related content color: [onNormal].
+     * - Orbit light-theme color example: [ColorTokens.RedDark].
+     */
     public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
-    public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy()); internal set
+
+    /**
+     * Color fot content for [normal], [strong] shades.
+     *
+     * - Orbit light-theme color example: [ColorTokens.White].
+     */
+    public var onNormal: Color by mutableStateOf(onNormal, structuralEqualityPolicy()); internal set
 
     public fun copy(
-        main: Color = this.main,
-        mainAlt: Color = this.mainAlt,
+        normal: Color = this.normal,
+        normalAlt: Color = this.normalAlt,
         subtle: Color = this.subtle,
         subtleAlt: Color = this.subtleAlt,
         strong: Color = this.strong,
-        onMain: Color = this.onMain,
+        onNormal: Color = this.onNormal,
     ): FeatureColors = FeatureColors(
-        main,
-        mainAlt,
+        normal,
+        normalAlt,
         subtle,
         subtleAlt,
         strong,
-        onMain,
+        onNormal,
     )
 }
 
+/**
+ * Product color set for various product levels.
+ */
 @Stable
 public class BundleColors(
     basic: Color,
@@ -122,7 +247,9 @@ public class BundleColors(
     public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy()); internal set
     public var basicGradient: Brush by mutableStateOf(basicGradient, structuralEqualityPolicy()); internal set
     public var medium: Color by mutableStateOf(medium, structuralEqualityPolicy()); internal set
-    public var mediumGradient: Brush by mutableStateOf(mediumGradient, structuralEqualityPolicy()); internal set
+    public var mediumGradient: Brush
+        by mutableStateOf(mediumGradient, structuralEqualityPolicy())
+        internal set
     public var top: Color by mutableStateOf(top, structuralEqualityPolicy()); internal set
     public var topGradient: Brush by mutableStateOf(topGradient, structuralEqualityPolicy()); internal set
     public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy()); internal set
@@ -152,12 +279,25 @@ public class BundleColors(
     )
 }
 
+/**
+ * Orbit Color Theme.
+ *
+ * Colors are exposed through semantic color sets:
+ * - [surface] light colors representing background shades;
+ * - [content] dark colors representing text color shades;
+ * - [primary] product colors representing main product colors and primary actions;
+ * - [info] blue colors representing info state and interactive components;
+ * - [success] green colors representing success states;
+ * - [warning] orange colors representing warning states;
+ * - [critical] red colors representing dangerous and critical states;
+ * - [bundle] bundle colors representing particular product variants;
+ */
 @Stable
 public class Colors(
     public val surface: SurfaceColors,
     public val content: ContentColors,
     public val primary: FeatureColors,
-    public val interactive: FeatureColors,
+    public val info: FeatureColors,
     public val success: FeatureColors,
     public val warning: FeatureColors,
     public val critical: FeatureColors,
@@ -170,7 +310,7 @@ public class Colors(
         surface: SurfaceColors = this.surface,
         content: ContentColors = this.content,
         primary: FeatureColors = this.primary,
-        interactive: FeatureColors = this.interactive,
+        info: FeatureColors = this.info,
         success: FeatureColors = this.success,
         warning: FeatureColors = this.warning,
         critical: FeatureColors = this.critical,
@@ -180,7 +320,7 @@ public class Colors(
         surface = surface,
         content = content,
         primary = primary,
-        interactive = interactive,
+        info = info,
         success = success,
         warning = warning,
         critical = critical,
@@ -191,18 +331,18 @@ public class Colors(
     @Suppress("Dependency")
     internal fun toMaterialColors(): androidx.compose.material.Colors =
         androidx.compose.material.Colors(
-            primary = primary.main,
+            primary = primary.normal,
             primaryVariant = primary.strong,
-            secondary = interactive.main,
-            secondaryVariant = interactive.strong,
+            secondary = info.normal,
+            secondaryVariant = info.strong,
             background = surface.background,
             surface = surface.main,
-            error = critical.main,
-            onPrimary = primary.onMain,
-            onSecondary = interactive.onMain,
+            error = critical.normal,
+            onPrimary = primary.onNormal,
+            onSecondary = info.onNormal,
             onBackground = content.normal,
             onSurface = content.normal,
-            onError = critical.onMain,
+            onError = critical.onNormal,
             isLight = isLight,
         )
 }
@@ -219,7 +359,7 @@ internal fun Colors.updateColorsFrom(other: Colors) {
     surface.updateColorsFrom(other.surface)
     content.updateColorsFrom(other.content)
     primary.updateColorsFrom(other.primary)
-    interactive.updateColorsFrom(other.interactive)
+    info.updateColorsFrom(other.info)
     success.updateColorsFrom(other.success)
     warning.updateColorsFrom(other.warning)
     critical.updateColorsFrom(other.critical)
@@ -243,12 +383,12 @@ internal fun ContentColors.updateColorsFrom(other: ContentColors) {
 }
 
 internal fun FeatureColors.updateColorsFrom(other: FeatureColors) {
-    main = other.main
-    mainAlt = other.mainAlt
+    normal = other.normal
+    normalAlt = other.normalAlt
     subtle = other.subtle
     subtleAlt = other.subtleAlt
     strong = other.strong
-    onMain = other.onMain
+    onNormal = other.onNormal
 }
 
 internal fun BundleColors.updateColorsFrom(other: BundleColors) {
@@ -266,6 +406,6 @@ internal fun BundleColors.updateColorsFrom(other: BundleColors) {
 /**
  * Local Orbit Colors.
  *
- * Access the colors through [kiwi.orbit.OrbitTheme.colors].
+ * Access the colors through [kiwi.orbit.compose.ui.OrbitTheme.colors].
  */
 internal val LocalColors: ProvidableCompositionLocal<Colors> = compositionLocalOf { lightColors() }

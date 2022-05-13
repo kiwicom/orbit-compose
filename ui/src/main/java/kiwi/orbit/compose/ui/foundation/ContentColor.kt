@@ -14,7 +14,7 @@ public fun Colors.contentColorFor(color: Color): Color =
     surface.contentColorFor(color, content)
         ?: content.contentColorFor(color, surface)
         ?: primary.contentColorFor(color)
-        ?: interactive.contentColorFor(color)
+        ?: info.contentColorFor(color)
         ?: success.contentColorFor(color)
         ?: warning.contentColorFor(color)
         ?: critical.contentColorFor(color)
@@ -51,11 +51,11 @@ private fun ContentColors.contentColorFor(
 
 private fun FeatureColors.contentColorFor(color: Color): Color? =
     when (color) {
-        main -> onMain
-        mainAlt -> onMain
-        strong -> onMain
+        normal -> onNormal
+        normalAlt -> onNormal
+        strong -> onNormal
         subtle -> strong
-        subtleAlt -> mainAlt
+        subtleAlt -> normalAlt
         else -> null
     }
 

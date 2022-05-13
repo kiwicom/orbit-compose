@@ -22,7 +22,7 @@ import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
-import kiwi.orbit.compose.ui.foundation.asInteractiveTheme
+import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
 import kotlin.math.roundToInt
@@ -37,7 +37,7 @@ public fun AlertInfo(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInteractiveTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asInfoTheme(suppressed),
     ) {
         Alert(
             icon = icon,
@@ -125,7 +125,7 @@ private fun Alert(
 ) {
     val bgColor = OrbitTheme.colors.surface.background
     val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
-    val accentColor = OrbitTheme.colors.primary.main
+    val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
     Row(
         modifier = modifier

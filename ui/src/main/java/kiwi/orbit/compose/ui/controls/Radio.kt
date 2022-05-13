@@ -42,7 +42,7 @@ public fun Radio(
     val borderColor by animateColorAsState(
         targetValue = when {
             !enabled || !selected -> OrbitTheme.colors.surface.disabled
-            else -> OrbitTheme.colors.interactive.main
+            else -> OrbitTheme.colors.info.normal
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration)
     )
@@ -74,7 +74,7 @@ public fun Radio(
         targetValue = if (isError && enabled) 1f else 0f,
         animationSpec = tween(durationMillis = RadioAnimationDuration)
     )
-    val errorStrokeColor = OrbitTheme.colors.critical.main
+    val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle
     val errorMessage = stringResource(R.string.orbit_field_default_error)
 

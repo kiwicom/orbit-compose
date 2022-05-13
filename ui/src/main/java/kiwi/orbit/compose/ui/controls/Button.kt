@@ -18,7 +18,7 @@ public fun ButtonPrimary(
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
-        backgroundColor = OrbitTheme.colors.primary.main,
+        backgroundColor = OrbitTheme.colors.primary.normal,
         modifier = modifier,
         content = content,
     )
@@ -60,7 +60,7 @@ public fun ButtonCritical(
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
-        backgroundColor = OrbitTheme.colors.critical.main,
+        backgroundColor = OrbitTheme.colors.critical.normal,
         modifier = modifier,
         content = content,
     )

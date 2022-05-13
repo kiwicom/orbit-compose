@@ -61,7 +61,7 @@ private fun CardScreenInner() {
         Card(
             onClick = { state = true },
             border = if (state) {
-                BorderStroke(2.dp, OrbitTheme.colors.interactive.main)
+                BorderStroke(2.dp, OrbitTheme.colors.info.normal)
             } else null,
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -71,7 +71,7 @@ private fun CardScreenInner() {
         Card(
             onClick = { state = false },
             border = if (!state) {
-                BorderStroke(2.dp, OrbitTheme.colors.interactive.main)
+                BorderStroke(2.dp, OrbitTheme.colors.info.normal)
             } else null,
             modifier = Modifier.fillMaxWidth(),
         ) {

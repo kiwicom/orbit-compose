@@ -86,7 +86,7 @@ internal fun TopAppBarNormalWithTabsScreen(
                         indicator = { tabPositions ->
                             TabRowDefaults.Indicator(
                                 modifier = Modifier.tabIndicatorOffset(tabPositions[state]),
-                                color = OrbitTheme.colors.primary.main,
+                                color = OrbitTheme.colors.primary.normal,
                             )
                         },
                         divider = {},

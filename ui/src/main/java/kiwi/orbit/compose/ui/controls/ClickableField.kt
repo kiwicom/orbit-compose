@@ -67,7 +67,7 @@ internal fun ClickableFieldBox(
         label = "borderColor"
     ) {
         when (it) {
-            true -> OrbitTheme.colors.critical.main
+            true -> OrbitTheme.colors.critical.normal
             false -> Color.Transparent
         }
     }

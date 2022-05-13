@@ -30,7 +30,7 @@ public fun ButtonLinkPrimary(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.primary.main,
+        contentColor = OrbitTheme.colors.primary.normal,
         modifier = modifier,
         content = content,
     )
@@ -52,7 +52,7 @@ public fun ButtonTextLinkPrimary(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        color = OrbitTheme.colors.primary.main,
+        color = OrbitTheme.colors.primary.normal,
     )
 }
 
@@ -110,7 +110,7 @@ public fun ButtonLinkCritical(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.critical.main,
+        contentColor = OrbitTheme.colors.critical.normal,
         modifier = modifier,
         content = content,
     )
@@ -132,7 +132,7 @@ public fun ButtonTextLinkCritical(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        color = OrbitTheme.colors.critical.main,
+        color = OrbitTheme.colors.critical.normal,
     )
 }
 
