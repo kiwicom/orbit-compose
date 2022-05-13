@@ -70,6 +70,7 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
+        baseline = file("lint-baseline.xml")
         abortOnError = true
         warningsAsErrors = true
     }
