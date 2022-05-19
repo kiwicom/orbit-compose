@@ -22,6 +22,7 @@ import kiwi.orbit.compose.catalog.screens.EmptyStateScreen
 import kiwi.orbit.compose.catalog.screens.IconsScreen
 import kiwi.orbit.compose.catalog.screens.IllustrationsScreen
 import kiwi.orbit.compose.catalog.screens.LinearProgressIndicatorScreen
+import kiwi.orbit.compose.catalog.screens.ListChoiceScreen
 import kiwi.orbit.compose.catalog.screens.LoadingScreen
 import kiwi.orbit.compose.catalog.screens.MainScreen
 import kiwi.orbit.compose.catalog.screens.RadioScreen
@@ -53,6 +54,7 @@ private object MainDestinations {
     const val DIALOGS_MATERIAL_DIALOG = "dialogs_material_dialog"
     const val EMPTY_STATE = "empty_state"
     const val LINEAR_PROGRESS_INDICATOR = "linear_progress_indicator"
+    const val LIST_CHOICE = "list_choice"
     const val LOADING = "loading"
     const val RADIO = "radio"
     const val SEAT = "seat"
@@ -126,6 +128,9 @@ fun NavGraph(
         }
         composable(MainDestinations.LINEAR_PROGRESS_INDICATOR) {
             LinearProgressIndicatorScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.LIST_CHOICE) {
+            ListChoiceScreen(actions::navigateUp)
         }
         composable(MainDestinations.LOADING) {
             LoadingScreen(actions::navigateUp)
@@ -227,6 +232,10 @@ class MainActions(
 
     fun showLinearProgressIndicator() {
         navController.navigate(MainDestinations.LINEAR_PROGRESS_INDICATOR)
+    }
+
+    fun showListChoice() {
+        navController.navigate(MainDestinations.LIST_CHOICE)
     }
 
     fun showLoading() {
