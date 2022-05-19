@@ -29,6 +29,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
+import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -75,7 +76,7 @@ public fun ButtonPrimitive(
             Row(
                 Modifier
                     .defaultMinSize(
-                        minWidth = ButtonDefaults.MinWidth,
+                        minWidth = if (LocalSmallButtonScope.current) ButtonDefaults.MinHeight else ButtonDefaults.MinWidth,
                         minHeight = ButtonDefaults.MinHeight
                     )
                     .padding(contentPadding),
