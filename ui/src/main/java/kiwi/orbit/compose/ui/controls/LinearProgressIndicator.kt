@@ -13,39 +13,53 @@ import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 
+/**
+ * Linear progress indicator.
+ *
+ * Renders 4.dp tall rounded line in maximum available width.
+ * To change the height or width, pass [modifier] with custom sizing.
+ */
 @Composable
 public fun LinearProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
     modifier: Modifier = Modifier,
-    indicatorColor: Color = OrbitTheme.colors.primary.strong,
-    trackColor: Color = OrbitTheme.colors.surface.strong,
+    color: Color = OrbitTheme.colors.primary.strong,
+    backgroundColor: Color = OrbitTheme.colors.surface.strong,
 ) {
     val animatedProgress by animateFloatAsState(
         targetValue = progress.coerceIn(0f, 1f),
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
-
     Canvas(
         modifier = modifier
             .height(4.dp)
             .fillMaxWidth()
             .clip(CircleShape)
-            .background(trackColor)
-            .progressSemantics(animatedProgress),
+            .background(backgroundColor)
+            .progressSemantics(progress.coerceIn(0f, 1f)),
     ) {
+        val isLtr = layoutDirection == LayoutDirection.Ltr
+        val barStart = (if (isLtr) 0f else 1f - animatedProgress) * size.width
+        val barEnd = (if (isLtr) animatedProgress else 1f) * size.width
+
         drawRoundRect(
-            color = indicatorColor,
-            size = Size(animatedProgress * size.width, size.height),
+            color = color,
+            topLeft = Offset(barStart, 0f),
+            size = Size(barEnd, size.height),
             cornerRadius = CornerRadius(size.height / 2f, size.height / 2f),
         )
     }
@@ -65,9 +79,23 @@ private fun PreviewLinearProgressIndicator() {
                 LinearProgressIndicator(0f)
                 LinearProgressIndicator(
                     progress = 0.5f,
-                    indicatorColor = OrbitTheme.colors.success.normal,
-                    trackColor = OrbitTheme.colors.surface.subtle,
+                    color = OrbitTheme.colors.success.normal,
+                    backgroundColor = OrbitTheme.colors.surface.subtle,
                 )
+                LinearProgressIndicator(
+                    modifier = Modifier.height(6.dp),
+                    progress = 0.5f,
+                    color = OrbitTheme.colors.primary.normal,
+                    backgroundColor = OrbitTheme.colors.primary.subtle,
+                )
+                CompositionLocalProvider(
+                    LocalLayoutDirection provides when (LocalLayoutDirection.current) {
+                        LayoutDirection.Ltr -> LayoutDirection.Rtl
+                        LayoutDirection.Rtl -> LayoutDirection.Ltr
+                    }
+                ) {
+                    LinearProgressIndicator(0.5f)
+                }
             }
         }
     }
