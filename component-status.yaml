@@ -30,6 +30,8 @@
   android: Released
 - component: InputField
   android: Released
+- component: ListChoice
+  android: Released
 - component: NavigationBar
   android: Released
 - component: Radio
