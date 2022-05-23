@@ -15,10 +15,12 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -213,5 +215,50 @@ private fun AlertInlineContent(
                 actionPlaceable.placeRelative(iconPlaceable.width + textPlaceable.width, 0)
             }
         }
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertInlinePreview() {
+    Preview {
+        AlertInlineInfo(
+            title = { Text("Title") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
+        AlertInlineSuccess(
+            title = { Text("Title") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
+        AlertInlineWarning(
+            title = { Text("Title") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
+        AlertInlineCritical(
+            title = { Text("Title") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertInlineCustomizedPreview() {
+    Preview {
+        AlertInlineInfo(
+            title = { Text("Very long title with multiple words and characters") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
+        AlertInlineInfo(
+            icon = null,
+            title = { Text("Very long title with multiple words and characters") },
+            action = { Text("Action") },
+            onActionClick = {},
+        )
     }
 }

@@ -17,11 +17,13 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.semantics.editableText
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -99,5 +101,22 @@ public fun <T> SelectField(
         }
 
         FieldMessage(error, info)
+    }
+}
+
+@Preview
+@Composable
+internal fun SelectFieldPreview() {
+    Preview {
+        SelectField(
+            value = "A",
+            options = listOf("A", "B"),
+            onOptionSelect = {},
+            label = { Text("Nationality") },
+            info = { Text("Attach JPEG.") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Airplane, contentDescription = null) },
+        ) {
+        }
     }
 }

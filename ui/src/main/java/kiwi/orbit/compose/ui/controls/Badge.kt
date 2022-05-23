@@ -2,14 +2,18 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
@@ -231,5 +235,38 @@ private fun Badge(
             icon?.invoke()
             content()
         }
+    }
+}
+
+@Preview
+@Composable
+internal fun BadgePreview() {
+    Preview {
+        Row {
+            BadgeInfo { Text("Text") }
+            BadgeInfoSubtle { Text("Text") }
+        }
+        Row {
+            BadgeSuccess { Text("Text") }
+            BadgeSuccessSubtle { Text("Text") }
+        }
+        Row {
+            BadgeWarning { Text("Text") }
+            BadgeWarningSubtle { Text("Text") }
+        }
+        Row {
+            BadgeCritical { Text("Text") }
+            BadgeCriticalSubtle { Text("Text") }
+        }
+        Row {
+            BadgeNeutralStrong { Text("Text") }
+            BadgeNeutralSubtle { Text("Text") }
+        }
+        BadgeNeutral(
+            icon = { Icon(Icons.Android, contentDescription = null) }
+        ) { Text("Text") }
+        BadgeInfo(
+            icon = { Icon(Icons.Android, contentDescription = null) }
+        ) { Text("Text") }
     }
 }

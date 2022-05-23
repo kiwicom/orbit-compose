@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.text.BasicTextField
@@ -32,14 +33,17 @@ import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kotlinx.coroutines.delay
@@ -199,3 +203,27 @@ private enum class InputState {
 }
 
 private const val AnimationDuration = 150
+
+@Preview
+@Composable
+internal fun TextFieldPreview() {
+    Preview {
+        TextField(
+            value = "A",
+            onValueChange = {},
+            label = { Text("Surname") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Diamond, contentDescription = null) },
+            trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+        )
+        TextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Surname") },
+            placeholder = { Text("Enter your surname.") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Ai, contentDescription = null) },
+            trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+        )
+    }
+}

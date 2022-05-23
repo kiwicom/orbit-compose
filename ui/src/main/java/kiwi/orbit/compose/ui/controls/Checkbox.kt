@@ -9,7 +9,9 @@ import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.triStateToggleable
@@ -31,9 +33,11 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
@@ -169,3 +173,30 @@ private val CheckboxRippleRadius = 20.dp
 private val ErrorShadowWidth = 2.dp
 private val ErrorShadowSize = CheckboxSize + ErrorShadowWidth * 2
 private val ErrorShadowCornerRadius = CheckboxCornerRadius + ErrorShadowWidth
+
+@Preview
+@Composable
+internal fun CheckboxPreview() {
+    Preview {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Checkbox(
+                checked = false,
+                onCheckedChange = {},
+            )
+            Checkbox(
+                checked = true,
+                onCheckedChange = {},
+            )
+            Checkbox(
+                checked = false,
+                isError = true,
+                onCheckedChange = {},
+            )
+            Checkbox(
+                checked = true,
+                isError = true,
+                onCheckedChange = {},
+            )
+        }
+    }
+}

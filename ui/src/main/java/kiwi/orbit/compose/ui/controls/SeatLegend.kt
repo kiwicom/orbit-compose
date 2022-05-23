@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -103,3 +105,13 @@ private val SeatTopRadius = 3.dp
 
 // Bottom radius of the legend icon
 private val SeatBottomRadius = 1.dp
+
+@Preview
+@Composable
+internal fun SeatLegendPreview() {
+    Preview {
+        SeatLegendStandard { Text("Standard") }
+        SeatLegendExtraLegroom { Text("Extra Legroom") }
+        SeatLegendUnavailable { Text("Unavailable") }
+    }
+}

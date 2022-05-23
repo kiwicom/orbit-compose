@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,9 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -158,6 +163,42 @@ private fun ChoiceTileFooter(
                     .align(Alignment.Bottom)
                     .padding(2.dp)
             )
+        }
+    }
+}
+
+@Preview
+@Composable
+internal fun ChoiceTilePreview() {
+    Preview {
+        ChoiceTile(
+            title = {
+                Text(
+                    "Multiline long choice title label with many characters",
+                    modifier = Modifier.weight(1f)
+                )
+                BadgeInfoSubtle {
+                    Text("Popular")
+                }
+            },
+            description = { Text("Multiline and very long description and lot of words and many characters") },
+            icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },
+            selected = false,
+            onSelect = {},
+            showRadio = true,
+            footer = {
+                Row(
+                    modifier = Modifier.heightIn(min = 32.dp),
+                    verticalAlignment = Alignment.Bottom,
+                ) {
+                    Text(
+                        "$16.90",
+                        Modifier.weight(1f)
+                    )
+                }
+            }
+        ) {
+            CustomPlaceholder()
         }
     }
 }

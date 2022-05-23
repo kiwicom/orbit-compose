@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -15,8 +16,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
 public fun PasswordTextField(
@@ -76,4 +79,28 @@ public fun PasswordTextField(
         },
         interactionSource = interactionSource,
     )
+}
+
+@Preview
+@Composable
+internal fun PasswordTextFieldPreview() {
+    Preview {
+        PasswordTextField(
+            value = "password",
+            label = { Text("Password") },
+            onValueChange = {},
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Security, contentDescription = null) },
+        )
+
+        PasswordTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Password") },
+            placeholder = { Text("Your password") },
+            error = { Text("Password doesn't match.") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Security, contentDescription = null) },
+        )
+    }
 }
