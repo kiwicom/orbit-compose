@@ -1,6 +1,8 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,11 +13,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
 /**
@@ -53,4 +57,16 @@ public fun CountryFlag(
                 shape = RoundedCornerShape(2.dp),
             )
     )
+}
+
+@Preview
+@Composable
+internal fun CountryFlagPreview() {
+    Preview {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            CountryFlag(countryCode = "cz", contentDescription = null)
+            CountryFlag(countryCode = "sk", contentDescription = null)
+            CountryFlag(countryCode = "", contentDescription = null)
+        }
+    }
 }

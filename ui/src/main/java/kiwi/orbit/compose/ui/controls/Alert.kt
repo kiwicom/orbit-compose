@@ -15,9 +15,16 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -215,5 +222,147 @@ private fun AlertButtons(
                 x += buttonSize + buttonPadding
             }
         }
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertInfoPreview() {
+    Preview {
+        AlertInfo(
+            title = { Text("Re-check your credentials") },
+            content = {
+                Text(
+                    buildAnnotatedString {
+                        append("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID. ")
+                        withStyle(
+                            SpanStyle(
+                                color = OrbitTheme.colors.content.highlight,
+                                fontWeight = FontWeight.Medium,
+                                textDecoration = TextDecoration.Underline,
+                            )
+                        ) {
+                            append("Some link")
+                        }
+                        append(".")
+                    }
+                )
+            },
+            actions = {
+                ButtonPrimary(onClick = {}) {
+                    Text("More info")
+                }
+                ButtonSecondary(onClick = {}) {
+                    Text("Mark as checked")
+                }
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertSuccessPreview() {
+    Preview {
+        AlertSuccess(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+        )
+        AlertSuccess(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+            suppressed = true,
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertWarningPreview() {
+    Preview {
+        AlertWarning(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+        )
+        AlertWarning(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+            suppressed = true,
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertCriticalPreview() {
+    Preview {
+        AlertCritical(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+        )
+        AlertCritical(
+            title = { Text("Title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+            suppressed = true,
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun AlertSimplePreview() {
+    Preview {
+        AlertInfo(
+            title = { Text("Title") },
+            content = {},
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+            },
+        )
+        AlertInfo(
+            title = {},
+            content = { Text("Content description") },
+        )
+        AlertInfo(
+            title = { Text("Title") },
+            content = {},
+        )
+        AlertInfo(
+            icon = null,
+            title = {},
+            content = { Text("Content description") },
+        )
+        AlertInfo(
+            icon = null,
+            title = {},
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+            },
+        )
     }
 }

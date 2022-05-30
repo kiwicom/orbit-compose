@@ -2,7 +2,10 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -12,7 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.layout.expand
 
@@ -166,5 +172,29 @@ private fun ButtonTextLink(
                     vertical = ButtonDefaults.ButtonSmallVerticalPadding
                 )
         )
+    }
+}
+
+@Preview
+@Composable
+internal fun ButtonLinkPreview() {
+    Preview {
+        val mW = Modifier.fillMaxWidth()
+        ButtonLinkPrimary({}, mW) { Text("Action") }
+        ButtonLinkSecondary({}, mW) { Text("Action") }
+        ButtonLinkCritical({}, mW) { Text("Action") }
+    }
+}
+
+@Preview
+@Composable
+internal fun ButtonTextLinkPreview() {
+    Preview {
+        Row(Modifier.padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Text", style = OrbitTheme.typography.title3, modifier = Modifier.alignByBaseline())
+            ButtonTextLinkPrimary("Action", {}, modifier = Modifier.alignByBaseline())
+            ButtonTextLinkSecondary("Action", {}, modifier = Modifier.alignByBaseline())
+            ButtonTextLinkCritical("Action", {}, modifier = Modifier.alignByBaseline())
+        }
     }
 }

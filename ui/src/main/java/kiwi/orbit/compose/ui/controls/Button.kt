@@ -1,12 +1,15 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -156,4 +159,20 @@ internal fun ButtonLargePrimitive(
         contentPadding = contentPadding,
         content = content,
     )
+}
+
+@Preview
+@Composable
+internal fun ButtonPreview() {
+    Preview {
+        val mW = Modifier.fillMaxWidth()
+        ButtonPrimary({}, mW) { Text("Action") }
+        ButtonPrimarySubtle({}, mW) { Text("Action") }
+        ButtonSecondary({}, mW) { Text("Action") }
+        ButtonCritical({}, mW) { Text("Action") }
+        ButtonCriticalSubtle({}, mW) { Text("Action") }
+        ButtonBundleBasic({}, mW) { Text("Action") }
+        ButtonBundleMedium({}, mW) { Text("Action") }
+        ButtonBundleTop({}, mW) { Text("Action") }
+    }
 }

@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("org.jmailen.kotlinter")
     id("com.vanniktech.maven.publish.base")
+    id("shot")
 }
 
 android {
@@ -10,7 +11,8 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
+        testApplicationId = "kiwi.orbit.compose.ui.test"
     }
 
     buildFeatures {
@@ -38,6 +40,16 @@ android {
         abortOnError = true
         warningsAsErrors = true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
+    }
+}
+
+shot {
+    applicationId = "kiwi.orbit.compose.ui.test"
+    tolerance = 6.0 // 6%
 }
 
 kotlinter {
@@ -62,4 +74,6 @@ dependencies {
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.activityCompose)
+
+    androidTestImplementation(libs.compose.uiTest)
 }

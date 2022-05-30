@@ -8,7 +8,6 @@ import androidx.compose.animation.splineBasedDecay
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.verticalDrag
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -217,21 +217,19 @@ private fun Modifier.toastGesturesDetector(
 
 @Preview
 @Composable
-private fun ToastPreview() {
-    OrbitTheme {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Toast(
-                message = "Message",
-                icon = null,
-            )
-            Toast(
-                message = "Message with icon",
-                icon = { Icons.CheckCircle },
-            )
-            Toast(
-                message = "Message with icon and very long message with many words.",
-                icon = { Icons.CheckCircle },
-            )
-        }
+internal fun ToastPreview() {
+    Preview {
+        Toast(
+            message = "Message",
+            icon = null,
+        )
+        Toast(
+            message = "Message with icon",
+            icon = { Icons.CheckCircle },
+        )
+        Toast(
+            message = "Message with icon and very long message with many words.",
+            icon = { Icons.CheckCircle },
+        )
     }
 }

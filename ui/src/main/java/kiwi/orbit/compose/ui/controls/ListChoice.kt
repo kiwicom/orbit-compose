@@ -156,10 +156,9 @@ private const val DescriptionLayoutId = "description"
 private const val TrailingIconLayoutId = "trailing_icon"
 private const val SeparatorLayoutId = "separator"
 
-@Suppress("UnusedPrivateMember")
 @Preview
 @Composable
-private fun ListChoicePreview() {
+internal fun ListChoicePreview() {
     OrbitTheme {
         Surface {
             Column {

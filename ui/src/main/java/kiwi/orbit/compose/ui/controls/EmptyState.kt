@@ -15,8 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -83,5 +86,22 @@ public fun EmptyState(
             Spacer(modifier = Modifier.size(16.dp))
             action()
         }
+    }
+}
+
+@Preview
+@Composable
+internal fun EmptyStatePreview() {
+    Preview {
+        EmptyState(
+            illustration = Icons.Accommodation, // illustrations are not a dependency of :ui
+            title = "No Results Found",
+            description = "We did not find any flights.",
+            action = {
+                ButtonPrimary(onClick = {}) {
+                    Text("Try again")
+                }
+            }
+        )
     }
 }

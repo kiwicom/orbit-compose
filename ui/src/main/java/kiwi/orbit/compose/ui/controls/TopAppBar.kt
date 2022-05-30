@@ -25,13 +25,16 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -241,4 +244,24 @@ private val TopAppBarTitleNormalTextStyle = TextStyle(
 public object TopAppBarSemantics {
     public const val Tag: String = "top_app_bar"
     public const val TitleTag: String = "title"
+}
+
+@Preview
+@Composable
+internal fun TopAppBarPreview() {
+    Preview {
+        TopAppBar(
+            title = { Text("Title") },
+            onNavigateUp = {},
+        )
+        TopAppBar(
+            title = { Text("Title") },
+            navigationIcon = {},
+            actions = {
+                IconButton(onClick = {}) {
+                    Icon(Icons.Security, contentDescription = null)
+                }
+            }
+        )
+    }
 }

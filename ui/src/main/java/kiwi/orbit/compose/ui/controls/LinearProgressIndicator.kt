@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 
 /**
  * Linear progress indicator.
@@ -65,37 +66,34 @@ public fun LinearProgressIndicator(
     }
 }
 
-@Suppress("UnusedPrivateMember")
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview
 @Composable
-private fun PreviewLinearProgressIndicator() {
-    OrbitTheme {
-        Surface {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.padding(8.dp)
-            ) {
-                LinearProgressIndicator(1f)
-                LinearProgressIndicator(0f)
-                LinearProgressIndicator(
-                    progress = 0.5f,
-                    color = OrbitTheme.colors.success.normal,
-                    backgroundColor = OrbitTheme.colors.surface.subtle,
-                )
-                LinearProgressIndicator(
-                    modifier = Modifier.height(6.dp),
-                    progress = 0.5f,
-                    color = OrbitTheme.colors.primary.normal,
-                    backgroundColor = OrbitTheme.colors.primary.subtle,
-                )
-                CompositionLocalProvider(
-                    LocalLayoutDirection provides when (LocalLayoutDirection.current) {
-                        LayoutDirection.Ltr -> LayoutDirection.Rtl
-                        LayoutDirection.Rtl -> LayoutDirection.Ltr
-                    }
-                ) {
-                    LinearProgressIndicator(0.5f)
+internal fun LinearProgressIndicatorPreview() {
+    Preview {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.padding(8.dp)
+        ) {
+            LinearProgressIndicator(1f)
+            LinearProgressIndicator(0f)
+            LinearProgressIndicator(
+                progress = 0.5f,
+                color = OrbitTheme.colors.success.normal,
+                backgroundColor = OrbitTheme.colors.surface.subtle,
+            )
+            LinearProgressIndicator(
+                modifier = Modifier.height(6.dp),
+                progress = 0.5f,
+                color = OrbitTheme.colors.primary.normal,
+                backgroundColor = OrbitTheme.colors.primary.subtle,
+            )
+            CompositionLocalProvider(
+                LocalLayoutDirection provides when (LocalLayoutDirection.current) {
+                    LayoutDirection.Ltr -> LayoutDirection.Rtl
+                    LayoutDirection.Rtl -> LayoutDirection.Ltr
                 }
+            ) {
+                LinearProgressIndicator(0.5f)
             }
         }
     }

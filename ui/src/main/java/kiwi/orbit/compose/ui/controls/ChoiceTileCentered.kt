@@ -5,7 +5,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,10 +22,13 @@ import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -161,4 +168,37 @@ private fun ChoiceTileFooter(
             .padding(top = 12.dp)
             .padding(2.dp)
     )
+}
+
+@Preview
+@Composable
+internal fun ChoiceTileCenteredPreview() {
+    Preview {
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Max),
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            ChoiceTileCentered(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
+                selected = false,
+                onSelect = {},
+                icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },
+                title = { Text("Plus Support") },
+                description = { Text("Everyone sits together") },
+                price = { Text("+ 10 €") },
+            )
+            ChoiceTileCentered(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
+                selected = true,
+                onSelect = {},
+                title = { Text("Minus Support") },
+                description = {},
+                price = { Text("+ 10 €") },
+            )
+        }
+    }
 }

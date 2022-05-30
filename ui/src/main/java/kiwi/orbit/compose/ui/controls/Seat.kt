@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,11 +38,13 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -317,3 +320,46 @@ private val SeatContainerLayersMargin = 9.dp
 // Derived SeatContainer constants
 private val SeatContainerHeight = SeatHeight + SeatPriceHeight + SeatContainerLayersMargin
 private val SeatContainerWidth = SeatWidth + SeatContainerLayersMargin * 2
+
+@Preview
+@Composable
+internal fun SeatPreview() {
+    Preview {
+        Row {
+            Column {
+                SeatExtraLegroom(
+                    selected = false,
+                    label = { Text("MO") },
+                    price = { Text("€19.99") },
+                    onClick = {},
+                )
+
+                SeatStandard(
+                    selected = false,
+                    label = { Text("MO") },
+                    price = { Text("€12.99") },
+                    onClick = {},
+                )
+
+                SeatUnavailable(
+                    contentDescription = "Unavailable"
+                )
+            }
+            Column {
+                SeatExtraLegroom(
+                    selected = true,
+                    label = { Text("MO") },
+                    price = { Text("€19.99") },
+                    onClick = {},
+                )
+
+                SeatStandard(
+                    selected = true,
+                    label = { Text("MO") },
+                    price = { Text("€12.99") },
+                    onClick = {},
+                )
+            }
+        }
+    }
+}

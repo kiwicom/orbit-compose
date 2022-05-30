@@ -19,9 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -95,6 +97,20 @@ public fun CheckboxField(
                     description()
                 }
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+internal fun CheckboxFieldPreview() {
+    Preview {
+        CheckboxField(checked = false, onCheckedChange = {}) { Text("Text") }
+        CheckboxField(checked = true, onCheckedChange = {}) { Text("Text") }
+        CheckboxField(checked = false, onCheckedChange = {}, isError = true) { Text("Text") }
+        CheckboxField(checked = true, onCheckedChange = {}, isError = true) { Text("Text") }
+        CheckboxField(checked = false, onCheckedChange = {}, description = { Text("Description") }) {
+            Text("Text")
         }
     }
 }

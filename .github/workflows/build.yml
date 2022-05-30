@@ -14,7 +14,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: ./gradlew catalog:assembleDebug lint lintKotlin
+      - name: Assemble & Linters
+        run: ./gradlew :catalog:assembleDebug lint lintKotlin
       - uses: yutailang0119/action-android-lint@v1.0.2
         name: App Lint errors to annotations
         if: ${{ failure() }}

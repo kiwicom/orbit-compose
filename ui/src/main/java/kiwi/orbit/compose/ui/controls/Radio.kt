@@ -6,6 +6,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.ripple.rememberRipple
@@ -21,10 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
 public fun Radio(
@@ -116,3 +120,30 @@ private val RadioRadiusSize = RadioSize / 2
 private val RadioRippleRadius = 20.dp
 private val ErrorShadowSize = 24.dp
 private val ErrorShadowRadius = ErrorShadowSize / 2
+
+@Preview
+@Composable
+internal fun RadioPreview() {
+    Preview {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Radio(
+                selected = false,
+                onClick = {},
+            )
+            Radio(
+                selected = true,
+                onClick = {},
+            )
+            Radio(
+                selected = false,
+                isError = true,
+                onClick = {},
+            )
+            Radio(
+                selected = true,
+                isError = true,
+                onClick = {},
+            )
+        }
+    }
+}

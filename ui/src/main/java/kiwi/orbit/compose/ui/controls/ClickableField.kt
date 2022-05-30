@@ -7,16 +7,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
+import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
 public fun ClickableField(
@@ -93,3 +97,29 @@ internal fun ClickableFieldBox(
 }
 
 private const val AnimationDuration = 150
+
+@Preview
+@Composable
+internal fun ClickableFieldPreview() {
+    Preview {
+        ClickableField(
+            value = "Attach filed",
+            onClick = {},
+            label = { Text("Attachment") },
+            info = { Text("Attach JPEG.") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Attachment, contentDescription = null) },
+            trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+        )
+
+        ClickableField(
+            value = "Attach filed",
+            onClick = {},
+            label = { Text("Attachment") },
+            error = { Text("Wrong file type.") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Attachment, contentDescription = null) },
+            trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+        )
+    }
+}

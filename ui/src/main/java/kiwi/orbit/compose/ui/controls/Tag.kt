@@ -2,6 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -14,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -71,6 +74,41 @@ public fun Tag(
                 ) {
                     Icon(Icons.CloseCircle, tint = iconColor, contentDescription = "Remove") // TODO: l10n
                 }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+internal fun TagPreview() {
+    Preview {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Tag {
+                Text("Prague")
+            }
+            Tag(selected = false, onSelect = {}) {
+                Text("Prague")
+            }
+            Tag(selected = true) {
+                Text("Prague")
+            }
+            Tag(selected = true, onSelect = {}) {
+                Text("Prague")
+            }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Tag(onRemove = {}) {
+                Text("Prague")
+            }
+            Tag(selected = false, onSelect = {}, onRemove = {}) {
+                Text("Prague")
+            }
+            Tag(selected = true, onRemove = {}) {
+                Text("Prague")
+            }
+            Tag(selected = true, onSelect = {}, onRemove = {}) {
+                Text("Prague")
             }
         }
     }
