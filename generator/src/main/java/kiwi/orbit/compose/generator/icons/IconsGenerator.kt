@@ -55,7 +55,7 @@ class IconsGenerator {
                     .removePrefix("svg/")
                     .replace("-", "_")
                     .lowercase()
-                val filenameXml = filenameSvg.replace("svg", "xml")
+                val filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
 
                 val outFileSvg = File(resourceOutDir.toFile(), filenameSvg)
                 val outFileXml = File(resourceOutDir.toFile(), filenameXml)
