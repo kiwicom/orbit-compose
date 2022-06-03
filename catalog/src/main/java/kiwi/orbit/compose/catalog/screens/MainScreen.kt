@@ -17,6 +17,7 @@ import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.Ballot
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
+import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
@@ -65,6 +66,7 @@ fun MainScreen(
         Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
         Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
         Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
+        Triple("KeyValue", { Icon(MaterialIcons.DragHandle, null) }, actions::showKeyValue),
         Triple("ListChoice", { Icon(Icons.MenuHamburger, null) }, actions::showListChoice),
         Triple("Loading", { Icon(Icons.MenuMeatballs, null) }, actions::showLoading),
         Triple(
