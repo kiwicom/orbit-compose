@@ -36,7 +36,8 @@ android {
     lint {
         disable.add("ObsoleteLintCustomCheck")
         disable.add("UnusedResources")
-        baseline = file("lint-baseline.xml")
+        disable.add("VectorPath")
+        disable.add("UnusedAttribute")
         abortOnError = true
         warningsAsErrors = true
     }
