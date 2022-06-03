@@ -161,7 +161,7 @@ internal class ScreenshotTest : ScreenshotTest {
     @Test
     fun countryFlag() {
         composeTestRule.setContent { CountryFlagPreview() }
-        Thread.sleep(250)
+        Thread.sleep(1000)
         compareScreenshot(composeTestRule)
     }
 
