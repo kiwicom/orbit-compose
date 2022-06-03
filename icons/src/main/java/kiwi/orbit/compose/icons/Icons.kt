@@ -83,6 +83,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_anywhere)
 
+    public val AppNotification: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_app_notification)
+
     public val Apple: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_apple)
@@ -159,6 +163,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_boat)
 
+    public val Bookmark: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_bookmark)
+
     public val Bug: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_bug)
@@ -202,6 +210,10 @@ public object Icons {
     public val CarRental: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_car_rental)
+
+    public val CareKiwiCom: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_care_kiwi_com)
 
     public val Chart: Painter
         @Composable
@@ -290,6 +302,10 @@ public object Icons {
     public val Code: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_code)
+
+    public val CodeKiwi: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_code_kiwi)
 
     public val Coffee: Painter
         @Composable
@@ -395,6 +411,14 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_facebook)
 
+    public val FamilyAll: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_family_all)
+
+    public val FamilyHalf: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_family_half)
+
     public val Feedback: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_feedback)
@@ -451,6 +475,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_gender_woman)
 
+    public val Github: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_github)
+
     public val Google: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_google)
@@ -482,6 +510,10 @@ public object Icons {
     public val History: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_history)
+
+    public val Inbox: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_inbox)
 
     public val Infant: Painter
         @Composable
@@ -526,6 +558,10 @@ public object Icons {
     public val KiwicomGuarantee: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_kiwicom_guarantee)
+
+    public val KiwicomNoGuarantee: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_kiwicom_no_guarantee)
 
     public val Leisure: Painter
         @Composable
@@ -671,9 +707,17 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_new_window)
 
-    public val NoKiwicomGuarantee: Painter
+    public val NoFlash: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_orbit_no_kiwicom_guarantee)
+        get() = painterResource(R.drawable.ic_orbit_no_flash)
+
+    public val NoRefund: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_no_refund)
+
+    public val NoRescheduling: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_no_rescheduling)
 
     public val Nonstop: Painter
         @Composable
@@ -694,6 +738,10 @@ public object Icons {
     public val NotificationOn: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_notification_on)
+
+    public val NotificiationAdd: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_notificiation_add)
 
     public val OnlineCheckin: Painter
         @Composable
@@ -755,6 +803,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_phone)
 
+    public val Placeholder: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_placeholder)
+
     public val Playground: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_playground)
@@ -766,6 +818,10 @@ public object Icons {
     public val PlusCircle: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_plus_circle)
+
+    public val PlusMinus: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_plus_minus)
 
     public val Pool: Painter
         @Composable
@@ -907,6 +963,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_sightseeing)
 
+    public val Sign: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_sign)
+
     public val Smoking: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_smoking)
@@ -914,6 +974,10 @@ public object Icons {
     public val SmokingOff: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_smoking_off)
+
+    public val Sms: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_sms)
 
     public val Sort: Painter
         @Composable
@@ -930,6 +994,10 @@ public object Icons {
     public val Sports: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_sports)
+
+    public val Stackoverflow: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_stackoverflow)
 
     public val StarEmpty: Painter
         @Composable
@@ -1058,4 +1126,8 @@ public object Icons {
     public val WifiOff: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_wifi_off)
+
+    public val Youtube: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_youtube)
 }
