@@ -226,10 +226,10 @@ private fun Badge(
         modifier = modifier,
         subtle = subtle,
         shape = RoundedCornerShape(percent = 50),
-        strokeWidth = 0.5.dp,
+        strokeWidth = BadgeStrokeWidth,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
+        contentPadding = BadgeContentPadding,
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
             icon?.invoke()
@@ -237,6 +237,13 @@ private fun Badge(
         }
     }
 }
+
+internal val BadgeContentPadding = PaddingValues(
+    horizontal = 8.dp,
+    vertical = 4.dp,
+)
+
+internal val BadgeStrokeWidth = 0.5.dp
 
 @Preview
 @Composable
