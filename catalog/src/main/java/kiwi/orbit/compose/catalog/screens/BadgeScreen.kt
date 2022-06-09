@@ -18,6 +18,17 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.BadgeCircleCritical
+import kiwi.orbit.compose.ui.controls.BadgeCircleCriticalSubtle
+import kiwi.orbit.compose.ui.controls.BadgeCircleInfo
+import kiwi.orbit.compose.ui.controls.BadgeCircleInfoSubtle
+import kiwi.orbit.compose.ui.controls.BadgeCircleNeutral
+import kiwi.orbit.compose.ui.controls.BadgeCircleNeutralStrong
+import kiwi.orbit.compose.ui.controls.BadgeCircleNeutralSubtle
+import kiwi.orbit.compose.ui.controls.BadgeCircleSuccess
+import kiwi.orbit.compose.ui.controls.BadgeCircleSuccessSubtle
+import kiwi.orbit.compose.ui.controls.BadgeCircleWarning
+import kiwi.orbit.compose.ui.controls.BadgeCircleWarningSubtle
 import kiwi.orbit.compose.ui.controls.BadgeCritical
 import kiwi.orbit.compose.ui.controls.BadgeCriticalSubtle
 import kiwi.orbit.compose.ui.controls.BadgeInfo
@@ -56,6 +67,13 @@ private fun BadgeScreenInner() {
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        Text(
+            text = "Badge",
+            style = OrbitTheme.typography.title3,
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
         BadgeRow("BadgeNeutral") {
             BadgeNeutral {
                 Text(text = "label")
@@ -221,6 +239,89 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        Text(
+            text = "BadgeCircle",
+            style = OrbitTheme.typography.title3,
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow(name = "BadgeCircleNeutral") {
+            BadgeCircleNeutral(1)
+            BadgeCircleNeutral(2)
+            BadgeCircleNeutral(3)
+        }
+
+        BadgeRow(name = "BadgeCircleNeutralSubtle") {
+            BadgeCircleNeutralSubtle(1)
+            BadgeCircleNeutralSubtle(2)
+            BadgeCircleNeutralSubtle(3)
+        }
+
+        BadgeRow(name = "BadgeCircleNeutralStrong") {
+            BadgeCircleNeutralStrong(1)
+            BadgeCircleNeutralStrong(2)
+            BadgeCircleNeutralStrong(3)
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow(name = "BadgeCircleInfo") {
+            BadgeCircleInfo(1)
+            BadgeCircleInfo(2)
+            BadgeCircleInfo(3)
+        }
+
+        BadgeRow(name = "BadgeCircleInfoSubtle") {
+            BadgeCircleInfoSubtle(1)
+            BadgeCircleInfoSubtle(2)
+            BadgeCircleInfoSubtle(3)
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow(name = "BadgeCircleSuccess") {
+            BadgeCircleSuccess(1)
+            BadgeCircleSuccess(2)
+            BadgeCircleSuccess(3)
+        }
+
+        BadgeRow(name = "BadgeCircleSuccessSubtle") {
+            BadgeCircleSuccessSubtle(1)
+            BadgeCircleSuccessSubtle(2)
+            BadgeCircleSuccessSubtle(3)
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow(name = "BadgeCircleWarning") {
+            BadgeCircleWarning(1)
+            BadgeCircleWarning(2)
+            BadgeCircleWarning(3)
+        }
+
+        BadgeRow(name = "BadgeCircleWarningSubtle") {
+            BadgeCircleWarningSubtle(1)
+            BadgeCircleWarningSubtle(2)
+            BadgeCircleWarningSubtle(3)
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow(name = "BadgeCircleCritical") {
+            BadgeCircleCritical(1)
+            BadgeCircleCritical(2)
+            BadgeCircleCritical(3)
+        }
+
+        BadgeRow(name = "BadgeCircleCriticalSubtle") {
+            BadgeCircleCriticalSubtle(1)
+            BadgeCircleCriticalSubtle(2)
+            BadgeCircleCriticalSubtle(3)
         }
     }
 }
