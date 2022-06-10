@@ -4,6 +4,7 @@ compileSdk = "32"
 minSdk = "23"
 
 kotlin-lang = "1.7.0"
+kotlin-dokka = "1.7.0"
 android-gradle-plugin = "7.2.0"
 maven-publish = "0.19.0"
 
@@ -21,6 +22,7 @@ square-kotlinPoet = "1.11.0"
 
 [libraries]
 
+kotlin-dokka = { module = "org.jetbrains.dokka:dokka-base", version.ref = "kotlin-dokka" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-lang" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
@@ -56,5 +58,6 @@ square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-
 [bundles]
 
 [plugins]
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin-dokka" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "3.11.1" }
 paparazzi = { id = "app.cash.paparazzi", version = "1.0.0" }

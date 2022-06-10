@@ -3,6 +3,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    alias(libs.plugins.dokka)
     alias(libs.plugins.kotlinter)
     id("com.vanniktech.maven.publish.base")
     alias(libs.plugins.paparazzi)

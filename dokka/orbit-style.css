@@ -1,0 +1,17 @@
+.library-name a {
+    position: relative;
+    --logo-width: 50px;
+    --logo-space: 20px;
+    margin-left: calc(var(--logo-width) + var(--logo-space));
+}
+
+.library-name a::before {
+    content: '';
+    background: url("../images/logo-icon.svg") center no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: var(--logo-width);
+    height: 50px;
+    top: -18px;
+    left: calc(-1 * var(--logo-width) - var(--logo-space));
+}
