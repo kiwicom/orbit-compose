@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
 import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -31,7 +30,6 @@ fun EmptyStateScreen(onNavigateUp: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
     Column(
