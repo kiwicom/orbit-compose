@@ -1,9 +1,11 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jmailen.kotlinter")
     id("com.vanniktech.maven.publish.base")
-    id("shot")
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -11,8 +13,6 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
-        testApplicationId = "kiwi.orbit.compose.ui.test"
     }
 
     buildFeatures {
@@ -45,11 +45,6 @@ android {
         resources.excludes.add("META-INF/AL2.0")
         resources.excludes.add("META-INF/LGPL2.1")
     }
-}
-
-shot {
-    applicationId = "kiwi.orbit.compose.ui.test"
-    tolerance = 6.0 // 6%
 }
 
 kotlinter {
