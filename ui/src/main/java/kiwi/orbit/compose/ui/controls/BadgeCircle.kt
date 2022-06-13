@@ -2,11 +2,15 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -207,16 +211,23 @@ private fun BadgeCircle(
     value: Int,
     modifier: Modifier,
 ) {
+    val height = with(LocalDensity.current) {
+        OrbitTheme.typography.bodySmallMedium.lineHeight.toDp() +
+            BadgeContentPadding.calculateTopPadding() +
+            BadgeContentPadding.calculateBottomPadding()
+    }
     ThemedSurface(
-        modifier = modifier,
+        modifier = modifier
+            .requiredHeight(height)
+            .requiredWidth(height),
         subtle = subtle,
         shape = CircleShape,
         strokeWidth = BadgeStrokeWidth,
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = BadgeContentPadding,
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
-            Text(text = value.toString())
+            Text(text = value.toString(), maxLines = 1, overflow = TextOverflow.Visible)
         }
     }
 }
@@ -226,35 +237,35 @@ private fun BadgeCircle(
 internal fun BadgeCirclePreview() {
     Preview {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             BadgeCircleInfo(1)
-            BadgeCircleInfoSubtle(1)
+            BadgeCircleInfoSubtle(5)
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            BadgeCircleSuccess(1)
-            BadgeCircleSuccessSubtle(1)
+            BadgeCircleSuccess(2)
+            BadgeCircleSuccessSubtle(6)
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            BadgeCircleWarning(1)
-            BadgeCircleWarningSubtle(1)
+            BadgeCircleWarning(3)
+            BadgeCircleWarningSubtle(7)
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            BadgeCircleCritical(1)
-            BadgeCircleCriticalSubtle(1)
+            BadgeCircleCritical(4)
+            BadgeCircleCriticalSubtle(8)
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            BadgeCircleNeutral(1)
-            BadgeCircleNeutralSubtle(1)
-            BadgeCircleNeutralStrong(1)
+            BadgeCircleNeutral(10)
+            BadgeCircleNeutralSubtle(100)
+            BadgeCircleNeutralStrong(1234)
         }
     }
 }
