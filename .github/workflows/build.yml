@@ -16,6 +16,8 @@ jobs:
           java-version: 11
       - name: Assemble & Linters
         run: ./gradlew :catalog:assembleDebug lint lintKotlin
+      - name: Run Screenshot Tests
+        run: ./gradlew :ui:verifyPaparazziDebug
       - uses: yutailang0119/action-android-lint@v1.0.2
         name: App Lint errors to annotations
         if: ${{ failure() }}
@@ -36,3 +38,8 @@ jobs:
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=icons/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' icons/build/reports/ktlint/main-lint.json || true
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=illustrations/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' illustrations/build/reports/ktlint/main-lint.json || true
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=ui/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' ui/build/reports/ktlint/main-lint.json || true
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: shots-results
+          path: ui/out/failures

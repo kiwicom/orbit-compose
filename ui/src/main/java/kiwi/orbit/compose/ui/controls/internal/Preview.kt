@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,9 +18,7 @@ internal fun Preview(
     OrbitTheme {
         Surface {
             Column(
-                modifier = modifier
-                    .requiredSizeIn(maxWidth = 375.dp)
-                    .padding(4.dp),
+                modifier = modifier.padding(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 content()
