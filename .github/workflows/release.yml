@@ -17,7 +17,10 @@ jobs:
         with:
           java-version: 11
       - name: Decrypt secrets
-        run: echo ${{ secrets.ENCRYPT_KEY }} | release/signing-unpack.sh
+        run: |
+          echo ${{ secrets.ENCRYPT_KEY }} | release/signing-unpack.sh
+          mv gradle.properties gradle.backup.properties
+          cat gradle.backup.properties | grep -v configuration-cache > gradle.properties
       - name: Deploy to Sonatype
         run: |
           ./gradlew publish --no-parallel --stacktrace
