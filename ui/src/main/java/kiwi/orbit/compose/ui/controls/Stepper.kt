@@ -19,7 +19,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -196,9 +199,10 @@ internal fun StepperPreview() {
             value = 0,
             onValueChange = {},
         )
+        var i by remember { mutableStateOf(10) }
         Stepper(
-            value = 10,
-            onValueChange = {},
+            value = i,
+            onValueChange = { i = it },
             maxValue = 10,
         )
     }
