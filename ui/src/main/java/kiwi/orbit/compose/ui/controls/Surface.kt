@@ -21,7 +21,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.contentColorFor
@@ -33,7 +32,7 @@ public fun Surface(
     color: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(color),
     border: BorderStroke? = null,
-    elevation: Dp = 0.dp,
+    elevation: Dp = OrbitTheme.elevations.None,
     content: @Composable () -> Unit
 ) {
     Surface(
@@ -58,7 +57,7 @@ public fun Surface(
     color: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(color),
     border: BorderStroke? = null,
-    elevation: Dp = 0.dp,
+    elevation: Dp = OrbitTheme.elevations.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     indication: Indication? = LocalIndication.current,
     enabled: Boolean = true,

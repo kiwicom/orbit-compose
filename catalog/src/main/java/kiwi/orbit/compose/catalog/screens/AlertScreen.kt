@@ -55,7 +55,7 @@ fun AlertScreen(onNavigateUp: () -> Unit) {
     Screen(
         title = "Alert",
         onNavigateUp = onNavigateUp,
-        topAppBarElevation = 0.dp,
+        topAppBarElevation = OrbitTheme.elevations.None,
     ) { contentPadding ->
         Column(
             Modifier.padding(top = contentPadding.calculateTopPadding())
