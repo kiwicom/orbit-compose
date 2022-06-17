@@ -92,7 +92,7 @@ private fun Toast(
             .toastGesturesDetector(onPause, onResume, onDismissed),
         color = OrbitTheme.colors.content.normal,
         shape = shape,
-        elevation = 6.dp,
+        elevation = OrbitTheme.elevations.Level2,
     ) {
         val progress = remember { Animatable(0f) }
         LaunchedEffect(animateDuration) {

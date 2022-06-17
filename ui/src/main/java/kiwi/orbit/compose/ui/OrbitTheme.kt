@@ -8,6 +8,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.foundation.ElevationLevels
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -64,4 +65,6 @@ public object OrbitTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalShapes.current
+
+    public val elevations: ElevationLevels = ElevationLevels
 }

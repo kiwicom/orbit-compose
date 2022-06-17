@@ -229,7 +229,7 @@ internal fun TopAppBarLayout(
     }
 }
 
-internal val TopAppBarElevation = 2.dp
+internal val TopAppBarElevation = OrbitTheme.elevations.Level1
 
 private val TopAppBarHorizontalPadding = 4.dp
 private val TopAppBarTitleInset = 16.dp - TopAppBarHorizontalPadding

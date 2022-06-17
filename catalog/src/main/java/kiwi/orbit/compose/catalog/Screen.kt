@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.ToastHostState
@@ -16,7 +16,7 @@ fun Screen(
     onNavigateUp: () -> Unit,
     action: @Composable (() -> Unit)? = null,
     toastHostState: ToastHostState = remember { ToastHostState() },
-    topAppBarElevation: Dp = 2.dp,
+    topAppBarElevation: Dp = OrbitTheme.elevations.Level1,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Scaffold(
