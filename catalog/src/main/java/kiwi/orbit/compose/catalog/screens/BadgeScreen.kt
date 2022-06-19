@@ -93,7 +93,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
-            BadgeCircleNeutral(value = 1)
+            BadgeCircleNeutral(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeNeutralSubtle") {
             BadgeNeutralSubtle {
@@ -108,7 +108,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
-            BadgeCircleNeutralSubtle(value = 1)
+            BadgeCircleNeutralSubtle(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeNeutralStrong") {
             BadgeNeutralStrong {
@@ -123,7 +123,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
             ) {
             }
-            BadgeCircleNeutralStrong(value = 1)
+            BadgeCircleNeutralStrong(value = 1, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -141,7 +141,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
             ) {
             }
-            BadgeCircleInfoSubtle(value = 1)
+            BadgeCircleInfoSubtle(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeInfo") {
             BadgeInfo {
@@ -156,7 +156,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
             ) {
             }
-            BadgeCircleInfo(value = 1)
+            BadgeCircleInfo(value = 1, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -174,7 +174,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Check, contentDescription = null) }
             ) {
             }
-            BadgeCircleSuccessSubtle(value = 1)
+            BadgeCircleSuccessSubtle(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeSuccess") {
             BadgeSuccess {
@@ -189,7 +189,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Check, contentDescription = null) }
             ) {
             }
-            BadgeCircleSuccess(value = 1)
+            BadgeCircleSuccess(value = 1, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -207,7 +207,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
-            BadgeCircleWarningSubtle(value = 1)
+            BadgeCircleWarningSubtle(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeWarning") {
             BadgeWarning {
@@ -222,7 +222,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
-            BadgeCircleWarning(value = 1)
+            BadgeCircleWarning(value = 1, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -240,7 +240,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
-            BadgeCircleCriticalSubtle(value = 1)
+            BadgeCircleCriticalSubtle(value = 1, Modifier.alignByBaseline())
         }
         BadgeRow("BadgeCritical") {
             BadgeCritical {
@@ -255,7 +255,7 @@ private fun BadgeScreenInner() {
                 icon = { Icon(painter = Icons.Alert, contentDescription = null) }
             ) {
             }
-            BadgeCircleCritical(value = 1)
+            BadgeCircleCritical(value = 1, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -270,19 +270,19 @@ private fun BadgeScreenInner() {
         BadgeRow(name = "BadgeCircleNeutral") {
             BadgeCircleNeutral(1)
             BadgeCircleNeutral(22)
-            BadgeCircleNeutral(333)
+            BadgeCircleNeutral(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleNeutralSubtle") {
             BadgeCircleNeutralSubtle(1)
             BadgeCircleNeutralSubtle(22)
-            BadgeCircleNeutralSubtle(333)
+            BadgeCircleNeutralSubtle(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleNeutralStrong") {
             BadgeCircleNeutralStrong(1)
             BadgeCircleNeutralStrong(22)
-            BadgeCircleNeutralStrong(333)
+            BadgeCircleNeutralStrong(333, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -290,13 +290,13 @@ private fun BadgeScreenInner() {
         BadgeRow(name = "BadgeCircleInfoSubtle") {
             BadgeCircleInfoSubtle(1)
             BadgeCircleInfoSubtle(22)
-            BadgeCircleInfoSubtle(333)
+            BadgeCircleInfoSubtle(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleInfo") {
             BadgeCircleInfo(1)
             BadgeCircleInfo(22)
-            BadgeCircleInfo(333)
+            BadgeCircleInfo(333, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -304,13 +304,13 @@ private fun BadgeScreenInner() {
         BadgeRow(name = "BadgeCircleSuccessSubtle") {
             BadgeCircleSuccessSubtle(1)
             BadgeCircleSuccessSubtle(22)
-            BadgeCircleSuccessSubtle(333)
+            BadgeCircleSuccessSubtle(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleSuccess") {
             BadgeCircleSuccess(1)
             BadgeCircleSuccess(22)
-            BadgeCircleSuccess(333)
+            BadgeCircleSuccess(333, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -318,13 +318,13 @@ private fun BadgeScreenInner() {
         BadgeRow(name = "BadgeCircleWarningSubtle") {
             BadgeCircleWarningSubtle(1)
             BadgeCircleWarningSubtle(22)
-            BadgeCircleWarningSubtle(333)
+            BadgeCircleWarningSubtle(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleWarning") {
             BadgeCircleWarning(1)
             BadgeCircleWarning(22)
-            BadgeCircleWarning(333)
+            BadgeCircleWarning(333, Modifier.alignByBaseline())
         }
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -332,13 +332,13 @@ private fun BadgeScreenInner() {
         BadgeRow(name = "BadgeCircleCriticalSubtle") {
             BadgeCircleCriticalSubtle(1)
             BadgeCircleCriticalSubtle(22)
-            BadgeCircleCriticalSubtle(333)
+            BadgeCircleCriticalSubtle(333, Modifier.alignByBaseline())
         }
 
         BadgeRow(name = "BadgeCircleCritical") {
             BadgeCircleCritical(1)
             BadgeCircleCritical(22)
-            BadgeCircleCritical(333)
+            BadgeCircleCritical(333, Modifier.alignByBaseline())
         }
     }
 }
