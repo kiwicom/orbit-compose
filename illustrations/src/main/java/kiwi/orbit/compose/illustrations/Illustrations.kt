@@ -23,6 +23,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_airport_transport_taxi)
 
+    public val AppKiwi: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_app_kiwi)
+
     public val AppQRCode: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_app_q_r_code)
