@@ -1,39 +1,42 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
 @Composable
 fun IllustrationsScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Illustrations",
-        onNavigateUp = onNavigateUp,
-    ) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Illustrations") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
+    ) { contentPadding: PaddingValues ->
         IllustrationsScreenInner(contentPadding)
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IllustrationsScreenInner(contentPadding: PaddingValues) {
     val illustrations: List<Pair<String, Painter>> = Illustrations::class.memberProperties.map {
@@ -41,7 +44,7 @@ fun IllustrationsScreenInner(contentPadding: PaddingValues) {
     }
 
     LazyVerticalGrid(
-        cells = GridCells.Adaptive(256.dp),
+        columns = GridCells.Adaptive(256.dp),
         contentPadding = contentPadding + PaddingValues(8.dp),
     ) {
         items(illustrations) { (name, icon) ->

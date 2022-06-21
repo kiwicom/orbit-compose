@@ -10,7 +10,7 @@
 [![CI Build](https://img.shields.io/github/workflow/status/kiwicom/orbit-compose/Build/main)](https://github.com/kiwicom/orbit-compose/actions/workflows/build.yml)
 [![GitHub release](https://img.shields.io/github/v/release/kiwicom/orbit-compose)](https://github.com/kiwicom/orbit-compose/releases)
 [![Maven release](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fkiwi%2Forbit%2Fcompose%2Fui%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:kiwi.orbit.compose)
-[![Compose version](https://img.shields.io/badge/compose-1.1-%232ec781)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
+[![Compose version](https://img.shields.io/badge/Compose-1.2-%232ec781)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
 
 </div>
 

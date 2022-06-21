@@ -87,7 +87,7 @@ dependencies {
     implementation(projects.icons)
     implementation(projects.illustrations)
 
-    implementation(libs.androidx.coreFixed)
+    implementation(libs.androidx.core)
     implementation(libs.androidx.activityCompose)
 
     implementation(libs.compose.animation)
@@ -104,7 +104,6 @@ dependencies {
     implementation(libs.kotlin.reflect)
 
     implementation(libs.coil)
-    implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemController)
     implementation(libs.accompanist.pager)
 

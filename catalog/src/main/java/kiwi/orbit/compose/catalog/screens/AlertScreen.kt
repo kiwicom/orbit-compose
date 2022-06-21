@@ -1,15 +1,20 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Tab
@@ -19,7 +24,6 @@ import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -28,12 +32,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.AlertCritical
@@ -46,78 +47,75 @@ import kiwi.orbit.compose.ui.controls.AlertSuccess
 import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AlertScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Alert",
-        onNavigateUp = onNavigateUp,
-        topAppBarElevation = OrbitTheme.elevations.None,
-    ) { contentPadding ->
-        Column(
-            Modifier.padding(top = contentPadding.calculateTopPadding())
-        ) {
-            val state = rememberPagerState(0)
-            val scope = rememberCoroutineScope()
+    val state = rememberPagerState(0)
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Alert") },
+                onNavigateUp = onNavigateUp,
+                extraContent = {
+                    TabRow(
+                        modifier = Modifier.windowInsetsPadding(
+                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                        ),
+                        selectedTabIndex = state.currentPage,
+                        backgroundColor = OrbitTheme.colors.surface.main,
+                        indicator = { tabPositions ->
+                            TabRowDefaults.Indicator(
+                                modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
+                                color = OrbitTheme.colors.primary.normal,
+                            )
+                        },
+                        divider = {},
+                    ) {
+                        Tab(
+                            selected = state.currentPage == 0,
+                            onClick = { scope.launch { state.animateScrollToPage(0) } },
+                            text = { Text("Normal") },
+                        )
+                        Tab(
+                            selected = state.currentPage == 1,
+                            onClick = { scope.launch { state.animateScrollToPage(1) } },
+                            text = { Text("Suppressed") },
+                        )
+                        Tab(
+                            selected = state.currentPage == 2,
+                            onClick = { scope.launch { state.animateScrollToPage(2) } },
+                            text = { Text("Inline") },
+                        )
+                    }
+                }
+            )
+        },
+    ) { contentPadding: PaddingValues ->
+        HorizontalPager(
+            count = 3,
+            state = state,
+            modifier = Modifier.padding(top = contentPadding.calculateTopPadding()),
+        ) { tabIndex ->
             Box(
                 Modifier
-                    .shadow(2.dp)
-                    .zIndex(1f)
-                    .background(OrbitTheme.colors.surface.main)
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(
+                        start = contentPadding.calculateStartPadding(LayoutDirection.Ltr),
+                        end = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
+                        bottom = contentPadding.calculateBottomPadding(),
+                    )
             ) {
-                TabRow(
-                    modifier = Modifier.navigationBarsPadding(bottom = false),
-                    selectedTabIndex = state.currentPage,
-                    backgroundColor = OrbitTheme.colors.surface.main,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.Indicator(
-                            modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                            color = OrbitTheme.colors.primary.normal,
-                        )
-                    },
-                    divider = {},
-                ) {
-                    Tab(
-                        selected = state.currentPage == 0,
-                        onClick = { scope.launch { state.animateScrollToPage(0) } },
-                        text = { Text("Normal") },
-                    )
-                    Tab(
-                        selected = state.currentPage == 1,
-                        onClick = { scope.launch { state.animateScrollToPage(1) } },
-                        text = { Text("Suppressed") },
-                    )
-                    Tab(
-                        selected = state.currentPage == 2,
-                        onClick = { scope.launch { state.animateScrollToPage(2) } },
-                        text = { Text("Inline") },
-                    )
-                }
-            }
-
-            HorizontalPager(
-                count = 3,
-                state = state,
-                modifier = Modifier.fillMaxSize()
-            ) { tabIndex ->
-                Box(
-                    Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                        .padding(
-                            start = contentPadding.calculateStartPadding(LayoutDirection.Ltr),
-                            end = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
-                            bottom = contentPadding.calculateBottomPadding(),
-                        )
-                ) {
-                    when (tabIndex) {
-                        0 -> AlertScreenNormalInner()
-                        1 -> AlertScreenSuppressedInner()
-                        2 -> AlertScreenInlineInner()
-                    }
+                when (tabIndex) {
+                    0 -> AlertScreenNormalInner()
+                    1 -> AlertScreenSuppressedInner()
+                    2 -> AlertScreenInlineInner()
                 }
             }
         }

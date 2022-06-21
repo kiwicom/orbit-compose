@@ -3,6 +3,7 @@ package kiwi.orbit.compose.catalog.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -15,11 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.ToastHostState
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,11 +30,15 @@ fun ToastScreen(
 ) {
     val toastHostState = remember { ToastHostState() }
     val scope = rememberCoroutineScope()
-    Screen(
-        title = "Toast",
-        onNavigateUp = onNavigateUp,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Toast") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
         toastHostState = toastHostState,
-    ) { contentPadding ->
+    ) { contentPadding: PaddingValues ->
         Box(
             Modifier
                 .fillMaxSize()

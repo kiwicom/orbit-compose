@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,25 +30,30 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.PasswordTextField
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TextField
+import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
 fun TextFieldScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Text Field",
-        onNavigateUp = onNavigateUp,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Text Field") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
         action = {
             ButtonPrimary(onClick = {}, Modifier.fillMaxWidth()) {
                 Text("Primary Action")
             }
-        }
-    ) { contentPadding ->
+        },
+    ) { contentPadding: PaddingValues ->
         Box(
             Modifier
                 .fillMaxSize()

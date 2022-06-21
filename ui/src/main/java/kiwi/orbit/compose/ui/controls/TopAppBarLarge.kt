@@ -3,19 +3,20 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,8 +26,6 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
@@ -98,10 +97,6 @@ public fun TopAppBarLarge(
             }
         },
         navigationIcon = navigationIcon,
-        contentPadding = rememberInsetsPaddingValues(
-            insets = LocalWindowInsets.current.systemBars,
-            applyBottom = false
-        ),
         actions = {
             Row(
                 horizontalArrangement = Arrangement.End,
@@ -122,7 +117,6 @@ private fun TwoRowsTopAppBar(
     largeTitle: @Composable () -> Unit,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable () -> Unit,
-    contentPadding: PaddingValues,
     largeElevated: Boolean,
     elevation: Dp,
     scrollBehavior: TopAppBarScrollBehavior?
@@ -141,7 +135,11 @@ private fun TwoRowsTopAppBar(
             color = OrbitTheme.colors.surface.main,
             elevation = elevation,
         ) {
-            Column(Modifier.padding(contentPadding)) {
+            Column(
+                Modifier.windowInsetsPadding(
+                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+                )
+            ) {
                 TopAppBarLayout(
                     modifier = Modifier,
                     title = title,
@@ -169,7 +167,9 @@ private fun TwoRowsTopAppBar(
                 elevation = elevation * scrollFraction,
             ) {
                 TopAppBarLayout(
-                    modifier = Modifier.padding(contentPadding),
+                    modifier = Modifier.windowInsetsPadding(
+                        WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+                    ),
                     title = title,
                     titleAlpha = scrollFraction,
                     hideTitleSemantics = hideTopRowSemantics,
@@ -178,9 +178,8 @@ private fun TwoRowsTopAppBar(
                 )
             }
             TopAppBarLargeLayout(
-                modifier = Modifier.padding(
-                    start = contentPadding.calculateStartPadding(LocalLayoutDirection.current),
-                    end = contentPadding.calculateEndPadding(LocalLayoutDirection.current),
+                modifier = Modifier.windowInsetsPadding(
+                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal)
                 ),
                 scrollBehavior = scrollBehavior,
                 largeTitle = largeTitle,

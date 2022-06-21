@@ -28,7 +28,7 @@ subprojects {
             jvmTarget = "1.8"
             allWarningsAsErrors = true
             freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
-                add("-Xopt-in=kotlin.RequiresOptIn")
+                add("-opt-in=kotlin.RequiresOptIn")
                 add("-Xskip-prerelease-check")
             }.toList()
         }

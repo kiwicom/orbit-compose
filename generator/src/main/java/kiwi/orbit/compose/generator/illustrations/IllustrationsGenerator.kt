@@ -32,7 +32,6 @@ class IllustrationsGenerator {
         generateClass(icons, kotlinOutDir)
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     fun buildImplOnly(
         kotlinOutDir: Path,
         resourceOutDir: Path,

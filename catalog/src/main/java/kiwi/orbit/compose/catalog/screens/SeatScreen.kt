@@ -3,6 +3,7 @@ package kiwi.orbit.compose.catalog.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SeatExtraLegroom
 import kiwi.orbit.compose.ui.controls.SeatLegendExtraLegroom
 import kiwi.orbit.compose.ui.controls.SeatLegendStandard
@@ -23,13 +24,18 @@ import kiwi.orbit.compose.ui.controls.SeatLegendUnavailable
 import kiwi.orbit.compose.ui.controls.SeatStandard
 import kiwi.orbit.compose.ui.controls.SeatUnavailable
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
 fun SeatScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Seat",
-        onNavigateUp = onNavigateUp,
-    ) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Seat") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
+    ) { contentPadding: PaddingValues ->
         Box(
             Modifier
                 .fillMaxSize()

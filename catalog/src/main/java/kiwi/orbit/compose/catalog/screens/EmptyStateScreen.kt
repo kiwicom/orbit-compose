@@ -11,21 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
 import kiwi.orbit.compose.ui.controls.EmptyState
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
 fun EmptyStateScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "EmptyState",
-        onNavigateUp = onNavigateUp,
-    ) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("EmptyState") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
+    ) { contentPadding: PaddingValues ->
         EmptyStateScreenInner(contentPadding)
     }
 }

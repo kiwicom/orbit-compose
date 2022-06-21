@@ -56,7 +56,6 @@ kotlinter {
 dependencies {
     implementation(projects.icons)
 
-    implementation(libs.accompanist.insets)
     implementation(libs.androidx.core)
     implementation(libs.coil)
     implementation(libs.compose.animationGraphics)
@@ -69,6 +68,4 @@ dependencies {
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.activityCompose)
-
-    androidTestImplementation(libs.compose.uiTest)
 }

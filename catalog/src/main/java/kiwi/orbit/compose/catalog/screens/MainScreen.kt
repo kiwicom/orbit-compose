@@ -1,15 +1,17 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.outlined.ToggleOff
 import androidx.compose.material.icons.rounded.Announcement
 import androidx.compose.material.icons.rounded.Article
@@ -29,7 +31,6 @@ import androidx.compose.material.icons.rounded.WebAsset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.MainActions
 import kiwi.orbit.compose.icons.Icons
@@ -41,6 +42,7 @@ import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.utils.plus
 import androidx.compose.material.icons.Icons.Outlined as OutlinedMaterialIcons
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
@@ -97,65 +99,42 @@ fun MainScreen(
         },
         backgroundColor = OrbitTheme.colors.surface.background,
     ) { contentPadding ->
-        BoxWithConstraints {
-            val columns = (maxWidth / 180.dp).toInt().coerceAtLeast(1)
-            Column(
-                Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(contentPadding)
-            ) {
-                Spacer(Modifier.size(16.dp))
-                CardsList("Foundation", foundation, columns)
-                CardsList("Controls", controls, columns)
-            }
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(160.dp),
+            contentPadding = contentPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            cardItems("Foundation", foundation)
+            cardItems("Controls", controls)
         }
     }
 }
 
-@Composable
-private fun CardsList(
+private fun LazyGridScope.cardItems(
     title: String,
     items: List<Triple<String, @Composable () -> Unit, () -> Unit>>,
-    columns: Int,
 ) {
-    Text(
-        text = title,
-        style = OrbitTheme.typography.title3,
-        modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-    )
-    Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-        for (rowItems in items.chunked(columns)) {
-            Row {
-                Items(rowItems)
-                val missingColumns = columns - rowItems.size
-                if (missingColumns > 0) {
-                    Spacer(Modifier.weight(missingColumns.toFloat()))
-                }
-            }
-        }
+    item(span = { GridItemSpan(maxLineSpan) }) {
+        Text(
+            text = title,
+            style = OrbitTheme.typography.title3,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
     }
-}
-
-@Composable
-private fun RowScope.Items(rowItems: List<Triple<String, @Composable () -> Unit, () -> Unit>>) {
-    for (item in rowItems) {
+    items(items) { item ->
         Item(item.first, item.second, item.third)
     }
 }
 
 @Composable
-private fun RowScope.Item(title: String, icon: @Composable () -> Unit, onClick: () -> Unit) {
+private fun Item(title: String, icon: @Composable () -> Unit, onClick: () -> Unit) {
     Card(
-        Modifier
-            .padding(4.dp)
-            .weight(1f),
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick,
     ) {
         Row(
-            Modifier
-                .clip(OrbitTheme.shapes.normal)
-                .clickable(onClick = onClick)
-                .padding(12.dp),
+            modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {

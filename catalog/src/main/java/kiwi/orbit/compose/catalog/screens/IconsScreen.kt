@@ -1,13 +1,12 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Alignment
@@ -16,26 +15,30 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kiwi.orbit.compose.catalog.Screen
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
 @Composable
 fun IconsScreen(onNavigateUp: () -> Unit) {
-    Screen(
-        title = "Icons",
-        onNavigateUp = onNavigateUp,
-    ) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Icons") },
+                onNavigateUp = onNavigateUp,
+            )
+        },
+    ) { contentPadding: PaddingValues ->
         IconsScreenInner(contentPadding)
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IconsScreenInner(contentPadding: PaddingValues) {
     val icons: List<Pair<String, Painter>> = Icons::class.memberProperties.map {
@@ -43,7 +46,7 @@ fun IconsScreenInner(contentPadding: PaddingValues) {
     }
 
     LazyVerticalGrid(
-        cells = GridCells.Adaptive(120.dp),
+        columns = GridCells.Adaptive(120.dp),
         contentPadding = contentPadding + PaddingValues(8.dp),
     ) {
         items(icons) { (name, icon) ->
