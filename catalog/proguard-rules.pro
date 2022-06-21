@@ -23,7 +23,9 @@
 -keep class kiwi.orbit.compose.icons.Icons {
     public *;
 }
-
+-keep class kiwi.orbit.compose.icons.ColoredIcons {
+    public *;
+}
 -keep class kiwi.orbit.compose.illustrations.Illustrations {
     public *;
 }

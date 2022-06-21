@@ -315,38 +315,6 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_color_picker)
 
-    public val ColoredFacebook: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_facebook)
-
-    public val ColoredImessage: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_imessage)
-
-    public val ColoredMessenger: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_messenger)
-
-    public val ColoredSignal: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_signal)
-
-    public val ColoredTelegram: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_telegram)
-
-    public val ColoredTwitter: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_twitter)
-
-    public val ColoredViber: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_viber)
-
-    public val ColoredWhatsapp: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_whatsapp)
-
     public val Compare: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_compare)
@@ -498,10 +466,6 @@ public object Icons {
     public val Github: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_github)
-
-    public val Google: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_google)
 
     public val GooglePlay: Painter
         @Composable
