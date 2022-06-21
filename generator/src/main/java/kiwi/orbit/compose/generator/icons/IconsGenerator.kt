@@ -16,6 +16,22 @@ import java.util.zip.ZipInputStream
 import kotlin.io.path.createDirectories
 
 class IconsGenerator {
+    companion object {
+        private val RtlAwareIcons = listOf(
+            "chevron_double_left",
+            "chevron_double_right",
+            "chevron_left",
+            "chevron_right",
+            "flight_direct",
+            "flight_multicity",
+            "flight_nomad",
+            "flight_return",
+            "route_no_stops",
+            "route_one_stop",
+            "route_two_stops",
+        )
+    }
+
     data class Icon(
         val name: String,
         val resourceName: String,
@@ -43,7 +59,7 @@ class IconsGenerator {
             dir = kotlinOutDir,
             kdoc = """
                 ColoredIcons are multi-colored icons and should be rendered using Image composable.
-            """.trimIndent()
+            """.trimIndent(),
         )
     }
 
@@ -83,7 +99,14 @@ class IconsGenerator {
                     .removePrefix("svg/")
                     .replace("-", "_")
                     .lowercase()
-                val filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
+                var filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
+
+                val isRtlAware = filenameXml.removeSuffix(".xml").removePrefix("ic_orbit_") in RtlAwareIcons
+                if (isRtlAware) {
+                    filenameXml = filenameXml
+                        .replace("left", "backward")
+                        .replace("right", "forward")
+                }
 
                 val outFileSvg = File(resourceOutDir.toFile(), filenameSvg)
                 val outFileXml = File(resourceOutDir.toFile(), filenameXml)
@@ -98,10 +121,6 @@ class IconsGenerator {
 
                 outFileSvg.delete()
 
-                val lines = outFileXml.readLines()
-                val contents = lines.joinToString("\n") + "\n"
-                Files.write(outFileXml.toPath(), contents.toByteArray())
-
                 val resourceName = filenameXml.removeSuffix(".xml")
 
                 @Suppress("SpellCheckingInspection")
@@ -110,6 +129,18 @@ class IconsGenerator {
                     .split("_")
                     .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
                     .replace("Checkin", "CheckIn")
+
+                val content = StringBuilder(outFileXml.readLines().joinToString("\n"))
+                if (isRtlAware) {
+                    val attributeIndex = content.indexOf("""android:viewportHeight="24"""")
+                    content.insert(
+                        attributeIndex + """android:viewportHeight="24"""".length,
+                        "\n    android:autoMirrored=\"true\"",
+                    )
+                }
+                content.append("\n")
+
+                Files.write(outFileXml.toPath(), content.toString().toByteArray())
                 icons.add(Icon(iconName, resourceName))
             }
         }
