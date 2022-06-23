@@ -3,7 +3,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("org.jmailen.kotlinter")
+    alias(libs.plugins.kotlinter)
     id("com.vanniktech.maven.publish.base")
     alias(libs.plugins.paparazzi)
 }
@@ -68,4 +68,6 @@ dependencies {
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.activityCompose)
+    debugImplementation(libs.androidx.customView)
+    debugImplementation(libs.androidx.customViewPoolingContainer)
 }

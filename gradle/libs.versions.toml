@@ -5,7 +5,6 @@ minSdk = "23"
 
 kotlin-lang = "1.6.21"
 android-gradle-plugin = "7.2.0"
-kotlinter = "3.9.0"
 maven-publish = "0.19.0"
 
 kotlin-serialization = "1.3.3"
@@ -13,9 +12,9 @@ android-sdkCommon = "30.2.0"
 androidx-activityCompose = "1.4.0"
 androidx-core = "1.8.0"
 androidx-constraint-layout = "1.0.0"
-accompanist-main = "0.24.11-rc"
+accompanist-main = "0.24.12-rc"
 coil = "2.0.0"
-compose-main = "1.2.0-rc01"
+compose-main = "1.2.0-rc02"
 compose-navigation = "2.5.0-rc02"
 square-kotlinPoet = "1.11.0"
 
@@ -28,6 +27,8 @@ android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "an
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
+androidx-customView = { module = "androidx.customview:customview", version = "1.1.0" }
+androidx-customViewPoolingContainer = { module = "androidx.customview:customview-poolingcontainer", version = "1.0.0-rc01" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist-main" }
 accompanist-systemController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-main" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
@@ -54,4 +55,5 @@ square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-
 [bundles]
 
 [plugins]
+kotlinter = { id = "org.jmailen.kotlinter", version = "3.10.0" }
 paparazzi = { id = "app.cash.paparazzi", version = "1.0.0" }

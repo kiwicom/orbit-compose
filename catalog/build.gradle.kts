@@ -1,9 +1,11 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("org.jmailen.kotlinter")
+    alias(libs.plugins.kotlinter)
 }
 
 android {
@@ -108,4 +110,6 @@ dependencies {
     implementation(libs.accompanist.pager)
 
     debugImplementation(libs.compose.tooling)
+    debugImplementation(libs.androidx.customView)
+    debugImplementation(libs.androidx.customViewPoolingContainer)
 }

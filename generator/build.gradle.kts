@@ -1,8 +1,10 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("java")
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jmailen.kotlinter")
+    alias(libs.plugins.kotlinter)
 }
 
 java {
