@@ -11,7 +11,7 @@ plugins {
     kotlin("android") version libs.versions.kotlin.lang.get() apply false
     kotlin("plugin.serialization") version libs.versions.kotlin.lang.get() apply false
     id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
-    id("org.jmailen.kotlinter") version libs.versions.kotlinter.get() apply false
+    alias(libs.plugins.kotlinter) apply false
     id("com.vanniktech.maven.publish.base") version libs.versions.maven.publish.get() apply false
     alias(libs.plugins.paparazzi) apply false
 }

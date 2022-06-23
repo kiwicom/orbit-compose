@@ -1,7 +1,9 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("org.jmailen.kotlinter")
+    alias(libs.plugins.kotlinter)
     id("com.vanniktech.maven.publish.base")
 }
 
