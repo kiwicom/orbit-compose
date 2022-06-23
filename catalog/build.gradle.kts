@@ -108,4 +108,6 @@ dependencies {
     implementation(libs.accompanist.pager)
 
     debugImplementation(libs.compose.tooling)
+    debugImplementation(libs.androidx.customView)
+    debugImplementation(libs.androidx.customViewPoolingContainer)
 }

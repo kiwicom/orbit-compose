@@ -68,4 +68,6 @@ dependencies {
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.activityCompose)
+    debugImplementation(libs.androidx.customView)
+    debugImplementation(libs.androidx.customViewPoolingContainer)
 }
