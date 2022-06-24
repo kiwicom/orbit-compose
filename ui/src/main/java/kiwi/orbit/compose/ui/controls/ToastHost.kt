@@ -19,7 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.AccessibilityManager
 import androidx.compose.ui.platform.LocalAccessibilityManager
+import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.coroutines.resume
+import kotlin.math.roundToLong
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -85,10 +87,13 @@ public class ToastHostState {
             resume()
             supervisorScope {
                 launch {
-                    animationDuration.collectLatest {
-                        if (it != null) {
+                    animationDuration.collectLatest { duration ->
+                        val animationScale = coroutineContext.durationScale
+                        // Do not run animation when animations are turned off.
+                        if (duration != null && animationScale != 0f) {
                             started = System.currentTimeMillis()
-                            delay(it.toLong())
+                            val finalDuration = (duration.toLong() * animationScale).roundToLong()
+                            delay(finalDuration)
                             this@launch.cancel()
                         } else {
                             elapsed += System.currentTimeMillis() - started
