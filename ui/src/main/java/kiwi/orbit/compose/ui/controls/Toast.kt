@@ -38,6 +38,7 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
+import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 import kotlinx.coroutines.coroutineScope
@@ -96,6 +97,9 @@ private fun Toast(
     ) {
         val progress = remember { Animatable(0f) }
         LaunchedEffect(animateDuration) {
+            // Do not run animation when animations are turned off.
+            if (coroutineContext.durationScale == 0f) return@LaunchedEffect
+
             if (animateDuration == null) {
                 progress.stop()
             } else {
