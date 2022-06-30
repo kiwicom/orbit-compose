@@ -1,3 +1,5 @@
+// ktlint-disable filename
+
 package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.foundation.text.selection.TextSelectionColors

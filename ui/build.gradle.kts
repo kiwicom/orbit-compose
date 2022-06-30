@@ -50,7 +50,7 @@ android {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
-    disabledRules = arrayOf("experimental:trailing-comma") // https://github.com/pinterest/ktlint/issues/1367 ?
+    disabledRules = arrayOf("trailing-comma") // kotlinter/ktlint does not respect editorconfig
 }
 
 dependencies {
