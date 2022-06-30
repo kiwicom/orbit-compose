@@ -15,7 +15,7 @@ java {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
-    disabledRules = arrayOf("experimental:trailing-comma") // https://github.com/pinterest/ktlint/issues/1367 ?
+    disabledRules = arrayOf("trailing-comma") // kotlinter/ktlint does not respect editorconfig
 }
 
 dependencies {
@@ -27,16 +27,16 @@ dependencies {
 }
 
 tasks.register<JavaExec>("colors") {
-    mainClass.set("kiwi.orbit.compose.generator.colors.RunnerKt")
+    mainClass.set("kiwi.orbit.compose.generator.colors.MainKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }
 
 tasks.register<JavaExec>("icons") {
-    mainClass.set("kiwi.orbit.compose.generator.icons.RunnerKt")
+    mainClass.set("kiwi.orbit.compose.generator.icons.MainKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }
 
 tasks.register<JavaExec>("illustrations") {
-    mainClass.set("kiwi.orbit.compose.generator.illustrations.RunnerKt")
+    mainClass.set("kiwi.orbit.compose.generator.illustrations.MainKt")
     classpath = sourceSets.getByName("main").runtimeClasspath
 }

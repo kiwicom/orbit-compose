@@ -3,7 +3,7 @@
 compileSdk = "32"
 minSdk = "23"
 
-kotlin-lang = "1.6.21"
+kotlin-lang = "1.7.0"
 android-gradle-plugin = "7.2.0"
 maven-publish = "0.19.0"
 
@@ -14,7 +14,7 @@ androidx-core = "1.8.0"
 androidx-constraint-layout = "1.0.0"
 accompanist-main = "0.24.13-rc"
 coil = "2.0.0"
-compose-compiler = "1.2.0-rc02"
+compose-compiler = "1.2.0"
 compose-main = "1.2.0-rc03"
 compose-navigation = "2.5.0"
 square-kotlinPoet = "1.11.0"
@@ -56,5 +56,5 @@ square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-
 [bundles]
 
 [plugins]
-kotlinter = { id = "org.jmailen.kotlinter", version = "3.10.0" }
+kotlinter = { id = "org.jmailen.kotlinter", version = "3.11.1" }
 paparazzi = { id = "app.cash.paparazzi", version = "1.0.0" }
