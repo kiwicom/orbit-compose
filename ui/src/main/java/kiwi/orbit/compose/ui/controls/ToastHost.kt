@@ -89,10 +89,13 @@ public class ToastHostState {
                 launch {
                     animationDuration.collectLatest { duration ->
                         val animationScale = coroutineContext.durationScale
-                        // Do not run animation when animations are turned off.
-                        if (duration != null && animationScale != 0f) {
+                        if (duration != null) {
                             started = System.currentTimeMillis()
-                            val finalDuration = (duration.toLong() * animationScale).roundToLong()
+                            // When animations are turned off, simply show, wait and hide.
+                            val finalDuration = when (animationScale) {
+                                0f -> duration.toLong()
+                                else -> (duration.toLong() * animationScale).roundToLong()
+                            }
                             delay(finalDuration)
                             this@launch.cancel()
                         } else {
