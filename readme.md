@@ -26,4 +26,6 @@ implementation "kiwi.orbit.compose:icons:<version>"
 implementation "kiwi.orbit.compose:illustrations:<version>"
 ```
 
-[Design system showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) is published on Google Play.
+Documentation:
+- [Design system showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) is published on Google Play.
+- [API documentation](https://kiwicom.github.io/orbit-compose).

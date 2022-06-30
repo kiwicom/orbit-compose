@@ -3,17 +3,32 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
+import java.time.Year
 import java.util.Properties
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version libs.versions.kotlin.lang.get() apply false
+    kotlin("jvm") version libs.versions.kotlin.lang.get()
     kotlin("android") version libs.versions.kotlin.lang.get() apply false
     kotlin("plugin.serialization") version libs.versions.kotlin.lang.get() apply false
     id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
     alias(libs.plugins.kotlinter) apply false
     id("com.vanniktech.maven.publish.base") version libs.versions.maven.publish.get() apply false
     alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.dokka)
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.kotlin.dokka)
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 subprojects {
@@ -57,5 +72,22 @@ subprojects {
             signAllPublications()
             configure(AndroidSingleVariantLibrary())
         }
+    }
+
+    tasks.withType<DokkaTaskPartial>().configureEach {
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            customStyleSheets = listOf(file("dokka/orbit-style.css"))
+            customAssets = listOf(file("dokka/logo-icon.svg"))
+            footerMessage = "© ${Year.now().value} Kiwi.com"
+        }
+    }
+}
+
+tasks.dokkaHtmlMultiModule.configure {
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        moduleName.set("Orbit Compose")
+        customStyleSheets = listOf(file("dokka/orbit-style.css"))
+        customAssets = listOf(file("dokka/logo-icon.svg"))
+        footerMessage = "© ${Year.now().value} Kiwi.com"
     }
 }
