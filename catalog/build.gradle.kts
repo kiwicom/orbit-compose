@@ -67,7 +67,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.main.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     lint {
