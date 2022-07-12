@@ -1,25 +1,15 @@
 package kiwi.orbit.compose.ui.controls
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
-import kiwi.orbit.compose.ui.foundation.LocalColors
-import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
-import kiwi.orbit.compose.ui.foundation.asCriticalTheme
-import kiwi.orbit.compose.ui.foundation.asInfoTheme
-import kiwi.orbit.compose.ui.foundation.asSuccessTheme
-import kiwi.orbit.compose.ui.foundation.asWarningTheme
+import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 /**
  * Cloud colored Badge.
@@ -27,19 +17,16 @@ import kiwi.orbit.compose.ui.foundation.asWarningTheme
 @Composable
 public fun BadgeNeutral(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(main = surface.background),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.surface.background,
+        borderColor = OrbitTheme.colors.surface.strong,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -48,19 +35,16 @@ public fun BadgeNeutral(
 @Composable
 public fun BadgeNeutralSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(background = surface.main),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.surface.main,
+        borderColor = OrbitTheme.colors.surface.strong,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -69,22 +53,16 @@ public fun BadgeNeutralSubtle(
 @Composable
 public fun BadgeNeutralStrong(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            primary = primary.copy(
-                normal = this.content.normal,
-                onNormal = surface.main,
-            )
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        Badge(subtle = false, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.content.normal,
+        contentColor = OrbitTheme.colors.surface.main,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -93,14 +71,15 @@ public fun BadgeNeutralStrong(
 @Composable
 public fun BadgeInfo(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(),
-    ) {
-        Badge(subtle = false, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.info.normal,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -109,14 +88,16 @@ public fun BadgeInfo(
 @Composable
 public fun BadgeInfoSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(),
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.info.subtle,
+        borderColor = OrbitTheme.colors.info.subtleAlt,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -125,14 +106,15 @@ public fun BadgeInfoSubtle(
 @Composable
 public fun BadgeSuccess(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
-    ) {
-        Badge(subtle = false, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.success.normal,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -141,14 +123,16 @@ public fun BadgeSuccess(
 @Composable
 public fun BadgeSuccessSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.success.subtle,
+        borderColor = OrbitTheme.colors.success.subtleAlt,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -157,14 +141,15 @@ public fun BadgeSuccessSubtle(
 @Composable
 public fun BadgeWarning(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(),
-    ) {
-        Badge(subtle = false, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.warning.normal,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -173,14 +158,16 @@ public fun BadgeWarning(
 @Composable
 public fun BadgeWarningSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(),
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.warning.subtle,
+        borderColor = OrbitTheme.colors.warning.subtleAlt,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -189,14 +176,15 @@ public fun BadgeWarningSubtle(
 @Composable
 public fun BadgeCritical(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
-    ) {
-        Badge(subtle = false, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.critical.normal,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 /**
@@ -205,45 +193,65 @@ public fun BadgeCritical(
 @Composable
 public fun BadgeCriticalSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
-    ) {
-        Badge(subtle = true, modifier, icon, content)
-    }
+    BadgePrimitive(
+        backgroundColor = OrbitTheme.colors.critical.subtle,
+        borderColor = OrbitTheme.colors.critical.subtleAlt,
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
 }
 
 @Composable
-private fun Badge(
-    subtle: Boolean,
+public fun BadgeBundleBasic(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit) = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    ThemedSurface(
+    BadgePrimitive(
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.basicGradient,
+        contentColor = contentColorFor(OrbitTheme.colors.bundle.basicGradient),
         modifier = modifier,
-        subtle = subtle,
-        shape = RoundedCornerShape(percent = 50),
-        strokeWidth = BadgeStrokeWidth,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        contentPadding = BadgeContentPadding,
-    ) {
-        ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
-            icon?.invoke()
-            content()
-        }
-    }
+        icon = icon,
+        content = content,
+    )
 }
 
-internal val BadgeContentPadding = PaddingValues(
-    horizontal = 8.dp,
-    vertical = 4.dp,
-)
+@Composable
+public fun BadgeBundleMedium(
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit) = {},
+    content: @Composable RowScope.() -> Unit,
+) {
+    BadgePrimitive(
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.mediumGradient,
+        contentColor = contentColorFor(OrbitTheme.colors.bundle.mediumGradient),
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
+}
 
-internal val BadgeStrokeWidth = 0.5.dp
+@Composable
+public fun BadgeBundleTop(
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit) = {},
+    content: @Composable RowScope.() -> Unit,
+) {
+    BadgePrimitive(
+        backgroundColor = Color.Unspecified,
+        backgroundBrush = OrbitTheme.colors.bundle.topGradient,
+        contentColor = contentColorFor(OrbitTheme.colors.bundle.topGradient),
+        modifier = modifier,
+        icon = icon,
+        content = content,
+    )
+}
 
 @Preview
 @Composable
@@ -275,5 +283,20 @@ internal fun BadgePreview() {
         BadgeInfo(
             icon = { Icon(Icons.Android, contentDescription = null) }
         ) { Text("Text") }
+        BadgeBundleBasic(
+            icon = { Icon(Icons.Check, contentDescription = null) }
+        ) {
+            Text("Text")
+        }
+        BadgeBundleMedium(
+            icon = { Icon(Icons.Check, contentDescription = null) }
+        ) {
+            Text("Text")
+        }
+        BadgeBundleTop(
+            icon = { Icon(Icons.Check, contentDescription = null) }
+        ) {
+            Text("Text")
+        }
     }
 }
