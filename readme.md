@@ -1,7 +1,7 @@
 <div align="center">
 
-  <a href="https://orbit.kiwi" target="_blank">
-    <img alt="orbit-components" src="https://images.kiwi.com/common/orbit-logo-full.png" srcset="https://images.kiwi.com/common/orbit-logo-full@2x.png 2x" />
+<a href="https://orbit.kiwi" target="_blank">  
+    <img alt="orbit-components" src="https://images.kiwi.com/common/orbit-logo-full.png" srcset="https://images.kiwi.com/common/orbit-logo-full@2x.png 2x" />  
   </a>
 
 **Orbit Compose**
@@ -14,18 +14,100 @@
 
 </div>
 
-<br>
+## About Orbit
 
-[Orbit design system](https://orbit.kiwi) implemented in [Jetpack Compose](https://developer.android.com/jetpack/compose) for Android.
+[Orbit](https://orbit.kiwi) is an open-source design system that aims to bring order and consistency to
+Kiwi.com products as well as the processes behind building them. It elevates the user experience and increases
+the speed and efficiency of how we design and build products.
 
-We publish to [Maven Central](https://search.maven.org/search?q=g:kiwi.orbit.compose).
+This library allows developers to implement Orbit in a project
+using [Jetpack Compose](https://developer.android.com/jetpack/compose) for Android.
+
+## Setup
+
+We publish our releases in [Maven Central](https://search.maven.org/search?q=g:kiwi.orbit.compose). To use
+this library, you can add the following dependencies to your **Gradle file**:
 
 ```
-implementation "kiwi.orbit.compose:ui:<version>"
-implementation "kiwi.orbit.compose:icons:<version>"
-implementation "kiwi.orbit.compose:illustrations:<version>"
+implementation "kiwi.orbit.compose:ui:<version>"  
+implementation "kiwi.orbit.compose:icons:<version>"  
+implementation "kiwi.orbit.compose:illustrations:<version>"  
 ```
 
-Documentation:
-- [Design system showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) is published on Google Play.
-- [API documentation](https://kiwicom.github.io/orbit-compose).
+## How to use?
+
+In order to use one of Orbit's components, simply add them to your Composable function.
+
+```kotlin
+@Composable
+fun MyScreen() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.padding(16.dp)
+    ) {
+        val maxWidth = Modifier.fillMaxWidth()
+      
+        ButtonPrimary(onClick = {}, maxWidth) {
+            Text("This is an Orbit primary button")
+        }
+  
+        Spacer(modifier = Modifier.padding(4.dp))
+  
+        AlertCritical(
+            title = { Text("Alert title") },
+            content = { Text("Content description") },
+            actions = {
+                ButtonPrimary(onClick = {}) { Text("Primary") }
+                ButtonSecondary(onClick = {}) { Text("Secondary") }
+            },
+        )
+    }
+}
+```
+
+Colors, typography, and other foundational elements can be used by accessing the `OrbitTheme` object:
+
+```kotlin
+Text("Title 1", emphasis = ContentEmphasis.Minor)
+Text("Big title in Title 1 style", style = OrbitTheme.typography.title1)
+Text("Check your typography styles!", color = OrbitTheme.colors.warning.normal)
+```
+
+<table>
+<tr>
+<td>
+
+![Orbit Button and Alert component](./docs/readme/button_and_alert.png)
+
+<td>
+
+![Orbit typography and colors](./docs/readme/styled_text.png)
+
+</table>
+
+### Icons and Illustrations
+
+Icons and illustrations can be accessed in the same way, with the corresponding `Icons` and `Illustrations`
+objects:
+
+```kotlin
+Image(painter = Illustrations.AppKiwi, contentDescription = "app_kiwi")
+```
+
+## Documentation
+
+You can take a look at our component Catalog by downloading and installing
+our [showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) from Google
+Play.
+
+The [API documentation](https://kiwicom.github.io/orbit-compose/) lists
+all possible types and composables in our library.
+
+## Contributing
+
+Check our [contributing guidelines](./contributing.md) to see how you can participate in this project.
+
+## Feedback
+
+Any feedback you have for us is appreciated. If you have any suggestions about what we can do, do not hesitate
+to [report the issue](https://github.com/kiwicom/orbit-compose/issues) and we'll take a look at it.
