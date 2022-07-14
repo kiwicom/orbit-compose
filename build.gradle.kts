@@ -64,6 +64,7 @@ subprojects {
     }
 
     plugins.withId("com.vanniktech.maven.publish.base") {
+        @Suppress("UnstableApiUsage")
         configure<MavenPublishBaseExtension> {
             group = requireNotNull(project.findProperty("GROUP"))
             version = requireNotNull(project.findProperty("VERSION_NAME"))
