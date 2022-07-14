@@ -13,12 +13,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
@@ -30,13 +32,15 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 public fun Tag(
     modifier: Modifier = Modifier,
     selected: Boolean = false,
+    active: Boolean = false,
     onSelect: (() -> Unit)? = null,
     onRemove: (() -> Unit)? = null,
+    removeContentDescription: String = stringResource(R.string.orbit_cd_tag_remove),
     content: @Composable RowScope.() -> Unit,
 ) {
     val backgroundColor = when {
         selected -> OrbitTheme.colors.info.normal
-        onRemove != null -> OrbitTheme.colors.info.subtle
+        active -> OrbitTheme.colors.info.subtle
         else -> OrbitTheme.colors.surface.strong
     }
     val contentColor = contentColorFor(backgroundColor)
@@ -62,17 +66,11 @@ public fun Tag(
             content()
 
             if (onRemove != null) {
-                val iconColor = when (selected) {
-                    true -> OrbitTheme.colors.info.onNormal
-                    false -> OrbitTheme.colors.info.strong
-                }
                 IconButton(
                     onClick = onRemove,
-                    Modifier
-                        .padding(start = 8.dp)
-                        .size(16.dp),
+                    modifier = Modifier.padding(start = 8.dp).size(16.dp),
                 ) {
-                    Icon(Icons.CloseCircle, tint = iconColor, contentDescription = "Remove") // TODO: l10n
+                    Icon(Icons.CloseCircle, contentDescription = removeContentDescription)
                 }
             }
         }
@@ -85,30 +83,34 @@ internal fun TagPreview() {
     Preview {
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Tag {
-                Text("Prague")
+                Text("Simple")
             }
-            Tag(selected = false, onSelect = {}) {
-                Text("Prague")
+            Tag(active = true) {
+                Text("Active")
             }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Tag(selected = true) {
-                Text("Prague")
+                Text("Selected")
             }
-            Tag(selected = true, onSelect = {}) {
-                Text("Prague")
+            Tag(active = true, selected = true) {
+                Text("Active & Selected")
             }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Tag(onRemove = {}) {
-                Text("Prague")
+                Text("Simple")
             }
-            Tag(selected = false, onSelect = {}, onRemove = {}) {
-                Text("Prague")
+            Tag(active = true, onRemove = {}) {
+                Text("Active")
             }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Tag(selected = true, onRemove = {}) {
-                Text("Prague")
+                Text("Selected")
             }
-            Tag(selected = true, onSelect = {}, onRemove = {}) {
-                Text("Prague")
+            Tag(active = true, selected = true, onRemove = {}) {
+                Text("Active & Selected")
             }
         }
     }

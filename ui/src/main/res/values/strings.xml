@@ -3,6 +3,7 @@
     <string name="orbit_cd_navigate_up">Navigate up</string>
     <string name="orbit_cd_stepper_add">Add</string>
     <string name="orbit_cd_stepper_remove">Remove</string>
+    <string name="orbit_cd_tag_remove">Remove</string>
     <string name="orbit_cd_text_field_hide_password">Hide password</string>
     <string name="orbit_cd_text_field_show_password">Show password</string>
     <string name="orbit_seat_price_unavailable">-</string>
