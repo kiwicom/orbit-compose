@@ -1,30 +1,35 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Tag
 import kiwi.orbit.compose.ui.controls.Text
+import kiwi.orbit.compose.ui.controls.ToastHostState
 import kiwi.orbit.compose.ui.controls.TopAppBar
+import kotlinx.coroutines.launch
 
 @Composable
 fun TagScreen(onNavigateUp: () -> Unit) {
+    val toastHostState = remember { ToastHostState() }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -32,66 +37,96 @@ fun TagScreen(onNavigateUp: () -> Unit) {
                 onNavigateUp = onNavigateUp,
             )
         },
+        toastHostState = toastHostState,
     ) { contentPadding: PaddingValues ->
         Box(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
-            TagScreenInner()
+            TagScreenInner(toastHostState)
+        }
+    }
+}
+
+@Composable
+private fun TagScreenInner(toastHostState: ToastHostState) {
+    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        val scope = rememberCoroutineScope()
+        val onRemove: () -> Unit = {
+            scope.launch {
+                toastHostState.showToast("Tag removed.") { Icons.InformationCircle }
+            }
+        }
+
+        Text("Non-interactive", style = OrbitTheme.typography.title4)
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Tag {
+                Text("Simple")
+            }
+            Tag(active = true) {
+                Text("Active")
+            }
+            Tag(selected = true) {
+                Text("Selected")
+            }
+        }
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Tag(onRemove = onRemove) {
+                Text("Simple")
+            }
+            Tag(active = true, onRemove = onRemove) {
+                Text("Active")
+            }
+            Tag(selected = true, onRemove = onRemove) {
+                Text("Selected")
+            }
+        }
+
+        Text("Interactive", style = OrbitTheme.typography.title4)
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            var selected1 by remember { mutableStateOf(false) }
+            var selected2 by remember { mutableStateOf(false) }
+            var selected3 by remember { mutableStateOf(true) }
+            Tag(selected = selected1, onSelect = { selected1 = !selected1 }) {
+                Text("Simple")
+            }
+            Tag(active = true, selected = selected2, onSelect = { selected2 = !selected2 }) {
+                Text("Active")
+            }
+            Tag(selected = selected3, onSelect = { selected3 = !selected3 }) {
+                Text("Selected")
+            }
+        }
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            var selected1 by remember { mutableStateOf(false) }
+            var selected2 by remember { mutableStateOf(false) }
+            var selected3 by remember { mutableStateOf(true) }
+            Tag(selected = selected1, onSelect = { selected1 = !selected1 }, onRemove = onRemove) {
+                Text("Simple")
+            }
+            Tag(
+                active = true,
+                selected = selected2,
+                onSelect = { selected2 = !selected2 },
+                onRemove = onRemove,
+            ) {
+                Text("Active")
+            }
+            Tag(selected = selected3, onSelect = { selected3 = !selected3 }, onRemove = onRemove) {
+                Text("Selected")
+            }
         }
     }
 }
 
 @Preview
 @Composable
-private fun TagScreenInner() {
-    Column(Modifier.padding(16.dp)) {
-        Row {
-            Tag {
-                Text("Prague")
-            }
-            Spacer(Modifier.size(16.dp))
-            var selected by remember { mutableStateOf(false) }
-            Tag(selected = selected, onSelect = { selected = !selected }) {
-                Text("Prague")
-            }
-        }
-        Spacer(Modifier.size(16.dp))
-        Row {
-            Tag(selected = true) {
-                Text("Prague")
-            }
-            Spacer(Modifier.size(16.dp))
-            var selected by remember { mutableStateOf(true) }
-            Tag(selected = selected, onSelect = { selected = !selected }) {
-                Text("Prague")
-            }
-        }
-
-        Spacer(Modifier.size(32.dp))
-
-        Row {
-            Tag(onRemove = {}) {
-                Text("Prague")
-            }
-            Spacer(Modifier.size(16.dp))
-            var selected by remember { mutableStateOf(false) }
-            Tag(selected = selected, onSelect = { selected = !selected }, onRemove = {}) {
-                Text("Prague")
-            }
-        }
-        Spacer(Modifier.size(16.dp))
-        Row {
-            Tag(selected = true, onRemove = {}) {
-                Text("Prague")
-            }
-            Spacer(Modifier.size(16.dp))
-            var selected by remember { mutableStateOf(true) }
-            Tag(selected = selected, onSelect = { selected = !selected }, onRemove = {}) {
-                Text("Prague")
-            }
-        }
-    }
+private fun TagScreenPreview() {
+    TagScreen({})
 }
