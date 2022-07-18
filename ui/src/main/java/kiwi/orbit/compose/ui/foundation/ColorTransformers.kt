@@ -1,38 +1,49 @@
 package kiwi.orbit.compose.ui.foundation
 
-public fun Colors.asInfoTheme(suppressed: Boolean = false): Colors =
-    themeWith(info, suppressed)
-
-public fun Colors.asSuccessTheme(suppressed: Boolean = false): Colors =
-    themeWith(success, suppressed)
-
-public fun Colors.asWarningTheme(suppressed: Boolean = false): Colors =
-    themeWith(warning, suppressed)
-
-public fun Colors.asCriticalTheme(suppressed: Boolean = false): Colors =
-    themeWith(critical, suppressed)
-
-private fun Colors.themeWith(
-    featureColors: FeatureColors,
-    suppressed: Boolean = false,
-): Colors =
-    copy(
-        surface = if (!suppressed) {
-            SurfaceColors(
-                main = featureColors.subtleAlt,
-                background = featureColors.subtle,
-                subtle = featureColors.subtle,
-                strong = featureColors.subtleAlt,
-                disabled = surface.disabled,
-            )
-        } else {
-            surface
-        },
-        content = content.copy(
-            normal = if (!suppressed) featureColors.strong else content.normal,
-            highlight = content.normal,
+public fun Colors.asNeutralTheme(): Colors =
+    themeWith(
+        FeatureColors(
+            normal = content.normal,
+            normalAlt = content.normal,
+            subtle = surface.background,
+            subtleAlt = surface.strong,
+            strong = surface.background,
+            onNormal = surface.main,
+            onSubtle = content.normal,
+            onSubtleAlt = content.normal,
         ),
-        primary = featureColors.copy(
-            subtle = featureColors.subtleAlt,
+    )
+
+public fun Colors.asNeutralSubtleStrongTheme(): Colors =
+    themeWith(
+        FeatureColors(
+            normal = content.normal,
+            normalAlt = content.normal,
+            subtle = surface.main,
+            subtleAlt = surface.strong,
+            strong = surface.background,
+            onNormal = surface.main,
+            onSubtle = content.normal,
+            onSubtleAlt = content.normal,
+        ),
+    )
+
+public fun Colors.asInfoTheme(): Colors =
+    themeWith(info)
+
+public fun Colors.asSuccessTheme(): Colors =
+    themeWith(success)
+
+public fun Colors.asWarningTheme(): Colors =
+    themeWith(warning)
+
+public fun Colors.asCriticalTheme(): Colors =
+    themeWith(critical)
+
+private fun Colors.themeWith(colors: FeatureColors): Colors =
+    copy(
+        primary = colors,
+        content = content.copy(
+            highlight = content.normal, // neutralize as the background is already colored
         ),
     )

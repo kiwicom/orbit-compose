@@ -279,9 +279,6 @@ private fun BadgeScreenInner() {
             ) {
             }
         }
-
-        Spacer(modifier = Modifier.size(16.dp))
-
         BadgeRow("BadgeBundleMedium") {
             BadgeBundleMedium {
                 Text(text = "label")
@@ -296,9 +293,6 @@ private fun BadgeScreenInner() {
             ) {
             }
         }
-
-        Spacer(modifier = Modifier.size(16.dp))
-
         BadgeRow("BadgeBundleTop") {
             BadgeBundleTop {
                 Text(text = "label")

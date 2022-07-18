@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -44,7 +45,7 @@ public fun AlertInfo(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asInfoTheme(),
     ) {
         Alert(
             icon = icon,
@@ -52,6 +53,7 @@ public fun AlertInfo(
             modifier = modifier,
             actions = actions,
             content = content,
+            suppressed = suppressed,
         )
     }
 }
@@ -66,7 +68,7 @@ public fun AlertSuccess(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
     ) {
         Alert(
             icon = icon,
@@ -74,6 +76,7 @@ public fun AlertSuccess(
             modifier = modifier,
             actions = actions,
             content = content,
+            suppressed = suppressed,
         )
     }
 }
@@ -88,7 +91,7 @@ public fun AlertWarning(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(),
     ) {
         Alert(
             icon = icon,
@@ -96,6 +99,7 @@ public fun AlertWarning(
             modifier = modifier,
             actions = actions,
             content = content,
+            suppressed = suppressed,
         )
     }
 }
@@ -110,7 +114,7 @@ public fun AlertCritical(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
     ) {
         Alert(
             icon = icon,
@@ -118,6 +122,7 @@ public fun AlertCritical(
             modifier = modifier,
             actions = actions,
             content = content,
+            suppressed = suppressed,
         )
     }
 }
@@ -129,11 +134,29 @@ private fun Alert(
     modifier: Modifier = Modifier,
     actions: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
+    suppressed: Boolean,
 ) {
-    val bgColor = OrbitTheme.colors.surface.background
+    val bgColor = when (suppressed) {
+        true -> OrbitTheme.colors.surface.background
+        false -> OrbitTheme.colors.primary.subtle
+    }
     val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
     val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
+    val buttonColors = when (suppressed) {
+        true -> OrbitTheme.colors
+        false -> {
+            val primaryColors = OrbitTheme.colors.primary
+            OrbitTheme.colors.copy(
+                surface = OrbitTheme.colors.surface.copy(
+                    strong = primaryColors.subtleAlt,
+                ),
+                content = OrbitTheme.colors.content.copy(
+                    normal = primaryColors.onSubtleAlt,
+                ),
+            )
+        }
+    }
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -153,7 +176,7 @@ private fun Alert(
                 start = if (icon != null) 12.dp else 16.dp,
                 end = 16.dp,
                 bottom = 16.dp,
-            )
+            ),
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             if (icon != null) {
@@ -168,6 +191,7 @@ private fun Alert(
                 title = title,
                 actions = actions,
                 content = content,
+                buttonColors = buttonColors,
             )
         }
     }
@@ -178,6 +202,7 @@ private fun AlertContent(
     title: @Composable ColumnScope.() -> Unit,
     actions: (@Composable () -> Unit)?,
     content: @Composable ColumnScope.() -> Unit,
+    buttonColors: Colors,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CompositionLocalProvider(
@@ -188,7 +213,11 @@ private fun AlertContent(
             }
             content()
             if (actions != null) {
-                AlertButtons(Modifier.padding(top = 12.dp), actions) // 16.dp-4.dp
+                CompositionLocalProvider(
+                    LocalColors provides buttonColors,
+                ) {
+                    AlertButtons(Modifier.padding(top = 12.dp), actions) // 16.dp-4.dp
+                }
             }
         }
     }
@@ -240,12 +269,12 @@ internal fun AlertInfoPreview() {
                                 color = OrbitTheme.colors.content.highlight,
                                 fontWeight = FontWeight.Medium,
                                 textDecoration = TextDecoration.Underline,
-                            )
+                            ),
                         ) {
                             append("Some link")
                         }
                         append(".")
-                    }
+                    },
                 )
             },
             actions = {
