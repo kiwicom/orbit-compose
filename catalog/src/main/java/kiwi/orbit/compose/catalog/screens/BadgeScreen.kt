@@ -13,11 +13,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.BadgeBundleBasic
+import kiwi.orbit.compose.ui.controls.BadgeBundleMedium
+import kiwi.orbit.compose.ui.controls.BadgeBundleTop
 import kiwi.orbit.compose.ui.controls.BadgeCircleCritical
 import kiwi.orbit.compose.ui.controls.BadgeCircleCriticalSubtle
 import kiwi.orbit.compose.ui.controls.BadgeCircleInfo
@@ -36,6 +40,7 @@ import kiwi.orbit.compose.ui.controls.BadgeInfoSubtle
 import kiwi.orbit.compose.ui.controls.BadgeNeutral
 import kiwi.orbit.compose.ui.controls.BadgeNeutralStrong
 import kiwi.orbit.compose.ui.controls.BadgeNeutralSubtle
+import kiwi.orbit.compose.ui.controls.BadgePrimitive
 import kiwi.orbit.compose.ui.controls.BadgeSuccess
 import kiwi.orbit.compose.ui.controls.BadgeSuccessSubtle
 import kiwi.orbit.compose.ui.controls.BadgeWarning
@@ -260,6 +265,70 @@ private fun BadgeScreenInner() {
 
         Spacer(modifier = Modifier.size(16.dp))
 
+        BadgeRow("BadgeBundleBasic") {
+            BadgeBundleBasic {
+                Text(text = "label")
+            }
+            BadgeBundleBasic(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeBundleBasic(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+            }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow("BadgeBundleMedium") {
+            BadgeBundleMedium {
+                Text(text = "label")
+            }
+            BadgeBundleMedium(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeBundleMedium(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+            }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow("BadgeBundleTop") {
+            BadgeBundleTop {
+                Text(text = "label")
+            }
+            BadgeBundleTop(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+                Text(text = "label")
+            }
+            BadgeBundleTop(
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+            ) {
+            }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        BadgeRow("Custom themed") {
+            BadgePrimitive(
+                backgroundColor = OrbitTheme.colors.info.subtle,
+                borderColor = OrbitTheme.colors.info.strong,
+                contentColor = OrbitTheme.colors.content.normal,
+                icon = { Icon(painter = Icons.Close, contentDescription = null) }
+            ) {
+                Text(text = "Custom badge")
+            }
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
         Text(
             text = "BadgeCircle",
             style = OrbitTheme.typography.title3,
@@ -349,7 +418,8 @@ private fun BadgeRow(
     content: @Composable RowScope.() -> Unit,
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         content()
         Text(
