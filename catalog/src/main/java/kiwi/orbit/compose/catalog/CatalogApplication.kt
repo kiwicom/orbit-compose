@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -11,21 +12,23 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun CatalogApplication() {
-    var isLightTheme by remember { mutableStateOf(true) }
     val systemUiController = rememberSystemUiController()
+
+    var isLightTheme by remember { mutableStateOf<Boolean?>(null) }
+    val isLightThemeFinal = isLightTheme ?: !isSystemInDarkTheme()
 
     SideEffect {
         systemUiController.setSystemBarsColor(
             color = Color.Transparent,
-            darkIcons = isLightTheme,
+            darkIcons = isLightThemeFinal,
         )
     }
 
-    AppTheme(isLightTheme = isLightTheme) {
+    AppTheme(isLightTheme = isLightThemeFinal) {
         NavGraph(
             onToggleTheme = {
-                isLightTheme = !isLightTheme
-            }
+                isLightTheme = !isLightThemeFinal
+            },
         )
     }
 }
