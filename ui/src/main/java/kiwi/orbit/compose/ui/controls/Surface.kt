@@ -8,6 +8,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.ElevationOverlay
+import androidx.compose.material.LocalAbsoluteElevation
+import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -33,20 +36,33 @@ public fun Surface(
     contentColor: Color = contentColorFor(color),
     border: BorderStroke? = null,
     elevation: Dp = OrbitTheme.elevations.None,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    Surface(
-        modifier = modifier,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        border = border,
-        elevation = elevation,
-        content = content,
-        clickAndSemanticsModifier = Modifier
-            .semantics(mergeDescendants = false) {}
-            .pointerInput(Unit) { }
-    )
+    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalAbsoluteElevation provides absoluteElevation,
+        LocalAbsoluteElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier = modifier
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .semantics(mergeDescendants = false) {}
+                .pointerInput(Unit) {},
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
 }
 
 @Composable
@@ -63,51 +79,62 @@ public fun Surface(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    Surface(
-        modifier = modifier,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        border = border,
-        elevation = elevation,
-        content = content,
-        clickAndSemanticsModifier = Modifier.clickable(
-            interactionSource = interactionSource,
-            indication = indication,
-            enabled = enabled,
-            onClickLabel = onClickLabel,
-            role = role,
-            onClick = onClick
-        )
-    )
-}
-
-@Composable
-private fun Surface(
-    modifier: Modifier,
-    shape: Shape,
-    color: Color,
-    contentColor: Color,
-    border: BorderStroke?,
-    elevation: Dp,
-    clickAndSemanticsModifier: Modifier,
-    content: @Composable () -> Unit
-) {
+    val absoluteElevation = LocalAbsoluteElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
+        LocalAbsoluteElevation provides absoluteElevation,
     ) {
         Box(
             modifier
-                .shadow(elevation, shape, clip = false)
-                .clip(shape)
-                .then(clickAndSemanticsModifier)
-                .then(if (border != null) Modifier.border(border, shape) else Modifier)
-                .background(color, shape),
-            propagateMinConstraints = true
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .then(
+                    Modifier.clickable(
+                        interactionSource = interactionSource,
+                        indication = indication,
+                        enabled = enabled,
+                        onClickLabel = onClickLabel,
+                        role = role,
+                        onClick = onClick,
+                    ),
+                ),
+            propagateMinConstraints = true,
         ) {
             content()
         }
+    }
+}
+
+private fun Modifier.surface(
+    shape: Shape,
+    backgroundColor: Color,
+    border: BorderStroke?,
+    elevation: Dp,
+): Modifier = this
+    .shadow(elevation, shape, clip = false)
+    .then(if (border != null) Modifier.border(border, shape) else Modifier)
+    .background(color = backgroundColor, shape = shape)
+    .clip(shape)
+
+@Composable
+private fun surfaceColorAtElevation(
+    color: Color,
+    elevationOverlay: ElevationOverlay?,
+    absoluteElevation: Dp,
+): Color {
+    return if (color == OrbitTheme.colors.surface.main && elevationOverlay != null) {
+        elevationOverlay.apply(color, absoluteElevation)
+    } else {
+        color
     }
 }

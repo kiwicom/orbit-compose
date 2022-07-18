@@ -27,11 +27,11 @@ public fun darkColors(
 )
 
 public fun darkSurfaceColors(
-    main: Color = ColorTokens.CloudLight.invert(),
-    background: Color = ColorTokens.White.invert(),
-    subtle: Color = ColorTokens.CloudNormal.invert(),
-    strong: Color = ColorTokens.CloudDark.invert(),
-    disabled: Color = ColorTokens.CloudDarker.invert(),
+    main: Color = Color(0xFF111927),
+    background: Color = Color(0xFF111927),
+    subtle: Color = Color(0xFF303846),
+    strong: Color = Color(0xFF343b42),
+    disabled: Color = Color(0x885E6674),
 ): SurfaceColors = SurfaceColors(
     main = main,
     background = background,
@@ -41,9 +41,9 @@ public fun darkSurfaceColors(
 )
 
 public fun darkContentColors(
-    normal: Color = ColorTokens.InkNormal.invert(),
-    minor: Color = ColorTokens.InkLight.invert(),
-    subtle: Color = ColorTokens.InkLighter.invert(),
+    normal: Color = Color(0xFFFFFFFF),
+    minor: Color = Color(0xFFBAC7D5),
+    subtle: Color = Color(0xFFA1AEBC),
     highlight: Color = ColorTokens.ProductNormal,
     disabled: Color = ColorTokens.CloudDarkerHover.invert(),
 ): ContentColors = ContentColors(
@@ -55,10 +55,10 @@ public fun darkContentColors(
 )
 
 public fun darkPrimaryColors(
-    normal: Color = ColorTokens.ProductDark,
+    normal: Color = Color(0xFF00CBAE),
     normalAlt: Color = ColorTokens.ProductDarkHover,
-    subtle: Color = ColorTokens.ProductLight.invert(),
-    subtleAlt: Color = ColorTokens.ProductLightHover.invert(),
+    subtle: Color = Color(0xFF0A4038),
+    subtleAlt: Color = Color(0xFF09332D),
     strong: Color = ColorTokens.ProductNormal,
     onNormal: Color = ColorTokens.White.invert(),
     onSubtle: Color = ColorTokens.White,
@@ -75,10 +75,10 @@ public fun darkPrimaryColors(
 )
 
 public fun darkInfoColors(
-    normal: Color = ColorTokens.BlueDark,
+    normal: Color = Color(0xFF2AA0FE),
     normalAlt: Color = ColorTokens.BlueDarkHover,
-    subtle: Color = ColorTokens.BlueLight.invert(),
-    subtleAlt: Color = ColorTokens.BlueLightHover.invert(),
+    subtle: Color = Color(0xFF21425F),
+    subtleAlt: Color = Color(0xFF3B5C79),
     strong: Color = ColorTokens.BlueNormal,
     onNormal: Color = ColorTokens.White.invert(),
     onSubtle: Color = ColorTokens.White,
@@ -95,10 +95,10 @@ public fun darkInfoColors(
 )
 
 public fun darkSuccessColors(
-    normal: Color = ColorTokens.GreenDark,
+    normal: Color = Color(0xFF3BCE4E),
     normalAlt: Color = ColorTokens.GreenDarkHover,
-    subtle: Color = ColorTokens.GreenLight.invert(),
-    subtleAlt: Color = ColorTokens.GreenLightHover.invert(),
+    subtle: Color = Color(0xFF254B3C),
+    subtleAlt: Color = Color(0xFF3F6556),
     strong: Color = ColorTokens.GreenNormal,
     onNormal: Color = ColorTokens.White.invert(),
     onSubtle: Color = ColorTokens.White,
@@ -115,10 +115,10 @@ public fun darkSuccessColors(
 )
 
 public fun darkWarningColors(
-    normal: Color = ColorTokens.OrangeDark,
+    normal: Color = Color(0xFFFBA132),
     normalAlt: Color = ColorTokens.OrangeDarkHover,
-    subtle: Color = ColorTokens.OrangeLight.invert(),
-    subtleAlt: Color = ColorTokens.OrangeLightHover.invert(),
+    subtle: Color = Color(0xFF4B4236),
+    subtleAlt: Color = Color(0xFF655C50),
     strong: Color = ColorTokens.OrangeNormal,
     onNormal: Color = ColorTokens.White.invert(),
     onSubtle: Color = ColorTokens.White,
@@ -135,10 +135,10 @@ public fun darkWarningColors(
 )
 
 public fun darkCriticalColors(
-    normal: Color = ColorTokens.RedDark,
+    normal: Color = Color(0xFFFF5050),
     normalAlt: Color = ColorTokens.RedDarkHover,
-    subtle: Color = ColorTokens.RedLight.invert(),
-    subtleAlt: Color = ColorTokens.RedLightHover.invert(),
+    subtle: Color = Color(0xFF4C323C),
+    subtleAlt: Color = Color(0xFF664C56),
     strong: Color = ColorTokens.RedNormal,
     onNormal: Color = ColorTokens.White.invert(),
     onSubtle: Color = ColorTokens.White,
@@ -157,22 +157,22 @@ public fun darkCriticalColors(
 public fun darkBundleColors(
     basic: Color = ColorTokens.BundleBasic.invert(),
     basicGradient: Brush = bundleLinearGradient(
-        ColorTokens.BundleBasicStart.invert(),
-        ColorTokens.BundleBasicEnd.invert()
+        ColorTokens.BundleBasicStart,
+        ColorTokens.BundleBasicEnd,
     ),
     medium: Color = ColorTokens.BundleMedium.invert(),
     mediumGradient: Brush = bundleLinearGradient(
-        ColorTokens.BundleMediumStart.invert(),
-        ColorTokens.BundleMediumEnd.invert()
+        ColorTokens.BundleMediumStart,
+        ColorTokens.BundleMediumEnd,
     ),
     top: Color = ColorTokens.InkNormal.invert(),
     topGradient: Brush = bundleLinearGradient(
-        ColorTokens.BundleTopStart.invert(),
-        ColorTokens.BundleTopEnd.invert()
+        ColorTokens.BundleTopStart,
+        ColorTokens.BundleTopEnd,
     ),
-    onBasic: Color = ColorTokens.White.invert(),
-    onMedium: Color = ColorTokens.White.invert(),
-    onTop: Color = ColorTokens.White.invert(),
+    onBasic: Color = ColorTokens.White,
+    onMedium: Color = ColorTokens.White,
+    onTop: Color = ColorTokens.White,
 ): BundleColors = BundleColors(
     basic = basic,
     basicGradient = basicGradient,
