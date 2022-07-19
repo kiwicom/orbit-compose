@@ -1,19 +1,3 @@
-/*
- * Copyright 2022 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package kiwi.orbit.compose.detectors
 
 import com.android.tools.lint.client.api.UElementHandler
@@ -28,12 +12,8 @@ import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UQualifiedReferenceExpression
 
-/**
- * A detector that checks for incorrect usages of Compose Material APIs over equivalents in
- * the Now in Android design system module.
- */
 @Suppress("UnstableApiUsage")
-class KiwiDesignSystemDetector : Detector(), Detector.UastScanner {
+class OrbitComposeDesignDetector : Detector(), Detector.UastScanner {
 
     override fun getApplicableUastTypes(): List<Class<out UElement>> {
         return listOf(
@@ -52,9 +32,6 @@ class KiwiDesignSystemDetector : Detector(), Detector.UastScanner {
 
             override fun visitQualifiedReferenceExpression(node: UQualifiedReferenceExpression) {
                 return
-//                val name = node.receiver.asRenderString()
-//                val preferredName = RECEIVER_NAMES[name] ?: return
-//                reportIssue(context, node, name, preferredName)
             }
         }
     }
@@ -62,24 +39,24 @@ class KiwiDesignSystemDetector : Detector(), Detector.UastScanner {
     companion object {
         @JvmField
         val ISSUE: Issue = Issue.create(
-            id = "KiwiDesignSystem",
-            briefDescription = "Kiwi Design system",
+            id = "OrbitComposeDesignSystem",
+            briefDescription = "Usage of Material UI instead of Orbit Compose UI",
             explanation = "This check highlights calls in code that use Compose Material " +
-                    "composables instead of equivalents from the Kiwi design system " +
+                    "composables instead of equivalents from the Orbit design system " +
                     "module.",
             category = Category.CUSTOM_LINT_CHECKS,
             priority = 4,
             severity = Severity.WARNING,
             implementation = Implementation(
-                KiwiDesignSystemDetector::class.java,
+                OrbitComposeDesignDetector::class.java,
                 Scope.JAVA_FILE_SCOPE
             )
         )
 
         val METHOD_NAMES = mapOf(
-            "MaterialTheme" to "OrbitTheme",
-            "Button" to "NiaFilledButton",
-            "OutlinedButton" to "NiaOutlinedButton",
+            "androidx.compose.material.MaterialTheme" to "OrbitThemee",
+            "androidx.compose.material.Card" to "Card",
+            "androidx.compose.material.Scaffold" to "NiaOutlinedButton",
             "TextButton" to "NiaTextButton",
 //            "FilterChip" to "NiaFilterChip",
 //            "ElevatedFilterChip" to "NiaFilterChip",

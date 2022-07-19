@@ -112,4 +112,7 @@ dependencies {
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.customView)
     debugImplementation(libs.androidx.customViewPoolingContainer)
+
+    implementation(project(":lint"))
+    lintPublish(project(":lint"))
 }

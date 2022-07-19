@@ -14,6 +14,6 @@ dependencies {
 
     compileOnly("com.android.tools.lint:lint-api:30.4.0-alpha08")
 
-//    testImplementation "com.android.tools.lint:lint-tests:$lint_version"
-//    testImplementation 'junit:junit:4.13.2'
+    testImplementation("com.android.tools.lint:lint-tests:30.4.0-alpha08")
+    testImplementation("junit:junit:4.13.2")
 }
