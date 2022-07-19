@@ -15,10 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInfoTheme
+import kiwi.orbit.compose.ui.foundation.asNeutralSubtleStrongTheme
+import kiwi.orbit.compose.ui.foundation.asNeutralTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
 
@@ -30,16 +33,7 @@ public fun BadgeCircleNeutral(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(main = surface.background),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asNeutralTheme(), subtle = true, value, modifier)
 }
 
 /**
@@ -50,16 +44,7 @@ public fun BadgeCircleNeutralSubtle(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            surface = surface.copy(background = surface.main),
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asNeutralSubtleStrongTheme(), subtle = true, value, modifier)
 }
 
 /**
@@ -70,19 +55,7 @@ public fun BadgeCircleNeutralStrong(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    val colors = with(OrbitTheme.colors) {
-        copy(
-            primary = primary.copy(
-                normal = this.content.normal,
-                onNormal = surface.main,
-            )
-        )
-    }
-    CompositionLocalProvider(
-        LocalColors provides colors,
-    ) {
-        BadgeCircle(subtle = false, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asNeutralSubtleStrongTheme(), subtle = false, value, modifier)
 }
 
 /**
@@ -93,11 +66,7 @@ public fun BadgeCircleInfo(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(),
-    ) {
-        BadgeCircle(subtle = false, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asInfoTheme(), subtle = false, value, modifier)
 }
 
 /**
@@ -108,11 +77,7 @@ public fun BadgeCircleInfoSubtle(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(),
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asInfoTheme(), subtle = true, value, modifier)
 }
 
 /**
@@ -123,11 +88,7 @@ public fun BadgeCircleSuccess(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
-    ) {
-        BadgeCircle(subtle = false, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asSuccessTheme(), subtle = false, value, modifier)
 }
 
 /**
@@ -138,11 +99,7 @@ public fun BadgeCircleSuccessSubtle(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asSuccessTheme(), subtle = true, value, modifier)
 }
 
 /**
@@ -153,11 +110,7 @@ public fun BadgeCircleWarning(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(),
-    ) {
-        BadgeCircle(subtle = false, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asWarningTheme(), subtle = false, value, modifier)
 }
 
 /**
@@ -168,11 +121,7 @@ public fun BadgeCircleWarningSubtle(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(),
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asWarningTheme(), subtle = true, value, modifier)
 }
 
 /**
@@ -183,11 +132,7 @@ public fun BadgeCircleCritical(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
-    ) {
-        BadgeCircle(subtle = false, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asCriticalTheme(), subtle = false, value, modifier)
 }
 
 /**
@@ -198,15 +143,12 @@ public fun BadgeCircleCriticalSubtle(
     value: Int,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
-    ) {
-        BadgeCircle(subtle = true, value, modifier)
-    }
+    BadgeCircle(OrbitTheme.colors.asCriticalTheme(), subtle = true, value, modifier)
 }
 
 @Composable
 private fun BadgeCircle(
+    colors: Colors,
     subtle: Boolean,
     value: Int,
     modifier: Modifier,
@@ -216,18 +158,22 @@ private fun BadgeCircle(
             BadgeContentPadding.calculateTopPadding() +
             BadgeContentPadding.calculateBottomPadding()
     }
-    ThemedSurface(
-        modifier = modifier
-            .requiredHeight(height)
-            .requiredWidth(height),
-        subtle = subtle,
-        shape = CircleShape,
-        strokeWidth = BadgeStrokeWidth,
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
+    CompositionLocalProvider(
+        LocalColors provides colors,
     ) {
-        ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
-            Text(text = value.toString(), maxLines = 1, overflow = TextOverflow.Visible)
+        ThemedSurface(
+            modifier = modifier
+                .requiredHeight(height)
+                .requiredWidth(height),
+            subtle = subtle,
+            shape = CircleShape,
+            borderStrokeWidth = BadgeStrokeWidth,
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
+                Text(text = value.toString(), maxLines = 1, overflow = TextOverflow.Visible)
+            }
         }
     }
 }

@@ -15,13 +15,16 @@ import kiwi.orbit.compose.ui.foundation.lightColors
 @Composable
 fun AppTheme(
     isLightTheme: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
     val fontFamily = remember { createFontFamily(context) }
     OrbitTheme(
         typography = Typography(defaultFontFamily = fontFamily),
-        colors = if (isLightTheme) lightColors() else darkColors(),
+        colors = when (isLightTheme) {
+            true -> lightColors()
+            false -> darkColors()
+        },
     ) {
         content()
     }

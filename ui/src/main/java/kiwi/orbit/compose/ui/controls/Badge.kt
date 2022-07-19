@@ -3,12 +3,22 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.Colors
+import kiwi.orbit.compose.ui.foundation.LocalColors
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.foundation.asCriticalTheme
+import kiwi.orbit.compose.ui.foundation.asInfoTheme
+import kiwi.orbit.compose.ui.foundation.asNeutralSubtleStrongTheme
+import kiwi.orbit.compose.ui.foundation.asNeutralTheme
+import kiwi.orbit.compose.ui.foundation.asSuccessTheme
+import kiwi.orbit.compose.ui.foundation.asWarningTheme
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 /**
@@ -17,16 +27,10 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 @Composable
 public fun BadgeNeutral(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.surface.background,
-        borderColor = OrbitTheme.colors.surface.strong,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asNeutralTheme(), subtle = true, modifier, icon, content)
 }
 
 /**
@@ -35,16 +39,10 @@ public fun BadgeNeutral(
 @Composable
 public fun BadgeNeutralSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.surface.main,
-        borderColor = OrbitTheme.colors.surface.strong,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = true, modifier, icon, content)
 }
 
 /**
@@ -53,16 +51,10 @@ public fun BadgeNeutralSubtle(
 @Composable
 public fun BadgeNeutralStrong(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.content.normal,
-        contentColor = OrbitTheme.colors.surface.main,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = false, modifier, icon, content)
 }
 
 /**
@@ -71,15 +63,10 @@ public fun BadgeNeutralStrong(
 @Composable
 public fun BadgeInfo(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.info.normal,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asInfoTheme(), subtle = false, modifier, icon, content)
 }
 
 /**
@@ -88,16 +75,10 @@ public fun BadgeInfo(
 @Composable
 public fun BadgeInfoSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.info.subtle,
-        borderColor = OrbitTheme.colors.info.subtleAlt,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asInfoTheme(), subtle = true, modifier, icon, content)
 }
 
 /**
@@ -106,15 +87,10 @@ public fun BadgeInfoSubtle(
 @Composable
 public fun BadgeSuccess(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.success.normal,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asSuccessTheme(), subtle = false, modifier, icon, content)
 }
 
 /**
@@ -123,16 +99,10 @@ public fun BadgeSuccess(
 @Composable
 public fun BadgeSuccessSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.success.subtle,
-        borderColor = OrbitTheme.colors.success.subtleAlt,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asSuccessTheme(), subtle = true, modifier, icon, content)
 }
 
 /**
@@ -141,15 +111,10 @@ public fun BadgeSuccessSubtle(
 @Composable
 public fun BadgeWarning(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.warning.normal,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asWarningTheme(), subtle = false, modifier, icon, content)
 }
 
 /**
@@ -158,16 +123,10 @@ public fun BadgeWarning(
 @Composable
 public fun BadgeWarningSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.warning.subtle,
-        borderColor = OrbitTheme.colors.warning.subtleAlt,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asWarningTheme(), subtle = true, modifier, icon, content)
 }
 
 /**
@@ -176,15 +135,10 @@ public fun BadgeWarningSubtle(
 @Composable
 public fun BadgeCritical(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.critical.normal,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asCriticalTheme(), subtle = false, modifier, icon, content)
 }
 
 /**
@@ -193,22 +147,16 @@ public fun BadgeCritical(
 @Composable
 public fun BadgeCriticalSubtle(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    BadgePrimitive(
-        backgroundColor = OrbitTheme.colors.critical.subtle,
-        borderColor = OrbitTheme.colors.critical.subtleAlt,
-        modifier = modifier,
-        icon = icon,
-        content = content,
-    )
+    Badge(LocalColors.current.asCriticalTheme(), subtle = true, modifier, icon, content)
 }
 
 @Composable
 public fun BadgeBundleBasic(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
     BadgePrimitive(
@@ -224,7 +172,7 @@ public fun BadgeBundleBasic(
 @Composable
 public fun BadgeBundleMedium(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
     BadgePrimitive(
@@ -240,7 +188,7 @@ public fun BadgeBundleMedium(
 @Composable
 public fun BadgeBundleTop(
     modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit) = {},
+    icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
     BadgePrimitive(
@@ -251,6 +199,33 @@ public fun BadgeBundleTop(
         icon = icon,
         content = content,
     )
+}
+
+@Composable
+private fun Badge(
+    colors: Colors,
+    subtle: Boolean,
+    modifier: Modifier,
+    icon: @Composable RowScope.() -> Unit,
+    content: @Composable RowScope.() -> Unit,
+) {
+    CompositionLocalProvider(LocalColors provides colors) {
+        ThemedSurface(
+            subtle = subtle,
+            shape = BadgeShape,
+            modifier = modifier,
+            borderStrokeWidth = BadgeStrokeWidth,
+            contentPadding = BadgeContentPadding,
+            horizontalArrangement = BadgeArrangement,
+            verticalAlignment = BadgeAlignment,
+            content = {
+                ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
+                    icon()
+                    content()
+                }
+            },
+        )
+    }
 }
 
 @Preview
@@ -278,23 +253,23 @@ internal fun BadgePreview() {
             BadgeNeutralSubtle { Text("Text") }
         }
         BadgeNeutral(
-            icon = { Icon(Icons.Android, contentDescription = null) }
+            icon = { Icon(Icons.Android, contentDescription = null) },
         ) { Text("Text") }
         BadgeInfo(
-            icon = { Icon(Icons.Android, contentDescription = null) }
+            icon = { Icon(Icons.Android, contentDescription = null) },
         ) { Text("Text") }
         BadgeBundleBasic(
-            icon = { Icon(Icons.Check, contentDescription = null) }
+            icon = { Icon(Icons.Check, contentDescription = null) },
         ) {
             Text("Text")
         }
         BadgeBundleMedium(
-            icon = { Icon(Icons.Check, contentDescription = null) }
+            icon = { Icon(Icons.Check, contentDescription = null) },
         ) {
             Text("Text")
         }
         BadgeBundleTop(
-            icon = { Icon(Icons.Check, contentDescription = null) }
+            icon = { Icon(Icons.Check, contentDescription = null) },
         ) {
             Text("Text")
         }

@@ -5,6 +5,7 @@ package kiwi.orbit.compose.ui.foundation
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
@@ -54,8 +55,8 @@ private fun FeatureColors.contentColorFor(color: Color): Color? =
         normal -> onNormal
         normalAlt -> onNormal
         strong -> onNormal
-        subtle -> strong
-        subtleAlt -> normalAlt
+        subtle -> onSubtle
+        subtleAlt -> onSubtleAlt
         else -> null
     }
 
@@ -67,10 +68,12 @@ private fun BundleColors.contentColorFor(color: Color): Color? =
         else -> null
     }
 
+@ReadOnlyComposable
 @Composable
 public fun contentColorFor(backgroundColor: Color): Color =
     OrbitTheme.colors.contentColorFor(backgroundColor).takeOrElse { LocalContentColor.current }
 
+@ReadOnlyComposable
 @Composable
 public fun contentColorFor(backgroundColor: Brush): Color =
     OrbitTheme.colors.contentColorFor(backgroundColor).takeOrElse { LocalContentColor.current }

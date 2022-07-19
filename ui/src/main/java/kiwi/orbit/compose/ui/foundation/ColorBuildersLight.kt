@@ -60,6 +60,8 @@ public fun lightPrimaryColors(
     subtleAlt: Color = ColorTokens.ProductLightHover,
     strong: Color = ColorTokens.ProductDark,
     onNormal: Color = ColorTokens.White,
+    onSubtle: Color = ColorTokens.ProductDark,
+    onSubtleAlt: Color = ColorTokens.ProductDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -67,6 +69,8 @@ public fun lightPrimaryColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightInfoColors(
@@ -76,6 +80,8 @@ public fun lightInfoColors(
     subtleAlt: Color = ColorTokens.BlueLightHover,
     strong: Color = ColorTokens.BlueDark,
     onNormal: Color = ColorTokens.White,
+    onSubtle: Color = ColorTokens.BlueDark,
+    onSubtleAlt: Color = ColorTokens.BlueDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -83,6 +89,8 @@ public fun lightInfoColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightSuccessColors(
@@ -92,6 +100,8 @@ public fun lightSuccessColors(
     subtleAlt: Color = ColorTokens.GreenLightHover,
     strong: Color = ColorTokens.GreenDark,
     onNormal: Color = ColorTokens.White,
+    onSubtle: Color = ColorTokens.GreenDark,
+    onSubtleAlt: Color = ColorTokens.GreenDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -99,6 +109,8 @@ public fun lightSuccessColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightWarningColors(
@@ -108,6 +120,8 @@ public fun lightWarningColors(
     subtleAlt: Color = ColorTokens.OrangeLightHover,
     strong: Color = ColorTokens.OrangeDark,
     onNormal: Color = ColorTokens.White,
+    onSubtle: Color = ColorTokens.OrangeDark,
+    onSubtleAlt: Color = ColorTokens.OrangeDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -115,6 +129,8 @@ public fun lightWarningColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightCriticalColors(
@@ -124,6 +140,8 @@ public fun lightCriticalColors(
     subtleAlt: Color = ColorTokens.RedLightHover,
     strong: Color = ColorTokens.RedDark,
     onNormal: Color = ColorTokens.White,
+    onSubtle: Color = ColorTokens.RedDark,
+    onSubtleAlt: Color = ColorTokens.RedDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
@@ -131,6 +149,8 @@ public fun lightCriticalColors(
     subtleAlt = subtleAlt,
     strong = strong,
     onNormal = onNormal,
+    onSubtle = onSubtle,
+    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightBundleColors(

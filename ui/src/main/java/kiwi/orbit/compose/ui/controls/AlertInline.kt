@@ -39,7 +39,7 @@ public fun AlertInlineInfo(
     icon: Painter? = Icons.InformationCircle,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asInfoTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asInfoTheme(),
     ) {
         AlertInline(
             icon = icon,
@@ -47,6 +47,7 @@ public fun AlertInlineInfo(
             action = action,
             onActionClick = onActionClick,
             modifier = modifier,
+            suppressed = suppressed,
         )
     }
 }
@@ -61,7 +62,7 @@ public fun AlertInlineSuccess(
     icon: Painter? = Icons.CheckCircle,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asSuccessTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asSuccessTheme(),
     ) {
         AlertInline(
             icon = icon,
@@ -69,6 +70,7 @@ public fun AlertInlineSuccess(
             action = action,
             onActionClick = onActionClick,
             modifier = modifier,
+            suppressed = suppressed,
         )
     }
 }
@@ -83,7 +85,7 @@ public fun AlertInlineWarning(
     icon: Painter? = Icons.AlertCircle,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asWarningTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asWarningTheme(),
     ) {
         AlertInline(
             icon = icon,
@@ -91,6 +93,7 @@ public fun AlertInlineWarning(
             action = action,
             onActionClick = onActionClick,
             modifier = modifier,
+            suppressed = suppressed,
         )
     }
 }
@@ -105,7 +108,7 @@ public fun AlertInlineCritical(
     icon: Painter? = Icons.AlertOctagon,
 ) {
     CompositionLocalProvider(
-        LocalColors provides OrbitTheme.colors.asCriticalTheme(suppressed),
+        LocalColors provides OrbitTheme.colors.asCriticalTheme(),
     ) {
         AlertInline(
             icon = icon,
@@ -113,6 +116,7 @@ public fun AlertInlineCritical(
             action = action,
             onActionClick = onActionClick,
             modifier = modifier,
+            suppressed = suppressed,
         )
     }
 }
@@ -124,8 +128,12 @@ private fun AlertInline(
     action: @Composable RowScope.() -> Unit,
     onActionClick: () -> Unit,
     modifier: Modifier = Modifier,
+    suppressed: Boolean,
 ) {
-    val bgColor = OrbitTheme.colors.surface.background
+    val bgColor = when (suppressed) {
+        true -> OrbitTheme.colors.surface.background
+        false -> OrbitTheme.colors.primary.subtle
+    }
     val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
     val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
