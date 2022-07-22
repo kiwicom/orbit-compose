@@ -59,11 +59,11 @@ internal object ColorTokens {
 
     public val CloudNormalHover: UIColor = UIColor(0xFFDCE3E9)
 
-    public val GreenDark: UIColor = UIColor(0xFF2B7336)
+    public val GreenDark: UIColor = UIColor(0xFF2D7738)
 
     public val GreenDarkActive: UIColor = UIColor(0xFF1F5126)
 
-    public val GreenDarkHover: UIColor = UIColor(0xFF25642F)
+    public val GreenDarkHover: UIColor = UIColor(0xFF276831)
 
     public val GreenDarker: UIColor = UIColor(0xFF235C2B)
 
@@ -97,25 +97,25 @@ internal object ColorTokens {
 
     public val InkNormalHover: UIColor = UIColor(0xFF181B20)
 
-    public val OrangeDark: UIColor = UIColor(0xFFAE5700)
+    public val OrangeDark: UIColor = UIColor(0xFFBA5D00)
 
-    public val OrangeDarkActive: UIColor = UIColor(0xFF753A00)
+    public val OrangeDarkActive: UIColor = UIColor(0xFF954A00)
 
-    public val OrangeDarkHover: UIColor = UIColor(0xFF8F4700)
+    public val OrangeDarkHover: UIColor = UIColor(0xFFA75400)
 
     public val OrangeDarker: UIColor = UIColor(0xFF803F00)
 
-    public val OrangeLight: UIColor = UIColor(0xFFFDF0E3)
+    public val OrangeLight: UIColor = UIColor(0xFFFCF2E6)
 
-    public val OrangeLightActive: UIColor = UIColor(0xFFF8D3AB)
+    public val OrangeLightActive: UIColor = UIColor(0xFFF5D7B3)
 
-    public val OrangeLightHover: UIColor = UIColor(0xFFFAE2C7)
+    public val OrangeLightHover: UIColor = UIColor(0xFFF9E5CC)
 
-    public val OrangeNormal: UIColor = UIColor(0xFFE98305)
+    public val OrangeNormal: UIColor = UIColor(0xFFDF7B00)
 
-    public val OrangeNormalActive: UIColor = UIColor(0xFFCD7304)
+    public val OrangeNormalActive: UIColor = UIColor(0xFFB26200)
 
-    public val OrangeNormalHover: UIColor = UIColor(0xFFDC7C05)
+    public val OrangeNormalHover: UIColor = UIColor(0xFFC96F00)
 
     public val ProductDark: UIColor = UIColor(0xFF007F6D)
 
@@ -125,17 +125,17 @@ internal object ColorTokens {
 
     public val ProductDarker: UIColor = UIColor(0xFF005C4E)
 
-    public val ProductLight: UIColor = UIColor(0xFFECF8F7)
+    public val ProductLight: UIColor = UIColor(0xFFE6F6F4)
 
-    public val ProductLightActive: UIColor = UIColor(0xFFC0E8E4)
+    public val ProductLightActive: UIColor = UIColor(0xFFB3E4DD)
 
-    public val ProductLightHover: UIColor = UIColor(0xFFD6F0EE)
+    public val ProductLightHover: UIColor = UIColor(0xFFCCEDE8)
 
-    public val ProductNormal: UIColor = UIColor(0xFF00A991)
+    public val ProductNormal: UIColor = UIColor(0xFF00A58E)
 
-    public val ProductNormalActive: UIColor = UIColor(0xFF008F7B)
+    public val ProductNormalActive: UIColor = UIColor(0xFF008472)
 
-    public val ProductNormalHover: UIColor = UIColor(0xFF009882)
+    public val ProductNormalHover: UIColor = UIColor(0xFF009580)
 
     public val RedDark: UIColor = UIColor(0xFF970C0C)
 
