@@ -279,6 +279,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_circle_small)
 
+    public val CircleSmallEmpty: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_circle_small_empty)
+
     public val City: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_city)
