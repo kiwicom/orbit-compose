@@ -26,6 +26,7 @@ import kiwi.orbit.compose.ui.controls.CountryFlagPreview
 import kiwi.orbit.compose.ui.controls.EmptyStatePreview
 import kiwi.orbit.compose.ui.controls.InlineLoadingPreview
 import kiwi.orbit.compose.ui.controls.KeyValuePreview
+import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ListChoicePreview
 import kiwi.orbit.compose.ui.controls.PasswordTextFieldPreview
@@ -169,6 +170,11 @@ internal class ScreenshotTest {
     @Test
     fun linearProgressIndicator() {
         snapshot { LinearProgressIndicatorPreview() }
+    }
+
+    @Test
+    fun linearIndeterminateProgressIndicator() {
+        snapshot { LinearIndeterminateProgressIndicatorPreview() }
     }
 
     @Test

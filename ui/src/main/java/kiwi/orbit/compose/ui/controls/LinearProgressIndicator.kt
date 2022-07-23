@@ -21,6 +21,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
@@ -31,7 +32,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 /**
  * Linear progress indicator.
  *
- * Renders 4.dp tall rounded line in maximum available width.
+ * Renders [LinearProgressIndicatorDefaultHeight] tall rounded line in maximum available width.
  * To change the height or width, pass [modifier] with custom sizing.
  */
 @Composable
@@ -47,24 +48,38 @@ public fun LinearProgressIndicator(
     )
     Canvas(
         modifier = modifier
-            .height(4.dp)
+            .height(LinearProgressIndicatorDefaultHeight)
             .fillMaxWidth()
             .clip(CircleShape)
             .background(backgroundColor)
             .progressSemantics(progress.coerceIn(0f, 1f)),
     ) {
-        val isLtr = layoutDirection == LayoutDirection.Ltr
-        val barStart = (if (isLtr) 0f else 1f - animatedProgress) * size.width
-        val barEnd = (if (isLtr) animatedProgress else 1f) * size.width
-
-        drawRoundRect(
+        drawLinearIndicator(
             color = color,
-            topLeft = Offset(barStart, 0f),
-            size = Size(barEnd, size.height),
-            cornerRadius = CornerRadius(size.height / 2f, size.height / 2f),
+            endFraction = animatedProgress,
         )
     }
 }
+
+internal fun DrawScope.drawLinearIndicator(
+    color: Color,
+    startFraction: Float = 0f,
+    endFraction: Float,
+) {
+    val isLtr = layoutDirection == LayoutDirection.Ltr
+    val barStart = (if (isLtr) startFraction else 1f - endFraction) * size.width
+    val barEnd = (if (isLtr) endFraction else 1f - startFraction) * size.width
+
+    // Progress line
+    drawRoundRect(
+        color = color,
+        topLeft = Offset(barStart, 0f),
+        size = Size(barEnd - barStart, size.height),
+        cornerRadius = CornerRadius(size.height / 2f, size.height / 2f),
+    )
+}
+
+internal val LinearProgressIndicatorDefaultHeight = 4.dp
 
 @Preview
 @Composable
@@ -72,7 +87,7 @@ internal fun LinearProgressIndicatorPreview() {
     Preview {
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
         ) {
             LinearProgressIndicator(1f)
             LinearProgressIndicator(0f)

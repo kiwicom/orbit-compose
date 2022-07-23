@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonCritical
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
+import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicator
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicator
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
@@ -79,6 +80,8 @@ private fun LinearProgressIndicatorScreenInner() {
                     Text("Increase")
                 }
             }
+
+            LinearIndeterminateProgressIndicator()
         }
     }
 }
