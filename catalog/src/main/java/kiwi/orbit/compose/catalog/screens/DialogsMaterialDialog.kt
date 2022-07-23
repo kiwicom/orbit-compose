@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ fun DialogsMaterialDialog(navController: NavController) {
     )
 }
 
+@SuppressLint("MaterialDesignInsteadOrbitDesign")
 @Suppress("Dependency")
 @Composable
 private fun DialogsMaterialDialog(
