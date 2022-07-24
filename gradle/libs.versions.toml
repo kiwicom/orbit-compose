@@ -10,6 +10,7 @@ maven-publish = "0.21.0"
 
 kotlin-serialization = "1.3.3"
 android-sdkCommon = "30.2.1"
+android-lint = "30.2.1"
 androidx-activityCompose = "1.4.0"
 androidx-core = "1.8.0"
 androidx-constraint-layout = "1.0.1"
@@ -27,6 +28,9 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "android-sdkCommon" }
+android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-lint" }
+android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "android-lint" }
+android-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-lint" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
@@ -53,6 +57,7 @@ compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = 
 compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose-main" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util", version.ref = "compose-main" }
 compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose-main" }
+junit = { module = "junit:junit", version = "4.13.2" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 [bundles]

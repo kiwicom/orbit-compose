@@ -18,7 +18,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - name: Assemble & Linters
-        run: ./gradlew :catalog:assembleDebug lint lintKotlin
+        run: ./gradlew :catalog:assembleDebug lint lintKotlin :lint:test
       - name: Run Screenshot Tests
         run: ./gradlew :ui:verifyPaparazziDebug
       - uses: yutailang0119/action-android-lint@v3.1.0
