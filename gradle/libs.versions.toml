@@ -3,7 +3,7 @@
 compileSdk = "32"
 minSdk = "23"
 
-kotlin-lang = "1.7.0"
+kotlin-lang = "1.7.10"
 kotlin-dokka = "1.7.0"
 android-gradle-plugin = "7.2.1"
 maven-publish = "0.21.0"
