@@ -19,6 +19,7 @@ import androidx.compose.material.icons.rounded.Ballot
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.DragHandle
+import androidx.compose.material.icons.rounded.EditAttributes
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
@@ -71,9 +72,14 @@ fun MainScreen(
         Triple("ListChoice", { Icon(Icons.MenuHamburger, null) }, actions::showListChoice),
         Triple("Loading", { Icon(Icons.MenuMeatballs, null) }, actions::showLoading),
         Triple(
+            "PillButton",
+            { Icon(MaterialIcons.EditAttributes, null) },
+            actions::showPillButton,
+        ),
+        Triple(
             "Progress Indicator",
             { Icon(OutlinedMaterialIcons.ToggleOff, null) },
-            actions::showLinearProgressIndicator
+            actions::showLinearProgressIndicator,
         ),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
