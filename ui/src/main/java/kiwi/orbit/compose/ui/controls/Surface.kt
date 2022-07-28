@@ -25,7 +25,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
+import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
@@ -41,6 +43,7 @@ public fun Surface(
     val absoluteElevation = LocalAbsoluteElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
+        LocalContentEmphasis provides ContentEmphasis.Normal,
         LocalAbsoluteElevation provides absoluteElevation,
         LocalAbsoluteElevation provides absoluteElevation,
     ) {
