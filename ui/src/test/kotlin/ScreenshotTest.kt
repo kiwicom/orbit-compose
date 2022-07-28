@@ -30,6 +30,7 @@ import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicatorPrevie
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ListChoicePreview
 import kiwi.orbit.compose.ui.controls.PasswordTextFieldPreview
+import kiwi.orbit.compose.ui.controls.PillButtonPreview
 import kiwi.orbit.compose.ui.controls.RadioFieldPreview
 import kiwi.orbit.compose.ui.controls.RadioPreview
 import kiwi.orbit.compose.ui.controls.SeatLegendPreview
@@ -190,6 +191,11 @@ internal class ScreenshotTest {
     @Test
     fun passwordTextField() {
         snapshot { PasswordTextFieldPreview() }
+    }
+
+    @Test
+    fun pillButton() {
+        snapshot { PillButtonPreview() }
     }
 
     @Test

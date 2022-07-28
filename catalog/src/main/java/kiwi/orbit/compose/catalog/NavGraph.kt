@@ -26,6 +26,7 @@ import kiwi.orbit.compose.catalog.screens.LinearProgressIndicatorScreen
 import kiwi.orbit.compose.catalog.screens.ListChoiceScreen
 import kiwi.orbit.compose.catalog.screens.LoadingScreen
 import kiwi.orbit.compose.catalog.screens.MainScreen
+import kiwi.orbit.compose.catalog.screens.PillButtonScreen
 import kiwi.orbit.compose.catalog.screens.RadioScreen
 import kiwi.orbit.compose.catalog.screens.SeatScreen
 import kiwi.orbit.compose.catalog.screens.SelectFieldScreen
@@ -58,6 +59,7 @@ private object MainDestinations {
     const val LINEAR_PROGRESS_INDICATOR = "linear_progress_indicator"
     const val LIST_CHOICE = "list_choice"
     const val LOADING = "loading"
+    const val PILL_BUTTON = "pill_button"
     const val RADIO = "radio"
     const val SEAT = "seat"
     const val SELECT_FIELD = "select_field"
@@ -142,6 +144,9 @@ fun NavGraph(
         }
         composable(MainDestinations.RADIO) {
             RadioScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.PILL_BUTTON) {
+            PillButtonScreen(actions::navigateUp)
         }
         composable(MainDestinations.SEAT) {
             SeatScreen(actions::navigateUp)
@@ -249,6 +254,10 @@ class MainActions(
 
     fun showLoading() {
         navController.navigate(MainDestinations.LOADING)
+    }
+
+    fun showPillButton() {
+        navController.navigate(MainDestinations.PILL_BUTTON)
     }
 
     fun showRadio() {
