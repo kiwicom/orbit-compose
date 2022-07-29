@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "kiwi.orbit.compose.catalog"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = 31
+        targetSdk = 33
         versionName = project.findProperty("VERSION_NAME").toString()
 
         val bits = versionName!!.split('.').map { it.toInt() }
