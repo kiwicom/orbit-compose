@@ -17,7 +17,7 @@ androidx-constraint-layout = "1.0.1"
 accompanist-main = "0.24.13-rc"
 coil = "2.0.0"
 compose-compiler = "1.2.0"
-compose-main = "1.2.0-rc03"
+compose-main = "1.2.0"
 compose-navigation = "2.5.0"
 square-kotlinPoet = "1.12.0"
 
