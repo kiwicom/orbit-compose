@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.center
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -30,21 +31,24 @@ import kotlin.math.absoluteValue
 @Composable
 public fun InlineLoading(
     modifier: Modifier = Modifier,
+    circleSize: Dp = 8.dp,
+    distanceBetweenCircles: Dp = 6.dp,
 ) {
     Row(
         modifier = modifier.height(44.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        horizontalArrangement = Arrangement.spacedBy(distanceBetweenCircles),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Circle(0)
-        Circle(1)
-        Circle(2)
+        Circle(0, circleSize)
+        Circle(1, circleSize)
+        Circle(2, circleSize)
     }
 }
 
 @Composable
 private fun Circle(
     index: Int,
+    circleSize: Dp,
 ) {
     val infiniteTransition = rememberInfiniteTransition()
     val animatedValue by infiniteTransition.animateValue(
@@ -52,7 +56,7 @@ private fun Circle(
         targetValue = -3f,
         typeConverter = TwoWayConverter(
             convertToVector = { value -> AnimationVector1D(value) },
-            convertFromVector = { vector -> vector.value }
+            convertFromVector = { vector -> vector.value },
         ),
         animationSpec = infiniteRepeatable(
             animation = tween(
@@ -62,12 +66,12 @@ private fun Circle(
             ),
             repeatMode = RepeatMode.Reverse,
             initialStartOffset = StartOffset((index + 1) * 120),
-        )
+        ),
     )
     val color = OrbitTheme.colors.surface.disabled
 
     Canvas(
-        modifier = Modifier.size(8.dp),
+        modifier = Modifier.size(circleSize),
     ) {
         drawCircle(
             color = color,
@@ -75,7 +79,7 @@ private fun Circle(
             center = Offset(
                 x = size.center.x,
                 y = size.center.y + animatedValue.dp.toPx(),
-            )
+            ),
         )
     }
 }
