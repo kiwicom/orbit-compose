@@ -32,11 +32,11 @@ import kotlin.math.absoluteValue
 public fun InlineLoading(
     modifier: Modifier = Modifier,
     circleSize: Dp = 8.dp,
-    distanceBetweenCircles: Dp = 6.dp,
+    circleDistance: Dp = 6.dp,
 ) {
     Row(
         modifier = modifier.height(44.dp),
-        horizontalArrangement = Arrangement.spacedBy(distanceBetweenCircles),
+        horizontalArrangement = Arrangement.spacedBy(circleDistance),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Circle(0, circleSize)
