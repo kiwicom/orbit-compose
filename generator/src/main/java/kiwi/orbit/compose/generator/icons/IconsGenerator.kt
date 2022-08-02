@@ -78,10 +78,13 @@ class IconsGenerator {
                 Files.write(outFileXml.toPath(), contents.toByteArray())
 
                 val resourceName = filenameXml.removeSuffix(".xml")
+
+                @Suppress("SpellCheckingInspection")
                 val iconName = resourceName
                     .removePrefix("ic_orbit_")
                     .split("_")
                     .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
+                    .replace("Checkin", "CheckIn")
                 icons.add(Pair(iconName, resourceName))
             }
         }
