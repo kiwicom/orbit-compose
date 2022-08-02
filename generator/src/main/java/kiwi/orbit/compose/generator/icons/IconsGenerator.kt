@@ -43,14 +43,17 @@ class IconsGenerator {
             while (true) {
                 val entry = zis.nextEntry ?: break
                 if (entry.isDirectory) {
+                    println("Skipping ${entry.name}")
                     zis.closeEntry()
                     continue
                 }
-                if (entry.name.contains("mobile") || entry.name == "orbit-icons.svg") {
+                if (entry.name == "orbit-icons.svg") {
+                    println("Skipping ${entry.name}")
                     zis.closeEntry()
                     continue
                 }
 
+                println("Rendering ${entry.name}")
                 val filenameSvg = "ic_orbit_" + entry.name
                     .removePrefix("svg/")
                     .replace("-", "_")
