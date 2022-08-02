@@ -114,5 +114,4 @@ dependencies {
     debugImplementation(libs.androidx.customViewPoolingContainer)
 
     lintChecks(project(":lint"))
-    lintPublish(project(":lint"))
 }
