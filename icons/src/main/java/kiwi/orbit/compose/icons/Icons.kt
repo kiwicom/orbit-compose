@@ -211,10 +211,6 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_car_rental)
 
-    public val CareKiwiCom: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_care_kiwi_com)
-
     public val Chart: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chart)
@@ -499,6 +495,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_google)
 
+    public val GooglePlay: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_google_play)
+
     public val GpsFixed: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_gps_fixed)
@@ -754,10 +754,6 @@ public object Icons {
     public val NotificationOn: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_notification_on)
-
-    public val NotificiationAdd: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_notificiation_add)
 
     public val OnlineCheckin: Painter
         @Composable
