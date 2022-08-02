@@ -383,6 +383,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_device_desktop)
 
+    public val DeviceMobile: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_device_mobile)
+
     public val Diamond: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_diamond)
@@ -755,11 +759,11 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_notification_on)
 
-    public val OnlineCheckin: Painter
+    public val OnlineCheckIn: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_online_checkin)
 
-    public val OnlineCheckinOff: Painter
+    public val OnlineCheckInOff: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_online_checkin_off)
 

@@ -43,14 +43,17 @@ class IconsGenerator {
             while (true) {
                 val entry = zis.nextEntry ?: break
                 if (entry.isDirectory) {
+                    println("Skipping ${entry.name}")
                     zis.closeEntry()
                     continue
                 }
-                if (entry.name.contains("mobile") || entry.name == "orbit-icons.svg") {
+                if (entry.name == "orbit-icons.svg") {
+                    println("Skipping ${entry.name}")
                     zis.closeEntry()
                     continue
                 }
 
+                println("Rendering ${entry.name}")
                 val filenameSvg = "ic_orbit_" + entry.name
                     .removePrefix("svg/")
                     .replace("-", "_")
@@ -75,10 +78,13 @@ class IconsGenerator {
                 Files.write(outFileXml.toPath(), contents.toByteArray())
 
                 val resourceName = filenameXml.removeSuffix(".xml")
+
+                @Suppress("SpellCheckingInspection")
                 val iconName = resourceName
                     .removePrefix("ic_orbit_")
                     .split("_")
                     .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
+                    .replace("Checkin", "CheckIn")
                 icons.add(Pair(iconName, resourceName))
             }
         }
