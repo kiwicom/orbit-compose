@@ -93,6 +93,7 @@ dependencies {
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.activityComposeCatalog)
 
     implementation(libs.compose.animation)
     implementation(libs.compose.foundation)

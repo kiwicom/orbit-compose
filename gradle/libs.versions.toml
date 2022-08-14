@@ -13,6 +13,7 @@ kotlin-serialization = "1.4.0"
 android-sdkCommon = "30.3.0"
 android-lint = "30.3.0"
 androidx-activityCompose = "1.5.1"
+androidx-activityComposeCatalog = "1.6.0"
 androidx-core = "1.8.0"
 androidx-constraint-layout = "1.0.1"
 accompanist-main = "0.25.1"
@@ -33,6 +34,7 @@ android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "
 android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "android-lint" }
 android-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-lint" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-activityComposeCatalog = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityComposeCatalog" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
 androidx-customView = { module = "androidx.customview:customview", version = "1.1.0" }
