@@ -18,9 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.ButtonCritical
-import kiwi.orbit.compose.ui.controls.ButtonPrimary
+import kiwi.orbit.compose.catalog.AppTheme
+import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicator
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicator
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -48,40 +47,44 @@ fun LinearProgressIndicatorScreen(onNavigateUp: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 private fun LinearProgressIndicatorScreenInner() {
-    OrbitTheme {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
         var progress by remember { mutableStateOf(0.5f) }
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+        LinearIndeterminateProgressIndicator()
+        LinearProgressIndicator(progress)
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            LinearProgressIndicator(progress)
-
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ButtonSecondary(
+                onClick = { if (progress > 0.1f) progress -= 0.1f },
+                modifier = Modifier
+                    .weight(0.5f)
+                    .alpha(if (progress > 0.1f) 1f else 0.3f),
             ) {
-                ButtonCritical(
-                    onClick = { if (progress > 0.1f) progress -= 0.1f },
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .alpha(if (progress > 0.1f) 1f else 0.3f),
-                ) {
-                    Text("Decrease")
-                }
-
-                ButtonPrimary(
-                    onClick = { if (progress < 1f) progress += 0.1f },
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .alpha(if (progress < 1f) 1f else 0.3f),
-                ) {
-                    Text("Increase")
-                }
+                Text("Decrease")
             }
 
-            LinearIndeterminateProgressIndicator()
+            ButtonSecondary(
+                onClick = { if (progress < 1f) progress += 0.1f },
+                modifier = Modifier
+                    .weight(0.5f)
+                    .alpha(if (progress < 1f) 1f else 0.3f),
+            ) {
+                Text("Increase")
+            }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun LinearProgressIndicatorScreenPreview() {
+    AppTheme {
+        LinearProgressIndicatorScreen(onNavigateUp = {})
     }
 }
