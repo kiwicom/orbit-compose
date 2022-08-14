@@ -1,6 +1,7 @@
 [versions]
 
-compileSdk = "32"
+compileSdk = "33"
+targetSdk = "33"
 minSdk = "23"
 
 kotlin-lang = "1.7.10"
