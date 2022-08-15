@@ -40,6 +40,8 @@
   android: Released
 - component: Seat
   android: Released
+- component: SegmentedSwitch
+  android: Released
 - component: Select
   android: Released
 - component: Separator
