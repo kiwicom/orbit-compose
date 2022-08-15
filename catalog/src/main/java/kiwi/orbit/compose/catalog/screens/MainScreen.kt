@@ -83,6 +83,7 @@ fun MainScreen(
         ),
         Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
         Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
+        Triple("Segmented Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSegmentedSwitch),
         Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
         Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
         Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
