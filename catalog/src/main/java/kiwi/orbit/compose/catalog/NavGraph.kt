@@ -29,6 +29,7 @@ import kiwi.orbit.compose.catalog.screens.MainScreen
 import kiwi.orbit.compose.catalog.screens.PillButtonScreen
 import kiwi.orbit.compose.catalog.screens.RadioScreen
 import kiwi.orbit.compose.catalog.screens.SeatScreen
+import kiwi.orbit.compose.catalog.screens.SegmentedSwitchScreen
 import kiwi.orbit.compose.catalog.screens.SelectFieldScreen
 import kiwi.orbit.compose.catalog.screens.StepperScreen
 import kiwi.orbit.compose.catalog.screens.SwitchScreen
@@ -62,6 +63,7 @@ private object MainDestinations {
     const val PILL_BUTTON = "pill_button"
     const val RADIO = "radio"
     const val SEAT = "seat"
+    const val SEGMENTED_SWITCH = "segmented_switch"
     const val SELECT_FIELD = "select_field"
     const val STEPPER = "stepper"
     const val SWITCH = "switch"
@@ -150,6 +152,9 @@ fun NavGraph(
         }
         composable(MainDestinations.SEAT) {
             SeatScreen(actions::navigateUp)
+        }
+        composable(MainDestinations.SEGMENTED_SWITCH) {
+            SegmentedSwitchScreen(actions::navigateUp)
         }
         composable(MainDestinations.SELECT_FIELD) {
             SelectFieldScreen(actions::navigateUp)
@@ -266,6 +271,10 @@ class MainActions(
 
     fun showSeat() {
         navController.navigate(MainDestinations.SEAT)
+    }
+
+    fun showSegmentedSwitch() {
+        navController.navigate(MainDestinations.SEGMENTED_SWITCH)
     }
 
     fun showSelectField() {

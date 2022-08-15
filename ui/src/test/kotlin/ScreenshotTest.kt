@@ -35,6 +35,7 @@ import kiwi.orbit.compose.ui.controls.RadioFieldPreview
 import kiwi.orbit.compose.ui.controls.RadioPreview
 import kiwi.orbit.compose.ui.controls.SeatLegendPreview
 import kiwi.orbit.compose.ui.controls.SeatPreview
+import kiwi.orbit.compose.ui.controls.SegmentedSwitchPreview
 import kiwi.orbit.compose.ui.controls.SelectFieldPreview
 import kiwi.orbit.compose.ui.controls.StepperPreview
 import kiwi.orbit.compose.ui.controls.SwitchPreview
@@ -211,6 +212,11 @@ internal class ScreenshotTest {
     @Test
     fun seat() {
         snapshot { SeatPreview() }
+    }
+
+    @Test
+    fun segmentedSwitch() {
+        snapshot { SegmentedSwitchPreview() }
     }
 
     @Test
