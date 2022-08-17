@@ -2,8 +2,8 @@
 
 plugins {
     id("java")
-    kotlin("jvm")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlinter)
 }
 
