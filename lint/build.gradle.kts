@@ -1,6 +1,8 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.kotlin.jvm)
     id("com.android.lint")
 }
 

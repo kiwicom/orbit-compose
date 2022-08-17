@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinter)
 }
 

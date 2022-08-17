@@ -11,12 +11,12 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version libs.versions.kotlin.lang.get()
-    kotlin("android") version libs.versions.kotlin.lang.get() apply false
-    kotlin("plugin.serialization") version libs.versions.kotlin.lang.get() apply false
-    id("com.android.application") version libs.versions.android.gradle.plugin.get() apply false
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.agp.application) apply false
     alias(libs.plugins.kotlinter) apply false
-    id("com.vanniktech.maven.publish.base") version libs.versions.maven.publish.get() apply false
+    alias(libs.plugins.mavenPublish) apply false
     alias(libs.plugins.paparazzi) apply false
     alias(libs.plugins.dokka)
 }
