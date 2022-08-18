@@ -25,7 +25,7 @@ public fun Card(
     contentColor: Color = contentColorFor(backgroundColor),
     border: BorderStroke? = null,
     elevation: Dp = OrbitTheme.elevations.Level1,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -34,7 +34,7 @@ public fun Card(
         contentColor = contentColor,
         elevation = elevation,
         border = border,
-        content = content
+        content = content,
     )
 }
 
@@ -52,7 +52,7 @@ public fun Card(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Surface(
         onClick = onClick,
@@ -67,7 +67,7 @@ public fun Card(
         enabled = enabled,
         onClickLabel = onClickLabel,
         role = role,
-        content = content
+        content = content,
     )
 }
 

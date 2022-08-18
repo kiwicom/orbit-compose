@@ -41,17 +41,17 @@ private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
         modifier = Modifier
             .padding(contentPadding)
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
     ) {
         EmptyState(
             illustration = { Image(Illustrations.NoResults, contentDescription = null) },
-            title = { Text(text = "Sorry, we couldn't find that connection. And let's make the title a bit longer, so we can see the text wrapping.") }
+            title = { Text(text = "Sorry, we couldn't find that connection. And let's make the title a bit longer, so we can see the text wrapping.") },
         )
         Separator(Modifier.padding(vertical = 8.dp))
         EmptyState(
             illustration = { Image(Illustrations.NoResults, contentDescription = null) },
             title = { Text(text = "Sorry, we couldn't find that connection.") },
-            description = { Text(text = "Try changing up your search a bit. We'll try harder next time.") }
+            description = { Text(text = "Try changing up your search a bit. We'll try harder next time.") },
         )
         Separator(Modifier.padding(vertical = 8.dp))
         EmptyState(
@@ -61,7 +61,7 @@ private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
                 ButtonPrimary(onClick = { }) {
                     Text(text = "Adjust search")
                 }
-            }
+            },
         )
         Separator(Modifier.padding(vertical = 8.dp))
         EmptyState(
@@ -72,7 +72,7 @@ private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
                 ButtonPrimarySubtle(onClick = { }) {
                     Text(text = "Adjust search")
                 }
-            }
+            },
         )
     }
 }

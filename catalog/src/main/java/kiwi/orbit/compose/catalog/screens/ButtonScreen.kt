@@ -71,7 +71,7 @@ fun ButtonScreen(onNavigateUp: () -> Unit) {
                 extraContent = {
                     TabRow(
                         modifier = Modifier.windowInsetsPadding(
-                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal),
                         ),
                         selectedTabIndex = state.currentPage,
                         backgroundColor = OrbitTheme.colors.surface.main,
@@ -94,7 +94,7 @@ fun ButtonScreen(onNavigateUp: () -> Unit) {
                             text = { Text("ButtonLink") },
                         )
                     }
-                }
+                },
             )
         },
     ) { contentPadding ->
@@ -111,7 +111,7 @@ fun ButtonScreen(onNavigateUp: () -> Unit) {
                         start = contentPadding.calculateStartPadding(LayoutDirection.Ltr),
                         end = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
                         bottom = contentPadding.calculateBottomPadding(),
-                    )
+                    ),
             ) {
                 when (tabIndex) {
                     0 -> ButtonScreenInner()
@@ -194,7 +194,7 @@ private fun ButtonLinkScreenInner() {
                     style = OrbitTheme.typography.title3,
                     modifier = Modifier
                         .alignByBaseline()
-                        .weight(1f)
+                        .weight(1f),
                 )
                 Spacer(Modifier.size(8.dp))
                 ButtonTextLinkCritical("Delete", onClick = {}, modifier = Modifier.alignByBaseline())

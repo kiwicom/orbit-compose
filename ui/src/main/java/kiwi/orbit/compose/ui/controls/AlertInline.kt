@@ -174,7 +174,7 @@ private fun AlertInline(
                 title()
             }
             CompositionLocalProvider(
-                LocalSmallButtonScope provides true
+                LocalSmallButtonScope provides true,
             ) {
                 ButtonPrimary(
                     onClick = onActionClick,

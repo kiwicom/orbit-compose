@@ -55,7 +55,7 @@ fun IconsScreenInner(contentPadding: PaddingValues) {
                     .padding(4.dp)
                     .border(1.dp, OrbitTheme.colors.surface.strong, OrbitTheme.shapes.normal)
                     .padding(vertical = 8.dp, horizontal = 4.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Icon(painter = icon, contentDescription = name)
                 Text(

@@ -31,7 +31,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 public fun CountryFlag(
     countryCode: String,
     contentDescription: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val url = "file:///android_asset/country_flags/$countryCode.png"
 
@@ -55,7 +55,7 @@ public fun CountryFlag(
                 width = 0.5.dp,
                 color = OrbitTheme.colors.content.normal.copy(alpha = .15f),
                 shape = RoundedCornerShape(2.dp),
-            )
+            ),
     )
 }
 

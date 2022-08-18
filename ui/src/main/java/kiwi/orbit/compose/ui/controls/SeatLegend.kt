@@ -94,9 +94,9 @@ private fun SeatLegendIcon(
                     topEnd = SeatTopRadius,
                     bottomStart = SeatBottomRadius,
                     bottomEnd = SeatBottomRadius,
-                )
+                ),
             )
-            .background(color)
+            .background(color),
     )
 }
 

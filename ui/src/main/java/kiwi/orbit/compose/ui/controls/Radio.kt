@@ -41,21 +41,21 @@ public fun Radio(
 ) {
     val borderWidth by animateDpAsState(
         targetValue = if (selected) 6.dp else 2.dp,
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val borderColor by animateColorAsState(
         targetValue = when {
             !enabled || !selected -> OrbitTheme.colors.surface.disabled
             else -> OrbitTheme.colors.info.normal
         },
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
             !enabled && !selected -> OrbitTheme.colors.surface.subtle
             else -> Color.Transparent
         },
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val selectableModifier =
         if (onClick != null) {
@@ -67,8 +67,8 @@ public fun Radio(
                 interactionSource = interactionSource,
                 indication = rememberRipple(
                     bounded = false,
-                    radius = RadioRippleRadius
-                )
+                    radius = RadioRippleRadius,
+                ),
             )
         } else {
             Modifier
@@ -76,7 +76,7 @@ public fun Radio(
 
     val errorAlpha by animateFloatAsState(
         targetValue = if (isError && enabled) 1f else 0f,
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle
@@ -88,7 +88,7 @@ public fun Radio(
             .semantics {
                 if (isError) this.error(errorMessage)
             }
-            .requiredSize(RadioSize)
+            .requiredSize(RadioSize),
     ) {
         drawRadio(borderWidth, borderColor, backgroundColor)
         drawError(errorStrokeColor, errorShadowColor, errorAlpha)

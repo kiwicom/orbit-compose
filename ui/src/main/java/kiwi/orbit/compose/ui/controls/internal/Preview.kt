@@ -28,7 +28,7 @@ internal fun Preview(
         Surface {
             Column(
                 modifier = modifier.padding(4.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 content()
             }

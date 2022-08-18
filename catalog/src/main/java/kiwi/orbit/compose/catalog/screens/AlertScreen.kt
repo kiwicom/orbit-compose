@@ -65,7 +65,7 @@ fun AlertScreen(onNavigateUp: () -> Unit) {
                 extraContent = {
                     TabRow(
                         modifier = Modifier.windowInsetsPadding(
-                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal),
                         ),
                         selectedTabIndex = state.currentPage,
                         backgroundColor = OrbitTheme.colors.surface.main,
@@ -93,7 +93,7 @@ fun AlertScreen(onNavigateUp: () -> Unit) {
                             text = { Text("Inline") },
                         )
                     }
-                }
+                },
             )
         },
     ) { contentPadding: PaddingValues ->
@@ -110,7 +110,7 @@ fun AlertScreen(onNavigateUp: () -> Unit) {
                         start = contentPadding.calculateStartPadding(LayoutDirection.Ltr),
                         end = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
                         bottom = contentPadding.calculateBottomPadding(),
-                    )
+                    ),
             ) {
                 when (tabIndex) {
                     0 -> AlertScreenNormalInner()
@@ -165,12 +165,12 @@ private fun AlertsInner(suppressed: Boolean) {
                                 color = OrbitTheme.colors.content.highlight,
                                 fontWeight = FontWeight.Medium,
                                 textDecoration = TextDecoration.Underline,
-                            )
+                            ),
                         ) {
                             append("Some link")
                         }
                         append(".")
-                    }
+                    },
                 )
             },
             actions = {

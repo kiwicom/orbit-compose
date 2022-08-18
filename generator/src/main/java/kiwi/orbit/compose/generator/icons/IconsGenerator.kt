@@ -34,7 +34,7 @@ class IconsGenerator {
 
     private fun downloadAndUnpackIcons(
         url: String,
-        resourceOutDir: Path
+        resourceOutDir: Path,
     ): List<Pair<String, String>> {
         val icons = mutableListOf<Pair<String, String>>()
         val inputStream = URL(url).openConnection().getInputStream().buffered()
@@ -101,7 +101,7 @@ class IconsGenerator {
         iconClass.addAnnotation(
             AnnotationSpec.builder(Suppress::class)
                 .addMember("%S", "unused")
-                .build()
+                .build(),
         )
 
         icons.sortedBy { it.first }.forEach { (iconName, iconResource) ->
@@ -112,9 +112,9 @@ class IconsGenerator {
                         .addStatement(
                             "return %M(%L)",
                             MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.$iconResource"
+                            "R.drawable.$iconResource",
                         )
-                        .build()
+                        .build(),
                 )
                 .build()
             iconClass.addProperty(property)

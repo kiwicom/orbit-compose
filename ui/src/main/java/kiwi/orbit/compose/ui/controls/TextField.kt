@@ -103,7 +103,7 @@ public fun TextField(
                     this.error(errorMessage)
                 }
             }
-            .then(autoBringIntoViewSetupModifier)
+            .then(autoBringIntoViewSetupModifier),
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -133,7 +133,7 @@ public fun TextField(
             val transition = updateTransition(inputState, "stateTransition")
             val borderColor = transition.animateColor(
                 transitionSpec = { tween(durationMillis = AnimationDuration) },
-                label = "borderColor"
+                label = "borderColor",
             ) {
                 when (it) {
                     InputState.Normal -> Color.Transparent
@@ -177,7 +177,7 @@ public fun TextField(
                         onTrailingIconClick = onTrailingIconClick,
                         singleLine = singleLine,
                     )
-                }
+                },
             )
 
             FieldMessage(

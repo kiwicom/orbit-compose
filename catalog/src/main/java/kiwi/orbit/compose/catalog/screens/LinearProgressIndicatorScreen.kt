@@ -41,7 +41,7 @@ fun LinearProgressIndicatorScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             LinearProgressIndicatorScreenInner()
         }

@@ -68,7 +68,9 @@ public fun Tag(
             if (onRemove != null) {
                 IconButton(
                     onClick = onRemove,
-                    modifier = Modifier.padding(start = 8.dp).size(16.dp),
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .size(16.dp),
                 ) {
                     Icon(Icons.CloseCircle, contentDescription = removeContentDescription)
                 }

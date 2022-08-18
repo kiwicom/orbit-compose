@@ -37,7 +37,7 @@ public fun EmptyState(
         title = { Text(title) },
         modifier = modifier,
         description = description?.let { { Text(description) } },
-        action = action
+        action = action,
     )
 }
 
@@ -54,7 +54,7 @@ public fun EmptyState(
             .fillMaxWidth()
             .padding(vertical = 16.dp, horizontal = 32.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
             modifier = Modifier.height(120.dp),
@@ -101,7 +101,7 @@ internal fun EmptyStatePreview() {
                 ButtonPrimary(onClick = {}) {
                     Text("Try again")
                 }
-            }
+            },
         )
     }
 }

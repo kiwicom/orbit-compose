@@ -74,7 +74,7 @@ public interface TopAppBarScrollBehavior {
     public companion object {
         @Composable
         public fun rememberPinned(
-            canScroll: () -> Boolean = { true }
+            canScroll: () -> Boolean = { true },
         ): TopAppBarScrollBehavior {
             val saver = remember {
                 TopAppBarScrollBehaviorSaver {
@@ -88,7 +88,7 @@ public interface TopAppBarScrollBehavior {
 
         @Composable
         public fun rememberEnterAlways(
-            canScroll: () -> Boolean = { true }
+            canScroll: () -> Boolean = { true },
         ): TopAppBarScrollBehavior {
             val saver = remember {
                 TopAppBarScrollBehaviorSaver {
@@ -150,7 +150,7 @@ private class PinnedScrollBehavior(val canScroll: () -> Boolean = { true }) :
             1 - (
                 (offsetLimit - contentOffset).coerceIn(
                     minimumValue = offsetLimit,
-                    maximumValue = 0f
+                    maximumValue = 0f,
                 ) / offsetLimit
                 )
         } else {
@@ -163,7 +163,7 @@ private class PinnedScrollBehavior(val canScroll: () -> Boolean = { true }) :
             override fun onPostScroll(
                 consumed: Offset,
                 available: Offset,
-                source: NestedScrollSource
+                source: NestedScrollSource,
             ): Offset {
                 if (!canScroll()) return Offset.Zero
                 if (consumed.y == 0f && available.y > 0f) {
@@ -195,7 +195,7 @@ private class EnterAlwaysScrollBehavior(val canScroll: () -> Boolean = { true })
             1 - (
                 (offsetLimit - contentOffset).coerceIn(
                     minimumValue = offsetLimit,
-                    maximumValue = 0f
+                    maximumValue = 0f,
                 ) / offsetLimit
                 )
         } else {
@@ -224,7 +224,7 @@ private class EnterAlwaysScrollBehavior(val canScroll: () -> Boolean = { true })
             override fun onPostScroll(
                 consumed: Offset,
                 available: Offset,
-                source: NestedScrollSource
+                source: NestedScrollSource,
             ): Offset {
                 if (!canScroll()) return Offset.Zero
                 contentOffset += consumed.y
@@ -237,7 +237,7 @@ private class EnterAlwaysScrollBehavior(val canScroll: () -> Boolean = { true })
                 }
                 offset = (offset + consumed.y).coerceIn(
                     minimumValue = offsetLimit,
-                    maximumValue = 0f
+                    maximumValue = 0f,
                 )
                 return Offset.Zero
             }
@@ -261,7 +261,7 @@ private class EnterAlwaysScrollBehavior(val canScroll: () -> Boolean = { true })
  */
 private class ExitUntilCollapsedScrollBehavior(
     val decayAnimationSpec: DecayAnimationSpec<Float>,
-    val canScroll: () -> Boolean = { true }
+    val canScroll: () -> Boolean = { true },
 ) : TopAppBarScrollBehavior {
     override val scrollFraction: Float
         get() = if (offsetLimit != 0f) offset / offsetLimit else 0f
@@ -290,7 +290,7 @@ private class ExitUntilCollapsedScrollBehavior(
             override fun onPostScroll(
                 consumed: Offset,
                 available: Offset,
-                source: NestedScrollSource
+                source: NestedScrollSource,
             ): Offset {
                 if (!canScroll()) return Offset.Zero
                 contentOffset += consumed.y
@@ -300,7 +300,7 @@ private class ExitUntilCollapsedScrollBehavior(
                     val oldOffset = offset
                     offset = (offset + consumed.y).coerceIn(
                         minimumValue = offsetLimit,
-                        maximumValue = 0f
+                        maximumValue = 0f,
                     )
                     return Offset(0f, offset - oldOffset)
                 }
@@ -317,7 +317,7 @@ private class ExitUntilCollapsedScrollBehavior(
                     val oldOffset = offset
                     offset = (offset + available.y).coerceIn(
                         minimumValue = offsetLimit,
-                        maximumValue = 0f
+                        maximumValue = 0f,
                     )
                     return Offset(0f, offset - oldOffset)
                 }
@@ -336,7 +336,7 @@ private class ExitUntilCollapsedScrollBehavior(
                             scrollBehavior = this@ExitUntilCollapsedScrollBehavior,
                             initialVelocity = available.y,
                             decayAnimationSpec = decayAnimationSpec,
-                            snap = true
+                            snap = true,
                         )
                 }
                 return result
@@ -348,7 +348,7 @@ private suspend fun onTopBarFling(
     scrollBehavior: TopAppBarScrollBehavior,
     initialVelocity: Float,
     decayAnimationSpec: DecayAnimationSpec<Float>,
-    snap: Boolean
+    snap: Boolean,
 ): Velocity {
     if (abs(initialVelocity) > 1f) {
         var remainingVelocity = initialVelocity
@@ -363,7 +363,7 @@ private suspend fun onTopBarFling(
                 scrollBehavior.offset =
                     (initialOffset + delta).coerceIn(
                         minimumValue = scrollBehavior.offsetLimit,
-                        maximumValue = 0f
+                        maximumValue = 0f,
                     )
                 val consumed = abs(initialOffset - scrollBehavior.offset)
                 lastValue = value
@@ -382,8 +382,8 @@ private suspend fun onTopBarFling(
                 if (initialVelocity > 0) 0f else scrollBehavior.offsetLimit,
                 animationSpec = tween(
                     durationMillis = TopAppBarAnimationDurationMillis,
-                    easing = LinearOutSlowInEasing
-                )
+                    easing = LinearOutSlowInEasing,
+                ),
             ) { scrollBehavior.offset = value }
         }
         return Velocity(0f, remainingVelocity)

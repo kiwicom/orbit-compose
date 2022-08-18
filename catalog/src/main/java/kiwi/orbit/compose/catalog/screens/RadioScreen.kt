@@ -39,7 +39,7 @@ fun RadioScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             RadioScreenInner()
         }
@@ -107,7 +107,7 @@ private fun RadioScreenInner() {
             selected = selected2 == 0,
             onClick = { selected2 = 0 },
             modifier = Modifier.fillMaxWidth(),
-            description = { Text("Live Long and Prosper.") }
+            description = { Text("Live Long and Prosper.") },
         ) {
             Text("Star Trek")
         }
@@ -137,7 +137,7 @@ private fun RadioScreenInner() {
             onClick = { selected3 = 0 },
             modifier = Modifier.fillMaxWidth(),
             enabled = false,
-            description = { Text("Live Long and Prosper.") }
+            description = { Text("Live Long and Prosper.") },
         ) {
             Text("Star Trek")
         }

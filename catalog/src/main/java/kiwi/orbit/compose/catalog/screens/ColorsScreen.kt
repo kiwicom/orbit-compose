@@ -46,7 +46,7 @@ fun ColorsScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             ColorsScreenInner()
         }
@@ -184,14 +184,14 @@ private fun RowScope.Color(
     color: Color,
     name: String,
     orbitName: String,
-    contentColor: Color = Color.Unspecified
+    contentColor: Color = Color.Unspecified,
 ) {
     Column(
         Modifier
             .weight(1f)
             .fillMaxHeight()
             .background(color)
-            .padding(horizontal = 6.dp, vertical = 4.dp)
+            .padding(horizontal = 6.dp, vertical = 4.dp),
     ) {
         val finalContentColor = contentColor.takeOrElse { contentColorFor(color) }
         Text(
@@ -218,14 +218,14 @@ private fun RowScope.Color(
     color: Brush,
     name: String,
     orbitName: String,
-    contentColor: Color = Color.Unspecified
+    contentColor: Color = Color.Unspecified,
 ) {
     Column(
         Modifier
             .fillMaxHeight()
             .weight(1f)
             .background(color)
-            .padding(horizontal = 6.dp, vertical = 4.dp)
+            .padding(horizontal = 6.dp, vertical = 4.dp),
     ) {
         Text(
             name,

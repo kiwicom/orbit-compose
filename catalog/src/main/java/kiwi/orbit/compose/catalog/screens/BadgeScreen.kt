@@ -65,7 +65,7 @@ fun BadgeScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             BadgeScreenInner()
         }
@@ -90,12 +90,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeNeutral(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeNeutral(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
             }
             BadgeCircleNeutral(value = 1)
@@ -105,12 +105,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeNeutralSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeNeutralSubtle(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
             }
             BadgeCircleNeutralSubtle(value = 1)
@@ -120,12 +120,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeNeutralStrong(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeNeutralStrong(
-                icon = { Icon(painter = Icons.Airplane, contentDescription = null) }
+                icon = { Icon(painter = Icons.Airplane, contentDescription = null) },
             ) {
             }
             BadgeCircleNeutralStrong(value = 1)
@@ -138,12 +138,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeInfoSubtle(
-                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeInfoSubtle(
-                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) },
             ) {
             }
             BadgeCircleInfoSubtle(value = 1)
@@ -153,12 +153,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeInfo(
-                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeInfo(
-                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) }
+                icon = { Icon(painter = Icons.InformationCircle, contentDescription = null) },
             ) {
             }
             BadgeCircleInfo(value = 1)
@@ -171,12 +171,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeSuccessSubtle(
-                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeSuccessSubtle(
-                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) },
             ) {
             }
             BadgeCircleSuccessSubtle(value = 1)
@@ -186,12 +186,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeSuccess(
-                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeSuccess(
-                icon = { Icon(painter = Icons.Check, contentDescription = null) }
+                icon = { Icon(painter = Icons.Check, contentDescription = null) },
             ) {
             }
             BadgeCircleSuccess(value = 1)
@@ -204,12 +204,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeWarningSubtle(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeWarningSubtle(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
             BadgeCircleWarningSubtle(value = 1)
@@ -219,12 +219,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeWarning(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeWarning(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
             BadgeCircleWarning(value = 1)
@@ -237,12 +237,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeCriticalSubtle(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeCriticalSubtle(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
             BadgeCircleCriticalSubtle(value = 1)
@@ -252,12 +252,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeCritical(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeCritical(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
             BadgeCircleCritical(value = 1)
@@ -270,12 +270,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeBundleBasic(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeBundleBasic(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
         }
@@ -284,12 +284,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeBundleMedium(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeBundleMedium(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
         }
@@ -298,12 +298,12 @@ private fun BadgeScreenInner() {
                 Text(text = "label")
             }
             BadgeBundleTop(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
                 Text(text = "label")
             }
             BadgeBundleTop(
-                icon = { Icon(painter = Icons.Alert, contentDescription = null) }
+                icon = { Icon(painter = Icons.Alert, contentDescription = null) },
             ) {
             }
         }
@@ -315,7 +315,7 @@ private fun BadgeScreenInner() {
                 backgroundColor = OrbitTheme.colors.info.subtle,
                 borderColor = OrbitTheme.colors.info.strong,
                 contentColor = OrbitTheme.colors.content.normal,
-                icon = { Icon(painter = Icons.Close, contentDescription = null) }
+                icon = { Icon(painter = Icons.Close, contentDescription = null) },
             ) {
                 Text(text = "Custom badge")
             }

@@ -68,7 +68,7 @@ internal fun ClickableFieldBox(
     val transition = updateTransition(isError, "stateTransition")
     val borderColor = transition.animateColor(
         transitionSpec = { tween(durationMillis = AnimationDuration) },
-        label = "borderColor"
+        label = "borderColor",
     ) {
         when (it) {
             true -> OrbitTheme.colors.critical.normal

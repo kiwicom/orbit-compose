@@ -72,7 +72,7 @@ public fun CheckboxField(
             onCheckedChange = null,
             modifier = Modifier.padding(
                 top = (contentPadding.calculateTopPadding() - checkboxVerticalShift).coerceAtLeast(0.dp),
-                end = 10.dp
+                end = 10.dp,
             ),
             enabled = enabled,
             isError = isError,

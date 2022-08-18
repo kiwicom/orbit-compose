@@ -143,7 +143,7 @@ public fun SegmentedSwitch(
                                 .fillMaxHeight()
                                 .clickable(
                                     role = Role.Button,
-                                    onClick = { onOptionClick(index) }
+                                    onClick = { onOptionClick(index) },
                                 )
                                 .padding(
                                     horizontal = 12.dp,

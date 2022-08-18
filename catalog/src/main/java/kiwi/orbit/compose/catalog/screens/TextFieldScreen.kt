@@ -58,7 +58,7 @@ fun TextFieldScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             TextFieldScreenInner()
         }
@@ -198,7 +198,7 @@ private fun TextFieldScreenInner() {
 
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.width(IntrinsicSize.Max)
+            modifier = Modifier.width(IntrinsicSize.Max),
         ) {
             var v1 by remember { mutableStateOf("") }
             TextField(v1, { v1 = it }, label = { Text("Long label") }, modifier = Modifier.fillMaxWidth())

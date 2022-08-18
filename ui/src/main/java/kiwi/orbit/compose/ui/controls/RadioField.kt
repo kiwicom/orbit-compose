@@ -73,7 +73,7 @@ public fun RadioField(
             onClick = null,
             modifier = Modifier.padding(
                 top = (contentPadding.calculateTopPadding() - radioVerticalShift).coerceAtLeast(0.dp),
-                end = 10.dp
+                end = 10.dp,
             ),
             enabled = enabled,
             isError = isError,

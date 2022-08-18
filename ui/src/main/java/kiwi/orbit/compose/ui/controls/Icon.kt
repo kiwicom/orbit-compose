@@ -99,8 +99,8 @@ public fun Icon(
             .paint(
                 painter,
                 colorFilter = colorFilter,
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Fit,
             )
-            .then(semantics)
+            .then(semantics),
     )
 }

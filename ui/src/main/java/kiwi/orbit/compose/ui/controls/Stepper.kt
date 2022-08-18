@@ -58,7 +58,7 @@ public fun Stepper(
         modifier = modifier,
         valueValidator = { newValue ->
             newValue in minValue..maxValue
-        }
+        },
     )
 }
 
@@ -116,9 +116,9 @@ private fun StepperPrimitive(
                     slideInVertically { height -> -height / 2 } + fadeIn() with
                         slideOutVertically { height -> height / 2 } + fadeOut()
                 }.using(
-                    SizeTransform(clip = false)
+                    SizeTransform(clip = false),
                 )
-            }
+            },
         ) { targetNumber ->
             Text(
                 modifier = Modifier
@@ -126,7 +126,7 @@ private fun StepperPrimitive(
                     .widthIn(min = 20.dp),
                 text = targetNumber.toString(),
                 style = OrbitTheme.typography.bodyLargeBold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
 
@@ -167,8 +167,8 @@ private fun StepperButton(
             onClick = onClick,
             role = Role.Button,
             interactionSource = remember { MutableInteractionSource() },
-            indication = rememberRipple(bounded = false, radius = 22.dp)
-        )
+            indication = rememberRipple(bounded = false, radius = 22.dp),
+        ),
     ) {
         CompositionLocalProvider(
             LocalTextStyle provides OrbitTheme.typography.bodyNormal,

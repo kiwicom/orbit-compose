@@ -44,7 +44,7 @@ public fun ButtonPrimitive(
     shape: Shape = OrbitTheme.shapes.normal,
     textStyle: TextStyle = OrbitTheme.typography.bodyNormalMedium.copy(textAlign = TextAlign.Center),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     @Suppress("NAME_SHADOWING")
     val textStyle = LocalTextStyle.current.merge(textStyle)
@@ -69,20 +69,20 @@ public fun ButtonPrimitive(
                     when {
                         backgroundBrush != null -> Modifier.background(backgroundBrush)
                         else -> Modifier.background(backgroundColor)
-                    }
+                    },
                 ),
-            propagateMinConstraints = true
+            propagateMinConstraints = true,
         ) {
             Row(
                 Modifier
                     .defaultMinSize(
                         minWidth = if (LocalSmallButtonScope.current) ButtonDefaults.MinHeight else ButtonDefaults.MinWidth,
-                        minHeight = ButtonDefaults.MinHeight
+                        minHeight = ButtonDefaults.MinHeight,
                     )
                     .padding(contentPadding),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                content = content
+                content = content,
             )
         }
     }
@@ -98,14 +98,14 @@ public object ButtonDefaults {
         start = ButtonHorizontalPadding,
         top = ButtonVerticalPadding,
         end = ButtonHorizontalPadding,
-        bottom = ButtonVerticalPadding
+        bottom = ButtonVerticalPadding,
     )
 
     public val SmallContentPadding: PaddingValues = PaddingValues(
         start = ButtonSmallHorizontalPadding,
         top = ButtonSmallVerticalPadding,
         end = ButtonSmallHorizontalPadding,
-        bottom = ButtonSmallVerticalPadding
+        bottom = ButtonSmallVerticalPadding,
     )
 
     /**

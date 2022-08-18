@@ -51,7 +51,7 @@ public fun ChoiceTileCentered(
         targetValue = when (selected) {
             true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
-        }
+        },
     )
     Box(
         modifier = modifier
@@ -78,7 +78,7 @@ public fun ChoiceTileCentered(
         }
         Card(
             onClick = onSelect,
-            border = BorderStroke(2.dp, color)
+            border = BorderStroke(2.dp, color),
         ) {
             Column(
                 Modifier
@@ -134,7 +134,7 @@ private fun ChoiceTileContent(
                 ProvideMergedTextStyle(
                     value = OrbitTheme.typography.bodyNormal.copy(
                         textAlign = TextAlign.Center,
-                    )
+                    ),
                 ) {
                     description()
                 }
@@ -147,7 +147,7 @@ private fun ChoiceTileContent(
                 color = when (selected) {
                     true -> OrbitTheme.colors.info.normal
                     false -> Color.Unspecified
-                }
+                },
             ),
         ) {
             price()
@@ -166,7 +166,7 @@ private fun ChoiceTileFooter(
         isError = isError,
         modifier = Modifier
             .padding(top = 12.dp)
-            .padding(2.dp)
+            .padding(2.dp),
     )
 }
 
@@ -176,7 +176,7 @@ internal fun ChoiceTileCenteredPreview() {
     Preview {
         Row(
             modifier = Modifier.height(IntrinsicSize.Max),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             ChoiceTileCentered(
                 modifier = Modifier

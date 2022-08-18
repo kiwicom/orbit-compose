@@ -37,7 +37,7 @@ fun LoadingScreen(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             LoadingScreenInner()
         }

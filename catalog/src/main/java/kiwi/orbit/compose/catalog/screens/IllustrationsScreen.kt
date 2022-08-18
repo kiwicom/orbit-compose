@@ -61,7 +61,7 @@ fun IllustrationsScreenInner(contentPadding: PaddingValues) {
                         modifier = Modifier
                             .padding(8.dp)
                             .fillMaxWidth(),
-                        contentDescription = name
+                        contentDescription = name,
                     )
                 }
             }

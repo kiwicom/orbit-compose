@@ -92,7 +92,7 @@ public fun TopAppBar(
             Box(
                 Modifier.semantics(mergeDescendants = true) {
                     testTag = TopAppBarSemantics.TitleTag
-                }
+                },
             ) {
                 title()
             }
@@ -102,7 +102,7 @@ public fun TopAppBar(
             Row(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
-                content = actions
+                content = actions,
             )
         },
         elevation = elevation,
@@ -124,12 +124,12 @@ private fun SingleRowTopAppBar(
     Surface(
         modifier = modifier,
         color = OrbitTheme.colors.surface.main,
-        elevation = elevation
+        elevation = elevation,
     ) {
         Column(
             Modifier
                 .statusBarsPadding()
-                .windowInsetsPadding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal))
+                .windowInsetsPadding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)),
         ) {
             TopAppBarLayout(
                 modifier = when (scrollBehavior) {
@@ -190,7 +190,7 @@ internal fun TopAppBarLayout(
                         .layoutId("title")
                         .padding(horizontal = TopAppBarHorizontalPadding)
                         .alpha(titleAlpha)
-                        .then(if (hideTitleSemantics) Modifier.clearAndSetSemantics { } else Modifier)
+                        .then(if (hideTitleSemantics) Modifier.clearAndSetSemantics { } else Modifier),
                 ) {
                     ProvideMergedTextStyle(TopAppBarTitleNormalTextStyle) {
                         title()
@@ -199,7 +199,7 @@ internal fun TopAppBarLayout(
                 Box(
                     Modifier
                         .layoutId("actionIcons")
-                        .padding(end = TopAppBarHorizontalPadding)
+                        .padding(end = TopAppBarHorizontalPadding),
                 ) {
                     actions()
                 }
@@ -217,15 +217,15 @@ internal fun TopAppBarLayout(
         layout(constraints.maxWidth, layoutHeight) {
             iconPlaceable.placeRelative(
                 x = 0,
-                y = (layoutHeight - iconPlaceable.height) / 2
+                y = (layoutHeight - iconPlaceable.height) / 2,
             )
             titlePlaceable.placeRelative(
                 x = max(TopAppBarTitleInset.roundToPx(), iconPlaceable.width),
-                y = (layoutHeight - titlePlaceable.height) / 2
+                y = (layoutHeight - titlePlaceable.height) / 2,
             )
             actionsPlaceable.placeRelative(
                 x = constraints.maxWidth - actionsPlaceable.width,
-                y = (layoutHeight - actionsPlaceable.height) / 2
+                y = (layoutHeight - actionsPlaceable.height) / 2,
             )
         }
     }
@@ -263,7 +263,7 @@ internal fun TopAppBarPreview() {
                 IconButton(onClick = {}) {
                     Icon(Icons.Security, contentDescription = null)
                 }
-            }
+            },
         )
     }
 }

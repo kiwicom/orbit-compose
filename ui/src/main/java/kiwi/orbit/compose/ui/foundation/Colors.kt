@@ -371,7 +371,7 @@ public class Colors(
 public fun ProvideColors(colors: Colors, content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalColors provides colors,
-        content = content
+        content = content,
     )
 }
 

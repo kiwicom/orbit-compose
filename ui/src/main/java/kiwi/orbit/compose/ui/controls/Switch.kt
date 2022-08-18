@@ -57,7 +57,6 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kotlin.math.roundToInt
-import kotlinx.coroutines.flow.collect
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -80,7 +79,7 @@ public fun Switch(
                 enabled = enabled,
                 role = Role.Switch,
                 interactionSource = interactionSource,
-                indication = null
+                indication = null,
             )
         } else {
             Modifier
@@ -101,7 +100,7 @@ public fun Switch(
             )
             .wrapContentSize(Alignment.Center)
             .padding(SwitchPadding)
-            .requiredSize(SwitchWidth, SwitchHeight)
+            .requiredSize(SwitchWidth, SwitchHeight),
     ) {
         SwitchImpl(
             checked = checked,
@@ -117,7 +116,7 @@ private fun BoxScope.SwitchImpl(
     checked: Boolean,
     enabled: Boolean,
     thumbValue: State<Float>,
-    interactionSource: InteractionSource
+    interactionSource: InteractionSource,
 ) {
     val interactions = remember { mutableStateListOf<Interaction>() }
 
@@ -145,14 +144,14 @@ private fun BoxScope.SwitchImpl(
             if (checked) OrbitTheme.colors.info.normal else OrbitTheme.colors.surface.disabled
         } else {
             (if (checked) OrbitTheme.colors.info.normal else OrbitTheme.colors.surface.disabled).copy(
-                alpha = 0.3f
+                alpha = 0.3f,
             )
-        }
+        },
     )
     Canvas(
         Modifier
             .align(Alignment.Center)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         drawTrack(mainColor, TrackWidth.toPx(), TrackStrokeWidth.toPx())
     }
@@ -162,7 +161,7 @@ private fun BoxScope.SwitchImpl(
             .offset { IntOffset(thumbValue.value.roundToInt(), 0) }
             .indication(
                 interactionSource = interactionSource,
-                indication = rememberRipple(bounded = false, radius = ThumbRippleRadius)
+                indication = rememberRipple(bounded = false, radius = ThumbRippleRadius),
             )
             .requiredSize(ThumbDiameter)
             .border(ThumbStrokeWidth, Color(0x1907405C), CircleShape) // 10% alpha from 255 = 25 dec = 19 hex
@@ -172,11 +171,11 @@ private fun BoxScope.SwitchImpl(
                     Modifier.shadow(elevation, CircleShape, clip = false)
                 } else {
                     Modifier
-                }
+                },
             )
             .background(OrbitTheme.colors.surface.main, CircleShape)
             .padding((ThumbDiameter - ThumbInnerDiameter - ThumbStrokeWidth * 2) / 2)
-            .background(mainColor, CircleShape)
+            .background(mainColor, CircleShape),
     )
 }
 
@@ -187,7 +186,7 @@ private fun DrawScope.drawTrack(trackColor: Color, trackWidth: Float, strokeWidt
         Offset(strokeRadius + SwitchPadding.toPx(), center.y),
         Offset(trackWidth - strokeRadius + SwitchPadding.toPx(), center.y),
         strokeWidth,
-        StrokeCap.Round
+        StrokeCap.Round,
     )
 }
 
@@ -197,13 +196,13 @@ private fun DrawScope.drawTrack(trackColor: Color, trackWidth: Float, strokeWidt
 private fun <T : Any> rememberSwipeableStateFor(
     value: T,
     onValueChange: (T) -> Unit,
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec
+    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
 ): SwipeableState<T> {
     val swipeableState = remember {
         SwipeableState(
             initialValue = value,
             animationSpec = animationSpec,
-            confirmStateChange = { true }
+            confirmStateChange = { true },
         )
     }
     val forceAnimationCheck = remember { mutableStateOf(false) }
@@ -246,21 +245,21 @@ internal fun SwitchPreview() {
         Row {
             Switch(
                 checked = false,
-                onCheckedChange = {}
+                onCheckedChange = {},
             )
             Switch(
                 checked = true,
-                onCheckedChange = {}
+                onCheckedChange = {},
             )
             Switch(
                 checked = false,
                 enabled = false,
-                onCheckedChange = {}
+                onCheckedChange = {},
             )
             Switch(
                 checked = true,
                 enabled = false,
-                onCheckedChange = {}
+                onCheckedChange = {},
             )
         }
     }

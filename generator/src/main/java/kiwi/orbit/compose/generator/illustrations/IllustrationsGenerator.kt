@@ -65,7 +65,7 @@ class IllustrationsGenerator {
     private fun downloadAndResizeIllustrations(
         listUrl: String,
         prefixUrl: String,
-        resourceOutDir: Path
+        resourceOutDir: Path,
     ): List<Pair<String, String>> {
         val regexp = ".+\"([a-zA-Z0-9]+)\".+".toRegex()
         val names = URL(listUrl)
@@ -135,7 +135,7 @@ class IllustrationsGenerator {
         illustrationClass.addAnnotation(
             AnnotationSpec.builder(Suppress::class)
                 .addMember("%S", "unused")
-                .build()
+                .build(),
         )
 
         illustrations.sortedBy { it.first }.forEach { (illustrationName, illustrationResource) ->
@@ -146,9 +146,9 @@ class IllustrationsGenerator {
                         .addStatement(
                             "return %M(%L)",
                             MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.$illustrationResource"
+                            "R.drawable.$illustrationResource",
                         )
-                        .build()
+                        .build(),
                 )
                 .build()
             illustrationClass.addProperty(property)

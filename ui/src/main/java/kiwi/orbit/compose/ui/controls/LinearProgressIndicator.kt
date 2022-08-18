@@ -106,7 +106,7 @@ internal fun LinearProgressIndicatorPreview() {
                 LocalLayoutDirection provides when (LocalLayoutDirection.current) {
                     LayoutDirection.Ltr -> LayoutDirection.Rtl
                     LayoutDirection.Rtl -> LayoutDirection.Ltr
-                }
+                },
             ) {
                 LinearProgressIndicator(0.5f)
             }

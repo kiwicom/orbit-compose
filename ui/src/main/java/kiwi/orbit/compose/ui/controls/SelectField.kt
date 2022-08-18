@@ -44,7 +44,7 @@ public fun <T> SelectField(
         modifier
             .semantics {
                 editableText = AnnotatedString(value)
-            }
+            },
     ) {
         var expanded by remember { mutableStateOf(false) }
 
@@ -77,13 +77,13 @@ public fun <T> SelectField(
                 },
                 singleLine = true,
                 // Workaround util https://issuetracker.google.com/issues/207695810 gets fixed.
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
             ExposedDropdownMenu(
                 expanded = expanded,
                 onDismissRequest = {
                     expanded = false
-                }
+                },
             ) {
                 options.forEach { selectionOption ->
                     DropdownMenuItem(

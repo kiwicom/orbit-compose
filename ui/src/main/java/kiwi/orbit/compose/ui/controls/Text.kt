@@ -40,7 +40,7 @@ public fun Text(
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = LocalTextStyle.current
+    style: TextStyle = LocalTextStyle.current,
 ) {
     Text(
         AnnotatedString(text),
@@ -60,7 +60,7 @@ public fun Text(
         maxLines,
         emptyMap(),
         onTextLayout,
-        style
+        style,
     )
 }
 
@@ -83,7 +83,7 @@ public fun Text(
     maxLines: Int = Int.MAX_VALUE,
     inlineContent: Map<String, InlineTextContent> = mapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = LocalTextStyle.current
+    style: TextStyle = LocalTextStyle.current,
 ) {
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
@@ -100,8 +100,8 @@ public fun Text(
             fontFamily = fontFamily,
             textDecoration = textDecoration,
             fontStyle = fontStyle,
-            letterSpacing = letterSpacing
-        )
+            letterSpacing = letterSpacing,
+        ),
     )
     BasicText(
         text,
@@ -111,6 +111,6 @@ public fun Text(
         overflow,
         softWrap,
         maxLines,
-        inlineContent
+        inlineContent,
     )
 }

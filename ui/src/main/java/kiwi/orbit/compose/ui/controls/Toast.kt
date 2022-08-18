@@ -134,7 +134,7 @@ private fun Toast(
                     contentDescription = null,
                     modifier = Modifier
                         .padding(top = 2.dp)
-                        .size(16.dp)
+                        .size(16.dp),
                 )
             }
             Text(message, style = OrbitTheme.typography.bodyNormal)
@@ -177,7 +177,7 @@ private fun Modifier.toastGesturesDetector(
                         } else {
                             velocityTracker.addPosition(
                                 change.uptimeMillis,
-                                change.position
+                                change.position,
                             )
                         }
                     }
@@ -187,7 +187,7 @@ private fun Modifier.toastGesturesDetector(
                 val velocity = velocityTracker.calculateVelocity().y
                 val targetOffsetY = decay.calculateTargetValue(
                     offsetY.value,
-                    velocity
+                    velocity,
                 )
                 // The animation stops when it reaches the bounds.
                 offsetY.updateBounds(

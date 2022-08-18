@@ -38,7 +38,7 @@ fun StepperScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             StepperScreenInner()
         }
@@ -55,7 +55,7 @@ private fun StepperScreenInner() {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 16.dp)
+            modifier = Modifier.padding(vertical = 16.dp),
         ) {
             Text(
                 modifier = Modifier.weight(1f),
@@ -73,12 +73,12 @@ private fun StepperScreenInner() {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 16.dp)
+            modifier = Modifier.padding(vertical = 16.dp),
         ) {
             Text(
                 modifier = Modifier.weight(1f),
                 style = OrbitTheme.typography.title5,
-                text = "How many pets would you like to have?"
+                text = "How many pets would you like to have?",
             )
 
             Stepper(

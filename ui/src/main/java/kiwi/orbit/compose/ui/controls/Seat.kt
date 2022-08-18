@@ -146,7 +146,7 @@ private fun SeatContainer(
             Seat(
                 selected = selected,
                 enabled = enabled,
-                isExtraLegroom = isExtraLegroom
+                isExtraLegroom = isExtraLegroom,
             ) {
                 label()
             }
@@ -174,7 +174,7 @@ private fun ColumnScope.Seat(
             selected -> Color.Transparent
             isExtraLegroom -> ColorTokens.BlueLightActive
             else -> ColorTokens.ProductLightActive
-        }
+        },
     )
 
     SeatSurface(
@@ -190,7 +190,7 @@ private fun ColumnScope.Seat(
                 isExtraLegroom -> OrbitTheme.colors.info.subtle
                 selected -> OrbitTheme.colors.primary.normal
                 else -> OrbitTheme.colors.primary.subtle
-            }
+            },
         )
         Box(
             modifier = Modifier
@@ -211,8 +211,8 @@ private fun ColumnScope.Seat(
                 },
                 LocalTextStyle provides OrbitTheme.typography.bodyNormal.copy(
                     color = color,
-                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
-                )
+                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                ),
             ) {
                 content()
             }
@@ -342,7 +342,7 @@ internal fun SeatPreview() {
                 )
 
                 SeatUnavailable(
-                    contentDescription = "Unavailable"
+                    contentDescription = "Unavailable",
                 )
             }
             Column {

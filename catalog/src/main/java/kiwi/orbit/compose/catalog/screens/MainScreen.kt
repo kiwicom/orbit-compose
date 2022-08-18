@@ -128,7 +128,7 @@ private fun LazyGridScope.cardItems(
         Text(
             text = title,
             style = OrbitTheme.typography.title3,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = 4.dp),
         )
     }
     items(items) { item ->
