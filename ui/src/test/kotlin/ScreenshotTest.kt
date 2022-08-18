@@ -29,6 +29,8 @@ import kiwi.orbit.compose.ui.controls.KeyValuePreview
 import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ListChoicePreview
+import kiwi.orbit.compose.ui.controls.ListLargePreview
+import kiwi.orbit.compose.ui.controls.ListPreview
 import kiwi.orbit.compose.ui.controls.PasswordTextFieldPreview
 import kiwi.orbit.compose.ui.controls.PillButtonPreview
 import kiwi.orbit.compose.ui.controls.RadioFieldPreview
@@ -180,8 +182,18 @@ internal class ScreenshotTest {
     }
 
     @Test
+    fun list() {
+        snapshot { ListPreview() }
+    }
+
+    @Test
     fun listChoice() {
         snapshot { ListChoicePreview() }
+    }
+
+    @Test
+    fun listLarge() {
+        snapshot { ListLargePreview() }
     }
 
     @Test
