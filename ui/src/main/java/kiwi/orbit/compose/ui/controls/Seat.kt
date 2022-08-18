@@ -38,12 +38,12 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -321,7 +321,7 @@ private val SeatContainerLayersMargin = 9.dp
 private val SeatContainerHeight = SeatHeight + SeatPriceHeight + SeatContainerLayersMargin
 private val SeatContainerWidth = SeatWidth + SeatContainerLayersMargin * 2
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun SeatPreview() {
     Preview {

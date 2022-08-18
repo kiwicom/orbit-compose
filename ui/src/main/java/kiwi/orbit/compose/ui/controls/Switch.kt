@@ -50,11 +50,11 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collect
@@ -239,7 +239,7 @@ private val AnimationSpec = TweenSpec<Float>(durationMillis = 100)
 private val ThumbDefaultElevation = 3.dp
 private val ThumbPressedElevation = 6.dp
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun SwitchPreview() {
     Preview {

@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
@@ -193,7 +194,7 @@ public class ListScope internal constructor(
     public val icon: Painter,
 )
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ListPreview() {
     Preview {

@@ -16,9 +16,9 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
@@ -81,7 +81,7 @@ public fun PasswordTextField(
     )
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun PasswordTextFieldPreview() {
     Preview {
