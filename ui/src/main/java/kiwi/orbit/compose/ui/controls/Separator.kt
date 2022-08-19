@@ -17,7 +17,7 @@ public fun Separator(
     modifier: Modifier = Modifier,
     color: Color = OrbitTheme.colors.surface.strong,
     thickness: Dp = 1.dp,
-    startIndent: Dp = 0.dp
+    startIndent: Dp = 0.dp,
 ) {
     val indentMod = if (startIndent.value != 0f) {
         Modifier.padding(start = startIndent)
@@ -29,6 +29,6 @@ public fun Separator(
             .then(indentMod)
             .fillMaxWidth()
             .height(thickness)
-            .background(color)
+            .background(color),
     )
 }

@@ -38,7 +38,7 @@ internal fun TopAppBarLargeScreen(
                     IconButton(onClick = {}) {
                         Icon(painter = Icons.Notification, contentDescription = null)
                     }
-                }
+                },
             )
         },
         content = { CustomContentPlaceholder(it) },
@@ -103,7 +103,7 @@ internal fun TopAppBarLargeCustomContentScreen(
                             Text(
                                 text = "j.archer@nx01.starfleet",
                                 style = OrbitTheme.typography.bodySmall,
-                                emphasis = ContentEmphasis.Minor
+                                emphasis = ContentEmphasis.Minor,
                             )
                         }
                         AsyncImage(
@@ -138,7 +138,7 @@ internal fun TopAppBarLargeCustomContentScreen(
                         Text(
                             text = "j.archer@nx01.starfleet",
                             style = OrbitTheme.typography.bodyNormal,
-                            emphasis = ContentEmphasis.Minor
+                            emphasis = ContentEmphasis.Minor,
                         )
                     }
                 },

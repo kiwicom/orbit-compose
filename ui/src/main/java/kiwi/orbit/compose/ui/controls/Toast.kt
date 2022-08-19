@@ -31,11 +31,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.platform.AccessibilityManager
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.utils.durationScale
@@ -134,7 +134,7 @@ private fun Toast(
                     contentDescription = null,
                     modifier = Modifier
                         .padding(top = 2.dp)
-                        .size(16.dp)
+                        .size(16.dp),
                 )
             }
             Text(message, style = OrbitTheme.typography.bodyNormal)
@@ -177,7 +177,7 @@ private fun Modifier.toastGesturesDetector(
                         } else {
                             velocityTracker.addPosition(
                                 change.uptimeMillis,
-                                change.position
+                                change.position,
                             )
                         }
                     }
@@ -187,7 +187,7 @@ private fun Modifier.toastGesturesDetector(
                 val velocity = velocityTracker.calculateVelocity().y
                 val targetOffsetY = decay.calculateTargetValue(
                     offsetY.value,
-                    velocity
+                    velocity,
                 )
                 // The animation stops when it reaches the bounds.
                 offsetY.updateBounds(
@@ -219,7 +219,7 @@ private fun Modifier.toastGesturesDetector(
         .alpha(alpha.value)
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ToastPreview() {
     Preview {

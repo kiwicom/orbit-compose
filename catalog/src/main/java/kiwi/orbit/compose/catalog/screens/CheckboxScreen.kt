@@ -39,7 +39,7 @@ fun CheckboxScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             CheckboxScreenInner()
         }
@@ -111,7 +111,7 @@ private fun CheckboxScreenInner() {
             checked = checkbox4,
             onCheckedChange = { checkbox4 = !checkbox4 },
             modifier = Modifier.fillMaxWidth(),
-            description = { Text("Live Long and Prosper.") }
+            description = { Text("Live Long and Prosper.") },
         ) {
             Text("Star Trek")
         }
@@ -142,7 +142,7 @@ private fun CheckboxScreenInner() {
             onCheckedChange = { },
             modifier = Modifier.fillMaxWidth(),
             enabled = false,
-            description = { Text("Live Long and Prosper.") }
+            description = { Text("Live Long and Prosper.") },
         ) {
             Text("Star Trek")
         }

@@ -40,7 +40,7 @@ fun SeatScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             SeatScreenInner()
         }
@@ -82,7 +82,7 @@ private fun SeatScreenInner() {
                 )
 
                 SeatUnavailable(
-                    contentDescription = "Unavailable"
+                    contentDescription = "Unavailable",
                 )
             }
 
@@ -104,7 +104,7 @@ private fun SeatScreenInner() {
                 )
 
                 SeatUnavailable(
-                    contentDescription = "Unavailable"
+                    contentDescription = "Unavailable",
                 )
             }
         }

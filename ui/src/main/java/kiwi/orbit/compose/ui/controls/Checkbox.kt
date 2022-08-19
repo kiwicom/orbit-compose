@@ -33,10 +33,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
@@ -54,7 +54,7 @@ public fun Checkbox(
             !checked -> OrbitTheme.colors.surface.disabled
             else -> Color.Transparent
         },
-        animationSpec = tween(durationMillis = CheckboxAnimationDuration)
+        animationSpec = tween(durationMillis = CheckboxAnimationDuration),
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
@@ -63,7 +63,7 @@ public fun Checkbox(
             checked -> OrbitTheme.colors.info.normal
             else -> Color.Transparent
         },
-        animationSpec = tween(durationMillis = CheckboxAnimationDuration)
+        animationSpec = tween(durationMillis = CheckboxAnimationDuration),
     )
     val iconColor = when (enabled) {
         true -> OrbitTheme.colors.info.onNormal
@@ -79,8 +79,8 @@ public fun Checkbox(
                 interactionSource = interactionSource,
                 indication = rememberRipple(
                     bounded = false,
-                    radius = CheckboxRippleRadius
-                )
+                    radius = CheckboxRippleRadius,
+                ),
             )
         } else {
             Modifier
@@ -88,7 +88,7 @@ public fun Checkbox(
 
     val errorAlpha by animateFloatAsState(
         targetValue = if (isError && enabled) 1.0f else 0.0f,
-        animationSpec = tween(durationMillis = CheckboxAnimationDuration)
+        animationSpec = tween(durationMillis = CheckboxAnimationDuration),
     )
     val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle
@@ -100,7 +100,7 @@ public fun Checkbox(
             .semantics {
                 if (isError) this.error(errorMessage)
             },
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.requiredSize(CheckboxSize)) {
             drawCheckbox(borderColor, backgroundColor, errorAlpha)
@@ -174,7 +174,7 @@ private val ErrorShadowWidth = 2.dp
 private val ErrorShadowSize = CheckboxSize + ErrorShadowWidth * 2
 private val ErrorShadowCornerRadius = CheckboxCornerRadius + ErrorShadowWidth
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun CheckboxPreview() {
     Preview {

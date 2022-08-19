@@ -23,11 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
@@ -41,21 +41,21 @@ public fun Radio(
 ) {
     val borderWidth by animateDpAsState(
         targetValue = if (selected) 6.dp else 2.dp,
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val borderColor by animateColorAsState(
         targetValue = when {
             !enabled || !selected -> OrbitTheme.colors.surface.disabled
             else -> OrbitTheme.colors.info.normal
         },
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
             !enabled && !selected -> OrbitTheme.colors.surface.subtle
             else -> Color.Transparent
         },
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val selectableModifier =
         if (onClick != null) {
@@ -67,8 +67,8 @@ public fun Radio(
                 interactionSource = interactionSource,
                 indication = rememberRipple(
                     bounded = false,
-                    radius = RadioRippleRadius
-                )
+                    radius = RadioRippleRadius,
+                ),
             )
         } else {
             Modifier
@@ -76,7 +76,7 @@ public fun Radio(
 
     val errorAlpha by animateFloatAsState(
         targetValue = if (isError && enabled) 1f else 0f,
-        animationSpec = tween(durationMillis = RadioAnimationDuration)
+        animationSpec = tween(durationMillis = RadioAnimationDuration),
     )
     val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle
@@ -88,7 +88,7 @@ public fun Radio(
             .semantics {
                 if (isError) this.error(errorMessage)
             }
-            .requiredSize(RadioSize)
+            .requiredSize(RadioSize),
     ) {
         drawRadio(borderWidth, borderColor, backgroundColor)
         drawError(errorStrokeColor, errorShadowColor, errorAlpha)
@@ -121,7 +121,7 @@ private val RadioRippleRadius = 20.dp
 private val ErrorShadowSize = 24.dp
 private val ErrorShadowRadius = ErrorShadowSize / 2
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun RadioPreview() {
     Preview {

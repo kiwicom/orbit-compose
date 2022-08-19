@@ -23,12 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
@@ -82,7 +82,7 @@ public fun TopAppBarLarge(
             Box(
                 Modifier.semantics(mergeDescendants = true) {
                     testTag = TopAppBarSemantics.TitleTag
-                }
+                },
             ) {
                 title()
             }
@@ -91,7 +91,7 @@ public fun TopAppBarLarge(
             Box(
                 Modifier.semantics(mergeDescendants = true) {
                     testTag = TopAppBarSemantics.TitleTag
-                }
+                },
             ) {
                 largeTitle()
             }
@@ -101,7 +101,7 @@ public fun TopAppBarLarge(
             Row(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
-                content = actions
+                content = actions,
             )
         },
         largeElevated = largeElevated,
@@ -119,7 +119,7 @@ private fun TwoRowsTopAppBar(
     actions: @Composable () -> Unit,
     largeElevated: Boolean,
     elevation: Dp,
-    scrollBehavior: TopAppBarScrollBehavior?
+    scrollBehavior: TopAppBarScrollBehavior?,
 ) {
     check(largeElevated || (!largeElevated && scrollBehavior != null)) {
         "TopAppBarLarge non-elevated is supported only with scrolling behavior."
@@ -137,8 +137,8 @@ private fun TwoRowsTopAppBar(
         ) {
             Column(
                 Modifier.windowInsetsPadding(
-                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
-                )
+                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
+                ),
             ) {
                 TopAppBarLayout(
                     modifier = Modifier,
@@ -168,7 +168,7 @@ private fun TwoRowsTopAppBar(
             ) {
                 TopAppBarLayout(
                     modifier = Modifier.windowInsetsPadding(
-                        WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+                        WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
                     ),
                     title = title,
                     titleAlpha = scrollFraction,
@@ -179,7 +179,7 @@ private fun TwoRowsTopAppBar(
             }
             TopAppBarLargeLayout(
                 modifier = Modifier.windowInsetsPadding(
-                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal)
+                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal),
                 ),
                 scrollBehavior = scrollBehavior,
                 largeTitle = largeTitle,
@@ -205,9 +205,9 @@ private fun TopAppBarLargeLayout(
                 when (scrollBehavior) {
                     null -> Modifier
                     else -> Modifier.scrollBehaviorLayout(scrollBehavior)
-                }
+                },
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
     ) {
         ProvideMergedTextStyle(value = OrbitTheme.typography.title1) {
             largeTitle()
@@ -215,7 +215,7 @@ private fun TopAppBarLargeLayout(
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun TopAppBarLargePreview() {
     Preview {
@@ -230,7 +230,7 @@ internal fun TopAppBarLargePreview() {
                 IconButton(onClick = {}) {
                     Icon(Icons.Security, contentDescription = null)
                 }
-            }
+            },
         )
     }
 }

@@ -17,11 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
@@ -76,7 +77,7 @@ public fun ListChoice(
             Box(Modifier.layoutId(TrailingIconLayoutId)) {
                 ProvideContentEmphasis(ContentEmphasis.Minor) {
                     CompositionLocalProvider(
-                        LocalSmallButtonScope provides true
+                        LocalSmallButtonScope provides true,
                     ) {
                         trailingIcon()
                     }
@@ -116,7 +117,7 @@ public fun ListChoice(
             trailingIconIndent
 
         val separatorPlaceable = separatorMeasurable?.measure(
-            constraints.copy(maxWidth = width).offset(horizontal = -iconIndent + 16.dp.roundToPx())
+            constraints.copy(maxWidth = width).offset(horizontal = -iconIndent + 16.dp.roundToPx()),
         )
 
         val mainHeight = titlePlaceable.height + descriptionPlaceable.height
@@ -156,54 +157,52 @@ private const val DescriptionLayoutId = "description"
 private const val TrailingIconLayoutId = "trailing_icon"
 private const val SeparatorLayoutId = "separator"
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ListChoicePreview() {
-    OrbitTheme {
-        Surface {
-            Column {
-                ListChoice(onClick = {}) {
-                    Text("ListChoice title")
-                }
-                ListChoice(
-                    onClick = {},
-                    description = { Text("Further description") },
-                ) {
-                    Text("ListChoice title")
-                }
-                ListChoice(
-                    onClick = {},
-                    icon = { Icon(Icons.Accommodation, contentDescription = null) },
-                    trailingIcon = { Icon(Icons.ChevronRight, contentDescription = null) },
-                ) {
-                    Text("ListChoice title")
-                }
-                ListChoice(
-                    onClick = {},
-                    icon = { Icon(Icons.Accommodation, contentDescription = null) },
-                    trailingIcon = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            BadgeInfoSubtle {
-                                Text("1")
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Icon(Icons.ChevronRight, contentDescription = null)
+    Preview {
+        Column {
+            ListChoice(onClick = {}) {
+                Text("ListChoice title")
+            }
+            ListChoice(
+                onClick = {},
+                description = { Text("Further description") },
+            ) {
+                Text("ListChoice title")
+            }
+            ListChoice(
+                onClick = {},
+                icon = { Icon(Icons.Accommodation, contentDescription = null) },
+                trailingIcon = { Icon(Icons.ChevronRight, contentDescription = null) },
+            ) {
+                Text("ListChoice title")
+            }
+            ListChoice(
+                onClick = {},
+                icon = { Icon(Icons.Accommodation, contentDescription = null) },
+                trailingIcon = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        BadgeInfoSubtle {
+                            Text("1")
                         }
-                    },
-                    description = { Text("Further description") },
-                ) {
-                    Text("ListChoice title")
-                }
-                ListChoice(
-                    onClick = {},
-                    trailingIcon = {
-                        ButtonPrimarySubtle(onClick = {}) {
-                            Icon(Icons.Plus, contentDescription = null)
-                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Icon(Icons.ChevronRight, contentDescription = null)
                     }
-                ) {
-                    Text("ListChoice title")
-                }
+                },
+                description = { Text("Further description") },
+            ) {
+                Text("ListChoice title")
+            }
+            ListChoice(
+                onClick = {},
+                trailingIcon = {
+                    ButtonPrimarySubtle(onClick = {}) {
+                        Icon(Icons.Plus, contentDescription = null)
+                    }
+                },
+            ) {
+                Text("ListChoice title")
             }
         }
     }

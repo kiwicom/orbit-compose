@@ -10,7 +10,7 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @Composable
 internal fun FieldLabel(
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
         Box(Modifier.padding(bottom = 4.dp)) {

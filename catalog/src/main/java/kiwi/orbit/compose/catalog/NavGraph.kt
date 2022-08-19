@@ -85,7 +85,7 @@ fun NavGraph(
     val actions = remember(navController) { MainActions(navController) }
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination,
     ) {
         composable(MainDestinations.MAIN) {
             MainScreen(actions, onToggleTheme)
@@ -182,8 +182,8 @@ fun NavGraph(
         composable(
             route = MainDestinations.TOP_APP_BAR + "/{demoId}",
             arguments = listOf(
-                navArgument("demoId") { type = NavType.IntType }
-            )
+                navArgument("demoId") { type = NavType.IntType },
+            ),
         ) { entry ->
             val demoId = requireNotNull(entry.arguments).getInt("demoId")
             TopAppBarScreen(demoId, actions::navigateUp, actions::showTopAppBar)

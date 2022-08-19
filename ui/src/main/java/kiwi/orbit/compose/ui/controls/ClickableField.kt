@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -20,6 +19,7 @@ import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 @Composable
@@ -68,7 +68,7 @@ internal fun ClickableFieldBox(
     val transition = updateTransition(isError, "stateTransition")
     val borderColor = transition.animateColor(
         transitionSpec = { tween(durationMillis = AnimationDuration) },
-        label = "borderColor"
+        label = "borderColor",
     ) {
         when (it) {
             true -> OrbitTheme.colors.critical.normal
@@ -98,7 +98,7 @@ internal fun ClickableFieldBox(
 
 private const val AnimationDuration = 150
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ClickableFieldPreview() {
     Preview {

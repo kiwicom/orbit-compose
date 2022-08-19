@@ -42,7 +42,7 @@ fun ToastScreen(
         Box(
             Modifier
                 .fillMaxSize()
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             ToastScreenInner { message, icon ->
                 scope.launch {
@@ -88,7 +88,7 @@ private fun ToastScreenInner(
             onClick = {
                 onToast(
                     "On mobile there’s always a fixed width to make the Toast stand out a bit more.",
-                    null
+                    null,
                 )
             },
         ) { Text("Toast – long message") }

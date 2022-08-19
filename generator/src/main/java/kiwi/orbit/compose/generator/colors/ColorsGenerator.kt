@@ -115,7 +115,7 @@ class ColorsGenerator {
                 .initializer(
                     "%T(0x%L)",
                     colorType,
-                    "%08x".format(colorValue).uppercase()
+                    "%08x".format(colorValue).uppercase(),
                 )
                 .build()
             objectBuilder.addProperty(property)

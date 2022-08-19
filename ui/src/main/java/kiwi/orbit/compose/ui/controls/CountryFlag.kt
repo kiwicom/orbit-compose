@@ -13,12 +13,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 
@@ -31,7 +31,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 public fun CountryFlag(
     countryCode: String,
     contentDescription: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val url = "file:///android_asset/country_flags/$countryCode.png"
 
@@ -55,11 +55,11 @@ public fun CountryFlag(
                 width = 0.5.dp,
                 color = OrbitTheme.colors.content.normal.copy(alpha = .15f),
                 shape = RoundedCornerShape(2.dp),
-            )
+            ),
     )
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun CountryFlagPreview() {
     Preview {

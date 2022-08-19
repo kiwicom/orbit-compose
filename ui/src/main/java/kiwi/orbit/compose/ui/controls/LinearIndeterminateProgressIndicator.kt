@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 /**
@@ -133,7 +133,7 @@ private val FirstLineTailEasing = CubicBezierEasing(0.4f, 0f, 1f, 1f)
 private val SecondLineHeadEasing = CubicBezierEasing(0f, 0f, 0.65f, 1f)
 private val SecondLineTailEasing = CubicBezierEasing(0.1f, 0f, 0.45f, 1f)
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun LinearIndeterminateProgressIndicatorPreview() {
     Preview {

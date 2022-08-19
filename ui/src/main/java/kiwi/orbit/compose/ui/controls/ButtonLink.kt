@@ -15,9 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.layout.expand
@@ -31,7 +31,7 @@ import kiwi.orbit.compose.ui.layout.expand
 public fun ButtonLinkPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -71,7 +71,7 @@ public fun ButtonTextLinkPrimary(
 public fun ButtonLinkSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -111,7 +111,7 @@ public fun ButtonTextLinkSecondary(
 public fun ButtonLinkCritical(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -158,7 +158,7 @@ private fun ButtonTextLink(
             modifier = modifier
                 .expand(
                     horizontal = ButtonDefaults.ButtonSmallHorizontalPadding,
-                    vertical = ButtonDefaults.ButtonSmallVerticalPadding
+                    vertical = ButtonDefaults.ButtonSmallVerticalPadding,
                 )
                 .clip(OrbitTheme.shapes.normal)
                 .clickable(
@@ -169,13 +169,13 @@ private fun ButtonTextLink(
                 )
                 .padding(
                     horizontal = ButtonDefaults.ButtonSmallHorizontalPadding,
-                    vertical = ButtonDefaults.ButtonSmallVerticalPadding
-                )
+                    vertical = ButtonDefaults.ButtonSmallVerticalPadding,
+                ),
         )
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ButtonLinkPreview() {
     Preview {
@@ -186,7 +186,7 @@ internal fun ButtonLinkPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ButtonTextLinkPreview() {
     Preview {

@@ -23,7 +23,7 @@ public fun IconButton(
     enabled: Boolean = true,
     rippleRadius: Dp = RippleRadius,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -32,10 +32,10 @@ public fun IconButton(
                 enabled = enabled,
                 role = Role.Button,
                 interactionSource = interactionSource,
-                indication = rememberRipple(bounded = false, radius = rippleRadius)
+                indication = rememberRipple(bounded = false, radius = rippleRadius),
             )
             .size(rippleRadius * 2),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         val contentEmphasis = if (enabled) LocalContentEmphasis.current else ContentEmphasis.Disabled
         ProvideContentEmphasis(contentEmphasis, content)

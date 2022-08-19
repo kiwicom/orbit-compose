@@ -38,7 +38,7 @@ fun SelectFieldScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             SelectFieldScreenInner()
         }
@@ -87,5 +87,5 @@ private fun SelectFieldScreenInner() {
 
 private class Country(
     val name: String,
-    val code: String
+    val code: String,
 )

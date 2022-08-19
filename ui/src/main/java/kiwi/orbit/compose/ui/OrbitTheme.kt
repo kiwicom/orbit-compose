@@ -45,7 +45,7 @@ public fun OrbitTheme(
             // Foundation
             LocalContentColor provides rememberedColors.content.normal,
             LocalTextSelectionColors provides selectionColors,
-            content = content
+            content = content,
         )
     }
 }

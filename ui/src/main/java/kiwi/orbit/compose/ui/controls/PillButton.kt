@@ -21,10 +21,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 /**
@@ -153,7 +153,7 @@ public interface PillButtonContainerScope
 
 private object PillButtonContainerScopeInstance : PillButtonContainerScope
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun PillButtonPreview() {
     Preview {

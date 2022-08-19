@@ -44,7 +44,7 @@ internal fun TopAppBarNormalScreen(
                     IconButton(onClick = {}) {
                         Icon(painter = Icons.Notification, contentDescription = null)
                     }
-                }
+                },
             )
         },
         content = { CustomContentPlaceholder(it) },
@@ -124,7 +124,7 @@ internal fun TopAppBarNormalWithFiltersScreen(
                     Row(
                         Modifier
                             .padding(horizontal = 16.dp)
-                            .padding(bottom = 8.dp)
+                            .padding(bottom = 8.dp),
                     ) {
                         var selected by remember { mutableStateOf(true) }
                         Tag(selected = selected, onSelect = { selected = !selected }) {
@@ -146,12 +146,12 @@ internal fun CustomContentPlaceholder(
         Modifier
             .verticalScroll(rememberScrollState())
             .padding(contentPadding)
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
         CustomPlaceholder(
             Modifier
                 .height(987.dp)
-                .clip(OrbitTheme.shapes.large)
+                .clip(OrbitTheme.shapes.large),
         )
     }
 }

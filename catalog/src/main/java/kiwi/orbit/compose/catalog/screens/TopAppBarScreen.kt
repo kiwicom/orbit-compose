@@ -46,7 +46,7 @@ private fun TopAppBarScreenInner(
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("TopAppBar") }, onNavigateUp = onNavigateUp)
-        }
+        },
     ) { contentPadding ->
         Column(
             Modifier

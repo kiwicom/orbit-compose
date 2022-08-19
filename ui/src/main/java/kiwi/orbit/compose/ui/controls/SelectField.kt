@@ -17,12 +17,12 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.semantics.editableText
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
@@ -44,7 +44,7 @@ public fun <T> SelectField(
         modifier
             .semantics {
                 editableText = AnnotatedString(value)
-            }
+            },
     ) {
         var expanded by remember { mutableStateOf(false) }
 
@@ -77,13 +77,13 @@ public fun <T> SelectField(
                 },
                 singleLine = true,
                 // Workaround util https://issuetracker.google.com/issues/207695810 gets fixed.
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
             ExposedDropdownMenu(
                 expanded = expanded,
                 onDismissRequest = {
                     expanded = false
-                }
+                },
             ) {
                 options.forEach { selectionOption ->
                     DropdownMenuItem(
@@ -104,7 +104,7 @@ public fun <T> SelectField(
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun SelectFieldPreview() {
     Preview {

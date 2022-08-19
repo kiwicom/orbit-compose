@@ -54,7 +54,7 @@ fun ChoiceTileScreen(onNavigateUp: () -> Unit) {
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             ChoiceTileScreenInner()
         }
@@ -78,7 +78,7 @@ private fun ChoiceTileScreenInner() {
                 Modifier
                     .horizontalScroll(rememberScrollState())
                     .height(IntrinsicSize.Max)
-                    .padding(horizontal = 8.dp, vertical = 2.dp)
+                    .padding(horizontal = 8.dp, vertical = 2.dp),
             ) {
                 ChoiceTile(
                     modifier = Modifier
@@ -114,7 +114,7 @@ private fun ChoiceTileScreenInner() {
             title = {
                 Text(
                     "Multiline long choice title label",
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 BadgeInfoSubtle {
                     Text("Popular")
@@ -136,7 +136,7 @@ private fun ChoiceTileScreenInner() {
                 ) {
                     Text(
                         "$16.90",
-                        Modifier.weight(1f)
+                        Modifier.weight(1f),
                     )
 
                     if (count > 0) {
@@ -146,7 +146,7 @@ private fun ChoiceTileScreenInner() {
                         )
                     }
                 }
-            }
+            },
         ) {
             CustomPlaceholder()
         }
@@ -157,7 +157,7 @@ private fun ChoiceTileScreenInner() {
             title = {
                 Text(
                     "Multiline long choice title label",
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
             },
             description = { Text("Multiline and very long description and lot of words") },
@@ -240,7 +240,7 @@ private fun ChoiceTileScreenInner() {
                     Image(
                         painter = Illustrations.Boarding,
                         contentDescription = null,
-                        Modifier.height(60.dp)
+                        Modifier.height(60.dp),
                     )
                 },
                 title = { Text("Plus Support") },
@@ -258,7 +258,7 @@ private fun ChoiceTileScreenInner() {
                     Text(
                         "Recommended Very Much",
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
                 },
                 icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },

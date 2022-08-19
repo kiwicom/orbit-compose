@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.contentColorFor
@@ -87,7 +87,7 @@ public fun ButtonCriticalSubtle(
 public fun ButtonBundleBasic(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -103,7 +103,7 @@ public fun ButtonBundleBasic(
 public fun ButtonBundleMedium(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -119,7 +119,7 @@ public fun ButtonBundleMedium(
 public fun ButtonBundleTop(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
@@ -138,7 +138,7 @@ internal fun ButtonLargePrimitive(
     modifier: Modifier = Modifier,
     backgroundBrush: Brush? = null,
     contentColor: Color = contentColorFor(backgroundColor),
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     val isSmall = LocalSmallButtonScope.current
     val contentPadding = when (isSmall) {
@@ -161,7 +161,7 @@ internal fun ButtonLargePrimitive(
     )
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ButtonPreview() {
     Preview {

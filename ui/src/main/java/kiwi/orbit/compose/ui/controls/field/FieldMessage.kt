@@ -80,7 +80,7 @@ internal fun FieldMessage(
 }
 
 private sealed class Message(
-    open val content: @Composable (() -> Unit)
+    open val content: @Composable (() -> Unit),
 ) {
     data class Error(override val content: @Composable () -> Unit) : Message(content)
     data class Info(override val content: @Composable () -> Unit) : Message(content)

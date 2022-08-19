@@ -32,7 +32,7 @@ internal fun ColumnWithMinConstraints(
 private class ColumnWithMinConstraintsMeasurePolicy : MeasurePolicy {
     override fun MeasureScope.measure(
         measurables: List<Measurable>,
-        constraints: Constraints
+        constraints: Constraints,
     ): MeasureResult {
         var occupiedSpaceVertically = 0
         val placeables = measurables.map { measurable ->
@@ -42,8 +42,8 @@ private class ColumnWithMinConstraintsMeasurePolicy : MeasurePolicy {
                         Constraints.Infinity
                     } else {
                         constraints.maxHeight - occupiedSpaceVertically
-                    }
-                )
+                    },
+                ),
             )
             occupiedSpaceVertically += placeable.height
             placeable

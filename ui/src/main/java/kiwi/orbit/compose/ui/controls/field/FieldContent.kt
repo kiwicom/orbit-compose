@@ -46,7 +46,7 @@ internal fun FieldContent(
                     LeadingId,
                     onLeadingIconClick,
                     leadingIcon,
-                    Modifier.padding(start = FieldIconPadding)
+                    Modifier.padding(start = FieldIconPadding),
                 )
             }
             if (trailingIcon != null) {
@@ -54,7 +54,7 @@ internal fun FieldContent(
                     TrailingId,
                     onTrailingIconClick,
                     trailingIcon,
-                    Modifier.padding(end = FieldIconPadding)
+                    Modifier.padding(end = FieldIconPadding),
                 )
             }
 
@@ -67,7 +67,7 @@ internal fun FieldContent(
                 Box(
                     Modifier
                         .layoutId(PlaceholderId)
-                        .then(padding)
+                        .then(padding),
                 ) {
                     ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
                         ProvideContentEmphasis(ContentEmphasis.Subtle, content = placeholder)
@@ -184,28 +184,28 @@ private class FieldContentMeasurePolicy(
 
     override fun IntrinsicMeasureScope.maxIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
-        width: Int
+        width: Int,
     ): Int {
         return intrinsicHeight(measurables, width, IntrinsicMeasurable::maxIntrinsicHeight)
     }
 
     override fun IntrinsicMeasureScope.minIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
-        width: Int
+        width: Int,
     ): Int {
         return intrinsicHeight(measurables, width, IntrinsicMeasurable::minIntrinsicHeight)
     }
 
     override fun IntrinsicMeasureScope.maxIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
-        height: Int
+        height: Int,
     ): Int {
         return intrinsicWidth(measurables, height, IntrinsicMeasurable::maxIntrinsicWidth)
     }
 
     override fun IntrinsicMeasureScope.minIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
-        height: Int
+        height: Int,
     ): Int {
         return intrinsicWidth(measurables, height, IntrinsicMeasurable::minIntrinsicWidth)
     }
@@ -224,7 +224,7 @@ private class FieldContentMeasurePolicy(
             leadingWidth = leadingWidth,
             trailingWidth = trailingWidth,
             placeholderWidth = placeholderWidth,
-            constraints = ZeroConstraints
+            constraints = ZeroConstraints,
         )
     }
 
@@ -243,7 +243,7 @@ private class FieldContentMeasurePolicy(
             trailingHeight = trailingHeight,
             placeholderHeight = placeholderHeight,
             constraints = ZeroConstraints,
-            density = density
+            density = density,
         )
     }
 }
@@ -253,7 +253,7 @@ private fun calculateWidth(
     leadingWidth: Int,
     trailingWidth: Int,
     placeholderWidth: Int,
-    constraints: Constraints
+    constraints: Constraints,
 ): Int {
     val middleSection = maxOf(fieldWidth, placeholderWidth)
     val wrappedWidth = leadingWidth + middleSection + trailingWidth
@@ -266,7 +266,7 @@ private fun calculateHeight(
     trailingHeight: Int,
     placeholderHeight: Int,
     constraints: Constraints,
-    density: Float
+    density: Float,
 ): Int {
     val topBottomPadding = FieldPadding.value * density
     val middleSection = max(fieldHeight, placeholderHeight)
@@ -275,7 +275,7 @@ private fun calculateHeight(
     return maxOf(
         wrappedHeight.roundToInt(),
         max(leadingHeight, trailingHeight),
-        constraints.minHeight
+        constraints.minHeight,
     )
 }
 

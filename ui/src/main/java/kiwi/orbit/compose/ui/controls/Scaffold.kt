@@ -36,7 +36,7 @@ public fun Scaffold(
     contentColor: Color = contentColorFor(backgroundColor),
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
-    content: @Composable (contentPadding: PaddingValues) -> Unit
+    content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -70,12 +70,12 @@ private fun ScaffoldLayout(
             Box { action() }
             Box {
                 CompositionLocalProvider(
-                    LocalScaffoldPadding provides contentPadding
+                    LocalScaffoldPadding provides contentPadding,
                 ) {
                     content(contentPadding)
                 }
             }
-        }
+        },
     ) { measurables, constraints ->
         val layoutWidth = constraints.maxWidth
         val layoutHeight = constraints.maxHeight
@@ -124,7 +124,7 @@ private fun ScaffoldAction(
 ) {
     val brush = Brush.verticalGradient(
         colors = listOf(Color.Transparent, backgroundColor),
-        endY = with(LocalDensity.current) { 44.dp.toPx() }
+        endY = with(LocalDensity.current) { 44.dp.toPx() },
     )
     Layout(
         content = content,

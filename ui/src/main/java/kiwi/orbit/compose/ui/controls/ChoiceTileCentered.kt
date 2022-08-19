@@ -22,12 +22,12 @@ import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
@@ -51,7 +51,7 @@ public fun ChoiceTileCentered(
         targetValue = when (selected) {
             true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
-        }
+        },
     )
     Box(
         modifier = modifier
@@ -78,7 +78,7 @@ public fun ChoiceTileCentered(
         }
         Card(
             onClick = onSelect,
-            border = BorderStroke(2.dp, color)
+            border = BorderStroke(2.dp, color),
         ) {
             Column(
                 Modifier
@@ -134,7 +134,7 @@ private fun ChoiceTileContent(
                 ProvideMergedTextStyle(
                     value = OrbitTheme.typography.bodyNormal.copy(
                         textAlign = TextAlign.Center,
-                    )
+                    ),
                 ) {
                     description()
                 }
@@ -147,7 +147,7 @@ private fun ChoiceTileContent(
                 color = when (selected) {
                     true -> OrbitTheme.colors.info.normal
                     false -> Color.Unspecified
-                }
+                },
             ),
         ) {
             price()
@@ -166,17 +166,17 @@ private fun ChoiceTileFooter(
         isError = isError,
         modifier = Modifier
             .padding(top = 12.dp)
-            .padding(2.dp)
+            .padding(2.dp),
     )
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ChoiceTileCenteredPreview() {
     Preview {
         Row(
             modifier = Modifier.height(IntrinsicSize.Max),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             ChoiceTileCentered(
                 modifier = Modifier

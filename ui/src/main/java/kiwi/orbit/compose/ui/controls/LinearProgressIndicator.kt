@@ -23,10 +23,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
 /**
@@ -81,7 +81,7 @@ internal fun DrawScope.drawLinearIndicator(
 
 internal val LinearProgressIndicatorDefaultHeight = 4.dp
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun LinearProgressIndicatorPreview() {
     Preview {
@@ -106,7 +106,7 @@ internal fun LinearProgressIndicatorPreview() {
                 LocalLayoutDirection provides when (LocalLayoutDirection.current) {
                     LayoutDirection.Ltr -> LayoutDirection.Rtl
                     LayoutDirection.Rtl -> LayoutDirection.Ltr
-                }
+                },
             ) {
                 LinearProgressIndicator(0.5f)
             }

@@ -20,10 +20,10 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
@@ -254,7 +254,7 @@ private fun AlertButtons(
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertInfoPreview() {
     Preview {
@@ -289,7 +289,7 @@ internal fun AlertInfoPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertSuccessPreview() {
     Preview {
@@ -313,7 +313,7 @@ internal fun AlertSuccessPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertWarningPreview() {
     Preview {
@@ -337,7 +337,7 @@ internal fun AlertWarningPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertCriticalPreview() {
     Preview {
@@ -361,7 +361,7 @@ internal fun AlertCriticalPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertSimplePreview() {
     Preview {

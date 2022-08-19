@@ -15,10 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
@@ -37,7 +37,7 @@ public fun EmptyState(
         title = { Text(title) },
         modifier = modifier,
         description = description?.let { { Text(description) } },
-        action = action
+        action = action,
     )
 }
 
@@ -54,7 +54,7 @@ public fun EmptyState(
             .fillMaxWidth()
             .padding(vertical = 16.dp, horizontal = 32.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
             modifier = Modifier.height(120.dp),
@@ -89,7 +89,7 @@ public fun EmptyState(
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun EmptyStatePreview() {
     Preview {
@@ -101,7 +101,7 @@ internal fun EmptyStatePreview() {
                 ButtonPrimary(onClick = {}) {
                     Text("Try again")
                 }
-            }
+            },
         )
     }
 }

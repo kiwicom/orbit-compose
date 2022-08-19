@@ -27,6 +27,6 @@ private fun DialogsMaterialDialog(
             androidx.compose.material.TextButton(onClick = onClose) {
                 Text("Ok")
             }
-        }
+        },
     )
 }

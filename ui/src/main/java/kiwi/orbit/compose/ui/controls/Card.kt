@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -25,7 +25,7 @@ public fun Card(
     contentColor: Color = contentColorFor(backgroundColor),
     border: BorderStroke? = null,
     elevation: Dp = OrbitTheme.elevations.Level1,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -34,7 +34,7 @@ public fun Card(
         contentColor = contentColor,
         elevation = elevation,
         border = border,
-        content = content
+        content = content,
     )
 }
 
@@ -52,7 +52,7 @@ public fun Card(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Surface(
         onClick = onClick,
@@ -67,11 +67,11 @@ public fun Card(
         enabled = enabled,
         onClickLabel = onClickLabel,
         role = role,
-        content = content
+        content = content,
     )
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun CardPreview() {
     Preview {

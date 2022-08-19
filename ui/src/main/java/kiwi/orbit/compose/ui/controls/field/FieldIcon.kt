@@ -18,13 +18,13 @@ internal fun FieldIcon(
     Box(
         modifier
             .layoutId(layoutId)
-            .sizeIn(maxWidth = 20.dp, maxHeight = 20.dp)
+            .sizeIn(maxWidth = 20.dp, maxHeight = 20.dp),
     ) {
         if (onClick != null) {
             IconButton(
                 onClick = onClick,
                 rippleRadius = RippleRadius,
-                content = icon
+                content = icon,
             )
         } else {
             icon()

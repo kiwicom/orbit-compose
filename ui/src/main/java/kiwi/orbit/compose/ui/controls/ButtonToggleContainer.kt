@@ -26,7 +26,7 @@ public fun <S> ButtonToggleContainer(
         fadeIn(tween(AnimationDuration)) with fadeOut(tween(AnimationDuration))
     },
     contentAlignment: Alignment = Alignment.TopStart,
-    content: @Composable AnimatedVisibilityScope.(targetState: S) -> Unit
+    content: @Composable AnimatedVisibilityScope.(targetState: S) -> Unit,
 ) {
     AnimatedContent(
         modifier = modifier.expand(16.dp),

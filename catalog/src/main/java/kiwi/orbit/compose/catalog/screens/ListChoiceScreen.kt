@@ -46,7 +46,7 @@ fun ListChoiceScreen(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(contentPadding)
+                .padding(contentPadding),
         ) {
             ListChoiceScreenInner()
         }
@@ -94,7 +94,7 @@ private fun ListChoiceScreenInner() {
                 ButtonPrimarySubtle(onClick = {}) {
                     Icon(Icons.Plus, contentDescription = null)
                 }
-            }
+            },
         ) {
             Text("ListChoice title")
         }

@@ -21,11 +21,11 @@ internal fun CustomPlaceholder(
             .fillMaxWidth()
             .height(100.dp)
             .background(OrbitTheme.colors.primary.subtle),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = "Custom content",
-            color = contentColorFor(backgroundColor = OrbitTheme.colors.primary.subtle)
+            color = contentColorFor(backgroundColor = OrbitTheme.colors.primary.subtle),
         )
     }
 }

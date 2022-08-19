@@ -18,12 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
@@ -48,7 +48,7 @@ public fun ChoiceTile(
         targetValue = when (selected) {
             true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
-        }
+        },
     )
     Card(
         onClick = onSelect,
@@ -135,7 +135,7 @@ private fun ChoiceTileFooter(
 ) {
     Row(
         Modifier
-            .padding(top = 12.dp)
+            .padding(top = 12.dp),
     ) {
         Box(
             Modifier.weight(1f),
@@ -145,7 +145,7 @@ private fun ChoiceTileFooter(
                     color = when (selected) {
                         true -> OrbitTheme.colors.info.normal
                         false -> Color.Unspecified
-                    }
+                    },
                 ),
             ) {
                 if (footer != null) {
@@ -161,13 +161,13 @@ private fun ChoiceTileFooter(
                 onClick = null,
                 modifier = Modifier
                     .align(Alignment.Bottom)
-                    .padding(2.dp)
+                    .padding(2.dp),
             )
         }
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ChoiceTilePreview() {
     Preview {
@@ -175,7 +175,7 @@ internal fun ChoiceTilePreview() {
             title = {
                 Text(
                     "Multiline long choice title label with many characters",
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 BadgeInfoSubtle {
                     Text("Popular")
@@ -193,10 +193,10 @@ internal fun ChoiceTilePreview() {
                 ) {
                     Text(
                         "$16.90",
-                        Modifier.weight(1f)
+                        Modifier.weight(1f),
                     )
                 }
-            }
+            },
         ) {
             CustomPlaceholder()
         }

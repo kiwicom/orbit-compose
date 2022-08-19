@@ -11,7 +11,7 @@ public operator fun PaddingValues.plus(other: PaddingValues): PaddingValues =
 
 private class SummedPaddingValues(
     private val a: PaddingValues,
-    private val b: PaddingValues
+    private val b: PaddingValues,
 ) : PaddingValues {
     override fun calculateBottomPadding(): Dp {
         return a.calculateBottomPadding() + b.calculateBottomPadding()

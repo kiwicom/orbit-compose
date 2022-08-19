@@ -15,11 +15,11 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
@@ -174,7 +174,7 @@ private fun AlertInline(
                 title()
             }
             CompositionLocalProvider(
-                LocalSmallButtonScope provides true
+                LocalSmallButtonScope provides true,
             ) {
                 ButtonPrimary(
                     onClick = onActionClick,
@@ -226,7 +226,7 @@ private fun AlertInlineContent(
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertInlinePreview() {
     Preview {
@@ -253,7 +253,7 @@ internal fun AlertInlinePreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun AlertInlineCustomizedPreview() {
     Preview {
