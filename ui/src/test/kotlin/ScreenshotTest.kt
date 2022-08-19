@@ -1,9 +1,12 @@
 package kiwi.orbit.compose.ui
 
+import android.content.res.Configuration
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
+import com.android.resources.NightMode
 import kiwi.orbit.compose.ui.controls.AlertCriticalPreview
 import kiwi.orbit.compose.ui.controls.AlertInfoPreview
 import kiwi.orbit.compose.ui.controls.AlertInlineCustomizedPreview
@@ -54,12 +57,29 @@ internal class ScreenshotTest {
 
     @get:Rule
     val paparazzi = Paparazzi(
-        deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false),
-        renderingMode = SessionParams.RenderingMode.V_SCROLL,
+        theme = "android:Theme.Material.NoActionBar.Fullscreen",
     )
 
     private fun snapshot(content: @Composable () -> Unit) {
-        paparazzi.snapshot {
+        paparazzi.unsafeUpdateConfig(
+            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false),
+            renderingMode = SessionParams.RenderingMode.V_SCROLL,
+        )
+        paparazzi.snapshot { content() }
+        paparazzi.unsafeUpdateConfig(
+            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false, fontScale = 1.6f),
+            renderingMode = SessionParams.RenderingMode.V_SCROLL,
+        )
+        paparazzi.snapshot(name = "big") { content() }
+        paparazzi.unsafeUpdateConfig(
+            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false, nightMode = NightMode.NIGHT),
+            renderingMode = SessionParams.RenderingMode.V_SCROLL,
+        )
+        paparazzi.snapshot(name = "dark") {
+            // Workaround for https://github.com/cashapp/paparazzi/pull/473
+            val configuration = LocalConfiguration.current
+            configuration.uiMode =
+                (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
             content()
         }
     }
