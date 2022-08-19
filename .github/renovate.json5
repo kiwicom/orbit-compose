@@ -4,13 +4,30 @@
     "config:base",
     "schedule:weekly",
   ],
-  "labels": ["chore"],
+  "labels": [
+    "chore"
+  ],
   "rebaseWhen": "conflicted",
   "packageRules": [
     {
-      "matchPaths": [".github/**"],
-      "enabled": true,
-      "groupName": "github-actions"
+      "groupName": "GitHub Actions",
+      "matchPaths": [
+        ".github/**",
+      ],
     },
+    {
+      "groupName": "Kotlin & Dokka",
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin",
+        "org.jetbrains.dokka",
+      ],
+    },
+    {
+      "groupName": "Compose & Accompanist",
+      "matchPackageNames": [
+        "androidx.compose",
+        "com.google.accompanist",
+      ],
+    }
   ]
 }
