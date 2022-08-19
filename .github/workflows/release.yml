@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 18
       - name: Decrypt secrets
         run: |
           echo ${{ secrets.ENCRYPT_KEY }} | release/signing-unpack.sh

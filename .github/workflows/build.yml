@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 18
       - name: Assemble & Linters
         run: ./gradlew :catalog:assembleDebug lint lintKotlin :lint:test
       - name: Run Screenshot Tests
