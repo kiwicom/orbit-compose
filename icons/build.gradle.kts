@@ -9,6 +9,8 @@ plugins {
 }
 
 android {
+    namespace = "kiwi.orbit.compose.icons"
+
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

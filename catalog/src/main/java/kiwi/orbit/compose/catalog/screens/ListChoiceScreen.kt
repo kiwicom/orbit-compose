@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
 import kiwi.orbit.compose.icons.Icons
-import kiwi.orbit.compose.ui.controls.BadgeInfoSubtle
+import kiwi.orbit.compose.ui.controls.BadgeCircleInfoSubtle
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
 import kiwi.orbit.compose.ui.controls.Checkbox
 import kiwi.orbit.compose.ui.controls.Icon
@@ -77,9 +77,7 @@ private fun ListChoiceScreenInner() {
             icon = { Icon(Icons.Accommodation, contentDescription = null) },
             trailingIcon = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    BadgeInfoSubtle {
-                        Text("1")
-                    }
+                    BadgeCircleInfoSubtle(value = 1)
                     Spacer(modifier = Modifier.width(8.dp))
                     Icon(Icons.ChevronRight, contentDescription = null)
                 }

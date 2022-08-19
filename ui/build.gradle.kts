@@ -10,6 +10,8 @@ plugins {
 }
 
 android {
+    namespace = "kiwi.orbit.compose.ui"
+
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

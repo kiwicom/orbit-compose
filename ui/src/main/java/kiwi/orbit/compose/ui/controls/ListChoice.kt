@@ -183,9 +183,7 @@ internal fun ListChoicePreview() {
                 icon = { Icon(Icons.Accommodation, contentDescription = null) },
                 trailingIcon = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        BadgeInfoSubtle {
-                            Text("1")
-                        }
+                        BadgeCircleInfoSubtle(value = 1)
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(Icons.ChevronRight, contentDescription = null)
                     }
