@@ -33,8 +33,12 @@ import androidx.compose.material.icons.rounded.WebAsset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.MainActions
+import com.kiwi.navigationcompose.typed.Route
+import com.kiwi.navigationcompose.typed.toRoute
+import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Card
@@ -45,54 +49,56 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.utils.plus
-import androidx.compose.material.icons.Icons.Outlined as OutlinedMaterialIcons
-import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
+import kotlinx.serialization.ExperimentalSerializationApi
+import androidx.compose.material.icons.Icons.Outlined as OMIcons
+import androidx.compose.material.icons.Icons.Rounded as MIcons
 
+private data class MenuItem(
+    val title: String,
+    val icon: Any,
+    val onClick: () -> Unit,
+)
+
+@ExperimentalSerializationApi
 @Composable
 internal fun MainScreen(
-    actions: MainActions,
+    onNavigate: (Route) -> Unit,
     onToggleTheme: () -> Unit,
 ) {
-    val foundation = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Colors", { Icon(MaterialIcons.Palette, null) }, actions::showColors),
-        Triple("Icons", { Icon(Icons.Airplane, null) }, actions::showIcons),
-        Triple("Illustrations", { Icon(Icons.Gallery, null) }, actions::showIllustrations),
-        Triple("Typography", { Icon(MaterialIcons.FormatSize, null) }, actions::showTypography),
-    )
+    fun MenuItem(title: String, icon: Any, onNavigate: () -> Route): MenuItem =
+        MenuItem(title, icon, onClick = { onNavigate(onNavigate()) })
 
-    val controls = listOf<Triple<String, @Composable () -> Unit, () -> Unit>>(
-        Triple("Alert", { Icon(Icons.Alert, null) }, actions::showAlert),
-        Triple("Badge", { Icon(Icons.Deals, null) }, actions::showBadge),
-        Triple("Button", { Icon(MaterialIcons.SmartButton, null) }, actions::showButton),
-        Triple("Cards / Tiles", { Icon(MaterialIcons.Article, null) }, actions::showCards),
-        Triple("Checkbox", { Icon(MaterialIcons.CheckBox, null) }, actions::showCheckbox),
-        Triple("Choice Tile", { Icon(MaterialIcons.Ballot, null) }, actions::showChoiceTile),
-        Triple("Dialogs", { Icon(Icons.Chat, null) }, actions::showDialogs),
-        Triple("EmptyState", { Icon(MaterialIcons.SignalWifiOff, null) }, actions::showEmptyState),
-        Triple("KeyValue", { Icon(MaterialIcons.DragHandle, null) }, actions::showKeyValue),
-        Triple("List", { Icon(MaterialIcons.DensitySmall, null) }, actions::showList),
-        Triple("ListChoice", { Icon(Icons.MenuHamburger, null) }, actions::showListChoice),
-        Triple("Loading", { Icon(Icons.MenuMeatballs, null) }, actions::showLoading),
-        Triple(
-            "PillButton",
-            { Icon(MaterialIcons.EditAttributes, null) },
-            actions::showPillButton,
-        ),
-        Triple(
-            "Progress Indicator",
-            { Icon(OutlinedMaterialIcons.ToggleOff, null) },
-            actions::showLinearProgressIndicator,
-        ),
-        Triple("Radio", { Icon(Icons.CircleFilled, null) }, actions::showRadio),
-        Triple("Seat", { Icon(Icons.Seat, null) }, actions::showSeat),
-        Triple("Segmented Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSegmentedSwitch),
-        Triple("Select Field", { Icon(MaterialIcons.MenuOpen, null) }, actions::showSelectField),
-        Triple("Stepper", { Icon(Icons.PlusCircle, null) }, actions::showStepper),
-        Triple("Switch", { Icon(MaterialIcons.ToggleOn, null) }, actions::showSwitch),
-        Triple("Tag", { Icon(MaterialIcons.LabelImportant, null) }, actions::showTag),
-        Triple("Text Field", { Icon(MaterialIcons.Keyboard, null) }, actions::showTextField),
-        Triple("Toast", { Icon(MaterialIcons.Announcement, null) }, actions::showToast),
-        Triple("TopAppBar", { Icon(MaterialIcons.WebAsset, null) }, { actions.showTopAppBar() }),
+    val foundation = listOf(
+        MenuItem("Colors", MIcons.Palette) { Destinations.Colors.toRoute() },
+        MenuItem("Icons", Icons.Airplane) { Destinations.Icons.toRoute() },
+        MenuItem("Illustrations", Icons.Gallery) { Destinations.Illustrations.toRoute() },
+        MenuItem("Typography", MIcons.FormatSize) { Destinations.Typography.toRoute() },
+    )
+    val controls = listOf(
+        MenuItem("Alert", Icons.Alert) { Destinations.Alert.toRoute() },
+        MenuItem("Badge", Icons.Deals) { Destinations.Badge.toRoute() },
+        MenuItem("Button", MIcons.SmartButton) { Destinations.Button.toRoute() },
+        MenuItem("Card / Tile", MIcons.Article) { Destinations.Card.toRoute() },
+        MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox.toRoute() },
+        MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile.toRoute() },
+        MenuItem("Dialog", Icons.Chat) { Destinations.Dialog.toRoute() },
+        MenuItem("EmptyState", MIcons.SignalWifiOff) { Destinations.EmptyState.toRoute() },
+        MenuItem("KeyValue", MIcons.DragHandle) { Destinations.KeyValue.toRoute() },
+        MenuItem("List", MIcons.DensitySmall) { Destinations.List.toRoute() },
+        MenuItem("ListChoice", Icons.MenuHamburger) { Destinations.ListChoice.toRoute() },
+        MenuItem("Loading", Icons.MenuMeatballs) { Destinations.Loading.toRoute() },
+        MenuItem("PillButton", MIcons.EditAttributes) { Destinations.PillButton.toRoute() },
+        MenuItem("Progress Indicator", OMIcons.ToggleOff) { Destinations.LinearProgressIndicator.toRoute() },
+        MenuItem("Radio", Icons.CircleFilled) { Destinations.Radio.toRoute() },
+        MenuItem("Seat", Icons.Seat) { Destinations.Seat.toRoute() },
+        MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch.toRoute() },
+        MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField.toRoute() },
+        MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper.toRoute() },
+        MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch.toRoute() },
+        MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag.toRoute() },
+        MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField.toRoute() },
+        MenuItem("Toast", MIcons.Announcement) { Destinations.Toast.toRoute() },
+        MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar.toRoute() },
     )
 
     Scaffold(
@@ -101,7 +107,7 @@ internal fun MainScreen(
                 title = { Text("Orbit Compose Catalog") },
                 actions = {
                     IconButton(onClick = onToggleTheme) {
-                        Icon(MaterialIcons.BrightnessMedium, contentDescription = null)
+                        Icon(MIcons.BrightnessMedium, contentDescription = null)
                     }
                 },
             )
@@ -122,7 +128,7 @@ internal fun MainScreen(
 
 private fun LazyGridScope.cardItems(
     title: String,
-    items: List<Triple<String, @Composable () -> Unit, () -> Unit>>,
+    items: List<MenuItem>,
 ) {
     item(span = { GridItemSpan(maxLineSpan) }) {
         Text(
@@ -131,25 +137,27 @@ private fun LazyGridScope.cardItems(
             modifier = Modifier.padding(vertical = 4.dp),
         )
     }
-    items(items) { item ->
-        Item(item.first, item.second, item.third)
-    }
+    items(items) { item -> Item(item) }
 }
 
 @Composable
-private fun Item(title: String, icon: @Composable () -> Unit, onClick: () -> Unit) {
+private fun Item(menuItem: MenuItem) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        onClick = onClick,
+        onClick = menuItem.onClick,
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
-                icon()
+                when (val icon = menuItem.icon) {
+                    is Painter -> Icon(icon, contentDescription = null)
+                    is ImageVector -> Icon(icon, contentDescription = null)
+                    else -> {}
+                }
                 Spacer(Modifier.size(8.dp))
-                Text(title)
+                Text(menuItem.title)
             }
         }
     }

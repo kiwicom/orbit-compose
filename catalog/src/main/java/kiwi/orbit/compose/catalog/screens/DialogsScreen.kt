@@ -12,16 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.kiwi.navigationcompose.typed.Route
+import com.kiwi.navigationcompose.typed.toRoute
+import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
+import kotlinx.serialization.ExperimentalSerializationApi
 
+@ExperimentalSerializationApi
 @Composable
 internal fun DialogsScreen(
     onNavigateUp: () -> Unit,
-    onShowMaterialDialog: () -> Unit,
-    onShowOrbitDialog: () -> Unit,
+    onNavigate: (Route) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -31,7 +35,11 @@ internal fun DialogsScreen(
             )
         },
     ) { contentPadding: PaddingValues ->
-        DialogsScreenInner(onShowMaterialDialog, onShowOrbitDialog, contentPadding)
+        DialogsScreenInner(
+            onShowMaterialDialog = { onNavigate(Destinations.DialogMaterial.toRoute()) },
+            onShowOrbitDialog = { onNavigate(Destinations.DialogOrbit.toRoute()) },
+            contentPadding = contentPadding,
+        )
     }
 }
 
