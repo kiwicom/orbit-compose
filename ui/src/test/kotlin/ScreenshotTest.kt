@@ -26,6 +26,7 @@ import kiwi.orbit.compose.ui.controls.ChoiceTileCenteredPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTilePreview
 import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
 import kiwi.orbit.compose.ui.controls.CountryFlagPreview
+import kiwi.orbit.compose.ui.controls.DialogPreview
 import kiwi.orbit.compose.ui.controls.EmptyStatePreview
 import kiwi.orbit.compose.ui.controls.InlineLoadingPreview
 import kiwi.orbit.compose.ui.controls.KeyValuePreview
@@ -179,6 +180,11 @@ internal class ScreenshotTest {
     @Test
     fun countryFlag() {
         snapshot { CountryFlagPreview() }
+    }
+
+    @Test
+    fun dialog() {
+        snapshot { DialogPreview() }
     }
 
     @Test

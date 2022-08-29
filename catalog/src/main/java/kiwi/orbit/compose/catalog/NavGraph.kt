@@ -17,6 +17,7 @@ import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
 import kiwi.orbit.compose.catalog.screens.DialogsMaterialDialog
+import kiwi.orbit.compose.catalog.screens.DialogsOrbitDialog
 import kiwi.orbit.compose.catalog.screens.DialogsScreen
 import kiwi.orbit.compose.catalog.screens.EmptyStateScreen
 import kiwi.orbit.compose.catalog.screens.IconsScreen
@@ -56,6 +57,7 @@ private object MainDestinations {
     const val CHOICE_TILE = "choice_tile"
     const val DIALOGS = "dialogs"
     const val DIALOGS_MATERIAL_DIALOG = "dialogs_material_dialog"
+    const val DIALOGS_ORBIT_DIALOG = "dialogs_orbit_dialog"
     const val EMPTY_STATE = "empty_state"
     const val KEY_VALUE = "key_value"
     const val LINEAR_PROGRESS_INDICATOR = "linear_progress_indicator"
@@ -126,10 +128,14 @@ fun NavGraph(
             DialogsScreen(
                 actions::navigateUp,
                 actions::showDialogsMaterialDialog,
+                actions::showDialogsOrbitDialog,
             )
         }
         dialog(MainDestinations.DIALOGS_MATERIAL_DIALOG) {
             DialogsMaterialDialog(navController)
+        }
+        dialog(MainDestinations.DIALOGS_ORBIT_DIALOG) {
+            DialogsOrbitDialog(navController)
         }
         composable(MainDestinations.EMPTY_STATE) {
             EmptyStateScreen(actions::navigateUp)
@@ -244,6 +250,10 @@ class MainActions(
 
     fun showDialogsMaterialDialog() {
         navController.navigate(MainDestinations.DIALOGS_MATERIAL_DIALOG)
+    }
+
+    fun showDialogsOrbitDialog() {
+        navController.navigate(MainDestinations.DIALOGS_ORBIT_DIALOG)
     }
 
     fun showEmptyState() {

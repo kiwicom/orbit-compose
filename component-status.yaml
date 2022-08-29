@@ -20,6 +20,8 @@
   android: Released
 - component: CountryFlag
   android: Released
+- component: Dialog
+  android: Released
 - component: EmptyState
   android: Released
 - component: Heading
