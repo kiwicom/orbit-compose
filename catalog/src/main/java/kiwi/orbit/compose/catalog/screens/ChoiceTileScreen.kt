@@ -41,7 +41,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun ChoiceTileScreen(onNavigateUp: () -> Unit) {
+internal fun ChoiceTileScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

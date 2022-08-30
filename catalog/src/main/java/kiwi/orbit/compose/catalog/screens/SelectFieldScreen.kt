@@ -25,7 +25,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun SelectFieldScreen(onNavigateUp: () -> Unit) {
+internal fun SelectFieldScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

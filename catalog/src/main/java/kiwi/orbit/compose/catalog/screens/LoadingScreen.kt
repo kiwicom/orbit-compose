@@ -22,7 +22,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 
 @Composable
-fun LoadingScreen(
+internal fun LoadingScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(

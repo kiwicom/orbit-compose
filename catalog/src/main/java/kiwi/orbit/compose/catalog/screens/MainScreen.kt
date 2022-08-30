@@ -49,7 +49,7 @@ import androidx.compose.material.icons.Icons.Outlined as OutlinedMaterialIcons
 import androidx.compose.material.icons.Icons.Rounded as MaterialIcons
 
 @Composable
-fun MainScreen(
+internal fun MainScreen(
     actions: MainActions,
     onToggleTheme: () -> Unit,
 ) {

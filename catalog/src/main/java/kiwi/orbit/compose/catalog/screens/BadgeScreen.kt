@@ -52,7 +52,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun BadgeScreen(onNavigateUp: () -> Unit) {
+internal fun BadgeScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

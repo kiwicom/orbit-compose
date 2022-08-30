@@ -18,7 +18,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun DialogsScreen(
+internal fun DialogsScreen(
     onNavigateUp: () -> Unit,
     onShowMaterialDialog: () -> Unit,
     onShowOrbitDialog: () -> Unit,

@@ -60,7 +60,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ButtonScreen(onNavigateUp: () -> Unit) {
+internal fun ButtonScreen(onNavigateUp: () -> Unit) {
     val state = rememberPagerState(0)
     val scope = rememberCoroutineScope()
     Scaffold(

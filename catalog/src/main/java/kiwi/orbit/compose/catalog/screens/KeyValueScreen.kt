@@ -20,7 +20,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun KeyValueScreen(onNavigateUp: () -> Unit) {
+internal fun KeyValueScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

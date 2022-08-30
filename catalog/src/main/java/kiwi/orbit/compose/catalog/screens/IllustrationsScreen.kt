@@ -24,7 +24,7 @@ import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
 @Composable
-fun IllustrationsScreen(onNavigateUp: () -> Unit) {
+internal fun IllustrationsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -38,7 +38,7 @@ fun IllustrationsScreen(onNavigateUp: () -> Unit) {
 }
 
 @Composable
-fun IllustrationsScreenInner(contentPadding: PaddingValues) {
+private fun IllustrationsScreenInner(contentPadding: PaddingValues) {
     val illustrations: List<Pair<String, Painter>> = Illustrations::class.memberProperties.map {
         it.name to (it.getter.call(Illustrations, currentComposer, 0) as Painter)
     }

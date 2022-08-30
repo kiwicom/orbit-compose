@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun DialogsMaterialDialog(navController: NavController) {
+internal fun DialogsMaterialDialog(navController: NavController) {
     DialogsMaterialDialog(
         onClose = { navController.popBackStack() },
     )

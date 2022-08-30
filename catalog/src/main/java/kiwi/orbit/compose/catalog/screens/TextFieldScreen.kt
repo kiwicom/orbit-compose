@@ -40,7 +40,7 @@ import kiwi.orbit.compose.ui.controls.TextField
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun TextFieldScreen(onNavigateUp: () -> Unit) {
+internal fun TextFieldScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
