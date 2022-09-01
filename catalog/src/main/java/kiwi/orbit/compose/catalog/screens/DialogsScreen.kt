@@ -21,6 +21,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 fun DialogsScreen(
     onNavigateUp: () -> Unit,
     onShowMaterialDialog: () -> Unit,
+    onShowOrbitDialog: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -30,13 +31,14 @@ fun DialogsScreen(
             )
         },
     ) { contentPadding: PaddingValues ->
-        DialogsScreenInner(onShowMaterialDialog, contentPadding)
+        DialogsScreenInner(onShowMaterialDialog, onShowOrbitDialog, contentPadding)
     }
 }
 
 @Composable
 private fun DialogsScreenInner(
     onShowMaterialDialog: () -> Unit,
+    onShowOrbitDialog: () -> Unit,
     contentPadding: PaddingValues,
 ) {
     Column(
@@ -50,5 +52,6 @@ private fun DialogsScreenInner(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ButtonSecondary(onClick = onShowMaterialDialog) { Text("Show Material Dialog") }
+        ButtonSecondary(onClick = onShowOrbitDialog) { Text("Show Orbit Dialog") }
     }
 }
