@@ -1,7 +1,9 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -16,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
@@ -28,6 +31,7 @@ public fun PasswordTextField(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    strengthContent: (@Composable () -> Unit)? = null,
     label: (@Composable () -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
     info: @Composable (() -> Unit)? = null,
@@ -78,6 +82,12 @@ public fun PasswordTextField(
             false -> PasswordVisualTransformation()
         },
         interactionSource = interactionSource,
+        additionalContent = {
+            if (strengthContent != null) {
+                Spacer(Modifier.height(4.dp))
+                strengthContent()
+            }
+        },
     )
 }
 
@@ -89,6 +99,13 @@ internal fun PasswordTextFieldPreview() {
             value = "password",
             label = { Text("Password") },
             onValueChange = {},
+            strengthContent = {
+                PasswordStrengthIndicator(
+                    value = 0.2f,
+                    color = PasswordStrengthColor.Weak,
+                    label = { Text(text = "Weak") },
+                )
+            },
             modifier = Modifier.fillMaxWidth(),
             leadingIcon = { Icon(Icons.Security, contentDescription = null) },
         )

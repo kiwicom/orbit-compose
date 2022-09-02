@@ -52,7 +52,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 public fun TextField(
     value: String,
@@ -63,6 +62,56 @@ public fun TextField(
     label: @Composable (() -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
     info: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    onLeadingIconClick: (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    onTrailingIconClick: (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    singleLine: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    bringIntoView: Boolean = true,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        enabled = enabled,
+        readOnly = readOnly,
+        label = label,
+        error = error,
+        info = info,
+        additionalContent = null,
+        placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        onLeadingIconClick = onLeadingIconClick,
+        trailingIcon = trailingIcon,
+        onTrailingIconClick = onTrailingIconClick,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        bringIntoView = bringIntoView,
+        visualTransformation = visualTransformation,
+        interactionSource = interactionSource,
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+internal fun TextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    label: @Composable (() -> Unit)? = null,
+    error: @Composable (() -> Unit)? = null,
+    info: @Composable (() -> Unit)? = null,
+    additionalContent: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     onLeadingIconClick: (() -> Unit)? = null,
@@ -179,6 +228,8 @@ public fun TextField(
                     )
                 },
             )
+
+            additionalContent?.invoke()
 
             FieldMessage(
                 error = error,
