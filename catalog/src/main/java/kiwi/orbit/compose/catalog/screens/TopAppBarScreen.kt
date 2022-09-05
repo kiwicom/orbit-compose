@@ -13,35 +13,94 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import com.kiwi.navigationcompose.typed.Destination
+import com.kiwi.navigationcompose.typed.Route
+import com.kiwi.navigationcompose.typed.composable
+import com.kiwi.navigationcompose.typed.createRoutePattern
+import com.kiwi.navigationcompose.typed.navigate
+import com.kiwi.navigationcompose.typed.navigation
+import com.kiwi.navigationcompose.typed.toRoute
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 
-@Composable
-fun TopAppBarScreen(
-    demoId: Int,
-    onNavigateUp: () -> Unit,
-    onShowTopAppBarDemo: (Int) -> Unit,
+sealed interface TopAppBarDestination : Destination {
+    @Serializable
+    object Home : TopAppBarDestination
+
+    @Serializable
+    object Normal : TopAppBarDestination
+
+    @Serializable
+    object NormalScrollable : TopAppBarDestination
+
+    @Serializable
+    object NormalWithTabs : TopAppBarDestination
+
+    @Serializable
+    object NormalWithFilters : TopAppBarDestination
+
+    @Serializable
+    object Large : TopAppBarDestination
+
+    @Serializable
+    object LargeScrollable : TopAppBarDestination
+
+    @Serializable
+    object LargeScrollableElevated : TopAppBarDestination
+
+    @Serializable
+    object LargeCustomContent : TopAppBarDestination
+}
+
+@ExperimentalSerializationApi
+internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigation(
+    navController: NavController,
 ) {
-    when (demoId) {
-        1 -> TopAppBarNormalScreen(onNavigateUp)
-        2 -> TopAppBarNormalScrollableScreen(onNavigateUp)
-        3 -> TopAppBarNormalWithTabsScreen(onNavigateUp)
-        4 -> TopAppBarNormalWithFiltersScreen(onNavigateUp)
-        10 -> TopAppBarLargeScreen(onNavigateUp)
-        11 -> TopAppBarLargeScrollableScreen(onNavigateUp)
-        12 -> TopAppBarLargeScrollableElevatedScreen(onNavigateUp)
-        13 -> TopAppBarLargeCustomContentScreen(onNavigateUp)
-        else -> TopAppBarScreenInner(onNavigateUp, onShowTopAppBarDemo)
+    navigation<T>(
+        startDestination = createRoutePattern<TopAppBarDestination.Home>(),
+    ) {
+        composable<TopAppBarDestination.Home> {
+            TopAppBarScreenInner(navController::navigateUp, navController::navigate)
+        }
+        composable<TopAppBarDestination.Normal> {
+            TopAppBarNormalScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.NormalScrollable> {
+            TopAppBarNormalScrollableScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.NormalWithTabs> {
+            TopAppBarNormalWithTabsScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.NormalWithFilters> {
+            TopAppBarNormalWithFiltersScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.Large> {
+            TopAppBarLargeScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.LargeScrollable> {
+            TopAppBarLargeScrollableScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.LargeScrollableElevated> {
+            TopAppBarLargeScrollableElevatedScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.LargeCustomContent> {
+            TopAppBarLargeCustomContentScreen(navController::navigateUp)
+        }
     }
 }
 
+@ExperimentalSerializationApi
 @Composable
-private fun TopAppBarScreenInner(
+internal fun TopAppBarScreenInner(
     onNavigateUp: () -> Unit,
-    onSelect: (Int) -> Unit,
+    onSelect: (Route) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -59,17 +118,49 @@ private fun TopAppBarScreenInner(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text("Normal", style = OrbitTheme.typography.title3)
-            ButtonSecondary(onClick = { onSelect(1) }) { Text("Simple") }
-            ButtonSecondary(onClick = { onSelect(2) }) { Text("Scrollable") }
-            ButtonSecondary(onClick = { onSelect(3) }) { Text("With Tabs") }
-            ButtonSecondary(onClick = { onSelect(4) }) { Text("With Filters") }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.Normal.toRoute()) },
+            ) {
+                Text("Simple")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.NormalScrollable.toRoute()) },
+            ) {
+                Text("Scrollable")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.NormalWithTabs.toRoute()) },
+            ) {
+                Text("With Tabs")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.NormalWithFilters.toRoute()) },
+            ) {
+                Text("With Filters")
+            }
 
             Spacer(Modifier.size(16.dp))
             Text("Large", style = OrbitTheme.typography.title3)
-            ButtonSecondary(onClick = { onSelect(10) }) { Text("Simple") }
-            ButtonSecondary(onClick = { onSelect(11) }) { Text("Scrollable") }
-            ButtonSecondary(onClick = { onSelect(12) }) { Text("Scrollable Elevated") }
-            ButtonSecondary(onClick = { onSelect(13) }) { Text("With Custom Content") }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.Large.toRoute()) },
+            ) {
+                Text("Simple")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.LargeScrollable.toRoute()) },
+            ) {
+                Text("Scrollable")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.LargeScrollableElevated.toRoute()) },
+            ) {
+                Text("Scrollable Elevated")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.LargeCustomContent.toRoute()) },
+            ) {
+                Text("With Custom Content")
+            }
         }
     }
 }

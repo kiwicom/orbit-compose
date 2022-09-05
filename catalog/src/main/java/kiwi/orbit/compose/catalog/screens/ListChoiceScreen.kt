@@ -31,7 +31,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun ListChoiceScreen(
+internal fun ListChoiceScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(

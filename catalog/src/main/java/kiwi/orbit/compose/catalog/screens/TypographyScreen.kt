@@ -24,7 +24,7 @@ import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kotlin.math.roundToInt
 
 @Composable
-fun TypographyScreen(onNavigateUp: () -> Unit) {
+internal fun TypographyScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

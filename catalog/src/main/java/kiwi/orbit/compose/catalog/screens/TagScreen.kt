@@ -28,7 +28,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
 
 @Composable
-fun TagScreen(onNavigateUp: () -> Unit) {
+internal fun TagScreen(onNavigateUp: () -> Unit) {
     val toastHostState = remember { ToastHostState() }
     Scaffold(
         topBar = {

@@ -28,7 +28,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun PillButtonScreen(
+internal fun PillButtonScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(

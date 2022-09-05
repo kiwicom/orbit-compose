@@ -22,7 +22,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun EmptyStateScreen(onNavigateUp: () -> Unit) {
+internal fun EmptyStateScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

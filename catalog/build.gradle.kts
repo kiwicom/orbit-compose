@@ -6,6 +6,7 @@ plugins {
     id("com.android.application")
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinter)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -103,12 +104,14 @@ dependencies {
     implementation(libs.compose.runtimeLivedata)
     implementation(libs.compose.toolingPreview)
 
+    implementation(libs.kotlin.serialization)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
 
     implementation(libs.coil)
     implementation(libs.accompanist.systemController)
     implementation(libs.accompanist.pager)
+    implementation(libs.kiwi.navigationComposeTyped)
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.customView)

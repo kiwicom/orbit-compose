@@ -26,7 +26,7 @@ import kiwi.orbit.compose.ui.utils.plus
 import kotlin.reflect.full.memberProperties
 
 @Composable
-fun IconsScreen(onNavigateUp: () -> Unit) {
+internal fun IconsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

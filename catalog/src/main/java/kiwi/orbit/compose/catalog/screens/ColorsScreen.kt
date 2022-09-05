@@ -33,7 +33,7 @@ import kiwi.orbit.compose.ui.foundation.FeatureColors
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-fun ColorsScreen(onNavigateUp: () -> Unit) {
+internal fun ColorsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

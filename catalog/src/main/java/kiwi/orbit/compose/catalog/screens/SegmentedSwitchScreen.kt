@@ -22,7 +22,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-fun SegmentedSwitchScreen(onNavigateUp: () -> Unit) {
+internal fun SegmentedSwitchScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
