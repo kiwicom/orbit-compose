@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.catalog.screens
 
 import android.util.Patterns
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.PasswordStrengthColor
+import kiwi.orbit.compose.ui.controls.PasswordStrengthIndicator
 import kiwi.orbit.compose.ui.controls.PasswordTextField
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
@@ -109,6 +112,24 @@ private fun TextFieldScreenInner() {
             onValueChange = { password = it },
             label = { Text("Password") },
             leadingIcon = { Icon(Icons.Security, contentDescription = null) },
+            strengthContent = {
+                val (color, label) = when (password.length) {
+                    in (0..4) -> PasswordStrengthColor.Weak to "Weak"
+                    in (5..8) -> PasswordStrengthColor.Medium to "Fair"
+                    else -> PasswordStrengthColor.Strong to "Strong"
+                }
+
+                AnimatedVisibility(visible = password.isNotEmpty()) {
+                    PasswordStrengthIndicator(
+                        value = (password.length / 10f).coerceAtMost(1f),
+                        color = color,
+                        label = { Text(label) },
+                    )
+                }
+            },
+            info = if (password.isNotEmpty()) {
+                { Text("A password for your awesome account.") }
+            } else null,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Next,
             ),
