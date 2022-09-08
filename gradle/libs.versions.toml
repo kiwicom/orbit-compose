@@ -58,7 +58,7 @@ compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", vers
 compose-uiUtil = { module = "androidx.compose.ui:ui-util", version.ref = "compose-main" }
 compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose-main" }
 junit = { module = "junit:junit", version = "4.13.2" }
-kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.1.0" }
+kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.2.0" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 [bundles]
