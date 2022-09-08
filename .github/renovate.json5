@@ -28,6 +28,12 @@
         "androidx.compose",
         "com.google.accompanist",
       ],
-    }
+    },
+    {
+      "groupName": "AndroidX",
+      "matchPackageNames": [
+        "androidx",
+      ],
+    },
   ]
 }
