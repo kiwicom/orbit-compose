@@ -2,7 +2,9 @@ package kiwi.orbit.compose.ui
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
@@ -179,7 +181,13 @@ internal class ScreenshotTest {
 
     @Test
     fun countryFlag() {
-        snapshot { CountryFlagPreview() }
+        snapshot {
+            CompositionLocalProvider(
+                LocalInspectionMode provides true,
+            ) {
+                CountryFlagPreview()
+            }
+        }
     }
 
     @Test
