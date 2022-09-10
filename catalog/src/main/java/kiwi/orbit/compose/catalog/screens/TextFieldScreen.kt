@@ -129,7 +129,9 @@ private fun TextFieldScreenInner() {
             },
             info = if (password.isNotEmpty()) {
                 { Text("A password for your awesome account.") }
-            } else null,
+            } else {
+                null
+            },
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Next,
             ),

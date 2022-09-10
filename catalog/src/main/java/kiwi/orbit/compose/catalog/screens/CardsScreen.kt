@@ -68,7 +68,9 @@ private fun CardScreenInner() {
             onClick = { state = true },
             border = if (state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)
-            } else null,
+            } else {
+                null
+            },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Image(Illustrations.AirportShuttle, contentDescription = null)
@@ -78,7 +80,9 @@ private fun CardScreenInner() {
             onClick = { state = false },
             border = if (!state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)
-            } else null,
+            } else {
+                null
+            },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Image(Illustrations.AirHelp, contentDescription = null)
