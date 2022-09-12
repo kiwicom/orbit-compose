@@ -36,8 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.kiwi.navigationcompose.typed.Route
-import com.kiwi.navigationcompose.typed.toRoute
+import com.kiwi.navigationcompose.typed.Destination
 import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -62,43 +61,43 @@ private data class MenuItem(
 @ExperimentalSerializationApi
 @Composable
 internal fun MainScreen(
-    onNavigate: (Route) -> Unit,
+    onNavigate: (Destination) -> Unit,
     onToggleTheme: () -> Unit,
 ) {
-    fun MenuItem(title: String, icon: Any, onNavigate: () -> Route): MenuItem =
+    fun MenuItem(title: String, icon: Any, onNavigate: () -> Destination): MenuItem =
         MenuItem(title, icon, onClick = { onNavigate(onNavigate()) })
 
     val foundation = listOf(
-        MenuItem("Colors", MIcons.Palette) { Destinations.Colors.toRoute() },
-        MenuItem("Icons", Icons.Airplane) { Destinations.Icons.toRoute() },
-        MenuItem("Illustrations", Icons.Gallery) { Destinations.Illustrations.toRoute() },
-        MenuItem("Typography", MIcons.FormatSize) { Destinations.Typography.toRoute() },
+        MenuItem("Colors", MIcons.Palette) { Destinations.Colors },
+        MenuItem("Icons", Icons.Airplane) { Destinations.Icons },
+        MenuItem("Illustrations", Icons.Gallery) { Destinations.Illustrations },
+        MenuItem("Typography", MIcons.FormatSize) { Destinations.Typography },
     )
     val controls = listOf(
-        MenuItem("Alert", Icons.Alert) { Destinations.Alert.toRoute() },
-        MenuItem("Badge", Icons.Deals) { Destinations.Badge.toRoute() },
-        MenuItem("Button", MIcons.SmartButton) { Destinations.Button.toRoute() },
-        MenuItem("Card / Tile", MIcons.Article) { Destinations.Card.toRoute() },
-        MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox.toRoute() },
-        MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile.toRoute() },
-        MenuItem("Dialog", Icons.Chat) { Destinations.Dialog.toRoute() },
-        MenuItem("EmptyState", MIcons.SignalWifiOff) { Destinations.EmptyState.toRoute() },
-        MenuItem("KeyValue", MIcons.DragHandle) { Destinations.KeyValue.toRoute() },
-        MenuItem("List", MIcons.DensitySmall) { Destinations.List.toRoute() },
-        MenuItem("ListChoice", Icons.MenuHamburger) { Destinations.ListChoice.toRoute() },
-        MenuItem("Loading", Icons.MenuMeatballs) { Destinations.Loading.toRoute() },
-        MenuItem("PillButton", MIcons.EditAttributes) { Destinations.PillButton.toRoute() },
-        MenuItem("Progress Indicator", OMIcons.ToggleOff) { Destinations.LinearProgressIndicator.toRoute() },
-        MenuItem("Radio", Icons.CircleFilled) { Destinations.Radio.toRoute() },
-        MenuItem("Seat", Icons.Seat) { Destinations.Seat.toRoute() },
-        MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch.toRoute() },
-        MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField.toRoute() },
-        MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper.toRoute() },
-        MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch.toRoute() },
-        MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag.toRoute() },
-        MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField.toRoute() },
-        MenuItem("Toast", MIcons.Announcement) { Destinations.Toast.toRoute() },
-        MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar.toRoute() },
+        MenuItem("Alert", Icons.Alert) { Destinations.Alert },
+        MenuItem("Badge", Icons.Deals) { Destinations.Badge },
+        MenuItem("Button", MIcons.SmartButton) { Destinations.Button },
+        MenuItem("Card / Tile", MIcons.Article) { Destinations.Card },
+        MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
+        MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
+        MenuItem("Dialog", Icons.Chat) { Destinations.Dialog },
+        MenuItem("EmptyState", MIcons.SignalWifiOff) { Destinations.EmptyState },
+        MenuItem("KeyValue", MIcons.DragHandle) { Destinations.KeyValue },
+        MenuItem("List", MIcons.DensitySmall) { Destinations.List },
+        MenuItem("ListChoice", Icons.MenuHamburger) { Destinations.ListChoice },
+        MenuItem("Loading", Icons.MenuMeatballs) { Destinations.Loading },
+        MenuItem("PillButton", MIcons.EditAttributes) { Destinations.PillButton },
+        MenuItem("Progress Indicator", OMIcons.ToggleOff) { Destinations.LinearProgressIndicator },
+        MenuItem("Radio", Icons.CircleFilled) { Destinations.Radio },
+        MenuItem("Seat", Icons.Seat) { Destinations.Seat },
+        MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch },
+        MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField },
+        MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper },
+        MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },
+        MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
+        MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
+        MenuItem("Toast", MIcons.Announcement) { Destinations.Toast },
+        MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar },
     )
 
     Scaffold(
