@@ -16,12 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.kiwi.navigationcompose.typed.Destination
-import com.kiwi.navigationcompose.typed.Route
 import com.kiwi.navigationcompose.typed.composable
 import com.kiwi.navigationcompose.typed.createRoutePattern
 import com.kiwi.navigationcompose.typed.navigate
 import com.kiwi.navigationcompose.typed.navigation
-import com.kiwi.navigationcompose.typed.toRoute
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -100,7 +98,7 @@ internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigatio
 @Composable
 internal fun TopAppBarScreenInner(
     onNavigateUp: () -> Unit,
-    onSelect: (Route) -> Unit,
+    onSelect: (Destination) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -119,22 +117,22 @@ internal fun TopAppBarScreenInner(
         ) {
             Text("Normal", style = OrbitTheme.typography.title3)
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.Normal.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.Normal) },
             ) {
                 Text("Simple")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.NormalScrollable.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.NormalScrollable) },
             ) {
                 Text("Scrollable")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.NormalWithTabs.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.NormalWithTabs) },
             ) {
                 Text("With Tabs")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.NormalWithFilters.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.NormalWithFilters) },
             ) {
                 Text("With Filters")
             }
@@ -142,22 +140,22 @@ internal fun TopAppBarScreenInner(
             Spacer(Modifier.size(16.dp))
             Text("Large", style = OrbitTheme.typography.title3)
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.Large.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.Large) },
             ) {
                 Text("Simple")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.LargeScrollable.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.LargeScrollable) },
             ) {
                 Text("Scrollable")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.LargeScrollableElevated.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.LargeScrollableElevated) },
             ) {
                 Text("Scrollable Elevated")
             }
             ButtonSecondary(
-                onClick = { onSelect(TopAppBarDestination.LargeCustomContent.toRoute()) },
+                onClick = { onSelect(TopAppBarDestination.LargeCustomContent) },
             ) {
                 Text("With Custom Content")
             }
