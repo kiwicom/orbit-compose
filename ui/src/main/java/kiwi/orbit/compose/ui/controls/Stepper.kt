@@ -125,7 +125,7 @@ private fun StepperPrimitive(
                     .padding(horizontal = 10.dp)
                     .widthIn(min = 20.dp),
                 text = targetNumber.toString(),
-                style = OrbitTheme.typography.bodyLargeBold,
+                style = OrbitTheme.typography.bodyLargeMedium,
                 textAlign = TextAlign.Center,
             )
         }
@@ -150,7 +150,7 @@ private fun StepperButton(
     val mainBackgroundColor = if (active) {
         OrbitTheme.colors.info.normal
     } else {
-        OrbitTheme.colors.surface.strong
+        OrbitTheme.colors.surface.normal
     }
 
     val background = when {

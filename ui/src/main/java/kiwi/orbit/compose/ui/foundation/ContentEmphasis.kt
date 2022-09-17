@@ -27,7 +27,7 @@ public enum class ContentEmphasis {
      * Represents a text that is rather a comment or an explanation.
      *
      * If applied on:
-     * - `content.normal` -> [ContentColors.minor] ([ColorTokens.InkLight])
+     * - `content.normal` -> [ContentColors.minor] ([ColorTokens.InkNormal])
      * - else -> opacity 20%
      */
     Minor,
@@ -38,7 +38,7 @@ public enum class ContentEmphasis {
      * Represents a suggestion or a placeholder.
      *
      * If applied on:
-     * - `content.normal` -> [ContentColors.subtle] ([ColorTokens.InkLighter])
+     * - `content.normal` -> [ContentColors.subtle] ([ColorTokens.InkLight])
      * - else -> opacity 34%
      */
     Subtle,
@@ -47,7 +47,7 @@ public enum class ContentEmphasis {
      * Disabled text color.
      *
      * If applied on:
-     * - `content.normal` -> [ContentColors.disabled] ([ColorTokens.CloudDarkerHover])
+     * - `content.normal` -> [ContentColors.disabled] ([ColorTokens.CloudDarkHover])
      * - else -> opacity 52%
      */
     Disabled,

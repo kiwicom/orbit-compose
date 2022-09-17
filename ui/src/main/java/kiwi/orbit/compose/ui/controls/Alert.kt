@@ -34,6 +34,7 @@ import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
+import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
 public fun AlertInfo(
@@ -137,10 +138,13 @@ private fun Alert(
     suppressed: Boolean,
 ) {
     val bgColor = when (suppressed) {
-        true -> OrbitTheme.colors.surface.background
+        true -> OrbitTheme.colors.surface.subtle
         false -> OrbitTheme.colors.primary.subtle
     }
-    val borderColor = OrbitTheme.colors.content.subtle.copy(0.08f)
+    val borderColor = when (suppressed) {
+        true -> OrbitTheme.colors.content.subtle
+        false -> OrbitTheme.colors.primary.normal
+    }.copy(0.1f)
     val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
     val buttonColors = when (suppressed) {
@@ -149,14 +153,15 @@ private fun Alert(
             val primaryColors = OrbitTheme.colors.primary
             OrbitTheme.colors.copy(
                 surface = OrbitTheme.colors.surface.copy(
-                    strong = primaryColors.subtleAlt,
+                    normal = primaryColors.subtleAlt,
                 ),
                 content = OrbitTheme.colors.content.copy(
-                    normal = primaryColors.onSubtleAlt,
+                    normal = contentColorFor(primaryColors.subtleAlt),
                 ),
             )
         }
     }
+
     Row(
         modifier = modifier
             .fillMaxWidth()

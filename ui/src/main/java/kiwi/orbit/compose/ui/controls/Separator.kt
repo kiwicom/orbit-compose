@@ -15,7 +15,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 @Composable
 public fun Separator(
     modifier: Modifier = Modifier,
-    color: Color = OrbitTheme.colors.surface.strong,
+    color: Color = OrbitTheme.colors.surface.normal,
     thickness: Dp = 1.dp,
     startIndent: Dp = 0.dp,
 ) {

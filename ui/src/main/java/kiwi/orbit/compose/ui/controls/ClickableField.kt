@@ -81,7 +81,7 @@ internal fun ClickableFieldBox(
             .clip(OrbitTheme.shapes.normal)
             .clickable(onClick = onClick)
             .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
-            .background(OrbitTheme.colors.surface.subtle, OrbitTheme.shapes.normal),
+            .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal),
         propagateMinConstraints = true,
     ) {
         FieldContent(

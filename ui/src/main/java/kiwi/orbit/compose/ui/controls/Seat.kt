@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
@@ -49,7 +50,6 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
-import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
 @Composable
 public fun SeatStandard(
@@ -172,10 +172,18 @@ private fun ColumnScope.Seat(
 ) {
     val borderColor by animateColorAsState(
         when {
-            !enabled -> ColorTokens.CloudLightHover
+            !enabled -> OrbitTheme.colors.surface.subtleAlt
             selected -> Color.Transparent
-            isExtraLegroom -> ColorTokens.BlueLightActive
-            else -> ColorTokens.ProductLightActive
+            isExtraLegroom -> {
+                OrbitTheme.colors.info.normal
+                    .copy(alpha = 0.2f) // custom, missing theme color
+                    .compositeOver(OrbitTheme.colors.surface.main)
+            }
+            else -> {
+                OrbitTheme.colors.primary.normal
+                    .copy(alpha = 0.2f) // custom, missing theme color
+                    .compositeOver(OrbitTheme.colors.surface.main)
+            }
         },
     )
 
@@ -187,7 +195,7 @@ private fun ColumnScope.Seat(
     ) {
         val background by animateColorAsState(
             when {
-                !enabled -> OrbitTheme.colors.surface.background
+                !enabled -> OrbitTheme.colors.surface.subtle
                 selected && isExtraLegroom -> OrbitTheme.colors.info.normal
                 isExtraLegroom -> OrbitTheme.colors.info.subtle
                 selected -> OrbitTheme.colors.primary.normal

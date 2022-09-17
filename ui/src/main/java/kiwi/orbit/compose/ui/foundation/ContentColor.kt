@@ -36,8 +36,12 @@ private fun SurfaceColors.contentColorFor(
 ): Color? =
     when (color) {
         main -> contentColors.normal
-        background -> contentColors.normal
+        subtle -> contentColors.normal
+        subtleAlt -> contentColors.normal
+        normal -> contentColors.normal
+        normalAlt -> contentColors.normal
         strong -> contentColors.normal
+        strongAlt -> contentColors.normal
         else -> null
     }
 
@@ -54,9 +58,10 @@ private fun FeatureColors.contentColorFor(color: Color): Color? =
     when (color) {
         normal -> onNormal
         normalAlt -> onNormal
+        subtle -> strong
+        subtleAlt -> strongAlt
         strong -> onNormal
-        subtle -> onSubtle
-        subtleAlt -> onSubtleAlt
+        strongAlt -> onNormal
         else -> null
     }
 

@@ -2,7 +2,6 @@ package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.core.graphics.ColorUtils
 import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
 public fun darkColors(
@@ -28,15 +27,21 @@ public fun darkColors(
 
 public fun darkSurfaceColors(
     main: Color = Color(0xFF111927),
-    background: Color = Color(0xFF111927),
-    subtle: Color = Color(0xFF303846),
-    strong: Color = Color(0xFF343b42),
-    disabled: Color = Color(0x885E6674),
+    subtle: Color = Color(0xFF151E29),
+    subtleAlt: Color = Color(0xFF1F2B35),
+    normal: Color = Color(0xFF293845),
+    normalAlt: Color = Color(0xFF324454),
+    strong: Color = Color(0xFF38414B),
+    strongAlt: Color = Color(0xFF424D59),
+    disabled: Color = Color(0xFF293845),
 ): SurfaceColors = SurfaceColors(
     main = main,
-    background = background,
     subtle = subtle,
+    subtleAlt = subtleAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     strong = strong,
+    strongAlt = strongAlt,
     disabled = disabled,
 )
 
@@ -44,8 +49,8 @@ public fun darkContentColors(
     normal: Color = Color(0xFFFFFFFF),
     minor: Color = Color(0xFFBAC7D5),
     subtle: Color = Color(0xFFA1AEBC),
-    highlight: Color = ColorTokens.ProductNormal,
-    disabled: Color = ColorTokens.CloudDarkerHover.invert(),
+    highlight: Color = Color(0xFF00EECC),
+    disabled: Color = Color(0xFF424D59),
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,
@@ -56,116 +61,106 @@ public fun darkContentColors(
 
 public fun darkPrimaryColors(
     normal: Color = Color(0xFF00CBAE),
-    normalAlt: Color = ColorTokens.ProductDarkHover,
+    normalAlt: Color = Color(0xFF00E4C3),
     subtle: Color = Color(0xFF0A4038),
-    subtleAlt: Color = Color(0xFF09332D),
-    strong: Color = ColorTokens.ProductNormal,
-    onNormal: Color = ColorTokens.White.invert(),
-    onSubtle: Color = ColorTokens.White,
-    onSubtleAlt: Color = ColorTokens.White,
+    subtleAlt: Color = Color(0xFF0F6558),
+    strong: Color = Color(0xFF00EECC),
+    strongAlt: Color = Color(0xFF09FFDB),
+    onNormal: Color = Color.Black,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkInfoColors(
     normal: Color = Color(0xFF2AA0FE),
-    normalAlt: Color = ColorTokens.BlueDarkHover,
+    normalAlt: Color = Color(0xFF43ABFE),
     subtle: Color = Color(0xFF21425F),
-    subtleAlt: Color = Color(0xFF3B5C79),
-    strong: Color = ColorTokens.BlueNormal,
-    onNormal: Color = ColorTokens.White.invert(),
-    onSubtle: Color = ColorTokens.White,
-    onSubtleAlt: Color = ColorTokens.White,
+    subtleAlt: Color = Color(0xFF2A557B),
+    strong: Color = Color(0xFF67BBFE),
+    strongAlt: Color = Color(0xFF80C6FE),
+    onNormal: Color = Color.Black,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkSuccessColors(
     normal: Color = Color(0xFF3BCE4E),
-    normalAlt: Color = ColorTokens.GreenDarkHover,
+    normalAlt: Color = Color(0xFF4FD360),
     subtle: Color = Color(0xFF254B3C),
-    subtleAlt: Color = Color(0xFF3F6556),
-    strong: Color = ColorTokens.GreenNormal,
-    onNormal: Color = ColorTokens.White.invert(),
-    onSubtle: Color = ColorTokens.White,
-    onSubtleAlt: Color = ColorTokens.White,
+    subtleAlt: Color = Color(0xFF326551),
+    strong: Color = Color(0xFF64D873),
+    strongAlt: Color = Color(0xFF87DD85),
+    onNormal: Color = Color.Black,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkWarningColors(
     normal: Color = Color(0xFFFBA132),
-    normalAlt: Color = ColorTokens.OrangeDarkHover,
+    normalAlt: Color = Color(0xFFFBAC4B),
     subtle: Color = Color(0xFF4B4236),
-    subtleAlt: Color = Color(0xFF655C50),
-    strong: Color = ColorTokens.OrangeNormal,
-    onNormal: Color = ColorTokens.White.invert(),
-    onSubtle: Color = ColorTokens.White,
-    onSubtleAlt: Color = ColorTokens.White,
+    subtleAlt: Color = Color(0xFF615545),
+    strong: Color = Color(0xFFFCB35A),
+    strongAlt: Color = Color(0xFFFCBE73),
+    onNormal: Color = Color.Black,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkCriticalColors(
     normal: Color = Color(0xFFFF5050),
-    normalAlt: Color = ColorTokens.RedDarkHover,
+    normalAlt: Color = Color(0xFFFF6969),
     subtle: Color = Color(0xFF4C323C),
-    subtleAlt: Color = Color(0xFF664C56),
-    strong: Color = ColorTokens.RedNormal,
-    onNormal: Color = ColorTokens.White.invert(),
-    onSubtle: Color = ColorTokens.White,
-    onSubtleAlt: Color = ColorTokens.White,
+    subtleAlt: Color = Color(0xFF63414E),
+    strong: Color = Color(0xFFFF7070),
+    strongAlt: Color = Color(0xFFFE8989),
+    onNormal: Color = Color.Black,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun darkBundleColors(
-    basic: Color = ColorTokens.BundleBasic.invert(),
+    basic: Color = ColorTokens.BundleBasic,
     basicGradient: Brush = bundleLinearGradient(
         ColorTokens.BundleBasicStart,
         ColorTokens.BundleBasicEnd,
     ),
-    medium: Color = ColorTokens.BundleMedium.invert(),
+    medium: Color = ColorTokens.BundleMedium,
     mediumGradient: Brush = bundleLinearGradient(
         ColorTokens.BundleMediumStart,
         ColorTokens.BundleMediumEnd,
     ),
-    top: Color = ColorTokens.InkNormal.invert(),
+    top: Color = ColorTokens.InkDark,
     topGradient: Brush = bundleLinearGradient(
         ColorTokens.BundleTopStart,
         ColorTokens.BundleTopEnd,
@@ -184,11 +179,3 @@ public fun darkBundleColors(
     onMedium = onMedium,
     onTop = onTop,
 )
-
-private fun Color.invert(): Color {
-    val hsl = floatArrayOf(0f, 0f, 0f)
-    ColorUtils.colorToHSL((value shr 32).toInt(), hsl)
-    hsl[2] = 1 - hsl[2]
-    val colorInt = ColorUtils.HSLToColor(hsl)
-    return Color(colorInt)
-}

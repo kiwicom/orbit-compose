@@ -5,12 +5,11 @@ public fun Colors.asNeutralTheme(): Colors =
         FeatureColors(
             normal = content.normal,
             normalAlt = content.normal,
-            subtle = surface.background,
-            subtleAlt = surface.strong,
-            strong = surface.background,
+            subtle = surface.subtle,
+            subtleAlt = surface.subtleAlt,
+            strong = surface.strong,
+            strongAlt = surface.strongAlt,
             onNormal = surface.main,
-            onSubtle = content.normal,
-            onSubtleAlt = content.normal,
         ),
     )
 
@@ -20,11 +19,10 @@ public fun Colors.asNeutralSubtleStrongTheme(): Colors =
             normal = content.normal,
             normalAlt = content.normal,
             subtle = surface.main,
-            subtleAlt = surface.strong,
-            strong = surface.background,
+            subtleAlt = surface.subtleAlt, // WhiteAlt is not in theme, using CloudLightAlt
+            strong = surface.subtle,
+            strongAlt = surface.strongAlt,
             onNormal = surface.main,
-            onSubtle = content.normal,
-            onSubtleAlt = content.normal,
         ),
     )
 

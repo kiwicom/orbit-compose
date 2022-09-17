@@ -49,7 +49,7 @@ public fun ButtonSecondary(
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
-        backgroundColor = OrbitTheme.colors.surface.strong,
+        backgroundColor = OrbitTheme.colors.surface.normal,
         modifier = modifier,
         content = content,
     )

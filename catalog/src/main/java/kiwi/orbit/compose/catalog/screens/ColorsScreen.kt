@@ -80,14 +80,21 @@ private fun SurfaceColors() {
             Column {
                 ColorRow {
                     Color(colors.main, "surface.main", "White")
-                    Color(colors.background, "surface.background", "CloudLight")
                 }
                 ColorRow {
-                    Color(colors.subtle, "surface.subtle", "CloudNormal")
+                    Color(colors.subtle, "surface.subtle", "CloudLight")
+                    Color(colors.subtleAlt, "surface.subtleAlt", "CloudLightHover")
+                }
+                ColorRow {
+                    Color(colors.normal, "surface.normal", "CloudNormal")
+                    Color(colors.normalAlt, "surface.normalAlt", "CloudNormalHover")
+                }
+                ColorRow {
                     Color(colors.strong, "surface.strong", "CloudDark")
+                    Color(colors.strongAlt, "surface.strongAlt", "CloudDarkHover")
                 }
                 ColorRow {
-                    Color(colors.disabled, "surface.disabled", "CloudDarker")
+                    Color(colors.disabled, "surface.disabled", "CloudNormal")
                 }
             }
         }
@@ -104,14 +111,14 @@ private fun ContentColors() {
         SurfaceCard {
             Column {
                 ColorRow {
-                    Color(colors.normal, "content.normal", "InkNormal", contentColor)
+                    Color(colors.normal, "content.normal", "InkDark", contentColor)
                 }
                 ColorRow {
-                    Color(colors.minor, "content.minor", "InkLight", contentColor)
-                    Color(colors.subtle, "content.subtle", "InkLighter", contentColor)
+                    Color(colors.minor, "content.minor", "InkNormal", contentColor)
+                    Color(colors.subtle, "content.subtle", "InkLight", contentColor)
                 }
                 ColorRow {
-                    Color(colors.disabled, "content.disabled", "CloudDarkerHover", contentColor)
+                    Color(colors.disabled, "content.disabled", "CloudDarkHover", contentColor)
                 }
             }
         }
@@ -128,14 +135,15 @@ private fun FeatureColors(colors: FeatureColors, name: String, orbitName: String
             Column {
                 ColorRow {
                     Color(colors.subtle, "$featureName.subtle", "${orbitName}Light")
-                    Color(colors.subtleAlt, "$featureName.subtleAlt", "${orbitName}LightActive")
+                    Color(colors.subtleAlt, "$featureName.subtleAlt", "${orbitName}LightHover")
                 }
                 ColorRow {
                     Color(colors.normal, "$featureName.normal", "${orbitName}Normal")
-                    Color(colors.normalAlt, "$featureName.normalAlt", "${orbitName}NormalActive")
+                    Color(colors.normalAlt, "$featureName.normalAlt", "${orbitName}NormalHover")
                 }
                 ColorRow {
                     Color(colors.strong, "$featureName.strong", "${orbitName}Dark")
+                    Color(colors.strongAlt, "$featureName.strongAlt", "${orbitName}DarkHover")
                 }
             }
         }

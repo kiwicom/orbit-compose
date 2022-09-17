@@ -74,7 +74,7 @@ private fun TypographyScreenInner() {
 private fun Typography(name: String, style: TextStyle, testText: String) {
     Row {
         Column(Modifier.weight(1f)) {
-            Text(name.uppercase(), emphasis = ContentEmphasis.Subtle)
+            Text(name.uppercase(), emphasis = ContentEmphasis.Minor)
             Text(
                 text = testText,
                 modifier = Modifier.padding(end = 16.dp),
@@ -83,7 +83,7 @@ private fun Typography(name: String, style: TextStyle, testText: String) {
         }
         Text(
             text = "${style.fontSize.value.roundToInt()}/${style.lineHeight.value.roundToInt()}",
-            emphasis = ContentEmphasis.Subtle,
+            emphasis = ContentEmphasis.Minor,
         )
     }
 }

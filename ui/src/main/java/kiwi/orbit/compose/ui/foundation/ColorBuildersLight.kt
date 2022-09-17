@@ -27,24 +27,30 @@ public fun lightColors(
 
 public fun lightSurfaceColors(
     main: Color = ColorTokens.White,
-    background: Color = ColorTokens.CloudLight,
-    subtle: Color = ColorTokens.CloudNormal,
+    subtle: Color = ColorTokens.CloudLight,
+    subtleAlt: Color = ColorTokens.CloudLightHover,
+    normal: Color = ColorTokens.CloudNormal,
+    normalAlt: Color = ColorTokens.CloudNormalHover,
     strong: Color = ColorTokens.CloudDark,
-    disabled: Color = ColorTokens.CloudDarker,
+    strongAlt: Color = ColorTokens.CloudDarkHover,
+    disabled: Color = ColorTokens.CloudNormal,
 ): SurfaceColors = SurfaceColors(
     main = main,
-    background = background,
     subtle = subtle,
+    subtleAlt = subtleAlt,
+    normal = normal,
+    normalAlt = normalAlt,
     strong = strong,
+    strongAlt = strongAlt,
     disabled = disabled,
 )
 
 public fun lightContentColors(
-    normal: Color = ColorTokens.InkNormal,
-    minor: Color = ColorTokens.InkLight,
-    subtle: Color = ColorTokens.InkLighter,
+    normal: Color = ColorTokens.InkDark,
+    minor: Color = ColorTokens.InkNormal,
+    subtle: Color = ColorTokens.InkLight,
     highlight: Color = ColorTokens.ProductDark,
-    disabled: Color = ColorTokens.CloudDarkerHover,
+    disabled: Color = ColorTokens.CloudDarkHover,
 ): ContentColors = ContentColors(
     normal = normal,
     minor = minor,
@@ -59,18 +65,16 @@ public fun lightPrimaryColors(
     subtle: Color = ColorTokens.ProductLight,
     subtleAlt: Color = ColorTokens.ProductLightHover,
     strong: Color = ColorTokens.ProductDark,
+    strongAlt: Color = ColorTokens.ProductDarkHover,
     onNormal: Color = ColorTokens.White,
-    onSubtle: Color = ColorTokens.ProductDark,
-    onSubtleAlt: Color = ColorTokens.ProductDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightInfoColors(
@@ -79,18 +83,16 @@ public fun lightInfoColors(
     subtle: Color = ColorTokens.BlueLight,
     subtleAlt: Color = ColorTokens.BlueLightHover,
     strong: Color = ColorTokens.BlueDark,
+    strongAlt: Color = ColorTokens.BlueDarkHover,
     onNormal: Color = ColorTokens.White,
-    onSubtle: Color = ColorTokens.BlueDark,
-    onSubtleAlt: Color = ColorTokens.BlueDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightSuccessColors(
@@ -99,18 +101,16 @@ public fun lightSuccessColors(
     subtle: Color = ColorTokens.GreenLight,
     subtleAlt: Color = ColorTokens.GreenLightHover,
     strong: Color = ColorTokens.GreenDark,
+    strongAlt: Color = ColorTokens.GreenDarkHover,
     onNormal: Color = ColorTokens.White,
-    onSubtle: Color = ColorTokens.GreenDark,
-    onSubtleAlt: Color = ColorTokens.GreenDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightWarningColors(
@@ -119,18 +119,16 @@ public fun lightWarningColors(
     subtle: Color = ColorTokens.OrangeLight,
     subtleAlt: Color = ColorTokens.OrangeLightHover,
     strong: Color = ColorTokens.OrangeDark,
+    strongAlt: Color = ColorTokens.OrangeDarkHover,
     onNormal: Color = ColorTokens.White,
-    onSubtle: Color = ColorTokens.OrangeDark,
-    onSubtleAlt: Color = ColorTokens.OrangeDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightCriticalColors(
@@ -139,18 +137,16 @@ public fun lightCriticalColors(
     subtle: Color = ColorTokens.RedLight,
     subtleAlt: Color = ColorTokens.RedLightHover,
     strong: Color = ColorTokens.RedDark,
+    strongAlt: Color = ColorTokens.RedDarkHover,
     onNormal: Color = ColorTokens.White,
-    onSubtle: Color = ColorTokens.RedDark,
-    onSubtleAlt: Color = ColorTokens.RedDarkHover,
 ): FeatureColors = FeatureColors(
     normal = normal,
     normalAlt = normalAlt,
     subtle = subtle,
     subtleAlt = subtleAlt,
     strong = strong,
+    strongAlt = strongAlt,
     onNormal = onNormal,
-    onSubtle = onSubtle,
-    onSubtleAlt = onSubtleAlt,
 )
 
 public fun lightBundleColors(
@@ -158,7 +154,7 @@ public fun lightBundleColors(
     basicGradient: Brush = bundleLinearGradient(ColorTokens.BundleBasicStart, ColorTokens.BundleBasicEnd),
     medium: Color = ColorTokens.BundleMedium,
     mediumGradient: Brush = bundleLinearGradient(ColorTokens.BundleMediumStart, ColorTokens.BundleMediumEnd),
-    top: Color = ColorTokens.InkNormal,
+    top: Color = ColorTokens.InkDark,
     topGradient: Brush = bundleLinearGradient(ColorTokens.BundleTopStart, ColorTokens.BundleTopEnd),
     onBasic: Color = ColorTokens.White,
     onMedium: Color = ColorTokens.White,

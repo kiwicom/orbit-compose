@@ -123,7 +123,7 @@ public fun SegmentedSwitch(
         ) {
             Surface(
                 shape = OrbitTheme.shapes.normal,
-                border = BorderStroke(1.dp, OrbitTheme.colors.surface.disabled),
+                border = BorderStroke(1.dp, OrbitTheme.colors.surface.strong),
             ) {
                 Row(
                     modifier = Modifier
@@ -157,8 +157,8 @@ public fun SegmentedSwitch(
                             CompositionLocalProvider(
                                 LocalTextStyle provides OrbitTheme.typography.bodyNormal
                                     .copy(textAlign = TextAlign.Center),
-                                LocalContentEmphasis provides when {
-                                    selectedIndex != null && selectedIndex == index -> ContentEmphasis.Normal
+                                LocalContentEmphasis provides when (selectedIndex) {
+                                    null, index -> ContentEmphasis.Normal
                                     else -> ContentEmphasis.Minor
                                 },
                             ) {
@@ -187,7 +187,7 @@ private fun VerticalDivider(
     val color by animateColorAsState(
         targetValue = when (selectedIndex) {
             index - 1, index -> Color.Unspecified
-            else -> OrbitTheme.colors.surface.disabled
+            else -> OrbitTheme.colors.surface.strong
         },
     )
     Surface(

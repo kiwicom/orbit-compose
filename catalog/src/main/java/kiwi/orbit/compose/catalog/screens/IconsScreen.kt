@@ -53,7 +53,7 @@ fun IconsScreenInner(contentPadding: PaddingValues) {
             Column(
                 modifier = Modifier
                     .padding(4.dp)
-                    .border(1.dp, OrbitTheme.colors.surface.strong, OrbitTheme.shapes.normal)
+                    .border(1.dp, OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal)
                     .padding(vertical = 8.dp, horizontal = 4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {

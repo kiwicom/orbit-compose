@@ -60,7 +60,7 @@ internal fun TopAppBarLargeScrollableScreen(
                 largeElevated = false,
             )
         },
-        backgroundColor = OrbitTheme.colors.surface.background,
+        backgroundColor = OrbitTheme.colors.surface.subtle,
         content = { CustomContentPlaceholder(it) },
     )
 }

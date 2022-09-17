@@ -111,7 +111,7 @@ internal fun MainScreen(
                 },
             )
         },
-        backgroundColor = OrbitTheme.colors.surface.background,
+        backgroundColor = OrbitTheme.colors.surface.subtle,
     ) { contentPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(160.dp),
