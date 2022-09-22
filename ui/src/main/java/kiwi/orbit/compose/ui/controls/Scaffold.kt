@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
@@ -34,6 +35,7 @@ public fun Scaffold(
     action: @Composable () -> Unit = {},
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
+    actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor, action) },
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
     content: @Composable (contentPadding: PaddingValues) -> Unit,
@@ -46,7 +48,7 @@ public fun Scaffold(
         ScaffoldLayout(
             topBar = topBar,
             toast = { toastHost(toastHostState) },
-            action = { ScaffoldAction(backgroundColor, action) },
+            action = actionLayout,
             content = content,
         )
     }
@@ -95,7 +97,7 @@ private fun ScaffoldLayout(
         val topInset = topBarHeight.takeUnless { it == 0 } ?: insets.getTop(density)
         val startInset = insets.getLeft(density, LayoutDirection.Ltr)
         val endInset = insets.getRight(density, LayoutDirection.Ltr)
-        val bottomInset = actionHeight + insets.getBottom(density)
+        val bottomInset = actionHeight.takeUnless { it == 0 } ?: insets.getBottom(density)
 
         contentPadding.updateFrom(
             top = topInset.toDp(),
@@ -122,15 +124,18 @@ private fun ScaffoldAction(
     backgroundColor: Color,
     content: @Composable () -> Unit,
 ) {
-    val brush = Brush.verticalGradient(
-        colors = listOf(Color.Transparent, backgroundColor),
-        endY = with(LocalDensity.current) { 44.dp.toPx() },
-    )
+    val density = LocalDensity.current
+    val brush = remember(density, backgroundColor) {
+        Brush.verticalGradient(
+            colors = listOf(Color.Transparent, backgroundColor),
+            endY = with(density) { 44.dp.toPx() },
+        )
+    }
     Layout(
         content = content,
-        modifier = Modifier.drawBehind {
-            drawRect(brush)
-        },
+        modifier = Modifier
+            .drawBehind { drawRect(brush) }
+            .windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars)),
     ) { measurables, constraints ->
         val action = measurables.firstOrNull() ?: return@Layout layout(0, 0) {}
 
