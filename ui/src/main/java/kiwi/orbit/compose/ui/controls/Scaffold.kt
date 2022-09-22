@@ -1,8 +1,11 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.union
@@ -13,16 +16,18 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
 import kiwi.orbit.compose.ui.controls.internal.MutablePaddingValues
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 public val LocalScaffoldPadding: ProvidableCompositionLocal<PaddingValues> =
@@ -128,13 +133,13 @@ private fun ScaffoldAction(
     val brush = remember(density, backgroundColor) {
         Brush.verticalGradient(
             colors = listOf(Color.Transparent, backgroundColor),
-            endY = with(density) { 44.dp.toPx() },
+            endY = with(density) { 16.dp.toPx() },
         )
     }
     Layout(
         content = content,
         modifier = Modifier
-            .drawBehind { drawRect(brush) }
+            .background(brush)
             .windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars)),
     ) { measurables, constraints ->
         val action = measurables.firstOrNull() ?: return@Layout layout(0, 0) {}
@@ -142,10 +147,24 @@ private fun ScaffoldAction(
         val padding = 16.dp.roundToPx()
         val placeable = action.measure(constraints.offset(horizontal = -2 * padding))
         val width = constraints.maxWidth
-        val height = placeable.height + padding
+        val height = placeable.height + 2 * padding
 
         layout(width, height) {
-            placeable.place(x = (width - placeable.width) / 2, y = 0)
+            placeable.place(x = (width - placeable.width) / 2, y = padding)
+        }
+    }
+}
+
+@Preview
+@Composable
+internal fun ScaffoldPreview() {
+    Preview {
+        Scaffold(
+            action = {
+                ButtonPrimary(onClick = {}, Modifier.fillMaxWidth()) { Text("Test") }
+            },
+        ) {
+            CustomPlaceholder(Modifier.fillMaxSize())
         }
     }
 }

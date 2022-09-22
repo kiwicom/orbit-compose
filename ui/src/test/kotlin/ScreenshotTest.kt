@@ -1,10 +1,14 @@
 package kiwi.orbit.compose.ui
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
@@ -41,6 +45,7 @@ import kiwi.orbit.compose.ui.controls.PasswordTextFieldPreview
 import kiwi.orbit.compose.ui.controls.PillButtonPreview
 import kiwi.orbit.compose.ui.controls.RadioFieldPreview
 import kiwi.orbit.compose.ui.controls.RadioPreview
+import kiwi.orbit.compose.ui.controls.ScaffoldPreview
 import kiwi.orbit.compose.ui.controls.SeatLegendPreview
 import kiwi.orbit.compose.ui.controls.SeatPreview
 import kiwi.orbit.compose.ui.controls.SegmentedSwitchPreview
@@ -253,6 +258,15 @@ internal class ScreenshotTest {
     @Test
     fun radioField() {
         snapshot { RadioFieldPreview() }
+    }
+
+    @Test
+    fun scaffold() {
+        snapshot {
+            Box(Modifier.height(200.dp)) {
+                ScaffoldPreview()
+            }
+        }
     }
 
     @Test
