@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "kiwi.orbit.compose.catalog"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = 33
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionName = project.findProperty("VERSION_NAME").toString()
 
         val bits = versionName!!.split('.').map { it.toInt() }
@@ -93,6 +93,7 @@ dependencies {
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.activityComposeCatalog)
 
     implementation(libs.compose.animation)
     implementation(libs.compose.foundation)

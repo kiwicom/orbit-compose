@@ -27,17 +27,7 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 subprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://kotlin.bintray.com/kotlinx/") }
-    }
-
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "1.8"

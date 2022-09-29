@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -30,9 +31,11 @@ fun AppTheme(
     }
 }
 
+@SuppressLint("DiscouragedApi")
 private fun createFontFamily(context: Context): FontFamily {
     val resources = context.resources
     val packageName = context.packageName
+
     val book = resources.getIdentifier("circular_pro_book", "font", packageName)
     val medium = resources.getIdentifier("circular_pro_medium", "font", packageName)
     val bold = resources.getIdentifier("circular_pro_bold", "font", packageName)
