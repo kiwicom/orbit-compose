@@ -44,6 +44,8 @@ accompanist-systemController = { module = "com.google.accompanist:accompanist-sy
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-main" }
 compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose-main" }
+# compiler dependency is defined to help Renovabot update the version
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose-compiler" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-main" }
 compose-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose-main" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose-main" }
