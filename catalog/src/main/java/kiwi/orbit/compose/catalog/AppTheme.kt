@@ -5,9 +5,11 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.Typography
 import kiwi.orbit.compose.ui.foundation.darkColors
@@ -19,9 +21,9 @@ fun AppTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
-    val fontFamily = remember { createFontFamily(context) }
+    val (fontFamily, lineHeightStyle) = remember { createFontFamily(context) }
     OrbitTheme(
-        typography = Typography(defaultFontFamily = fontFamily),
+        typography = Typography(fontFamily, lineHeightStyle),
         colors = when (isLightTheme) {
             true -> lightColors()
             false -> darkColors()
@@ -31,8 +33,9 @@ fun AppTheme(
     }
 }
 
+@OptIn(ExperimentalTextApi::class)
 @SuppressLint("DiscouragedApi")
-private fun createFontFamily(context: Context): FontFamily {
+private fun createFontFamily(context: Context): Pair<FontFamily, LineHeightStyle.Alignment> {
     val resources = context.resources
     val packageName = context.packageName
 
@@ -41,12 +44,16 @@ private fun createFontFamily(context: Context): FontFamily {
     val bold = resources.getIdentifier("circular_pro_bold", "font", packageName)
 
     if (book == 0 || medium == 0 || bold == 0) {
-        return FontFamily.Default
+        return FontFamily.Default to LineHeightStyle.Alignment.Center
     }
 
-    return FontFamily(
-        Font(book, FontWeight.Normal),
-        Font(medium, FontWeight.Medium),
-        Font(bold, FontWeight.Bold),
+    return Pair(
+        FontFamily(
+            Font(book, FontWeight.Normal),
+            Font(medium, FontWeight.Medium),
+            Font(bold, FontWeight.Bold),
+        ),
+        // Accommodate for Circular Pro to 0.6f instead of Center
+        LineHeightStyle.Alignment(0.6f),
     )
 }
