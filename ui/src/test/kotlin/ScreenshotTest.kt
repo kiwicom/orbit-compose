@@ -1,18 +1,14 @@
 package kiwi.orbit.compose.ui
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
 import app.cash.paparazzi.Paparazzi
-import app.cash.paparazzi.androidHome
-import app.cash.paparazzi.detectEnvironment
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import kiwi.orbit.compose.ui.controls.AlertCriticalPreview
@@ -69,10 +65,6 @@ internal class ScreenshotTest {
     val paparazzi = Paparazzi(
         theme = "android:Theme.Material.NoActionBar.Fullscreen",
         renderingMode = SessionParams.RenderingMode.V_SCROLL,
-        environment = detectEnvironment().copy(
-            platformDir = "${androidHome()}/platforms/android-32",
-            compileSdkVersion = 32,
-        ),
     )
 
     private fun snapshot(content: @Composable () -> Unit) {
@@ -87,13 +79,7 @@ internal class ScreenshotTest {
         paparazzi.unsafeUpdateConfig(
             deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false, nightMode = NightMode.NIGHT),
         )
-        paparazzi.snapshot(name = "dark") {
-            // Workaround for https://github.com/cashapp/paparazzi/pull/473
-            val configuration = LocalConfiguration.current
-            configuration.uiMode =
-                (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
-            content()
-        }
+        paparazzi.snapshot(name = "dark") { content() }
     }
 
     @Test
