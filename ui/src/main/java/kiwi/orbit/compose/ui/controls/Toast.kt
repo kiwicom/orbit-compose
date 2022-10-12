@@ -41,6 +41,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -154,17 +155,19 @@ private fun Modifier.toastGesturesDetector(
         val decay = splineBasedDecay<Float>(this)
         coroutineScope {
             while (true) {
-                // Detect a touch down event.
-                val pointerId = awaitPointerEventScope {
+                awaitPointerEventScope {
+                    // Detect a touch down event.
                     val down = awaitFirstDown()
                     onPause()
-                    down.id
-                }
-                val velocityTracker = VelocityTracker()
-                // Stop any ongoing animation.
-                offsetY.stop()
-                alpha.stop()
-                awaitPointerEventScope {
+                    val pointerId = down.id
+
+                    val velocityTracker = VelocityTracker()
+                    // Stop any ongoing animation.
+                    launch(start = CoroutineStart.UNDISPATCHED) {
+                        offsetY.stop()
+                        alpha.stop()
+                    }
+
                     verticalDrag(pointerId) { change ->
                         onPause()
                         // Update the animation value with touch events.
@@ -181,32 +184,33 @@ private fun Modifier.toastGesturesDetector(
                             )
                         }
                     }
-                }
-                onResume()
-                // No longer receiving touch events. Prepare the animation.
-                val velocity = velocityTracker.calculateVelocity().y
-                val targetOffsetY = decay.calculateTargetValue(
-                    offsetY.value,
-                    velocity,
-                )
-                // The animation stops when it reaches the bounds.
-                offsetY.updateBounds(
-                    lowerBound = -size.height.toFloat() * 3,
-                    upperBound = size.height.toFloat(),
-                )
-                launch {
-                    if (velocity >= 0 || targetOffsetY.absoluteValue <= size.height) {
-                        // Not enough velocity; Slide back.
-                        offsetY.animateTo(
-                            targetValue = 0f,
-                            initialVelocity = velocity,
-                        )
-                    } else {
-                        // The element was swiped away.
-                        launch { offsetY.animateDecay(velocity, decay) }
-                        launch {
-                            alpha.animateTo(targetValue = 0f, animationSpec = tween(300))
-                            onDismissed()
+
+                    onResume()
+                    // No longer receiving touch events. Prepare the animation.
+                    val velocity = velocityTracker.calculateVelocity().y
+                    val targetOffsetY = decay.calculateTargetValue(
+                        offsetY.value,
+                        velocity,
+                    )
+                    // The animation stops when it reaches the bounds.
+                    offsetY.updateBounds(
+                        lowerBound = -size.height.toFloat() * 3,
+                        upperBound = size.height.toFloat(),
+                    )
+                    launch {
+                        if (velocity >= 0 || targetOffsetY.absoluteValue <= size.height) {
+                            // Not enough velocity; Slide back.
+                            offsetY.animateTo(
+                                targetValue = 0f,
+                                initialVelocity = velocity,
+                            )
+                        } else {
+                            // The element was swiped away.
+                            launch { offsetY.animateDecay(velocity, decay) }
+                            launch {
+                                alpha.animateTo(targetValue = 0f, animationSpec = tween(300))
+                                onDismissed()
+                            }
                         }
                     }
                 }
