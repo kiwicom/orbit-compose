@@ -65,6 +65,7 @@ private fun SurfaceCardScreenInner() {
         Text("Selectable SurfaceCards")
 
         SurfaceCard(
+            selected = state,
             onClick = { state = true },
             border = if (state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)
@@ -77,6 +78,7 @@ private fun SurfaceCardScreenInner() {
         }
 
         SurfaceCard(
+            selected = !state,
             onClick = { state = false },
             border = if (!state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)

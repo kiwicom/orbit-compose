@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
-import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
@@ -51,13 +50,12 @@ public fun ChoiceTile(
         },
     )
     SurfaceCard(
+        selected = selected,
         onClick = onSelect,
         border = BorderStroke(2.dp, color),
-        modifier = modifier
-            .semantics {
-                this.selected = selected
-                if (isError) this.error(errorMessage)
-            },
+        modifier = modifier.semantics {
+            if (isError) this.error(errorMessage)
+        },
     ) {
         Column(
             Modifier.padding(12.dp),

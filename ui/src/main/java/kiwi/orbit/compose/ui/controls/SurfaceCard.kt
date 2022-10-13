@@ -62,6 +62,35 @@ public fun SurfaceCard(
     )
 }
 
+@Composable
+public fun SurfaceCard(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = OrbitTheme.shapes.normal,
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
+    contentColor: Color = contentColorFor(backgroundColor),
+    border: BorderStroke? = null,
+    elevation: Dp = OrbitTheme.elevations.Level1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable () -> Unit,
+) {
+    Surface(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        shape = shape,
+        color = backgroundColor,
+        contentColor = contentColor,
+        border = border,
+        elevation = elevation,
+        interactionSource = interactionSource,
+        content = content,
+    )
+}
+
 @OrbitPreviews
 @Composable
 internal fun SurfaceCardPreview() {
