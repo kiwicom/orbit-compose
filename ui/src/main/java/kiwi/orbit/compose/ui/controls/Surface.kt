@@ -1,16 +1,17 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ElevationOverlay
 import androidx.compose.material.LocalAbsoluteElevation
 import androidx.compose.material.LocalElevationOverlay
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -45,7 +46,6 @@ public fun Surface(
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
         LocalAbsoluteElevation provides absoluteElevation,
-        LocalAbsoluteElevation provides absoluteElevation,
     ) {
         Box(
             modifier = modifier
@@ -72,21 +72,19 @@ public fun Surface(
 public fun Surface(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     shape: Shape = RectangleShape,
     color: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(color),
     border: BorderStroke? = null,
     elevation: Dp = OrbitTheme.elevations.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    indication: Indication? = LocalIndication.current,
-    enabled: Boolean = true,
-    onClickLabel: String? = null,
-    role: Role? = null,
     content: @Composable () -> Unit,
 ) {
     val absoluteElevation = LocalAbsoluteElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
+        LocalContentEmphasis provides ContentEmphasis.Normal,
         LocalAbsoluteElevation provides absoluteElevation,
     ) {
         Box(
@@ -101,15 +99,106 @@ public fun Surface(
                     border = border,
                     elevation = elevation,
                 )
-                .then(
-                    Modifier.clickable(
-                        interactionSource = interactionSource,
-                        indication = indication,
-                        enabled = enabled,
-                        onClickLabel = onClickLabel,
-                        role = role,
-                        onClick = onClick,
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    role = Role.Button,
+                    onClick = onClick,
+                ),
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+public fun Surface(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = RectangleShape,
+    color: Color = OrbitTheme.colors.surface.main,
+    contentColor: Color = contentColorFor(color),
+    border: BorderStroke? = null,
+    elevation: Dp = OrbitTheme.elevations.None,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable () -> Unit,
+) {
+    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalContentEmphasis provides ContentEmphasis.Normal,
+        LocalAbsoluteElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
                     ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .selectable(
+                    selected = selected,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    role = Role.Tab,
+                    onClick = onClick,
+                ),
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+public fun Surface(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = RectangleShape,
+    color: Color = OrbitTheme.colors.surface.main,
+    contentColor: Color = contentColorFor(color),
+    border: BorderStroke? = null,
+    elevation: Dp = OrbitTheme.elevations.None,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable () -> Unit,
+) {
+    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalContentEmphasis provides ContentEmphasis.Normal,
+        LocalAbsoluteElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .toggleable(
+                    value = checked,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    role = Role.Switch,
+                    onValueChange = onCheckedChange,
                 ),
             propagateMinConstraints = true,
         ) {

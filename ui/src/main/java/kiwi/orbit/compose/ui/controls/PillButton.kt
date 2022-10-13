@@ -8,7 +8,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.LayoutScopeMarker
@@ -20,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -122,14 +120,10 @@ public fun PillButtonContainerScope.PillButton(
     content: @Composable () -> Unit = {},
 ) {
     Surface(
+        onClick = onClick,
         color = OrbitTheme.colors.info.normal,
         shape = CircleShape,
-        modifier = Modifier
-            .padding(16.dp)
-            .clickable(
-                role = Role.Button,
-                onClick = onClick,
-            ),
+        modifier = Modifier.padding(16.dp),
         elevation = OrbitTheme.elevations.Level1,
     ) {
         Row(

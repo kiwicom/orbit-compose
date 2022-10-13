@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -128,6 +129,7 @@ private fun SeatContainer(
                 interactionSource = remember { MutableInteractionSource() },
                 enabled = onClick != null,
                 indication = null,
+                role = Role.Button,
             ) { onClick?.invoke() }
             .semantics {
                 this.selected = selected
