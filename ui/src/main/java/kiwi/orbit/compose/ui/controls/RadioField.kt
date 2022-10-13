@@ -6,15 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.error
@@ -54,7 +51,6 @@ public fun RadioField(
     } else {
         Modifier
     }
-    val layoutDirection = LocalLayoutDirection.current
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     Row(
         modifier = modifier
@@ -62,26 +58,19 @@ public fun RadioField(
             .semantics {
                 if (isError) this.error(errorMessage)
             }
-            .padding(
-                start = contentPadding.calculateStartPadding(layoutDirection),
-                end = contentPadding.calculateEndPadding(layoutDirection),
-            ),
+            .padding(contentPadding),
     ) {
-        val radioVerticalShift = 1.dp
         Radio(
             selected = selected,
             onClick = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - radioVerticalShift).coerceAtLeast(0.dp),
                 end = 10.dp,
             ),
             enabled = enabled,
             isError = isError,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(radioVerticalShift)
-        val bottomPadding = contentPadding.calculateBottomPadding()
-        Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
+        Column {
             CompositionLocalProvider(
                 LocalTextStyle provides OrbitTheme.typography.title5,
                 LocalContentColor provides OrbitTheme.colors.content.normal,

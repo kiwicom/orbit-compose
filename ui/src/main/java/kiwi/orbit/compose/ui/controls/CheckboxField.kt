@@ -6,15 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
@@ -53,7 +50,6 @@ public fun CheckboxField(
     } else {
         Modifier
     }
-    val layoutDirection = LocalLayoutDirection.current
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     Row(
         modifier = modifier
@@ -61,26 +57,19 @@ public fun CheckboxField(
             .semantics {
                 if (isError) this.error(errorMessage)
             }
-            .padding(
-                start = contentPadding.calculateStartPadding(layoutDirection),
-                end = contentPadding.calculateEndPadding(layoutDirection),
-            ),
+            .padding(contentPadding),
     ) {
-        val checkboxVerticalShift = 1.dp
         Checkbox(
             checked = checked,
             onCheckedChange = null,
             modifier = Modifier.padding(
-                top = (contentPadding.calculateTopPadding() - checkboxVerticalShift).coerceAtLeast(0.dp),
                 end = 10.dp,
             ),
             enabled = enabled,
             isError = isError,
             interactionSource = interactionSource,
         )
-        val topPadding = contentPadding.calculateTopPadding().coerceAtLeast(checkboxVerticalShift)
-        val bottomPadding = contentPadding.calculateBottomPadding()
-        Column(Modifier.padding(top = topPadding, bottom = bottomPadding)) {
+        Column {
             CompositionLocalProvider(
                 LocalTextStyle provides OrbitTheme.typography.title5,
                 LocalContentColor provides OrbitTheme.colors.content.normal,
