@@ -3,7 +3,6 @@ package kiwi.orbit.compose.ui.foundation
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -67,95 +66,6 @@ public data class Typography internal constructor(
      */
     val bodySmall: TextStyle,
 ) {
-    @OptIn(ExperimentalTextApi::class)
-    @Suppress("DEPRECATION")
-    public constructor(
-        defaultFontFamily: FontFamily = FontFamily.Default,
-        lineHeightStyle: LineHeightStyle.Alignment = LineHeightStyle.Alignment.Center,
-        title1: TextStyle = TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 28.sp,
-            lineHeight = 32.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        title2: TextStyle = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 22.sp,
-            lineHeight = 28.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        title3: TextStyle = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
-            lineHeight = 24.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        title4: TextStyle = TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        title5: TextStyle = TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
-            lineHeight = 20.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        title6: TextStyle = TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 12.sp,
-            lineHeight = 16.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-            // TODO: textAllCaps
-        ),
-        bodyExtraLarge: TextStyle = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 18.sp,
-            lineHeight = 24.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        bodyLarge: TextStyle = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp,
-            lineHeight = 22.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        bodyNormal: TextStyle = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 14.sp,
-            lineHeight = 20.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-        bodySmall: TextStyle = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 12.sp,
-            lineHeight = 16.sp,
-            platformStyle = PlatformTextStyle(includeFontPadding = false),
-            lineHeightStyle = LineHeightStyle(lineHeightStyle, LineHeightStyle.Trim.None),
-        ),
-    ) : this(
-        title1 = title1.withDefaultFontFamily(defaultFontFamily),
-        title2 = title2.withDefaultFontFamily(defaultFontFamily),
-        title3 = title3.withDefaultFontFamily(defaultFontFamily),
-        title4 = title4.withDefaultFontFamily(defaultFontFamily),
-        title5 = title5.withDefaultFontFamily(defaultFontFamily),
-        title6 = title6.withDefaultFontFamily(defaultFontFamily),
-        bodyExtraLarge = bodyExtraLarge.withDefaultFontFamily(defaultFontFamily),
-        bodyLarge = bodyLarge.withDefaultFontFamily(defaultFontFamily),
-        bodyNormal = bodyNormal.withDefaultFontFamily(defaultFontFamily),
-        bodySmall = bodySmall.withDefaultFontFamily(defaultFontFamily),
-    )
-
     /**
      * Orbit BodyExtraLarge with Medium font-weight.
      */
@@ -215,9 +125,86 @@ public data class Typography internal constructor(
         )
 }
 
-private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {
-    return if (fontFamily != null) this else copy(fontFamily = default)
-}
+@Suppress("DEPRECATION")
+public fun createTypography(
+    defaultFontFamily: FontFamily = FontFamily.Default,
+    defaultPlatformTextStyle: PlatformTextStyle? = PlatformTextStyle(includeFontPadding = false),
+    defaultLineHeightStyle: LineHeightStyle? = LineHeightStyle(
+        LineHeightStyle.Alignment.Center,
+        LineHeightStyle.Trim.None,
+    ),
+    title1: TextStyle = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp,
+        lineHeight = 32.sp,
+    ),
+    title2: TextStyle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+    ),
+    title3: TextStyle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
+    ),
+    title4: TextStyle = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+    ),
+    title5: TextStyle = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    ),
+    title6: TextStyle = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+    ),
+    bodyExtraLarge: TextStyle = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
+    ),
+    bodyLarge: TextStyle = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 22.sp,
+    ),
+    bodyNormal: TextStyle = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    ),
+    bodySmall: TextStyle = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+    ),
+): Typography = Typography(
+    title1 = title1.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    title2 = title2.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    title3 = title3.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    title4 = title4.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    title5 = title5.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    title6 = title6.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    bodyExtraLarge = bodyExtraLarge.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    bodyLarge = bodyLarge.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    bodyNormal = bodyNormal.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+    bodySmall = bodySmall.with(defaultFontFamily, defaultPlatformTextStyle, defaultLineHeightStyle),
+)
+
+private fun TextStyle.with(
+    fontFamily: FontFamily,
+    platformTextStyle: PlatformTextStyle?,
+    lineHeightStyle: LineHeightStyle?,
+): TextStyle = copy(
+    fontFamily = this.fontFamily ?: fontFamily,
+    platformStyle = this.platformStyle ?: platformTextStyle,
+    lineHeightStyle = this.lineHeightStyle ?: lineHeightStyle,
+)
 
 internal val LocalTypography: ProvidableCompositionLocal<Typography> =
-    staticCompositionLocalOf { Typography() }
+    staticCompositionLocalOf { createTypography() }
