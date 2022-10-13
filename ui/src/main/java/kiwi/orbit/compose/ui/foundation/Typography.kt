@@ -159,50 +159,42 @@ public data class Typography internal constructor(
     /**
      * Orbit BodyExtraLarge with Medium font-weight.
      */
-    val bodyExtraLargeMedium: TextStyle
-        get() = bodyExtraLarge.copy(fontWeight = FontWeight.Medium)
+    val bodyExtraLargeMedium: TextStyle = bodyExtraLarge.copy(fontWeight = FontWeight.Medium)
 
     /**
      * Orbit BodyExtraLarge with Bold font-weight.
      */
-    val bodyExtraLargeBold: TextStyle
-        get() = bodyExtraLarge.copy(fontWeight = FontWeight.Bold)
+    val bodyExtraLargeBold: TextStyle = bodyExtraLarge.copy(fontWeight = FontWeight.Bold)
 
     /**
      * Orbit BodyLarge with Medium font-weight.
      */
-    val bodyLargeMedium: TextStyle
-        get() = bodyLarge.copy(fontWeight = FontWeight.Medium)
+    val bodyLargeMedium: TextStyle = bodyLarge.copy(fontWeight = FontWeight.Medium)
 
     /**
      * Orbit BodyLarge with Bold font-weight.
      */
-    val bodyLargeBold: TextStyle
-        get() = bodyLarge.copy(fontWeight = FontWeight.Bold)
+    val bodyLargeBold: TextStyle = bodyLarge.copy(fontWeight = FontWeight.Bold)
 
     /**
      * Orbit BodyNormal with Medium font-weight.
      */
-    val bodyNormalMedium: TextStyle
-        get() = bodyNormal.copy(fontWeight = FontWeight.Medium)
+    val bodyNormalMedium: TextStyle = bodyNormal.copy(fontWeight = FontWeight.Medium)
 
     /**
      * Orbit BodyNormal with Bold font-weight.
      */
-    val bodyNormalBold: TextStyle
-        get() = bodyNormal.copy(fontWeight = FontWeight.Bold)
+    val bodyNormalBold: TextStyle = bodyNormal.copy(fontWeight = FontWeight.Bold)
 
     /**
      * Orbit BodySmall with Medium font-weight.
      */
-    val bodySmallMedium: TextStyle
-        get() = bodySmall.copy(fontWeight = FontWeight.Medium)
+    val bodySmallMedium: TextStyle = bodySmall.copy(fontWeight = FontWeight.Medium)
 
     /**
      * Orbit BodySmall with Bold font-weight.
      */
-    val bodySmallBold: TextStyle
-        get() = bodySmall.copy(fontWeight = FontWeight.Bold)
+    val bodySmallBold: TextStyle = bodySmall.copy(fontWeight = FontWeight.Bold)
 
     @Suppress("Dependency")
     internal fun toMaterialTypography(): androidx.compose.material.Typography =
