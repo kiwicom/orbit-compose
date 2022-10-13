@@ -20,18 +20,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
+import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
-internal fun CardsScreen(onNavigateUp: () -> Unit) {
+internal fun SurfaceCardScreen(onNavigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Cards / Tiles") },
+                title = { Text("SurfaceCard") },
                 onNavigateUp = onNavigateUp,
             )
         },
@@ -42,29 +42,29 @@ internal fun CardsScreen(onNavigateUp: () -> Unit) {
                 .verticalScroll(rememberScrollState())
                 .padding(contentPadding),
         ) {
-            CardScreenInner()
+            SurfaceCardScreenInner()
         }
     }
 }
 
 @Composable
-private fun CardScreenInner() {
+private fun SurfaceCardScreenInner() {
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         var state by remember { mutableStateOf(true) }
 
-        Card(Modifier.fillMaxWidth()) {
+        SurfaceCard(Modifier.fillMaxWidth()) {
             Box(Modifier.padding(16.dp)) {
-                Text("Basic card")
+                Text("Basic SurfaceCard")
             }
         }
 
         Separator()
-        Text("Selectable cards")
+        Text("Selectable SurfaceCards")
 
-        Card(
+        SurfaceCard(
             onClick = { state = true },
             border = if (state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)
@@ -76,7 +76,7 @@ private fun CardScreenInner() {
             Image(Illustrations.AirportShuttle, contentDescription = null)
         }
 
-        Card(
+        SurfaceCard(
             onClick = { state = false },
             border = if (!state) {
                 BorderStroke(2.dp, OrbitTheme.colors.info.normal)

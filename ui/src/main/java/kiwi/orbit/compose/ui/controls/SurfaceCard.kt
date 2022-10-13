@@ -15,7 +15,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-public fun Card(
+public fun SurfaceCard(
     modifier: Modifier = Modifier,
     shape: Shape = OrbitTheme.shapes.normal,
     backgroundColor: Color = OrbitTheme.colors.surface.main,
@@ -36,7 +36,7 @@ public fun Card(
 }
 
 @Composable
-public fun Card(
+public fun SurfaceCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -64,9 +64,9 @@ public fun Card(
 
 @OrbitPreviews
 @Composable
-internal fun CardPreview() {
+internal fun SurfaceCardPreview() {
     Preview {
-        Card {
+        SurfaceCard {
             CustomPlaceholder()
         }
     }

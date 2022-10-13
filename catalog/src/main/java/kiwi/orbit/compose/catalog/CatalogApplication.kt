@@ -18,7 +18,6 @@ import com.kiwi.navigationcompose.typed.navigate
 import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
 import kiwi.orbit.compose.catalog.screens.ButtonScreen
-import kiwi.orbit.compose.catalog.screens.CardsScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
@@ -40,6 +39,7 @@ import kiwi.orbit.compose.catalog.screens.SeatScreen
 import kiwi.orbit.compose.catalog.screens.SegmentedSwitchScreen
 import kiwi.orbit.compose.catalog.screens.SelectFieldScreen
 import kiwi.orbit.compose.catalog.screens.StepperScreen
+import kiwi.orbit.compose.catalog.screens.SurfaceCardScreen
 import kiwi.orbit.compose.catalog.screens.SwitchScreen
 import kiwi.orbit.compose.catalog.screens.TagScreen
 import kiwi.orbit.compose.catalog.screens.TextFieldScreen
@@ -92,7 +92,6 @@ private fun NavGraph(
         composable<Destinations.Alert> { AlertScreen(navController::navigateUp) }
         composable<Destinations.Badge> { BadgeScreen(navController::navigateUp) }
         composable<Destinations.Button> { ButtonScreen(navController::navigateUp) }
-        composable<Destinations.Card> { CardsScreen(navController::navigateUp) }
         composable<Destinations.Checkbox> { CheckboxScreen(navController::navigateUp) }
         composable<Destinations.ChoiceTile> { ChoiceTileScreen(navController::navigateUp) }
         composable<Destinations.Dialog> { DialogsScreen(navController::navigateUp, navController::navigate) }
@@ -110,6 +109,7 @@ private fun NavGraph(
         composable<Destinations.SegmentedSwitch> { SegmentedSwitchScreen(navController::navigateUp) }
         composable<Destinations.SelectField> { SelectFieldScreen(navController::navigateUp) }
         composable<Destinations.Stepper> { StepperScreen(navController::navigateUp) }
+        composable<Destinations.SurfaceCard> { SurfaceCardScreen(navController::navigateUp) }
         composable<Destinations.Switch> { SwitchScreen(navController::navigateUp) }
         composable<Destinations.Tag> { TagScreen(navController::navigateUp) }
         composable<Destinations.TextField> { TextFieldScreen(navController::navigateUp) }

@@ -50,7 +50,7 @@ public fun ChoiceTile(
             false -> Color.Transparent
         },
     )
-    Card(
+    SurfaceCard(
         onClick = onSelect,
         border = BorderStroke(2.dp, color),
         modifier = modifier

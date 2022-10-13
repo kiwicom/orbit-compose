@@ -29,9 +29,6 @@ sealed interface Destinations : Destination {
     object Button : Destinations
 
     @Serializable
-    object Card : Destinations
-
-    @Serializable
     object Checkbox : Destinations
 
     @Serializable
@@ -81,6 +78,9 @@ sealed interface Destinations : Destination {
 
     @Serializable
     object Stepper : Destinations
+
+    @Serializable
+    object SurfaceCard : Destinations
 
     @Serializable
     object Switch : Destinations

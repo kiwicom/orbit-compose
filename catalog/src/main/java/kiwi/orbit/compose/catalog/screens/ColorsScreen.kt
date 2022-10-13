@@ -23,9 +23,9 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Surface
+import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.foundation.BundleColors
@@ -76,7 +76,7 @@ private fun SurfaceColors() {
         Title("Surface – background colors")
 
         val colors = OrbitTheme.colors.surface
-        Card {
+        SurfaceCard {
             Column {
                 ColorRow {
                     Color(colors.main, "surface.main", "White")
@@ -101,7 +101,7 @@ private fun ContentColors() {
 
         val colors = OrbitTheme.colors.content
         val contentColor = OrbitTheme.colors.surface.main
-        Card {
+        SurfaceCard {
             Column {
                 ColorRow {
                     Color(colors.normal, "content.normal", "InkNormal", contentColor)
@@ -124,7 +124,7 @@ private fun FeatureColors(colors: FeatureColors, name: String, orbitName: String
         Title(name)
         val featureName = name.lowercase()
 
-        Card {
+        SurfaceCard {
             Column {
                 ColorRow {
                     Color(colors.subtle, "$featureName.subtle", "${orbitName}Light")
@@ -147,7 +147,7 @@ private fun BundleColors(colors: BundleColors) {
     Column {
         Title("Bundle")
 
-        Card {
+        SurfaceCard {
             Column {
                 ColorRow {
                     Color(colors.basicGradient, "bundle.basicGradient", "BundleBasic gradient")

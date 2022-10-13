@@ -52,8 +52,8 @@ import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.ButtonTextLinkCritical
 import kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary
 import kiwi.orbit.compose.ui.controls.ButtonToggleContainer
-import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
@@ -177,7 +177,7 @@ private fun ButtonLinkScreenInner() {
         ButtonLinkSecondary(onClick = {}, Modifier.fillMaxWidth()) { Text("Secondary ButtonLink") }
         ButtonLinkCritical(onClick = {}, Modifier.fillMaxWidth()) { Text("Critical ButtonLink") }
 
-        Card {
+        SurfaceCard {
             Column(Modifier.padding(16.dp)) {
                 Text(
                     text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam sit amet magna in magna gravida vehicula. Nam quis nulla. Nam sed tellus id magna elementum tincidunt.",
@@ -187,7 +187,7 @@ private fun ButtonLinkScreenInner() {
             }
         }
 
-        Card {
+        SurfaceCard {
             Row(Modifier.padding(16.dp)) {
                 Text(
                     text = "Title",

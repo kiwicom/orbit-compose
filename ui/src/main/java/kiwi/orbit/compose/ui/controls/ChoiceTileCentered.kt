@@ -76,7 +76,7 @@ public fun ChoiceTileCentered(
                 )
             }
         }
-        Card(
+        SurfaceCard(
             onClick = onSelect,
             border = BorderStroke(2.dp, color),
         ) {
