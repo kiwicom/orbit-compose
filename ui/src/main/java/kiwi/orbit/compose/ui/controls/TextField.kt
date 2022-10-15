@@ -162,7 +162,6 @@ internal fun TextField(
                 FieldLabel(label)
             }
 
-            @Suppress("MoveVariableDeclarationIntoWhen")
             val isFocused = interactionSource.collectIsFocusedAsState().value
             val inputState: InputState = when (isFocused) {
                 true -> when (error != null) {

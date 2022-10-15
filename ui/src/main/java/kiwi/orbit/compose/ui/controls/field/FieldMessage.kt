@@ -12,14 +12,16 @@ import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.layout.size
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -60,14 +62,19 @@ internal fun FieldMessage(
                     is Message.Error -> OrbitTheme.colors.critical.normal
                     is Message.Info -> OrbitTheme.colors.info.normal
                 }
-                Icon(
-                    icon,
-                    contentDescription = null,
+                Box(
                     modifier = Modifier
-                        .padding(top = 2.dp, end = 4.dp)
-                        .size(16.dp),
-                    tint = tintColor,
-                )
+                        .padding(end = 4.dp)
+                        .size(height = 20.sp, width = 16.sp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        icon,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.sp),
+                        tint = tintColor,
+                    )
+                }
                 ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal.copy(color = tintColor)) {
                     message.content.invoke()
                 }

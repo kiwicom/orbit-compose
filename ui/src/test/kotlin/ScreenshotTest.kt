@@ -31,6 +31,7 @@ import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
 import kiwi.orbit.compose.ui.controls.CountryFlagPreview
 import kiwi.orbit.compose.ui.controls.DialogPreview
 import kiwi.orbit.compose.ui.controls.EmptyStatePreview
+import kiwi.orbit.compose.ui.controls.IconPreview
 import kiwi.orbit.compose.ui.controls.InlineLoadingPreview
 import kiwi.orbit.compose.ui.controls.KeyValuePreview
 import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicatorPreview
@@ -188,6 +189,11 @@ internal class ScreenshotTest {
     @Test
     fun emptyState() {
         snapshot { EmptyStatePreview() }
+    }
+
+    @Test
+    fun icon() {
+        snapshot { IconPreview() }
     }
 
     @Test

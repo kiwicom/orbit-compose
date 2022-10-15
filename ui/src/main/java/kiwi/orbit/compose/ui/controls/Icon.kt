@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -15,16 +16,30 @@ import androidx.compose.ui.graphics.toolingGraphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.layout.LayoutModifier
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.constrain
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
+import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.applyEmphasis
+import kiwi.orbit.compose.ui.layout.size
 
 /**
  * Orbit Icon.
@@ -71,6 +86,12 @@ public fun Icon(
     )
 }
 
+/**
+ * Orbit Icon.
+ *
+ * - Size is resolved to current line-height. To modify the size, use [Modifier.size]. Defaults to 20.sp.
+ * - Color is resolved to current text color, possible to change [emphasis] or [tint] icon directly.
+ */
 @Composable
 public fun Icon(
     painter: Painter,
@@ -88,19 +109,54 @@ public fun Icon(
     } else {
         Modifier
     }
-    // Defaults icon size to 20.sp (~20.dp), bodyNormal's line-height.
-    val lineHeight = with(LocalDensity.current) {
-        LocalTextStyle.current.lineHeight.toDp()
-    }
     Box(
         modifier
             .toolingGraphicsLayer()
-            .size(lineHeight)
+            .then(DefaultSizeModifier(LocalTextStyle.current.lineHeight))
             .paint(
-                painter,
+                painter = painter,
                 colorFilter = colorFilter,
                 contentScale = ContentScale.Fit,
             )
             .then(semantics),
     )
+}
+
+private data class DefaultSizeModifier(
+    private val defaultSize: TextUnit,
+) : LayoutModifier {
+    override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
+        val size = defaultSize.roundToPx()
+        val scaledConstraints = constraints.constrain(Constraints.fixed(size, size))
+        val placeable = measurable.measure(scaledConstraints)
+        return layout(placeable.width, placeable.height) {
+            placeable.placeRelative(0, 0)
+        }
+    }
+}
+
+@OrbitPreviews
+@Composable
+internal fun IconPreview() {
+    Preview {
+        Row {
+            Icon(Icons.Cake, contentDescription = null)
+            Icon(Icons.Cake, contentDescription = null, Modifier.size(20.sp))
+            Icon(Icons.Cake, contentDescription = null, Modifier.size(24.sp))
+            Icon(Icons.Cake, contentDescription = null, Modifier.size(20.dp))
+            Icon(Icons.Cake, contentDescription = null, Modifier.size(24.dp))
+            Box(Modifier.size(16.dp)) {
+                Icon(Icons.Cake, contentDescription = null)
+            }
+        }
+        Row {
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyLarge) {
+                Icon(Icons.Cake, contentDescription = null)
+                Icon(Icons.Cake, contentDescription = null, Modifier.size(22.sp))
+                Icon(Icons.Cake, contentDescription = null, Modifier.size(26.sp))
+                Icon(Icons.Cake, contentDescription = null, Modifier.size(22.dp))
+                Icon(Icons.Cake, contentDescription = null, Modifier.size(26.dp))
+            }
+        }
+    }
 }

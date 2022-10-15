@@ -1,7 +1,6 @@
 package kiwi.orbit.compose.ui.controls.field
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,33 +40,21 @@ internal fun FieldContent(
     }
     Layout(
         content = {
-            if (leadingIcon != null) {
-                FieldIcon(
-                    LeadingId,
-                    onLeadingIconClick,
-                    leadingIcon,
-                    Modifier.padding(start = FieldIconPadding),
-                )
-            }
-            if (trailingIcon != null) {
-                FieldIcon(
-                    TrailingId,
-                    onTrailingIconClick,
-                    trailingIcon,
-                    Modifier.padding(end = FieldIconPadding),
-                )
-            }
-
-            val padding = Modifier.padding(
-                start = if (leadingIcon != null) FieldIconSeparatorPadding else FieldPadding,
-                end = if (trailingIcon != null) FieldIconSeparatorPadding else FieldPadding,
+            FieldIcon(
+                onClick = onLeadingIconClick,
+                icon = leadingIcon,
+                leading = true,
+                modifier = Modifier.layoutId(LeadingId),
             )
-
+            FieldIcon(
+                onClick = onTrailingIconClick,
+                icon = trailingIcon,
+                leading = false,
+                modifier = Modifier.layoutId(TrailingId),
+            )
             if (placeholder != null) {
                 Box(
-                    Modifier
-                        .layoutId(PlaceholderId)
-                        .then(padding),
+                    Modifier.layoutId(PlaceholderId),
                 ) {
                     ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
                         ProvideContentEmphasis(ContentEmphasis.Subtle, content = placeholder)
@@ -75,9 +62,7 @@ internal fun FieldContent(
                 }
             }
             Box(
-                Modifier
-                    .layoutId(FieldId)
-                    .then(padding),
+                modifier = Modifier.layoutId(FieldId),
                 propagateMinConstraints = true,
             ) {
                 fieldContent()
@@ -99,12 +84,12 @@ private class FieldContentMeasurePolicy(
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
         var occupiedSpaceHorizontally = 0
 
-        val leadingPlaceable = measurables.find { it.layoutId == LeadingId }?.measure(looseConstraints)
-        occupiedSpaceHorizontally += leadingPlaceable?.width ?: 0
+        val leadingPlaceable = measurables.first { it.layoutId == LeadingId }.measure(looseConstraints)
+        occupiedSpaceHorizontally += leadingPlaceable.width
 
-        val trailingPlaceable = measurables.find { it.layoutId == TrailingId }
-            ?.measure(looseConstraints.offset(horizontal = -occupiedSpaceHorizontally))
-        occupiedSpaceHorizontally += trailingPlaceable?.width ?: 0
+        val trailingPlaceable = measurables.first { it.layoutId == TrailingId }
+            .measure(looseConstraints.offset(horizontal = -occupiedSpaceHorizontally))
+        occupiedSpaceHorizontally += trailingPlaceable.width
 
         val fieldConstraints = constraints
             .copy(minHeight = 0)
@@ -120,15 +105,15 @@ private class FieldContentMeasurePolicy(
 
         val width = calculateWidth(
             fieldWidth = fieldPlaceable.width,
-            leadingWidth = leadingPlaceable?.width ?: 0,
-            trailingWidth = trailingPlaceable?.width ?: 0,
+            leadingWidth = leadingPlaceable.width,
+            trailingWidth = trailingPlaceable.width,
             placeholderWidth = placeholderPlaceable?.width ?: 0,
             constraints = constraints,
         )
         val height = calculateHeight(
             fieldHeight = fieldPlaceable.height,
-            leadingHeight = leadingPlaceable?.height ?: 0,
-            trailingHeight = trailingPlaceable?.height ?: 0,
+            leadingHeight = leadingPlaceable.height,
+            trailingHeight = trailingPlaceable.height,
             placeholderHeight = placeholderPlaceable?.height ?: 0,
             constraints = constraints,
             density = density,
@@ -137,7 +122,7 @@ private class FieldContentMeasurePolicy(
         return layout(width, height) {
             val verticalPaddingPx = FieldPadding.roundToPx()
 
-            leadingPlaceable?.placeRelative(
+            leadingPlaceable.placeRelative(
                 x = 0,
                 y = if (singleLine) {
                     Alignment.CenterVertically.align(leadingPlaceable.height, height)
@@ -145,7 +130,7 @@ private class FieldContentMeasurePolicy(
                     verticalPaddingPx
                 },
             )
-            trailingPlaceable?.placeRelative(
+            trailingPlaceable.placeRelative(
                 x = width - trailingPlaceable.width,
                 y = if (singleLine) {
                     Alignment.CenterVertically.align(trailingPlaceable.height, height)
@@ -162,7 +147,7 @@ private class FieldContentMeasurePolicy(
                 verticalPaddingPx
             }
             fieldPlaceable.placeRelative(
-                x = leadingPlaceable?.width ?: 0,
+                x = leadingPlaceable.width,
                 y = fieldVerticalPosition,
                 zIndex = 1f,
             )
@@ -175,7 +160,7 @@ private class FieldContentMeasurePolicy(
                     verticalPaddingPx
                 }
                 placeholderPlaceable.placeRelative(
-                    x = leadingPlaceable?.width ?: 0,
+                    x = leadingPlaceable.width,
                     y = placeholderVerticalPosition,
                 )
             }
@@ -216,9 +201,10 @@ private class FieldContentMeasurePolicy(
         intrinsicMeasurer: IntrinsicMeasurable.(Int) -> Int,
     ): Int {
         val fieldWidth = measurables.first { it.layoutId == FieldId }.intrinsicMeasurer(height)
-        val leadingWidth = measurables.find { it.layoutId == LeadingId }?.intrinsicMeasurer(height) ?: 0
-        val trailingWidth = measurables.find { it.layoutId == TrailingId }?.intrinsicMeasurer(height) ?: 0
-        val placeholderWidth = measurables.find { it.layoutId == PlaceholderId }?.intrinsicMeasurer(height) ?: 0
+        val leadingWidth = measurables.first { it.layoutId == LeadingId }.intrinsicMeasurer(height)
+        val trailingWidth = measurables.first { it.layoutId == TrailingId }.intrinsicMeasurer(height)
+        val placeholderWidth =
+            measurables.find { it.layoutId == PlaceholderId }?.intrinsicMeasurer(height) ?: 0
         return calculateWidth(
             fieldWidth = fieldWidth,
             leadingWidth = leadingWidth,
@@ -234,9 +220,10 @@ private class FieldContentMeasurePolicy(
         intrinsicMeasurer: IntrinsicMeasurable.(Int) -> Int,
     ): Int {
         val fieldHeight = measurables.first { it.layoutId == FieldId }.intrinsicMeasurer(width)
-        val leadingHeight = measurables.find { it.layoutId == LeadingId }?.intrinsicMeasurer(width) ?: 0
-        val trailingHeight = measurables.find { it.layoutId == TrailingId }?.intrinsicMeasurer(width) ?: 0
-        val placeholderHeight = measurables.find { it.layoutId == PlaceholderId }?.intrinsicMeasurer(width) ?: 0
+        val leadingHeight = measurables.first { it.layoutId == LeadingId }.intrinsicMeasurer(width)
+        val trailingHeight = measurables.first { it.layoutId == TrailingId }.intrinsicMeasurer(width)
+        val placeholderHeight =
+            measurables.find { it.layoutId == PlaceholderId }?.intrinsicMeasurer(width) ?: 0
         return calculateHeight(
             fieldHeight = fieldHeight,
             leadingHeight = leadingHeight,
@@ -285,8 +272,6 @@ internal val IntrinsicMeasurable.layoutId: Any?
 private val ZeroConstraints = Constraints(0, 0, 0, 0)
 
 private val FieldPadding = 12.dp
-private val FieldIconPadding = 14.dp
-private val FieldIconSeparatorPadding = 10.dp
 
 private const val FieldId = "Field"
 private const val PlaceholderId = "Placeholder"
