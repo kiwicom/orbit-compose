@@ -47,6 +47,7 @@ android {
             applicationIdSuffix = ".debug"
         }
         create("ci") {
+            matchingFallbacks.add("release")
             applicationIdSuffix = ".ci"
             isMinifyEnabled = true
             isShrinkResources = true
