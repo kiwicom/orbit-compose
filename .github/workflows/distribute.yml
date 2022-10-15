@@ -1,0 +1,20 @@
+name: Distribute
+on: workflow_dispatch
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 18
+      - name: Decrypt secrets
+        run: |
+          echo ${{ secrets.ENCRYPT_KEY }} | release/signing-unpack.sh
+      - name: Assemble & Distribute
+        run: ./gradlew :catalog:assembleCi :catalog:appDistributionUploadCi
+      - name: Clean secrets
+        if: always()
+        run: release/signing-cleanup.sh

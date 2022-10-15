@@ -1,5 +1,6 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
+@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
 
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.appDistribution)
 }
 
 android {
@@ -44,14 +46,40 @@ android {
         debug {
             applicationIdSuffix = ".debug"
         }
+        create("ci") {
+            applicationIdSuffix = ".ci"
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            firebaseAppDistribution {
+                appId = "1:442962334472:android:3a8ac71491745d2d37d2bd"
+                artifactType = "APK"
+                groups = "main"
+                serviceCredentialsFile = "../release/service-account.json"
+            }
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
+        }
+    }
+
+    applicationVariants.forEach { variant ->
+        variant.outputs.forEach { output ->
+            if (variant.buildType.name == "ci") {
+                output as ApkVariantOutputImpl
+                output.versionNameOverride = "${variant.versionName}-${System.getenv("GITHUB_REF_NAME")}"
+                output.versionCodeOverride = System.getenv("GITHUB_RUN_ID")?.toInt() ?: 1
+            }
         }
     }
 
