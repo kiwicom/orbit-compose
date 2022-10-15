@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.kotlinter) apply false
     alias(libs.plugins.mavenPublish) apply false
     alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.appDistribution) apply false
     alias(libs.plugins.dokka)
 }
 

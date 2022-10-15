@@ -7,6 +7,7 @@ pluginManagement {
         eachPlugin {
             when (requested.id.name) {
                 "com.android.application" -> useModule("com.android.tools.build:gradle")
+                "com.google.firebase.appdistribution" -> useModule("com.google.firebase:firebase-appdistribution-gradle")
             }
         }
     }
