@@ -74,12 +74,12 @@ android {
         }
     }
 
-    applicationVariants.forEach { variant ->
-        variant.outputs.forEach { output ->
-            if (variant.buildType.name == "ci") {
-                output as ApkVariantOutputImpl
-                output.versionNameOverride = "${variant.versionName}-${System.getenv("GITHUB_REF_NAME")}"
-                output.versionCodeOverride = System.getenv("GITHUB_RUN_ID")?.toInt() ?: 1
+    applicationVariants.configureEach {
+        outputs.configureEach {
+            if (buildType.name == "ci") {
+                this as ApkVariantOutputImpl
+                versionNameOverride = "${versionName}-${System.getenv("GITHUB_REF_NAME")}"
+                versionCodeOverride = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
             }
         }
     }
