@@ -60,7 +60,7 @@ android {
                 appId = "1:442962334472:android:3a8ac71491745d2d37d2bd"
                 artifactType = "APK"
                 groups = "main"
-                serviceCredentialsFile = "../release/service-account.json"
+                serviceCredentialsFile = "release/service-account.json"
             }
         }
         release {
