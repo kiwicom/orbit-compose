@@ -20,6 +20,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -33,7 +34,6 @@ import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asSuccessTheme
 import kiwi.orbit.compose.ui.foundation.asWarningTheme
-import kotlin.math.roundToInt
 
 @Composable
 public fun AlertInfo(
@@ -41,7 +41,7 @@ public fun AlertInfo(
     modifier: Modifier = Modifier,
     suppressed: Boolean = false,
     icon: Painter? = Icons.InformationCircle,
-    actions: (@Composable () -> Unit)? = null,
+    actions: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -64,7 +64,7 @@ public fun AlertSuccess(
     modifier: Modifier = Modifier,
     suppressed: Boolean = false,
     icon: Painter? = Icons.CheckCircle,
-    actions: (@Composable () -> Unit)? = null,
+    actions: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -87,7 +87,7 @@ public fun AlertWarning(
     modifier: Modifier = Modifier,
     suppressed: Boolean = false,
     icon: Painter? = Icons.AlertCircle,
-    actions: (@Composable () -> Unit)? = null,
+    actions: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -110,7 +110,7 @@ public fun AlertCritical(
     modifier: Modifier = Modifier,
     suppressed: Boolean = false,
     icon: Painter? = Icons.AlertOctagon,
-    actions: (@Composable () -> Unit)? = null,
+    actions: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
     CompositionLocalProvider(
@@ -132,7 +132,7 @@ private fun Alert(
     icon: Painter?,
     title: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
-    actions: (@Composable () -> Unit)? = null,
+    actions: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
     suppressed: Boolean,
 ) {
@@ -200,39 +200,41 @@ private fun Alert(
 @Composable
 private fun AlertContent(
     title: @Composable ColumnScope.() -> Unit,
-    actions: (@Composable () -> Unit)?,
+    actions: @Composable () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
     buttonColors: Colors,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        CompositionLocalProvider(
-            LocalSmallButtonScope provides true,
-        ) {
+    Column {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
                 title()
             }
             content()
-            if (actions != null) {
-                CompositionLocalProvider(
-                    LocalColors provides buttonColors,
-                ) {
-                    AlertButtons(Modifier.padding(top = 12.dp), actions) // 16.dp-4.dp
-                }
-            }
+        }
+        CompositionLocalProvider(
+            LocalColors provides buttonColors,
+            LocalSmallButtonScope provides true,
+        ) {
+            AlertButtons(topPadding = 16.dp, actions)
         }
     }
 }
 
 @Composable
 private fun AlertButtons(
-    modifier: Modifier = Modifier,
+    topPadding: Dp,
     content: @Composable () -> Unit,
 ) {
     Layout(
         content = content,
-        modifier = modifier,
     ) { measurables, incomingConstraints ->
-        val buttonPadding = 12.dp.toPx().roundToInt()
+        if (measurables.isEmpty()) {
+            return@Layout layout(0, 0) {}
+        }
+
+        val topPaddingPx = topPadding.roundToPx()
+        val buttonPadding = 12.dp.roundToPx()
+
         val buttonsCount = measurables.size
         val buttonSize =
             ((incomingConstraints.maxWidth - (buttonPadding * (buttonsCount - 1))) / buttonsCount)
@@ -243,11 +245,11 @@ private fun AlertButtons(
             it.measure(buttonConstraint)
         }
 
-        val maxHeight = placeables.maxOfOrNull { it.height } ?: 0
+        val maxHeight = placeables.maxOf { it.height } + topPaddingPx
         layout(incomingConstraints.maxWidth, maxHeight) {
             var x = 0
             for (placeable in placeables) {
-                placeable.place(x, y = 0)
+                placeable.place(x, y = topPaddingPx)
                 x += buttonSize + buttonPadding
             }
         }
