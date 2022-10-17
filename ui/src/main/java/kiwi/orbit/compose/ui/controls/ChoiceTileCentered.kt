@@ -43,7 +43,7 @@ public fun ChoiceTileCentered(
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     badgeContent: @Composable (RowScope.() -> Unit)? = null,
-    icon: @Composable (() -> Unit)? = null,
+    icon: @Composable () -> Unit = {},
     largeHeading: Boolean = true,
 ) {
     val errorMessage = stringResource(R.string.orbit_field_default_error)
@@ -107,9 +107,9 @@ public fun ChoiceTileCentered(
 @Composable
 private fun ChoiceTileContent(
     selected: Boolean,
-    icon: @Composable (() -> Unit)?,
+    icon: @Composable () -> Unit,
     title: @Composable () -> Unit,
-    description: @Composable (() -> Unit)?,
+    description: @Composable () -> Unit,
     price: @Composable () -> Unit,
     largeHeading: Boolean,
 ) {
@@ -119,7 +119,7 @@ private fun ChoiceTileContent(
     ) {
         // Provide default icon size to 24.dp
         ProvideMergedTextStyle(OrbitTheme.typography.title3) {
-            icon?.invoke()
+            icon()
         }
         val headingStyle = when (largeHeading) {
             true -> OrbitTheme.typography.title3
@@ -128,19 +128,15 @@ private fun ChoiceTileContent(
         ProvideMergedTextStyle(headingStyle) {
             title()
         }
-
-        if (description != null) {
-            ProvideContentEmphasis(ContentEmphasis.Minor) {
-                ProvideMergedTextStyle(
-                    value = OrbitTheme.typography.bodyNormal.copy(
-                        textAlign = TextAlign.Center,
-                    ),
-                ) {
-                    description()
-                }
+        ProvideContentEmphasis(ContentEmphasis.Minor) {
+            ProvideMergedTextStyle(
+                value = OrbitTheme.typography.bodyNormal.copy(
+                    textAlign = TextAlign.Center,
+                ),
+            ) {
+                description()
             }
         }
-
         ProvideMergedTextStyle(
             value = OrbitTheme.typography.title3.copy(
                 textAlign = TextAlign.Center,
