@@ -13,7 +13,7 @@
 - component: ButtonPrimitive
   android: Released
 - component: Card
-  android: Partially
+  android: Planned
 - component: ChoiceTile
   android: Released
 - component: Checkbox

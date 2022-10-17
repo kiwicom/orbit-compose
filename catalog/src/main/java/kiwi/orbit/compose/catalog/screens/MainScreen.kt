@@ -40,10 +40,10 @@ import com.kiwi.navigationcompose.typed.Destination
 import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -77,7 +77,6 @@ internal fun MainScreen(
         MenuItem("Alert", Icons.Alert) { Destinations.Alert },
         MenuItem("Badge", Icons.Deals) { Destinations.Badge },
         MenuItem("Button", MIcons.SmartButton) { Destinations.Button },
-        MenuItem("Card / Tile", MIcons.Article) { Destinations.Card },
         MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
         MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
         MenuItem("Dialog", Icons.Chat) { Destinations.Dialog },
@@ -93,6 +92,7 @@ internal fun MainScreen(
         MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch },
         MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField },
         MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper },
+        MenuItem("SurfaceCard", MIcons.Article) { Destinations.SurfaceCard },
         MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },
         MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
@@ -141,7 +141,7 @@ private fun LazyGridScope.cardItems(
 
 @Composable
 private fun Item(menuItem: MenuItem) {
-    Card(
+    SurfaceCard(
         modifier = Modifier.fillMaxWidth(),
         onClick = menuItem.onClick,
     ) {

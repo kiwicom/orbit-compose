@@ -1,15 +1,12 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
@@ -18,7 +15,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
 @Composable
-public fun Card(
+public fun SurfaceCard(
     modifier: Modifier = Modifier,
     shape: Shape = OrbitTheme.shapes.normal,
     backgroundColor: Color = OrbitTheme.colors.surface.main,
@@ -39,43 +36,66 @@ public fun Card(
 }
 
 @Composable
-public fun Card(
+public fun SurfaceCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     shape: Shape = OrbitTheme.shapes.normal,
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
     border: BorderStroke? = null,
     elevation: Dp = OrbitTheme.elevations.Level1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    indication: Indication? = LocalIndication.current,
-    enabled: Boolean = true,
-    onClickLabel: String? = null,
-    role: Role? = null,
     content: @Composable () -> Unit,
 ) {
     Surface(
         onClick = onClick,
         modifier = modifier,
+        enabled = enabled,
         shape = shape,
         color = backgroundColor,
         contentColor = contentColor,
         border = border,
         elevation = elevation,
         interactionSource = interactionSource,
-        indication = indication,
+        content = content,
+    )
+}
+
+@Composable
+public fun SurfaceCard(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = OrbitTheme.shapes.normal,
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
+    contentColor: Color = contentColorFor(backgroundColor),
+    border: BorderStroke? = null,
+    elevation: Dp = OrbitTheme.elevations.Level1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable () -> Unit,
+) {
+    Surface(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
         enabled = enabled,
-        onClickLabel = onClickLabel,
-        role = role,
+        shape = shape,
+        color = backgroundColor,
+        contentColor = contentColor,
+        border = border,
+        elevation = elevation,
+        interactionSource = interactionSource,
         content = content,
     )
 }
 
 @OrbitPreviews
 @Composable
-internal fun CardPreview() {
+internal fun SurfaceCardPreview() {
     Preview {
-        Card {
+        SurfaceCard {
             CustomPlaceholder()
         }
     }

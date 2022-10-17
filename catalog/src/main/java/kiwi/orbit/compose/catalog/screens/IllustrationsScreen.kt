@@ -16,8 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.Card
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.utils.plus
@@ -48,7 +48,7 @@ private fun IllustrationsScreenInner(contentPadding: PaddingValues) {
         contentPadding = contentPadding + PaddingValues(8.dp),
     ) {
         items(illustrations) { (name, icon) ->
-            Card(Modifier.padding(8.dp)) {
+            SurfaceCard(Modifier.padding(8.dp)) {
                 Column {
                     Text(
                         name,
