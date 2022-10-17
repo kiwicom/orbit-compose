@@ -147,9 +147,8 @@ private fun ChoiceTileScreenInner() {
                     }
                 }
             },
-        ) {
-            CustomPlaceholder()
-        }
+            content = { CustomPlaceholder() },
+        )
 
         var selectedSmall by remember { mutableStateOf(false) }
         ChoiceTile(
@@ -172,20 +171,18 @@ private fun ChoiceTileScreenInner() {
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = { Text("ChoiceTile") },
+            content = { CustomPlaceholder() },
             selected = selectedA,
             onSelect = { selectedA = !selectedA },
-        ) {
-            CustomPlaceholder()
-        }
+        )
 
         var selectedB by remember { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
+            content = { CustomPlaceholder() },
             selected = selectedB,
             onSelect = { selectedB = !selectedB },
-        ) {
-            CustomPlaceholder()
-        }
+        )
 
         var selectedC by remember { mutableStateOf(false) }
         ChoiceTile(
