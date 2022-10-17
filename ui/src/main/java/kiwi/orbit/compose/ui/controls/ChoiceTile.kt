@@ -34,13 +34,13 @@ public fun ChoiceTile(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
-    icon: @Composable (() -> Unit)? = null,
-    title: @Composable (RowScope.() -> Unit)? = null,
-    description: @Composable (() -> Unit)? = null,
-    footer: @Composable (() -> Unit)? = null,
+    icon: @Composable () -> Unit = {},
+    title: @Composable RowScope.() -> Unit = {},
+    description: @Composable () -> Unit = {},
+    footer: @Composable () -> Unit = {},
+    content: @Composable () -> Unit = {},
     largeHeading: Boolean = true,
     showRadio: Boolean = true,
-    content: @Composable (() -> Unit)? = null,
 ) {
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     val color by animateColorAsState(
@@ -80,53 +80,47 @@ public fun ChoiceTile(
 
 @Composable
 private fun ChoiceTileContent(
-    icon: @Composable (() -> Unit)?,
-    title: @Composable (RowScope.() -> Unit)?,
-    description: @Composable (() -> Unit)?,
-    content: @Composable (() -> Unit)?,
+    icon: @Composable () -> Unit,
+    title: @Composable RowScope.() -> Unit,
+    description: @Composable () -> Unit,
+    content: @Composable () -> Unit,
     largeHeading: Boolean,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        if (title != null || description != null) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                val headingStyle = when (largeHeading) {
-                    true -> OrbitTheme.typography.title3
-                    false -> OrbitTheme.typography.title4
-                }
-                ProvideMergedTextStyle(headingStyle) {
-                    icon?.invoke()
-                }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            val headingStyle = when (largeHeading) {
+                true -> OrbitTheme.typography.title3
+                false -> OrbitTheme.typography.title4
+            }
+            ProvideMergedTextStyle(headingStyle) {
+                icon()
+            }
 
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    if (title != null) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            ProvideMergedTextStyle(headingStyle) {
-                                title()
-                            }
-                        }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    ProvideMergedTextStyle(headingStyle) {
+                        title()
                     }
-                    if (description != null) {
-                        ProvideContentEmphasis(ContentEmphasis.Minor) {
-                            ProvideMergedTextStyle(value = OrbitTheme.typography.bodyNormal) {
-                                description()
-                            }
-                        }
+                }
+                ProvideContentEmphasis(ContentEmphasis.Minor) {
+                    ProvideMergedTextStyle(value = OrbitTheme.typography.bodyNormal) {
+                        description()
                     }
                 }
             }
         }
 
-        content?.invoke()
+        content()
     }
 }
 
 @Composable
 private fun ChoiceTileFooter(
-    footer: @Composable (() -> Unit)?,
+    footer: @Composable () -> Unit,
     selected: Boolean,
     isError: Boolean,
     showRadio: Boolean,
@@ -146,9 +140,7 @@ private fun ChoiceTileFooter(
                     },
                 ),
             ) {
-                if (footer != null) {
-                    footer()
-                }
+                footer()
             }
         }
 
@@ -195,8 +187,7 @@ internal fun ChoiceTilePreview() {
                     )
                 }
             },
-        ) {
-            CustomPlaceholder()
-        }
+            content = { CustomPlaceholder() },
+        )
     }
 }
