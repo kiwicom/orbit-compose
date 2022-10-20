@@ -58,7 +58,7 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         )
 
         private val METHOD_NAMES = mapOf(
-            "Card" to ("androidx.compose.material.Card" to "kiwi.orbit.compose.ui.controls.Card"),
+            "Card" to ("androidx.compose.material.Card" to "kiwi.orbit.compose.ui.controls.SurfaceCard"),
             "IconButton" to ("androidx.compose.material.IconButton" to "kiwi.orbit.compose.ui.controls.IconButton"),
             "Icon" to ("androidx.compose.material.Icon" to "kiwi.orbit.compose.ui.controls.Icon"),
             "LinearProgressIndicator" to ("androidx.compose.material.LinearProgressIndicator" to "kiwi.orbit.compose.ui.controls.LinearProgressIndicator"),
