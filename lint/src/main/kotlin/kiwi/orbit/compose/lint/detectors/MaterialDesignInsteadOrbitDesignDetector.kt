@@ -65,6 +65,7 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
             "Scaffold" to ("androidx.compose.material.Scaffold" to "kiwi.orbit.compose.ui.controls.Scaffold"),
             "Surface" to ("androidx.compose.material.Surface" to "kiwi.orbit.compose.ui.controls.Surface"),
             "Text" to ("androidx.compose.material.Text" to "kiwi.orbit.compose.ui.controls.Text"),
+            "contentColorFor" to ("androidx.compose.material.contentColorFor" to "kiwi.orbit.compose.ui.foundation.contentColorFor"),
         )
         private val RECEIVER_NAMES = mapOf(
             "androidx.compose.material.icons.Icons" to "kiwi.orbit.compose.icons.Icons",

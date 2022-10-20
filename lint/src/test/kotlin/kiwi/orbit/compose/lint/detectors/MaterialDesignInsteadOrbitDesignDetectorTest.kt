@@ -21,12 +21,14 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
         val stubFile = kotlin(
             """
                 import androidx.compose.material.Card
+                import androidx.compose.material.contentColorFor
                 import androidx.compose.material.Text
                 import androidx.compose.material.icons.Icons
                 fun Test() {
                     Card {
                         Text("test")
                         Icons.Test
+                        contentColorFor()
                     }
                 }
             """.trimIndent(),
@@ -36,6 +38,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 package androidx.compose.material
                 fun Card(content: () -> Unit) {}
                 fun Text(content: () -> Unit) {}
+                fun contentColorFor(backgroundColor: Color): Color = TODO()
             """.trimIndent(),
         )
         val materialIconsFile = kotlin(
@@ -59,12 +62,13 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
             ".custom",
         )
 
-        Assert.assertSame(3, messages.count())
+        Assert.assertSame(4, messages.count())
         Assert.assertEquals(
             listOf(
                 "Using androidx.compose.material.Card instead of kiwi.orbit.compose.ui.controls.SurfaceCard",
                 "Using androidx.compose.material.Text instead of kiwi.orbit.compose.ui.controls.Text",
                 "Using androidx.compose.material.icons.Icons instead of kiwi.orbit.compose.icons.Icons",
+                "Using androidx.compose.material.contentColorFor instead of kiwi.orbit.compose.ui.foundation.contentColorFor",
             ),
             messages,
         )
