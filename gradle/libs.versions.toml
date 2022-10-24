@@ -5,11 +5,11 @@ targetSdk = "33"
 minSdk = "23"
 
 kotlin-lang = "1.7.20"
-kotlin-dokka = "1.7.10"
+kotlin-dokka = "1.7.20"
 androidGradlePlugin = "7.3.1"
 mavenPublish = "0.22.0"
 
-kotlin-serialization = "1.4.0"
+kotlin-serialization = "1.4.1"
 android-sdkCommon = "30.3.0"
 android-lint = "30.3.1"
 androidx-activityCompose = "1.6.0"
