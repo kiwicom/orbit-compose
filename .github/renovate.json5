@@ -16,16 +16,16 @@
       ],
     },
     {
+      "groupName": "AndroidX",
+      "matchPackagePrefixes": [
+        "androidx",
+      ],
+    },
+    {
       "groupName": "Compose & Accompanist",
       "matchPackageNames": [
         "androidx.compose",
         "com.google.accompanist",
-      ],
-    },
-    {
-      "groupName": "AndroidX",
-      "matchPackagePrefixes": [
-        "androidx",
       ],
     },
     {
