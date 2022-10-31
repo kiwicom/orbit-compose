@@ -37,7 +37,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 public fun LinearIndeterminateProgressIndicator(
     modifier: Modifier = Modifier,
     color: Color = OrbitTheme.colors.primary.strong,
-    backgroundColor: Color = OrbitTheme.colors.surface.strong,
+    backgroundColor: Color = OrbitTheme.colors.surface.normal,
 ) {
     val infiniteTransition = rememberInfiniteTransition()
     // Fractional position of the 'head' and 'tail' of the two lines drawn. I.e if the head is 0.8

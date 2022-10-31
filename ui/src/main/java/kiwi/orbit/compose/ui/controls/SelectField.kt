@@ -24,6 +24,7 @@ import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -73,6 +74,7 @@ public fun <T> SelectField(
                         painter = Icons.ChevronUp,
                         contentDescription = null, // TODO:
                         modifier = Modifier.rotate(iconRotation),
+                        emphasis = ContentEmphasis.Minor,
                     )
                 },
                 singleLine = true,

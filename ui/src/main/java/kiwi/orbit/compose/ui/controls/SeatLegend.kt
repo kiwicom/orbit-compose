@@ -21,7 +21,6 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
-import kiwi.orbit.compose.ui.foundation.tokens.ColorTokens
 
 @Composable
 public fun SeatLegendExtraLegroom(
@@ -29,7 +28,7 @@ public fun SeatLegendExtraLegroom(
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
-        color = ColorTokens.BlueLightActive,
+        color = OrbitTheme.colors.info.normal.copy(alpha = 0.2f), // custom, missing theme color
         content = content,
         modifier = modifier,
     )
@@ -41,7 +40,7 @@ public fun SeatLegendStandard(
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
-        color = ColorTokens.ProductLightActive,
+        color = OrbitTheme.colors.primary.normal.copy(alpha = 0.2f), // custom, missing theme color
         content = content,
         modifier = modifier,
     )
@@ -53,7 +52,7 @@ public fun SeatLegendUnavailable(
     content: @Composable RowScope.() -> Unit,
 ) {
     SeatLegend(
-        color = ColorTokens.CloudLightActive,
+        color = OrbitTheme.colors.surface.strong.copy(alpha = 0.6f), // custom, missing theme color
         content = content,
         modifier = modifier,
     )

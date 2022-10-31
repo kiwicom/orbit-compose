@@ -41,7 +41,7 @@ public fun Tag(
     val backgroundColor = when {
         selected -> OrbitTheme.colors.info.normal
         active -> OrbitTheme.colors.info.subtle
-        else -> OrbitTheme.colors.surface.strong
+        else -> OrbitTheme.colors.surface.subtle
     }
     val contentColor = contentColorFor(backgroundColor)
     val shape = OrbitTheme.shapes.normal
@@ -72,7 +72,11 @@ public fun Tag(
                         .padding(start = 8.dp)
                         .size(16.dp),
                 ) {
-                    Icon(Icons.CloseCircle, contentDescription = removeContentDescription)
+                    Icon(
+                        Icons.CloseCircle,
+                        contentDescription = removeContentDescription,
+                        emphasis = ContentEmphasis.Minor,
+                    )
                 }
             }
         }

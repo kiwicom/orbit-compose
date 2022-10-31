@@ -2,7 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.AnimationVector1D
-import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.EaseInOut
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.StartOffset
 import androidx.compose.animation.core.TwoWayConverter
@@ -61,21 +61,21 @@ private fun Circle(
         animationSpec = infiniteRepeatable(
             animation = tween(
                 durationMillis = AnimationConstants.DefaultDurationMillis,
-                easing = CubicBezierEasing(0.42f, 0.0f, 0.58f, 1f),
+                easing = EaseInOut,
                 delayMillis = 400,
             ),
             repeatMode = RepeatMode.Reverse,
             initialStartOffset = StartOffset((index + 1) * 120),
         ),
     )
-    val color = OrbitTheme.colors.surface.disabled
+    val color = OrbitTheme.colors.surface.strong
 
     Canvas(
         modifier = Modifier.size(circleSize),
     ) {
         drawCircle(
             color = color,
-            alpha = 0.2f + 0.8f * animatedValue.absoluteValue / 3,
+            alpha = 0.8f + 0.2f * animatedValue.absoluteValue / 3,
             center = Offset(
                 x = size.center.x,
                 y = size.center.y + animatedValue.dp.toPx(),

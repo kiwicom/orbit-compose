@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.serialization)
     implementation(libs.square.kotlinPoet)
+    implementation(libs.javaJq)
 }
 
 tasks.register<JavaExec>("colors") {

@@ -140,12 +140,14 @@ private fun BoxScope.SwitchImpl(
         ThumbDefaultElevation
     }
     val mainColor by rememberUpdatedState(
-        if (enabled) {
-            if (checked) OrbitTheme.colors.info.normal else OrbitTheme.colors.surface.disabled
-        } else {
-            (if (checked) OrbitTheme.colors.info.normal else OrbitTheme.colors.surface.disabled).copy(
-                alpha = 0.3f,
-            )
+        when {
+            checked -> OrbitTheme.colors.info.normal
+            else -> OrbitTheme.colors.surface.strong
+        }.let {
+            when {
+                !enabled -> it.copy(alpha = 0.3f)
+                else -> it
+            }
         },
     )
     Canvas(

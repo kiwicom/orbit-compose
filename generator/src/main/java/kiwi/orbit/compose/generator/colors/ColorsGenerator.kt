@@ -1,115 +1,118 @@
 package kiwi.orbit.compose.generator.colors
 
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
-import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Path
+import kotlin.math.roundToInt
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import net.thisptr.jackson.jq.BuiltinFunctionLoader
+import net.thisptr.jackson.jq.JsonQuery
+import net.thisptr.jackson.jq.Scope
+import net.thisptr.jackson.jq.Versions
+import net.thisptr.jackson.jq.module.loaders.BuiltinModuleLoader
 
 class ColorsGenerator {
-    companion object {
-        private const val COLOR_PREFIX = "palette"
-        private const val BUNDLE_PREFIX = "backgroundButtonBundle"
-        private val DROP_SUFFIXES = arrayOf("Active", "Hover")
+    @Serializable
+    private data class ColorDefinition(
+        val name: String,
+        val color: Color?,
+        val gradient: List<ColorPair>?,
+    ) {
+        @Serializable
+        data class Color(
+            val r: Double,
+            val g: Double,
+            val b: Double,
+            val a: Double,
+        )
+
+        @Serializable
+        data class ColorPair(
+            val color: Color,
+            val position: Float,
+        )
     }
 
-    fun build(svgUrl: String, kotlinOutDir: Path) {
-        val colors = downloadColors(svgUrl)
+    fun build(figmaToken: String, kotlinOutDir: Path) {
+        val colors = downloadColors(figmaToken)
         generateClass(colors, kotlinOutDir)
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun downloadColors(
-        url: String,
-    ): List<Pair<String, String>> {
-        val finalUrl = getFinalRedirectedUrl(url)
+        figmaToken: String,
+    ): List<Pair<String, ColorDefinition.Color>> {
+        val url =
+            "https://api.figma.com/v1/files/2rTHlBKKR6IWGeP6Dw6qbP/nodes?ids=2002%3A506,2002%3A448,2002%3A350,2002%3A767,2002%3A634,2002%3A709,2002%3A566,2002%3A836,2002%3A351"
+        val fullJson = URL(url)
+            .openConnection()
+            .apply {
+                setRequestProperty("X-Figma-Token", figmaToken)
+            }
+            .getInputStream()
+            .buffered()
+            .reader()
+            .readText()
 
-        val inputStream = URL(finalUrl).openConnection().getInputStream().buffered()
-        val inputText = inputStream.reader().readText()
+        val rootScope = Scope.newEmptyScope()
+        BuiltinFunctionLoader.getInstance().loadFunctions(Versions.JQ_1_6, rootScope)
+        rootScope.moduleLoader = BuiltinModuleLoader.getInstance()
+        val childScope = Scope.newChildScope(rootScope)
+        val query = JsonQuery.compile(
+            "[.. | select(.children?[0].name?==\"Color\") | {name: .name, color: .children[0].fills[0].color, gradient: .children[0].fills[0].gradientStops}]",
+            Versions.JQ_1_6,
+        )
+        val out = arrayListOf<JsonNode>()
+        val inJson = ObjectMapper().readTree(fullJson)
+        query.apply(childScope, inJson, out::add)
 
+        val filteredJson = out.first().toString()
         val parser = Json { isLenient = true }
-        val parsed = parser.decodeFromString<Map<String, String>>(inputText)
-        val colors = parsed
-            .filter {
-                it.key.startsWith(COLOR_PREFIX) || (
-                    it.key.startsWith(BUNDLE_PREFIX) &&
-                        DROP_SUFFIXES.none { suffix -> it.key.endsWith(suffix) }
-                    )
-            }
-            .toList()
-            .sortedBy { it.first }
+        val parsed = parser.decodeFromString<List<ColorDefinition>>(filteredJson)
 
-        val pattern =
-            """linear-gradient\(to top right, (#[a-fA-F0-9]{6}) 0%, (#[a-fA-F0-9]{6}) 100%\)""".toRegex()
-        val expanded = colors.flatMap { (key, color) ->
-            if (!color.contains("gradient")) {
-                return@flatMap listOf(
-                    key.removePrefix(COLOR_PREFIX) to color,
-                )
+        return buildList {
+            parsed.forEach { colorDefinition ->
+                val name = colorDefinition.name
+                    .replace(":", "")
+                    .replace("gradient", "")
+                    .split(' ')
+                    .joinToString(separator = "") {
+                        it.trim().replaceFirstChar { it.uppercase() }
+                    }
+                colorDefinition.color?.let { color ->
+                    add(name to color)
+                }
+                colorDefinition.gradient?.let { gradient ->
+                    val start = gradient.first { it.position <= 0.01 }
+                    val end = gradient.first { it.position >= 0.99 }
+                    add("${name}Start" to start.color)
+                    add("${name}End" to end.color)
+                }
             }
-
-            val matchResult = pattern.matchEntire(color) ?: return@flatMap emptyList()
-            val matched = matchResult.groupValues.drop(1)
-            val newKey = key.removePrefix("backgroundButton")
-            return@flatMap listOf(
-                "${newKey}Start" to matched.first(),
-                "${newKey}End" to matched.last(),
-            )
-        }
-        return expanded.sortedBy { it.first }
+        }.sortedBy { it.first }
     }
 
-    private fun getFinalRedirectedUrl(url: String): String {
-        val connection = URL(url).openConnection() as HttpURLConnection
-        connection.instanceFollowRedirects = false
-        connection.useCaches = false
-        connection.requestMethod = "GET"
-        connection.connect()
-
-        val responseCode: Int = connection.responseCode
-        connection.disconnect()
-
-        if (responseCode in 300..399) {
-            val location = connection.getHeaderField("Location") ?: url
-            val orig = URL(url)
-            val redirect = URL(orig.protocol, orig.host, orig.port, location, null)
-            return redirect.toString().replace("@", "%40")
-        } else {
-            return url
-        }
-    }
-
-    private fun generateClass(colors: List<Pair<String, String>>, dir: Path) {
+    private fun generateClass(colors: List<Pair<String, ColorDefinition.Color>>, dir: Path) {
         val colorClass = ClassName("kiwi.orbit.compose.ui.foundation.tokens", "ColorTokens")
         val colorType = ClassName("androidx.compose.ui.graphics", "Color")
         val objectBuilder = TypeSpec.objectBuilder(colorClass)
             .addModifiers(KModifier.INTERNAL)
 
         colors.forEach { (name, colorString) ->
-            val colorValue = when (colorString.contains("rgb")) {
-                true -> {
-                    val segments = colorString
-                        .removePrefix("rgb(")
-                        .removeSuffix(")")
-                        .split(",\\s*".toRegex())
-                        .mapNotNull { it.toIntOrNull() }
-                    assert(segments.size == 3)
-                    val (red, green, blue) = segments
-                    val colorValue = (0xFF shl 24) or
-                        ((red and 0xFF) shl 16) or
-                        ((green and 0xFF) shl 8) or
-                        (blue and 0xFF)
-                    colorValue
-                }
-                false -> {
-                    "FF${colorString.drop(1)}".toLong(radix = 16)
-                }
-            }
+            val red = (colorString.r * 255).roundToInt()
+            val green = (colorString.g * 255).roundToInt()
+            val blue = (colorString.b * 255).roundToInt()
+            val colorValue = (0xFF shl 24) or
+                ((red and 0xFF) shl 16) or
+                ((green and 0xFF) shl 8) or
+                (blue and 0xFF)
 
             val property = PropertySpec.builder(name, colorType)
                 .initializer(

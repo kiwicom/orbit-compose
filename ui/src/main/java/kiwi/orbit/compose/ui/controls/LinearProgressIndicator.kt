@@ -40,7 +40,7 @@ public fun LinearProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
     modifier: Modifier = Modifier,
     color: Color = OrbitTheme.colors.primary.strong,
-    backgroundColor: Color = OrbitTheme.colors.surface.strong,
+    backgroundColor: Color = OrbitTheme.colors.surface.normal,
 ) {
     val animatedProgress by animateFloatAsState(
         targetValue = progress.coerceIn(0f, 1f),
