@@ -88,6 +88,17 @@ private fun ListChoiceScreenInner() {
         }
         ListChoice(
             onClick = {},
+            icon = { Icon(Icons.Bus, contentDescription = null) },
+            trailingIcon = {
+                ButtonPrimarySubtle(onClick = {}) {
+                    Icon(Icons.Plus, contentDescription = null)
+                }
+            },
+        ) {
+            Text("ListChoice title")
+        }
+        ListChoice(
+            onClick = {},
             trailingIcon = {
                 ButtonPrimarySubtle(onClick = {}) {
                     Icon(Icons.Plus, contentDescription = null)

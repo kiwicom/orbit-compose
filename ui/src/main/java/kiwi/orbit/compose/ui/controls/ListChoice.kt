@@ -129,11 +129,11 @@ public fun ListChoice(
         layout(width, height) {
             iconPlaceable.placeRelative(
                 x = 0,
-                y = 0,
+                y = contentYShift,
             )
             trailingIconPlaceable.placeRelative(
                 x = width - trailingIconPlaceable.width,
-                y = (height - trailingIconPlaceable.height) / 2,
+                y = (maxOf(mainHeight, trailingHeight) - trailingIconPlaceable.height) / 2,
             )
             titlePlaceable.placeRelative(
                 x = iconIndent,
@@ -194,6 +194,7 @@ internal fun ListChoicePreview() {
             }
             ListChoice(
                 onClick = {},
+                icon = { Icon(Icons.Bus, contentDescription = null) },
                 trailingIcon = {
                     ButtonPrimarySubtle(onClick = {}) {
                         Icon(Icons.Plus, contentDescription = null)
