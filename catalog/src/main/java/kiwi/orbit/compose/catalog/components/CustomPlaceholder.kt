@@ -15,6 +15,7 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 @Composable
 fun CustomPlaceholder(
     modifier: Modifier = Modifier,
+    text: String = "Custom content",
 ) {
     Box(
         modifier
@@ -24,7 +25,7 @@ fun CustomPlaceholder(
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            text = "Custom content",
+            text = text,
             color = contentColorFor(backgroundColor = OrbitTheme.colors.primary.subtle),
         )
     }

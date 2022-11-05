@@ -141,6 +141,7 @@ internal fun TopAppBarNormalWithFiltersScreen(
 @Composable
 internal fun CustomContentPlaceholder(
     contentPadding: PaddingValues,
+    text: String = "Custom Content",
 ) {
     Column(
         Modifier
@@ -152,6 +153,7 @@ internal fun CustomContentPlaceholder(
             Modifier
                 .height(987.dp)
                 .clip(OrbitTheme.shapes.large),
+            text,
         )
     }
 }
