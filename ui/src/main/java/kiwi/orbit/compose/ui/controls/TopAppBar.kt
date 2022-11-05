@@ -152,11 +152,11 @@ internal fun Modifier.scrollBehaviorLayout(
 ): Modifier = clipToBounds().layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
 
-    if (scrollBehavior.offsetLimit != placeable.height.toFloat()) {
-        scrollBehavior.offsetLimit = -placeable.height.toFloat()
+    if (scrollBehavior.state.offsetLimit != placeable.height.toFloat()) {
+        scrollBehavior.state.offsetLimit = -placeable.height.toFloat()
     }
 
-    val height = placeable.height + scrollBehavior.offset.roundToInt()
+    val height = placeable.height + scrollBehavior.state.offset.roundToInt()
     layout(placeable.width, height) {
         placeable.place(0, height - placeable.height)
     }

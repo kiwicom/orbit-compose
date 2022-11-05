@@ -49,7 +49,7 @@ internal fun TopAppBarLargeScreen(
 internal fun TopAppBarLargeScrollableScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -69,7 +69,7 @@ internal fun TopAppBarLargeScrollableScreen(
 internal fun TopAppBarLargeScrollableElevatedScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -88,7 +88,7 @@ internal fun TopAppBarLargeScrollableElevatedScreen(
 internal fun TopAppBarLargeCustomContentScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
