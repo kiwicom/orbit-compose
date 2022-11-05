@@ -131,6 +131,15 @@ private fun SingleRowTopAppBar(
             state = rememberDraggableState { delta ->
                 scrollBehavior.state.heightOffset = scrollBehavior.state.heightOffset + delta
             },
+            onDragStopped = { velocity ->
+                settleAppBar(
+                    scrollBehavior.state,
+                    velocity,
+                    scrollBehavior.flingAnimationSpec,
+                    scrollBehavior.snapAnimationSpec,
+                )
+            },
+        )
     } else {
         Modifier
     }

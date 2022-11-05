@@ -139,6 +139,15 @@ private fun TwoRowsTopAppBar(
             state = rememberDraggableState { delta ->
                 scrollBehavior.state.heightOffset = scrollBehavior.state.heightOffset + delta
             },
+            onDragStopped = { velocity ->
+                settleAppBar(
+                    scrollBehavior.state,
+                    velocity,
+                    scrollBehavior.flingAnimationSpec,
+                    scrollBehavior.snapAnimationSpec,
+                )
+            },
+        )
     } else {
         Modifier
     }
@@ -172,7 +181,7 @@ private fun TwoRowsTopAppBar(
         }
     } else {
         Column(
-            Modifier.then(appBarDragModifier)
+            Modifier.then(appBarDragModifier),
         ) {
             Surface(
                 modifier = modifier,

@@ -1,11 +1,12 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.DecayAnimationSpec
-import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDecay
 import androidx.compose.animation.core.animateTo
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -37,6 +38,18 @@ public interface TopAppBarScrollBehavior {
      * drag gestures.
      */
     public val isPinned: Boolean
+
+    /**
+     * An optional [AnimationSpec] that defines how the top app bar snaps to either fully collapsed
+     * or fully extended state when a fling or a drag scrolled it into an intermediate position.
+     */
+    public val snapAnimationSpec: AnimationSpec<Float>?
+
+    /**
+     * An optional [DecayAnimationSpec] that defined how to fling the top app bar when the user
+     * flings the app bar itself, or the content below it.
+     */
+    public val flingAnimationSpec: DecayAnimationSpec<Float>?
 
     /**
      * A [NestedScrollConnection] that should be attached to a [Modifier.nestedScroll] in order to
@@ -71,12 +84,25 @@ public interface TopAppBarScrollBehavior {
          * compositions.
          * @param canScroll a callback used to determine whether scroll events are to be
          * handled by this [EnterAlwaysScrollBehavior]
+         * @param snapAnimationSpec an optional [AnimationSpec] that defines how the top app bar snaps
+         * to either fully collapsed or fully extended state when a fling or a drag scrolled it into an
+         * intermediate position
+         * @param flingAnimationSpec an optional [DecayAnimationSpec] that defined how to fling the top
+         * app bar when the user flings the app bar itself, or the content below it
          */
         @Composable
         public fun enterAlways(
             state: TopAppBarState = rememberTopAppBarState(),
             canScroll: () -> Boolean = { true },
-        ): TopAppBarScrollBehavior = EnterAlwaysScrollBehavior(state, canScroll)
+            snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
+            flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay(),
+        ): TopAppBarScrollBehavior =
+            EnterAlwaysScrollBehavior(
+                state = state,
+                snapAnimationSpec = snapAnimationSpec,
+                flingAnimationSpec = flingAnimationSpec,
+                canScroll = canScroll,
+            )
 
         /**
          * Returns a [TopAppBarScrollBehavior] that adjusts its properties to affect the colors and
@@ -95,17 +121,24 @@ public interface TopAppBarScrollBehavior {
          * compositions.
          * @param canScroll a callback used to determine whether scroll events are to be
          * handled by this [ExitUntilCollapsedScrollBehavior]
+         * @param snapAnimationSpec an optional [AnimationSpec] that defines how the top app bar snaps
+         * to either fully collapsed or fully extended state when a fling or a drag scrolled it into an
+         * intermediate position
+         * @param flingAnimationSpec an optional [DecayAnimationSpec] that defined how to fling the top
+         * app bar when the user flings the app bar itself, or the content below it
          */
         @Composable
         public fun exitUntilCollapsed(
             state: TopAppBarState = rememberTopAppBarState(),
-            decayAnimationSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay(),
             canScroll: () -> Boolean = { true },
+            snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
+            flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay(),
         ): TopAppBarScrollBehavior =
             ExitUntilCollapsedScrollBehavior(
-                state,
-                decayAnimationSpec,
-                canScroll,
+                state = state,
+                snapAnimationSpec = snapAnimationSpec,
+                flingAnimationSpec = flingAnimationSpec,
+                canScroll = canScroll,
             )
     }
 }
@@ -114,14 +147,17 @@ public interface TopAppBarScrollBehavior {
  * Returns a [TopAppBarScrollBehavior] that only adjusts its content offset, without adjusting any
  * properties that affect the height of a top app bar.
  *
+ * @param state a [TopAppBarState]
  * @param canScroll a callback used to determine whether scroll events are to be
  * handled by this [PinnedScrollBehavior]
  */
 private class PinnedScrollBehavior(
-    override var state: TopAppBarState,
+    override val state: TopAppBarState,
     val canScroll: () -> Boolean = { true },
 ) : TopAppBarScrollBehavior {
     override val isPinned: Boolean = true
+    override val snapAnimationSpec: AnimationSpec<Float>? = null
+    override val flingAnimationSpec: DecayAnimationSpec<Float>? = null
     override var nestedScrollConnection =
         object : NestedScrollConnection {
             override fun onPostScroll(
@@ -149,11 +185,19 @@ private class PinnedScrollBehavior(
  * A top app bar that is set up with this [TopAppBarScrollBehavior] will immediately collapse when
  * the nested content is pulled up, and will immediately appear when the content is pulled down.
  *
+ * @param state a [TopAppBarState]
+ * @param snapAnimationSpec an optional [AnimationSpec] that defines how the top app bar snaps to
+ * either fully collapsed or fully extended state when a fling or a drag scrolled it into an
+ * intermediate position
+ * @param flingAnimationSpec an optional [DecayAnimationSpec] that defined how to fling the top app
+ * bar when the user flings the app bar itself, or the content below it
  * @param canScroll a callback used to determine whether scroll events are to be
  * handled by this [EnterAlwaysScrollBehavior]
  */
 private class EnterAlwaysScrollBehavior(
-    override var state: TopAppBarState,
+    override val state: TopAppBarState,
+    override val snapAnimationSpec: AnimationSpec<Float>?,
+    override val flingAnimationSpec: DecayAnimationSpec<Float>?,
     val canScroll: () -> Boolean = { true },
 ) : TopAppBarScrollBehavior {
     override val isPinned: Boolean = false
@@ -189,6 +233,16 @@ private class EnterAlwaysScrollBehavior(
                 state.heightOffset = state.heightOffset + consumed.y
                 return Offset.Zero
             }
+
+            override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+                val superConsumed = super.onPostFling(consumed, available)
+                return superConsumed + settleAppBar(
+                    state,
+                    available.y,
+                    flingAnimationSpec,
+                    snapAnimationSpec,
+                )
+            }
         }
 }
 
@@ -200,16 +254,19 @@ private class EnterAlwaysScrollBehavior(
  * the nested content is pulled up, and will expand back the collapsed area when the content is
  * pulled all the way down.
  *
- * @param decayAnimationSpec a [DecayAnimationSpec] that will be used by the top app bar motion
- * when the user flings the content. Preferably, this should match the animation spec used by the
- * scrollable content. See also [androidx.compose.animation.rememberSplineBasedDecay] for a
- * default [DecayAnimationSpec] that can be used with this behavior.
+ * @param state a [TopAppBarState]
+ * @param snapAnimationSpec an optional [AnimationSpec] that defines how the top app bar snaps to
+ * either fully collapsed or fully extended state when a fling or a drag scrolled it into an
+ * intermediate position
+ * @param flingAnimationSpec an optional [DecayAnimationSpec] that defined how to fling the top app
+ * bar when the user flings the app bar itself, or the content below it
  * @param canScroll a callback used to determine whether scroll events are to be
  * handled by this [ExitUntilCollapsedScrollBehavior]
  */
 private class ExitUntilCollapsedScrollBehavior(
     override var state: TopAppBarState,
-    val decayAnimationSpec: DecayAnimationSpec<Float>,
+    override val snapAnimationSpec: AnimationSpec<Float>?,
+    override val flingAnimationSpec: DecayAnimationSpec<Float>?,
     val canScroll: () -> Boolean = { true },
 ) : TopAppBarScrollBehavior {
     override val isPinned: Boolean = false
@@ -262,66 +319,84 @@ private class ExitUntilCollapsedScrollBehavior(
             }
 
             override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
-                val result = super.onPostFling(consumed, available)
-                // TODO(b/179417109): We get positive Velocity when flinging up while the top app
-                //  bar is changing its height. Track b/179417109 for a fix.
-                if ((available.y < 0f && state.contentOffset == 0f) ||
-                    (available.y > 0f && state.heightOffset < 0f)
-                ) {
-                    return result +
-                        onTopBarFling(
-                            scrollBehavior = this@ExitUntilCollapsedScrollBehavior,
-                            initialVelocity = available.y,
-                            decayAnimationSpec = decayAnimationSpec,
-                            snap = true,
-                        )
-                }
-                return result
+                val superConsumed = super.onPostFling(consumed, available)
+                return superConsumed + settleAppBar(
+                    state,
+                    available.y,
+                    flingAnimationSpec,
+                    snapAnimationSpec,
+                )
             }
         }
 }
 
-private suspend fun onTopBarFling(
-    scrollBehavior: TopAppBarScrollBehavior,
-    initialVelocity: Float,
-    decayAnimationSpec: DecayAnimationSpec<Float>,
-    snap: Boolean,
+/**
+ * Settles the app bar by flinging, in case the given velocity is greater than zero, and snapping
+ * after the fling settles.
+ */
+internal suspend fun settleAppBar(
+    state: TopAppBarState,
+    velocity: Float,
+    flingAnimationSpec: DecayAnimationSpec<Float>?,
+    snapAnimationSpec: AnimationSpec<Float>?,
 ): Velocity {
-    if (abs(initialVelocity) > 1f) {
-        var remainingVelocity = initialVelocity
+    // Check if the app bar is completely collapsed/expanded. If so, no need to settle the app bar,
+    // and just return Zero Velocity.
+    // Note that we don't check for 0f due to float precision with the collapsedFraction
+    // calculation.
+    if (state.collapsedFraction < 0.01f || state.collapsedFraction == 1f) {
+        return Velocity.Zero
+    }
+    var remainingVelocity = velocity
+    // In case there is an initial velocity that was left after a previous user fling, animate to
+    // continue the motion to expand or collapse the app bar.
+    if (flingAnimationSpec != null && abs(velocity) > 1f) {
         var lastValue = 0f
         AnimationState(
             initialValue = 0f,
-            initialVelocity = initialVelocity,
+            initialVelocity = velocity,
         )
-            .animateDecay(decayAnimationSpec) {
+            .animateDecay(flingAnimationSpec) {
                 val delta = value - lastValue
-                val initialHeightOffset = scrollBehavior.state.heightOffset
-                scrollBehavior.state.heightOffset = initialHeightOffset + delta
-                val consumed = abs(initialHeightOffset - scrollBehavior.state.heightOffset)
+                val initialHeightOffset = state.heightOffset
+                state.heightOffset = initialHeightOffset + delta
+                val consumed = abs(initialHeightOffset - state.heightOffset)
                 lastValue = value
                 remainingVelocity = this.velocity
                 // avoid rounding errors and stop if anything is unconsumed
                 if (abs(delta - consumed) > 0.5f) this.cancelAnimation()
             }
-
-        if (snap &&
-            scrollBehavior.state.heightOffset < 0 &&
-            scrollBehavior.state.heightOffset > scrollBehavior.state.heightOffsetLimit
-        ) {
-            AnimationState(initialValue = scrollBehavior.state.heightOffset).animateTo(
-                // Snap the top app bar height offset to have the bar completely collapse or
-                // completely expand according to the initial velocity direction.
-                if (initialVelocity > 0) 0f else scrollBehavior.state.heightOffsetLimit,
-                animationSpec = tween(
-                    durationMillis = TopAppBarAnimationDurationMillis,
-                    easing = LinearOutSlowInEasing,
-                ),
-            ) { scrollBehavior.state.heightOffset = value }
-        }
-        return Velocity(0f, remainingVelocity)
     }
-    return Velocity.Zero
+    // Snap if animation specs were provided.
+    if (snapAnimationSpec != null) {
+        if (state.heightOffset < 0 &&
+            state.heightOffset > state.heightOffsetLimit
+        ) {
+            AnimationState(initialValue = state.heightOffset).animateTo(
+                if (state.collapsedFraction < 0.5f) {
+                    0f
+                } else {
+                    state.heightOffsetLimit
+                },
+                animationSpec = snapAnimationSpec,
+            ) { state.heightOffset = value }
+        }
+    }
+
+    return Velocity(0f, remainingVelocity)
+}
+
+internal suspend fun snapTopAppBar(state: TopAppBarState) {
+    // In case the app bar motion was stopped in a state where it's partially visible, snap it to
+    // the nearest state.
+    if (state.heightOffset < 0 &&
+        state.heightOffset > state.heightOffsetLimit
+    ) {
+        AnimationState(initialValue = state.heightOffset).animateTo(
+            if (state.collapsedFraction < 0.5f) 0f else state.heightOffsetLimit,
+            animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+        ) { state.heightOffset = value }
+    }
 }
 
 /**
@@ -387,7 +462,7 @@ public class TopAppBarState(
         set(newOffset) {
             _heightOffset.value = newOffset.coerceIn(
                 minimumValue = heightOffsetLimit,
-                maximumValue = 0f
+                maximumValue = 0f,
             )
         }
 
@@ -453,5 +528,3 @@ public class TopAppBarState(
         )
     }
 }
-
-private const val TopAppBarAnimationDurationMillis = 500
