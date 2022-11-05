@@ -125,8 +125,8 @@ private fun TwoRowsTopAppBar(
         "TopAppBarLarge non-elevated is supported only with scrolling behavior."
     }
 
-    val scrollFraction = scrollBehavior?.scrollFraction ?: 0f
-    val hideTopRowSemantics = scrollFraction < 0.5f
+    val alphaFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
+    val hideTopRowSemantics = alphaFraction < 0.5f
     val hideBottomRowSemantics = !hideTopRowSemantics
 
     if (largeElevated) {
@@ -143,7 +143,7 @@ private fun TwoRowsTopAppBar(
                 TopAppBarLayout(
                     modifier = Modifier,
                     title = title,
-                    titleAlpha = scrollFraction,
+                    titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
@@ -160,18 +160,18 @@ private fun TwoRowsTopAppBar(
         Column {
             Surface(
                 modifier = modifier,
-                color = when (scrollFraction > 0.01f) {
+                color = when (alphaFraction > 0.01f) {
                     true -> OrbitTheme.colors.surface.main
                     false -> Color.Transparent
                 },
-                elevation = elevation * scrollFraction,
+                elevation = elevation * alphaFraction,
             ) {
                 TopAppBarLayout(
                     modifier = Modifier.windowInsetsPadding(
                         WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
                     ),
                     title = title,
-                    titleAlpha = scrollFraction,
+                    titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
@@ -196,7 +196,7 @@ private fun TopAppBarLargeLayout(
     largeTitle: @Composable () -> Unit,
     hideTitleSemantics: Boolean,
 ) {
-    val scrollFraction = scrollBehavior?.scrollFraction ?: 0f
+    val scrollFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
     Box(
         modifier
             .then(if (hideTitleSemantics) Modifier.clearAndSetSemantics { } else Modifier)

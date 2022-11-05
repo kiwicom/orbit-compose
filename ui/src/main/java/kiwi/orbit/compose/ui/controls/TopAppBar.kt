@@ -151,12 +151,11 @@ internal fun Modifier.scrollBehaviorLayout(
     scrollBehavior: TopAppBarScrollBehavior,
 ): Modifier = clipToBounds().layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
-
-    if (scrollBehavior.state.offsetLimit != placeable.height.toFloat()) {
-        scrollBehavior.state.offsetLimit = -placeable.height.toFloat()
+    val heightOffsetLimit = -placeable.height.toFloat()
+    if (scrollBehavior.state.heightOffsetLimit != heightOffsetLimit) {
+        scrollBehavior.state.heightOffsetLimit = heightOffsetLimit
     }
-
-    val height = placeable.height + scrollBehavior.state.offset.roundToInt()
+    val height = placeable.height + scrollBehavior.state.heightOffset.roundToInt()
     layout(placeable.width, height) {
         placeable.place(0, height - placeable.height)
     }
