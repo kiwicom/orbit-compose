@@ -1,5 +1,8 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -129,9 +132,20 @@ private fun TwoRowsTopAppBar(
     val hideTopRowSemantics = alphaFraction < 0.5f
     val hideBottomRowSemantics = !hideTopRowSemantics
 
+    // Set up support for resizing the top app bar when vertically dragging the bar itself.
+    val appBarDragModifier = if (scrollBehavior?.isPinned == false) {
+        Modifier.draggable(
+            orientation = Orientation.Vertical,
+            state = rememberDraggableState { delta ->
+                scrollBehavior.state.heightOffset = scrollBehavior.state.heightOffset + delta
+            },
+    } else {
+        Modifier
+    }
+
     if (largeElevated) {
         Surface(
-            modifier = modifier,
+            modifier = modifier.then(appBarDragModifier),
             color = OrbitTheme.colors.surface.main,
             elevation = elevation,
         ) {
@@ -157,7 +171,9 @@ private fun TwoRowsTopAppBar(
             }
         }
     } else {
-        Column {
+        Column(
+            Modifier.then(appBarDragModifier)
+        ) {
             Surface(
                 modifier = modifier,
                 color = when (alphaFraction > 0.01f) {
