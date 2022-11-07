@@ -359,6 +359,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_contact_email)
 
+    public val Copy: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_copy)
+
     public val CreditCard: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_credit_card)
