@@ -55,6 +55,9 @@ sealed interface TopAppBarDestination : Destination {
 
     @Serializable
     object LargeCustomContent : TopAppBarDestination
+
+    @Serializable
+    object LargePullRefresh : TopAppBarDestination
 }
 
 @ExperimentalSerializationApi
@@ -90,6 +93,9 @@ internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigatio
         }
         composable<TopAppBarDestination.LargeCustomContent> {
             TopAppBarLargeCustomContentScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.LargePullRefresh> {
+            TopAppBarLargePullRefreshScreen(navController::navigateUp)
         }
     }
 }
@@ -158,6 +164,11 @@ internal fun TopAppBarScreenInner(
                 onClick = { onSelect(TopAppBarDestination.LargeCustomContent) },
             ) {
                 Text("With Custom Content")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.LargePullRefresh) },
+            ) {
+                Text("With Pull Refresh")
             }
         }
     }

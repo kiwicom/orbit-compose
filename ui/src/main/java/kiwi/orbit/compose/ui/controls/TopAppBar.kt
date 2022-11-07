@@ -1,5 +1,8 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -121,8 +124,28 @@ private fun SingleRowTopAppBar(
     extraContent: @Composable () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior?,
 ) {
+    // Set up support for resizing the top app bar when vertically dragging the bar itself.
+    val appBarDragModifier = if (scrollBehavior?.isPinned == false) {
+        Modifier.draggable(
+            orientation = Orientation.Vertical,
+            state = rememberDraggableState { delta ->
+                scrollBehavior.state.heightOffset = scrollBehavior.state.heightOffset + delta
+            },
+            onDragStopped = { velocity ->
+                settleAppBar(
+                    scrollBehavior.state,
+                    velocity,
+                    scrollBehavior.flingAnimationSpec,
+                    scrollBehavior.snapAnimationSpec,
+                )
+            },
+        )
+    } else {
+        Modifier
+    }
+
     Surface(
-        modifier = modifier,
+        modifier = modifier.then(appBarDragModifier),
         color = OrbitTheme.colors.surface.main,
         elevation = elevation,
     ) {
@@ -151,12 +174,11 @@ internal fun Modifier.scrollBehaviorLayout(
     scrollBehavior: TopAppBarScrollBehavior,
 ): Modifier = clipToBounds().layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
-
-    if (scrollBehavior.offsetLimit != placeable.height.toFloat()) {
-        scrollBehavior.offsetLimit = -placeable.height.toFloat()
+    val heightOffsetLimit = -placeable.height.toFloat()
+    if (scrollBehavior.state.heightOffsetLimit != heightOffsetLimit) {
+        scrollBehavior.state.heightOffsetLimit = heightOffsetLimit
     }
-
-    val height = placeable.height + scrollBehavior.offset.roundToInt()
+    val height = placeable.height + scrollBehavior.state.heightOffset.roundToInt()
     layout(placeable.width, height) {
         placeable.place(0, height - placeable.height)
     }

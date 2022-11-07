@@ -1,11 +1,21 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +34,8 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.controls.TopAppBarScrollBehavior
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun TopAppBarLargeScreen(
@@ -49,7 +61,7 @@ internal fun TopAppBarLargeScreen(
 internal fun TopAppBarLargeScrollableScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -69,7 +81,7 @@ internal fun TopAppBarLargeScrollableScreen(
 internal fun TopAppBarLargeScrollableElevatedScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -88,7 +100,7 @@ internal fun TopAppBarLargeScrollableElevatedScreen(
 internal fun TopAppBarLargeCustomContentScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberExitUntilCollapsed()
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -148,6 +160,52 @@ internal fun TopAppBarLargeCustomContentScreen(
             )
         },
         content = { CustomContentPlaceholder(it) },
+    )
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+internal fun TopAppBarLargePullRefreshScreen(
+    onNavigateUp: () -> Unit,
+) {
+    val refreshScope = rememberCoroutineScope()
+    var refreshing by remember { mutableStateOf(false) }
+    var i by remember { mutableStateOf(0) }
+
+    fun refresh() = refreshScope.launch {
+        refreshing = true
+        delay(1500)
+        i += 1
+        refreshing = false
+    }
+
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
+    val pullRefreshState = rememberPullRefreshState(refreshing, ::refresh)
+
+    Scaffold(
+        modifier = Modifier
+            .pullRefresh(pullRefreshState)
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBarLarge(
+                title = { Text("Pull Refresh") },
+                onNavigateUp = onNavigateUp,
+                scrollBehavior = scrollBehavior,
+                largeElevated = true,
+            )
+        },
+        content = {
+            Box {
+                CustomContentPlaceholder(it, "Custom content $i")
+                PullRefreshIndicator(
+                    refreshing,
+                    pullRefreshState,
+                    Modifier
+                        .padding(it)
+                        .align(Alignment.TopCenter),
+                )
+            }
+        },
     )
 }
 

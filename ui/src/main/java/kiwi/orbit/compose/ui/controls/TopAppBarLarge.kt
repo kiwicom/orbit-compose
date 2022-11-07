@@ -1,5 +1,8 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -125,13 +128,33 @@ private fun TwoRowsTopAppBar(
         "TopAppBarLarge non-elevated is supported only with scrolling behavior."
     }
 
-    val scrollFraction = scrollBehavior?.scrollFraction ?: 0f
-    val hideTopRowSemantics = scrollFraction < 0.5f
+    val alphaFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
+    val hideTopRowSemantics = alphaFraction < 0.5f
     val hideBottomRowSemantics = !hideTopRowSemantics
+
+    // Set up support for resizing the top app bar when vertically dragging the bar itself.
+    val appBarDragModifier = if (scrollBehavior?.isPinned == false) {
+        Modifier.draggable(
+            orientation = Orientation.Vertical,
+            state = rememberDraggableState { delta ->
+                scrollBehavior.state.heightOffset = scrollBehavior.state.heightOffset + delta
+            },
+            onDragStopped = { velocity ->
+                settleAppBar(
+                    scrollBehavior.state,
+                    velocity,
+                    scrollBehavior.flingAnimationSpec,
+                    scrollBehavior.snapAnimationSpec,
+                )
+            },
+        )
+    } else {
+        Modifier
+    }
 
     if (largeElevated) {
         Surface(
-            modifier = modifier,
+            modifier = modifier.then(appBarDragModifier),
             color = OrbitTheme.colors.surface.main,
             elevation = elevation,
         ) {
@@ -143,7 +166,7 @@ private fun TwoRowsTopAppBar(
                 TopAppBarLayout(
                     modifier = Modifier,
                     title = title,
-                    titleAlpha = scrollFraction,
+                    titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
@@ -157,21 +180,23 @@ private fun TwoRowsTopAppBar(
             }
         }
     } else {
-        Column {
+        Column(
+            Modifier.then(appBarDragModifier),
+        ) {
             Surface(
                 modifier = modifier,
-                color = when (scrollFraction > 0.01f) {
+                color = when (alphaFraction > 0.01f) {
                     true -> OrbitTheme.colors.surface.main
                     false -> Color.Transparent
                 },
-                elevation = elevation * scrollFraction,
+                elevation = elevation * alphaFraction,
             ) {
                 TopAppBarLayout(
                     modifier = Modifier.windowInsetsPadding(
                         WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
                     ),
                     title = title,
-                    titleAlpha = scrollFraction,
+                    titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
@@ -196,7 +221,7 @@ private fun TopAppBarLargeLayout(
     largeTitle: @Composable () -> Unit,
     hideTitleSemantics: Boolean,
 ) {
-    val scrollFraction = scrollBehavior?.scrollFraction ?: 0f
+    val scrollFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
     Box(
         modifier
             .then(if (hideTitleSemantics) Modifier.clearAndSetSemantics { } else Modifier)

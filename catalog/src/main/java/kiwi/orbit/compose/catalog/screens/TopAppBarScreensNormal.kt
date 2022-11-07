@@ -55,7 +55,7 @@ internal fun TopAppBarNormalScreen(
 internal fun TopAppBarNormalScrollableScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberEnterAlways()
+    val scrollBehavior = TopAppBarScrollBehavior.enterAlways()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -113,7 +113,7 @@ internal fun TopAppBarNormalWithTabsScreen(
 internal fun TopAppBarNormalWithFiltersScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarScrollBehavior.rememberPinned()
+    val scrollBehavior = TopAppBarScrollBehavior.pinned()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -141,6 +141,7 @@ internal fun TopAppBarNormalWithFiltersScreen(
 @Composable
 internal fun CustomContentPlaceholder(
     contentPadding: PaddingValues,
+    text: String = "Custom Content",
 ) {
     Column(
         Modifier
@@ -152,6 +153,7 @@ internal fun CustomContentPlaceholder(
             Modifier
                 .height(987.dp)
                 .clip(OrbitTheme.shapes.large),
+            text,
         )
     }
 }
