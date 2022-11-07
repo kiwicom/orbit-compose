@@ -112,7 +112,17 @@ class IllustrationsGenerator {
                 val image = ImageIO.read(inFile)
                 val resized = resize(image, width = expectedWidth, height = 0)
                 ImageIO.write(resized, "PNG", outPath)
-                Runtime.getRuntime().exec("pngquant --skip-if-larger -f --strip -o $outPath $outPath")
+                Runtime.getRuntime().exec(
+                    arrayOf(
+                        "pngquant",
+                        "--skip-if-larger",
+                        "-f",
+                        "--strip",
+                        "-o",
+                        outPath.toString(),
+                        outPath.toString(),
+                    ),
+                )
             }.forEach { process ->
                 process.waitFor()
             }
