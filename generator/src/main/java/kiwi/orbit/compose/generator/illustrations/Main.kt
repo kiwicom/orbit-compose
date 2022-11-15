@@ -13,7 +13,7 @@ fun main() {
     val kotlinOutDir = Paths.get(root, "illustrations/src/main/java/")
     val resourceOutDir = Paths.get("$root/illustrations/src/main/res/")
     val urlIllustrationList =
-        "https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-components/src/Illustration/consts.js"
+        "https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-components/src/Illustration/consts.mts"
     val urlIllustrationPrefix = "https://images.kiwi.com/illustrations/originals"
 
     processor.build(urlIllustrationList, urlIllustrationPrefix, kotlinOutDir, resourceOutDir)
