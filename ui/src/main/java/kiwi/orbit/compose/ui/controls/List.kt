@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -48,10 +47,11 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  *     ListItem(
  *         icon = { Icon(painter = Icons.BaggageCabin, contentDescription = null) },
  *         content = { Text("Cabin Baggage") },
- *     ) { Text("Cabin Baggage") }
+ *     )
  *     ListItem(
  *         icon = { Icon(painter = Icons.BaggageChecked20, contentDescription = null) },
- *     ) { Text("Checked Baggage") }
+ *         content = { Text("Checked Baggage") },
+ *     )
  * }
  * ```
  */
@@ -105,10 +105,11 @@ public fun List(
  *     ListItem(
  *         icon = { Icon(painter = Icons.BaggageCabin, contentDescription = null) },
  *         content = { Text("Cabin Baggage") },
- *     ) { Text("Cabin Baggage") }
+ *     )
  *     ListItem(
  *         icon = { Icon(painter = Icons.BaggageChecked20, contentDescription = null) },
- *     ) { Text("Checked Baggage") }
+ *         content =  { Text("Checked Baggage") },
+ *     )
  * }
  * ```
  */
@@ -235,7 +236,7 @@ internal fun ListPreview() {
     }
 }
 
-@Preview
+@OrbitPreviews
 @Composable
 internal fun ListLargePreview() {
     Preview {
