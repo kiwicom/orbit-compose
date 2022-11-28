@@ -79,4 +79,4 @@ mavenPublish = { id = "com.vanniktech.maven.publish.base", version.ref = "mavenP
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin-dokka" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "3.12.0" }
 paparazzi = { id = "dev.chrisbanes.paparazzi", version = "1.1.0-sdk33-alpha02" }
-appDistribution = { id = "com.google.firebase.appdistribution", version = "3.1.0" }
+appDistribution = { id = "com.google.firebase.appdistribution", version = "3.1.1" }
