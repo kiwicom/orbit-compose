@@ -48,6 +48,7 @@ jobs:
           packageName: kiwi.orbit.compose.catalog
           releaseFiles: catalog/build/outputs/bundle/release/catalog-release.aab
           track: production
+          status: completed
           whatsNewDirectory: whatsnew
           mappingFile: catalog/build/outputs/mapping/release/mapping.txt
       - name: Clean secrets
