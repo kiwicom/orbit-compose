@@ -19,6 +19,7 @@ import kiwi.orbit.compose.ui.controls.AlertSimplePreview
 import kiwi.orbit.compose.ui.controls.AlertSuccessPreview
 import kiwi.orbit.compose.ui.controls.AlertWarningPreview
 import kiwi.orbit.compose.ui.controls.BadgeCirclePreview
+import kiwi.orbit.compose.ui.controls.BadgeListPreview
 import kiwi.orbit.compose.ui.controls.BadgePreview
 import kiwi.orbit.compose.ui.controls.ButtonLinkPreview
 import kiwi.orbit.compose.ui.controls.ButtonPreview
@@ -126,6 +127,11 @@ internal class ScreenshotTest {
     @Test
     fun badgeCircle() {
         snapshot { BadgeCirclePreview() }
+    }
+
+    @Test
+    fun badgeList() {
+        snapshot { BadgeListPreview() }
     }
 
     @Test

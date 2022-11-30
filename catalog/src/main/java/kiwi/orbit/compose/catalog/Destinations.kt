@@ -26,6 +26,9 @@ sealed interface Destinations : Destination {
     object Badge : Destinations
 
     @Serializable
+    object BadgeList : Destinations
+
+    @Serializable
     object Button : Destinations
 
     @Serializable

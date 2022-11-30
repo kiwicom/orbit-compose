@@ -76,6 +76,7 @@ internal fun MainScreen(
     val controls = listOf(
         MenuItem("Alert", Icons.Alert) { Destinations.Alert },
         MenuItem("Badge", Icons.Deals) { Destinations.Badge },
+        MenuItem("BadgeList", Icons.List) { Destinations.BadgeList },
         MenuItem("Button", MIcons.SmartButton) { Destinations.Button },
         MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
         MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
