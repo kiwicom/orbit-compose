@@ -123,6 +123,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_fare_lock_success)
 
+    public val FastBooking: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_fast_booking)
+
     public val FastTrack: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_fast_track)
