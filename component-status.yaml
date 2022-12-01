@@ -3,7 +3,7 @@
 - component: Badge
   android: Released
 - component: BadgeList
-  android: Planned
+  android: Released
 - component: BadgePrimitive
   android: Planned
 - component: Button
