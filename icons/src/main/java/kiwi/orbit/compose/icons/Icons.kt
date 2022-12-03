@@ -227,25 +227,25 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_check_circle)
 
-    public val ChevronDoubleLeft: Painter
+    public val ChevronBackward: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_orbit_chevron_double_left)
+        get() = painterResource(R.drawable.ic_orbit_chevron_backward)
 
-    public val ChevronDoubleRight: Painter
+    public val ChevronDoubleBackward: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_orbit_chevron_double_right)
+        get() = painterResource(R.drawable.ic_orbit_chevron_double_backward)
+
+    public val ChevronDoubleForward: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_chevron_double_forward)
 
     public val ChevronDown: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chevron_down)
 
-    public val ChevronLeft: Painter
+    public val ChevronForward: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_orbit_chevron_left)
-
-    public val ChevronRight: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_chevron_right)
+        get() = painterResource(R.drawable.ic_orbit_chevron_forward)
 
     public val ChevronUp: Painter
         @Composable
@@ -314,38 +314,6 @@ public object Icons {
     public val ColorPicker: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_color_picker)
-
-    public val ColoredFacebook: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_facebook)
-
-    public val ColoredImessage: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_imessage)
-
-    public val ColoredMessenger: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_messenger)
-
-    public val ColoredSignal: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_signal)
-
-    public val ColoredTelegram: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_telegram)
-
-    public val ColoredTwitter: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_twitter)
-
-    public val ColoredViber: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_viber)
-
-    public val ColoredWhatsapp: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_colored_whatsapp)
 
     public val Compare: Painter
         @Composable
@@ -498,10 +466,6 @@ public object Icons {
     public val Github: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_github)
-
-    public val Google: Painter
-        @Composable
-        get() = painterResource(R.drawable.ic_orbit_google)
 
     public val GooglePlay: Painter
         @Composable

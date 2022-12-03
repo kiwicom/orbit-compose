@@ -174,7 +174,7 @@ internal fun ListChoicePreview() {
             ListChoice(
                 onClick = {},
                 icon = { Icon(Icons.Accommodation, contentDescription = null) },
-                trailingIcon = { Icon(Icons.ChevronRight, contentDescription = null) },
+                trailingIcon = { Icon(Icons.ChevronForward, contentDescription = null) },
             ) {
                 Text("ListChoice title")
             }
@@ -185,7 +185,7 @@ internal fun ListChoicePreview() {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         BadgeCircleInfoSubtle(value = 1)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Icon(Icons.ChevronRight, contentDescription = null)
+                        Icon(Icons.ChevronForward, contentDescription = null)
                     }
                 },
                 description = { Text("Further description") },

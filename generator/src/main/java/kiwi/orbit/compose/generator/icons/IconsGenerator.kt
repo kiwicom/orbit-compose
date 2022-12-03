@@ -16,10 +16,51 @@ import java.util.zip.ZipInputStream
 import kotlin.io.path.createDirectories
 
 class IconsGenerator {
+    companion object {
+        private val RtlAwareIcons = listOf(
+            "chevron_double_left",
+            "chevron_double_right",
+            "chevron_left",
+            "chevron_right",
+            "flight_direct",
+            "flight_multicity",
+            "flight_nomad",
+            "flight_return",
+            "route_no_stops",
+            "route_one_stop",
+            "route_two_stops",
+        )
+    }
+
+    data class Icon(
+        val name: String,
+        val resourceName: String,
+    )
+
     fun build(svgUrl: String, kotlinOutDir: Path, resourceOutDir: Path) {
         removeOldIcons(kotlinOutDir, resourceOutDir)
         val icons = downloadAndUnpackIcons(svgUrl, resourceOutDir)
-        generateClass(icons, kotlinOutDir)
+
+        val isColoredRegexp = """(?!#FF000000)#[0-9A-F]{6,8}""".toRegex(RegexOption.IGNORE_CASE)
+        val groupedIcons = icons.groupBy { icon ->
+            val file = File(resourceOutDir.toFile(), icon.resourceName + ".xml")
+            val content = file.readText()
+            isColoredRegexp.containsMatchIn(content)
+        }
+
+        generateClass(
+            className = "Icons",
+            icons = groupedIcons[false]!!,
+            dir = kotlinOutDir,
+        )
+        generateClass(
+            className = "ColoredIcons",
+            icons = groupedIcons[true]!!.map { it.copy(name = it.name.removePrefix("Colored")) },
+            dir = kotlinOutDir,
+            kdoc = """
+                ColoredIcons are multi-colored icons and should be rendered using Image composable.
+            """.trimIndent(),
+        )
     }
 
     private fun removeOldIcons(kotlinDir: Path, resourceDir: Path) {
@@ -35,8 +76,8 @@ class IconsGenerator {
     private fun downloadAndUnpackIcons(
         url: String,
         resourceOutDir: Path,
-    ): List<Pair<String, String>> {
-        val icons = mutableListOf<Pair<String, String>>()
+    ): List<Icon> {
+        val icons = mutableListOf<Icon>()
         val inputStream = URL(url).openConnection().getInputStream().buffered()
         resourceOutDir.createDirectories()
         ZipInputStream(inputStream).use { zis ->
@@ -58,7 +99,14 @@ class IconsGenerator {
                     .removePrefix("svg/")
                     .replace("-", "_")
                     .lowercase()
-                val filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
+                var filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
+
+                val isRtlAware = filenameXml.removeSuffix(".xml").removePrefix("ic_orbit_") in RtlAwareIcons
+                if (isRtlAware) {
+                    filenameXml = filenameXml
+                        .replace("left", "backward")
+                        .replace("right", "forward")
+                }
 
                 val outFileSvg = File(resourceOutDir.toFile(), filenameSvg)
                 val outFileXml = File(resourceOutDir.toFile(), filenameXml)
@@ -73,10 +121,6 @@ class IconsGenerator {
 
                 outFileSvg.delete()
 
-                val lines = outFileXml.readLines()
-                val contents = lines.joinToString("\n") + "\n"
-                Files.write(outFileXml.toPath(), contents.toByteArray())
-
                 val resourceName = filenameXml.removeSuffix(".xml")
 
                 @Suppress("SpellCheckingInspection")
@@ -85,34 +129,49 @@ class IconsGenerator {
                     .split("_")
                     .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
                     .replace("Checkin", "CheckIn")
-                icons.add(Pair(iconName, resourceName))
+
+                val content = StringBuilder(outFileXml.readLines().joinToString("\n"))
+                if (isRtlAware) {
+                    val attributeIndex = content.indexOf("""android:viewportHeight="24"""")
+                    content.insert(
+                        attributeIndex + """android:viewportHeight="24"""".length,
+                        "\n    android:autoMirrored=\"true\"",
+                    )
+                }
+                content.append("\n")
+
+                Files.write(outFileXml.toPath(), content.toString().toByteArray())
+                icons.add(Icon(iconName, resourceName))
             }
         }
         return icons
     }
 
-    private fun generateClass(icons: List<Pair<String, String>>, dir: Path) {
-        val iconClassType = ClassName("kiwi.orbit.compose.icons", "Icons")
+    private fun generateClass(className: String, icons: List<Icon>, dir: Path, kdoc: String? = null) {
+        val iconClassType = ClassName("kiwi.orbit.compose.icons", className)
         val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
         val iconClass = TypeSpec.objectBuilder(iconClassType)
+        if (kdoc != null) {
+            iconClass.addKdoc(kdoc)
+        }
         iconClass.addAnnotation(
             AnnotationSpec.builder(Suppress::class)
                 .addMember("%S", "unused")
                 .build(),
         )
 
-        icons.sortedBy { it.first }.forEach { (iconName, iconResource) ->
-            val property = PropertySpec.builder(iconName, painterType)
+        icons.sortedBy { it.name }.forEach { icon ->
+            val property = PropertySpec.builder(icon.name, painterType)
                 .getter(
                     FunSpec.getterBuilder()
                         .addAnnotation(composableAnnotation)
                         .addStatement(
                             "return %M(%L)",
                             MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.$iconResource",
+                            "R.drawable.${icon.resourceName}",
                         )
                         .build(),
                 )
@@ -120,7 +179,7 @@ class IconsGenerator {
             iconClass.addProperty(property)
         }
 
-        val file = FileSpec.builder("kiwi.orbit.compose.icons", "Icons")
+        val file = FileSpec.builder("kiwi.orbit.compose.icons", className)
             .addType(iconClass.build())
             .indent("    ")
             .build()

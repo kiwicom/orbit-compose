@@ -45,6 +45,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            isPseudoLocalesEnabled = true
         }
         create("ci") {
             matchingFallbacks.add("release")
@@ -64,6 +65,7 @@ android {
             }
         }
         release {
+            isPseudoLocalesEnabled = true
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
