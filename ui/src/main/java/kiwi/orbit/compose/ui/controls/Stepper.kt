@@ -25,8 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
@@ -99,6 +102,7 @@ private fun StepperPrimitive(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         StepperButton(
+            modifier = Modifier.testTag(StepperSemantics.MinusTag),
             onClick = { onValueChange.invoke(value - 1) },
             active = active,
             enabled = valueValidator?.invoke(value - 1) ?: true,
@@ -122,6 +126,7 @@ private fun StepperPrimitive(
         ) { targetNumber ->
             Text(
                 modifier = Modifier
+                    .testTag(StepperSemantics.ValueTextTag)
                     .padding(horizontal = 10.dp)
                     .widthIn(min = 20.dp),
                 text = targetNumber.toString(),
@@ -131,6 +136,7 @@ private fun StepperPrimitive(
         }
 
         StepperButton(
+            modifier = Modifier.testTag(StepperSemantics.PlusTag),
             onClick = { onValueChange.invoke(value + 1) },
             active = active,
             enabled = valueValidator?.invoke(value + 1) ?: true,
@@ -142,6 +148,7 @@ private fun StepperPrimitive(
 
 @Composable
 private fun StepperButton(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     active: Boolean,
     enabled: Boolean = true,
@@ -162,13 +169,17 @@ private fun StepperButton(
     val contentColor = contentColorFor(mainBackgroundColor)
 
     Box(
-        modifier = Modifier.clickable(
-            enabled = enabled,
-            onClick = onClick,
-            role = Role.Button,
-            interactionSource = remember { MutableInteractionSource() },
-            indication = rememberRipple(bounded = false, radius = 22.dp),
-        ),
+        modifier = modifier
+            .semantics {
+                this[EnabledKey] = enabled
+            }
+            .clickable(
+                enabled = enabled,
+                onClick = onClick,
+                role = Role.Button,
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(bounded = false, radius = 22.dp),
+            ),
     ) {
         CompositionLocalProvider(
             LocalTextStyle provides OrbitTheme.typography.bodyNormal,
@@ -186,6 +197,14 @@ private fun StepperButton(
         }
     }
 }
+
+public object StepperSemantics {
+    public const val MinusTag: String = "stepper_minus"
+    public const val PlusTag: String = "stepper_plus"
+    public const val ValueTextTag: String = "stepper_text_value"
+}
+
+public val EnabledKey: SemanticsPropertyKey<Boolean> = SemanticsPropertyKey("enabled")
 
 @OrbitPreviews
 @Composable
