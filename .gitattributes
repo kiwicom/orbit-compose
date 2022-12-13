@@ -1,1 +1,2 @@
 ui/src/test/snapshots/images/*.png filter=lfs diff=lfs merge=lfs -text
+illustrations/src/main/res/**/il_*.png filter=lfs diff=lfs merge=lfs -text
