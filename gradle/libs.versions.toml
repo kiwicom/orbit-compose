@@ -19,8 +19,6 @@ androidx-constraint-layout = "1.0.1"
 accompanist-main = "0.28.0"
 coil = "2.2.2"
 compose-compiler = "1.3.2"
-compose-main = "1.3.1"
-compose-navigation = "2.5.3"
 square-kotlinPoet = "1.12.0"
 
 [libraries]
@@ -42,26 +40,26 @@ androidx-customViewPoolingContainer = { module = "androidx.customview:customview
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist-main" }
 accompanist-systemController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-main" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-main" }
-compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose-main" }
+compose-animation = { module = "androidx.compose.animation:animation", version = "1.3.2" }
+compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version = "1.3.1" }
 # compiler dependency is defined to help Renovabot update the version
 compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose-compiler" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-main" }
-compose-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose-main" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose-main" }
-compose-materialRipple = { module = "androidx.compose.material:material-ripple", version.ref = "compose-main" }
-compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-main" }
-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose-main" }
-compose-runtimeLivedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose-main" }
-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-main" }
-compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-main" }
-compose-test = { module = "androidx.compose.ui:ui-test", version.ref = "compose-main" }
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-main" }
-compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-main" }
-compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose-main" }
-compose-uiUtil = { module = "androidx.compose.ui:ui-util", version.ref = "compose-main" }
-compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose-main" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version = "1.3.1" }
+compose-layout = { module = "androidx.compose.foundation:foundation-layout", version = "1.3.1" }
+compose-material = { module = "androidx.compose.material:material", version = "1.3.1" }
+compose-materialRipple = { module = "androidx.compose.material:material-ripple", version = "1.3.1" }
+compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended", version = "1.3.1" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.5.3" }
+compose-runtime = { module = "androidx.compose.runtime:runtime", version = "1.3.2" }
+compose-runtimeLivedata = { module = "androidx.compose.runtime:runtime-livedata", version = "1.3.2" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version = "1.3.1" }
+compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version = "1.3.1" }
+compose-test = { module = "androidx.compose.ui:ui-test", version = "1.3.1" }
+compose-ui = { module = "androidx.compose.ui:ui", version = "1.3.2" }
+compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version = "1.3.2" }
+compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version = "1.3.2" }
+compose-uiUtil = { module = "androidx.compose.ui:ui-util", version = "1.3.2" }
+compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version = "1.3.1" }
 javaJq = { module = "net.thisptr:jackson-jq", version="1.0.0-preview.20220705" }
 junit = { module = "junit:junit", version = "4.13.2" }
 kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.4.0" }
