@@ -97,6 +97,7 @@ internal fun MainScreen(
         MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },
         MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
+        MenuItem("Timeline", Icons.RouteTwoStops) { Destinations.Timeline },
         MenuItem("Toast", MIcons.Announcement) { Destinations.Toast },
         MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar },
     )

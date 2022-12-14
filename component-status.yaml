@@ -60,3 +60,5 @@
   android: Released
 - component: Textarea
   android: Released
+- component: Timeline
+  android: Released
