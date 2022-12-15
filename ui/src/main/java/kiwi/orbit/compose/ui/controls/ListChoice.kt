@@ -47,13 +47,67 @@ public fun ListChoice(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     title: @Composable () -> Unit,
 ) {
+    ListChoicePrimitive(
+        onClick,
+        modifier,
+        icon,
+        description,
+        trailingIcon,
+        withSeparator,
+        interactionSource,
+        title,
+    )
+}
+
+/**
+ * List choice component.
+ *
+ * Represents a menu item. Optionally provide a [description], [icon] or [trailingIcon].
+ * Separator is drawn by default. This variant of the component is not clickable.
+ *
+ * The [trailingIcon] icon slot is suitable for other end-aligned UI, e.g. badges.
+ */
+@Composable
+public fun ListChoice(
+    modifier: Modifier = Modifier,
+    icon: @Composable () -> Unit = {},
+    description: @Composable () -> Unit = {},
+    trailingIcon: @Composable () -> Unit = {},
+    withSeparator: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    title: @Composable () -> Unit,
+) {
+    ListChoicePrimitive(
+        onClick = null,
+        modifier,
+        icon,
+        description,
+        trailingIcon,
+        withSeparator,
+        interactionSource,
+        title,
+    )
+}
+
+@Composable
+private fun ListChoicePrimitive(
+    onClick: (() -> Unit)?,
+    modifier: Modifier,
+    icon: @Composable () -> Unit,
+    description: @Composable () -> Unit,
+    trailingIcon: @Composable () -> Unit,
+    withSeparator: Boolean,
+    interactionSource: MutableInteractionSource,
+    title: @Composable () -> Unit,
+) {
     Layout(
         modifier = modifier
             .fillMaxWidth()
             .clickable(
-                onClick = onClick,
-                indication = rememberRipple(),
                 interactionSource = interactionSource,
+                indication = rememberRipple(),
+                enabled = onClick != null,
+                onClick = { onClick?.invoke() },
             )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         content = {
@@ -200,6 +254,11 @@ internal fun ListChoicePreview() {
                         Icon(Icons.Plus, contentDescription = null)
                     }
                 },
+            ) {
+                Text("ListChoice title")
+            }
+            ListChoice(
+                description = { Text("This ListChoice is not clickable") },
             ) {
                 Text("ListChoice title")
             }
