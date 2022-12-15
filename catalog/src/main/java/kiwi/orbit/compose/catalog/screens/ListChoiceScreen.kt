@@ -119,6 +119,11 @@ private fun ListChoiceScreenInner() {
         ) {
             Text("ListChoice title")
         }
+        ListChoice(
+            description = { Text("This ListChoice is not clickable") },
+        ) {
+            Text("ListChoice title")
+        }
     }
 }
 
