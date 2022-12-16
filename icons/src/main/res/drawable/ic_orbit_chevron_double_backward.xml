@@ -2,8 +2,7 @@
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
-    android:viewportHeight="24"
-    android:autoMirrored="true">
+    android:viewportHeight="24">
   <path
       android:fillColor="#FF000000"
       android:pathData="M11.37,17.363C11.703,16.993 11.674,16.422 11.305,16.089L7.075,12.264C7.065,12.254 7.055,12.244 7.046,12.234C6.899,12.07 6.912,11.817 7.077,11.669L11.256,7.916C11.627,7.583 11.658,7.013 11.326,6.641C10.995,6.27 10.425,6.239 10.055,6.571L4.8,11.291C4.401,11.649 4.4,12.274 4.797,12.634L10.099,17.429C10.468,17.763 11.037,17.733 11.37,17.363Z"/>

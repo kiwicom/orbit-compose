@@ -231,6 +231,14 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chevron_backward)
 
+    public val ChevronBackward: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_chevron_backward)
+
+    public val ChevronDoubleBackward: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_chevron_double_backward)
+
     public val ChevronDoubleBackward: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chevron_double_backward)
@@ -239,9 +247,17 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chevron_double_forward)
 
+    public val ChevronDoubleForward: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_chevron_double_forward)
+
     public val ChevronDown: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_chevron_down)
+
+    public val ChevronForward: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_chevron_forward)
 
     public val ChevronForward: Painter
         @Composable
