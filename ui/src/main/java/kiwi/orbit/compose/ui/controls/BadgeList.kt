@@ -62,52 +62,52 @@ public fun BadgeListSmall(
 }
 
 @Composable
-public fun BadgeItemNeutral(
+public fun BadgeListItemNeutral(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.surface.subtle, modifier, content)
+    BadgeListItem(icon, OrbitTheme.colors.surface.subtle, modifier, content)
 }
 
 @Composable
-public fun BadgeItemInfo(
+public fun BadgeListItemInfo(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.info.subtle, modifier, content)
+    BadgeListItem(icon, OrbitTheme.colors.info.subtle, modifier, content)
 }
 
 @Composable
-public fun BadgeItemSuccess(
+public fun BadgeListItemSuccess(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.success.subtle, modifier, content)
+    BadgeListItem(icon, OrbitTheme.colors.success.subtle, modifier, content)
 }
 
 @Composable
-public fun BadgeItemWarning(
+public fun BadgeListItemWarning(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.warning.subtle, modifier, content)
+    BadgeListItem(icon, OrbitTheme.colors.warning.subtle, modifier, content)
 }
 
 @Composable
-public fun BadgeItemCritical(
+public fun BadgeListItemCritical(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.critical.subtle, modifier, content)
+    BadgeListItem(icon, OrbitTheme.colors.critical.subtle, modifier, content)
 }
 
 @Composable
-private fun BadgeItem(
+private fun BadgeListItem(
     icon: Painter,
     iconBackgroundColor: Color,
     modifier: Modifier = Modifier,
@@ -140,22 +140,22 @@ private fun BadgeItem(
 internal fun BadgeListPreview() {
     Preview {
         BadgeList {
-            BadgeItemInfo(Icons.Check) {
+            BadgeListItemInfo(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemSuccess(Icons.Check) {
+            BadgeListItemSuccess(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemWarning(Icons.Check) {
+            BadgeListItemWarning(Icons.Check) {
                 Text("This is a simple BadgeListItem. \nBut two rows are needed.")
             }
         }
 
         BadgeListSmall(contentEmphasis = ContentEmphasis.Minor) {
-            BadgeItemNeutral(Icons.Check) {
+            BadgeListItemNeutral(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemCritical(Icons.Check) {
+            BadgeListItemCritical(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
         }

@@ -14,12 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
-import kiwi.orbit.compose.ui.controls.BadgeItemCritical
-import kiwi.orbit.compose.ui.controls.BadgeItemInfo
-import kiwi.orbit.compose.ui.controls.BadgeItemNeutral
-import kiwi.orbit.compose.ui.controls.BadgeItemSuccess
-import kiwi.orbit.compose.ui.controls.BadgeItemWarning
 import kiwi.orbit.compose.ui.controls.BadgeList
+import kiwi.orbit.compose.ui.controls.BadgeListItemCritical
+import kiwi.orbit.compose.ui.controls.BadgeListItemInfo
+import kiwi.orbit.compose.ui.controls.BadgeListItemNeutral
+import kiwi.orbit.compose.ui.controls.BadgeListItemSuccess
+import kiwi.orbit.compose.ui.controls.BadgeListItemWarning
 import kiwi.orbit.compose.ui.controls.BadgeListSmall
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Surface
@@ -60,19 +60,19 @@ private fun BadgeListScreenInner() {
         )
 
         BadgeListSmall {
-            BadgeItemNeutral(icon = Icons.AirConditioning) {
+            BadgeListItemNeutral(icon = Icons.AirConditioning) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemInfo(icon = Icons.Airplane) {
+            BadgeListItemInfo(icon = Icons.Airplane) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemSuccess(icon = Icons.Check) {
+            BadgeListItemSuccess(icon = Icons.Check) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemWarning(icon = Icons.Terminal) {
+            BadgeListItemWarning(icon = Icons.Terminal) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemCritical(icon = Icons.Alert) {
+            BadgeListItemCritical(icon = Icons.Alert) {
                 Text(text = "This is simple BadgeList item")
             }
         }
@@ -83,19 +83,19 @@ private fun BadgeListScreenInner() {
         )
 
         BadgeList {
-            BadgeItemNeutral(icon = Icons.AirConditioning) {
+            BadgeListItemNeutral(icon = Icons.AirConditioning) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemInfo(icon = Icons.Airplane) {
+            BadgeListItemInfo(icon = Icons.Airplane) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemSuccess(icon = Icons.Check) {
+            BadgeListItemSuccess(icon = Icons.Check) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemWarning(icon = Icons.Terminal) {
+            BadgeListItemWarning(icon = Icons.Terminal) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemCritical(icon = Icons.Alert) {
+            BadgeListItemCritical(icon = Icons.Alert) {
                 Text(text = "This is simple BadgeList item")
             }
         }
@@ -106,19 +106,19 @@ private fun BadgeListScreenInner() {
         )
 
         BadgeList(contentEmphasis = ContentEmphasis.Minor) {
-            BadgeItemNeutral(icon = Icons.AirConditioning) {
+            BadgeListItemNeutral(icon = Icons.AirConditioning) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemInfo(icon = Icons.Airplane) {
+            BadgeListItemInfo(icon = Icons.Airplane) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemSuccess(icon = Icons.Check) {
+            BadgeListItemSuccess(icon = Icons.Check) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemWarning(icon = Icons.Terminal) {
+            BadgeListItemWarning(icon = Icons.Terminal) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemCritical(icon = Icons.Alert) {
+            BadgeListItemCritical(icon = Icons.Alert) {
                 Text(text = "This is simple BadgeList item")
             }
         }
@@ -129,19 +129,19 @@ private fun BadgeListScreenInner() {
         )
 
         BadgeListSmall(contentEmphasis = ContentEmphasis.Minor) {
-            BadgeItemNeutral(icon = Icons.AirConditioning) {
+            BadgeListItemNeutral(icon = Icons.AirConditioning) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemInfo(icon = Icons.Airplane) {
+            BadgeListItemInfo(icon = Icons.Airplane) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemSuccess(icon = Icons.Check) {
+            BadgeListItemSuccess(icon = Icons.Check) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemWarning(icon = Icons.Terminal) {
+            BadgeListItemWarning(icon = Icons.Terminal) {
                 Text(text = "This is simple BadgeList item")
             }
-            BadgeItemCritical(icon = Icons.Alert) {
+            BadgeListItemCritical(icon = Icons.Alert) {
                 Text(text = "This is simple BadgeList item")
             }
         }
@@ -152,19 +152,19 @@ private fun BadgeListScreenInner() {
         )
 
         BadgeListSmall {
-            BadgeItemNeutral(icon = Icons.AirConditioning) {
+            BadgeListItemNeutral(icon = Icons.AirConditioning) {
                 Text(text = "This is simple BadgeList item, but text is really long. \nMore than one line is needed.")
             }
-            BadgeItemInfo(icon = Icons.Airplane) {
+            BadgeListItemInfo(icon = Icons.Airplane) {
                 Text(text = "This is simple BadgeList item, but text is really long. \nMore than one line is needed.")
             }
-            BadgeItemSuccess(icon = Icons.Check) {
+            BadgeListItemSuccess(icon = Icons.Check) {
                 Text(text = "This is simple BadgeList item, but text is really long. \nMore than one line is needed.")
             }
-            BadgeItemWarning(icon = Icons.Terminal) {
+            BadgeListItemWarning(icon = Icons.Terminal) {
                 Text(text = "This is simple BadgeList item, but text is really long. \nMore than one line is needed.")
             }
-            BadgeItemCritical(icon = Icons.Alert) {
+            BadgeListItemCritical(icon = Icons.Alert) {
                 Text(text = "This is simple BadgeList item, but text is really long. \nMore than one line is needed.")
             }
         }
