@@ -18,10 +18,10 @@ import kotlin.io.path.createDirectories
 class IconsGenerator {
     companion object {
         private val RtlAwareIcons = listOf(
-            "chevron_double_left",
-            "chevron_double_right",
-            "chevron_left",
-            "chevron_right",
+            "chevron_double_backward",
+            "chevron_double_forward",
+            "chevron_backward",
+            "chevron_forward",
             "flight_direct",
             "flight_multicity",
             "flight_nomad",
@@ -29,6 +29,13 @@ class IconsGenerator {
             "route_no_stops",
             "route_one_stop",
             "route_two_stops",
+        )
+        private val SkipFiles = setOf(
+            "svg/chevron-double-left.svg",
+            "svg/chevron-double-right.svg",
+            "svg/chevron-left.svg",
+            "svg/chevron-right.svg",
+            "orbit-icons.svg",
         )
     }
 
@@ -88,7 +95,7 @@ class IconsGenerator {
                     zis.closeEntry()
                     continue
                 }
-                if (entry.name == "orbit-icons.svg") {
+                if (entry.name in SkipFiles) {
                     println("Skipping ${entry.name}")
                     zis.closeEntry()
                     continue
@@ -99,15 +106,8 @@ class IconsGenerator {
                     .removePrefix("svg/")
                     .replace("-", "_")
                     .lowercase()
-                var filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
-
+                val filenameXml = filenameSvg.removeSuffix(".svg").replace('.', '_') + ".xml"
                 val isRtlAware = filenameXml.removeSuffix(".xml").removePrefix("ic_orbit_") in RtlAwareIcons
-                if (isRtlAware) {
-                    filenameXml = filenameXml
-                        .replace("left", "backward")
-                        .replace("right", "forward")
-                }
-
                 val outFileSvg = File(resourceOutDir.toFile(), filenameSvg)
                 val outFileXml = File(resourceOutDir.toFile(), filenameXml)
                 outFileSvg.outputStream().use { outputStream ->
