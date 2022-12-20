@@ -22,7 +22,6 @@ import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
-import kiwi.orbit.compose.ui.foundation.contentColorFor
 import kiwi.orbit.compose.ui.layout.size
 
 @Composable
@@ -62,58 +61,88 @@ public fun BadgeListSmall(
 }
 
 @Composable
-public fun BadgeItemNeutral(
+public fun BadgeListItemNeutral(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.surface.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.surface.subtle,
+        iconTint = OrbitTheme.colors.content.subtle,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
-public fun BadgeItemInfo(
+public fun BadgeListItemInfo(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.info.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.info.subtle,
+        iconTint = OrbitTheme.colors.info.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
-public fun BadgeItemSuccess(
+public fun BadgeListItemSuccess(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.success.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.success.subtle,
+        iconTint = OrbitTheme.colors.success.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
-public fun BadgeItemWarning(
+public fun BadgeListItemWarning(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.warning.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.warning.subtle,
+        iconTint = OrbitTheme.colors.warning.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
-public fun BadgeItemCritical(
+public fun BadgeListItemCritical(
     icon: Painter,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeItem(icon, OrbitTheme.colors.critical.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.critical.subtle,
+        iconTint = OrbitTheme.colors.critical.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
-private fun BadgeItem(
+private fun BadgeListItem(
     icon: Painter,
     iconBackgroundColor: Color,
+    iconTint: Color,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    val iconTint = contentColorFor(iconBackgroundColor)
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -140,22 +169,22 @@ private fun BadgeItem(
 internal fun BadgeListPreview() {
     Preview {
         BadgeList {
-            BadgeItemInfo(Icons.Check) {
+            BadgeListItemInfo(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemSuccess(Icons.Check) {
+            BadgeListItemSuccess(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemWarning(Icons.Check) {
+            BadgeListItemWarning(Icons.Check) {
                 Text("This is a simple BadgeListItem. \nBut two rows are needed.")
             }
         }
 
         BadgeListSmall(contentEmphasis = ContentEmphasis.Minor) {
-            BadgeItemNeutral(Icons.Check) {
+            BadgeListItemNeutral(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeItemCritical(Icons.Check) {
+            BadgeListItemCritical(Icons.Check) {
                 Text("This is a simple BadgeListItem.")
             }
         }
