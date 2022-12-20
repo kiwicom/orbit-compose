@@ -61,7 +61,9 @@ android {
                 appId = "1:442962334472:android:3a8ac71491745d2d37d2bd"
                 artifactType = "APK"
                 groups = "main"
-                serviceCredentialsFile = "release/service-account.json"
+                // A different service account as the Orbit Compose project is not the linked project
+                // to Google Play.
+                serviceCredentialsFile = "release/orbit-service-account.json"
             }
         }
         release {

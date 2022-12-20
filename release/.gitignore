@@ -1,4 +1,4 @@
 /secring.gpg
 /signing.properties
 /upload.jks
-/service-account.json
+/*.json
