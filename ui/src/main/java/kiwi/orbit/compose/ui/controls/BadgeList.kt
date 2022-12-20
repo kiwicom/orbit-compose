@@ -22,7 +22,6 @@ import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideContentEmphasis
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
-import kiwi.orbit.compose.ui.foundation.contentColorFor
 import kiwi.orbit.compose.ui.layout.size
 
 @Composable
@@ -67,7 +66,13 @@ public fun BadgeListItemNeutral(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeListItem(icon, OrbitTheme.colors.surface.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.surface.subtle,
+        iconTint = OrbitTheme.colors.content.subtle,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
@@ -76,7 +81,13 @@ public fun BadgeListItemInfo(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeListItem(icon, OrbitTheme.colors.info.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.info.subtle,
+        iconTint = OrbitTheme.colors.info.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
@@ -85,7 +96,13 @@ public fun BadgeListItemSuccess(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeListItem(icon, OrbitTheme.colors.success.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.success.subtle,
+        iconTint = OrbitTheme.colors.success.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
@@ -94,7 +111,13 @@ public fun BadgeListItemWarning(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeListItem(icon, OrbitTheme.colors.warning.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.warning.subtle,
+        iconTint = OrbitTheme.colors.warning.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
@@ -103,17 +126,23 @@ public fun BadgeListItemCritical(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    BadgeListItem(icon, OrbitTheme.colors.critical.subtle, modifier, content)
+    BadgeListItem(
+        icon = icon,
+        iconBackgroundColor = OrbitTheme.colors.critical.subtle,
+        iconTint = OrbitTheme.colors.critical.normal,
+        modifier = modifier,
+        content = content,
+    )
 }
 
 @Composable
 private fun BadgeListItem(
     icon: Painter,
     iconBackgroundColor: Color,
+    iconTint: Color,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    val iconTint = contentColorFor(iconBackgroundColor)
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
