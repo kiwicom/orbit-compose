@@ -3,12 +3,15 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -34,6 +37,7 @@ public fun ClickableField(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ColumnWithMinConstraints(modifier) {
         if (label != null) {
@@ -48,6 +52,7 @@ public fun ClickableField(
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
             singleLine = singleLine,
+            interactionSource = interactionSource,
         )
 
         FieldMessage(error, info)
@@ -64,6 +69,7 @@ internal fun ClickableFieldBox(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean,
+    interactionSource: MutableInteractionSource,
 ) {
     val transition = updateTransition(isError, "stateTransition")
     val borderColor = transition.animateColor(
@@ -79,7 +85,11 @@ internal fun ClickableFieldBox(
     Box(
         modifier
             .clip(OrbitTheme.shapes.normal)
-            .clickable(onClick = onClick)
+            .clickable(
+                onClick = onClick,
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+            )
             .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
             .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal),
         propagateMinConstraints = true,

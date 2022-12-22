@@ -31,6 +31,7 @@ import kiwi.orbit.compose.ui.layout.expand
 public fun ButtonLinkPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -38,6 +39,7 @@ public fun ButtonLinkPrimary(
         backgroundColor = Color.Transparent,
         contentColor = OrbitTheme.colors.primary.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -53,12 +55,14 @@ public fun ButtonTextLinkPrimary(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
         text = text,
         onClick = onClick,
         modifier = modifier,
         color = OrbitTheme.colors.primary.normal,
+        interactionSource = interactionSource,
     )
 }
 
@@ -71,6 +75,7 @@ public fun ButtonTextLinkPrimary(
 public fun ButtonLinkSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -78,6 +83,7 @@ public fun ButtonLinkSecondary(
         backgroundColor = Color.Transparent,
         contentColor = OrbitTheme.colors.content.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -93,12 +99,14 @@ public fun ButtonTextLinkSecondary(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
         text = text,
         onClick = onClick,
         modifier = modifier,
         color = OrbitTheme.colors.content.normal,
+        interactionSource = interactionSource,
     )
 }
 
@@ -111,6 +119,7 @@ public fun ButtonTextLinkSecondary(
 public fun ButtonLinkCritical(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -118,6 +127,7 @@ public fun ButtonLinkCritical(
         backgroundColor = Color.Transparent,
         contentColor = OrbitTheme.colors.critical.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -133,12 +143,14 @@ public fun ButtonTextLinkCritical(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
         text = text,
         onClick = onClick,
         modifier = modifier,
         color = OrbitTheme.colors.critical.normal,
+        interactionSource = interactionSource,
     )
 }
 
@@ -148,6 +160,7 @@ private fun ButtonTextLink(
     onClick: () -> Unit,
     modifier: Modifier,
     color: Color,
+    interactionSource: MutableInteractionSource,
 ) {
     CompositionLocalProvider(
         LocalContentColor provides color,
@@ -162,7 +175,7 @@ private fun ButtonTextLink(
                 )
                 .clip(OrbitTheme.shapes.normal)
                 .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
+                    interactionSource = interactionSource,
                     indication = rememberRipple(),
                     onClick = onClick,
                     role = Role.Button,

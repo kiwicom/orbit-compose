@@ -2,6 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +43,7 @@ public fun ChoiceTile(
     content: @Composable () -> Unit = {},
     largeHeading: Boolean = true,
     showRadio: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     val color by animateColorAsState(
@@ -53,6 +56,7 @@ public fun ChoiceTile(
         selected = selected,
         onClick = onSelect,
         border = BorderStroke(2.dp, color),
+        interactionSource = interactionSource,
         modifier = modifier.semantics {
             if (isError) this.error(errorMessage)
         },

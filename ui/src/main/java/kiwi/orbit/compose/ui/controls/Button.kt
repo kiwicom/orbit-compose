@@ -1,8 +1,10 @@
 package kiwi.orbit.compose.ui.controls
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -17,12 +19,14 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 public fun ButtonPrimary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -31,12 +35,14 @@ public fun ButtonPrimary(
 public fun ButtonPrimarySubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.subtle,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -45,12 +51,14 @@ public fun ButtonPrimarySubtle(
 public fun ButtonSecondary(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.surface.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -59,12 +67,14 @@ public fun ButtonSecondary(
 public fun ButtonCritical(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.normal,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -73,12 +83,14 @@ public fun ButtonCritical(
 public fun ButtonCriticalSubtle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.subtle,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -87,6 +99,7 @@ public fun ButtonCriticalSubtle(
 public fun ButtonBundleBasic(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -95,6 +108,7 @@ public fun ButtonBundleBasic(
         backgroundBrush = OrbitTheme.colors.bundle.basicGradient,
         contentColor = OrbitTheme.colors.bundle.onBasic,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -103,6 +117,7 @@ public fun ButtonBundleBasic(
 public fun ButtonBundleMedium(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -111,6 +126,7 @@ public fun ButtonBundleMedium(
         backgroundBrush = OrbitTheme.colors.bundle.mediumGradient,
         contentColor = OrbitTheme.colors.bundle.onMedium,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -119,6 +135,7 @@ public fun ButtonBundleMedium(
 public fun ButtonBundleTop(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
@@ -127,6 +144,7 @@ public fun ButtonBundleTop(
         backgroundBrush = OrbitTheme.colors.bundle.topGradient,
         contentColor = OrbitTheme.colors.bundle.onTop,
         modifier = modifier,
+        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -137,6 +155,7 @@ internal fun ButtonLargePrimitive(
     backgroundColor: Color,
     modifier: Modifier = Modifier,
     backgroundBrush: Brush? = null,
+    interactionSource: MutableInteractionSource,
     contentColor: Color = contentColorFor(backgroundColor),
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -157,6 +176,7 @@ internal fun ButtonLargePrimitive(
         textStyle = textStyle,
         contentColor = contentColor,
         contentPadding = contentPadding,
+        interactionSource = interactionSource,
         content = content,
     )
 }

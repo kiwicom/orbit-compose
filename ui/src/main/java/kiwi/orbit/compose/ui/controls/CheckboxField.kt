@@ -34,10 +34,10 @@ public fun CheckboxField(
     enabled: Boolean = true,
     isError: Boolean = false,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     description: (@Composable () -> Unit)? = null,
     label: @Composable ColumnScope.() -> Unit,
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
     val selectable = if (onCheckedChange != null) {
         Modifier
             .triStateToggleable(

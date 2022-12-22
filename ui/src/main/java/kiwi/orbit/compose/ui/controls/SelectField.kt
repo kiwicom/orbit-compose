@@ -2,6 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.DropdownMenuItem
@@ -34,6 +35,7 @@ public fun <T> SelectField(
     options: List<T>,
     onOptionSelect: (T) -> Unit,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     label: @Composable (() -> Unit)? = null,
     error: @Composable (() -> Unit)? = null,
     info: @Composable (() -> Unit)? = null,
@@ -62,7 +64,8 @@ public fun <T> SelectField(
             ClickableFieldBox(
                 value = value,
                 isError = error != null,
-                onClick = { },
+                onClick = {},
+                interactionSource = interactionSource,
                 placeholder = placeholder,
                 leadingIcon = leadingIcon,
                 trailingIcon = {
