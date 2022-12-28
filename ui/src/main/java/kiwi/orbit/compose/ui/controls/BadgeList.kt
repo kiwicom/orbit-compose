@@ -69,7 +69,7 @@ public fun BadgeListItemNeutral(
     BadgeListItem(
         icon = icon,
         iconBackgroundColor = OrbitTheme.colors.surface.subtle,
-        iconTint = OrbitTheme.colors.content.subtle,
+        iconTint = OrbitTheme.colors.content.minor,
         modifier = modifier,
         content = content,
     )
@@ -169,22 +169,22 @@ private fun BadgeListItem(
 internal fun BadgeListPreview() {
     Preview {
         BadgeList {
-            BadgeListItemInfo(Icons.Check) {
+            BadgeListItemInfo(Icons.BaggageCabin) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeListItemSuccess(Icons.Check) {
+            BadgeListItemSuccess(Icons.BaggageCabin) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeListItemWarning(Icons.Check) {
+            BadgeListItemWarning(Icons.BaggageCabin) {
                 Text("This is a simple BadgeListItem. \nBut two rows are needed.")
             }
         }
 
         BadgeListSmall(contentEmphasis = ContentEmphasis.Minor) {
-            BadgeListItemNeutral(Icons.Check) {
+            BadgeListItemNeutral(Icons.BaggageCabin) {
                 Text("This is a simple BadgeListItem.")
             }
-            BadgeListItemCritical(Icons.Check) {
+            BadgeListItemCritical(Icons.BaggageCabin) {
                 Text("This is a simple BadgeListItem.")
             }
         }
