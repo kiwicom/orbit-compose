@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -95,7 +96,17 @@ internal fun ClickableFieldBox(
         propagateMinConstraints = true,
     ) {
         FieldContent(
-            fieldContent = { Text(value) },
+            fieldContent = {
+                if (singleLine) {
+                    Text(
+                        text = value,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                } else {
+                    Text(value)
+                }
+            },
             placeholder = if (value.isEmpty()) placeholder else null,
             leadingIcon = leadingIcon,
             onLeadingIconClick = null,
@@ -130,6 +141,13 @@ internal fun ClickableFieldPreview() {
             modifier = Modifier.fillMaxWidth(),
             leadingIcon = { Icon(Icons.Attachment, contentDescription = null) },
             trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+        )
+
+        ClickableField(
+            value = "LaGuardia, John F. Kennedy International, Ostrava, Brno, Prague",
+            onClick = {},
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.AirplaneTakeoff, contentDescription = null) },
         )
     }
 }
