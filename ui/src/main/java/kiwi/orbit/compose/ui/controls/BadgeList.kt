@@ -64,10 +64,12 @@ public fun BadgeListSmall(
 public fun BadgeListItemNeutral(
     icon: Painter,
     modifier: Modifier = Modifier,
+    iconContentDescription: String? = null,
     content: @Composable () -> Unit,
 ) {
     BadgeListItem(
         icon = icon,
+        iconContentDescription = iconContentDescription,
         iconBackgroundColor = OrbitTheme.colors.surface.subtle,
         iconTint = OrbitTheme.colors.content.minor,
         modifier = modifier,
@@ -79,10 +81,12 @@ public fun BadgeListItemNeutral(
 public fun BadgeListItemInfo(
     icon: Painter,
     modifier: Modifier = Modifier,
+    iconContentDescription: String? = null,
     content: @Composable () -> Unit,
 ) {
     BadgeListItem(
         icon = icon,
+        iconContentDescription = iconContentDescription,
         iconBackgroundColor = OrbitTheme.colors.info.subtle,
         iconTint = OrbitTheme.colors.info.normal,
         modifier = modifier,
@@ -94,10 +98,12 @@ public fun BadgeListItemInfo(
 public fun BadgeListItemSuccess(
     icon: Painter,
     modifier: Modifier = Modifier,
+    iconContentDescription: String? = null,
     content: @Composable () -> Unit,
 ) {
     BadgeListItem(
         icon = icon,
+        iconContentDescription = iconContentDescription,
         iconBackgroundColor = OrbitTheme.colors.success.subtle,
         iconTint = OrbitTheme.colors.success.normal,
         modifier = modifier,
@@ -109,10 +115,12 @@ public fun BadgeListItemSuccess(
 public fun BadgeListItemWarning(
     icon: Painter,
     modifier: Modifier = Modifier,
+    iconContentDescription: String? = null,
     content: @Composable () -> Unit,
 ) {
     BadgeListItem(
         icon = icon,
+        iconContentDescription = iconContentDescription,
         iconBackgroundColor = OrbitTheme.colors.warning.subtle,
         iconTint = OrbitTheme.colors.warning.normal,
         modifier = modifier,
@@ -124,10 +132,12 @@ public fun BadgeListItemWarning(
 public fun BadgeListItemCritical(
     icon: Painter,
     modifier: Modifier = Modifier,
+    iconContentDescription: String? = null,
     content: @Composable () -> Unit,
 ) {
     BadgeListItem(
         icon = icon,
+        iconContentDescription = iconContentDescription,
         iconBackgroundColor = OrbitTheme.colors.critical.subtle,
         iconTint = OrbitTheme.colors.critical.normal,
         modifier = modifier,
@@ -138,6 +148,7 @@ public fun BadgeListItemCritical(
 @Composable
 private fun BadgeListItem(
     icon: Painter,
+    iconContentDescription: String?,
     iconBackgroundColor: Color,
     iconTint: Color,
     modifier: Modifier = Modifier,
@@ -149,7 +160,7 @@ private fun BadgeListItem(
     ) {
         Icon(
             painter = icon,
-            contentDescription = null,
+            contentDescription = iconContentDescription,
             tint = iconTint,
             modifier = Modifier
                 .background(iconBackgroundColor, shape = CircleShape)
