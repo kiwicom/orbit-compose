@@ -5,7 +5,7 @@
 - component: BadgeList
   android: Released
 - component: BadgePrimitive
-  android: Planned
+  android: Released
 - component: Button
   android: Released
 - component: ButtonLink
