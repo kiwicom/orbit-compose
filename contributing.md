@@ -1,20 +1,42 @@
 # Contributing
 
-If you want to directly fix a bug or implement a feature, you are welcome to do so.
+If you want to fix a bug or implement a feature, you are welcome to do so. But read this first before implementing something.
+
+Possible contributions:
+
+- bugfixes (visual bugs, documentation bugs, API bugs),
+- modifications to existing components,
+- adding more documentation,
+- implementing new components.
+
+Please always open an issue first to be sure your work will be accepted (with the exception to documentation bugs). Especially all feature development (changes/new components/API) has to be discussed first. Thank you for understanding.
 
 Our code review will focus on:
 
-- Consistency with existing components
-- Visual matching with the design proposal
+- Consistency with existing components.
+- Visual matching with the design proposal.
 - Compliance with our API requirements.
 
-Don't forget to add any new components to our showcase app!
+## Creating new component
 
-## Snapshot Testing
+**The component development has to be approved, see the previous section.**
 
-Snapshot tests are simple JVM  `test`s and run directly on JVM. We
+- discuss the API of the composable first;
+- add the component - composables with KDoc;
+- add screenshots tests covering basic rendering of the component; Locally recorded screenshots may produce changes to all PNG files, push only the relevant ones.
+- add catalog demonstration;
+- add entry into `component-status.yaml`;
+- add documentation to docs (component.mdx) including UI testing documentation;
+
+## Screenshot Testing
+
+Screenshot tests are simple JVM  `test`s and run directly on JVM. We
 use [Paparazzi](https://github.com/cashapp/paparazzi) to validate changes to our components.
 
 To generate new screenshots, run the **gradle task**:
 
 `./gradlew :ui:recordPaparazziDebug`
+
+To verify the implementation matches the recorded screenshots, run
+
+`./gradlew :ui:verifyPaparazziDebug`
