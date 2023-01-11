@@ -15,6 +15,15 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
+/**
+ * Primary button.
+ *
+ * ```
+ * ButtonPrimary(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonPrimary(
     onClick: () -> Unit,
@@ -31,6 +40,15 @@ public fun ButtonPrimary(
     )
 }
 
+/**
+ * Primary button with subtle color variant.
+ *
+ * ```
+ * ButtonPrimarySubtle(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonPrimarySubtle(
     onClick: () -> Unit,
@@ -47,6 +65,15 @@ public fun ButtonPrimarySubtle(
     )
 }
 
+/**
+ * Secondary button.
+ *
+ * ```
+ * ButtonSecondary(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonSecondary(
     onClick: () -> Unit,
@@ -63,6 +90,15 @@ public fun ButtonSecondary(
     )
 }
 
+/**
+ * Button for critical action.
+ *
+ * ```
+ * ButtonCritical(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonCritical(
     onClick: () -> Unit,
@@ -79,6 +115,15 @@ public fun ButtonCritical(
     )
 }
 
+/**
+ * Button for critical action with subtle color variant.
+ *
+ * ```
+ * ButtonCriticalSubtle(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonCriticalSubtle(
     onClick: () -> Unit,
@@ -95,6 +140,15 @@ public fun ButtonCriticalSubtle(
     )
 }
 
+/**
+ * Colored button for basic product level visualization.
+ *
+ * ```
+ * ButtonBundleBasic(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonBundleBasic(
     onClick: () -> Unit,
@@ -113,6 +167,15 @@ public fun ButtonBundleBasic(
     )
 }
 
+/**
+ * Colored button for medium product level visualization.
+ *
+ * ```
+ * ButtonBundleMedium(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonBundleMedium(
     onClick: () -> Unit,
@@ -131,6 +194,15 @@ public fun ButtonBundleMedium(
     )
 }
 
+/**
+ * Colored button for top product level visualization.
+ *
+ * ```
+ * ButtonBundleTop(onClick = {}) {
+ *     Text("Click me")
+ * }
+ * ```
+ */
 @Composable
 public fun ButtonBundleTop(
     onClick: () -> Unit,
