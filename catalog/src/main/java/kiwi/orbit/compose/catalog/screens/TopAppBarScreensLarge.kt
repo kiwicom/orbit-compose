@@ -198,9 +198,10 @@ internal fun TopAppBarLargePullRefreshScreen(
             Box {
                 CustomContentPlaceholder(it, "Custom content $i")
                 PullRefreshIndicator(
-                    refreshing,
-                    pullRefreshState,
-                    Modifier
+                    refreshing = refreshing,
+                    state = pullRefreshState,
+                    contentColor = OrbitTheme.colors.primary.normal,
+                    modifier = Modifier
                         .padding(it)
                         .align(Alignment.TopCenter),
                 )

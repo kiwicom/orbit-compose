@@ -2,8 +2,8 @@
 
 package kiwi.orbit.compose.ui.foundation
 
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.ui.text.TextStyle

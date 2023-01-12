@@ -14,8 +14,8 @@ public data class Shapes(
     val large: CornerBasedShape = RoundedCornerShape(12.dp),
 ) {
     @Suppress("Dependency")
-    internal fun toMaterialShapes(): androidx.compose.material.Shapes =
-        androidx.compose.material.Shapes(
+    internal fun toMaterial3Shapes(): androidx.compose.material3.Shapes =
+        androidx.compose.material3.Shapes(
             small = small,
             medium = normal,
             large = large,

@@ -8,10 +8,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.ElevationOverlay
-import androidx.compose.material.LocalAbsoluteElevation
-import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -21,15 +19,18 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.contentColorFor
+import kotlin.math.ln
 
 @Composable
 public fun Surface(
@@ -41,11 +42,11 @@ public fun Surface(
     elevation: Dp = OrbitTheme.elevations.None,
     content: @Composable () -> Unit,
 ) {
-    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalAbsoluteElevation provides absoluteElevation,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
     ) {
         Box(
             modifier = modifier
@@ -53,8 +54,7 @@ public fun Surface(
                     shape = shape,
                     backgroundColor = surfaceColorAtElevation(
                         color = color,
-                        elevationOverlay = LocalElevationOverlay.current,
-                        absoluteElevation = absoluteElevation,
+                        elevation = absoluteElevation,
                     ),
                     border = border,
                     elevation = elevation,
@@ -81,11 +81,11 @@ public fun Surface(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalAbsoluteElevation provides absoluteElevation,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
     ) {
         Box(
             modifier
@@ -93,8 +93,7 @@ public fun Surface(
                     shape = shape,
                     backgroundColor = surfaceColorAtElevation(
                         color = color,
-                        elevationOverlay = LocalElevationOverlay.current,
-                        absoluteElevation = absoluteElevation,
+                        elevation = absoluteElevation,
                     ),
                     border = border,
                     elevation = elevation,
@@ -127,11 +126,11 @@ public fun Surface(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalAbsoluteElevation provides absoluteElevation,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
     ) {
         Box(
             modifier
@@ -139,8 +138,7 @@ public fun Surface(
                     shape = shape,
                     backgroundColor = surfaceColorAtElevation(
                         color = color,
-                        elevationOverlay = LocalElevationOverlay.current,
-                        absoluteElevation = absoluteElevation,
+                        elevation = absoluteElevation,
                     ),
                     border = border,
                     elevation = elevation,
@@ -174,11 +172,11 @@ public fun Surface(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    val absoluteElevation = LocalAbsoluteElevation.current + elevation
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
         LocalContentEmphasis provides ContentEmphasis.Normal,
-        LocalAbsoluteElevation provides absoluteElevation,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
     ) {
         Box(
             modifier
@@ -186,8 +184,7 @@ public fun Surface(
                     shape = shape,
                     backgroundColor = surfaceColorAtElevation(
                         color = color,
-                        elevationOverlay = LocalElevationOverlay.current,
-                        absoluteElevation = absoluteElevation,
+                        elevation = absoluteElevation,
                     ),
                     border = border,
                     elevation = elevation,
@@ -221,11 +218,12 @@ private fun Modifier.surface(
 @Composable
 private fun surfaceColorAtElevation(
     color: Color,
-    elevationOverlay: ElevationOverlay?,
-    absoluteElevation: Dp,
+    elevation: Dp,
 ): Color {
-    return if (color == OrbitTheme.colors.surface.main && elevationOverlay != null) {
-        elevationOverlay.apply(color, absoluteElevation)
+    return if (color == OrbitTheme.colors.surface.main && !OrbitTheme.colors.isLight) {
+        if (elevation == 0.dp) return color
+        val alpha = ((4.5f * ln(elevation.value + 1)) + 2f) / 100f
+        return contentColorFor(color).copy(alpha = alpha).compositeOver(color)
     } else {
         color
     }

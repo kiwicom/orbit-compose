@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -82,7 +82,7 @@ internal fun TopAppBarNormalWithTabsScreen(
                     var state by rememberSaveable { mutableStateOf(0) }
                     TabRow(
                         selectedTabIndex = state,
-                        backgroundColor = OrbitTheme.colors.surface.main,
+                        containerColor = OrbitTheme.colors.surface.main,
                         indicator = { tabPositions ->
                             TabRowDefaults.Indicator(
                                 modifier = Modifier.tabIndicatorOffset(tabPositions[state]),

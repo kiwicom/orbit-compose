@@ -13,7 +13,6 @@ import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UQualifiedReferenceExpression
 
-@Suppress("UnstableApiUsage")
 class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanner {
     override fun getApplicableUastTypes(): List<Class<out UElement>> {
         return listOf(
@@ -26,11 +25,11 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         return object : UElementHandler() {
             override fun visitCallExpression(node: UCallExpression) {
                 val name = node.methodName ?: return
-                val (originalName, preferredName) = METHOD_NAMES[name] ?: return
+                val (originalNames, preferredName) = METHOD_NAMES[name] ?: return
                 val fqn = node.resolve()?.containingClass?.qualifiedName ?: return
                 val packageName = fqn.substring(0, fqn.lastIndexOf("."))
-                if ("$packageName.$name" != originalName) return
-                reportIssue(context, node, originalName, preferredName)
+                if ("$packageName.$name" !in originalNames) return
+                reportIssue(context, node, "$packageName.$name", preferredName)
             }
 
             override fun visitQualifiedReferenceExpression(node: UQualifiedReferenceExpression) {
@@ -58,15 +57,40 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         )
 
         private val METHOD_NAMES = mapOf(
-            "Card" to ("androidx.compose.material.Card" to "kiwi.orbit.compose.ui.controls.SurfaceCard"),
-            "IconButton" to ("androidx.compose.material.IconButton" to "kiwi.orbit.compose.ui.controls.IconButton"),
-            "Icon" to ("androidx.compose.material.Icon" to "kiwi.orbit.compose.ui.controls.Icon"),
-            "LinearProgressIndicator" to ("androidx.compose.material.LinearProgressIndicator" to "kiwi.orbit.compose.ui.controls.LinearProgressIndicator"),
-            "Scaffold" to ("androidx.compose.material.Scaffold" to "kiwi.orbit.compose.ui.controls.Scaffold"),
-            "Surface" to ("androidx.compose.material.Surface" to "kiwi.orbit.compose.ui.controls.Surface"),
-            "Text" to ("androidx.compose.material.Text" to "kiwi.orbit.compose.ui.controls.Text"),
-            "contentColorFor" to ("androidx.compose.material.contentColorFor" to "kiwi.orbit.compose.ui.foundation.contentColorFor"),
+            "Card" to (setOf(
+                "androidx.compose.material.Card",
+                "androidx.compose.material3.Card",
+            ) to "kiwi.orbit.compose.ui.controls.SurfaceCard"),
+            "IconButton" to (setOf(
+                "androidx.compose.material.IconButton",
+                "androidx.compose.material3.IconButton",
+            ) to "kiwi.orbit.compose.ui.controls.IconButton"),
+            "Icon" to (setOf(
+                "androidx.compose.material.Icon",
+                "androidx.compose.material3.Icon",
+            ) to "kiwi.orbit.compose.ui.controls.Icon"),
+            "LinearProgressIndicator" to (setOf(
+                "androidx.compose.material.LinearProgressIndicator",
+                "androidx.compose.material3.LinearProgressIndicator",
+            ) to "kiwi.orbit.compose.ui.controls.LinearProgressIndicator"),
+            "Scaffold" to (setOf(
+                "androidx.compose.material.Scaffold",
+                "androidx.compose.material3.Scaffold",
+            ) to "kiwi.orbit.compose.ui.controls.Scaffold"),
+            "Surface" to (setOf(
+                "androidx.compose.material.Surface",
+                "androidx.compose.material3.Surface",
+            ) to "kiwi.orbit.compose.ui.controls.Surface"),
+            "Text" to (setOf(
+                "androidx.compose.material.Text",
+                "androidx.compose.material3.Text",
+            ) to "kiwi.orbit.compose.ui.controls.Text"),
+            "contentColorFor" to (setOf(
+                "androidx.compose.material.contentColorFor",
+                "androidx.compose.material3.contentColorFor",
+            ) to "kiwi.orbit.compose.ui.foundation.contentColorFor"),
         )
+
         private val RECEIVER_NAMES = mapOf(
             "androidx.compose.material.icons.Icons" to "kiwi.orbit.compose.icons.Icons",
         )

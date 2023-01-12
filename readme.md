@@ -10,7 +10,8 @@
 [![CI Build](https://img.shields.io/github/actions/workflow/status/kiwicom/orbit-compose/build.yml?branch=main)](https://github.com/kiwicom/orbit-compose/actions/workflows/build.yml)
 [![GitHub release](https://img.shields.io/github/v/release/kiwicom/orbit-compose)](https://github.com/kiwicom/orbit-compose/releases)
 [![Maven release](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fkiwi%2Forbit%2Fcompose%2Fui%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:kiwi.orbit.compose)
-[![Compose version](https://img.shields.io/badge/Compose-1.3-%232ec781)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
+[![Compose 1.3](https://img.shields.io/badge/Compose-1.3-%232ec781)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
+[![Material 3](https://img.shields.io/badge/Material-3-%230c57d0)](https://developer.android.com/jetpack/androidx/releases/compose-material3)
 
 </div>
 
@@ -22,6 +23,9 @@ the speed and efficiency of how we design and build products.
 
 This library allows developers to implement Orbit in a project
 using [Jetpack Compose](https://developer.android.com/jetpack/compose) for Android.
+
+Orbit Compose builds upon Material 3 library. If you need an integration with Material 2, see
+[Theming chapter](https://github.com/kiwicom/orbit-compose/blob/main/docs/02-foundation/04-color/theming.mdx).
 
 ## Setup
 

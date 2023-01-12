@@ -1,10 +1,10 @@
 package kiwi.orbit.compose.catalog.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import kiwi.orbit.compose.ui.controls.Text
 
 @Composable
 internal fun DialogsMaterialDialog(navController: NavController) {
@@ -24,8 +24,13 @@ private fun DialogsMaterialDialog(
         title = { Text("Title") },
         text = { Text("Some message.") },
         confirmButton = {
-            androidx.compose.material.TextButton(onClick = onClose) {
-                Text("Ok")
+            androidx.compose.material3.TextButton(onClick = onClose) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            androidx.compose.material3.TextButton(onClick = onClose) {
+                Text("Cancel")
             }
         },
     )

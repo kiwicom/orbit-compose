@@ -58,7 +58,7 @@ private fun DialogsScreenInner(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ButtonSecondary(onClick = onShowMaterialDialog) { Text("Show Material Dialog") }
+        ButtonSecondary(onClick = onShowMaterialDialog) { Text("Show Material 3 Dialog") }
         ButtonSecondary(onClick = onShowOrbitDialog) { Text("Show Orbit Dialog") }
     }
 }

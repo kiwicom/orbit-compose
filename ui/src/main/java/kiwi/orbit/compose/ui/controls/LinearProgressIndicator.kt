@@ -1,6 +1,8 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.annotation.FloatRange
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -11,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -44,7 +45,13 @@ public fun LinearProgressIndicator(
 ) {
     val animatedProgress by animateFloatAsState(
         targetValue = progress.coerceIn(0f, 1f),
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
+        animationSpec = SpringSpec(
+            dampingRatio = Spring.DampingRatioNoBouncy,
+            stiffness = Spring.StiffnessVeryLow,
+            // The default threshold is 0.01, or 1% of the overall progress range, which is quite
+            // large and noticeable. We purposefully choose a smaller threshold.
+            visibilityThreshold = 1 / 1000f,
+        ),
     )
     Canvas(
         modifier = modifier
