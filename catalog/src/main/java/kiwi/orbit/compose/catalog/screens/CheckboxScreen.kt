@@ -14,7 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,17 +51,17 @@ internal fun CheckboxScreen(onNavigateUp: () -> Unit) {
 private fun CheckboxScreenInner() {
     Column {
         Row(Modifier.padding(16.dp)) {
-            var checkbox1 by remember { mutableStateOf(true) }
+            var checkbox1 by rememberSaveable { mutableStateOf(true) }
             Checkbox(checked = checkbox1, onCheckedChange = { checkbox1 = !checkbox1 })
 
             Spacer(Modifier.size(32.dp))
 
-            var checkbox2 by remember { mutableStateOf(false) }
+            var checkbox2 by rememberSaveable { mutableStateOf(false) }
             Checkbox(checked = checkbox2, onCheckedChange = { checkbox2 = !checkbox2 })
 
             Spacer(Modifier.size(32.dp))
 
-            var checkbox3 by remember { mutableStateOf(false) }
+            var checkbox3 by rememberSaveable { mutableStateOf(false) }
             Checkbox(checked = checkbox3, isError = true, onCheckedChange = { checkbox3 = !checkbox3 })
 
             Spacer(Modifier.size(32.dp))
@@ -79,7 +79,7 @@ private fun CheckboxScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        var checkbox1 by remember { mutableStateOf(true) }
+        var checkbox1 by rememberSaveable { mutableStateOf(true) }
         CheckboxField(
             checked = checkbox1,
             onCheckedChange = { checkbox1 = !checkbox1 },
@@ -87,7 +87,7 @@ private fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        var checkbox2 by remember { mutableStateOf(false) }
+        var checkbox2 by rememberSaveable { mutableStateOf(false) }
         CheckboxField(
             checked = checkbox2,
             onCheckedChange = { checkbox2 = !checkbox2 },
@@ -95,7 +95,7 @@ private fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        var checkbox3 by remember { mutableStateOf(false) }
+        var checkbox3 by rememberSaveable { mutableStateOf(false) }
         CheckboxField(
             checked = checkbox3,
             onCheckedChange = { checkbox3 = !checkbox3 },
@@ -106,7 +106,7 @@ private fun CheckboxScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        var checkbox4 by remember { mutableStateOf(true) }
+        var checkbox4 by rememberSaveable { mutableStateOf(true) }
         CheckboxField(
             checked = checkbox4,
             onCheckedChange = { checkbox4 = !checkbox4 },
@@ -115,7 +115,7 @@ private fun CheckboxScreenInner() {
         ) {
             Text("Star Trek")
         }
-        var checkbox5 by remember { mutableStateOf(false) }
+        var checkbox5 by rememberSaveable { mutableStateOf(false) }
         CheckboxField(
             checked = checkbox5,
             onCheckedChange = { checkbox5 = !checkbox5 },
@@ -125,7 +125,7 @@ private fun CheckboxScreenInner() {
         ) {
             Text("Star Wars")
         }
-        var checkbox6 by remember { mutableStateOf(false) }
+        var checkbox6 by rememberSaveable { mutableStateOf(false) }
         CheckboxField(
             checked = checkbox6,
             onCheckedChange = { checkbox6 = !checkbox6 },

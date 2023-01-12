@@ -14,7 +14,7 @@ import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,7 +79,7 @@ internal fun TopAppBarNormalWithTabsScreen(
                 title = { Text("With Tabs") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    var state by remember { mutableStateOf(0) }
+                    var state by rememberSaveable { mutableStateOf(0) }
                     TabRow(
                         selectedTabIndex = state,
                         backgroundColor = OrbitTheme.colors.surface.main,
@@ -126,7 +126,7 @@ internal fun TopAppBarNormalWithFiltersScreen(
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 8.dp),
                     ) {
-                        var selected by remember { mutableStateOf(true) }
+                        var selected by rememberSaveable { mutableStateOf(true) }
                         Tag(selected = selected, onSelect = { selected = !selected }) {
                             Text("Custom Filter")
                         }

@@ -11,7 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,7 +49,7 @@ internal fun TimelineScreen(onNavigateUp: () -> Unit) {
 @Composable
 private fun TimelineScreenInner() {
     Column {
-        var activeItem by remember { mutableStateOf(1) }
+        var activeItem by rememberSaveable { mutableStateOf(1) }
         Timeline(
             Modifier
                 .clickable { activeItem = (activeItem + 1).mod(6) }

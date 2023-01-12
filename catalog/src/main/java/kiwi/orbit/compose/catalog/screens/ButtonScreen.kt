@@ -26,8 +26,8 @@ import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -152,7 +152,7 @@ private fun ButtonScreenInner() {
         }
 
         Text("Button Toggling", Modifier.padding(top = 16.dp))
-        var targetState by remember { mutableStateOf(true) }
+        var targetState by rememberSaveable { mutableStateOf(true) }
         ButtonToggleContainer(targetState) { state ->
             if (state) {
                 ButtonPrimarySubtle(onClick = { targetState = !targetState }, maxWidth) {

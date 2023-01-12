@@ -76,8 +76,8 @@ private fun TextFieldScreenInner() {
         val bioFocusRequester = remember { FocusRequester() }
         val nationalityFocusRequester = remember { FocusRequester() }
 
-        var hasError by remember { mutableStateOf(false) }
-        var email by remember { mutableStateOf("") }
+        var hasError by rememberSaveable { mutableStateOf(false) }
+        var email by rememberSaveable { mutableStateOf("") }
         TextField(
             value = email,
             onValueChange = {
@@ -106,7 +106,7 @@ private fun TextFieldScreenInner() {
 
         Spacer(Modifier.height(16.dp))
 
-        var password by remember { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
         PasswordTextField(
             value = password,
             onValueChange = { password = it },
@@ -147,8 +147,8 @@ private fun TextFieldScreenInner() {
 
         Spacer(Modifier.height(16.dp))
 
-        var isNationalityError by remember { mutableStateOf(false) }
-        var nationality by remember { mutableStateOf("") }
+        var isNationalityError by rememberSaveable { mutableStateOf(false) }
+        var nationality by rememberSaveable { mutableStateOf("") }
         TextField(
             value = nationality,
             onValueChange = {
@@ -200,20 +200,20 @@ private fun TextFieldScreenInner() {
         Spacer(Modifier.height(16.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            var v1 by remember { mutableStateOf("") }
+            var v1 by rememberSaveable { mutableStateOf("") }
             TextField(v1, { v1 = it }, label = { Text("A") })
 
-            var v2 by remember { mutableStateOf("") }
+            var v2 by rememberSaveable { mutableStateOf("") }
             TextField(v2, { v2 = it }, label = { Text("B") })
         }
 
         Spacer(Modifier.height(8.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            var v1 by remember { mutableStateOf("") }
+            var v1 by rememberSaveable { mutableStateOf("") }
             TextField(v1, { v1 = it }, label = { Text("A") }, modifier = Modifier.weight(1f))
 
-            var v2 by remember { mutableStateOf("") }
+            var v2 by rememberSaveable { mutableStateOf("") }
             TextField(v2, { v2 = it }, label = { Text("B") }, modifier = Modifier.weight(1f))
         }
 
@@ -223,10 +223,10 @@ private fun TextFieldScreenInner() {
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.width(IntrinsicSize.Max),
         ) {
-            var v1 by remember { mutableStateOf("") }
+            var v1 by rememberSaveable { mutableStateOf("") }
             TextField(v1, { v1 = it }, label = { Text("Long label") }, modifier = Modifier.fillMaxWidth())
 
-            var v2 by remember { mutableStateOf("") }
+            var v2 by rememberSaveable { mutableStateOf("") }
             TextField(v2, { v2 = it }, label = { Text("Label") }, modifier = Modifier.fillMaxWidth())
         }
     }

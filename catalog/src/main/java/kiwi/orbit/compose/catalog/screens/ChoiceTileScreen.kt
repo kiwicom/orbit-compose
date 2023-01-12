@@ -20,7 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,7 +70,7 @@ private fun ChoiceTileScreenInner() {
     ) {
         BoxWithConstraints {
             val width = maxWidth * 0.8f
-            var mainSelection by remember { mutableStateOf(-1) }
+            var mainSelection by rememberSaveable { mutableStateOf(-1) }
 
             // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
             // https://issuetracker.google.com/issues/215652703
@@ -108,7 +108,7 @@ private fun ChoiceTileScreenInner() {
             }
         }
 
-        var count by remember { mutableStateOf(0) }
+        var count by rememberSaveable { mutableStateOf(0) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = {
@@ -150,7 +150,7 @@ private fun ChoiceTileScreenInner() {
             content = { CustomPlaceholder() },
         )
 
-        var selectedSmall by remember { mutableStateOf(false) }
+        var selectedSmall by rememberSaveable { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = {
@@ -167,7 +167,7 @@ private fun ChoiceTileScreenInner() {
             largeHeading = false,
         )
 
-        var selectedA by remember { mutableStateOf(false) }
+        var selectedA by rememberSaveable { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = { Text("ChoiceTile") },
@@ -176,7 +176,7 @@ private fun ChoiceTileScreenInner() {
             onSelect = { selectedA = !selectedA },
         )
 
-        var selectedB by remember { mutableStateOf(false) }
+        var selectedB by rememberSaveable { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             content = { CustomPlaceholder() },
@@ -184,7 +184,7 @@ private fun ChoiceTileScreenInner() {
             onSelect = { selectedB = !selectedB },
         )
 
-        var selectedC by remember { mutableStateOf(false) }
+        var selectedC by rememberSaveable { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = { Text("Simple title") },
@@ -194,7 +194,7 @@ private fun ChoiceTileScreenInner() {
             content = { },
         )
 
-        var selectedD by remember { mutableStateOf(false) }
+        var selectedD by rememberSaveable { mutableStateOf(false) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = { Text("ChoiceTile with error") },
@@ -207,7 +207,7 @@ private fun ChoiceTileScreenInner() {
 
         // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
         // https://issuetracker.google.com/issues/215652703
-        var selectedE by remember { mutableStateOf(-1) }
+        var selectedE by rememberSaveable { mutableStateOf(-1) }
         Row(
             Modifier
                 .height(IntrinsicSize.Max)

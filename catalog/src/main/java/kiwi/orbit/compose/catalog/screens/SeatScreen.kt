@@ -12,7 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -65,7 +65,7 @@ private fun SeatScreenInner() {
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Row {
-                var seatSelected by remember { mutableStateOf(false) }
+                var seatSelected by rememberSaveable { mutableStateOf(false) }
                 SeatExtraLegroom(
                     selected = seatSelected,
                     label = { Text("A") },
@@ -73,7 +73,7 @@ private fun SeatScreenInner() {
                     onClick = { seatSelected = !seatSelected },
                 )
 
-                var seatSelected2 by remember { mutableStateOf(false) }
+                var seatSelected2 by rememberSaveable { mutableStateOf(false) }
                 SeatStandard(
                     selected = seatSelected2,
                     label = { Text("B") },
@@ -87,7 +87,7 @@ private fun SeatScreenInner() {
             }
 
             Row {
-                var seatSelected3 by remember { mutableStateOf(true) }
+                var seatSelected3 by rememberSaveable { mutableStateOf(true) }
                 SeatExtraLegroom(
                     selected = seatSelected3,
                     label = { Text("MO") },
@@ -95,7 +95,7 @@ private fun SeatScreenInner() {
                     onClick = { seatSelected3 = !seatSelected3 },
                 )
 
-                var seatSelected4 by remember { mutableStateOf(true) }
+                var seatSelected4 by rememberSaveable { mutableStateOf(true) }
                 SeatStandard(
                     selected = seatSelected4,
                     label = { Text("MO") },
