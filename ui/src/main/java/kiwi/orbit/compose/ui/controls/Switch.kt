@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.core.AnimationSpec
@@ -25,16 +23,10 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.SwipeableDefaults
-import androidx.compose.material.SwipeableState
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -56,9 +48,11 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.controls.internal.SwipeableV2State
+import kiwi.orbit.compose.ui.controls.internal.swipeAnchors
+import kiwi.orbit.compose.ui.controls.internal.swipeableV2
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 public fun Switch(
     checked: Boolean,
@@ -67,10 +61,7 @@ public fun Switch(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val minBound = 0f
-    val maxBound = with(LocalDensity.current) { ThumbPathLength.toPx() }
-    val swipeableState = rememberSwipeableStateFor(checked, onCheckedChange ?: {}, AnimationSpec)
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val density = LocalDensity.current
     val toggleableModifier =
         if (onCheckedChange != null) {
             Modifier.toggleable(
@@ -84,28 +75,39 @@ public fun Switch(
         } else {
             Modifier
         }
-
+    val swipeableState = rememberSwipeableStateFor(
+        value = checked,
+        onValueChange = onCheckedChange ?: {},
+        animationSpec = AnimationSpec,
+    )
     Box(
         modifier
-            .then(toggleableModifier)
-            .swipeable(
-                state = swipeableState,
-                anchors = mapOf(minBound to false, maxBound to true),
-                thresholds = { _, _ -> FractionalThreshold(0.5f) },
-                orientation = Orientation.Horizontal,
-                enabled = enabled && onCheckedChange != null,
-                reverseDirection = isRtl,
-                interactionSource = interactionSource,
-                resistance = null,
-            )
             .wrapContentSize(Alignment.Center)
             .padding(SwitchPadding)
-            .requiredSize(SwitchWidth, SwitchHeight),
+            .requiredSize(SwitchWidth, SwitchHeight)
+            .then(toggleableModifier)
+            .swipeableV2(
+                state = swipeableState,
+                orientation = Orientation.Horizontal,
+                enabled = enabled && onCheckedChange != null,
+                reverseDirection = LocalLayoutDirection.current == LayoutDirection.Rtl,
+                interactionSource = interactionSource,
+            )
+            .swipeAnchors(
+                state = swipeableState,
+                possibleValues = setOf(false, true),
+                calculateAnchor = { value, layoutSize ->
+                    when (value) {
+                        false -> 0f
+                        true -> layoutSize.width - with(density) { ThumbDiameter.toPx() }
+                    }
+                },
+            ),
     ) {
         SwitchImpl(
             checked = checked,
             enabled = enabled,
-            thumbValue = swipeableState.offset,
+            state = swipeableState,
             interactionSource = interactionSource,
         )
     }
@@ -115,7 +117,7 @@ public fun Switch(
 private fun BoxScope.SwitchImpl(
     checked: Boolean,
     enabled: Boolean,
-    thumbValue: State<Float>,
+    state: SwipeableV2State<Boolean>,
     interactionSource: InteractionSource,
 ) {
     val interactions = remember { mutableStateListOf<Interaction>() }
@@ -160,7 +162,14 @@ private fun BoxScope.SwitchImpl(
     Spacer(
         Modifier
             .align(Alignment.CenterStart)
-            .offset { IntOffset(thumbValue.value.roundToInt(), 0) }
+            .offset {
+                IntOffset(
+                    x = state
+                        .requireOffset()
+                        .roundToInt(),
+                    y = 0,
+                )
+            }
             .indication(
                 interactionSource = interactionSource,
                 indication = rememberRipple(bounded = false, radius = ThumbRippleRadius),
@@ -193,19 +202,14 @@ private fun DrawScope.drawTrack(trackColor: Color, trackWidth: Float, strokeWidt
 }
 
 @Suppress("SameParameterValue")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun <T : Any> rememberSwipeableStateFor(
     value: T,
     onValueChange: (T) -> Unit,
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-): SwipeableState<T> {
+    animationSpec: AnimationSpec<Float>,
+): SwipeableV2State<T> {
     val swipeableState = remember {
-        SwipeableState(
-            initialValue = value,
-            animationSpec = animationSpec,
-            confirmStateChange = { true },
-        )
+        SwipeableV2State(initialValue = value, animationSpec)
     }
     val forceAnimationCheck = remember { mutableStateOf(false) }
     LaunchedEffect(value, forceAnimationCheck.value) {
@@ -232,7 +236,6 @@ private val TrackStrokeWidth = SwitchHeight - SwitchPadding * 2
 private val ThumbDiameter = SwitchHeight
 private val ThumbStrokeWidth = 0.5.dp
 private val ThumbInnerDiameter = 10.dp
-private val ThumbPathLength = SwitchWidth - ThumbDiameter
 private val ThumbRippleRadius = 24.dp
 
 private val AnimationSpec = TweenSpec<Float>(durationMillis = 100)

@@ -1,5 +1,7 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
+import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
+
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
@@ -53,6 +55,10 @@ android {
 kotlinter {
     reporters = arrayOf("json")
     experimentalRules = true
+}
+
+tasks.withType<ConfigurableKtLintTask> {
+    exclude { it.file.absoluteFile.endsWith("SwipeableV2.kt") }
 }
 
 dependencies {
