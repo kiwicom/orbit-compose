@@ -52,6 +52,7 @@ import kiwi.orbit.compose.ui.controls.SelectFieldPreview
 import kiwi.orbit.compose.ui.controls.StepperPreview
 import kiwi.orbit.compose.ui.controls.SurfaceCardPreview
 import kiwi.orbit.compose.ui.controls.SwitchPreview
+import kiwi.orbit.compose.ui.controls.TabsPreview
 import kiwi.orbit.compose.ui.controls.TagPreview
 import kiwi.orbit.compose.ui.controls.TextFieldPreview
 import kiwi.orbit.compose.ui.controls.TimelinePreview
@@ -301,6 +302,12 @@ internal class ScreenshotTest {
     @Test
     fun switch() {
         snapshot { SwitchPreview() }
+    }
+
+    @Ignore("Weirdly squashed, probably issue with subcompose layout")
+    @Test
+    fun tabs() {
+        snapshot { TabsPreview() }
     }
 
     @Test

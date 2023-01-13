@@ -89,6 +89,9 @@ sealed interface Destinations : Destination {
     object Switch : Destinations
 
     @Serializable
+    object Tabs : Destinations
+
+    @Serializable
     object Tag : Destinations
 
     @Serializable

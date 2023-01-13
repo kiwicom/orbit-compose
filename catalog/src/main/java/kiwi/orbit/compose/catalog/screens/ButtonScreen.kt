@@ -6,23 +6,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +45,8 @@ import kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary
 import kiwi.orbit.compose.ui.controls.ButtonToggleContainer
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SurfaceCard
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
@@ -69,20 +62,7 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
                 title = { Text("Buttons") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    TabRow(
-                        modifier = Modifier.windowInsetsPadding(
-                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal),
-                        ),
-                        selectedTabIndex = state.currentPage,
-                        containerColor = OrbitTheme.colors.surface.main,
-                        indicator = { tabPositions ->
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                                color = OrbitTheme.colors.primary.normal,
-                            )
-                        },
-                        divider = {},
-                    ) {
+                    TabRow(selectedTabIndex = state.currentPage) {
                         Tab(
                             selected = state.currentPage == 0,
                             onClick = { scope.launch { state.animateScrollToPage(0) } },

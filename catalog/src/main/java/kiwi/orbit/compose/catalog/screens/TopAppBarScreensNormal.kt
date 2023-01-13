@@ -7,10 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +22,8 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Tag
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
@@ -79,26 +77,16 @@ internal fun TopAppBarNormalWithTabsScreen(
                 title = { Text("With Tabs") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    var state by rememberSaveable { mutableStateOf(0) }
-                    TabRow(
-                        selectedTabIndex = state,
-                        containerColor = OrbitTheme.colors.surface.main,
-                        indicator = { tabPositions ->
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[state]),
-                                color = OrbitTheme.colors.primary.normal,
-                            )
-                        },
-                        divider = {},
-                    ) {
+                    var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
+                    TabRow(selectedTabIndex = selectedTabIndex) {
                         Tab(
-                            selected = state == 0,
-                            onClick = { state = 0 },
+                            selected = selectedTabIndex == 0,
+                            onClick = { selectedTabIndex = 0 },
                             text = { Text("Normal") },
                         )
                         Tab(
-                            selected = state == 1,
-                            onClick = { state = 1 },
+                            selected = selectedTabIndex == 1,
+                            onClick = { selectedTabIndex = 1 },
                             text = { Text("Inline") },
                         )
                     }

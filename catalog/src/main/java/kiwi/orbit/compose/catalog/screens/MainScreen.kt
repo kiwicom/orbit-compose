@@ -28,6 +28,7 @@ import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SignalWifiOff
 import androidx.compose.material.icons.rounded.SmartButton
+import androidx.compose.material.icons.rounded.Tab
 import androidx.compose.material.icons.rounded.ToggleOn
 import androidx.compose.material.icons.rounded.WebAsset
 import androidx.compose.runtime.Composable
@@ -95,6 +96,7 @@ internal fun MainScreen(
         MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper },
         MenuItem("SurfaceCard", MIcons.Article) { Destinations.SurfaceCard },
         MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },
+        MenuItem("Tabs", MIcons.Tab) { Destinations.Tabs },
         MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
         MenuItem("Timeline", Icons.RouteTwoStops) { Destinations.Timeline },
