@@ -1,6 +1,5 @@
 @file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
 
-import com.android.build.api.dsl.ManagedVirtualDevice
 import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
 
 plugins {
@@ -19,7 +18,6 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
@@ -54,15 +52,8 @@ android {
     }
 
     testOptions {
-        managedDevices {
-            devices {
-                maybeCreate<ManagedVirtualDevice>("pixel4api30").apply {
-                    device = "Pixel 4"
-                    apiLevel = 30
-                    // ATDs currently support only API level 30.
-                    systemImageSource = "aosp-atd"
-                }
-            }
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 }
@@ -94,8 +85,10 @@ dependencies {
     debugImplementation(libs.androidx.customView)
     debugImplementation(libs.androidx.customViewPoolingContainer)
 
-    androidTestImplementation(libs.compose.uiTest)
-    androidTestImplementation(libs.compose.uiTestManifest)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.compose.uiTest)
+    testImplementation(libs.compose.uiTestManifest)
+    testImplementation(libs.hamcrest) // ui test fails if not added
 
-    lintPublish(project(":lint"))
+    lintPublish(projects.lint)
 }
