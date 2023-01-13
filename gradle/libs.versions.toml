@@ -60,9 +60,11 @@ compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version = "1.3
 compose-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version = "1.3.3" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util", version = "1.3.3" }
 compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding", version = "1.3.3" }
+hamcrest = { module = "org.hamcrest:hamcrest-all", version = "1.3" }
 javaJq = { module = "net.thisptr:jackson-jq", version="1.0.0-preview.20220705" }
 junit = { module = "junit:junit", version = "4.13.2" }
 kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.4.0" }
+robolectric = { module = "org.robolectric:robolectric", version = "4.9.2" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 [bundles]
