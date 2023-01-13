@@ -7,14 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +22,8 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Tag
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
@@ -79,26 +77,16 @@ internal fun TopAppBarNormalWithTabsScreen(
                 title = { Text("With Tabs") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    var state by remember { mutableStateOf(0) }
-                    TabRow(
-                        selectedTabIndex = state,
-                        backgroundColor = OrbitTheme.colors.surface.main,
-                        indicator = { tabPositions ->
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[state]),
-                                color = OrbitTheme.colors.primary.normal,
-                            )
-                        },
-                        divider = {},
-                    ) {
+                    var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
+                    TabRow(selectedTabIndex = selectedTabIndex) {
                         Tab(
-                            selected = state == 0,
-                            onClick = { state = 0 },
+                            selected = selectedTabIndex == 0,
+                            onClick = { selectedTabIndex = 0 },
                             text = { Text("Normal") },
                         )
                         Tab(
-                            selected = state == 1,
-                            onClick = { state = 1 },
+                            selected = selectedTabIndex == 1,
+                            onClick = { selectedTabIndex = 1 },
                             text = { Text("Inline") },
                         )
                     }
@@ -126,7 +114,7 @@ internal fun TopAppBarNormalWithFiltersScreen(
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 8.dp),
                     ) {
-                        var selected by remember { mutableStateOf(true) }
+                        var selected by rememberSaveable { mutableStateOf(true) }
                         Tag(selected = selected, onSelect = { selected = !selected }) {
                             Text("Custom Filter")
                         }

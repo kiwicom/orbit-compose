@@ -368,21 +368,37 @@ public class Colors(
     )
 
     @Suppress("Dependency")
-    internal fun toMaterialColors(): androidx.compose.material.Colors =
-        androidx.compose.material.Colors(
+    internal fun toMaterial3Colors(): androidx.compose.material3.ColorScheme =
+        androidx.compose.material3.ColorScheme(
             primary = primary.normal,
-            primaryVariant = primary.strong,
+            onPrimary = contentColorFor(primary.normal),
+            primaryContainer = primary.subtle,
+            onPrimaryContainer = contentColorFor(primary.subtle),
+            inversePrimary = primary.strong,
             secondary = info.normal,
-            secondaryVariant = info.strong,
-            background = surface.subtle,
+            onSecondary = contentColorFor(info.normal),
+            secondaryContainer = info.subtle,
+            onSecondaryContainer = contentColorFor(info.subtle),
+            tertiary = info.normal,
+            onTertiary = contentColorFor(info.normal),
+            tertiaryContainer = info.subtle,
+            onTertiaryContainer = contentColorFor(info.subtle),
+            background = surface.main,
+            onBackground = contentColorFor(surface.main),
             surface = surface.main,
+            onSurface = contentColorFor(surface.main),
+            surfaceVariant = surface.subtle,
+            onSurfaceVariant = contentColorFor(surface.subtle),
+            surfaceTint = contentColorFor(surface.main),
+            inverseSurface = content.normal,
+            inverseOnSurface = contentColorFor(content.normal),
             error = critical.normal,
-            onPrimary = primary.onNormal,
-            onSecondary = info.onNormal,
-            onBackground = content.normal,
-            onSurface = content.normal,
-            onError = critical.onNormal,
-            isLight = isLight,
+            onError = contentColorFor(critical.normal),
+            errorContainer = critical.subtle,
+            onErrorContainer = contentColorFor(critical.subtle),
+            outline = surface.strong,
+            outlineVariant = surface.normal,
+            scrim = surface.strong,
         )
 }
 

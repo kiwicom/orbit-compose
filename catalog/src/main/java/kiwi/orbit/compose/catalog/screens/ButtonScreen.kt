@@ -6,28 +6,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,6 +45,8 @@ import kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary
 import kiwi.orbit.compose.ui.controls.ButtonToggleContainer
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SurfaceCard
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
@@ -69,20 +62,7 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
                 title = { Text("Buttons") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    TabRow(
-                        modifier = Modifier.windowInsetsPadding(
-                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal),
-                        ),
-                        selectedTabIndex = state.currentPage,
-                        backgroundColor = OrbitTheme.colors.surface.main,
-                        indicator = { tabPositions ->
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                                color = OrbitTheme.colors.primary.normal,
-                            )
-                        },
-                        divider = {},
-                    ) {
+                    TabRow(selectedTabIndex = state.currentPage) {
                         Tab(
                             selected = state.currentPage == 0,
                             onClick = { scope.launch { state.animateScrollToPage(0) } },
@@ -152,7 +132,7 @@ private fun ButtonScreenInner() {
         }
 
         Text("Button Toggling", Modifier.padding(top = 16.dp))
-        var targetState by remember { mutableStateOf(true) }
+        var targetState by rememberSaveable { mutableStateOf(true) }
         ButtonToggleContainer(targetState) { state ->
             if (state) {
                 ButtonPrimarySubtle(onClick = { targetState = !targetState }, maxWidth) {

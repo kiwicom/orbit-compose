@@ -12,8 +12,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun TagScreen(onNavigateUp: () -> Unit) {
-    val toastHostState = remember { ToastHostState() }
+    val toastHostState = rememberSaveable { ToastHostState() }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -89,9 +89,9 @@ private fun TagScreenInner(toastHostState: ToastHostState) {
         Text("Interactive", style = OrbitTheme.typography.title4)
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            var selected1 by remember { mutableStateOf(false) }
-            var selected2 by remember { mutableStateOf(false) }
-            var selected3 by remember { mutableStateOf(true) }
+            var selected1 by rememberSaveable { mutableStateOf(false) }
+            var selected2 by rememberSaveable { mutableStateOf(false) }
+            var selected3 by rememberSaveable { mutableStateOf(true) }
             Tag(selected = selected1, onSelect = { selected1 = !selected1 }) {
                 Text("Simple")
             }
@@ -104,9 +104,9 @@ private fun TagScreenInner(toastHostState: ToastHostState) {
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            var selected1 by remember { mutableStateOf(false) }
-            var selected2 by remember { mutableStateOf(false) }
-            var selected3 by remember { mutableStateOf(true) }
+            var selected1 by rememberSaveable { mutableStateOf(false) }
+            var selected2 by rememberSaveable { mutableStateOf(false) }
+            var selected3 by rememberSaveable { mutableStateOf(true) }
             Tag(selected = selected1, onSelect = { selected1 = !selected1 }, onRemove = onRemove) {
                 Text("Simple")
             }

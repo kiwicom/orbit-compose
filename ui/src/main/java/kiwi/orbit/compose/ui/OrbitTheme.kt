@@ -1,7 +1,7 @@
 package kiwi.orbit.compose.ui
 
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -32,9 +32,9 @@ public fun OrbitTheme(
     val selectionColors = rememberTextSelectionColors(rememberedColors)
 
     MaterialTheme(
-        colors = rememberedColors.toMaterialColors(),
-        typography = typography.toMaterialTypography(),
-        shapes = shapes.toMaterialShapes(),
+        colorScheme = rememberedColors.toMaterial3Colors(),
+        typography = typography.toMaterial3Typography(),
+        shapes = shapes.toMaterial3Shapes(),
     ) {
         CompositionLocalProvider(
             // Orbit

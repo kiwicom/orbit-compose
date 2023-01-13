@@ -54,6 +54,8 @@
   android: Released
 - component: Switch
   android: Released
+- component: Tabs
+  android: Released
 - component: Tag
   android: Released
 - component: Text

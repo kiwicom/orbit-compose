@@ -13,8 +13,8 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -169,8 +169,8 @@ internal fun TopAppBarLargePullRefreshScreen(
     onNavigateUp: () -> Unit,
 ) {
     val refreshScope = rememberCoroutineScope()
-    var refreshing by remember { mutableStateOf(false) }
-    var i by remember { mutableStateOf(0) }
+    var refreshing by rememberSaveable { mutableStateOf(false) }
+    var i by rememberSaveable { mutableStateOf(0) }
 
     fun refresh() = refreshScope.launch {
         refreshing = true
@@ -198,9 +198,10 @@ internal fun TopAppBarLargePullRefreshScreen(
             Box {
                 CustomContentPlaceholder(it, "Custom content $i")
                 PullRefreshIndicator(
-                    refreshing,
-                    pullRefreshState,
-                    Modifier
+                    refreshing = refreshing,
+                    state = pullRefreshState,
+                    contentColor = OrbitTheme.colors.primary.normal,
+                    modifier = Modifier
                         .padding(it)
                         .align(Alignment.TopCenter),
                 )

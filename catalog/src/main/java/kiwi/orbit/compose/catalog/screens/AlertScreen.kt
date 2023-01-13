@@ -5,22 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -48,6 +39,8 @@ import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
@@ -63,20 +56,7 @@ internal fun AlertScreen(onNavigateUp: () -> Unit) {
                 title = { Text("Alert") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    TabRow(
-                        modifier = Modifier.windowInsetsPadding(
-                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal),
-                        ),
-                        selectedTabIndex = state.currentPage,
-                        backgroundColor = OrbitTheme.colors.surface.main,
-                        indicator = { tabPositions ->
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[state.currentPage]),
-                                color = OrbitTheme.colors.primary.normal,
-                            )
-                        },
-                        divider = {},
-                    ) {
+                    TabRow(selectedTabIndex = state.currentPage) {
                         Tab(
                             selected = state.currentPage == 0,
                             onClick = { scope.launch { state.animateScrollToPage(0) } },

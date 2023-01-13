@@ -11,7 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,8 +47,8 @@ internal fun PillButtonScreen(
 private fun PillButtonScreenInner(
     contentPadding: PaddingValues,
 ) {
-    var show by remember { mutableStateOf(false) }
-    var showIcon by remember { mutableStateOf(false) }
+    var show by rememberSaveable { mutableStateOf(false) }
+    var showIcon by rememberSaveable { mutableStateOf(false) }
     PillButtonContainer(
         modifier = Modifier.padding(contentPadding),
         button = {

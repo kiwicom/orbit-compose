@@ -42,6 +42,7 @@ import kiwi.orbit.compose.catalog.screens.SelectFieldScreen
 import kiwi.orbit.compose.catalog.screens.StepperScreen
 import kiwi.orbit.compose.catalog.screens.SurfaceCardScreen
 import kiwi.orbit.compose.catalog.screens.SwitchScreen
+import kiwi.orbit.compose.catalog.screens.TabsScreen
 import kiwi.orbit.compose.catalog.screens.TagScreen
 import kiwi.orbit.compose.catalog.screens.TextFieldScreen
 import kiwi.orbit.compose.catalog.screens.TimelineScreen
@@ -114,6 +115,7 @@ private fun NavGraph(
         composable<Destinations.Stepper> { StepperScreen(navController::navigateUp) }
         composable<Destinations.SurfaceCard> { SurfaceCardScreen(navController::navigateUp) }
         composable<Destinations.Switch> { SwitchScreen(navController::navigateUp) }
+        composable<Destinations.Tabs> { TabsScreen(navController::navigateUp) }
         composable<Destinations.Tag> { TagScreen(navController::navigateUp) }
         composable<Destinations.TextField> { TextFieldScreen(navController::navigateUp) }
         composable<Destinations.Timeline> { TimelineScreen(navController::navigateUp) }

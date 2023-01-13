@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 
 // TODO: remove data class to allow maintain better binary compatibility
+@Suppress("WrapUnaryOperator")
 @Immutable
 public data class Typography internal constructor(
     /**
@@ -107,21 +108,23 @@ public data class Typography internal constructor(
     val bodySmallBold: TextStyle = bodySmall.copy(fontWeight = FontWeight.Bold)
 
     @Suppress("Dependency")
-    internal fun toMaterialTypography(): androidx.compose.material.Typography =
-        androidx.compose.material.Typography(
-            defaultFontFamily = title1.fontFamily ?: FontFamily.Default,
-            h1 = title1.copy(fontSize = 96.sp),
-            h2 = title1.copy(fontSize = 60.sp),
-            h3 = title1.copy(fontSize = 38.sp),
-            h4 = title1,
-            h5 = title2,
-            h6 = title3,
-            subtitle1 = title4,
-            subtitle2 = title5,
-            overline = title6,
-            body1 = bodyNormal,
-            body2 = bodySmall,
-            button = title5,
+    internal fun toMaterial3Typography(): androidx.compose.material3.Typography =
+        androidx.compose.material3.Typography(
+            displayLarge = title1.copy(fontSize = 57.sp, lineHeight = 64.sp, letterSpacing = -0.2.sp),
+            displayMedium = title1.copy(fontSize = 45.sp, lineHeight = 52.sp),
+            displaySmall = title1.copy(fontSize = 36.sp, lineHeight = 44.sp),
+            headlineLarge = title1.copy(fontSize = 32.sp, lineHeight = 40.sp),
+            headlineMedium = title1,
+            headlineSmall = title2,
+            titleLarge = title2,
+            titleMedium = title4,
+            titleSmall = title5,
+            bodyLarge = bodyLarge,
+            bodyMedium = bodyNormal,
+            bodySmall = bodySmall,
+            labelLarge = bodyNormal,
+            labelMedium = bodySmall,
+            labelSmall = bodySmall.copy(fontSize = (bodySmall.fontSize.value - 1f).sp),
         )
 }
 

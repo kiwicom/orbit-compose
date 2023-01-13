@@ -24,11 +24,18 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 import androidx.compose.material.contentColorFor
                 import androidx.compose.material.Text
                 import androidx.compose.material.icons.Icons
+                import androidx.compose.material3.Card as Card3
+                import androidx.compose.material3.contentColorFor as contentColorFor3
+                import androidx.compose.material3.Text as Text3
                 fun Test() {
                     Card {
                         Text("test")
                         Icons.Test
                         contentColorFor()
+                    }
+                    Card3 {
+                        Text3("test")
+                        contentColorFor3()
                     }
                 }
             """.trimIndent(),
@@ -36,6 +43,14 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
         val materialFile = kotlin(
             """
                 package androidx.compose.material
+                fun Card(content: () -> Unit) {}
+                fun Text(content: () -> Unit) {}
+                fun contentColorFor(backgroundColor: Color): Color = TODO()
+            """.trimIndent(),
+        )
+        val material3File = kotlin(
+            """
+                package androidx.compose.material3
                 fun Card(content: () -> Unit) {}
                 fun Text(content: () -> Unit) {}
                 fun contentColorFor(backgroundColor: Color): Color = TODO()
@@ -53,7 +68,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
             .issues(MaterialDesignInsteadOrbitDesignDetector.ISSUE)
             .testModes(TestMode.FULLY_QUALIFIED)
             .allowMissingSdk()
-            .files(stubFile, materialFile, materialIconsFile)
+            .files(stubFile, materialFile, material3File, materialIconsFile)
             .run()
 
         val messages = mutableListOf<String>()
@@ -62,13 +77,15 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
             ".custom",
         )
 
-        Assert.assertSame(4, messages.count())
         Assert.assertEquals(
             listOf(
                 "Using androidx.compose.material.Card instead of kiwi.orbit.compose.ui.controls.SurfaceCard",
                 "Using androidx.compose.material.Text instead of kiwi.orbit.compose.ui.controls.Text",
                 "Using androidx.compose.material.icons.Icons instead of kiwi.orbit.compose.icons.Icons",
                 "Using androidx.compose.material.contentColorFor instead of kiwi.orbit.compose.ui.foundation.contentColorFor",
+                "Using androidx.compose.material3.Card instead of kiwi.orbit.compose.ui.controls.SurfaceCard",
+                "Using androidx.compose.material3.Text instead of kiwi.orbit.compose.ui.controls.Text",
+                "Using androidx.compose.material3.contentColorFor instead of kiwi.orbit.compose.ui.foundation.contentColorFor",
             ),
             messages,
         )
