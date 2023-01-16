@@ -14,6 +14,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalShapes
 import kiwi.orbit.compose.ui.foundation.LocalTypography
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
 import kiwi.orbit.compose.ui.foundation.rememberTextSelectionColors
@@ -45,8 +46,9 @@ public fun OrbitTheme(
             // Foundation
             LocalContentColor provides rememberedColors.content.normal,
             LocalTextSelectionColors provides selectionColors,
-            content = content,
-        )
+        ) {
+            ProvideMergedTextStyle(typography.bodyNormal, content)
+        }
     }
 }
 

@@ -26,6 +26,7 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
 /**
  * A host Composable for the [PillButton] Composable.
@@ -114,7 +115,7 @@ public fun PillButtonContainer(
  *     },
  * )
  */
-@Suppress("unused")
+@Suppress("UnusedReceiverParameter")
 @Composable
 public fun PillButtonContainerScope.PillButton(
     onClick: () -> Unit,
@@ -137,8 +138,10 @@ public fun PillButtonContainerScope.PillButton(
             ),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            icon()
-            content()
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
+                icon()
+                content()
+            }
         }
     }
 }

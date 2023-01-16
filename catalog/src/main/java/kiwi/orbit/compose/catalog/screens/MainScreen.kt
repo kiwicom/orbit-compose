@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kiwi.navigationcompose.typed.Destination
 import kiwi.orbit.compose.catalog.Destinations
@@ -160,7 +161,7 @@ private fun Item(menuItem: MenuItem) {
                     else -> {}
                 }
                 Spacer(Modifier.size(8.dp))
-                Text(menuItem.title)
+                Text(menuItem.title, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
     }
