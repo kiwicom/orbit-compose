@@ -295,6 +295,7 @@ internal fun TextFieldPreview() {
             modifier = Modifier.fillMaxWidth(),
             leadingIcon = { Icon(Icons.Ai, contentDescription = null) },
             trailingIcon = { Icon(Icons.Close, contentDescription = null) },
+            error = { Text("Error message") },
         )
     }
 }

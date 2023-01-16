@@ -53,7 +53,7 @@ internal fun FieldMessage(
         },
     ) { message ->
         if (message != null) {
-            Row(Modifier.padding(top = 6.dp)) {
+            Row(Modifier.padding(top = 4.dp)) {
                 val icon = when (message) {
                     is Message.Error -> Icons.AlertCircle
                     is Message.Info -> Icons.InformationCircle
