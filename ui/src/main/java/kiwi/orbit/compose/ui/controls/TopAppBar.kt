@@ -223,7 +223,9 @@ internal fun TopAppBarLayout(
                         .layoutId("actionIcons")
                         .padding(end = TopAppBarHorizontalPadding),
                 ) {
-                    actions()
+                    ProvideMergedTextStyle(OrbitTheme.typography.bodyExtraLarge) {
+                        actions()
+                    }
                 }
             }
         },
