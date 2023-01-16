@@ -158,12 +158,12 @@ public fun createTypography(
     ),
     title5: TextStyle = TextStyle(
         fontWeight = FontWeight.Bold,
-        fontSize = 14.sp,
+        fontSize = 15.sp,
         lineHeight = 20.sp,
     ),
     title6: TextStyle = TextStyle(
         fontWeight = FontWeight.Bold,
-        fontSize = 12.sp,
+        fontSize = 13.sp,
         lineHeight = 16.sp,
     ),
     bodyExtraLarge: TextStyle = TextStyle(
@@ -178,12 +178,12 @@ public fun createTypography(
     ),
     bodyNormal: TextStyle = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = 15.sp,
         lineHeight = 20.sp,
     ),
     bodySmall: TextStyle = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = 13.sp,
         lineHeight = 16.sp,
     ),
 ): Typography = Typography(
