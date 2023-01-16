@@ -26,6 +26,8 @@
   android: Released
 - component: Heading
   android: Released
+- component: HorizontalScroll
+  android: Planned
 - component: Icon
   android: Released
 - component: Illustration
@@ -37,6 +39,8 @@
 - component: ListChoice
   android: Released
 - component: List
+  android: Released
+- component: Loading
   android: Released
 - component: NavigationBar
   android: Released
@@ -50,6 +54,8 @@
   android: Released
 - component: Separator
   android: Released
+- component: Slider
+  android: Planned
 - component: Stepper
   android: Released
 - component: Switch
@@ -62,5 +68,11 @@
   android: Released
 - component: Textarea
   android: Released
+- component: TileGroup
+  android: Planned
+- component: Tile
+  android: Planned
 - component: Timeline
+  android: Released
+- component: Toast
   android: Released
