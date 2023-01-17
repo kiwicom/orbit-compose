@@ -21,7 +21,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
@@ -29,6 +28,7 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.TopAppBarIcons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
@@ -41,7 +41,7 @@ public fun TopAppBarLarge(
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     largeTitle: @Composable () -> Unit = title,
-    navigationIcon: Painter = painterResource(R.drawable.ic_appbar_arrow_back),
+    navigationIcon: Painter = TopAppBarIcons.Back,
     actions: @Composable RowScope.() -> Unit = {},
     largeElevated: Boolean = true,
     elevation: Dp = TopAppBarElevation,

@@ -76,7 +76,7 @@ class IconsGenerator {
             ?.forEach { it.delete() }
 
         resourceDir.toFile().listFiles()
-            ?.filter { it.name.startsWith("ic_") }
+            ?.filter { it.name.startsWith("ic_orbit") }
             ?.forEach { it.delete() }
     }
 
