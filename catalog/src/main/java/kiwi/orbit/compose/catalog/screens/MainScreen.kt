@@ -18,6 +18,7 @@ import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.Ballot
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
+import androidx.compose.material.icons.rounded.Crop169
 import androidx.compose.material.icons.rounded.DensitySmall
 import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.EditAttributes
@@ -100,6 +101,7 @@ internal fun MainScreen(
         MenuItem("Tabs", MIcons.Tab) { Destinations.Tabs },
         MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
+        MenuItem("Tile", MIcons.Crop169) { Destinations.Tile },
         MenuItem("Timeline", Icons.RouteTwoStops) { Destinations.Timeline },
         MenuItem("Toast", MIcons.Announcement) { Destinations.Toast },
         MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar },

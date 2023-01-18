@@ -98,6 +98,9 @@ sealed interface Destinations : Destination {
     object TextField : Destinations
 
     @Serializable
+    object Tile : Destinations
+
+    @Serializable
     object Timeline : Destinations
 
     @Serializable
