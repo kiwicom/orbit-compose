@@ -26,6 +26,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.constrain
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -109,10 +110,15 @@ public fun Icon(
     } else {
         Modifier
     }
+    val lineHeight = LocalTextStyle.current.lineHeight
+    val sizeModifier = when (lineHeight.type) {
+        TextUnitType.Sp -> DefaultSizeModifier(lineHeight)
+        else -> Modifier
+    }
     Box(
         modifier
             .toolingGraphicsLayer()
-            .then(DefaultSizeModifier(LocalTextStyle.current.lineHeight))
+            .then(sizeModifier)
             .paint(
                 painter = painter,
                 colorFilter = colorFilter,
