@@ -45,6 +45,7 @@ import kiwi.orbit.compose.catalog.screens.SwitchScreen
 import kiwi.orbit.compose.catalog.screens.TabsScreen
 import kiwi.orbit.compose.catalog.screens.TagScreen
 import kiwi.orbit.compose.catalog.screens.TextFieldScreen
+import kiwi.orbit.compose.catalog.screens.TileScreen
 import kiwi.orbit.compose.catalog.screens.TimelineScreen
 import kiwi.orbit.compose.catalog.screens.ToastScreen
 import kiwi.orbit.compose.catalog.screens.TypographyScreen
@@ -118,6 +119,7 @@ private fun NavGraph(
         composable<Destinations.Tabs> { TabsScreen(navController::navigateUp) }
         composable<Destinations.Tag> { TagScreen(navController::navigateUp) }
         composable<Destinations.TextField> { TextFieldScreen(navController::navigateUp) }
+        composable<Destinations.Tile> { TileScreen(navController::navigateUp) }
         composable<Destinations.Timeline> { TimelineScreen(navController::navigateUp) }
         composable<Destinations.Toast> { ToastScreen(navController::navigateUp) }
         topAppBarNavigation<Destinations.TopAppBar>(navController)

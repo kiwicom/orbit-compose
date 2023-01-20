@@ -68,9 +68,9 @@
   android: Released
 - component: Textarea
   android: Released
-- component: TileGroup
-  android: Planned
 - component: Tile
+  android: Released
+- component: TileGroup
   android: Planned
 - component: Timeline
   android: Released
