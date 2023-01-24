@@ -179,6 +179,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_mobile_app)
 
+    public val MobileApp2: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_mobile_app2)
+
     public val Money: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_money)
