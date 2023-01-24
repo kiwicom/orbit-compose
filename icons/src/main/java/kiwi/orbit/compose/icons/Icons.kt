@@ -187,6 +187,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_calendar_anytime)
 
+    public val CalendarDuration: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_calendar_duration)
+
     public val CalendarRange: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_calendar_range)
