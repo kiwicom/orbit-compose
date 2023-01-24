@@ -10,6 +10,10 @@ import kotlin.Suppress
  */
 @Suppress("unused")
 public object ColoredIcons {
+    public val CalendarDuration: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_calendar_duration)
+
     public val Facebook: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_colored_facebook)
