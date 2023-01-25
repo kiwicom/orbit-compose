@@ -20,6 +20,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
     fun testDetector() {
         val stubFile = kotlin(
             """
+                package test
                 import androidx.compose.material.Card
                 import androidx.compose.material.contentColorFor
                 import androidx.compose.material.Text
@@ -28,6 +29,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 import androidx.compose.material3.contentColorFor as contentColorFor3
                 import androidx.compose.material3.Text as Text3
                 import androidx.compose.material3.Divider
+                import androidx.compose.material3.LocalTextStyle
                 fun Test() {
                     Card {
                         Text("test")
@@ -38,6 +40,9 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                         Text3("test")
                         contentColorFor3()
                         Divider()
+                        LocalTextStyle.current
+                        LocalTextStyle
+                        LocalTextStyle.provides()
                     }
                 }
             """.trimIndent(),
@@ -57,6 +62,27 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 fun Text(content: () -> Unit) {}
                 fun Divider() {}
                 fun contentColorFor(backgroundColor: Color): Color = TODO()
+                @Stable
+                sealed class CompositionLocal<T> constructor(defaultFactory: () -> T) {
+                    @Suppress("UNCHECKED_CAST")
+                    internal val defaultValueHolder = LazyValueHolder(defaultFactory)
+
+                    @Composable
+                    internal abstract fun provided(value: T): State<T>
+
+                    /**
+                     * Return the value provided by the nearest [CompositionLocalProvider] component that invokes, directly or
+                     * indirectly, the composable function that uses this property.
+                     *
+                     * @sample androidx.compose.runtime.samples.consumeCompositionLocal
+                     */
+                    @OptIn(InternalComposeApi::class)
+                    inline val current: T
+                        @ReadOnlyComposable
+                        @Composable
+                        get() = currentComposer.consume(this)
+                }
+                val LocalTextStyle: CompositionLocal<Int> = TODO()
             """.trimIndent(),
         )
         val materialIconsFile = kotlin(
@@ -90,6 +116,9 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 "Using androidx.compose.material3.Text instead of kiwi.orbit.compose.ui.controls.Text",
                 "Using androidx.compose.material3.contentColorFor instead of kiwi.orbit.compose.ui.foundation.contentColorFor",
                 "Using androidx.compose.material3.Divider instead of kiwi.orbit.compose.ui.controls.Separator",
+                "Using androidx.compose.material3.LocalTextStyle instead of kiwi.orbit.compose.ui.foundation.LocalTextStyle",
+                "Using androidx.compose.material3.LocalTextStyle instead of kiwi.orbit.compose.ui.foundation.LocalTextStyle",
+                "Using androidx.compose.material3.LocalTextStyle instead of kiwi.orbit.compose.ui.foundation.LocalTextStyle",
             ),
             messages,
         )

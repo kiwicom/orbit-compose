@@ -8,16 +8,19 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
+import com.intellij.psi.PsiMember
 import com.intellij.psi.impl.source.PsiClassReferenceType
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UQualifiedReferenceExpression
+import org.jetbrains.uast.USimpleNameReferenceExpression
 
 class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanner {
     override fun getApplicableUastTypes(): List<Class<out UElement>> {
         return listOf(
             UCallExpression::class.java,
             UQualifiedReferenceExpression::class.java,
+            USimpleNameReferenceExpression::class.java,
         )
     }
 
@@ -36,6 +39,13 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 val fqn = (node.receiver.getExpressionType() as? PsiClassReferenceType)
                     ?.reference?.qualifiedName
                     ?: return
+                val preferredName = RECEIVER_NAMES[fqn] ?: return
+                reportIssue(context, node, fqn, preferredName)
+            }
+
+            override fun visitSimpleNameReferenceExpression(node: USimpleNameReferenceExpression) {
+                val className = (node.resolve() as? PsiMember)?.containingClass?.qualifiedName ?: return
+                val fqn = className.dropLastWhile { it != '.' }.dropLast(1) + "." + node.identifier
                 val preferredName = RECEIVER_NAMES[fqn] ?: return
                 reportIssue(context, node, fqn, preferredName)
             }
@@ -97,6 +107,8 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
 
         private val RECEIVER_NAMES = mapOf(
             "androidx.compose.material.icons.Icons" to "kiwi.orbit.compose.icons.Icons",
+            "androidx.compose.material3.LocalTextStyle" to "kiwi.orbit.compose.ui.foundation.LocalTextStyle",
+            "androidx.compose.material3.LocalContentColor" to "kiwi.orbit.compose.ui.foundation.LocalContentColor",
         )
 
         internal fun reportIssue(
