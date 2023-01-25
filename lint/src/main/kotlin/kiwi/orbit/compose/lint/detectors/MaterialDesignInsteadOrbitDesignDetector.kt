@@ -61,6 +61,10 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 "androidx.compose.material.Card",
                 "androidx.compose.material3.Card",
             ) to "kiwi.orbit.compose.ui.controls.SurfaceCard"),
+            "Divider" to (setOf(
+                "androidx.compose.material.Divider",
+                "androidx.compose.material3.Divider",
+            ) to "kiwi.orbit.compose.ui.controls.Separator"),
             "IconButton" to (setOf(
                 "androidx.compose.material.IconButton",
                 "androidx.compose.material3.IconButton",

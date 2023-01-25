@@ -27,6 +27,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 import androidx.compose.material3.Card as Card3
                 import androidx.compose.material3.contentColorFor as contentColorFor3
                 import androidx.compose.material3.Text as Text3
+                import androidx.compose.material3.Divider
                 fun Test() {
                     Card {
                         Text("test")
@@ -36,6 +37,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                     Card3 {
                         Text3("test")
                         contentColorFor3()
+                        Divider()
                     }
                 }
             """.trimIndent(),
@@ -53,6 +55,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 package androidx.compose.material3
                 fun Card(content: () -> Unit) {}
                 fun Text(content: () -> Unit) {}
+                fun Divider() {}
                 fun contentColorFor(backgroundColor: Color): Color = TODO()
             """.trimIndent(),
         )
@@ -86,6 +89,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 "Using androidx.compose.material3.Card instead of kiwi.orbit.compose.ui.controls.SurfaceCard",
                 "Using androidx.compose.material3.Text instead of kiwi.orbit.compose.ui.controls.Text",
                 "Using androidx.compose.material3.contentColorFor instead of kiwi.orbit.compose.ui.foundation.contentColorFor",
+                "Using androidx.compose.material3.Divider instead of kiwi.orbit.compose.ui.controls.Separator",
             ),
             messages,
         )
