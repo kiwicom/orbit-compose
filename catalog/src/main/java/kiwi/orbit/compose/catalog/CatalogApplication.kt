@@ -19,6 +19,7 @@ import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeListScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
 import kiwi.orbit.compose.catalog.screens.ButtonScreen
+import kiwi.orbit.compose.catalog.screens.CardScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
@@ -97,6 +98,7 @@ private fun NavGraph(
         composable<Destinations.Badge> { BadgeScreen(navController::navigateUp) }
         composable<Destinations.BadgeList> { BadgeListScreen(navController::navigateUp) }
         composable<Destinations.Button> { ButtonScreen(navController::navigateUp) }
+        composable<Destinations.Card> { CardScreen(navController::navigateUp) }
         composable<Destinations.Checkbox> { CheckboxScreen(navController::navigateUp) }
         composable<Destinations.ChoiceTile> { ChoiceTileScreen(navController::navigateUp) }
         composable<Destinations.Dialog> { DialogsScreen(navController::navigateUp, navController::navigate) }

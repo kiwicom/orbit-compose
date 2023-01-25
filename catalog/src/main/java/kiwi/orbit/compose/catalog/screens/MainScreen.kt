@@ -27,6 +27,7 @@ import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.Rectangle
 import androidx.compose.material.icons.rounded.SignalWifiOff
 import androidx.compose.material.icons.rounded.SmartButton
 import androidx.compose.material.icons.rounded.Tab
@@ -81,6 +82,7 @@ internal fun MainScreen(
         MenuItem("Badge", Icons.Deals) { Destinations.Badge },
         MenuItem("BadgeList", Icons.List) { Destinations.BadgeList },
         MenuItem("Button", MIcons.SmartButton) { Destinations.Button },
+        MenuItem("Card", MIcons.Rectangle) { Destinations.Card },
         MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
         MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
         MenuItem("Dialog", Icons.Chat) { Destinations.Dialog },

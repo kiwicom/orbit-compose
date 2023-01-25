@@ -32,6 +32,9 @@ sealed interface Destinations : Destination {
     object Button : Destinations
 
     @Serializable
+    object Card : Destinations
+
+    @Serializable
     object Checkbox : Destinations
 
     @Serializable
