@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.background
@@ -9,12 +7,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material3.Divider
-import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.internal.OrbitElevations
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -39,10 +36,7 @@ public fun TabRow(
     },
     tabs: @Composable () -> Unit,
 ) {
-    val isLight = OrbitTheme.colors.isLight
-    CompositionLocalProvider(
-        LocalAbsoluteTonalElevation provides (if (isLight) 0.dp else LocalAbsoluteTonalElevation.current),
-    ) {
+    OrbitElevations {
         androidx.compose.material3.TabRow(
             selectedTabIndex = selectedTabIndex,
             modifier = modifier,

@@ -7,13 +7,23 @@ title: Android Theming
 Orbit Compose is based on Material 3 theme (library). If you need to use Orbit Compose together with Material 2, setup Material 2 theme on your own. To do so, apply `MaterialTheme` composable with new sets of colors and others. Use this conversion function to make Material 2 similar to the Orbit Theme.
 
 ```kotlin
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.Shapes
 import kiwi.orbit.compose.ui.foundation.Typography
+import kiwi.orbit.compose.ui.foundation.createTypography
+import kiwi.orbit.compose.ui.foundation.lightColors
 
+@Composable
 fun App() {
-    val colors = lightColors() // your Orbit Theme setup
+    // your Orbit Theme setup
+    val colors = lightColors()
+    val typography = remember { createTypography() }
+    val shapes = remember { Shapes() }
+
     MaterialTheme(
         colors = colors.toMaterial2(),
         typography = typography.toMaterial2(),
@@ -51,7 +61,7 @@ private fun Typography.toMaterial2(): androidx.compose.material.Typography =
         defaultFontFamily = title1.fontFamily ?: FontFamily.Default,
         h1 = title1.copy(fontSize = 96.sp, lineHeight = TextUnit.Unspecified),
         h2 = title1.copy(fontSize = 60.sp, lineHeight = TextUnit.Unspecified),
-        h3 = title1.copy(fontSize = 38.sp, lineHeihgt = TextUnit.Unspecified),
+        h3 = title1.copy(fontSize = 38.sp, lineHeight = TextUnit.Unspecified),
         h4 = title1,
         h5 = title2,
         h6 = title3,
@@ -61,6 +71,7 @@ private fun Typography.toMaterial2(): androidx.compose.material.Typography =
         body1 = bodyNormal,
         body2 = bodySmall,
         button = title5,
+        caption = bodySmall,
     )
 
 private fun Shapes.toMaterial2(): androidx.compose.material.Shapes =
