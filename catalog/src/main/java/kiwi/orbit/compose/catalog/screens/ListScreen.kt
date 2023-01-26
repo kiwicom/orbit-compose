@@ -134,11 +134,10 @@ private fun ListScreenInner() {
     }
 }
 
-@Suppress("UnusedPrivateMember")
 @Preview
 @Composable
 private fun ListScreenPreview() {
     AppTheme {
-        ListScreen {}
+        ListScreen(onNavigateUp = {})
     }
 }

@@ -24,6 +24,7 @@ import kiwi.orbit.compose.ui.controls.BadgePreview
 import kiwi.orbit.compose.ui.controls.ButtonLinkPreview
 import kiwi.orbit.compose.ui.controls.ButtonPreview
 import kiwi.orbit.compose.ui.controls.ButtonTextLinkPreview
+import kiwi.orbit.compose.ui.controls.CardPreview
 import kiwi.orbit.compose.ui.controls.CheckboxFieldPreview
 import kiwi.orbit.compose.ui.controls.CheckboxPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTileCenteredPreview
@@ -151,6 +152,11 @@ internal class ScreenshotTest {
     @Test
     fun button() {
         snapshot { ButtonPreview() }
+    }
+
+    @Test
+    fun card() {
+        snapshot { CardPreview() }
     }
 
     @Ignore("https://github.com/cashapp/paparazzi/issues/456")

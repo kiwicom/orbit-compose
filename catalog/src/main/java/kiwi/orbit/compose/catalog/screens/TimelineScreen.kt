@@ -127,6 +127,6 @@ private fun TimelineScreenInner() {
 @Composable
 private fun TimelineScreenPreview() {
     AppTheme {
-        TimelineScreenInner()
+        TimelineScreen(onNavigateUp = {})
     }
 }
