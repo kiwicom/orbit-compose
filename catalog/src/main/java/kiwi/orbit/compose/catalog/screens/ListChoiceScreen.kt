@@ -127,11 +127,10 @@ private fun ListChoiceScreenInner() {
     }
 }
 
-@Suppress("UnusedPrivateMember")
 @Preview
 @Composable
 private fun ListChoiceScreenPreview() {
     AppTheme {
-        ListChoiceScreen({})
+        ListChoiceScreen(onNavigateUp = {})
     }
 }

@@ -92,7 +92,6 @@ private fun TileScreenInner() {
     }
 }
 
-@Suppress("UnusedPrivateMember")
 @Preview
 @Composable
 private fun TileScreenPreview() {
