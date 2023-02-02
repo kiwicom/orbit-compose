@@ -31,11 +31,11 @@ internal fun CardScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Tile") },
+                title = { Text("Card") },
                 onNavigateUp = onNavigateUp,
             )
         },
-        backgroundColor = OrbitTheme.colors.surface.normal,
+        backgroundColor = OrbitTheme.colors.surface.subtle,
     ) { contentPadding ->
         Box(
             modifier = Modifier
