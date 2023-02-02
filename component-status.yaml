@@ -55,7 +55,7 @@
 - component: Separator
   android: Released
 - component: Slider
-  android: Planned
+  android: Released
 - component: Stepper
   android: Released
 - component: Switch

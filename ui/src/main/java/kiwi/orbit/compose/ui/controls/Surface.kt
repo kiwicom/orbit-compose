@@ -204,7 +204,7 @@ public fun Surface(
     }
 }
 
-private fun Modifier.surface(
+internal fun Modifier.surface(
     shape: Shape,
     backgroundColor: Color,
     border: BorderStroke?,
@@ -216,7 +216,7 @@ private fun Modifier.surface(
     .clip(shape)
 
 @Composable
-private fun surfaceColorAtElevation(
+internal fun surfaceColorAtElevation(
     color: Color,
     elevation: Dp,
 ): Color {

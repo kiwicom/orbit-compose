@@ -83,6 +83,9 @@ sealed interface Destinations : Destination {
     object SelectField : Destinations
 
     @Serializable
+    object Slider : Destinations
+
+    @Serializable
     object Stepper : Destinations
 
     @Serializable

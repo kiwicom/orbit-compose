@@ -1,0 +1,62 @@
+---
+title: Android
+---
+
+## Overview
+
+`Slider` component is provided as a single float-value slider:
+
+- [`Slider`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-slider.html)
+
+## Usage
+
+Use `Slider` composable and define a state for its value. Process the value in `onValueChanged` and `onValueChangeFinished` callbacks. Provide labels for start and end value. Optionally, setup steps or a custom range.  
+
+```kotlin
+@Composable
+fun Example() {
+    val volumeValue by rememberSaveable {
+        mutableStateOf(0.0f)
+    }
+    Slider(
+        value = volumeValue,
+        onValueChange = { volumeValue = it },
+        onValueChangeFinished = { /* process volumeValue */ },
+        steps = 20,
+        startLabel = { Text("0") },
+        endLabel = { Text("100") },
+    )
+}
+```
+
+## UI Testing
+
+Use semantic properties and action to set progress and read the state.
+
+```kotlin
+composeTestRule.setContent {
+    var value by rememberSaveable { mutableStateOf(0.0f) }
+    var currentValue by rememberSaveable { mutableStateOf(0.0f) }
+    Slider(
+        value = currentValue,
+        onValueChange = { currentValue = it },
+        onValueChangeFinished = { value = currentValue },
+        modifier = Modifier.testTag("slider"),
+        startLabel = {},
+        endLabel = {},
+    )
+}
+
+composeTestRule.onNodeWithTag("slider")
+    .performSemanticsAction(SemanticsActions.SetProgress) { it.invoke(0.5f) }
+
+val progressBarInfo = composeTestRule.onNodeWithTag("slider")
+    .fetchSemanticsNode()
+    .config[SemanticsProperties.ProgressBarRangeInfo]
+
+assertEquals(0.5f, progressBarInfo.current)
+```
+
+## Customization
+
+`Slider` appearance is not customizable.

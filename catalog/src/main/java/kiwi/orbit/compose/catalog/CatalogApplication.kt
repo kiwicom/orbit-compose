@@ -40,6 +40,7 @@ import kiwi.orbit.compose.catalog.screens.RadioScreen
 import kiwi.orbit.compose.catalog.screens.SeatScreen
 import kiwi.orbit.compose.catalog.screens.SegmentedSwitchScreen
 import kiwi.orbit.compose.catalog.screens.SelectFieldScreen
+import kiwi.orbit.compose.catalog.screens.SliderScreen
 import kiwi.orbit.compose.catalog.screens.StepperScreen
 import kiwi.orbit.compose.catalog.screens.SurfaceCardScreen
 import kiwi.orbit.compose.catalog.screens.SwitchScreen
@@ -115,6 +116,7 @@ private fun NavGraph(
         composable<Destinations.Seat> { SeatScreen(navController::navigateUp) }
         composable<Destinations.SegmentedSwitch> { SegmentedSwitchScreen(navController::navigateUp) }
         composable<Destinations.SelectField> { SelectFieldScreen(navController::navigateUp) }
+        composable<Destinations.Slider> { SliderScreen(navController::navigateUp) }
         composable<Destinations.Stepper> { StepperScreen(navController::navigateUp) }
         composable<Destinations.SurfaceCard> { SurfaceCardScreen(navController::navigateUp) }
         composable<Destinations.Switch> { SwitchScreen(navController::navigateUp) }
