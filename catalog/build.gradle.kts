@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.appDistribution)
+    id("kotlin-parcelize")
 }
 
 android {

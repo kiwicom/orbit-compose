@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import android.os.Parcelable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,6 +24,7 @@ import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SelectField
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
+import kotlinx.parcelize.Parcelize
 
 @Composable
 internal fun SelectFieldScreen(onNavigateUp: () -> Unit) {
@@ -85,7 +87,8 @@ private fun SelectFieldScreenInner() {
     }
 }
 
+@Parcelize
 private class Country(
     val name: String,
     val code: String,
-)
+) : Parcelable
