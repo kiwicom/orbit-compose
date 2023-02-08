@@ -25,6 +25,7 @@ import androidx.compose.material.icons.rounded.EditAttributes
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
+import androidx.compose.material.icons.rounded.LinearScale
 import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Rectangle
@@ -97,6 +98,7 @@ internal fun MainScreen(
         MenuItem("Seat", Icons.Seat) { Destinations.Seat },
         MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch },
         MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField },
+        MenuItem("Slider", MIcons.LinearScale) { Destinations.Slider },
         MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper },
         MenuItem("SurfaceCard", MIcons.Article) { Destinations.SurfaceCard },
         MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },

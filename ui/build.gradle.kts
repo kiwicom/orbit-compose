@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.compose.materialRipple)
     implementation(libs.compose.material3)
     implementation(libs.compose.toolingPreview)
+    implementation(libs.compose.uiUtil)
     implementation(libs.kotlin.stdlib)
 
     debugImplementation(libs.compose.tooling)

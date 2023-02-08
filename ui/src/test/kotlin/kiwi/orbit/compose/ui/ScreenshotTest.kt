@@ -50,6 +50,7 @@ import kiwi.orbit.compose.ui.controls.SeatLegendPreview
 import kiwi.orbit.compose.ui.controls.SeatPreview
 import kiwi.orbit.compose.ui.controls.SegmentedSwitchPreview
 import kiwi.orbit.compose.ui.controls.SelectFieldPreview
+import kiwi.orbit.compose.ui.controls.SliderPreview
 import kiwi.orbit.compose.ui.controls.StepperPreview
 import kiwi.orbit.compose.ui.controls.SurfaceCardPreview
 import kiwi.orbit.compose.ui.controls.SwitchPreview
@@ -304,6 +305,11 @@ internal class ScreenshotTest {
     @Test
     fun surfaceCard() {
         snapshot { SurfaceCardPreview() }
+    }
+
+    @Test
+    fun slider() {
+        snapshot { SliderPreview() }
     }
 
     @Test
