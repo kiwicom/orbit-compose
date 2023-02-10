@@ -12,6 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -29,7 +30,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun TagScreen(onNavigateUp: () -> Unit) {
-    val toastHostState = rememberSaveable { ToastHostState() }
+    val toastHostState = remember { ToastHostState() }
     Scaffold(
         topBar = {
             TopAppBar(
