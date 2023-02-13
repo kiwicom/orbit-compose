@@ -44,7 +44,7 @@ jobs:
           URL=${{ steps.release.outputs.url }}
           echo "See full release notes at $URL" > whatsnew/whatsnew-en-US
       - name: Release to Google Play
-        uses: r0adkll/upload-google-play@v1.0.19
+        uses: r0adkll/upload-google-play@v1.1.1
         with:
           serviceAccountJson: release/service-account.json
           packageName: kiwi.orbit.compose.catalog
