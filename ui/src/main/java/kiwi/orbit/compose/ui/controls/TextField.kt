@@ -3,39 +3,28 @@ package kiwi.orbit.compose.ui.controls
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusEvent
-import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
@@ -47,10 +36,6 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
 
 @Composable
 public fun TextField(
@@ -71,7 +56,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    bringIntoView: Boolean = true,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -94,13 +78,11 @@ public fun TextField(
         keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
-        bringIntoView = bringIntoView,
         visualTransformation = visualTransformation,
         interactionSource = interactionSource,
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun TextField(
     value: String,
@@ -121,29 +103,9 @@ internal fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    bringIntoView: Boolean = true,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val autoBringIntoViewSetupModifier: Modifier
-    val autoBringIntoViewFocusModifier: Modifier
-
-    if (bringIntoView) {
-        val bringIntoViewRequester = remember { BringIntoViewRequester() }
-        val layoutCoordinates = remember { mutableStateOf<LayoutCoordinates?>(null) }
-        val focused = remember { mutableStateOf(false) }
-
-        autoBringIntoViewSetupModifier = Modifier
-            .bringIntoViewRequester(bringIntoViewRequester)
-            .onGloballyPositioned { layoutCoordinates.value = it }
-        autoBringIntoViewFocusModifier = Modifier.onFocusEvent { focused.value = it.isFocused }
-
-        BringIntoViewWhenFocused(focused, layoutCoordinates, bringIntoViewRequester)
-    } else {
-        autoBringIntoViewSetupModifier = Modifier
-        autoBringIntoViewFocusModifier = Modifier
-    }
-
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     ColumnWithMinConstraints(
         modifier
@@ -151,8 +113,7 @@ internal fun TextField(
                 if (error != null) {
                     this.error(errorMessage)
                 }
-            }
-            .then(autoBringIntoViewSetupModifier),
+            },
     ) {
         ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
             var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -199,7 +160,6 @@ internal fun TextField(
                     }
                 },
                 modifier = Modifier
-                    .then(autoBringIntoViewFocusModifier)
                     .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
                     .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal),
                 enabled = enabled,
@@ -234,34 +194,6 @@ internal fun TextField(
                 error = error,
                 info = if (isFocused) info else null, // Present info only in focused mode.
             )
-        }
-    }
-}
-
-@OptIn(FlowPreview::class, ExperimentalFoundationApi::class)
-@Composable
-private fun BringIntoViewWhenFocused(
-    focused: State<Boolean>,
-    layoutCoordinates: State<LayoutCoordinates?>,
-    bringIntoViewRequester: BringIntoViewRequester,
-) {
-    val density = LocalDensity.current
-    val scaffoldBottomPadding = remember {
-        MutableStateFlow(0f)
-    }
-    val height = with(density) {
-        LocalScaffoldPadding.current.calculateBottomPadding().toPx()
-    }
-    LaunchedEffect(height) {
-        scaffoldBottomPadding.emit(height)
-    }
-    LaunchedEffect(focused.value) {
-        if (focused.value) {
-            scaffoldBottomPadding.debounce(100).collectLatest { scaffoldBottomPadding ->
-                val size = layoutCoordinates.value?.size?.toSize() ?: return@collectLatest
-                val paddedSize = size.copy(height = size.height + scaffoldBottomPadding)
-                bringIntoViewRequester.bringIntoView(paddedSize.toRect())
-            }
         }
     }
 }
