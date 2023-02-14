@@ -52,7 +52,7 @@ internal fun TextFieldScreen(onNavigateUp: () -> Unit) {
             )
         },
         action = {
-            ButtonPrimary(onClick = {}, Modifier.fillMaxWidth()) {
+            ButtonPrimary(onClick = {}) {
                 Text("Primary Action")
             }
         },

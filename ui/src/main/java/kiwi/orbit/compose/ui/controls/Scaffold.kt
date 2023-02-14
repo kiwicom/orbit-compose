@@ -135,7 +135,7 @@ public fun ScaffoldAction(
     val inset = contentWindowInsets.asPaddingValues()
     Layout(
         content = {
-            Box {
+            Box(Modifier.fillMaxWidth(), propagateMinConstraints = true) {
                 content()
             }
         },
@@ -181,7 +181,7 @@ internal fun ScaffoldPreview() {
     Preview {
         Scaffold(
             action = {
-                ButtonPrimary(onClick = {}, Modifier.fillMaxWidth()) { Text("Test") }
+                ButtonPrimary(onClick = {}) { Text("Test") }
             },
         ) {
             CustomPlaceholder(Modifier.fillMaxSize())
