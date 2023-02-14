@@ -1,37 +1,33 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
-import kiwi.orbit.compose.ui.controls.internal.MutablePaddingValues
+import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
-
-public val LocalScaffoldPadding: ProvidableCompositionLocal<PaddingValues> =
-    staticCompositionLocalOf { PaddingValues(0.dp) }
 
 @Composable
 public fun Scaffold(
@@ -43,6 +39,7 @@ public fun Scaffold(
     actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor, action) },
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
+    contentWindowInsets: WindowInsets = WindowInsets.systemBars,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Surface(
@@ -55,6 +52,7 @@ public fun Scaffold(
             toast = { toastHost(toastHostState) },
             action = actionLayout,
             content = content,
+            contentWindowInsets = contentWindowInsets,
         )
     }
 }
@@ -65,57 +63,48 @@ private fun ScaffoldLayout(
     toast: @Composable () -> Unit,
     action: @Composable () -> Unit,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
+    contentWindowInsets: WindowInsets,
 ) {
-    val density = LocalDensity.current
-    val contentPadding = remember { MutablePaddingValues() }
-    val insets = WindowInsets.ime.union(WindowInsets.navigationBars)
-
-    Layout(
-        content = {
-            Box { topBar() }
-            Box { toast() }
-            Box { action() }
-            Box {
-                CompositionLocalProvider(
-                    LocalScaffoldPadding provides contentPadding,
-                ) {
-                    content(contentPadding)
-                }
-            }
-        },
-    ) { measurables, constraints ->
+    SubcomposeLayout { constraints ->
         val layoutWidth = constraints.maxWidth
         val layoutHeight = constraints.maxHeight
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
-        val topBarPlaceable = measurables[0].measure(looseConstraints)
+        val topBarPlaceables = subcompose(SlotTopAppBar, topBar).map { it.measure(looseConstraints) }
+        val actionPlaceables = subcompose(SlotAction, action).map { it.measure(looseConstraints) }
+        val toastPlaceables = subcompose(SlotToast, toast).map { it.measure(looseConstraints) }
 
-        val topBarHeight = topBarPlaceable.height
-        val mainConstraints = looseConstraints.copy(maxHeight = layoutHeight - topBarHeight)
-        val toastPlaceables = measurables[1].measure(mainConstraints)
-
-        val actionPlaceable = measurables[2].measure(mainConstraints)
-        val actionHeight = actionPlaceable.height
-
-        val contentPlaceable = measurables[3].measure(looseConstraints)
-
-        val topInset = topBarHeight.takeUnless { it == 0 } ?: insets.getTop(density)
-        val startInset = insets.getLeft(density, LayoutDirection.Ltr)
-        val endInset = insets.getRight(density, LayoutDirection.Ltr)
-        val bottomInset = actionHeight.takeUnless { it == 0 } ?: insets.getBottom(density)
-
-        contentPadding.updateFrom(
-            top = topInset.toDp(),
-            start = startInset.toDp(),
-            end = endInset.toDp(),
-            bottom = bottomInset.toDp(),
+        val actionHeight = actionPlaceables.maxOfOrNull { it.height } ?: 0
+        val contentTop = topBarPlaceables.maxOfOrNull { it.height } ?: 0
+        val contentBottom = (actionHeight - ActionGradientHeight.roundToPx()).coerceAtLeast(0)
+        val contentConstraints = looseConstraints.copy(
+            maxHeight = layoutHeight - contentTop - contentBottom,
         )
 
+        val insets = contentWindowInsets.asPaddingValues(this)
+        val innerPadding = PaddingValues(
+            top = if (topBarPlaceables.isEmpty()) {
+                insets.calculateTopPadding()
+            } else {
+                0.dp
+            },
+            bottom = if (actionPlaceables.isEmpty()) {
+                insets.calculateBottomPadding()
+            } else {
+                ActionGradientHeight
+            },
+            start = insets.calculateStartPadding(layoutDirection),
+            end = insets.calculateEndPadding(layoutDirection),
+        )
+        val contentPlaceables = subcompose(SlotContent) {
+            content(innerPadding)
+        }.map { it.measure(contentConstraints) }
+
         layout(layoutWidth, layoutHeight) {
-            contentPlaceable.place(0, 0)
-            topBarPlaceable.place(0, 0)
-            actionPlaceable.place(0, layoutHeight - bottomInset)
-            toastPlaceables.place((layoutWidth - toastPlaceables.measuredWidth) / 2, topBarHeight)
+            contentPlaceables.forEach { it.placeRelative(0, contentTop) }
+            topBarPlaceables.forEach { it.placeRelative(0, 0) }
+            actionPlaceables.forEach { it.placeRelative(0, layoutHeight - actionHeight) }
+            toastPlaceables.forEach { it.placeRelative(0, contentTop) }
         }
     }
 }
@@ -133,7 +122,7 @@ private fun ScaffoldAction(
     val brush = remember(density, backgroundColor) {
         Brush.verticalGradient(
             colors = listOf(Color.Transparent, backgroundColor),
-            endY = with(density) { 16.dp.toPx() },
+            endY = with(density) { ActionGradientHeight.toPx() },
         )
     }
     Layout(
@@ -142,20 +131,35 @@ private fun ScaffoldAction(
             .background(brush)
             .windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars)),
     ) { measurables, constraints ->
-        val action = measurables.firstOrNull() ?: return@Layout layout(0, 0) {}
+        val action = measurables.firstOrNull()
+            ?: return@Layout layout(0, 0) {}
 
+        val top = ActionGradientHeight.roundToPx()
         val padding = 16.dp.roundToPx()
         val placeable = action.measure(constraints.offset(horizontal = -2 * padding))
         val width = constraints.maxWidth
-        val height = placeable.height + 2 * padding
+        val height = top + placeable.height + padding
 
         layout(width, height) {
-            placeable.place(x = (width - placeable.width) / 2, y = padding)
+            placeable.place(x = (width - placeable.width) / 2, y = top)
         }
     }
 }
 
-@Preview
+private val SlotTopAppBar = 0
+private val SlotAction = 1
+private val SlotToast = 2
+private val SlotContent = 3
+
+/**
+ * Action's top gradient currently decreased from 16.dp to minimize contentPadding
+ * (auto)scrolling issues. We need a new api for scroll to be able to account for
+ * this semi-transparent area.
+ * https://issuetracker.google.com/issues/221252680
+ */
+private val ActionGradientHeight = 8.dp
+
+@OrbitPreviews
 @Composable
 internal fun ScaffoldPreview() {
     Preview {
