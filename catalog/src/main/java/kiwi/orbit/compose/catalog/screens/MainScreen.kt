@@ -126,7 +126,7 @@ internal fun MainScreen(
     ) { contentPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(160.dp),
-            contentPadding = contentPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            contentPadding = contentPadding + PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
