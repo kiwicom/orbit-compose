@@ -31,6 +31,15 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
+/**
+ * Scaffold helps layouting basic screen widgets, such as [TopAppBar], [action] and the [content].
+ *
+ * The [action] slot takes a primary action for the screen, usually a button. This slot is wrapped with
+ * [actionLayout] to provide additional insets and another visual padding and background fade.
+ *
+ * Utilize contentPadding passed to [content] lambda to handle IME, navigation or status bar paddings.
+ * If you define your own [actionLayout], do not forget to handle IME and navigation bar insets in it.
+ */
 @Composable
 public fun Scaffold(
     modifier: Modifier = Modifier,
@@ -41,7 +50,7 @@ public fun Scaffold(
     actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor, content = action) },
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
-    contentWindowInsets: WindowInsets = WindowInsets.systemBars,
+    contentWindowInsets: WindowInsets = WindowInsets.systemBars.union(WindowInsets.ime),
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     Surface(
@@ -88,10 +97,10 @@ private fun ScaffoldLayout(
 
         val contentInsets = contentWindowInsets.asPaddingValues(this)
         val innerPadding = PaddingValues(
-            top = if (topBarPlaceables.isEmpty()) {
-                contentInsets.calculateTopPadding()
-            } else {
+            top = if (contentTop > 0) {
                 0.dp
+            } else {
+                contentInsets.calculateTopPadding()
             },
             bottom = if (actionHeight > 0) {
                 actionFadeHeight.toDp()
