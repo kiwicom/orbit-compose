@@ -126,6 +126,7 @@ private fun StepperPrimitive(
                     .widthIn(min = 20.dp),
                 text = targetNumber.toString(),
                 style = OrbitTheme.typography.bodyLargeMedium,
+                emphasis = ContentEmphasis.Normal,
                 textAlign = TextAlign.Center,
             )
         }
