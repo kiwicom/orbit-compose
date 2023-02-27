@@ -21,7 +21,7 @@ dependencies {
     implementation(libs.android.sdkCommon)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
-    implementation(libs.kotlin.serialization)
+    implementation(libs.kotlin.serialization.json)
     implementation(libs.square.kotlinPoet)
     implementation(libs.javaJq)
 }

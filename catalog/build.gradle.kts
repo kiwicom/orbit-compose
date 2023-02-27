@@ -140,7 +140,7 @@ dependencies {
     implementation(libs.compose.runtimeLivedata)
     implementation(libs.compose.toolingPreview)
 
-    implementation(libs.kotlin.serialization)
+    implementation(libs.kotlin.serialization.core)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
 
