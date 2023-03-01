@@ -151,6 +151,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_storage)
 
+    public val Bank: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_bank)
+
     public val BillingDetails: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_billing_details)
@@ -791,6 +795,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_phone)
 
+    public val Pin: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_pin)
+
     public val Placeholder: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_placeholder)
@@ -1038,6 +1046,10 @@ public object Icons {
     public val TicketOutline: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_ticket_outline)
+
+    public val Tiktok: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_tiktok)
 
     public val Timelapse: Painter
         @Composable
