@@ -45,6 +45,9 @@ public fun <T> SelectField(
     info: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
+    singleLine: Boolean = true,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
     optionContent: @Composable RowScope.(option: T) -> Unit,
 ) {
     ColumnWithMinConstraints(
@@ -83,6 +86,8 @@ public fun <T> SelectField(
                     )
                 },
                 singleLine = true,
+                maxLines = maxLines,
+                minLines = minLines,
                 // Workaround util https://issuetracker.google.com/issues/207695810 gets fixed.
                 modifier = Modifier
                     .menuAnchor()

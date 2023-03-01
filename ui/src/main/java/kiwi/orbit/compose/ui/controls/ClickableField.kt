@@ -38,6 +38,8 @@ public fun ClickableField(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ColumnWithMinConstraints(modifier) {
@@ -53,6 +55,8 @@ public fun ClickableField(
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
             singleLine = singleLine,
+            maxLines = maxLines,
+            minLines = minLines,
             interactionSource = interactionSource,
         )
 
@@ -70,6 +74,8 @@ internal fun ClickableFieldBox(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean,
+    maxLines: Int,
+    minLines: Int,
     interactionSource: MutableInteractionSource,
 ) {
     val transition = updateTransition(isError, "stateTransition")
@@ -97,15 +103,12 @@ internal fun ClickableFieldBox(
     ) {
         FieldContent(
             fieldContent = {
-                if (singleLine) {
-                    Text(
-                        text = value,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                } else {
-                    Text(value)
-                }
+                Text(
+                    text = value,
+                    maxLines = maxLines,
+                    minLines = minLines,
+                    overflow = if (singleLine) TextOverflow.Ellipsis else TextOverflow.Clip,
+                )
             },
             placeholder = if (value.isEmpty()) placeholder else null,
             leadingIcon = leadingIcon,
