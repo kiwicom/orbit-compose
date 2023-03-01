@@ -1,3 +1,5 @@
+@file:Suppress("Dependency")
+
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.BorderStroke

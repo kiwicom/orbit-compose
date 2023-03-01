@@ -68,6 +68,8 @@ tasks.withType<ConfigurableKtLintTask> {
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
+
     implementation(projects.icons)
 
     implementation(libs.androidx.core)

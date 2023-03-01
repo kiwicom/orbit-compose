@@ -121,6 +121,8 @@ kotlinter {
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
+
     implementation(projects.ui)
     implementation(projects.icons)
     implementation(projects.illustrations)
