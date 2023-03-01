@@ -61,8 +61,8 @@ public fun SeatLegendUnavailable(
 @Composable
 private fun SeatLegend(
     color: Color,
-    modifier: Modifier,
     content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,

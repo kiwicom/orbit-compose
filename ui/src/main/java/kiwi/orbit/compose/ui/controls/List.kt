@@ -68,12 +68,12 @@ public fun List(
         LocalTextStyle provides OrbitTheme.typography.bodyNormal,
     ) {
         ListPrimitive(
-            modifier = modifier,
             contentColor = contentColor,
             defaultContentDescription = defaultContentDescription,
             defaultIcon = defaultIcon,
             verticalArrangement = verticalArrangement,
             content = content,
+            modifier = modifier,
         )
     }
 }
@@ -126,12 +126,12 @@ public fun ListLarge(
         LocalTextStyle provides OrbitTheme.typography.bodyLarge,
     ) {
         ListPrimitive(
-            modifier = modifier,
             contentColor = contentColor,
             defaultContentDescription = defaultContentDescription,
-            verticalArrangement = verticalArrangement,
             defaultIcon = defaultIcon,
+            verticalArrangement = verticalArrangement,
             content = content,
+            modifier = modifier,
         )
     }
 }
@@ -163,12 +163,12 @@ public fun ListScope.ListItem(
 
 @Composable
 private fun ListPrimitive(
-    modifier: Modifier,
     contentColor: Color,
     defaultContentDescription: String?,
     defaultIcon: Painter,
     verticalArrangement: Arrangement.Vertical,
     content: @Composable ListScope.() -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     CompositionLocalProvider(
         LocalContentColor provides contentColor,

@@ -69,14 +69,14 @@ internal fun ClickableFieldBox(
     value: String,
     isError: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    placeholder: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)?,
+    leadingIcon: @Composable (() -> Unit)?,
+    trailingIcon: @Composable (() -> Unit)?,
     singleLine: Boolean,
     maxLines: Int,
     minLines: Int,
     interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
     val transition = updateTransition(isError, "stateTransition")
     val borderColor = transition.animateColor(

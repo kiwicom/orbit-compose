@@ -80,7 +80,6 @@ public fun TopAppBarLarge(
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     TwoRowsTopAppBar(
-        modifier = modifier.testTag(TopAppBarSemantics.Tag),
         title = {
             Box(
                 Modifier.semantics(mergeDescendants = true) {
@@ -110,12 +109,12 @@ public fun TopAppBarLarge(
         largeElevated = largeElevated,
         elevation = elevation,
         scrollBehavior = scrollBehavior,
+        modifier = modifier.testTag(TopAppBarSemantics.Tag),
     )
 }
 
 @Composable
 private fun TwoRowsTopAppBar(
-    modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     largeTitle: @Composable () -> Unit,
     navigationIcon: @Composable () -> Unit,
@@ -123,6 +122,7 @@ private fun TwoRowsTopAppBar(
     largeElevated: Boolean,
     elevation: Dp,
     scrollBehavior: TopAppBarScrollBehavior?,
+    modifier: Modifier = Modifier,
 ) {
     check(largeElevated || (!largeElevated && scrollBehavior != null)) {
         "TopAppBarLarge non-elevated is supported only with scrolling behavior."
@@ -164,18 +164,18 @@ private fun TwoRowsTopAppBar(
                 ),
             ) {
                 TopAppBarLayout(
-                    modifier = Modifier,
                     title = title,
                     titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
+                    modifier = Modifier,
                 )
                 TopAppBarLargeLayout(
-                    modifier = Modifier,
                     scrollBehavior = scrollBehavior,
                     largeTitle = largeTitle,
                     hideTitleSemantics = hideBottomRowSemantics,
+                    modifier = Modifier,
                 )
             }
         }
@@ -192,23 +192,23 @@ private fun TwoRowsTopAppBar(
                 elevation = elevation * alphaFraction,
             ) {
                 TopAppBarLayout(
-                    modifier = Modifier.windowInsetsPadding(
-                        WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
-                    ),
                     title = title,
                     titleAlpha = alphaFraction,
                     hideTitleSemantics = hideTopRowSemantics,
                     navigationIcon = navigationIcon,
                     actions = actions,
+                    modifier = Modifier.windowInsetsPadding(
+                        WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
+                    ),
                 )
             }
             TopAppBarLargeLayout(
-                modifier = Modifier.windowInsetsPadding(
-                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal),
-                ),
                 scrollBehavior = scrollBehavior,
                 largeTitle = largeTitle,
                 hideTitleSemantics = hideBottomRowSemantics,
+                modifier = Modifier.windowInsetsPadding(
+                    WindowInsets.systemBars.only(WindowInsetsSides.Horizontal),
+                ),
             )
         }
     }
@@ -216,10 +216,10 @@ private fun TwoRowsTopAppBar(
 
 @Composable
 private fun TopAppBarLargeLayout(
-    modifier: Modifier,
     scrollBehavior: TopAppBarScrollBehavior?,
     largeTitle: @Composable () -> Unit,
     hideTitleSemantics: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     val scrollFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
     Box(

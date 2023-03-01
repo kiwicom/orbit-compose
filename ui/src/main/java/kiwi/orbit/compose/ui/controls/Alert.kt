@@ -51,10 +51,10 @@ public fun AlertInfo(
         Alert(
             icon = icon,
             title = title,
-            modifier = modifier,
             actions = actions,
             content = content,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -74,10 +74,10 @@ public fun AlertSuccess(
         Alert(
             icon = icon,
             title = title,
-            modifier = modifier,
             actions = actions,
             content = content,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -97,10 +97,10 @@ public fun AlertWarning(
         Alert(
             icon = icon,
             title = title,
-            modifier = modifier,
             actions = actions,
             content = content,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -120,10 +120,10 @@ public fun AlertCritical(
         Alert(
             icon = icon,
             title = title,
-            modifier = modifier,
             actions = actions,
             content = content,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -132,10 +132,10 @@ public fun AlertCritical(
 private fun Alert(
     icon: Painter?,
     title: @Composable ColumnScope.() -> Unit,
-    modifier: Modifier = Modifier,
-    actions: @Composable () -> Unit = {},
+    actions: @Composable () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
     suppressed: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     val bgColor = when (suppressed) {
         true -> OrbitTheme.colors.surface.subtle

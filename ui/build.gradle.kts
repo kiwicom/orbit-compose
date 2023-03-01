@@ -42,6 +42,8 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
+        disable.add("ComposeUnstableCollections") // not suitable requirement for library, for now
+        disable.add("ComposeCompositionLocalUsage") // theming uses this a lot
         abortOnError = true
         warningsAsErrors = true
     }
@@ -92,6 +94,8 @@ dependencies {
     testImplementation(libs.compose.uiTest)
     testImplementation(libs.compose.uiTestManifest)
     testImplementation(libs.hamcrest) // ui test fails if not added
+
+    lintChecks(libs.slack.composeLintChecks)
 
     lintPublish(projects.lint)
 }

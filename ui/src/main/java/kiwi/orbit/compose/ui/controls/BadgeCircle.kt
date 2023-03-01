@@ -151,7 +151,7 @@ private fun BadgeCircle(
     colors: Colors,
     subtle: Boolean,
     value: Int,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     val height = with(LocalDensity.current) {
         OrbitTheme.typography.bodySmallMedium.lineHeight.toDp() +

@@ -43,7 +43,7 @@ internal fun IconsScreen(onNavigateUp: () -> Unit) {
 }
 
 @Composable
-fun IconsScreenInner(contentPadding: PaddingValues) {
+private fun IconsScreenInner(contentPadding: PaddingValues) {
     val icons: List<Pair<String, Painter>> = Icons::class.memberProperties.map {
         it.name to (it.getter.call(Icons, currentComposer, 0) as Painter)
     }

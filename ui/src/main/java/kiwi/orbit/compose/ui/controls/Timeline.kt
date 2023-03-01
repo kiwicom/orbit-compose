@@ -52,6 +52,8 @@ public enum class TimelineItemStatus {
     Future,
 }
 
+public object TimelineScope
+
 /**
  * Timeline container.
  *
@@ -70,10 +72,12 @@ public enum class TimelineItemStatus {
 @Composable
 public fun Timeline(
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+    content: @Composable TimelineScope.() -> Unit,
 ) {
     Layout(
-        content = content,
+        content = {
+            TimelineScope.content()
+        },
         modifier = modifier,
     ) { measurables, constraints ->
         /**
@@ -154,7 +158,7 @@ public fun Timeline(
  * Always use directly inside the [Timeline] container.
  */
 @Composable
-public fun TimelineItem(
+public fun TimelineScope.TimelineItem(
     status: TimelineItemStatus,
     modifier: Modifier = Modifier,
     description: @Composable () -> Unit = {},

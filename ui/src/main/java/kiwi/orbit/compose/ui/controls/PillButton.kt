@@ -122,6 +122,7 @@ public fun PillButtonContainer(
 @Composable
 public fun PillButtonContainerScope.PillButton(
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: @Composable () -> Unit = {},
     content: @Composable () -> Unit = {},
@@ -131,7 +132,7 @@ public fun PillButtonContainerScope.PillButton(
         interactionSource = interactionSource,
         color = OrbitTheme.colors.info.normal,
         shape = CircleShape,
-        modifier = Modifier
+        modifier = modifier
             .semantics { role = Role.Button }
             .padding(16.dp),
         elevation = OrbitTheme.elevations.Level1,
