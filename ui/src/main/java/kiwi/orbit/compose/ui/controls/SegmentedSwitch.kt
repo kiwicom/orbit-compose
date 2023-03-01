@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -150,7 +150,7 @@ public fun SegmentedSwitch(
                                     vertical = 11.dp,
                                 )
                                 .semantics {
-                                    this[SemanticsProperties.Selected] = selectedIndex == index
+                                    selected = selectedIndex == index
                                 },
                             contentAlignment = Alignment.Center,
                         ) {

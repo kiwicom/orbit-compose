@@ -21,6 +21,9 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -128,7 +131,9 @@ public fun PillButtonContainerScope.PillButton(
         interactionSource = interactionSource,
         color = OrbitTheme.colors.info.normal,
         shape = CircleShape,
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .semantics { role = Role.Button }
+            .padding(16.dp),
         elevation = OrbitTheme.elevations.Level1,
     ) {
         Row(
