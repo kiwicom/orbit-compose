@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.isContainer
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -61,7 +62,9 @@ public fun Surface(
                     border = border,
                     elevation = elevation,
                 )
-                .semantics(mergeDescendants = false) {}
+                .semantics(mergeDescendants = false) {
+                    isContainer = true
+                }
                 .pointerInput(Unit) {},
             propagateMinConstraints = true,
         ) {
