@@ -63,7 +63,6 @@ import kiwi.orbit.compose.ui.controls.TimelineStatesPreview
 import kiwi.orbit.compose.ui.controls.ToastPreview
 import kiwi.orbit.compose.ui.controls.TopAppBarLargePreview
 import kiwi.orbit.compose.ui.controls.TopAppBarPreview
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -71,21 +70,20 @@ internal class ScreenshotTest {
 
     @get:Rule
     val paparazzi = Paparazzi(
-        theme = "android:Theme.Material.NoActionBar.Fullscreen",
-        renderingMode = SessionParams.RenderingMode.V_SCROLL,
+        renderingMode = SessionParams.RenderingMode.SHRINK,
     )
 
     private fun snapshot(content: @Composable () -> Unit) {
         paparazzi.unsafeUpdateConfig(
-            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false),
+            deviceConfig = PIXEL_5.copy(softButtons = false),
         )
         paparazzi.snapshot { content() }
         paparazzi.unsafeUpdateConfig(
-            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false, fontScale = 1.6f),
+            deviceConfig = PIXEL_5.copy(softButtons = false, fontScale = 1.6f),
         )
         paparazzi.snapshot(name = "big") { content() }
         paparazzi.unsafeUpdateConfig(
-            deviceConfig = PIXEL_5.copy(screenHeight = 1, softButtons = false, nightMode = NightMode.NIGHT),
+            deviceConfig = PIXEL_5.copy(softButtons = false, nightMode = NightMode.NIGHT),
         )
         paparazzi.snapshot(name = "dark") { content() }
     }
@@ -160,13 +158,11 @@ internal class ScreenshotTest {
         snapshot { CardPreview() }
     }
 
-    @Ignore("https://github.com/cashapp/paparazzi/issues/456")
     @Test
     fun checkbox() {
         snapshot { CheckboxPreview() }
     }
 
-    @Ignore("https://github.com/cashapp/paparazzi/issues/456")
     @Test
     fun checkboxField() {
         snapshot { CheckboxFieldPreview() }
@@ -317,7 +313,6 @@ internal class ScreenshotTest {
         snapshot { SwitchPreview() }
     }
 
-    @Ignore("Weirdly squashed, probably issue with subcompose layout")
     @Test
     fun tabs() {
         snapshot { TabsPreview() }
