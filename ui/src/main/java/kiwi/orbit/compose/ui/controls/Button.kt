@@ -34,8 +34,8 @@ public fun ButtonPrimary(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
         content = content,
     )
 }
@@ -59,8 +59,8 @@ public fun ButtonPrimarySubtle(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.primary.subtle,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
         content = content,
     )
 }
@@ -84,8 +84,8 @@ public fun ButtonSecondary(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.surface.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
         content = content,
     )
 }
@@ -109,8 +109,8 @@ public fun ButtonCritical(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
         content = content,
     )
 }
@@ -134,8 +134,8 @@ public fun ButtonCriticalSubtle(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = OrbitTheme.colors.critical.subtle,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
         content = content,
     )
 }
@@ -159,10 +159,10 @@ public fun ButtonBundleBasic(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Unspecified,
+        interactionSource = interactionSource,
+        modifier = modifier,
         backgroundBrush = OrbitTheme.colors.bundle.basicGradient,
         contentColor = OrbitTheme.colors.bundle.onBasic,
-        modifier = modifier,
-        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -186,10 +186,10 @@ public fun ButtonBundleMedium(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Unspecified,
+        interactionSource = interactionSource,
+        modifier = modifier,
         backgroundBrush = OrbitTheme.colors.bundle.mediumGradient,
         contentColor = OrbitTheme.colors.bundle.onMedium,
-        modifier = modifier,
-        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -213,10 +213,10 @@ public fun ButtonBundleTop(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Unspecified,
+        interactionSource = interactionSource,
+        modifier = modifier,
         backgroundBrush = OrbitTheme.colors.bundle.topGradient,
         contentColor = OrbitTheme.colors.bundle.onTop,
-        modifier = modifier,
-        interactionSource = interactionSource,
         content = content,
     )
 }
@@ -225,9 +225,9 @@ public fun ButtonBundleTop(
 internal fun ButtonLargePrimitive(
     onClick: () -> Unit,
     backgroundColor: Color,
+    interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
     backgroundBrush: Brush? = null,
-    interactionSource: MutableInteractionSource,
     contentColor: Color = contentColorFor(backgroundColor),
     content: @Composable RowScope.() -> Unit,
 ) {

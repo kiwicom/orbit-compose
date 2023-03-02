@@ -46,8 +46,8 @@ public fun AlertInlineInfo(
             title = title,
             action = action,
             onActionClick = onActionClick,
-            modifier = modifier,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -69,8 +69,8 @@ public fun AlertInlineSuccess(
             title = title,
             action = action,
             onActionClick = onActionClick,
-            modifier = modifier,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -92,8 +92,8 @@ public fun AlertInlineWarning(
             title = title,
             action = action,
             onActionClick = onActionClick,
-            modifier = modifier,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -115,8 +115,8 @@ public fun AlertInlineCritical(
             title = title,
             action = action,
             onActionClick = onActionClick,
-            modifier = modifier,
             suppressed = suppressed,
+            modifier = modifier,
         )
     }
 }
@@ -127,8 +127,8 @@ private fun AlertInline(
     title: @Composable () -> Unit,
     action: @Composable RowScope.() -> Unit,
     onActionClick: () -> Unit,
-    modifier: Modifier = Modifier,
     suppressed: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     val bgColor = when (suppressed) {
         true -> OrbitTheme.colors.surface.subtle

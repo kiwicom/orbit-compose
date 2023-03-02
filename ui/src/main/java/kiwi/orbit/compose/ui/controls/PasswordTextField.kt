@@ -50,7 +50,6 @@ public fun PasswordTextField(
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier,
         enabled = enabled,
         readOnly = readOnly,
         label = label,
@@ -92,6 +91,7 @@ public fun PasswordTextField(
             false -> PasswordVisualTransformation()
         },
         interactionSource = interactionSource,
+        modifier = modifier,
     )
 }
 

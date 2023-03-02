@@ -63,7 +63,6 @@ public fun TextField(
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier,
         enabled = enabled,
         readOnly = readOnly,
         label = label,
@@ -82,6 +81,7 @@ public fun TextField(
         minLines = minLines,
         visualTransformation = visualTransformation,
         interactionSource = interactionSource,
+        modifier = modifier,
     )
 }
 
@@ -89,7 +89,6 @@ public fun TextField(
 internal fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier,
     enabled: Boolean,
     readOnly: Boolean,
     label: @Composable (() -> Unit)?,
@@ -108,6 +107,7 @@ internal fun TextField(
     minLines: Int,
     visualTransformation: VisualTransformation,
     interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     ColumnWithMinConstraints(

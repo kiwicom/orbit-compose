@@ -49,13 +49,13 @@ public fun ListChoice(
 ) {
     ListChoicePrimitive(
         onClick,
-        modifier,
         icon,
         description,
         trailingIcon,
         withSeparator,
         interactionSource,
         title,
+        modifier,
     )
 }
 
@@ -79,26 +79,26 @@ public fun ListChoice(
 ) {
     ListChoicePrimitive(
         onClick = null,
-        modifier,
         icon,
         description,
         trailingIcon,
         withSeparator,
         interactionSource,
         title,
+        modifier,
     )
 }
 
 @Composable
 private fun ListChoicePrimitive(
     onClick: (() -> Unit)?,
-    modifier: Modifier,
     icon: @Composable () -> Unit,
     description: @Composable () -> Unit,
     trailingIcon: @Composable () -> Unit,
     withSeparator: Boolean,
     interactionSource: MutableInteractionSource,
     title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Layout(
         modifier = modifier

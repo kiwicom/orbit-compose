@@ -119,7 +119,7 @@ private fun SeatContainer(
     label: @Composable () -> Unit,
     price: @Composable () -> Unit,
     onClick: (() -> Unit)?,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
@@ -130,7 +130,8 @@ private fun SeatContainer(
                 enabled = onClick != null,
                 indication = null,
                 role = Role.Button,
-            ) { onClick?.invoke() }
+                onClick = { onClick?.invoke() },
+            )
             .semantics {
                 this.selected = selected
             },

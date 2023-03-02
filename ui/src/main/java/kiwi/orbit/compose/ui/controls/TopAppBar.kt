@@ -90,7 +90,6 @@ public fun TopAppBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     SingleRowTopAppBar(
-        modifier = modifier.testTag(TopAppBarSemantics.Tag),
         title = {
             Box(
                 Modifier.semantics(mergeDescendants = true) {
@@ -111,18 +110,19 @@ public fun TopAppBar(
         elevation = elevation,
         extraContent = extraContent,
         scrollBehavior = scrollBehavior,
+        modifier = modifier.testTag(TopAppBarSemantics.Tag),
     )
 }
 
 @Composable
 private fun SingleRowTopAppBar(
-    modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable () -> Unit,
     elevation: Dp,
     extraContent: @Composable () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior?,
+    modifier: Modifier = Modifier,
 ) {
     // Set up support for resizing the top app bar when vertically dragging the bar itself.
     val appBarDragModifier = if (scrollBehavior?.isPinned == false) {
@@ -155,15 +155,15 @@ private fun SingleRowTopAppBar(
                 .windowInsetsPadding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)),
         ) {
             TopAppBarLayout(
-                modifier = when (scrollBehavior) {
-                    null -> Modifier
-                    else -> Modifier.scrollBehaviorLayout(scrollBehavior)
-                },
                 title = title,
                 titleAlpha = 1f,
                 hideTitleSemantics = false,
                 navigationIcon = navigationIcon,
                 actions = actions,
+                modifier = when (scrollBehavior) {
+                    null -> Modifier
+                    else -> Modifier.scrollBehaviorLayout(scrollBehavior)
+                },
             )
             extraContent()
         }
@@ -186,12 +186,12 @@ internal fun Modifier.scrollBehaviorLayout(
 
 @Composable
 internal fun TopAppBarLayout(
-    modifier: Modifier,
     title: @Composable () -> Unit,
     titleAlpha: Float,
     hideTitleSemantics: Boolean,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Layout(
         modifier = modifier,

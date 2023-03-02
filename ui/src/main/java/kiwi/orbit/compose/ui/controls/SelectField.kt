@@ -70,7 +70,6 @@ public fun <T> SelectField(
                 value = value,
                 isError = error != null,
                 onClick = {},
-                interactionSource = interactionSource,
                 placeholder = placeholder,
                 leadingIcon = leadingIcon,
                 trailingIcon = {
@@ -88,6 +87,7 @@ public fun <T> SelectField(
                 singleLine = true,
                 maxLines = maxLines,
                 minLines = minLines,
+                interactionSource = interactionSource,
                 // Workaround util https://issuetracker.google.com/issues/207695810 gets fixed.
                 modifier = Modifier
                     .menuAnchor()

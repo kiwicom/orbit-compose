@@ -30,7 +30,7 @@ public fun BadgeNeutral(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asNeutralTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asNeutralTheme(), subtle = true, icon, content, modifier)
 }
 
 /**
@@ -42,7 +42,7 @@ public fun BadgeNeutralSubtle(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = true, icon, content, modifier)
 }
 
 /**
@@ -54,7 +54,7 @@ public fun BadgeNeutralStrong(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = false, modifier, icon, content)
+    Badge(LocalColors.current.asNeutralSubtleStrongTheme(), subtle = false, icon, content, modifier)
 }
 
 /**
@@ -66,7 +66,7 @@ public fun BadgeInfo(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asInfoTheme(), subtle = false, modifier, icon, content)
+    Badge(LocalColors.current.asInfoTheme(), subtle = false, icon, content, modifier)
 }
 
 /**
@@ -78,7 +78,7 @@ public fun BadgeInfoSubtle(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asInfoTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asInfoTheme(), subtle = true, icon, content, modifier)
 }
 
 /**
@@ -90,7 +90,7 @@ public fun BadgeSuccess(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asSuccessTheme(), subtle = false, modifier, icon, content)
+    Badge(LocalColors.current.asSuccessTheme(), subtle = false, icon, content, modifier)
 }
 
 /**
@@ -102,7 +102,7 @@ public fun BadgeSuccessSubtle(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asSuccessTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asSuccessTheme(), subtle = true, icon, content, modifier)
 }
 
 /**
@@ -114,7 +114,7 @@ public fun BadgeWarning(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asWarningTheme(), subtle = false, modifier, icon, content)
+    Badge(LocalColors.current.asWarningTheme(), subtle = false, icon, content, modifier)
 }
 
 /**
@@ -126,7 +126,7 @@ public fun BadgeWarningSubtle(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asWarningTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asWarningTheme(), subtle = true, icon, content, modifier)
 }
 
 /**
@@ -138,7 +138,7 @@ public fun BadgeCritical(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asCriticalTheme(), subtle = false, modifier, icon, content)
+    Badge(LocalColors.current.asCriticalTheme(), subtle = false, icon, content, modifier)
 }
 
 /**
@@ -150,7 +150,7 @@ public fun BadgeCriticalSubtle(
     icon: @Composable RowScope.() -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    Badge(LocalColors.current.asCriticalTheme(), subtle = true, modifier, icon, content)
+    Badge(LocalColors.current.asCriticalTheme(), subtle = true, icon, content, modifier)
 }
 
 @Composable
@@ -205,9 +205,9 @@ public fun BadgeBundleTop(
 private fun Badge(
     colors: Colors,
     subtle: Boolean,
-    modifier: Modifier,
     icon: @Composable RowScope.() -> Unit,
     content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     CompositionLocalProvider(LocalColors provides colors) {
         ThemedSurface(

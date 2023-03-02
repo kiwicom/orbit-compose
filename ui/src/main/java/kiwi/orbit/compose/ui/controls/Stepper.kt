@@ -78,8 +78,8 @@ public fun Stepper(
         onValueChange = onValueChange,
         addContentDescription = addContentDescription,
         removeContentDescription = removeContentDescription,
-        modifier = modifier,
         valueValidator = valueValidator,
+        modifier = modifier,
     )
 }
 
@@ -91,8 +91,8 @@ private fun StepperPrimitive(
     onValueChange: (Int) -> Unit,
     addContentDescription: String,
     removeContentDescription: String,
-    modifier: Modifier = Modifier,
     valueValidator: ((Int) -> Boolean)?,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,

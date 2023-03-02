@@ -38,7 +38,6 @@ internal fun DialogMaterialTimePicker(navController: NavController) {
     val state = rememberTimePickerState()
 
     TimePickerDialog(
-        title = "Select Time",
         onCancel = { navController.popBackStack() },
         onConfirm = {
             navController.setResult(
@@ -59,7 +58,6 @@ internal fun DialogMaterialTimePicker(navController: NavController) {
 @Suppress("Dependency")
 @Composable
 private fun TimePickerDialog(
-    title: String = "Select Time",
     onCancel: () -> Unit,
     onConfirm: () -> Unit,
     toggle: @Composable RowScope.() -> Unit = {},
@@ -87,7 +85,7 @@ private fun TimePickerDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 20.dp),
-                    text = title,
+                    text = "Select Time",
                     style = MaterialTheme.typography.labelMedium,
                 )
                 content()

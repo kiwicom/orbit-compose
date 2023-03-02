@@ -47,7 +47,7 @@ public fun Scaffold(
     action: @Composable () -> Unit = {},
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
-    actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor, content = action) },
+    actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor = backgroundColor, content = action) },
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
     contentWindowInsets: WindowInsets = WindowInsets.systemBars.union(WindowInsets.ime),
@@ -129,6 +129,7 @@ private fun ScaffoldLayout(
  */
 @Composable
 public fun ScaffoldAction(
+    modifier: Modifier = Modifier,
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentWindowInsets: WindowInsets = WindowInsets.systemBars.union(WindowInsets.ime),
     fadeHeight: Dp = DefaultActionFadeHeight,
@@ -143,12 +144,12 @@ public fun ScaffoldAction(
     }
     val inset = contentWindowInsets.asPaddingValues()
     Layout(
+        modifier = modifier.background(brush),
         content = {
             Box(Modifier.fillMaxWidth(), propagateMinConstraints = true) {
                 content()
             }
         },
-        modifier = Modifier.background(brush),
     ) { measurables, constraints ->
         val padding = 16.dp.roundToPx()
         val action = measurables.first().measure(

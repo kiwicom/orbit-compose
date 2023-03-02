@@ -37,9 +37,9 @@ public fun ButtonLinkPrimary(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.primary.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
+        contentColor = OrbitTheme.colors.primary.normal,
         content = content,
     )
 }
@@ -58,9 +58,9 @@ public fun ButtonTextLinkPrimary(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
+        modifier = modifier,
         text = text,
         onClick = onClick,
-        modifier = modifier,
         color = OrbitTheme.colors.primary.normal,
         interactionSource = interactionSource,
     )
@@ -81,9 +81,9 @@ public fun ButtonLinkSecondary(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.content.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
+        contentColor = OrbitTheme.colors.content.normal,
         content = content,
     )
 }
@@ -102,9 +102,9 @@ public fun ButtonTextLinkSecondary(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
+        modifier = modifier,
         text = text,
         onClick = onClick,
-        modifier = modifier,
         color = OrbitTheme.colors.content.normal,
         interactionSource = interactionSource,
     )
@@ -125,9 +125,9 @@ public fun ButtonLinkCritical(
     ButtonLargePrimitive(
         onClick = onClick,
         backgroundColor = Color.Transparent,
-        contentColor = OrbitTheme.colors.critical.normal,
-        modifier = modifier,
         interactionSource = interactionSource,
+        modifier = modifier,
+        contentColor = OrbitTheme.colors.critical.normal,
         content = content,
     )
 }
@@ -146,9 +146,9 @@ public fun ButtonTextLinkCritical(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     ButtonTextLink(
+        modifier = modifier,
         text = text,
         onClick = onClick,
-        modifier = modifier,
         color = OrbitTheme.colors.critical.normal,
         interactionSource = interactionSource,
     )
@@ -158,9 +158,9 @@ public fun ButtonTextLinkCritical(
 private fun ButtonTextLink(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier,
     color: Color,
     interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
     CompositionLocalProvider(
         LocalContentColor provides color,
