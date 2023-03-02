@@ -92,6 +92,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
 
     buildFeatures {
@@ -121,6 +122,8 @@ kotlinter {
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
+
     implementation(projects.ui)
     implementation(projects.icons)
     implementation(projects.illustrations)
@@ -140,6 +143,7 @@ dependencies {
     implementation(libs.compose.runtimeLivedata)
     implementation(libs.compose.toolingPreview)
 
+    implementation(libs.kotlin.datetime)
     implementation(libs.kotlin.serialization.core)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
@@ -148,6 +152,8 @@ dependencies {
     implementation(libs.accompanist.systemController)
     implementation(libs.accompanist.pager)
     implementation(libs.kiwi.navigationComposeTyped)
+
+    coreLibraryDesugaring(libs.android.desugarJdk)
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.customView)

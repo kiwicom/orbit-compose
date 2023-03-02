@@ -1,30 +1,15 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.annotation.FloatRange
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.SpringSpec
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.progressSemantics
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
@@ -33,7 +18,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 /**
  * Linear progress indicator.
  *
- * Renders [LinearProgressIndicatorDefaultHeight] tall rounded line in maximum available width.
+ * Renders progress indicator in maximum available width.
  * To change the height or width, pass [modifier] with custom sizing.
  */
 @Composable
@@ -43,50 +28,14 @@ public fun LinearProgressIndicator(
     color: Color = OrbitTheme.colors.primary.strong,
     backgroundColor: Color = OrbitTheme.colors.surface.normal,
 ) {
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress.coerceIn(0f, 1f),
-        animationSpec = SpringSpec(
-            dampingRatio = Spring.DampingRatioNoBouncy,
-            stiffness = Spring.StiffnessVeryLow,
-            // The default threshold is 0.01, or 1% of the overall progress range, which is quite
-            // large and noticeable. We purposefully choose a smaller threshold.
-            visibilityThreshold = 1 / 1000f,
-        ),
-    )
-    Canvas(
-        modifier = modifier
-            .height(LinearProgressIndicatorDefaultHeight)
-            .fillMaxWidth()
-            .clip(CircleShape)
-            .background(backgroundColor)
-            .progressSemantics(progress.coerceIn(0f, 1f)),
-    ) {
-        drawLinearIndicator(
-            color = color,
-            endFraction = animatedProgress,
-        )
-    }
-}
-
-internal fun DrawScope.drawLinearIndicator(
-    color: Color,
-    startFraction: Float = 0f,
-    endFraction: Float,
-) {
-    val isLtr = layoutDirection == LayoutDirection.Ltr
-    val barStart = (if (isLtr) startFraction else 1f - endFraction) * size.width
-    val barEnd = (if (isLtr) endFraction else 1f - startFraction) * size.width
-
-    // Progress line
-    drawRoundRect(
+    androidx.compose.material3.LinearProgressIndicator(
+        progress = progress,
+        modifier = modifier.fillMaxWidth(),
         color = color,
-        topLeft = Offset(barStart, 0f),
-        size = Size(barEnd - barStart, size.height),
-        cornerRadius = CornerRadius(size.height / 2f, size.height / 2f),
+        trackColor = backgroundColor,
+        strokeCap = StrokeCap.Round,
     )
 }
-
-internal val LinearProgressIndicatorDefaultHeight = 4.dp
 
 @OrbitPreviews
 @Composable
@@ -109,14 +58,6 @@ internal fun LinearProgressIndicatorPreview() {
                 color = OrbitTheme.colors.primary.normal,
                 backgroundColor = OrbitTheme.colors.primary.subtle,
             )
-            CompositionLocalProvider(
-                LocalLayoutDirection provides when (LocalLayoutDirection.current) {
-                    LayoutDirection.Ltr -> LayoutDirection.Rtl
-                    LayoutDirection.Rtl -> LayoutDirection.Ltr
-                },
-            ) {
-                LinearProgressIndicator(0.5f)
-            }
         }
     }
 }

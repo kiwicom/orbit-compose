@@ -37,10 +37,12 @@ public fun PasswordTextField(
     info: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
+    onLeadingIconClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
-    maxLines: Int = Int.MAX_VALUE,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     var showRawInput by rememberSaveable { mutableStateOf(false) }
@@ -54,8 +56,15 @@ public fun PasswordTextField(
         label = label,
         error = error,
         info = info,
+        additionalContent = {
+            if (strengthContent != null) {
+                Spacer(Modifier.height(4.dp))
+                strengthContent()
+            }
+        },
         placeholder = placeholder,
         leadingIcon = leadingIcon,
+        onLeadingIconClick = onLeadingIconClick,
         trailingIcon = {
             Icon(
                 when (showRawInput) {
@@ -77,17 +86,12 @@ public fun PasswordTextField(
         keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
+        minLines = minLines,
         visualTransformation = when (showRawInput) {
             true -> VisualTransformation.None
             false -> PasswordVisualTransformation()
         },
         interactionSource = interactionSource,
-        additionalContent = {
-            if (strengthContent != null) {
-                Spacer(Modifier.height(4.dp))
-                strengthContent()
-            }
-        },
     )
 }
 

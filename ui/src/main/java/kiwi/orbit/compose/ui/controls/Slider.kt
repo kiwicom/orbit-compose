@@ -22,7 +22,7 @@ import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.SliderPositions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -94,7 +94,7 @@ public fun Slider(
                 valueLabel(value)
             }
             CompositionLocalProvider(
-                LocalMinimumTouchTargetEnforcement provides false,
+                LocalMinimumInteractiveComponentEnforcement provides false,
             ) {
                 androidx.compose.material3.Slider(
                     value = value,
@@ -196,7 +196,6 @@ private fun Thumb(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Track(enabled: Boolean, sliderPositions: SliderPositions) {
     val activeTrackColor = when (enabled) {
@@ -238,13 +237,13 @@ private fun Track(enabled: Boolean, sliderPositions: SliderPositions) {
         )
         val sliderValueEnd = Offset(
             sliderStart.x +
-                (sliderEnd.x - sliderStart.x) * sliderPositions.positionFraction,
+                (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.endInclusive,
             center.y,
         )
 
         val sliderValueStart = Offset(
             sliderStart.x +
-                (sliderEnd.x - sliderStart.x) * 0f,
+                (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.start,
             center.y,
         )
 
@@ -256,8 +255,8 @@ private fun Track(enabled: Boolean, sliderPositions: SliderPositions) {
             StrokeCap.Round,
         )
         sliderPositions.tickFractions.groupBy {
-            it > sliderPositions.positionFraction ||
-                it < 0f
+            it > sliderPositions.activeRange.endInclusive ||
+                it < sliderPositions.activeRange.start
         }.forEach { (outsideFraction, list) ->
             drawPoints(
                 list.map {
