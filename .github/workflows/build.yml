@@ -54,11 +54,10 @@ jobs:
         with:
           name: shots-results
           path: ui/out/failures
-# Reenable when Dokka 1.8 gets released
-#      - name: Build Dokka HTML
-#        if: ${{ github.ref == 'refs/heads/main' }}
-#        run: |
-#          ./gradlew :dokkaHtmlMultiModule
+      - name: Build Dokka HTML
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          ./gradlew :dokkaHtmlMultiModule
       - name: Deploy Dokka HTML
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
