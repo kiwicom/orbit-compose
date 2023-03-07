@@ -2,6 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.runtime.Composable
@@ -47,7 +49,12 @@ public fun Scaffold(
     action: @Composable () -> Unit = {},
     backgroundColor: Color = OrbitTheme.colors.surface.main,
     contentColor: Color = contentColorFor(backgroundColor),
-    actionLayout: @Composable () -> Unit = { ScaffoldAction(backgroundColor = backgroundColor, content = action) },
+    actionLayout: @Composable () -> Unit = {
+        ScaffoldAction(
+            backgroundColor = backgroundColor,
+            content = action,
+        )
+    },
     toastHostState: ToastHostState = remember { ToastHostState() },
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
     contentWindowInsets: WindowInsets = WindowInsets.systemBars.union(WindowInsets.ime),
@@ -68,6 +75,7 @@ public fun Scaffold(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ScaffoldLayout(
     topBar: @Composable () -> Unit,
@@ -76,6 +84,7 @@ private fun ScaffoldLayout(
     content: @Composable (contentPadding: PaddingValues) -> Unit,
     contentWindowInsets: WindowInsets,
 ) {
+    val imeOpened = WindowInsets.isImeVisible
     SubcomposeLayout { constraints ->
         val layoutWidth = constraints.maxWidth
         val layoutHeight = constraints.maxHeight
@@ -89,13 +98,22 @@ private fun ScaffoldLayout(
         val actionFadeHeight = actionPlaceables.firstOrNull()?.get(ActionFadeLine)?.let { value ->
             if (value == AlignmentLine.Unspecified) 0 else value
         } ?: 0
+
+        val contentInsets = contentWindowInsets.asPaddingValues(this)
         val contentTop = topBarPlaceables.maxOfOrNull { it.height } ?: 0
-        val contentBottom = (actionHeight - actionFadeHeight).coerceAtLeast(0)
+        val contentBottom = if (actionHeight > 0) {
+            (actionHeight - actionFadeHeight).coerceAtLeast(0)
+        } else {
+            if (imeOpened) {
+                contentInsets.calculateBottomPadding().roundToPx()
+            } else {
+                0
+            }
+        }
         val contentConstraints = looseConstraints.copy(
             maxHeight = layoutHeight - contentTop - contentBottom,
         )
 
-        val contentInsets = contentWindowInsets.asPaddingValues(this)
         val innerPadding = PaddingValues(
             top = if (contentTop > 0) {
                 0.dp
@@ -105,7 +123,11 @@ private fun ScaffoldLayout(
             bottom = if (actionHeight > 0) {
                 actionFadeHeight.toDp()
             } else {
-                contentInsets.calculateBottomPadding()
+                if (imeOpened) {
+                    0.dp
+                } else {
+                    contentInsets.calculateBottomPadding()
+                }
             },
             start = contentInsets.calculateStartPadding(layoutDirection),
             end = contentInsets.calculateEndPadding(layoutDirection),
