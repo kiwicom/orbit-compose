@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.Icon
+import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.PasswordStrengthColor
 import kiwi.orbit.compose.ui.controls.PasswordStrengthIndicator
 import kiwi.orbit.compose.ui.controls.PasswordTextField
@@ -44,16 +45,30 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 
 @Composable
 internal fun TextFieldScreen(onNavigateUp: () -> Unit) {
+    var showAction by rememberSaveable { mutableStateOf(true) }
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Text Field") },
                 onNavigateUp = onNavigateUp,
+                actions = {
+                    IconButton(onClick = { showAction = !showAction }) {
+                        Icon(
+                            painter = when (showAction) {
+                                true -> Icons.Visibility
+                                false -> Icons.VisibilityOff
+                            },
+                            contentDescription = null,
+                        )
+                    }
+                },
             )
         },
         action = {
-            ButtonPrimary(onClick = {}) {
-                Text("Primary Action")
+            if (showAction) {
+                ButtonPrimary(onClick = {}) {
+                    Text("Primary Action")
+                }
             }
         },
     ) { contentPadding: PaddingValues ->
