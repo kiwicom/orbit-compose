@@ -100,7 +100,7 @@ Image(painter = Illustrations.AppKiwi, contentDescription = "app_kiwi")
 
 ## Documentation
 
-You can take a look at our component Catalog by downloading and installing
+You can check out our component Catalog by downloading and installing
 our [showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) from Google
 Play.
 
@@ -109,7 +109,7 @@ all possible types and composables in our library.
 
 ## Contributing
 
-Check our [contributing guidelines](./contributing.md) to see how you can participate in this project.
+Read our [contributing guidelines](./contributing.md) to see how you can participate in this project.
 
 ## Feedback
 
