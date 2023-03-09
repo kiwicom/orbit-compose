@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -35,6 +37,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.field.FieldMessage
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
@@ -46,6 +49,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  *
  * Renders a segmented switch displaying [optionFirst] and [optionSecond].
  * Modify via custom passed [modifier].
+ * An information or error footer can be added to the field.
  *
  * Example:
  *
@@ -57,6 +61,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  *   selectedIndex = selectedIndex,
  *   onOptionClick = { index -> selectedIndex = index },
  *   label = { Text("Feature") },
+ *   info = { Text("This is contextual information.") },
  * )
  * ```
  */
@@ -68,6 +73,8 @@ public fun SegmentedSwitch(
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
+    error: @Composable (() -> Unit)? = null,
+    info: @Composable (() -> Unit)? = null,
 ) {
     SegmentedSwitch(
         onOptionClick = onOptionClick,
@@ -75,6 +82,8 @@ public fun SegmentedSwitch(
         selectedIndex = selectedIndex,
         modifier = modifier,
         label = label,
+        error = error,
+        info = info,
     )
 }
 
@@ -83,6 +92,7 @@ public fun SegmentedSwitch(
  *
  * Renders a segmented switch displaying [options].
  * Modify via custom passed [modifier].
+ * An information or error footer can be added to the field.
  *
  * Example:
  *
@@ -97,6 +107,11 @@ public fun SegmentedSwitch(
  *   selectedIndex = selectedIndex,
  *   onOptionClick = { index -> selectedIndex = index },
  *   label = { Text("Options") },
+ *   error = if (selectedIndex == null) {
+ *     { Text("Please select an option.") }
+ *   } else {
+ *     null
+ *   },
  * )
  * ```
  */
@@ -107,6 +122,8 @@ public fun SegmentedSwitch(
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
+    error: @Composable (() -> Unit)? = null,
+    info: @Composable (() -> Unit)? = null,
 ) {
     Column(
         modifier = modifier,
@@ -121,9 +138,15 @@ public fun SegmentedSwitch(
         Box(
             modifier = Modifier.height(IntrinsicSize.Min),
         ) {
+            val borderColor = if (error == null) {
+                OrbitTheme.colors.surface.strong
+            } else {
+                OrbitTheme.colors.critical.normal
+            }
+
             Surface(
                 shape = OrbitTheme.shapes.normal,
-                border = BorderStroke(1.dp, OrbitTheme.colors.surface.strong),
+                border = BorderStroke(1.dp, borderColor),
             ) {
                 Row(
                     modifier = Modifier
@@ -133,6 +156,7 @@ public fun SegmentedSwitch(
                     options.forEachIndexed { index, option ->
                         if (index != 0) {
                             VerticalDivider(
+                                hasError = error != null,
                                 index = index,
                                 selectedIndex = selectedIndex,
                             )
@@ -176,17 +200,24 @@ public fun SegmentedSwitch(
                 )
             }
         }
+
+        FieldMessage(
+            error = error,
+            info = info,
+        )
     }
 }
 
 @Composable
 private fun VerticalDivider(
+    hasError: Boolean,
     index: Int,
     selectedIndex: Int?,
 ) {
     val color by animateColorAsState(
-        targetValue = when (selectedIndex) {
-            index - 1, index -> Color.Unspecified
+        targetValue = when {
+            hasError -> OrbitTheme.colors.critical.normal
+            selectedIndex == index - 1 || selectedIndex == index -> Color.Unspecified
             else -> OrbitTheme.colors.surface.strong
         },
     )
@@ -229,14 +260,16 @@ private fun SelectionOutline(
 @OrbitPreviews
 @Composable
 internal fun SegmentedSwitchPreview() {
-    Preview {
+    Preview(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState()),
+    ) {
         SegmentedSwitchUnselectedPreview()
-        SegmentedSwitchSelectedFirstPreview()
-        SegmentedSwitchSelectedSecondPreview()
+        SegmentedSwitchSelectedPreview()
         SegmentedSwitchThreeOptionsUnselectedPreview()
-        SegmentedSwitchThreeOptionsSelectedFirstPreview()
-        SegmentedSwitchThreeOptionsSelectedSecondPreview()
-        SegmentedSwitchThreeOptionsSelectedThirdPreview()
+        SegmentedSwitchThreeOptionsSelectedPreview()
+        SegmentedSwitchWithInfoPreview()
+        SegmentedSwitchWithErrorPreview()
     }
 }
 
@@ -253,7 +286,7 @@ private fun SegmentedSwitchUnselectedPreview() {
 }
 
 @Composable
-private fun SegmentedSwitchSelectedFirstPreview() {
+private fun SegmentedSwitchSelectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(0) }
     SegmentedSwitch(
         optionFirst = { Text("Male") },
@@ -261,18 +294,6 @@ private fun SegmentedSwitchSelectedFirstPreview() {
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
-    )
-}
-
-@Composable
-private fun SegmentedSwitchSelectedSecondPreview() {
-    var selectedIndex by remember { mutableStateOf<Int?>(1) }
-    SegmentedSwitch(
-        optionFirst = { Text("San\nFrancisco") },
-        optionSecond = { Text("Sacramento") },
-        selectedIndex = selectedIndex,
-        onOptionClick = { index -> selectedIndex = index },
-        label = { Text("City") },
     )
 }
 
@@ -292,22 +313,7 @@ private fun SegmentedSwitchThreeOptionsUnselectedPreview() {
 }
 
 @Composable
-private fun SegmentedSwitchThreeOptionsSelectedFirstPreview() {
-    var selectedIndex by remember { mutableStateOf<Int?>(0) }
-    SegmentedSwitch(
-        options = listOf(
-            { Text("Off") },
-            { Text("On") },
-            { Text("Remote") },
-        ),
-        selectedIndex = selectedIndex,
-        onOptionClick = { index -> selectedIndex = index },
-        label = { Text("Feature") },
-    )
-}
-
-@Composable
-private fun SegmentedSwitchThreeOptionsSelectedSecondPreview() {
+private fun SegmentedSwitchThreeOptionsSelectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(1) }
     SegmentedSwitch(
         options = listOf(
@@ -322,7 +328,7 @@ private fun SegmentedSwitchThreeOptionsSelectedSecondPreview() {
 }
 
 @Composable
-private fun SegmentedSwitchThreeOptionsSelectedThirdPreview() {
+private fun SegmentedSwitchWithInfoPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(2) }
     SegmentedSwitch(
         options = listOf(
@@ -333,5 +339,21 @@ private fun SegmentedSwitchThreeOptionsSelectedThirdPreview() {
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Feature") },
+        info = { Text("This is valuable information.") },
+    )
+}
+
+@Composable
+private fun SegmentedSwitchWithErrorPreview() {
+    SegmentedSwitch(
+        options = listOf(
+            { Text("Off") },
+            { Text("On") },
+            { Text("Remote") },
+        ),
+        selectedIndex = null,
+        onOptionClick = {},
+        label = { Text("Feature") },
+        error = { Text("You haven't completed this step.") },
     )
 }
