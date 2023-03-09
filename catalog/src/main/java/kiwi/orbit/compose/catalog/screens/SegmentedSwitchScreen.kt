@@ -73,5 +73,42 @@ private fun SegmentedSwitchScreenInner() {
             },
             label = { Text("Feature") },
         )
+
+        var selectedIndexInfo by rememberSaveable { mutableStateOf<Int?>(null) }
+        val infoList = listOf(
+            "Pizza was invented in Naples, Italy.",
+            "Burgers come from Hamburg, Germany.",
+        )
+        SegmentedSwitch(
+            onOptionClick = { index ->
+                selectedIndexInfo = index.takeIf { index != selectedIndexInfo }
+            },
+            options = listOf(
+                { Text("Pizza") },
+                { Text("Burgers") },
+            ),
+            selectedIndex = selectedIndexInfo,
+            label = { Text("Food info") },
+            info = selectedIndexInfo?.let { { Text(infoList[it]) } },
+        )
+
+        var selectedIndexError by rememberSaveable { mutableStateOf<Int?>(null) }
+        SegmentedSwitch(
+            onOptionClick = { index ->
+                selectedIndexError = index.takeIf { index != selectedIndexError }
+            },
+            options = listOf(
+                { Text("Star Trek") },
+                { Text("Star Wars") },
+                { Text("Stargate") },
+            ),
+            selectedIndex = selectedIndexError,
+            label = { Text("Sci-fi shows") },
+            error = if (selectedIndexError == null) {
+                { Text("Please select an option.") }
+            } else {
+                null
+            },
+        )
     }
 }
