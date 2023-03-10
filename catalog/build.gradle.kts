@@ -150,7 +150,6 @@ dependencies {
 
     implementation(libs.coil)
     implementation(libs.accompanist.systemController)
-    implementation(libs.accompanist.pager)
     implementation(libs.kiwi.navigationComposeTyped)
 
     coreLibraryDesugaring(libs.android.desugarJdk)
