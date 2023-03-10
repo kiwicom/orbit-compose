@@ -1,12 +1,12 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Tab
 import kiwi.orbit.compose.ui.controls.TabRow
@@ -14,7 +14,7 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun TabsScreen(onNavigateUp: () -> Unit) {
     val pagerState = rememberPagerState(0)
@@ -47,7 +47,7 @@ internal fun TabsScreen(onNavigateUp: () -> Unit) {
         },
     ) { contentPadding: PaddingValues ->
         HorizontalPager(
-            count = 3,
+            pageCount = 3,
             state = pagerState,
         ) {
             when (it) {
