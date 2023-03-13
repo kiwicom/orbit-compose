@@ -803,6 +803,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_placeholder)
 
+    public val Play: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_play)
+
     public val Playground: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_playground)
