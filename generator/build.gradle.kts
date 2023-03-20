@@ -16,7 +16,6 @@ java {
 
 kotlinter {
     reporters = arrayOf("json")
-    experimentalRules = true
 }
 
 dependencies {
