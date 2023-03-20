@@ -62,7 +62,6 @@ android {
 
 kotlinter {
     reporters = arrayOf("json")
-    experimentalRules = true
 }
 
 tasks.withType<ConfigurableKtLintTask> {

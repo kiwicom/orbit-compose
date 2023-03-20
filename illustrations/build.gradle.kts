@@ -47,7 +47,6 @@ android {
 
 kotlinter {
     reporters = arrayOf("json")
-    experimentalRules = true
 }
 
 dependencies {
