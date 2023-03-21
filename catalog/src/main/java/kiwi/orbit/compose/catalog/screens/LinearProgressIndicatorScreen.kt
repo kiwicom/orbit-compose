@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,7 @@ private fun LinearProgressIndicatorScreenInner() {
         var progress by rememberSaveable { mutableStateOf(0.5f) }
         LinearIndeterminateProgressIndicator()
         LinearProgressIndicator(progress)
+        LinearProgressIndicator(progress, progressAnimationSpec = snap())
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
