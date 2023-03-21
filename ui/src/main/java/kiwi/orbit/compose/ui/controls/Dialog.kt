@@ -74,11 +74,13 @@ public fun Dialog(
     title: @Composable () -> Unit,
     text: @Composable () -> Unit,
     confirmButton: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     dismissButton: @Composable () -> Unit = {},
     illustration: @Composable () -> Unit = {},
     properties: DialogProperties = DialogProperties(),
 ) {
     Dialog(
+        modifier = modifier,
         onDismissRequest = onDismissRequest,
         text = text,
         buttons = {
@@ -146,6 +148,7 @@ public fun Dialog(
     title: @Composable () -> Unit,
     text: @Composable () -> Unit,
     buttons: @Composable ColumnScope.() -> Unit,
+    modifier: Modifier = Modifier,
     illustration: @Composable () -> Unit = {},
     properties: DialogProperties = DialogProperties(),
 ) {
@@ -158,6 +161,7 @@ public fun Dialog(
             text = text,
             buttons = buttons,
             illustration = illustration,
+            modifier = modifier
         )
     }
 }
@@ -168,10 +172,12 @@ private fun DialogContent(
     title: @Composable () -> Unit,
     text: @Composable () -> Unit,
     buttons: @Composable ColumnScope.() -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         shape = OrbitTheme.shapes.large,
         elevation = OrbitTheme.elevations.Level2,
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier
