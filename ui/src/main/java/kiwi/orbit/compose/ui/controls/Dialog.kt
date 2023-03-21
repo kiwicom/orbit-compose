@@ -161,7 +161,7 @@ public fun Dialog(
             text = text,
             buttons = buttons,
             illustration = illustration,
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
@@ -177,7 +177,7 @@ private fun DialogContent(
     Surface(
         shape = OrbitTheme.shapes.large,
         elevation = OrbitTheme.elevations.Level2,
-        modifier = modifier
+        modifier = modifier,
     ) {
         Column(
             modifier = Modifier
