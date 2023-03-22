@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -47,7 +48,7 @@ public fun Collapse(
     modifier: Modifier = Modifier,
     showSeparator: Boolean = true,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,

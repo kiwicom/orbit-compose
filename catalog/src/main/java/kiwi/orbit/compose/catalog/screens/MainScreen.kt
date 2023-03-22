@@ -86,6 +86,7 @@ internal fun MainScreen(
         MenuItem("Card", MIcons.Rectangle) { Destinations.Card },
         MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
         MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
+        MenuItem("Collapse", Icons.ChevronDown) { Destinations.Collapse },
         MenuItem("Dialog", Icons.Chat) { Destinations.Dialog },
         MenuItem("EmptyState", MIcons.SignalWifiOff) { Destinations.EmptyState },
         MenuItem("KeyValue", MIcons.DragHandle) { Destinations.KeyValue },
