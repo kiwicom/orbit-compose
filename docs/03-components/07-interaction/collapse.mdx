@@ -1,0 +1,82 @@
+---
+title: Android
+---
+
+## Overview
+
+`Collapse` Hides long or complex information under a block that can be hidden.
+
+- [`Collapse`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-collapse.html)
+
+## Usage
+
+Use `Collapse` composable and define a boolean state passe it to `isExpended`. Process the value in `onExpandChange` callback.
+
+`Collapse` has `header` slot for the always visible content. Use the `body` slot to provide the collapsible content.
+
+```kotlin
+@Composable
+fun Example() {
+    var isExpended by remember { mutableStateOf(false) }
+
+    Collapse(
+        isExpended = isExpended,
+        onExpandChange = { isExpended = it },
+        header = {
+            Text(text = "This the header")
+        },
+        body = {
+            Text(text = "This is the collapsible body")
+        },
+     )
+}
+```
+
+Optionally you can choose to display the separator between the header and the body or not by setting `showSeparator`, the default value is true.
+
+```kotlin
+@Composable
+fun Example() {
+    var isExpended by remember { mutableStateOf(false) }
+
+    Collapse(
+        isExpended = isExpended,
+        onExpandChange = { isExpended = it },
+        header = {
+            Text(text = "This the header")
+        },
+        body = {
+            Text(text = "This is the collapsible body")
+        },
+        showSeparator = false,
+     )
+}
+```
+
+## UI Testing
+
+Slotting API allows you to add testTag to particular component parts.
+
+```kotlin
+composeTestRule.setContent {
+    var isExpended by remember { mutableStateOf(false) }
+    Collapse(
+        isExpended = isExpended,
+        onExpandChange = { isExpended = it },
+        header = {
+            Text(text = "This the header", modifier = Modifier.testTag("header"))
+        },
+        body = {
+            Text(text = "This is the collapsible body", modifier = Modifier.testTag("body"))
+        },
+    )
+}
+
+composeTestRule.onNodeWithTag("body").assertDoesNotExist()
+composeTestRule.onNodeWithTag("collapse_arrow").performClick()
+composeTestRule.onNodeWithTag("body").assertIsDisplayed()
+```
+
+## Customization
+
+`Collapse` appearance is not customizable.
