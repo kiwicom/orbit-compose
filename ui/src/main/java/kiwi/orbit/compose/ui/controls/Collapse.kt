@@ -92,7 +92,7 @@ private fun CollapseArrow(
 @OrbitPreviews
 @Composable
 internal fun CollapsePreview() {
-    var isExpended by remember { mutableStateOf(false) }
+    var isExpended by remember { mutableStateOf(true) }
     Preview {
         Collapse(
             isExpended = isExpended,
