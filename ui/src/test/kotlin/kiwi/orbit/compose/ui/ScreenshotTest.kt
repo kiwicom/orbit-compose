@@ -184,6 +184,7 @@ internal class ScreenshotTest {
     fun clickableField() {
         snapshot { ClickableFieldPreview() }
     }
+
     @Test
     fun collapse() {
         snapshot { CollapsePreview() }

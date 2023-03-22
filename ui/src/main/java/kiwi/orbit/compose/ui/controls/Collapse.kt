@@ -20,7 +20,6 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
-
 /**
  * Hides long or complex information under a block that can be hidden.
  *
@@ -72,14 +71,15 @@ private fun CollapseArrow(
     isExpended: Boolean,
     onClick: () -> Unit,
 ) {
-
     val arrowRotationDegree by animateFloatAsState(
         targetValue = if (isExpended) 180f else 0f,
     )
 
-    IconButton(onClick = onClick, modifier = Modifier
-        .rotate(arrowRotationDegree)
-        .testTag("collapse_arrow")
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier
+            .rotate(arrowRotationDegree)
+            .testTag("collapse_arrow"),
     ) {
         Icon(
             painter = Icons.ChevronDown,

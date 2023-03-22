@@ -45,5 +45,4 @@ internal class CollapseTest {
 
         composeTestRule.onNodeWithTag("body").assertIsDisplayed()
     }
-
 }
