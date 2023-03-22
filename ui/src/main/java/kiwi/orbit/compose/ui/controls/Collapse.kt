@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.testTag
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -54,7 +55,7 @@ public fun Collapse(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             header()
-            CardArrow(isExpended = isExpended, onClick = { onExpandChange(!isExpended) })
+            CollapseArrow(isExpended = isExpended, onClick = { onExpandChange(!isExpended) })
         }
         AnimatedVisibility(visible = isExpended, modifier = Modifier.fillMaxWidth()) {
             body()
@@ -67,7 +68,7 @@ public fun Collapse(
 }
 
 @Composable
-private fun CardArrow(
+private fun CollapseArrow(
     isExpended: Boolean,
     onClick: () -> Unit,
 ) {
@@ -76,7 +77,10 @@ private fun CardArrow(
         targetValue = if (isExpended) 180f else 0f,
     )
 
-    IconButton(onClick = onClick, modifier = Modifier.rotate(arrowRotationDegree)) {
+    IconButton(onClick = onClick, modifier = Modifier
+        .rotate(arrowRotationDegree)
+        .testTag("collapse_arrow")
+    ) {
         Icon(
             painter = Icons.ChevronDown,
             contentDescription = null,

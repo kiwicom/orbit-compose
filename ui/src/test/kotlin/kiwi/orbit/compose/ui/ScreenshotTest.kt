@@ -30,6 +30,7 @@ import kiwi.orbit.compose.ui.controls.CheckboxPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTileCenteredPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTilePreview
 import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
+import kiwi.orbit.compose.ui.controls.CollapsePreview
 import kiwi.orbit.compose.ui.controls.CountryFlagPreview
 import kiwi.orbit.compose.ui.controls.DialogPreview
 import kiwi.orbit.compose.ui.controls.EmptyStatePreview
@@ -182,6 +183,10 @@ internal class ScreenshotTest {
     @Test
     fun clickableField() {
         snapshot { ClickableFieldPreview() }
+    }
+    @Test
+    fun collapse() {
+        snapshot { CollapsePreview() }
     }
 
     @Test
