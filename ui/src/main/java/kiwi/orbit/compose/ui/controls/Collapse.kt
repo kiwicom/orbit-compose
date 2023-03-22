@@ -19,6 +19,25 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 
+
+/**
+ * Hides long or complex information under a block that can be hidden.
+ *
+ * Example :
+ *
+ * var isExpended by remember { mutableStateOf(false) }
+ *
+ * Collapse(
+ *    isExpended = isExpended,
+ *    onExpandChange = { isExpended = it },
+ *    header = {
+ *      Text(text = "This the header")
+ *    },
+ *    body = {
+ *      Text(text = "This is the collapsible body")
+ *    },
+ * )
+ */
 @Composable
 public fun Collapse(
     isExpended: Boolean,
