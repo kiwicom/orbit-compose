@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
@@ -35,10 +36,13 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
@@ -77,6 +81,7 @@ public fun Slider(
     @IntRange(from = 0)
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
+    enableSystemGestureExclusion: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SliderContainer(
@@ -89,6 +94,7 @@ public fun Slider(
             .sliderSemantics(value, enabled, onValueChange, onValueChangeFinished, valueRange, steps),
     ) {
         androidx.compose.material3.Slider(
+            modifier = Modifier.sliderSystemGestureExclusion(enableSystemGestureExclusion),
             value = value,
             onValueChange = onValueChange,
             enabled = enabled,
@@ -128,6 +134,7 @@ public fun RangeSlider(
     @IntRange(from = 0)
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
+    enableSystemGestureExclusion: Boolean = true,
     startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -138,6 +145,7 @@ public fun RangeSlider(
         modifier = modifier.fillMaxWidth(),
     ) {
         androidx.compose.material3.RangeSlider(
+            modifier = Modifier.sliderSystemGestureExclusion(enableSystemGestureExclusion),
             value = value,
             onValueChange = onValueChange,
             enabled = enabled,
@@ -391,6 +399,23 @@ private fun Modifier.sliderSemantics(
             },
         )
     }.progressSemantics(value, valueRange, steps)
+}
+
+private fun Modifier.sliderSystemGestureExclusion(enabled: Boolean): Modifier {
+    if (!enabled) return this
+
+    return composed {
+        val density = LocalDensity.current
+        val padding = with(density) { 16.dp.toPx() }
+        systemGestureExclusion { coordinates ->
+            Rect(
+                -padding,
+                -padding,
+                coordinates.size.width + padding,
+                coordinates.size.height.toFloat() + padding,
+            )
+        }
+    }
 }
 
 private val TrackSize = 4.dp
