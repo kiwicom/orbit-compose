@@ -16,7 +16,7 @@ androidx-activityCompose = "1.7.0"
 androidx-activityComposeCatalog = "1.7.0"
 androidx-core = "1.9.0"
 androidx-constraint-layout = "1.0.1"
-accompanist-main = "0.29.2-rc"
+accompanist-main = "0.30.0"
 compose-compiler = "1.4.4"
 square-kotlinPoet = "1.12.0"
 
