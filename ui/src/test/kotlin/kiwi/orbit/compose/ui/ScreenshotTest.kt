@@ -45,6 +45,7 @@ import kiwi.orbit.compose.ui.controls.PasswordTextFieldPreview
 import kiwi.orbit.compose.ui.controls.PillButtonPreview
 import kiwi.orbit.compose.ui.controls.RadioFieldPreview
 import kiwi.orbit.compose.ui.controls.RadioPreview
+import kiwi.orbit.compose.ui.controls.RangeSliderPreview
 import kiwi.orbit.compose.ui.controls.ScaffoldPreview
 import kiwi.orbit.compose.ui.controls.SeatLegendPreview
 import kiwi.orbit.compose.ui.controls.SeatPreview
@@ -306,6 +307,11 @@ internal class ScreenshotTest {
     @Test
     fun slider() {
         snapshot { SliderPreview() }
+    }
+
+    @Test
+    fun sliderRange() {
+        snapshot { RangeSliderPreview() }
     }
 
     @Test

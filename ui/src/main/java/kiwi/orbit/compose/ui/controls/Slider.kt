@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
@@ -35,10 +36,13 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
@@ -77,13 +81,109 @@ public fun Slider(
     @IntRange(from = 0)
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
+    enableSystemGestureExclusion: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    Column(
+    SliderContainer(
+        valueLabel = { valueLabel(value) },
+        startLabel = startLabel,
+        endLabel = endLabel,
         modifier = modifier
             .fillMaxWidth()
             .semantics(mergeDescendants = true) {}
             .sliderSemantics(value, enabled, onValueChange, onValueChangeFinished, valueRange, steps),
+    ) {
+        androidx.compose.material3.Slider(
+            modifier = Modifier.sliderSystemGestureExclusion(enableSystemGestureExclusion),
+            value = value,
+            onValueChange = onValueChange,
+            enabled = enabled,
+            valueRange = valueRange,
+            steps = steps,
+            onValueChangeFinished = onValueChangeFinished,
+            interactionSource = interactionSource,
+            thumb = {
+                Thumb(
+                    interactionSource = interactionSource,
+                    enabled = enabled,
+                )
+            },
+            track = { sliderPositions ->
+                Track(enabled, sliderPositions)
+            },
+        )
+    }
+}
+
+/**
+ * Slider component for a single float value.
+ *
+ * The [valueLabel] slot may stay empty, render the value outside Slider component.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+public fun RangeSlider(
+    value: ClosedFloatingPointRange<Float>,
+    onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
+    valueLabel: @Composable (ClosedFloatingPointRange<Float>) -> Unit,
+    startLabel: @Composable () -> Unit,
+    endLabel: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+    @IntRange(from = 0)
+    steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
+    enableSystemGestureExclusion: Boolean = true,
+    startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    SliderContainer(
+        valueLabel = { valueLabel(value) },
+        startLabel = startLabel,
+        endLabel = endLabel,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        androidx.compose.material3.RangeSlider(
+            modifier = Modifier.sliderSystemGestureExclusion(enableSystemGestureExclusion),
+            value = value,
+            onValueChange = onValueChange,
+            enabled = enabled,
+            valueRange = valueRange,
+            onValueChangeFinished = onValueChangeFinished,
+            startInteractionSource = startInteractionSource,
+            endInteractionSource = endInteractionSource,
+            startThumb = {
+                Thumb(
+                    interactionSource = startInteractionSource,
+                    enabled = enabled,
+                )
+            },
+            endThumb = {
+                Thumb(
+                    interactionSource = endInteractionSource,
+                    enabled = enabled,
+                )
+            },
+            track = { sliderPositions ->
+                Track(enabled, sliderPositions)
+            },
+            steps = steps,
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SliderContainer(
+    valueLabel: @Composable () -> Unit,
+    startLabel: @Composable () -> Unit,
+    endLabel: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    slider: @Composable () -> Unit,
+) {
+    Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -91,29 +191,12 @@ public fun Slider(
                 LocalContentColor provides OrbitTheme.colors.info.normal,
                 LocalTextStyle provides LocalTextStyle.current.merge(OrbitTheme.typography.bodyNormal),
             ) {
-                valueLabel(value)
+                valueLabel()
             }
             CompositionLocalProvider(
                 LocalMinimumInteractiveComponentEnforcement provides false,
             ) {
-                androidx.compose.material3.Slider(
-                    value = value,
-                    onValueChange = onValueChange,
-                    enabled = enabled,
-                    valueRange = valueRange,
-                    steps = steps,
-                    onValueChangeFinished = onValueChangeFinished,
-                    interactionSource = interactionSource,
-                    thumb = {
-                        Thumb(
-                            interactionSource = interactionSource,
-                            enabled = enabled,
-                        )
-                    },
-                    track = { sliderPositions ->
-                        Track(enabled, sliderPositions)
-                    },
-                )
+                slider()
             }
         }
         Row {
@@ -318,6 +401,23 @@ private fun Modifier.sliderSemantics(
     }.progressSemantics(value, valueRange, steps)
 }
 
+private fun Modifier.sliderSystemGestureExclusion(enabled: Boolean): Modifier {
+    if (!enabled) return this
+
+    return composed {
+        val density = LocalDensity.current
+        val padding = with(density) { 16.dp.toPx() }
+        systemGestureExclusion { coordinates ->
+            Rect(
+                -padding,
+                -padding,
+                coordinates.size.width + padding,
+                coordinates.size.height.toFloat() + padding,
+            )
+        }
+    }
+}
+
 private val TrackSize = 4.dp
 private val TickSize = 2.dp
 
@@ -359,6 +459,30 @@ internal fun SliderPreview() {
             valueLabel = {},
             startLabel = { Text("0") },
             endLabel = { Text("1") },
+        )
+    }
+}
+
+@OrbitPreviews
+@Composable
+internal fun RangeSliderPreview() {
+    Preview {
+        var value by remember { mutableStateOf(0.25f..0.75f) }
+        RangeSlider(
+            value = value,
+            onValueChange = { value = it },
+            valueLabel = { Text(it.toString()) },
+            startLabel = { Text("0") },
+            endLabel = { Text("1") },
+        )
+        Separator()
+        RangeSlider(
+            value = value,
+            onValueChange = { value = it },
+            valueLabel = { Text(it.toString()) },
+            startLabel = { Text("Start") },
+            endLabel = { Text("End") },
+            steps = 3,
         )
     }
 }
