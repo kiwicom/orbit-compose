@@ -48,24 +48,24 @@ private fun CollapseScreenInner() {
     var isSecondCollapseExtended by remember { mutableStateOf(false) }
     Column(modifier = Modifier.padding(16.dp)) {
         Collapse(
-            isExpended = isFirstCollapseExtended,
-            onExpandChange = { isFirstCollapseExtended = it },
-            header = {
+            expanded = isFirstCollapseExtended,
+            onExpandClick = { isFirstCollapseExtended = it },
+            title = {
                 Text(text = "Title 1")
             },
-            body = {
+            content = {
                 Text(text = "Something with many many words, descriptive and longer for more lines.")
             },
         )
 
         Collapse(
-            isExpended = isSecondCollapseExtended,
-            onExpandChange = { isSecondCollapseExtended = it },
-            showSeparator = false,
-            header = {
+            expanded = isSecondCollapseExtended,
+            onExpandClick = { isSecondCollapseExtended = it },
+            withSeparator = false,
+            title = {
                 Text(text = "Title 2")
             },
-            body = {
+            content = {
                 Text(text = "Something with many many words, descriptive and longer for more lines.")
             },
         )
