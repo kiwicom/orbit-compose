@@ -10,18 +10,18 @@ title: Android
 
 ## Usage
 
-Use `Collapse` composable and define a boolean state passe it to `isExpended`. Process the value in `onExpandChange` callback.
+Use `Collapse` composable and define a boolean state as an argument for `expanded`. Process the value in `onExpandClick` callback.
 
 `Collapse` has `header` slot for the always visible content. Use the `body` slot to provide the collapsible content.
 
 ```kotlin
 @Composable
 fun Example() {
-    var isExpended by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
 
     Collapse(
-        isExpended = isExpended,
-        onExpandChange = { isExpended = it },
+        expanded = expanded,
+        onExpandClick = { expanded = it },
         header = {
             Text(text = "This the header")
         },
@@ -37,11 +37,11 @@ Optionally you can choose to display the separator between the header and the bo
 ```kotlin
 @Composable
 fun Example() {
-    var isExpended by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
 
     Collapse(
-        isExpended = isExpended,
-        onExpandChange = { isExpended = it },
+        expanded = expanded,
+        onExpandClick = { expanded = it },
         header = {
             Text(text = "This the header")
         },
@@ -59,10 +59,10 @@ Slotting API allows you to add testTag to particular component parts.
 
 ```kotlin
 composeTestRule.setContent {
-    var isExpended by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
     Collapse(
-        isExpended = isExpended,
-        onExpandChange = { isExpended = it },
+        expanded = expanded,
+        onExpandClick = { expanded = it },
         header = {
             Text(text = "This the header", modifier = Modifier.testTag("header"))
         },

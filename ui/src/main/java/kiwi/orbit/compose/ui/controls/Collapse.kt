@@ -15,7 +15,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.AccessibilityAction
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
@@ -26,42 +28,62 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
  *
  * Example :
  *
- * var isExpended by remember { mutableStateOf(false) }
+ * var expanded by remember { mutableStateOf(false) }
  *
  * Collapse(
- *    isExpended = isExpended,
- *    onExpandChange = { isExpended = it },
- *    header = {
- *      Text(text = "This the header")
+ *    expanded = expanded,
+ *    onExpandClick = { expanded = it },
+ *    title = {
+ *      Text(text = "This the title")
  *    },
- *    body = {
- *      Text(text = "This is the collapsible body")
+ *    content = {
+ *      Text(text = "This is the collapsible content")
  *    },
  * )
  */
 @Composable
 public fun Collapse(
-    isExpended: Boolean,
-    onExpandChange: (Boolean) -> Unit,
-    header: @Composable () -> Unit,
-    body: @Composable () -> Unit,
+    expanded: Boolean,
+    onExpandClick: (Boolean) -> Unit,
+    title: @Composable () -> Unit,
+    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    showSeparator: Boolean = true,
+    withSeparator: Boolean = true,
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        modifier = modifier.semantics {
+            this[SemanticsActions.Expand] = AccessibilityAction(SemanticsActions.Expand.name) {
+                if (!expanded) {
+                    onExpandClick(true)
+                    true
+                } else {
+                    false
+                }
+            }
+            this[SemanticsActions.Collapse] = AccessibilityAction(SemanticsActions.Collapse.name) {
+                if (expanded) {
+                    onExpandClick(false)
+                    true
+                } else {
+                    false
+                }
+            }
+        },
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            header()
-            CollapseArrow(isExpended = isExpended, onClick = { onExpandChange(!isExpended) })
+            title()
+            CollapseArrow(expanded = expanded, onClick = { onExpandClick(!expanded) })
         }
-        AnimatedVisibility(visible = isExpended, modifier = Modifier.fillMaxWidth()) {
-            body()
+        AnimatedVisibility(visible = expanded, modifier = Modifier.fillMaxWidth()) {
+            content()
         }
 
-        if (showSeparator) {
+        if (withSeparator) {
             Divider()
         }
     }
@@ -69,18 +91,17 @@ public fun Collapse(
 
 @Composable
 private fun CollapseArrow(
-    isExpended: Boolean,
+    expanded: Boolean,
     onClick: () -> Unit,
 ) {
     val arrowRotationDegree by animateFloatAsState(
-        targetValue = if (isExpended) 180f else 0f,
+        targetValue = if (expanded) 180f else 0f,
     )
 
     IconButton(
         onClick = onClick,
         modifier = Modifier
-            .rotate(arrowRotationDegree)
-            .testTag("collapse_arrow"),
+            .rotate(arrowRotationDegree),
     ) {
         Icon(
             painter = Icons.ChevronDown,
@@ -92,16 +113,16 @@ private fun CollapseArrow(
 @OrbitPreviews
 @Composable
 internal fun CollapsePreview() {
-    var isExpended by remember { mutableStateOf(true) }
+    var expanded by remember { mutableStateOf(true) }
     Preview {
         Collapse(
-            isExpended = isExpended,
-            onExpandChange = { isExpended = it },
-            header = {
-                Text(text = "This the header")
+            expanded = expanded,
+            onExpandClick = { expanded = it },
+            title = {
+                Text(text = "This the title")
             },
-            body = {
-                Text(text = "This is the collapsible body")
+            content = {
+                Text(text = "This is the collapsible content")
             },
         )
     }

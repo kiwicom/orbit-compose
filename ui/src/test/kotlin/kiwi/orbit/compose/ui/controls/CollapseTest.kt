@@ -6,10 +6,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performSemanticsAction
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,25 +24,27 @@ internal class CollapseTest {
     @Test
     fun testBasics() {
         composeTestRule.setContent {
-            var isExpended by remember { mutableStateOf(false) }
+            var expanded by remember { mutableStateOf(false) }
             Collapse(
-                isExpended = isExpended,
-                onExpandChange = { isExpended = it },
-                header = {
-                    Text(text = "This the header", modifier = Modifier.testTag("header"))
+                expanded = expanded,
+                onExpandClick = { expanded = it },
+                title = {
+                    Text(text = "This the title", modifier = Modifier.testTag("title"))
                 },
-                body = {
-                    Text(text = "This is the collapsible body", modifier = Modifier.testTag("body"))
+                content = {
+                    Text(text = "This is the collapsible content", modifier = Modifier.testTag("content"))
                 },
+                Modifier.testTag("collapse"),
             )
         }
 
-        composeTestRule.onNodeWithTag("header").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("body").assertDoesNotExist()
-        composeTestRule.onNodeWithTag("collapse_arrow").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("title").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("content").assertDoesNotExist()
 
-        composeTestRule.onNodeWithTag("collapse_arrow").performClick()
+        composeTestRule.onNodeWithTag("collapse").performSemanticsAction(SemanticsActions.Expand)
+        composeTestRule.onNodeWithTag("content").assertIsDisplayed()
 
-        composeTestRule.onNodeWithTag("body").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("collapse").performSemanticsAction(SemanticsActions.Collapse)
+        composeTestRule.onNodeWithTag("content").assertDoesNotExist()
     }
 }
