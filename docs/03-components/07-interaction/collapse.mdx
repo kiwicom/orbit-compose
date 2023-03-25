@@ -12,7 +12,7 @@ title: Android
 
 Use `Collapse` composable and define a boolean state as an argument for `expanded`. Process the value in `onExpandClick` callback.
 
-`Collapse` has `header` slot for the always visible content. Use the `body` slot to provide the collapsible content.
+`Collapse` has `title` slot for the always visible content. Use the `content` slot to provide the collapsible content.
 
 ```kotlin
 @Composable
@@ -22,17 +22,17 @@ fun Example() {
     Collapse(
         expanded = expanded,
         onExpandClick = { expanded = it },
-        header = {
-            Text(text = "This the header")
+        title = {
+            Text(text = "This the title")
         },
-        body = {
-            Text(text = "This is the collapsible body")
+        content = {
+            Text(text = "This is the collapsible content")
         },
      )
 }
 ```
 
-Optionally you can choose to display the separator between the header and the body or not by setting `showSeparator`, the default value is true.
+Optionally you can choose to display the separator between the title and the content or not by setting `withSeparator`, the default value is true.
 
 ```kotlin
 @Composable
@@ -42,13 +42,13 @@ fun Example() {
     Collapse(
         expanded = expanded,
         onExpandClick = { expanded = it },
-        header = {
-            Text(text = "This the header")
+        title = {
+            Text(text = "This the title")
         },
-        body = {
-            Text(text = "This is the collapsible body")
+        content = {
+            Text(text = "This is the collapsible content")
         },
-        showSeparator = false,
+        withSeparator = false,
      )
 }
 ```
@@ -63,18 +63,24 @@ composeTestRule.setContent {
     Collapse(
         expanded = expanded,
         onExpandClick = { expanded = it },
-        header = {
-            Text(text = "This the header", modifier = Modifier.testTag("header"))
+        title = {
+            Text(text = "This the title", modifier = Modifier.testTag("title"))
         },
-        body = {
-            Text(text = "This is the collapsible body", modifier = Modifier.testTag("body"))
+        content = {
+            Text(text = "This is the collapsible content", modifier = Modifier.testTag("content"))
         },
+        modifier = Modifier.testTag("collapse"),
     )
 }
 
-composeTestRule.onNodeWithTag("body").assertDoesNotExist()
-composeTestRule.onNodeWithTag("collapse_arrow").performClick()
-composeTestRule.onNodeWithTag("body").assertIsDisplayed()
+composeTestRule.onNodeWithTag("title").assertIsDisplayed()
+composeTestRule.onNodeWithTag("content").assertDoesNotExist()
+
+composeTestRule.onNodeWithTag("collapse").performSemanticsAction(SemanticsActions.Expand)
+composeTestRule.onNodeWithTag("content").assertIsDisplayed()
+
+composeTestRule.onNodeWithTag("collapse").performSemanticsAction(SemanticsActions.Collapse)
+composeTestRule.onNodeWithTag("content").assertDoesNotExist()
 ```
 
 ## Customization

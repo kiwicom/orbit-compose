@@ -44,12 +44,12 @@ internal fun CollapseScreen(onNavigateUp: () -> Unit) {
 @Preview
 @Composable
 private fun CollapseScreenInner() {
-    var isFirstCollapseExtended by remember { mutableStateOf(true) }
-    var isSecondCollapseExtended by remember { mutableStateOf(false) }
+    var isFirstCollapseExpanded by remember { mutableStateOf(true) }
+    var isSecondCollapseExpanded by remember { mutableStateOf(false) }
     Column(modifier = Modifier.padding(16.dp)) {
         Collapse(
-            expanded = isFirstCollapseExtended,
-            onExpandClick = { isFirstCollapseExtended = it },
+            expanded = isFirstCollapseExpanded,
+            onExpandClick = { isFirstCollapseExpanded = it },
             title = {
                 Text(text = "Title 1")
             },
@@ -59,8 +59,8 @@ private fun CollapseScreenInner() {
         )
 
         Collapse(
-            expanded = isSecondCollapseExtended,
-            onExpandClick = { isSecondCollapseExtended = it },
+            expanded = isSecondCollapseExpanded,
+            onExpandClick = { isSecondCollapseExpanded = it },
             withSeparator = false,
             title = {
                 Text(text = "Title 2")

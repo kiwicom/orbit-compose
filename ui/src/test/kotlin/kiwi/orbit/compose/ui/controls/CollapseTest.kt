@@ -34,7 +34,7 @@ internal class CollapseTest {
                 content = {
                     Text(text = "This is the collapsible content", modifier = Modifier.testTag("content"))
                 },
-                Modifier.testTag("collapse"),
+                modifier = Modifier.testTag("collapse"),
             )
         }
 
