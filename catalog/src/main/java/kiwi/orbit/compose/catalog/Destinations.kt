@@ -44,6 +44,9 @@ sealed interface Destinations : Destination {
     object ChoiceTile : Destinations
 
     @Serializable
+    object Collapse : Destinations
+
+    @Serializable
     object Dialog : Destinations
 
     @Serializable

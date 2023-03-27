@@ -18,6 +18,8 @@
   android: Released
 - component: Checkbox
   android: Released
+- component: Collapse
+  android: Released
 - component: CountryFlag
   android: Released
 - component: Dialog

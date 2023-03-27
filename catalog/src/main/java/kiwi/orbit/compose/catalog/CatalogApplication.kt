@@ -22,6 +22,7 @@ import kiwi.orbit.compose.catalog.screens.ButtonScreen
 import kiwi.orbit.compose.catalog.screens.CardScreen
 import kiwi.orbit.compose.catalog.screens.CheckboxScreen
 import kiwi.orbit.compose.catalog.screens.ChoiceTileScreen
+import kiwi.orbit.compose.catalog.screens.CollapseScreen
 import kiwi.orbit.compose.catalog.screens.ColorsScreen
 import kiwi.orbit.compose.catalog.screens.DialogMaterialDatePicker
 import kiwi.orbit.compose.catalog.screens.DialogMaterialTimePicker
@@ -104,6 +105,7 @@ private fun NavGraph(
         composable<Destinations.Card> { CardScreen(navController::navigateUp) }
         composable<Destinations.Checkbox> { CheckboxScreen(navController::navigateUp) }
         composable<Destinations.ChoiceTile> { ChoiceTileScreen(navController::navigateUp) }
+        composable<Destinations.Collapse> { CollapseScreen(navController::navigateUp) }
         composable<Destinations.Dialog> { DialogsScreen(navController) }
         dialog<Destinations.DialogMaterialTimePicker> { DialogMaterialTimePicker(navController) }
         dialog<Destinations.DialogMaterialDatePicker> { DialogMaterialDatePicker(navController) }
