@@ -36,5 +36,6 @@ jobs:
           ssh-add - <<< "${{ secrets.GH_ACTION_DEPLOY_PRIVATE_KEY }}"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Bump version to ${{ steps.version_job.outputs.VERSION_NAME }}" -a
+          git add gradle.properties
+          git commit -m "Bump version to ${{ steps.version_job.outputs.VERSION_NAME }}"
           git push git@github.com:$GITHUB_REPOSITORY.git
