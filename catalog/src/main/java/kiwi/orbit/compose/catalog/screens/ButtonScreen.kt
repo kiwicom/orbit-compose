@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -24,9 +25,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.catalog.AppTheme
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonBundleBasic
 import kiwi.orbit.compose.ui.controls.ButtonBundleMedium
@@ -43,7 +47,9 @@ import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.ButtonTextLinkCritical
 import kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary
 import kiwi.orbit.compose.ui.controls.ButtonToggleContainer
+import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Surface
 import kiwi.orbit.compose.ui.controls.SurfaceCard
 import kiwi.orbit.compose.ui.controls.Tab
 import kiwi.orbit.compose.ui.controls.TabRow
@@ -103,7 +109,6 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-@Preview
 @Composable
 private fun ButtonScreenInner() {
     Column(
@@ -111,24 +116,26 @@ private fun ButtonScreenInner() {
         modifier = Modifier.padding(16.dp),
     ) {
         val maxWidth = Modifier.fillMaxWidth()
+        var variant by rememberSaveable { mutableStateOf(0) }
+        val onClick = { variant = (variant + 1).mod(4) }
 
-        ButtonPrimary(onClick = {}, maxWidth) { Text("Primary Button") }
-        ButtonPrimarySubtle(onClick = {}, maxWidth) { Text("Primary Subtle Button") }
-        ButtonSecondary(onClick = {}, maxWidth) { Text("Secondary Button") }
-        ButtonCritical(onClick = {}, maxWidth) { Text("Critical Button") }
-        ButtonCriticalSubtle(onClick = {}, maxWidth) { Text("Critical Subtle Button") }
-        ButtonBundleBasic(onClick = {}, maxWidth) { Text("Bundle Basic Button") }
-        ButtonBundleMedium(onClick = {}, maxWidth) { Text("Bundle Medium Button") }
-        ButtonBundleTop(onClick = {}, maxWidth) { Text("Bundle Top Button") }
+        ButtonPrimary(onClick = onClick, maxWidth) { Inner(variant, "Primary Button") }
+        ButtonPrimarySubtle(onClick = onClick, maxWidth) { Inner(variant, "Primary Subtle Button") }
+        ButtonSecondary(onClick = onClick, maxWidth) { Inner(variant, "Secondary Button") }
+        ButtonCritical(onClick = onClick, maxWidth) { Inner(variant, "Critical Button") }
+        ButtonCriticalSubtle(onClick = onClick, maxWidth) { Inner(variant, "Critical Subtle Button") }
+        ButtonBundleBasic(onClick = onClick, maxWidth) { Inner(variant, "Bundle Basic Button") }
+        ButtonBundleMedium(onClick = onClick, maxWidth) { Inner(variant, "Bundle Medium Button") }
+        ButtonBundleTop(onClick = onClick, maxWidth) { Inner(variant, "Bundle Top Button") }
 
         Text("Manually themed", Modifier.padding(top = 16.dp))
 
         ButtonPrimitive(
-            onClick = {},
+            onClick = onClick,
             modifier = maxWidth,
             backgroundColor = OrbitTheme.colors.info.normal,
         ) {
-            Text("Info Button")
+            Inner(variant, "Info Button")
         }
 
         Text("Button Toggling", Modifier.padding(top = 16.dp))
@@ -136,13 +143,33 @@ private fun ButtonScreenInner() {
         ButtonToggleContainer(targetState) { state ->
             if (state) {
                 ButtonPrimarySubtle(onClick = { targetState = !targetState }, maxWidth) {
-                    Text("Add Service")
+                    Inner(variant, "Add Service")
                 }
             } else {
                 ButtonSecondary(onClick = { targetState = !targetState }, maxWidth) {
-                    Text("Remove Service")
+                    Inner(variant, "Remove Service")
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun RowScope.Inner(variant: Int, label: String) {
+    when (variant) {
+        0 -> {
+            Text(label)
+        }
+        1 -> {
+            Icon(Icons.Android, contentDescription = null)
+            Text(label)
+        }
+        2 -> {
+            Icon(Icons.Android, contentDescription = null)
+        }
+        3 -> {
+            Text(label, Modifier.weight(1f), textAlign = TextAlign.Start)
+            Icon(Icons.ChevronForward, contentDescription = null)
         }
     }
 }
@@ -179,6 +206,16 @@ private fun ButtonLinkScreenInner() {
                 Spacer(Modifier.size(8.dp))
                 ButtonTextLinkCritical("Delete", onClick = {}, modifier = Modifier.alignByBaseline())
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun ButtonScreenPreview() {
+    AppTheme {
+        Surface {
+            ButtonScreenInner()
         }
     }
 }

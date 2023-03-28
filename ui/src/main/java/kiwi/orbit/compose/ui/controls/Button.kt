@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -228,6 +230,7 @@ internal fun ButtonLargePrimitive(
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
     backgroundBrush: Brush? = null,
+    contentArrangement: Arrangement.Horizontal = ButtonDefaults.HorizontalArrangement,
     contentColor: Color = contentColorFor(backgroundColor),
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -247,6 +250,7 @@ internal fun ButtonLargePrimitive(
         backgroundBrush = backgroundBrush,
         textStyle = textStyle,
         contentColor = contentColor,
+        contentArrangement = contentArrangement,
         contentPadding = contentPadding,
         interactionSource = interactionSource,
         content = content,
@@ -259,7 +263,10 @@ internal fun ButtonPreview() {
     Preview {
         val mW = Modifier.fillMaxWidth()
         ButtonPrimary({}, mW) { Text("Action") }
-        ButtonPrimarySubtle({}, mW) { Text("Action") }
+        ButtonPrimarySubtle({}, mW) {
+            Icon(Icons.Android, contentDescription = null)
+            Text("Action")
+        }
         ButtonSecondary({}, mW) { Text("Action") }
         ButtonCritical({}, mW) { Text("Action") }
         ButtonCriticalSubtle({}, mW) { Text("Action") }
