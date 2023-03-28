@@ -23,7 +23,7 @@ Our code review will focus on:
 
 - discuss the API of the composable first;
 - add the component - composables with KDoc;
-- add screenshots tests covering basic rendering of the component; Locally recorded screenshots may produce changes to all PNG files, push only the relevant ones.
+- add screenshots tests covering basic rendering of the component; Locally recorded screenshots may produce changes to all PNG files, push only the relevant ones. Don't forget to install Git LFS, if installed properly, screenshots are automatically committed as LFS files.
 - add catalog demonstration;
 - add entry into `component-status.yaml`;
 - add documentation to docs (component.mdx) including UI testing documentation; resolve the correct name using [the Orbit repo](https://github.com/kiwicom/orbit/tree/master/docs/src/documentation) and naming pattern using the dir name as a file name;
