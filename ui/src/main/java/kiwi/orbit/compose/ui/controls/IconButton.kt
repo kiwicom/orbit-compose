@@ -22,6 +22,7 @@ public fun IconButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     rippleRadius: Dp = RippleRadius,
+    minimumInteractiveComponentEnforcement: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
@@ -34,7 +35,13 @@ public fun IconButton(
                 interactionSource = interactionSource,
                 indication = rememberRipple(bounded = false, radius = rippleRadius),
             )
-            .size(rippleRadius * 2),
+            .run {
+                if (minimumInteractiveComponentEnforcement) {
+                    size(rippleRadius * 2)
+                } else {
+                    this
+                }
+            },
         contentAlignment = Alignment.Center,
     ) {
         val contentEmphasis = if (enabled) LocalContentEmphasis.current else ContentEmphasis.Disabled

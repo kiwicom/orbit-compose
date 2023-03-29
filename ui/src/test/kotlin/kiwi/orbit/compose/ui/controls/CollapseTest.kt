@@ -27,9 +27,9 @@ internal class CollapseTest {
             var expanded by remember { mutableStateOf(false) }
             Collapse(
                 expanded = expanded,
-                onExpandClick = { expanded = it },
+                onExpandChange = { expanded = it },
                 title = {
-                    Text(text = "This the title", modifier = Modifier.testTag("title"))
+                    Text(text = "Collapse title", modifier = Modifier.testTag("title"))
                 },
                 content = {
                     Text(text = "This is the collapsible content", modifier = Modifier.testTag("content"))
@@ -38,7 +38,7 @@ internal class CollapseTest {
             )
         }
 
-        composeTestRule.onNodeWithTag("title").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("title", useUnmergedTree = true).assertIsDisplayed()
         composeTestRule.onNodeWithTag("content").assertDoesNotExist()
 
         composeTestRule.onNodeWithTag("collapse").performSemanticsAction(SemanticsActions.Expand)

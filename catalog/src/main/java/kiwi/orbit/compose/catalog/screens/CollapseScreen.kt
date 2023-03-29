@@ -49,7 +49,7 @@ private fun CollapseScreenInner() {
     Column(modifier = Modifier.padding(16.dp)) {
         Collapse(
             expanded = isFirstCollapseExpanded,
-            onExpandClick = { isFirstCollapseExpanded = it },
+            onExpandChange = { isFirstCollapseExpanded = it },
             title = {
                 Text(text = "Title 1")
             },
@@ -60,7 +60,7 @@ private fun CollapseScreenInner() {
 
         Collapse(
             expanded = isSecondCollapseExpanded,
-            onExpandClick = { isSecondCollapseExpanded = it },
+            onExpandChange = { isSecondCollapseExpanded = it },
             withSeparator = false,
             title = {
                 Text(text = "Title 2")
