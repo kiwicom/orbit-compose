@@ -10,13 +10,13 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.semantics.AccessibilityAction
-import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.collapse
+import androidx.compose.ui.semantics.expand
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
@@ -27,24 +27,20 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
  * Hides long or complex information under a block that can be hidden.
  *
  * Example :
- *
- * var expanded by remember { mutableStateOf(false) }
- *
+ * ```
+ * var expanded by rememberSaveable { mutableStateOf(false) }
  * Collapse(
  *    expanded = expanded,
  *    onExpandClick = { expanded = it },
- *    title = {
- *      Text(text = "This the title")
- *    },
- *    content = {
- *      Text(text = "This is the collapsible content")
- *    },
+ *    title = { Text("Title") },
+ *    content = { Text(text = "This is the collapsible content") },
  * )
+ * ```
  */
 @Composable
 public fun Collapse(
     expanded: Boolean,
-    onExpandClick: (Boolean) -> Unit,
+    onExpandChange: (Boolean) -> Unit,
     title: @Composable () -> Unit,
     content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -52,17 +48,17 @@ public fun Collapse(
 ) {
     Column(
         modifier = modifier.semantics {
-            this[SemanticsActions.Expand] = AccessibilityAction(SemanticsActions.Expand.name) {
+            expand {
                 if (!expanded) {
-                    onExpandClick(true)
+                    onExpandChange(true)
                     true
                 } else {
                     false
                 }
             }
-            this[SemanticsActions.Collapse] = AccessibilityAction(SemanticsActions.Collapse.name) {
+            collapse {
                 if (expanded) {
-                    onExpandClick(false)
+                    onExpandChange(false)
                     true
                 } else {
                     false
@@ -77,7 +73,7 @@ public fun Collapse(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             title()
-            CollapseArrow(expanded = expanded, onClick = { onExpandClick(!expanded) })
+            CollapseArrow(expanded = expanded, onClick = { onExpandChange(!expanded) })
         }
         AnimatedVisibility(visible = expanded, modifier = Modifier.fillMaxWidth()) {
             content()
@@ -113,11 +109,11 @@ private fun CollapseArrow(
 @OrbitPreviews
 @Composable
 internal fun CollapsePreview() {
-    var expanded by remember { mutableStateOf(true) }
+    var expanded by rememberSaveable { mutableStateOf(true) }
     Preview {
         Collapse(
             expanded = expanded,
-            onExpandClick = { expanded = it },
+            onExpandChange = { expanded = it },
             title = {
                 Text(text = "This the title")
             },

@@ -27,7 +27,7 @@ internal class CollapseTest {
             var expanded by remember { mutableStateOf(false) }
             Collapse(
                 expanded = expanded,
-                onExpandClick = { expanded = it },
+                onExpandChange = { expanded = it },
                 title = {
                     Text(text = "This the title", modifier = Modifier.testTag("title"))
                 },
