@@ -27,7 +27,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
-android-desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.2" }
+android-desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.3" }
 android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "android-sdkCommon" }
 android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-lint" }
 android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "android-lint" }
