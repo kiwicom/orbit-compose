@@ -11,7 +11,7 @@ internal object ColorTokens {
 
     public val BlueDarker: UIColor = UIColor(0xFF004680)
 
-    public val BlueLight: UIColor = UIColor(0xFFF1F8FE)
+    public val BlueLight: UIColor = UIColor(0xFFE8F4FD)
 
     public val BlueLightActive: UIColor = UIColor(0xFFC7E4FA)
 
@@ -65,7 +65,7 @@ internal object ColorTokens {
 
     public val GreenDarker: UIColor = UIColor(0xFF235C2B)
 
-    public val GreenLight: UIColor = UIColor(0xFFF2F8F2)
+    public val GreenLight: UIColor = UIColor(0xFFEAF5EA)
 
     public val GreenLightActive: UIColor = UIColor(0xFFCDE4CF)
 
@@ -95,7 +95,7 @@ internal object ColorTokens {
 
     public val InkNormalHover: UIColor = UIColor(0xFF3E4E63)
 
-    public val OrangeDark: UIColor = UIColor(0xFFBA5D00)
+    public val OrangeDark: UIColor = UIColor(0xFFAD5700)
 
     public val OrangeDarkActive: UIColor = UIColor(0xFF954A00)
 
@@ -103,7 +103,7 @@ internal object ColorTokens {
 
     public val OrangeDarker: UIColor = UIColor(0xFF803F00)
 
-    public val OrangeLight: UIColor = UIColor(0xFFFEF7F1)
+    public val OrangeLight: UIColor = UIColor(0xFFFEF2E6)
 
     public val OrangeLightActive: UIColor = UIColor(0xFFFAE2C6)
 
@@ -115,7 +115,7 @@ internal object ColorTokens {
 
     public val OrangeNormalHover: UIColor = UIColor(0xFFC96F00)
 
-    public val ProductDark: UIColor = UIColor(0xFF007F6D)
+    public val ProductDark: UIColor = UIColor(0xFF007A69)
 
     public val ProductDarkActive: UIColor = UIColor(0xFF006657)
 
@@ -123,7 +123,7 @@ internal object ColorTokens {
 
     public val ProductDarker: UIColor = UIColor(0xFF005C4E)
 
-    public val ProductLight: UIColor = UIColor(0xFFECF8F7)
+    public val ProductLight: UIColor = UIColor(0xFFE1F4F3)
 
     public val ProductLightActive: UIColor = UIColor(0xFFBFE8E2)
 
@@ -143,7 +143,7 @@ internal object ColorTokens {
 
     public val RedDarker: UIColor = UIColor(0xFF760909)
 
-    public val RedLight: UIColor = UIColor(0xFFFCF3F3)
+    public val RedLight: UIColor = UIColor(0xFFFAEAEA)
 
     public val RedLightActive: UIColor = UIColor(0xFFF3CECE)
 
