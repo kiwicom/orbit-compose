@@ -32,7 +32,7 @@ jobs:
           app_id: ${{ secrets.PRBOT_APP_ID }}
           private_key: ${{ secrets.PRBOT_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
           labels: |
