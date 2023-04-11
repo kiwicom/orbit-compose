@@ -28,10 +28,10 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         return object : UElementHandler() {
             override fun visitCallExpression(node: UCallExpression) {
                 val name = node.methodName ?: return
-                val (originalNames, preferredName) = METHOD_NAMES[name] ?: return
-                val fqn = node.resolve()?.containingClass?.qualifiedName ?: return
-                val packageName = fqn.substring(0, fqn.lastIndexOf("."))
-                if ("$packageName.$name" !in originalNames) return
+                val wrapperName = node.resolve()?.containingClass?.qualifiedName ?: return
+                val packageName = wrapperName.substring(0, wrapperName.lastIndexOf("."))
+                val fqn = "$packageName.$name"
+                val (preferredName) = METHOD_NAMES.entries.firstOrNull { it.value.contains(fqn) } ?: return
                 reportIssue(context, node, "$packageName.$name", preferredName)
             }
 
@@ -67,42 +67,103 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         )
 
         private val METHOD_NAMES = mapOf(
-            "Card" to (setOf(
+            "kiwi.orbit.compose.ui.controls.ButtonPrimary" to setOf(
+                "androidx.compose.material.Button",
+                "androidx.compose.material3.ElevatedButton",
+                "androidx.compose.material3.FilledTonalButton",
+            ),
+            "kiwi.orbit.compose.ui.controls.ButtonSecondary" to setOf(
+                "androidx.compose.material.OutlinedButton",
+                "androidx.compose.material3.OutlinedButton",
+            ),
+            "kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary" to setOf(
+                "androidx.compose.material.TextButton",
+                "androidx.compose.material3.TextButton",
+            ),
+            "kiwi.orbit.compose.ui.controls.SurfaceCard" to setOf(
                 "androidx.compose.material.Card",
                 "androidx.compose.material3.Card",
-            ) to "kiwi.orbit.compose.ui.controls.SurfaceCard"),
-            "Divider" to (setOf(
+                "androidx.compose.material3.OutlinedCard",
+            ),
+            "kiwi.orbit.compose.ui.controls.Checkbox" to setOf(
+                "androidx.compose.material.Checkbox",
+                "androidx.compose.material3.Checkbox",
+            ),
+            "kiwi.orbit.compose.ui.controls.Separator" to setOf(
                 "androidx.compose.material.Divider",
                 "androidx.compose.material3.Divider",
-            ) to "kiwi.orbit.compose.ui.controls.Separator"),
-            "IconButton" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.IconButton" to setOf(
                 "androidx.compose.material.IconButton",
                 "androidx.compose.material3.IconButton",
-            ) to "kiwi.orbit.compose.ui.controls.IconButton"),
-            "Icon" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.Icon" to setOf(
                 "androidx.compose.material.Icon",
                 "androidx.compose.material3.Icon",
-            ) to "kiwi.orbit.compose.ui.controls.Icon"),
-            "LinearProgressIndicator" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.LinearProgressIndicator" to setOf(
                 "androidx.compose.material.LinearProgressIndicator",
                 "androidx.compose.material3.LinearProgressIndicator",
-            ) to "kiwi.orbit.compose.ui.controls.LinearProgressIndicator"),
-            "Scaffold" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.ListChoice" to setOf(
+                "androidx.compose.material.ListItem",
+                "androidx.compose.material3.ListItem",
+            ),
+            "kiwi.orbit.compose.ui.controls.Radio" to setOf(
+                "androidx.compose.material.RadioButton",
+                "androidx.compose.material3.RadioButton",
+            ),
+            "kiwi.orbit.compose.ui.controls.RangeSlider" to setOf(
+                "androidx.compose.material.RangeSlider",
+                "androidx.compose.material3.RangeSlider",
+            ),
+            "kiwi.orbit.compose.ui.controls.Scaffold" to setOf(
                 "androidx.compose.material.Scaffold",
                 "androidx.compose.material3.Scaffold",
-            ) to "kiwi.orbit.compose.ui.controls.Scaffold"),
-            "Surface" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.Slider" to setOf(
+                "androidx.compose.material.Slider",
+                "androidx.compose.material3.Slider",
+            ),
+            "kiwi.orbit.compose.ui.controls.Surface" to setOf(
                 "androidx.compose.material.Surface",
                 "androidx.compose.material3.Surface",
-            ) to "kiwi.orbit.compose.ui.controls.Surface"),
-            "Text" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.Switch" to setOf(
+                "androidx.compose.material.Switch",
+                "androidx.compose.material3.Switch",
+            ),
+            "kiwi.orbit.compose.ui.controls.Tab" to setOf(
+                "androidx.compose.material.Tab",
+                "androidx.compose.material3.Tab",
+            ),
+            "kiwi.orbit.compose.ui.controls.TabRow" to setOf(
+                "androidx.compose.material.TabRow",
+                "androidx.compose.material3.TabRow",
+            ),
+            "kiwi.orbit.compose.ui.controls.Text" to setOf(
                 "androidx.compose.material.Text",
                 "androidx.compose.material3.Text",
-            ) to "kiwi.orbit.compose.ui.controls.Text"),
-            "contentColorFor" to (setOf(
+            ),
+            "kiwi.orbit.compose.ui.controls.TextField" to setOf(
+                "androidx.compose.material.TextField",
+                "androidx.compose.material.OutlinedTextField",
+                "androidx.compose.material3.TextField",
+                "androidx.compose.material3.OutlinedTextField",
+            ),
+            "kiwi.orbit.compose.ui.controls.ToastHost" to setOf(
+                "androidx.compose.material.SnackbarHost",
+                "androidx.compose.material3.SnackbarHost",
+            ),
+            "kiwi.orbit.compose.ui.controls.TopAppBar" to setOf(
+                "androidx.compose.material.TopAppBar",
+                "androidx.compose.material3.TopAppBar",
+                "androidx.compose.material3.LargeTopAppBar",
+            ),
+            "kiwi.orbit.compose.ui.foundation.contentColorFor" to setOf(
                 "androidx.compose.material.contentColorFor",
                 "androidx.compose.material3.contentColorFor",
-            ) to "kiwi.orbit.compose.ui.foundation.contentColorFor"),
+            ),
         )
 
         private val RECEIVER_NAMES = mapOf(
