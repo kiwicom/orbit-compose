@@ -43,6 +43,7 @@ public fun ButtonPrimitive(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = OrbitTheme.shapes.normal,
     textStyle: TextStyle = OrbitTheme.typography.bodyNormalMedium.copy(textAlign = TextAlign.Center),
+    contentArrangement: Arrangement.Horizontal = ButtonDefaults.HorizontalArrangement,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -80,7 +81,7 @@ public fun ButtonPrimitive(
                         minHeight = ButtonDefaults.MinHeight,
                     )
                     .padding(contentPadding),
-                horizontalArrangement = Arrangement.Center,
+                horizontalArrangement = contentArrangement,
                 verticalAlignment = Alignment.CenterVertically,
                 content = content,
             )
@@ -107,6 +108,9 @@ public object ButtonDefaults {
         end = ButtonSmallHorizontalPadding,
         bottom = ButtonSmallVerticalPadding,
     )
+
+    public val HorizontalArrangement: Arrangement.Horizontal =
+        Arrangement.spacedBy(8.dp, alignment = Alignment.CenterHorizontally)
 
     /**
      * The default min width applied for the [ButtonPrimitive].
