@@ -9,8 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasParent
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performSemanticsAction
 import org.junit.Assert
@@ -51,14 +53,17 @@ internal class SliderTest {
                 value = currentValue,
                 onValueChange = { currentValue = it },
                 modifier = Modifier.testTag("slider"),
-                valueLabel = {},
-                startLabel = {},
-                endLabel = {},
+                valueLabel = { Text(it.toString()) }, // make children offsets non-trivial
+                startLabel = { Text("Start") },
+                endLabel = { Text("End") },
             )
         }
-        val slider = composeTestRule.onNodeWithTag("slider")
-        val start = slider.onChildren()[0]
-        val end = slider.onChildren()[1]
+        val sliderThumbs = composeTestRule.onAllNodes(
+            hasParent(hasTestTag("slider")) and
+                SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress),
+        )
+        val start = sliderThumbs[0]
+        val end = sliderThumbs[1]
 
         start.performSemanticsAction(SemanticsActions.SetProgress) { it.invoke(0.5f) }
         val startProgressBarInfo = start.fetchSemanticsNode().config[SemanticsProperties.ProgressBarRangeInfo]

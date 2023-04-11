@@ -89,9 +89,12 @@ composeTestRule.setContent {
     )
 }
 
-val slider = composeTestRule.onNodeWithTag("slider")
-val start = slider.onChildren()[0]
-val end = slider.onChildren()[1]
+val sliderThumbs = composeTestRule.onAllNodes(
+    hasParent(hasTestTag("slider")) and
+        SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress),
+)
+val start = sliderThumbs[0]
+val end = sliderThumbs[1]
 
 start.performSemanticsAction(SemanticsActions.SetProgress) { it.invoke(0.5f) }
 end.performSemanticsAction(SemanticsActions.SetProgress) { it.invoke(0.8f) }
