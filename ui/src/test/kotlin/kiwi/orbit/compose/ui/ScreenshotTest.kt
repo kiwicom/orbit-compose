@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.ui
 
+import android.os.ext.SdkExtensions
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
@@ -11,6 +12,9 @@ import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
+import io.mockk.every
+import io.mockk.mockkStatic
+import io.mockk.unmockkAll
 import kiwi.orbit.compose.ui.controls.AlertCriticalPreview
 import kiwi.orbit.compose.ui.controls.AlertInfoPreview
 import kiwi.orbit.compose.ui.controls.AlertInlineCustomizedPreview
@@ -65,10 +69,23 @@ import kiwi.orbit.compose.ui.controls.TimelineStatesPreview
 import kiwi.orbit.compose.ui.controls.ToastPreview
 import kiwi.orbit.compose.ui.controls.TopAppBarLargePreview
 import kiwi.orbit.compose.ui.controls.TopAppBarPreview
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 internal class ScreenshotTest {
+
+    @Before
+    fun setUp() {
+        mockkStatic(SdkExtensions::class)
+        every { SdkExtensions.getExtensionVersion(any()) } returns 3
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
+    }
 
     @get:Rule
     val paparazzi = Paparazzi(
