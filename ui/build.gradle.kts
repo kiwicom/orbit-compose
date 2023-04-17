@@ -93,6 +93,7 @@ dependencies {
     testImplementation(libs.compose.uiTest)
     testImplementation(libs.compose.uiTestManifest)
     testImplementation(libs.hamcrest) // ui test fails if not added
+    testImplementation(libs.mockk)
 
     lintChecks(libs.slack.composeLintChecks)
 
