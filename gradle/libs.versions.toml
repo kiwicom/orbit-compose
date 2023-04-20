@@ -69,7 +69,7 @@ junit = { module = "junit:junit", version = "4.13.2" }
 kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.6.1" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 robolectric = { module = "org.robolectric:robolectric", version = "4.10" }
-slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.1.1" }
+slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.2.0" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 [bundles]
