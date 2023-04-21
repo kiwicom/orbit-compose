@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -313,7 +314,7 @@ private fun BadgeScreenInner() {
         BadgeRow("Custom themed") {
             BadgePrimitive(
                 backgroundColor = OrbitTheme.colors.info.subtle,
-                borderColor = OrbitTheme.colors.info.strong,
+                borderStroke = BorderStroke(0.5.dp, OrbitTheme.colors.info.strong),
                 contentColor = OrbitTheme.colors.content.normal,
                 icon = { Icon(painter = Icons.Close, contentDescription = null) },
             ) {

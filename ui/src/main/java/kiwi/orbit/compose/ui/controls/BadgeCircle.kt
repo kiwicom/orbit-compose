@@ -1,10 +1,10 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -17,7 +17,6 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
-import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asNeutralSubtleStrongTheme
@@ -155,26 +154,31 @@ private fun BadgeCircle(
 ) {
     val height = with(LocalDensity.current) {
         OrbitTheme.typography.bodySmallMedium.lineHeight.toDp() +
-            BadgeContentPadding.calculateTopPadding() +
-            BadgeContentPadding.calculateBottomPadding()
+            BadgeDefaults.ContentPadding.calculateTopPadding() +
+            BadgeDefaults.ContentPadding.calculateBottomPadding()
+    }
+    val backgroundColor = when (subtle) {
+        true -> colors.primary.subtle
+        false -> colors.primary.normal
     }
     CompositionLocalProvider(
         LocalColors provides colors,
     ) {
-        ThemedSurface(
+        BadgePrimitive(
             modifier = modifier
                 .requiredHeight(height)
                 .requiredWidth(height),
-            subtle = subtle,
-            shape = CircleShape,
-            borderStrokeWidth = BadgeStrokeWidth,
+            backgroundColor = backgroundColor,
+            backgroundBrush = null,
+            borderStroke = null,
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-        ) {
-            ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
+            contentPadding = ContentPadding,
+            icon = {},
+            content = {
                 Text(text = value.toString(), maxLines = 1, overflow = TextOverflow.Visible)
-            }
-        }
+            },
+        )
     }
 }
 
@@ -215,3 +219,8 @@ internal fun BadgeCirclePreview() {
         }
     }
 }
+
+private val ContentPadding = PaddingValues(
+    top = BadgeDefaults.ContentPadding.calculateTopPadding(),
+    bottom = BadgeDefaults.ContentPadding.calculateBottomPadding(),
+)

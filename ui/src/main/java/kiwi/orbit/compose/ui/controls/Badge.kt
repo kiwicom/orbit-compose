@@ -12,7 +12,6 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
-import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
 import kiwi.orbit.compose.ui.foundation.asInfoTheme
 import kiwi.orbit.compose.ui.foundation.asNeutralSubtleStrongTheme
@@ -209,21 +208,20 @@ private fun Badge(
     content: @Composable RowScope.() -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(LocalColors provides colors) {
-        ThemedSurface(
-            subtle = subtle,
-            shape = BadgeShape,
+    val backgroundColor = when (subtle) {
+        true -> colors.primary.subtle
+        false -> colors.primary.normal
+    }
+    CompositionLocalProvider(
+        LocalColors provides colors,
+    ) {
+        BadgePrimitive(
+            backgroundColor = backgroundColor,
+            backgroundBrush = null,
+            borderStroke = null,
+            icon = icon,
+            content = content,
             modifier = modifier,
-            borderStrokeWidth = BadgeStrokeWidth,
-            contentPadding = BadgeContentPadding,
-            horizontalArrangement = BadgeArrangement,
-            verticalAlignment = BadgeAlignment,
-            content = {
-                ProvideMergedTextStyle(OrbitTheme.typography.bodySmallMedium) {
-                    icon()
-                    content()
-                }
-            },
         )
     }
 }
