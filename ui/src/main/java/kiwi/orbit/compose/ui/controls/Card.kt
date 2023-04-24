@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
@@ -35,15 +36,18 @@ public fun Card(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit = {},
     action: @Composable () -> Unit = {},
+    description: @Composable () -> Unit = {},
     contentPadding: PaddingValues = PaddingValues(16.dp),
     content: @Composable () -> Unit,
 ) {
     Surface(modifier) {
         Column {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .layout { measurable, constraints ->
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Row(
+                    modifier = Modifier.layout { measurable, constraints ->
                         val placeable = measurable.measure(constraints)
 
                         // Header has 16dp top padding but only if it has some content in it.
@@ -56,21 +60,27 @@ public fun Card(
                             placeable.placeRelative(0, topPadding)
                         }
                     },
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .alignByBaseline()
-                        .weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    ProvideMergedTextStyle(OrbitTheme.typography.title4) {
-                        title()
+                    Box(
+                        modifier = Modifier
+                            .alignByBaseline()
+                            .weight(1f),
+                    ) {
+                        ProvideMergedTextStyle(OrbitTheme.typography.title3) {
+                            title()
+                        }
                     }
-                }
-                Box(Modifier.alignByBaseline()) {
-                    ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
+                    Box(
+                        Modifier
+                            .alignByBaseline()
+                            .widthIn(max = 240.dp),
+                    ) {
                         action()
                     }
+                }
+                ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalMedium) {
+                    description()
                 }
             }
             Box(Modifier.padding(contentPadding)) {
@@ -88,19 +98,15 @@ internal fun CardPreview() {
             CustomPlaceholder()
         }
         Card(
-            title = { Text("Card title") },
-            action = { ButtonTextLinkPrimary("Action", onClick = {}) },
+            title = { Text("Card title with many words and even longer") },
+            action = { ButtonTextLinkPrimary("This is a longer call to action", onClick = {}) },
+            description = { Text("Description should contain short and relevant information.") },
         ) {
             CustomPlaceholder()
         }
         Card(
-            title = { Text("Card title", style = OrbitTheme.typography.title1) },
+            title = { Text("Card title", style = OrbitTheme.typography.title2) },
             action = { ButtonTextLinkPrimary("Action", onClick = {}) },
-        ) {
-            CustomPlaceholder()
-        }
-        Card(
-            title = { Text("Card title") },
             contentPadding = PaddingValues(vertical = 12.dp),
         ) {
             Column {

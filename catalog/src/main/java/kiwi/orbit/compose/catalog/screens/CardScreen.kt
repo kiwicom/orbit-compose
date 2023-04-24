@@ -54,7 +54,11 @@ private fun CardScreenInner() {
         modifier = Modifier.padding(vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Card {
+        Card(
+            title = { Text("Card title with many words and even longer") },
+            action = { ButtonTextLinkPrimary("This is a longer call to action", onClick = {}) },
+            description = { Text("Description should contain short and relevant information.") },
+        ) {
             CustomPlaceholder()
         }
         Card(
