@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,6 +37,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
+import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -129,16 +129,15 @@ private fun Toast(
                 .padding(12.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            if (icon != null) {
-                Icon(
-                    icon(),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                        .size(16.dp),
-                )
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+                if (icon != null) {
+                    Icon(
+                        icon(),
+                        contentDescription = null,
+                    )
+                }
+                Text(message)
             }
-            Text(message, style = OrbitTheme.typography.bodyNormal)
         }
     }
 }
