@@ -54,8 +54,7 @@ fun Example() {
     Column {
         AlertInlineSuccess(
             title = { Text("Password changed") },
-            action = { Text("Account") },
-            onActionClick = { /* navigate */ },
+            action = { ButtonTextLinkPrimary("Account", onClick = { /* ... */ }) },
         )
     }
 }
@@ -80,8 +79,6 @@ composeTestRule.setContent {
 
 composeTestRule.onNodeWithTag("action").performClick()
 ```
-
-`AlertInline`'s action is not correctly exposed for now.
 
 ## Customization
 

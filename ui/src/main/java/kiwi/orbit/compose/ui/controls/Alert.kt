@@ -4,7 +4,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -26,7 +28,6 @@ import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
-import kiwi.orbit.compose.ui.foundation.Colors
 import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
@@ -137,6 +138,123 @@ private fun Alert(
     suppressed: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    AlertContainer(
+        suppressed = suppressed,
+        contentPadding = PaddingValues(12.dp),
+        modifier = modifier,
+    ) {
+        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+            if (icon != null) {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    modifier = Modifier.padding(end = 8.dp),
+                    tint = OrbitTheme.colors.primary.normal,
+                )
+            }
+            AlertContent(
+                title = title,
+                actions = actions,
+                content = content,
+                suppressed = suppressed,
+            )
+        }
+    }
+}
+
+@Composable
+private fun AlertContent(
+    title: @Composable ColumnScope.() -> Unit,
+    actions: @Composable () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
+    suppressed: Boolean,
+) {
+    Column {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            ProvideMergedTextStyle(OrbitTheme.typography.title5) {
+                title()
+            }
+            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+                content()
+            }
+        }
+        AlertButtons(topPadding = 12.dp, suppressed, actions)
+    }
+}
+
+@Composable
+private fun AlertButtons(
+    topPadding: Dp,
+    suppressed: Boolean,
+    content: @Composable () -> Unit,
+) {
+    val backgroundColor = when (suppressed) {
+        true -> OrbitTheme.colors.content.subtle.copy(alpha = 0.1f)
+        false -> OrbitTheme.colors.primary.normal.copy(alpha = 0.1f)
+    }
+    val contentColor = when (suppressed) {
+        true -> contentColorFor(OrbitTheme.colors.surface.normal)
+        false -> contentColorFor(OrbitTheme.colors.primary.subtle)
+    }
+    val colors = OrbitTheme.colors.copy(
+        surface = OrbitTheme.colors.surface.copy(
+            normal = backgroundColor,
+        ),
+        content = OrbitTheme.colors.content.copy(
+            normal = contentColor,
+        ),
+    )
+    CompositionLocalProvider(
+        LocalColors provides colors,
+        LocalSmallButtonScope provides true,
+    ) {
+        AlertButtonsLayout(topPadding, content)
+    }
+}
+
+@Composable
+private fun AlertButtonsLayout(
+    topPadding: Dp,
+    content: @Composable () -> Unit,
+) {
+    Layout(
+        content = content,
+    ) { measurables, incomingConstraints ->
+        if (measurables.isEmpty()) {
+            return@Layout layout(0, 0) {}
+        }
+
+        val topPaddingPx = topPadding.roundToPx()
+        val buttonSpacing = 8.dp.roundToPx()
+
+        val buttonsCount = measurables.size
+        val buttonSize =
+            ((incomingConstraints.maxWidth - (buttonSpacing * (buttonsCount - 1))) / buttonsCount)
+        val buttonConstraint =
+            incomingConstraints.copy(minWidth = buttonSize, maxWidth = buttonSize)
+
+        val placeables = measurables.map {
+            it.measure(buttonConstraint)
+        }
+
+        val maxHeight = placeables.maxOf { it.height } + topPaddingPx
+        layout(incomingConstraints.maxWidth, maxHeight) {
+            var x = 0
+            for (placeable in placeables) {
+                placeable.place(x, y = topPaddingPx)
+                x += buttonSize + buttonSpacing
+            }
+        }
+    }
+}
+
+@Composable
+internal fun AlertContainer(
+    suppressed: Boolean,
+    contentPadding: PaddingValues,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit,
+) {
     val bgColor = when (suppressed) {
         true -> OrbitTheme.colors.surface.subtle
         false -> OrbitTheme.colors.primary.subtle
@@ -147,20 +265,6 @@ private fun Alert(
     }.copy(0.1f)
     val accentColor = OrbitTheme.colors.primary.normal
     val shape = OrbitTheme.shapes.normal
-    val buttonColors = when (suppressed) {
-        true -> OrbitTheme.colors
-        false -> {
-            val primaryColors = OrbitTheme.colors.primary
-            OrbitTheme.colors.copy(
-                surface = OrbitTheme.colors.surface.copy(
-                    normal = primaryColors.subtleAlt,
-                ),
-                content = OrbitTheme.colors.content.copy(
-                    normal = contentColorFor(primaryColors.subtleAlt),
-                ),
-            )
-        }
-    }
 
     Row(
         modifier = modifier
@@ -176,89 +280,10 @@ private fun Alert(
                 )
             }
             .border(1.dp, borderColor, shape)
-            .padding(
-                top = 12.dp + 3.dp, // stroke width
-                start = if (icon != null) 12.dp else 16.dp,
-                end = 16.dp,
-                bottom = 16.dp,
-            ),
-    ) {
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-            if (icon != null) {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    modifier = Modifier.padding(end = 8.dp),
-                    tint = accentColor,
-                )
-            }
-            AlertContent(
-                title = title,
-                actions = actions,
-                content = content,
-                buttonColors = buttonColors,
-            )
-        }
-    }
-}
-
-@Composable
-private fun AlertContent(
-    title: @Composable ColumnScope.() -> Unit,
-    actions: @Composable () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
-    buttonColors: Colors,
-) {
-    Column {
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            ProvideMergedTextStyle(OrbitTheme.typography.bodyNormalBold) {
-                title()
-            }
-            content()
-        }
-        CompositionLocalProvider(
-            LocalColors provides buttonColors,
-            LocalSmallButtonScope provides true,
-        ) {
-            AlertButtons(topPadding = 16.dp, actions)
-        }
-    }
-}
-
-@Composable
-private fun AlertButtons(
-    topPadding: Dp,
-    content: @Composable () -> Unit,
-) {
-    Layout(
+            .padding(top = 3.dp) // stroke width
+            .padding(contentPadding),
         content = content,
-    ) { measurables, incomingConstraints ->
-        if (measurables.isEmpty()) {
-            return@Layout layout(0, 0) {}
-        }
-
-        val topPaddingPx = topPadding.roundToPx()
-        val buttonPadding = 12.dp.roundToPx()
-
-        val buttonsCount = measurables.size
-        val buttonSize =
-            ((incomingConstraints.maxWidth - (buttonPadding * (buttonsCount - 1))) / buttonsCount)
-        val buttonConstraint =
-            incomingConstraints.copy(minWidth = buttonSize, maxWidth = buttonSize)
-
-        val placeables = measurables.map {
-            it.measure(buttonConstraint)
-        }
-
-        val maxHeight = placeables.maxOf { it.height } + topPaddingPx
-        layout(incomingConstraints.maxWidth, maxHeight) {
-            var x = 0
-            for (placeable in placeables) {
-                placeable.place(x, y = topPaddingPx)
-                x += buttonSize + buttonPadding
-            }
-        }
-    }
+    )
 }
 
 @OrbitPreviews
