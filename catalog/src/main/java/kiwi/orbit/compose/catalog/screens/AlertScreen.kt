@@ -38,6 +38,7 @@ import kiwi.orbit.compose.ui.controls.AlertSuccess
 import kiwi.orbit.compose.ui.controls.AlertWarning
 import kiwi.orbit.compose.ui.controls.ButtonPrimary
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
+import kiwi.orbit.compose.ui.controls.ButtonTextLinkPrimary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Tab
 import kiwi.orbit.compose.ui.controls.TabRow
@@ -125,8 +126,7 @@ private fun AlertScreenInlineInner() {
         AlertInlineInfo(
             modifier = Modifier.padding(16.dp),
             title = { Text("Informational message which is longer than expected. We should try avoid such a long copy.") },
-            action = { Text("Primary") },
-            onActionClick = {},
+            action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
         )
     }
 }
@@ -319,32 +319,28 @@ private fun AlertsInlineInner(suppressed: Boolean, withIcon: Boolean) {
     ) {
         AlertInlineInfo(
             title = { Text("Informational message") },
-            action = { Text("Primary") },
-            onActionClick = {},
+            action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
             suppressed = suppressed,
             icon = if (withIcon) Icons.InformationCircle else null,
         )
 
         AlertInlineSuccess(
             title = { Text("Success message") },
-            action = { Text("Primary") },
-            onActionClick = {},
+            action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
             suppressed = suppressed,
             icon = if (withIcon) Icons.CheckCircle else null,
         )
 
         AlertInlineWarning(
             title = { Text("Warning message") },
-            action = { Text("Primary") },
-            onActionClick = {},
+            action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
             suppressed = suppressed,
             icon = if (withIcon) Icons.AlertCircle else null,
         )
 
         AlertInlineCritical(
             title = { Text("Critical message") },
-            action = { Text("Primary") },
-            onActionClick = {},
+            action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
             suppressed = suppressed,
             icon = if (withIcon) Icons.AlertOctagon else null,
         )
