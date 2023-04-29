@@ -64,6 +64,7 @@ public fun ClickableField(
     }
 }
 
+@Suppress("LongParameterList")
 @Composable
 internal fun ClickableFieldBox(
     value: String,

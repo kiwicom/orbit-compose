@@ -1,7 +1,7 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.splineBasedDecay
@@ -108,7 +108,7 @@ private fun Toast(
                     targetValue = 1f,
                     animationSpec = tween(
                         durationMillis = animateDuration,
-                        easing = CubicBezierEasing(0f, 0f, 0.58f, 1f), // EaseOut
+                        easing = EaseOut,
                     ),
                 )
             }

@@ -220,12 +220,10 @@ internal fun Modifier.surface(
 internal fun surfaceColorAtElevation(
     color: Color,
     elevation: Dp,
-): Color {
-    return if (color == OrbitTheme.colors.surface.main && !OrbitTheme.colors.isLight) {
-        if (elevation == 0.dp) return color
+): Color =
+    if (color == OrbitTheme.colors.surface.main && !OrbitTheme.colors.isLight && elevation != 0.dp) {
         val alpha = ((4.5f * ln(elevation.value + 1)) + 2f) / 100f
-        return contentColorFor(color).copy(alpha = alpha).compositeOver(color)
+        contentColorFor(color).copy(alpha = alpha).compositeOver(color)
     } else {
         color
     }
-}

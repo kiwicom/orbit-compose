@@ -194,10 +194,10 @@ public fun ScaffoldAction(
 
 private val ActionFadeLine = HorizontalAlignmentLine(::minOf)
 
-private val SlotTopAppBar = 0
-private val SlotAction = 1
-private val SlotToast = 2
-private val SlotContent = 3
+private const val SlotTopAppBar = 0
+private const val SlotAction = 1
+private const val SlotToast = 2
+private const val SlotContent = 3
 
 /**
  * Action's top gradient currently decreased from 16.dp to minimize contentPadding
