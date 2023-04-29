@@ -77,7 +77,10 @@ public fun ButtonPrimitive(
             Row(
                 Modifier
                     .defaultMinSize(
-                        minWidth = if (LocalSmallButtonScope.current) ButtonDefaults.MinHeight else ButtonDefaults.MinWidth,
+                        minWidth = when {
+                            LocalSmallButtonScope.current -> ButtonDefaults.MinHeight
+                            else -> ButtonDefaults.MinWidth
+                        },
                         minHeight = ButtonDefaults.MinHeight,
                     )
                     .padding(contentPadding),

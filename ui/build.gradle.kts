@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.mavenPublish)
     alias(libs.plugins.paparazzi)
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -58,6 +59,12 @@ android {
             isIncludeAndroidResources = true
         }
     }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(file("$rootDir/detekt.yml"))
+    baseline = file("$projectDir/detekt-baseline.xml")
 }
 
 kotlinter {

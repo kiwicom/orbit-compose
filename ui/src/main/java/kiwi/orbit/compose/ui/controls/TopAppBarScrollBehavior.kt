@@ -510,7 +510,7 @@ public class TopAppBarState(
             0f
         }
 
-    private var _heightOffset = mutableStateOf(initialHeightOffset)
+    private val _heightOffset = mutableStateOf(initialHeightOffset)
 
     public companion object {
         /**

@@ -74,24 +74,24 @@ public fun PillButtonContainer(
             visible = buttonVisible,
             enter = fadeIn(
                 tween(
-                    durationMillis = ANIMATION_DURATION_MILLIS,
+                    durationMillis = AnimationDurationMillis,
                     easing = EaseOutBack,
                 ),
             ) + slideInVertically(
                 animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION_MILLIS,
+                    durationMillis = AnimationDurationMillis,
                     easing = EaseOutBack,
                 ),
                 initialOffsetY = { fullHeight -> -fullHeight },
             ),
             exit = fadeOut(
                 animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION_MILLIS,
+                    durationMillis = AnimationDurationMillis,
                     easing = EaseInBack,
                 ),
             ) + slideOutVertically(
                 animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION_MILLIS,
+                    durationMillis = AnimationDurationMillis,
                     easing = EaseInBack,
                 ),
                 targetOffsetY = { fullHeight -> -fullHeight },
@@ -152,7 +152,7 @@ public fun PillButtonContainerScope.PillButton(
     }
 }
 
-private const val ANIMATION_DURATION_MILLIS = 300
+private const val AnimationDurationMillis = 300
 
 @LayoutScopeMarker
 @Immutable
