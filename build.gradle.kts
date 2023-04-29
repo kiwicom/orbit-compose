@@ -19,7 +19,7 @@ plugins {
     alias(libs.plugins.mavenPublish) apply false
     alias(libs.plugins.paparazzi) apply false
     alias(libs.plugins.appDistribution) apply false
-    id("io.gitlab.arturbosch.detekt") version "1.23.0-RC2" apply false
+    id("io.gitlab.arturbosch.detekt") version "1.23.0-RC3" apply false
     alias(libs.plugins.dokka)
 }
 
