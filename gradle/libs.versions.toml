@@ -11,7 +11,7 @@ mavenPublish = "0.25.2"
 
 kotlin-serialization = "1.5.0"
 android-sdkCommon = "30.4.2"
-android-lint = "31.0.0"
+android-lint = "31.0.1"
 androidx-activityCompose = "1.7.1"
 androidx-activityComposeCatalog = "1.7.1"
 androidx-core = "1.10.0"
