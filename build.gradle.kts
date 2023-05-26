@@ -30,6 +30,11 @@ buildscript {
 }
 
 subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force(libs.compose.material3)
+        }
+    }
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "1.8"

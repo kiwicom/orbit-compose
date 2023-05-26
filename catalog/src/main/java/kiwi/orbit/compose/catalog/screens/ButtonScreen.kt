@@ -1,6 +1,5 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,7 +59,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ButtonScreen(onNavigateUp: () -> Unit) {
-    val state = rememberPagerState(0)
+    val state = rememberPagerState(0) { 2 }
     val scope = rememberCoroutineScope()
     Scaffold(
         topBar = {
@@ -85,7 +84,6 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
         },
     ) { contentPadding ->
         HorizontalPager(
-            pageCount = 2,
             state = state,
             modifier = Modifier.padding(top = contentPadding.calculateTopPadding()),
         ) { tabIndex ->
@@ -108,7 +106,6 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun ButtonScreenInner() {
     Column(
