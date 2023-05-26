@@ -172,20 +172,8 @@ private fun ColumnScope.Seat(
     content: @Composable () -> Unit,
 ) {
     val borderColor by animateColorAsState(
-        when {
-            !enabled -> OrbitTheme.colors.surface.subtleAlt
-            selected -> Color.Transparent
-            isExtraLegroom -> {
-                OrbitTheme.colors.info.normal
-                    .copy(alpha = 0.2f) // custom, missing theme color
-                    .compositeOver(OrbitTheme.colors.surface.main)
-            }
-            else -> {
-                OrbitTheme.colors.primary.normal
-                    .copy(alpha = 0.2f) // custom, missing theme color
-                    .compositeOver(OrbitTheme.colors.surface.main)
-            }
-        },
+        targetValue = resolveBorderColor(enabled, selected, isExtraLegroom),
+        label = "SeatBorderColor",
     )
 
     SeatSurface(
@@ -202,6 +190,7 @@ private fun ColumnScope.Seat(
                 selected -> OrbitTheme.colors.primary.normal
                 else -> OrbitTheme.colors.primary.subtle
             },
+            label = "SeatBackgroundColor",
         )
         Box(
             modifier = Modifier
@@ -228,6 +217,26 @@ private fun ColumnScope.Seat(
                 content()
             }
         }
+    }
+}
+
+@Composable
+private fun resolveBorderColor(
+    enabled: Boolean,
+    selected: Boolean,
+    isExtraLegroom: Boolean,
+): Color = when {
+    !enabled -> OrbitTheme.colors.surface.subtleAlt
+    selected -> Color.Transparent
+    isExtraLegroom -> {
+        OrbitTheme.colors.info.normal
+            .copy(alpha = 0.2f) // custom, missing theme color
+            .compositeOver(OrbitTheme.colors.surface.main)
+    }
+    else -> {
+        OrbitTheme.colors.primary.normal
+            .copy(alpha = 0.2f) // custom, missing theme color
+            .compositeOver(OrbitTheme.colors.surface.main)
     }
 }
 

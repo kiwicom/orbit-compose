@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun TabsScreen(onNavigateUp: () -> Unit) {
-    val pagerState = rememberPagerState(0)
+    val pagerState = rememberPagerState(0) { 3 }
     val scope = rememberCoroutineScope()
     Scaffold(
         topBar = {
@@ -47,7 +47,6 @@ internal fun TabsScreen(onNavigateUp: () -> Unit) {
         },
     ) { contentPadding: PaddingValues ->
         HorizontalPager(
-            pageCount = 3,
             state = pagerState,
         ) {
             when (it) {

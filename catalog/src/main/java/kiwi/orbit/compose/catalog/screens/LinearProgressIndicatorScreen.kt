@@ -12,7 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -54,7 +54,7 @@ private fun LinearProgressIndicatorScreenInner() {
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        var progress by rememberSaveable { mutableStateOf(0.5f) }
+        var progress by rememberSaveable { mutableFloatStateOf(0.5f) }
         LinearIndeterminateProgressIndicator()
         LinearProgressIndicator(progress)
         LinearProgressIndicator(progress, progressAnimationSpec = snap())

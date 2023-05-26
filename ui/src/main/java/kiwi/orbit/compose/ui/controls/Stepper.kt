@@ -1,13 +1,12 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,7 +19,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -83,7 +82,6 @@ public fun Stepper(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun StepperPrimitive(
     value: Int,
@@ -110,15 +108,16 @@ private fun StepperPrimitive(
             targetState = value,
             transitionSpec = {
                 if (targetState > initialState) {
-                    slideInVertically { height -> height / 2 } + fadeIn() with
+                    slideInVertically { height -> height / 2 } + fadeIn() togetherWith
                         slideOutVertically { height -> -height / 2 } + fadeOut()
                 } else {
-                    slideInVertically { height -> -height / 2 } + fadeIn() with
+                    slideInVertically { height -> -height / 2 } + fadeIn() togetherWith
                         slideOutVertically { height -> height / 2 } + fadeOut()
                 }.using(
                     SizeTransform(clip = false),
                 )
             },
+            label = "StepperValue",
         ) { targetNumber ->
             Text(
                 modifier = Modifier
@@ -200,7 +199,7 @@ internal fun StepperPreview() {
             value = 0,
             onValueChange = {},
         )
-        var i by remember { mutableStateOf(10) }
+        var i by remember { mutableIntStateOf(10) }
         Stepper(
             value = i,
             onValueChange = { i = it },

@@ -11,7 +11,7 @@ import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -449,7 +449,7 @@ public class TopAppBarState(
      *
      * Use this limit to coerce the [heightOffset] value when it's updated.
      */
-    public var heightOffsetLimit: Float by mutableStateOf(initialHeightOffsetLimit)
+    public var heightOffsetLimit: Float by mutableFloatStateOf(initialHeightOffsetLimit)
 
     /**
      * The top app bar's current height offset in pixels. This height offset is applied to the fixed
@@ -458,9 +458,9 @@ public class TopAppBarState(
      * Updates to the [heightOffset] value are coerced between zero and [heightOffsetLimit].
      */
     public var heightOffset: Float
-        get() = _heightOffset.value
+        get() = _heightOffset.floatValue
         set(newOffset) {
-            _heightOffset.value = newOffset.coerceIn(
+            _heightOffset.floatValue = newOffset.coerceIn(
                 minimumValue = heightOffsetLimit,
                 maximumValue = 0f,
             )
@@ -476,7 +476,7 @@ public class TopAppBarState(
      * consumes scroll events. A common implementation would update the value to be the sum of all
      * [NestedScrollConnection.onPostScroll] `consumed.y` values.
      */
-    public var contentOffset: Float by mutableStateOf(initialContentOffset)
+    public var contentOffset: Float by mutableFloatStateOf(initialContentOffset)
 
     /**
      * A value that represents the collapsed height percentage of the app bar.
@@ -510,7 +510,7 @@ public class TopAppBarState(
             0f
         }
 
-    private val _heightOffset = mutableStateOf(initialHeightOffset)
+    private val _heightOffset = mutableFloatStateOf(initialHeightOffset)
 
     public companion object {
         /**

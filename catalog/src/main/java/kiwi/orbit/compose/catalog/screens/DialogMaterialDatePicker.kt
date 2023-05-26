@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.catalog.screens
 
 import android.annotation.SuppressLint

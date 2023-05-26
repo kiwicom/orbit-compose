@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -52,7 +53,7 @@ private fun SliderScreenInner() {
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("Slider", style = OrbitTheme.typography.title4)
-            var value1 by rememberSaveable { mutableStateOf(0.5f) }
+            var value1 by rememberSaveable { mutableFloatStateOf(0.5f) }
             Slider(
                 value = value1,
                 onValueChange = { value1 = it },
@@ -64,7 +65,7 @@ private fun SliderScreenInner() {
 
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("Slider with steps", style = OrbitTheme.typography.title4)
-            var value2 by rememberSaveable { mutableStateOf(0.5f) }
+            var value2 by rememberSaveable { mutableFloatStateOf(0.5f) }
             Slider(
                 value = value2,
                 onValueChange = { value2 = it },

@@ -1,14 +1,13 @@
 package kiwi.orbit.compose.ui.controls.field
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -23,7 +22,6 @@ import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.layout.size
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun FieldMessage(
     error: @Composable (() -> Unit)? = null,
@@ -43,14 +41,15 @@ internal fun FieldMessage(
                 val exit = slideOutVertically(animationSpec = tween(AnimationDuration)) +
                     fadeOut(animationSpec = tween(AnimationDuration))
                 val size = SizeTransform(clip = false) { _, _ -> tween(AnimationDuration) }
-                enter with exit using size
+                enter togetherWith exit using size
             } else {
                 val enter = fadeIn(animationSpec = tween(AnimationDuration))
                 val exit = fadeOut(animationSpec = tween(AnimationDuration))
                 val size = SizeTransform(clip = false) { _, _ -> tween(AnimationDuration) }
-                enter with exit using size
+                enter togetherWith exit using size
             }
         },
+        label = "FieldErrorInfoMessage",
     ) { message ->
         if (message != null) {
             Row(Modifier.padding(top = 4.dp)) {

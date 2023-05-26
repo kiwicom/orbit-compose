@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.ui.controls.internal
 
 import androidx.compose.material3.LocalAbsoluteTonalElevation

@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.foundation.BorderStroke
@@ -23,7 +21,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.semantics.isContainer
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -62,7 +60,7 @@ public fun Surface(
                     elevation = elevation,
                 )
                 .semantics(mergeDescendants = false) {
-                    isContainer = true
+                    isTraversalGroup = true
                 }
                 .pointerInput(Unit) {},
             propagateMinConstraints = true,

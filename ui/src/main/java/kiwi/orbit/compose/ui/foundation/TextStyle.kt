@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.material3.LocalTextStyle

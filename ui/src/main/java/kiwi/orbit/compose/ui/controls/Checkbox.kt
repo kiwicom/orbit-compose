@@ -55,6 +55,7 @@ public fun Checkbox(
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration),
+        label = "CheckboxBorderColor",
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
@@ -64,6 +65,7 @@ public fun Checkbox(
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = CheckboxAnimationDuration),
+        label = "CheckboxBackgroundColor",
     )
     val iconColor = when (enabled) {
         true -> OrbitTheme.colors.info.onNormal
@@ -89,6 +91,7 @@ public fun Checkbox(
     val errorAlpha by animateFloatAsState(
         targetValue = if (isError && enabled) 1.0f else 0.0f,
         animationSpec = tween(durationMillis = CheckboxAnimationDuration),
+        label = "CheckboxErrorGlowAlpha",
     )
     val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle

@@ -11,7 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -49,8 +49,8 @@ internal fun StepperScreen(onNavigateUp: () -> Unit) {
 @Composable
 private fun StepperScreenInner() {
     Column(Modifier.padding(16.dp)) {
-        var valueFirst by rememberSaveable { mutableStateOf(0) }
-        var valueSecond by rememberSaveable { mutableStateOf(0) }
+        var valueFirst by rememberSaveable { mutableIntStateOf(0) }
+        var valueSecond by rememberSaveable { mutableIntStateOf(0) }
 
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

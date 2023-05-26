@@ -50,7 +50,9 @@ private fun Circle(
     index: Int,
     circleSize: Dp,
 ) {
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(
+        label = "InlineLoading",
+    )
     val animatedValue by infiniteTransition.animateValue(
         initialValue = 0f,
         targetValue = -3f,
@@ -67,6 +69,7 @@ private fun Circle(
             repeatMode = RepeatMode.Reverse,
             initialStartOffset = StartOffset((index + 1) * 120),
         ),
+        label = "InlineLoadingScale",
     )
     val color = OrbitTheme.colors.surface.strong
 

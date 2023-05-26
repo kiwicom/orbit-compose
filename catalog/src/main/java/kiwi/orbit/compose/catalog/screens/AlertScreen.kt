@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun AlertScreen(onNavigateUp: () -> Unit) {
-    val state = rememberPagerState(0)
+    val state = rememberPagerState(0) { 3 }
     val scope = rememberCoroutineScope()
     Scaffold(
         topBar = {
@@ -79,7 +79,6 @@ internal fun AlertScreen(onNavigateUp: () -> Unit) {
         },
     ) { contentPadding: PaddingValues ->
         HorizontalPager(
-            pageCount = 3,
             state = state,
             modifier = Modifier.padding(top = contentPadding.calculateTopPadding()),
         ) { tabIndex ->

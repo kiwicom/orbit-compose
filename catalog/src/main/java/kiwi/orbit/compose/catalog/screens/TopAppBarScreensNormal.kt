@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -77,7 +78,7 @@ internal fun TopAppBarNormalWithTabsScreen(
                 title = { Text("With Tabs") },
                 onNavigateUp = onNavigateUp,
                 extraContent = {
-                    var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
+                    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
                     TabRow(selectedTabIndex = selectedTabIndex) {
                         Tab(
                             selected = selectedTabIndex == 0,

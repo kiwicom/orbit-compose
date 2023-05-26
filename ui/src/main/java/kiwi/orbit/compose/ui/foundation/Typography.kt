@@ -107,7 +107,6 @@ public data class Typography internal constructor(
      */
     val bodySmallBold: TextStyle = bodySmall.copy(fontWeight = FontWeight.Bold)
 
-    @Suppress("Dependency")
     internal fun toMaterial3Typography(): androidx.compose.material3.Typography =
         androidx.compose.material3.Typography(
             displayLarge = title1.copy(fontSize = 57.sp, lineHeight = 64.sp, letterSpacing = -0.2.sp),
@@ -128,7 +127,6 @@ public data class Typography internal constructor(
         )
 }
 
-@Suppress("DEPRECATION")
 public fun createTypography(
     defaultFontFamily: FontFamily = FontFamily.Default,
     defaultPlatformTextStyle: PlatformTextStyle? = PlatformTextStyle(includeFontPadding = false),

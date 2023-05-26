@@ -12,6 +12,7 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -170,7 +171,7 @@ internal fun TopAppBarLargePullRefreshScreen(
 ) {
     val refreshScope = rememberCoroutineScope()
     var refreshing by rememberSaveable { mutableStateOf(false) }
-    var i by rememberSaveable { mutableStateOf(0) }
+    var i by rememberSaveable { mutableIntStateOf(0) }
 
     fun refresh() = refreshScope.launch {
         refreshing = true

@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -425,7 +426,7 @@ private val TickSize = 2.dp
 @Composable
 internal fun SliderPreview() {
     Preview {
-        var value by remember { mutableStateOf(0.5f) }
+        var value by remember { mutableFloatStateOf(0.5f) }
         Slider(
             value = value,
             onValueChange = { value = it },

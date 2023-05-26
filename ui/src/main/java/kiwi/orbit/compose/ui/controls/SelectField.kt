@@ -76,6 +76,7 @@ public fun <T> SelectField(
                     val iconRotation by animateFloatAsState(
                         targetValue = if (expanded) 0f else 180f,
                         animationSpec = tween(),
+                        label = "SelectDropdownChevronRotation",
                     )
                     Icon(
                         painter = Icons.ChevronUp,

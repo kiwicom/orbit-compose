@@ -13,7 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -51,7 +51,7 @@ internal fun RadioScreen(onNavigateUp: () -> Unit) {
 private fun RadioScreenInner() {
     Column {
         Row(Modifier.padding(16.dp)) {
-            var selected by rememberSaveable { mutableStateOf(0) }
+            var selected by rememberSaveable { mutableIntStateOf(0) }
             Radio(selected = selected == 0, onClick = { selected = 0 })
 
             Spacer(Modifier.size(32.dp))
@@ -77,7 +77,7 @@ private fun RadioScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        var selected by rememberSaveable { mutableStateOf(0) }
+        var selected by rememberSaveable { mutableIntStateOf(0) }
         RadioField(
             selected = selected == 0,
             onClick = { selected = 0 },
@@ -102,7 +102,7 @@ private fun RadioScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        var selected2 by rememberSaveable { mutableStateOf(0) }
+        var selected2 by rememberSaveable { mutableIntStateOf(0) }
         RadioField(
             selected = selected2 == 0,
             onClick = { selected2 = 0 },
@@ -131,7 +131,7 @@ private fun RadioScreenInner() {
 
         Spacer(Modifier.size(32.dp))
 
-        var selected3 by rememberSaveable { mutableStateOf(0) }
+        var selected3 by rememberSaveable { mutableIntStateOf(0) }
         RadioField(
             selected = selected3 == 0,
             onClick = { selected3 = 0 },

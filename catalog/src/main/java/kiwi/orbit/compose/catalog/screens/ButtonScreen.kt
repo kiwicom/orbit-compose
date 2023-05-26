@@ -1,6 +1,5 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -60,7 +60,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ButtonScreen(onNavigateUp: () -> Unit) {
-    val state = rememberPagerState(0)
+    val state = rememberPagerState(0) { 2 }
     val scope = rememberCoroutineScope()
     Scaffold(
         topBar = {
@@ -85,7 +85,6 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
         },
     ) { contentPadding ->
         HorizontalPager(
-            pageCount = 2,
             state = state,
             modifier = Modifier.padding(top = contentPadding.calculateTopPadding()),
         ) { tabIndex ->
@@ -108,7 +107,6 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun ButtonScreenInner() {
     Column(
@@ -116,7 +114,7 @@ private fun ButtonScreenInner() {
         modifier = Modifier.padding(16.dp),
     ) {
         val maxWidth = Modifier.fillMaxWidth()
-        var variant by rememberSaveable { mutableStateOf(0) }
+        var variant by rememberSaveable { mutableIntStateOf(0) }
         val onClick = { variant = (variant + 1).mod(4) }
 
         ButtonPrimary(onClick = onClick, maxWidth) { Inner(variant, "Primary Button") }
