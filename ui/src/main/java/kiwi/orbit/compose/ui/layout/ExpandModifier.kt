@@ -3,10 +3,12 @@
 package kiwi.orbit.compose.ui.layout
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.LayoutModifier
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.node.LayoutModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.constrainHeight
@@ -26,7 +28,7 @@ import androidx.compose.ui.unit.offset
  * ```
  */
 public fun Modifier.expand(all: Dp): Modifier =
-    then(ExpandModifier(all, all))
+    this then ExpandModifierNodeElement(all, all)
 
 /**
  * Expands drawing beyond the assigned rect on all sides by provided [horizontal] and [vertical] size.
@@ -41,15 +43,33 @@ public fun Modifier.expand(all: Dp): Modifier =
  * ```
  */
 public fun Modifier.expand(horizontal: Dp, vertical: Dp): Modifier =
-    then(ExpandModifier(horizontal, vertical))
+    this then ExpandModifierNodeElement(horizontal, vertical)
 
-private data class ExpandModifier(
-    private val horizontalShift: Dp,
-    private val verticalShift: Dp,
-) : LayoutModifier {
+private data class ExpandModifierNodeElement(
+    val horizontal: Dp,
+    val vertical: Dp,
+) : ModifierNodeElement<ExpandModifierNode>() {
+    override fun InspectorInfo.inspectableProperties() {
+        name = "expand"
+        properties["horizontal"] = horizontal
+        properties["vertical"] = vertical
+    }
+
+    override fun create(): ExpandModifierNode = ExpandModifierNode(horizontal, vertical)
+
+    override fun update(node: ExpandModifierNode) {
+        node.horizontal = horizontal
+        node.vertical = vertical
+    }
+}
+
+private class ExpandModifierNode(
+    var horizontal: Dp,
+    var vertical: Dp,
+) : Modifier.Node(), LayoutModifierNode {
     override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
-        val shiftXPx = horizontalShift.roundToPx()
-        val shiftYPx = verticalShift.roundToPx()
+        val shiftXPx = horizontal.roundToPx()
+        val shiftYPx = vertical.roundToPx()
         val expandedConstraints = constraints.offset(
             horizontal = shiftXPx * 2,
             vertical = shiftYPx * 2,
