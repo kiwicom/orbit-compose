@@ -10,7 +10,7 @@ androidGradlePlugin = "7.4.2"
 mavenPublish = "0.25.2"
 
 kotlin-serialization = "1.5.1"
-android-sdkCommon = "30.4.2"
+android-sdkCommon = "31.0.2"
 android-lint = "31.0.2"
 androidx-activityCompose = "1.7.1"
 androidx-activityComposeCatalog = "1.7.1"
