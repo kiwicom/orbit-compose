@@ -367,7 +367,6 @@ public class Colors(
         isLight = isLight,
     )
 
-    @Suppress("Dependency")
     internal fun toMaterial3Colors(): androidx.compose.material3.ColorScheme =
         androidx.compose.material3.ColorScheme(
             primary = primary.normal,

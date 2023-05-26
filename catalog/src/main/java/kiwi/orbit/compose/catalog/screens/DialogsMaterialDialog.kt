@@ -14,7 +14,6 @@ internal fun DialogsMaterialDialog(navController: NavController) {
 }
 
 @SuppressLint("MaterialDesignInsteadOrbitDesign")
-@Suppress("Dependency")
 @Composable
 private fun DialogsMaterialDialog(
     onClose: () -> Unit,

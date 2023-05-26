@@ -1,5 +1,3 @@
-@file:Suppress("Dependency")
-
 package kiwi.orbit.compose.catalog.screens
 
 import android.annotation.SuppressLint
@@ -55,7 +53,6 @@ internal fun DialogMaterialTimePicker(navController: NavController) {
 }
 
 @SuppressLint("MaterialDesignInsteadOrbitDesign")
-@Suppress("Dependency")
 @Composable
 private fun TimePickerDialog(
     onCancel: () -> Unit,
