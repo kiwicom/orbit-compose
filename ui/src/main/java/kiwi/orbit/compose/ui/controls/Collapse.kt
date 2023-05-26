@@ -97,7 +97,10 @@ public fun Collapse(
                 onClick = { onExpandChange(!expanded) },
             )
         }
-        AnimatedVisibility(visible = expanded) {
+        AnimatedVisibility(
+            visible = expanded,
+            label = "CollapseContent",
+        ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
                 content()
             }
@@ -116,6 +119,7 @@ private fun CollapseArrow(
 ) {
     val arrowRotationDegree by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
+        label = "CollapseExpandChevronRotation",
     )
     IconButton(
         onClick = onClick,

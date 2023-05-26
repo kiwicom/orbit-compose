@@ -31,6 +31,7 @@ public fun <S> ButtonToggleContainer(
         targetState = targetState,
         transitionSpec = transitionSpec,
         contentAlignment = contentAlignment,
+        label = "ButtonToggleContainer",
     ) { state ->
         Box(Modifier.padding(16.dp)) {
             content(state)

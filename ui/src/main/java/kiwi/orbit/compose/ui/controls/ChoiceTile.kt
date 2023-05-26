@@ -51,6 +51,7 @@ public fun ChoiceTile(
             true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
         },
+        label = "ChoiceTileBorderColor",
     )
     SurfaceCard(
         selected = selected,

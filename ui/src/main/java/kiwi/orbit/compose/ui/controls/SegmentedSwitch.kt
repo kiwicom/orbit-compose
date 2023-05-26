@@ -220,6 +220,7 @@ private fun VerticalDivider(
             selectedIndex == index - 1 || selectedIndex == index -> Color.Unspecified
             else -> OrbitTheme.colors.surface.strong
         },
+        label = "SegmentedSwitchDividerColor",
     )
     Surface(
         modifier = Modifier
@@ -235,7 +236,10 @@ private fun SelectionOutline(
     selectedIndex: Int,
     optionsCount: Int,
 ) {
-    val animatedOffset by animateFloatAsState(targetValue = selectedIndex.toFloat())
+    val animatedOffset by animateFloatAsState(
+        targetValue = selectedIndex.toFloat(),
+        label = "SegmentedSwitchSelectedOffset",
+    )
     val brushColor = OrbitTheme.colors.info.normal
     Canvas(
         modifier = Modifier

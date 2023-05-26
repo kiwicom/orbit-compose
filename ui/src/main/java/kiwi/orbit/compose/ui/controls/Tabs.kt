@@ -12,7 +12,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -97,7 +97,7 @@ public fun TabIndicator(
 @Composable
 internal fun TabsPreview() {
     Preview {
-        var i by rememberSaveable { mutableStateOf(1) }
+        var i by rememberSaveable { mutableIntStateOf(1) }
         TabRow(selectedTabIndex = i) {
             Tab(selected = i == 0, onClick = { i = 0 }) { Text("Tab A") }
             Tab(selected = i == 1, onClick = { i = 1 }) { Text("Tab B") }

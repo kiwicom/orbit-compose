@@ -49,6 +49,7 @@ internal fun FieldMessage(
                 enter togetherWith exit using size
             }
         },
+        label = "FieldErrorInfoMessage",
     ) { message ->
         if (message != null) {
             Row(Modifier.padding(top = 4.dp)) {

@@ -19,7 +19,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -117,6 +117,7 @@ private fun StepperPrimitive(
                     SizeTransform(clip = false),
                 )
             },
+            label = "StepperValue",
         ) { targetNumber ->
             Text(
                 modifier = Modifier
@@ -198,7 +199,7 @@ internal fun StepperPreview() {
             value = 0,
             onValueChange = {},
         )
-        var i by remember { mutableStateOf(10) }
+        var i by remember { mutableIntStateOf(10) }
         Stepper(
             value = i,
             onValueChange = { i = it },

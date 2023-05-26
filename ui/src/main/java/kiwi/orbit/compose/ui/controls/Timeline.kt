@@ -204,14 +204,16 @@ private fun ItemFutureIcon() {
 @Composable
 private fun ItemInProgressIcon() {
     val color = TimelineItemStatus.InProgress.color
-    val anim by rememberInfiniteTransition().animateFloat(
-        initialValue = 1f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1000, easing = EaseInOutCubic),
-            repeatMode = RepeatMode.Reverse,
-        ),
-    )
+    val anim by rememberInfiniteTransition(label = "TimelineItemInProgressGlow")
+        .animateFloat(
+            initialValue = 1f,
+            targetValue = 0f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1000, easing = EaseInOutCubic),
+                repeatMode = RepeatMode.Reverse,
+            ),
+            label = "TimelineItemInProgressGlowRadios",
+        )
     Canvas(Modifier.size(20.sp)) {
         val twoDp = 2.sp.toPx()
         drawCircle(color, size.width / 2 - twoDp, alpha = 0.1f, style = Stroke(twoDp + twoDp * anim)) // glow

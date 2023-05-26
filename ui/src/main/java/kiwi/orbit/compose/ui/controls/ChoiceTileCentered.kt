@@ -55,30 +55,16 @@ public fun ChoiceTileCentered(
             true -> OrbitTheme.colors.info.normal
             false -> Color.Transparent
         },
+        label = "ChoiceTileCenteredBorderColor",
     )
     Box(
-        modifier = modifier
-            .semantics {
-                this.selected = selected
-                if (isError) this.error(errorMessage)
-            },
+        modifier = modifier.semantics {
+            this.selected = selected
+            if (isError) this.error(errorMessage)
+        },
         propagateMinConstraints = true,
     ) {
-        if (badgeContent != null) {
-            Box(Modifier.zIndex(1f)) {
-                BadgeInfo(
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .layout { measurable, constraints ->
-                            val placeable = measurable.measure(constraints)
-                            layout(placeable.width, placeable.height) {
-                                placeable.placeRelative(0, placeable.height / -2)
-                            }
-                        },
-                    content = badgeContent,
-                )
-            }
-        }
+        ChoiceTileBadge(badgeContent)
         SurfaceCard(
             onClick = onSelect,
             interactionSource = interactionSource,
@@ -105,6 +91,25 @@ public fun ChoiceTileCentered(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun ChoiceTileBadge(badgeContent: @Composable (RowScope.() -> Unit)?) {
+    if (badgeContent == null) return
+
+    Box(Modifier.zIndex(1f)) {
+        BadgeInfo(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .layout { measurable, constraints ->
+                    val placeable = measurable.measure(constraints)
+                    layout(placeable.width, placeable.height) {
+                        placeable.placeRelative(0, placeable.height / -2)
+                    }
+                },
+            content = badgeContent,
+        )
     }
 }
 

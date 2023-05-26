@@ -19,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -70,7 +71,7 @@ private fun ChoiceTileScreenInner() {
     ) {
         BoxWithConstraints {
             val width = maxWidth * 0.8f
-            var mainSelection by rememberSaveable { mutableStateOf(-1) }
+            var mainSelection by rememberSaveable { mutableIntStateOf(-1) }
 
             // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
             // https://issuetracker.google.com/issues/215652703
@@ -108,7 +109,7 @@ private fun ChoiceTileScreenInner() {
             }
         }
 
-        var count by rememberSaveable { mutableStateOf(0) }
+        var count by rememberSaveable { mutableIntStateOf(0) }
         ChoiceTile(
             modifier = Modifier.padding(horizontal = 16.dp),
             title = {
@@ -207,7 +208,7 @@ private fun ChoiceTileScreenInner() {
 
         // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
         // https://issuetracker.google.com/issues/215652703
-        var selectedE by rememberSaveable { mutableStateOf(-1) }
+        var selectedE by rememberSaveable { mutableIntStateOf(-1) }
         Row(
             Modifier
                 .height(IntrinsicSize.Max)

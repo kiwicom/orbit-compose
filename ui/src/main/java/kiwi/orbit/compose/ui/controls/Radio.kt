@@ -42,6 +42,7 @@ public fun Radio(
     val borderWidth by animateDpAsState(
         targetValue = if (selected) 6.dp else 2.dp,
         animationSpec = tween(durationMillis = RadioAnimationDuration),
+        label = "RadioBorderWidth",
     )
     val borderColor by animateColorAsState(
         targetValue = when {
@@ -49,6 +50,7 @@ public fun Radio(
             else -> OrbitTheme.colors.info.normal
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration),
+        label = "RadioBorderColor",
     )
     val backgroundColor by animateColorAsState(
         targetValue = when {
@@ -56,6 +58,7 @@ public fun Radio(
             else -> Color.Transparent
         },
         animationSpec = tween(durationMillis = RadioAnimationDuration),
+        label = "RadioBackgroundColor",
     )
     val selectableModifier =
         if (onClick != null) {
@@ -77,6 +80,7 @@ public fun Radio(
     val errorAlpha by animateFloatAsState(
         targetValue = if (isError && enabled) 1f else 0f,
         animationSpec = tween(durationMillis = RadioAnimationDuration),
+        label = "RadioErrorGlowAlpha",
     )
     val errorStrokeColor = OrbitTheme.colors.critical.normal
     val errorShadowColor = OrbitTheme.colors.critical.subtle

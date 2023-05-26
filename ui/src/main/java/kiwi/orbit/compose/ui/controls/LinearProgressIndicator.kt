@@ -42,7 +42,11 @@ public fun LinearProgressIndicator(
         visibilityThreshold = 1 / 1000f,
     ),
 ) {
-    val animatedProgress by animateFloatAsState(progress, progressAnimationSpec)
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = progressAnimationSpec,
+        label = "LinearProgressWidth",
+    )
     androidx.compose.material3.LinearProgressIndicator(
         progress = animatedProgress,
         modifier = modifier.fillMaxWidth(),

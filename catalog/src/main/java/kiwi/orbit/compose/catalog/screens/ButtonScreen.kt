@@ -19,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -113,7 +114,7 @@ private fun ButtonScreenInner() {
         modifier = Modifier.padding(16.dp),
     ) {
         val maxWidth = Modifier.fillMaxWidth()
-        var variant by rememberSaveable { mutableStateOf(0) }
+        var variant by rememberSaveable { mutableIntStateOf(0) }
         val onClick = { variant = (variant + 1).mod(4) }
 
         ButtonPrimary(onClick = onClick, maxWidth) { Inner(variant, "Primary Button") }
