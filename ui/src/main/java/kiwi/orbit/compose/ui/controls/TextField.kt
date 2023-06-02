@@ -110,19 +110,78 @@ internal fun TextField(
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
 ) {
-    val errorMessage = stringResource(R.string.orbit_field_default_error)
-    ColumnWithMinConstraints(
-        modifier
-            .semantics {
-                if (error != null) {
-                    this.error(errorMessage)
-                }
-            },
-    ) {
-        ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-            var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
-            val textFieldValue = textFieldValueState.copy(text = value)
+    var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
+    val textFieldValue = textFieldValueState.copy(text = value)
 
+    // Reset input text style color to content color norma.
+    val textStyle = LocalTextStyle.current
+    val inputTextStyle = textStyle.copy(color = OrbitTheme.colors.content.normal)
+
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
+
+    BasicTextField(
+        value = textFieldValue,
+        onValueChange = {
+            textFieldValueState = it
+            if (value != it.text) {
+                onValueChange(it.text)
+            }
+        },
+        modifier = modifier.semantics {
+            if (error != null) {
+                this.error(errorMessage)
+            }
+        },
+        enabled = enabled,
+        readOnly = readOnly,
+        textStyle = inputTextStyle,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
+        visualTransformation = visualTransformation,
+        interactionSource = interactionSource,
+        cursorBrush = SolidColor(OrbitTheme.colors.info.normal),
+        decorationBox = { innerTextField ->
+            TextFiledDecorationBox(
+                innerTextField = innerTextField,
+                textFieldValue = textFieldValue,
+                label = label,
+                error = error,
+                info = info,
+                additionalContent = additionalContent,
+                placeholder = placeholder,
+                leadingIcon = leadingIcon,
+                onLeadingIconClick = onLeadingIconClick,
+                trailingIcon = trailingIcon,
+                onTrailingIconClick = onTrailingIconClick,
+                singleLine = singleLine,
+                interactionSource = interactionSource,
+            )
+        },
+    )
+}
+
+@Suppress("LongParameterList")
+@Composable
+private fun TextFiledDecorationBox(
+    innerTextField: @Composable () -> Unit,
+    textFieldValue: TextFieldValue,
+    label: @Composable (() -> Unit)?,
+    error: @Composable (() -> Unit)?,
+    info: @Composable (() -> Unit)?,
+    additionalContent: @Composable (() -> Unit)?,
+    placeholder: @Composable (() -> Unit)?,
+    leadingIcon: @Composable (() -> Unit)?,
+    onLeadingIconClick: (() -> Unit)?,
+    trailingIcon: @Composable (() -> Unit)?,
+    onTrailingIconClick: (() -> Unit)?,
+    singleLine: Boolean,
+    interactionSource: MutableInteractionSource,
+) {
+    ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+        ColumnWithMinConstraints {
             if (label != null) {
                 FieldLabel(label)
             }
@@ -139,10 +198,6 @@ internal fun TextField(
                 }
             }
 
-            // If color is not provided via the text style, use content color as a default
-            val textStyle = LocalTextStyle.current
-            val mergedTextStyle = textStyle.copy(color = OrbitTheme.colors.content.normal)
-
             val transition = updateTransition(inputState, "stateTransition")
             val borderColor = transition.animateColor(
                 transitionSpec = { tween(durationMillis = AnimationDuration) },
@@ -155,42 +210,20 @@ internal fun TextField(
                 }
             }
 
-            BasicTextField(
-                value = textFieldValue,
-                onValueChange = {
-                    textFieldValueState = it
-                    if (value != it.text) {
-                        onValueChange(it.text)
-                    }
-                },
+            FieldContent(
                 modifier = Modifier
                     .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
                     .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal),
-                enabled = enabled,
-                readOnly = readOnly,
-                textStyle = mergedTextStyle,
-                keyboardOptions = keyboardOptions,
-                keyboardActions = keyboardActions,
-                singleLine = singleLine,
-                maxLines = maxLines,
-                minLines = minLines,
-                visualTransformation = visualTransformation,
-                interactionSource = interactionSource,
-                cursorBrush = SolidColor(OrbitTheme.colors.info.normal),
-                decorationBox = { innerTextField ->
-                    FieldContent(
-                        fieldContent = innerTextField,
-                        placeholder = when (textFieldValue.text.isEmpty()) {
-                            true -> placeholder
-                            false -> null
-                        },
-                        leadingIcon = leadingIcon,
-                        onLeadingIconClick = onLeadingIconClick,
-                        trailingIcon = trailingIcon,
-                        onTrailingIconClick = onTrailingIconClick,
-                        singleLine = singleLine,
-                    )
+                fieldContent = innerTextField,
+                placeholder = when (textFieldValue.text.isEmpty()) {
+                    true -> placeholder
+                    false -> null
                 },
+                leadingIcon = leadingIcon,
+                onLeadingIconClick = onLeadingIconClick,
+                trailingIcon = trailingIcon,
+                onTrailingIconClick = onTrailingIconClick,
+                singleLine = singleLine,
             )
 
             additionalContent?.invoke()
