@@ -41,8 +41,8 @@ public fun <T> SelectField(
     modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     label: @Composable (() -> Unit)? = null,
-    error: @Composable (() -> Unit)? = null,
-    info: @Composable (() -> Unit)? = null,
+    error: @Composable () -> Unit = {},
+    info: @Composable () -> Unit = {},
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
@@ -50,6 +50,7 @@ public fun <T> SelectField(
     minLines: Int = 1,
     optionContent: @Composable RowScope.(option: T) -> Unit,
 ) {
+    var isError by remember { mutableStateOf(false) }
     ColumnWithMinConstraints(
         modifier
             .semantics {
@@ -68,7 +69,7 @@ public fun <T> SelectField(
         ) {
             ClickableFieldBox(
                 value = value,
-                isError = error != null,
+                isError = isError,
                 onClick = {},
                 placeholder = placeholder,
                 leadingIcon = leadingIcon,
@@ -118,7 +119,12 @@ public fun <T> SelectField(
             }
         }
 
-        FieldMessage(error, info)
+        FieldMessage(
+            showInfo = true,
+            onErrorResolved = { isError = it },
+            error = error,
+            info = info,
+        )
     }
 }
 

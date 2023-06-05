@@ -25,7 +25,7 @@ public fun PasswordStrengthIndicator(
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val progressAnimation by animateFloatAsState(value)
+    val progressAnimation by animateFloatAsState(value, label = "PasswordStrengthProgress")
 
     Row(
         modifier = modifier.fillMaxWidth(),

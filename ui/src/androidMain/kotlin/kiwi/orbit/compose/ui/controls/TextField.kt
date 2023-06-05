@@ -1,8 +1,7 @@
 package kiwi.orbit.compose.ui.controls
 
-import androidx.compose.animation.animateColor
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
@@ -52,8 +50,8 @@ public fun TextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     label: @Composable (() -> Unit)? = null,
-    error: @Composable (() -> Unit)? = null,
-    info: @Composable (() -> Unit)? = null,
+    error: @Composable () -> Unit = {},
+    info: @Composable () -> Unit = {},
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     onLeadingIconClick: (() -> Unit)? = null,
@@ -100,8 +98,8 @@ internal fun TextField(
     enabled: Boolean,
     readOnly: Boolean,
     label: @Composable (() -> Unit)?,
-    error: @Composable (() -> Unit)?,
-    info: @Composable (() -> Unit)?,
+    error: @Composable () -> Unit,
+    info: @Composable () -> Unit,
     additionalContent: @Composable (() -> Unit)?,
     placeholder: @Composable (() -> Unit)?,
     leadingIcon: @Composable (() -> Unit)?,
@@ -124,7 +122,7 @@ internal fun TextField(
     val textStyle = LocalTextStyle.current
     val inputTextStyle = textStyle.copy(color = OrbitTheme.colors.content.normal)
 
-    val errorMessage = stringResource(R.string.orbit_field_default_error)
+    @Suppress("UNUSED_VARIABLE") val errorMessage = stringResource(R.string.orbit_field_default_error)
 
     BasicTextField(
         value = textFieldValue,
@@ -135,9 +133,9 @@ internal fun TextField(
             }
         },
         modifier = modifier.semantics {
-            if (error != null) {
-                this.error(errorMessage)
-            }
+//            if (isError) {
+//                this.error(errorMessage)
+//            }
         },
         enabled = enabled,
         readOnly = readOnly,
@@ -176,8 +174,8 @@ private fun TextFiledDecorationBox(
     innerTextField: @Composable () -> Unit,
     textFieldValue: TextFieldValue,
     label: @Composable (() -> Unit)?,
-    error: @Composable (() -> Unit)?,
-    info: @Composable (() -> Unit)?,
+    error: @Composable () -> Unit,
+    info: @Composable () -> Unit,
     additionalContent: @Composable (() -> Unit)?,
     placeholder: @Composable (() -> Unit)?,
     leadingIcon: @Composable (() -> Unit)?,
@@ -193,29 +191,18 @@ private fun TextFiledDecorationBox(
                 FieldLabel(label)
             }
 
-            val isFocused = interactionSource.collectIsFocusedAsState().value
-            val inputState: InputState = when (isFocused) {
-                true -> when (error != null) {
-                    true -> InputState.FocusedError
-                    false -> InputState.Focused
-                }
-                false -> when (error != null) {
-                    true -> InputState.NormalError
-                    false -> InputState.Normal
-                }
-            }
+            val isFocused = interactionSource.collectIsFocusedAsState()
+            val isError = remember { mutableStateOf(false) }
 
-            val transition = updateTransition(inputState, "stateTransition")
-            val borderColor = transition.animateColor(
-                transitionSpec = { tween(durationMillis = AnimationDuration) },
+            val borderColor = animateColorAsState(
+                targetValue = when {
+                    isError.value -> OrbitTheme.colors.critical.normal
+                    isFocused.value -> OrbitTheme.colors.info.normal
+                    else -> Color.Transparent
+                },
+                animationSpec = tween(durationMillis = AnimationDuration),
                 label = "borderColor",
-            ) {
-                when (it) {
-                    InputState.Normal -> Color.Transparent
-                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.info.normal
-                    InputState.NormalError -> OrbitTheme.colors.critical.normal
-                }
-            }
+            )
 
             FieldContent(
                 modifier = Modifier
@@ -236,18 +223,13 @@ private fun TextFiledDecorationBox(
             additionalContent?.invoke()
 
             FieldMessage(
+                showInfo = isFocused.value,
+                onErrorResolved = { isError.value = it },
                 error = error,
-                info = if (isFocused) info else null, // Present info only in focused mode.
+                info = info,
             )
         }
     }
-}
-
-private enum class InputState {
-    Normal,
-    NormalError,
-    Focused,
-    FocusedError,
 }
 
 private const val AnimationDuration = 150

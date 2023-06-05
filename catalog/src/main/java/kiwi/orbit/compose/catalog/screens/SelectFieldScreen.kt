@@ -68,11 +68,10 @@ private fun SelectFieldScreenInner() {
         SelectField(
             value = selected?.name ?: "",
             options = items,
-            error = when (selected?.name) {
-                items.first().name -> {
-                    { Text("Select other country.") }
+            error = {
+                if (selected?.name == items.first().name) {
+                    Text("Select other country.")
                 }
-                else -> null
             },
             leadingIcon = selected?.let { selectedItem ->
                 {

@@ -105,11 +105,7 @@ private fun TextFieldScreenInner() {
             },
             label = { Text("E-mail") },
             leadingIcon = { Icon(Icons.Email, contentDescription = null) },
-            error = if (hasError) {
-                { Text("Please use this format: your@email.com") }
-            } else {
-                null
-            },
+            error = { if (hasError) Text("Please use this format: your@email.com") },
             placeholder = { Text("your@email.com") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email,
@@ -176,11 +172,7 @@ private fun TextFieldScreenInner() {
             },
             label = { Text("Nationality") },
             leadingIcon = { Icon(Icons.Trip, contentDescription = null) },
-            error = if (isNationalityError) {
-                { Text("Nationality must have at least 3 letters.") }
-            } else {
-                null
-            },
+            error = { if (isNationalityError) Text("Nationality must have at least 3 letters.") },
             info = { Text("A nationality code or full name.") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,

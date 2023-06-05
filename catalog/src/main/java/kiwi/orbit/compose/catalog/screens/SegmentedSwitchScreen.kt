@@ -92,7 +92,7 @@ private fun SegmentedSwitchScreenInner() {
             ),
             selectedIndex = selectedIndexInfo,
             label = { Text("Food info") },
-            info = selectedIndexInfo?.let { { Text(infoList[it]) } },
+            info = { selectedIndexInfo?.let { Text(infoList[it]) } },
         )
 
         var selectedIndexError by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -107,10 +107,10 @@ private fun SegmentedSwitchScreenInner() {
             ),
             selectedIndex = selectedIndexError,
             label = { Text("Sci-fi shows") },
-            error = if (selectedIndexError == null) {
-                { Text("Please select an option.") }
-            } else {
-                null
+            error = {
+                if (selectedIndexError == null) {
+                    Text("Please select an option.")
+                }
             },
         )
     }

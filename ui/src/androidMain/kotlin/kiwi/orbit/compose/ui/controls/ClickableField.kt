@@ -11,7 +11,10 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -38,8 +41,8 @@ public fun ClickableField(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
-    error: @Composable (() -> Unit)? = null,
-    info: @Composable (() -> Unit)? = null,
+    error: @Composable () -> Unit = {},
+    info: @Composable () -> Unit = {},
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -48,11 +51,12 @@ public fun ClickableField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+    var isError by remember { mutableStateOf(false) }
     val errorMessage = stringResource(R.string.orbit_field_default_error)
     ColumnWithMinConstraints(
         modifier.semantics(mergeDescendants = true) {
             editableText = AnnotatedString(value)
-            if (error != null) {
+            if (isError) {
                 error(errorMessage)
             }
         },
@@ -63,7 +67,7 @@ public fun ClickableField(
 
         ClickableFieldBox(
             value = value,
-            isError = error != null,
+            isError = isError,
             onClick = onClick,
             placeholder = placeholder,
             leadingIcon = leadingIcon,
@@ -74,7 +78,12 @@ public fun ClickableField(
             interactionSource = interactionSource,
         )
 
-        FieldMessage(error, info)
+        FieldMessage(
+            error = error,
+            info = info,
+            onErrorResolved = { isError = it },
+            showInfo = true,
+        )
     }
 }
 

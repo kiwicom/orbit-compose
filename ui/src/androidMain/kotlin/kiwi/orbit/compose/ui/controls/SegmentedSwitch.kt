@@ -75,8 +75,8 @@ public fun SegmentedSwitch(
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
-    error: @Composable (() -> Unit)? = null,
-    info: @Composable (() -> Unit)? = null,
+    error: @Composable () -> Unit = {},
+    info: @Composable () -> Unit = {},
 ) {
     SegmentedSwitch(
         onOptionClick = onOptionClick,
@@ -124,9 +124,10 @@ public fun SegmentedSwitch(
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
-    error: @Composable (() -> Unit)? = null,
-    info: @Composable (() -> Unit)? = null,
+    error: @Composable () -> Unit = {},
+    info: @Composable () -> Unit = {},
 ) {
+    var isError by remember { mutableStateOf(false) }
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -140,7 +141,7 @@ public fun SegmentedSwitch(
         Box(
             modifier = Modifier.height(IntrinsicSize.Min),
         ) {
-            val borderColor = if (error == null) {
+            val borderColor = if (!isError) {
                 OrbitTheme.colors.surface.strong
             } else {
                 OrbitTheme.colors.critical.normal
@@ -158,7 +159,7 @@ public fun SegmentedSwitch(
                     options.forEachIndexed { index, option ->
                         if (index != 0) {
                             VerticalDivider(
-                                hasError = error != null,
+                                isError = isError,
                                 index = index,
                                 selectedIndex = selectedIndex,
                             )
@@ -204,6 +205,8 @@ public fun SegmentedSwitch(
         }
 
         FieldMessage(
+            showInfo = true,
+            onErrorResolved = { isError = it },
             error = error,
             info = info,
         )
@@ -212,13 +215,13 @@ public fun SegmentedSwitch(
 
 @Composable
 private fun VerticalDivider(
-    hasError: Boolean,
+    isError: Boolean,
     index: Int,
     selectedIndex: Int?,
 ) {
     val color by animateColorAsState(
         targetValue = when {
-            hasError -> OrbitTheme.colors.critical.normal
+            isError -> OrbitTheme.colors.critical.normal
             selectedIndex == index - 1 || selectedIndex == index -> Color.Unspecified
             else -> OrbitTheme.colors.surface.strong
         },
