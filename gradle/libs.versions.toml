@@ -5,7 +5,7 @@ targetSdk = "33"
 minSdk = "23"
 
 kotlin-lang = "1.8.21"
-kotlin-dokka = "1.8.10"
+kotlin-dokka = "1.8.20"
 androidGradlePlugin = "8.0.2"
 mavenPublish = "0.25.2"
 
