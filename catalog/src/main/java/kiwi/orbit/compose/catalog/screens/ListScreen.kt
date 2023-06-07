@@ -92,13 +92,43 @@ private fun ListScreenInner() {
 
             List(
                 contentColor = OrbitTheme.colors.critical.normal,
-                defaultIcon = Icons.ThumbDown,
+                icon = Icons.ThumbDown,
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 ListItem { Text("Oh no, two women love me.") }
                 ListItem { Text("They're both gorgeous and sexy.") }
                 ListItem { Text("My wallet's too small for my fifties.") }
                 ListItem { Text("And my diamond shoes are too tight!") }
+            }
+
+            Text(
+                text = "List with custom icon colors",
+                style = OrbitTheme.typography.title2,
+            )
+
+            List(
+                iconTint = OrbitTheme.colors.success.normal,
+                icon = Icons.CheckCircle,
+            ) {
+                ListItem {
+                    Text("This checks.")
+                }
+                ListItem(
+                    icon = { Icon(painter = Icons.Check, contentDescription = null) },
+                ) {
+                    Text("This is also right.")
+                }
+                ListItem(
+                    iconTint = OrbitTheme.colors.info.normal,
+                ) {
+                    Text("This is right but info.")
+                }
+                ListItem(
+                    iconTint = OrbitTheme.colors.critical.normal,
+                    icon = { Icon(painter = Icons.CloseCircle, contentDescription = null) },
+                ) {
+                    Text("This is wrong!")
+                }
             }
         }
 
@@ -123,7 +153,7 @@ private fun ListScreenInner() {
 
             List(
                 contentColor = OrbitTheme.colors.info.strong,
-                defaultIcon = Icons.Moon,
+                icon = Icons.Moon,
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 ListItem { Text("Good night.") }
