@@ -125,6 +125,9 @@ sealed interface Destinations : Destination {
     object Tile : Destinations
 
     @Serializable
+    object TileGroup : Destinations
+
+    @Serializable
     object Timeline : Destinations
 
     @Serializable

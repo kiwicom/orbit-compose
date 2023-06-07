@@ -63,6 +63,7 @@ import kiwi.orbit.compose.ui.controls.SwitchPreview
 import kiwi.orbit.compose.ui.controls.TabsPreview
 import kiwi.orbit.compose.ui.controls.TagPreview
 import kiwi.orbit.compose.ui.controls.TextFieldPreview
+import kiwi.orbit.compose.ui.controls.TileGroupPreview
 import kiwi.orbit.compose.ui.controls.TilePreview
 import kiwi.orbit.compose.ui.controls.TimelinePreview
 import kiwi.orbit.compose.ui.controls.TimelineStatesPreview
@@ -360,6 +361,11 @@ internal class ScreenshotTest {
     @Test
     fun tile() {
         snapshot { TilePreview() }
+    }
+
+    @Test
+    fun tileGroup() {
+        snapshot { TileGroupPreview() }
     }
 
     @Test

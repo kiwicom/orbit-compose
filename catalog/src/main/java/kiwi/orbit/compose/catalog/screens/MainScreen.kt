@@ -26,6 +26,7 @@ import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.LinearScale
+import androidx.compose.material.icons.rounded.ListAlt
 import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Rectangle
@@ -107,6 +108,7 @@ internal fun MainScreen(
         MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
         MenuItem("Tile", MIcons.Crop169) { Destinations.Tile },
+        MenuItem("TileGroup", MIcons.ListAlt) { Destinations.TileGroup },
         MenuItem("Timeline", Icons.RouteTwoStops) { Destinations.Timeline },
         MenuItem("Toast", MIcons.Announcement) { Destinations.Toast },
         MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar },

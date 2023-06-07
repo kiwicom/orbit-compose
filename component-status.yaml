@@ -73,7 +73,7 @@
 - component: Tile
   android: Released
 - component: TileGroup
-  android: Planned
+  android: Released
 - component: Timeline
   android: Released
 - component: Toast

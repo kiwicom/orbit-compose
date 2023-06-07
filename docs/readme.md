@@ -18,3 +18,4 @@
 1. [Slider](03-components/07-interaction/slider.mdx)
 1. [Tabs](03-components/02-structure/tabs.mdx)
 1. [Tile](03-components/02-structure/tile.mdx)
+1. [TileGroup](03-components/02-structure/tilegroup.mdx)
