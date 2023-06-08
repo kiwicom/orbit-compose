@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -45,12 +46,43 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  *         content = { Text("Personal Item") },
  *     ),
  *     ListItem(
- *         icon = { Icon(painter = Icons.BaggageCabin, contentDescription = null) },
+ *         icon = Icons.BaggageCabin,
  *         content = { Text("Cabin Baggage") },
  *     )
  *     ListItem(
- *         icon = { Icon(painter = Icons.BaggageChecked20, contentDescription = null) },
+ *         icon = Icons.BaggageChecked20,
  *         content = { Text("Checked Baggage") },
+ *     )
+ * }
+ * ```
+ *
+ * List with default icon and icon color that can be overridden by ListItem properties:
+ *
+ * ```
+ * List(
+ *     iconTint = OrbitTheme.colors.primary.normal,
+ *     icon = Icons.CircleEmpty,
+ * ) {
+ *     // Resolves to: default icon, default color.
+ *     ListItem { Text("First item") }
+ *
+ *     // Resolves to: custom icon, default color.
+ *     ListItem(
+ *         icon = { Icon(painter = Icons.Check, contentDescription = null) },
+ *         content = { Text("Checked Baggage") },
+ *     )
+ *
+ *     // Resolves to: default icon, custom color.
+ *     ListItem(
+ *         iconTint = OrbitTheme.colors.critical.normal,
+ *         content = { Text("Checked Baggage") },
+ *     )
+ *
+ *     // Resolves to: custom icon, custom color.
+ *     ListItem(
+ *         iconTint = OrbitTheme.colors.critical.normal,
+ *         icon = { Icon(painter = Icons.CloseCircle, contentDescription = null) },
+ *         content = { Text("Personal Item") },
  *     )
  * }
  * ```
@@ -59,8 +91,9 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 public fun List(
     modifier: Modifier = Modifier,
     contentColor: Color = OrbitTheme.colors.content.normal,
-    defaultContentDescription: String? = null,
-    defaultIcon: Painter = Icons.CircleSmall,
+    iconContentDescription: String? = null,
+    iconTint: Color = Color.Unspecified,
+    icon: Painter = Icons.CircleSmall,
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(4.dp, Alignment.Top),
     content: @Composable ListScope.() -> Unit,
 ) {
@@ -69,8 +102,9 @@ public fun List(
     ) {
         ListPrimitive(
             contentColor = contentColor,
-            defaultContentDescription = defaultContentDescription,
-            defaultIcon = defaultIcon,
+            iconContentDescription = iconContentDescription,
+            iconTint = iconTint,
+            icon = icon,
             verticalArrangement = verticalArrangement,
             content = content,
             modifier = modifier,
@@ -103,12 +137,43 @@ public fun List(
  *         content = { Text("Personal Item") },
  *     ),
  *     ListItem(
- *         icon = { Icon(painter = Icons.BaggageCabin, contentDescription = null) },
+ *         icon = Icons.BaggageCabin,
  *         content = { Text("Cabin Baggage") },
  *     )
  *     ListItem(
- *         icon = { Icon(painter = Icons.BaggageChecked20, contentDescription = null) },
- *         content =  { Text("Checked Baggage") },
+ *         icon = Icons.BaggageChecked20,
+ *         content = { Text("Checked Baggage") },
+ *     )
+ * }
+ * ```
+ *
+ * List with default icon and icon color that can be overridden by ListItem properties:
+ *
+ * ```
+ * ListLarge(
+ *     iconTint = OrbitTheme.colors.primary.normal,
+ *     icon = Icons.CircleEmpty,
+ * ) {
+ *     // Resolves to: default icon, default color.
+ *     ListItem { Text("First item") }
+ *
+ *     // Resolves to: custom icon, default color.
+ *     ListItem(
+ *         icon = { Icon(painter = Icons.Check, contentDescription = null) },
+ *         content = { Text("Checked Baggage") },
+ *     )
+ *
+ *     // Resolves to: default icon, custom color.
+ *     ListItem(
+ *         iconTint = OrbitTheme.colors.critical.normal,
+ *         content = { Text("Checked Baggage") },
+ *     )
+ *
+ *     // Resolves to: custom icon, custom color.
+ *     ListItem(
+ *         iconTint = OrbitTheme.colors.critical.normal,
+ *         icon = { Icon(painter = Icons.CloseCircle, contentDescription = null) },
+ *         content = { Text("Personal Item") },
  *     )
  * }
  * ```
@@ -117,8 +182,9 @@ public fun List(
 public fun ListLarge(
     modifier: Modifier = Modifier,
     contentColor: Color = OrbitTheme.colors.content.normal,
-    defaultContentDescription: String? = null,
-    defaultIcon: Painter = Icons.CircleSmall,
+    iconContentDescription: String? = null,
+    iconTint: Color = Color.Unspecified,
+    icon: Painter = Icons.CircleSmall,
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(4.dp, Alignment.Top),
     content: @Composable ListScope.() -> Unit,
 ) {
@@ -127,8 +193,9 @@ public fun ListLarge(
     ) {
         ListPrimitive(
             contentColor = contentColor,
-            defaultContentDescription = defaultContentDescription,
-            defaultIcon = defaultIcon,
+            iconContentDescription = iconContentDescription,
+            iconTint = iconTint,
+            icon = icon,
             verticalArrangement = verticalArrangement,
             content = content,
             modifier = modifier,
@@ -144,10 +211,11 @@ public fun ListLarge(
 @Composable
 public fun ListScope.ListItem(
     modifier: Modifier = Modifier,
+    iconTint: Color = this.iconTint,
     icon: @Composable () -> Unit = {
         Icon(
             painter = this.icon,
-            contentDescription = this.contentDescription,
+            contentDescription = this.iconContentDescription,
         )
     },
     content: @Composable () -> Unit,
@@ -156,7 +224,12 @@ public fun ListScope.ListItem(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        icon()
+        val currentContentColor = LocalContentColor.current
+        CompositionLocalProvider(
+            LocalContentColor provides iconTint.takeOrElse { currentContentColor },
+        ) {
+            icon()
+        }
         content()
     }
 }
@@ -164,8 +237,9 @@ public fun ListScope.ListItem(
 @Composable
 private fun ListPrimitive(
     contentColor: Color,
-    defaultContentDescription: String?,
-    defaultIcon: Painter,
+    iconContentDescription: String?,
+    iconTint: Color,
+    icon: Painter,
     verticalArrangement: Arrangement.Vertical,
     content: @Composable ListScope.() -> Unit,
     modifier: Modifier = Modifier,
@@ -177,10 +251,11 @@ private fun ListPrimitive(
             modifier = modifier,
             verticalArrangement = verticalArrangement,
         ) {
-            val listScope = remember(defaultContentDescription, defaultIcon) {
+            val listScope = remember(iconContentDescription, icon) {
                 ListScope(
-                    contentDescription = defaultContentDescription,
-                    icon = defaultIcon,
+                    iconContentDescription = iconContentDescription,
+                    iconTint = iconTint,
+                    icon = icon,
                 )
             }
             listScope.content()
@@ -191,7 +266,8 @@ private fun ListPrimitive(
 @LayoutScopeMarker
 @Immutable
 public class ListScope internal constructor(
-    public val contentDescription: String?,
+    public val iconContentDescription: String?,
+    public val iconTint: Color,
     public val icon: Painter,
 )
 
@@ -231,6 +307,26 @@ internal fun ListPreview() {
                 ListItem { Text("First thing that went wrong") }
                 ListItem { Text("Second thing that went wrong") }
                 ListItem { Text("Third thing that went wrong") }
+            }
+
+            List(
+                iconTint = OrbitTheme.colors.success.normal,
+                icon = Icons.CheckCircle,
+            ) {
+                ListItem {
+                    Text("This checks.")
+                }
+                ListItem(
+                    icon = { Icon(painter = Icons.Check, contentDescription = null) },
+                ) {
+                    Text("This is also right.")
+                }
+                ListItem(
+                    iconTint = OrbitTheme.colors.critical.normal,
+                    icon = { Icon(painter = Icons.CloseCircle, contentDescription = null) },
+                ) {
+                    Text("This is wrong!")
+                }
             }
         }
     }
@@ -272,6 +368,26 @@ internal fun ListLargePreview() {
                 ListItem { Text("First thing that went well") }
                 ListItem { Text("Second thing that went well") }
                 ListItem { Text("Third thing that went well") }
+            }
+
+            ListLarge(
+                iconTint = OrbitTheme.colors.success.normal,
+                icon = Icons.CheckCircle,
+            ) {
+                ListItem {
+                    Text("This checks.")
+                }
+                ListItem(
+                    icon = { Icon(painter = Icons.Check, contentDescription = null) },
+                ) {
+                    Text("This is also right.")
+                }
+                ListItem(
+                    iconTint = OrbitTheme.colors.critical.normal,
+                    icon = { Icon(painter = Icons.CloseCircle, contentDescription = null) },
+                ) {
+                    Text("This is wrong!")
+                }
             }
         }
     }
