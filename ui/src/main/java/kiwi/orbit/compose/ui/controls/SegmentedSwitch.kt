@@ -31,10 +31,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
@@ -241,19 +243,24 @@ private fun SelectionOutline(
         label = "SegmentedSwitchSelectedOffset",
     )
     val brushColor = OrbitTheme.colors.info.normal
+    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     Canvas(
         modifier = Modifier
             .padding(1.dp)
             .fillMaxSize(),
         onDraw = {
-            val size = size.copy(width = size.width / optionsCount)
+            val rectSize = size.copy(width = size.width / optionsCount)
+            val topLeft = Offset(
+                x = when (isRtl) {
+                    false -> animatedOffset * rectSize.width
+                    true -> size.width - ((animatedOffset + 1) * rectSize.width)
+                },
+                y = 0f,
+            )
             drawRoundRect(
                 brush = SolidColor(brushColor),
-                topLeft = Offset(
-                    x = animatedOffset * size.width,
-                    y = 0f,
-                ),
-                size = size,
+                topLeft = topLeft,
+                size = rectSize,
                 cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx()),
                 style = Stroke(width = 2.dp.toPx()),
             )
