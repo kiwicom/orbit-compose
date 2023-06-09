@@ -33,6 +33,7 @@ import kiwi.orbit.compose.ui.controls.CheckboxFieldPreview
 import kiwi.orbit.compose.ui.controls.CheckboxPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTileCenteredPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTilePreview
+import kiwi.orbit.compose.ui.controls.CircularProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
 import kiwi.orbit.compose.ui.controls.CollapsePreview
 import kiwi.orbit.compose.ui.controls.CountryFlagPreview
@@ -196,6 +197,11 @@ internal class ScreenshotTest {
     @Test
     fun choiceTileCentered() {
         snapshot { ChoiceTileCenteredPreview() }
+    }
+
+    @Test
+    fun circularProgressIndicator() {
+        snapshot { CircularProgressIndicatorPreview() }
     }
 
     @Test
