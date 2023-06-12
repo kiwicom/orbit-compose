@@ -25,6 +25,7 @@ import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+import kiwi.orbit.compose.ui.layout.alignByLineHeight
 
 @Composable
 public fun CheckboxField(
@@ -62,9 +63,9 @@ public fun CheckboxField(
         Checkbox(
             checked = checked,
             onCheckedChange = null,
-            modifier = Modifier.padding(
-                end = 10.dp,
-            ),
+            modifier = Modifier
+                .padding(end = 10.dp)
+                .alignByLineHeight(OrbitTheme.typography.title5),
             enabled = enabled,
             isError = isError,
             interactionSource = interactionSource,
