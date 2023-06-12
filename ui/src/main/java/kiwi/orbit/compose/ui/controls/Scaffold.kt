@@ -8,14 +8,19 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -84,8 +89,13 @@ private fun ScaffoldLayout(
     content: @Composable (contentPadding: PaddingValues) -> Unit,
     contentWindowInsets: WindowInsets,
 ) {
+    var finalContentWindowInsets by remember { mutableStateOf(contentWindowInsets) }
     val imeOpened = WindowInsets.isImeVisible
-    SubcomposeLayout { constraints ->
+    SubcomposeLayout(
+        Modifier.onConsumedWindowInsetsChanged { consumedWindowInsets ->
+            finalContentWindowInsets = consumedWindowInsets.exclude(consumedWindowInsets)
+        },
+    ) { constraints ->
         val layoutWidth = constraints.maxWidth
         val layoutHeight = constraints.maxHeight
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
@@ -99,7 +109,7 @@ private fun ScaffoldLayout(
             if (value == AlignmentLine.Unspecified) 0 else value
         } ?: 0
 
-        val contentInsets = contentWindowInsets.asPaddingValues(this)
+        val contentInsets = finalContentWindowInsets.asPaddingValues(this)
         val contentTop = topBarPlaceables.maxOfOrNull { it.height } ?: 0
         val contentBottom = if (actionHeight > 0) {
             (actionHeight - actionFadeHeight).coerceAtLeast(0)
