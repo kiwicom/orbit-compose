@@ -1,3 +1,6 @@
+@file:Suppress("MatchingDeclarationName")
+// ktlint-disable filename
+
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.AnimatedContent
@@ -25,7 +28,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.AccessibilityAction
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
@@ -38,6 +44,13 @@ import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
+
+public object StepperSemanticsActions {
+    public val IncreaseValue: SemanticsPropertyKey<AccessibilityAction<() -> Boolean>> =
+        SemanticsPropertyKey("IncreaseValue")
+    public val DecreaseValue: SemanticsPropertyKey<AccessibilityAction<() -> Boolean>> =
+        SemanticsPropertyKey("DecreaseValue")
+}
 
 @Composable
 public fun Stepper(
@@ -92,14 +105,25 @@ private fun StepperPrimitive(
     valueValidator: ((Int) -> Boolean)?,
     modifier: Modifier = Modifier,
 ) {
+    val isDecreaseValid = valueValidator?.invoke(value - 1) ?: true
+    val isIncreaseValid = valueValidator?.invoke(value + 1) ?: true
     Row(
-        modifier = modifier,
+        modifier = modifier.semantics(mergeDescendants = true) {
+            if (isDecreaseValid) {
+                this[StepperSemanticsActions.DecreaseValue] =
+                    AccessibilityAction(null) { onValueChange.invoke(value - 1); true }
+            }
+            if (isIncreaseValid) {
+                this[StepperSemanticsActions.IncreaseValue] =
+                    AccessibilityAction(null) { onValueChange.invoke(value + 1); true }
+            }
+        },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         StepperButton(
             onClick = { onValueChange.invoke(value - 1) },
             active = active,
-            enabled = valueValidator?.invoke(value - 1) ?: true,
+            enabled = isDecreaseValid,
         ) {
             Icon(Icons.Minus, contentDescription = removeContentDescription)
         }
@@ -133,7 +157,7 @@ private fun StepperPrimitive(
         StepperButton(
             onClick = { onValueChange.invoke(value + 1) },
             active = active,
-            enabled = valueValidator?.invoke(value + 1) ?: true,
+            enabled = isIncreaseValid,
         ) {
             Icon(Icons.Plus, contentDescription = addContentDescription)
         }

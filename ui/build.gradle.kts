@@ -96,6 +96,7 @@ dependencies {
     debugImplementation(libs.androidx.customView)
     debugImplementation(libs.androidx.customViewPoolingContainer)
 
+    testImplementation(kotlin("test"))
     testImplementation(libs.robolectric)
     testImplementation(libs.compose.uiTest)
     testImplementation(libs.compose.uiTestManifest)
