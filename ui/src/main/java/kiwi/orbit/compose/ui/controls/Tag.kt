@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -27,6 +26,7 @@ import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.contentColorFor
+import kiwi.orbit.compose.ui.layout.alignByLineHeight
 
 @Composable
 public fun Tag(
@@ -53,7 +53,6 @@ public fun Tag(
     ) {
         Row(
             modifier
-                .requiredHeight(32.dp)
                 .clip(shape)
                 .background(backgroundColor, shape)
                 .then(if (onSelect != null) Modifier.clickable(onClick = onSelect) else Modifier)
@@ -70,6 +69,7 @@ public fun Tag(
                     onClick = onRemove,
                     modifier = Modifier
                         .padding(start = 8.dp)
+                        .alignByLineHeight()
                         .size(16.dp),
                 ) {
                     Icon(
