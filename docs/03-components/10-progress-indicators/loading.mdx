@@ -8,6 +8,7 @@ Orbit Compose offers multiple components to visualize loading::
 
 - [`LinearProgressIndicator`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-linear-progress-indicator.html)
 - [`LinearIndeterminateProgressIndicator`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-linear-indeterminate-progress-indicator.html)
+- [`CircularProgressIndicator`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-circular-progress-indicator.html)
 
 ## Usage
 
@@ -44,4 +45,6 @@ Assert.assertEquals(0.4f, progressBarInfo.current)
 
 ## Customization
 
-To change track colors use `color` and `backgroundColor` arguments.
+Linear indicators: To change track colors use `color` and `backgroundColor` arguments.
+
+Circular indicator: To change the appearance custom `modifier.size()`, `color` and `strokeWidth` can be set.
