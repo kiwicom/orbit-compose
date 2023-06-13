@@ -105,6 +105,10 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 "androidx.compose.material.LinearProgressIndicator",
                 "androidx.compose.material3.LinearProgressIndicator",
             ),
+            "kiwi.orbit.compose.ui.controls.CircularProgresIndicator" to setOf(
+                "androidx.compose.material.CircularProgresIndicator",
+                "androidx.compose.material3.CircularProgresIndicator",
+            ),
             "kiwi.orbit.compose.ui.controls.ListChoice" to setOf(
                 "androidx.compose.material.ListItem",
                 "androidx.compose.material3.ListItem",
