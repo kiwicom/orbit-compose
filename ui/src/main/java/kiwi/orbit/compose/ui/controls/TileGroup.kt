@@ -4,12 +4,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.LayoutScopeMarker
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -17,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
@@ -128,24 +126,40 @@ public fun TileGroupScope.Tile(
         modifier = modifier,
         interactionSource = interactionSource,
     ) {
-        Row(
-            modifier = Modifier
-                .height(IntrinsicSize.Max)
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Box(Modifier.weight(1f)) {
-                content()
-            }
-            Row(
-                modifier = Modifier.fillMaxHeight(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-                    ProvideContentEmphasis(ContentEmphasis.Minor) {
-                        trailingContent()
+        Layout(
+            modifier = Modifier.padding(16.dp),
+            content = {
+                Box {
+                    content()
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
+                        ProvideContentEmphasis(ContentEmphasis.Minor) {
+                            trailingContent()
+                        }
                     }
                 }
+            },
+        ) { measurables, constraints ->
+            val trailingWidth = measurables[1].maxIntrinsicWidth(Int.MAX_VALUE)
+            val occupied = trailingWidth.takeIf { it != 0 }?.plus(12.dp.roundToPx()) ?: 0
+            val contentPlaceable = measurables[0].measure(
+                Constraints.fixedWidth(width = constraints.maxWidth - occupied),
+            )
+            val trailingPlaceable = measurables[1].measure(
+                Constraints.fixed(
+                    width = trailingWidth,
+                    height = contentPlaceable.height,
+                ),
+            )
+            layout(constraints.maxWidth, contentPlaceable.height) {
+                contentPlaceable.placeRelative(0, 0)
+                trailingPlaceable.placeRelative(
+                    x = constraints.maxWidth - trailingPlaceable.width,
+                    y = 0,
+                )
             }
         }
     }

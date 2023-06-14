@@ -1,10 +1,15 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -15,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
 import kiwi.orbit.compose.catalog.components.CustomPlaceholder
 import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -82,6 +88,20 @@ private fun TileScreenInner() {
                     color = OrbitTheme.colors.primary.normal,
                     style = OrbitTheme.typography.bodyNormalMedium,
                 )
+            },
+        )
+        Tile(
+            onClick = {},
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        Illustrations.CabinBaggage,
+                        contentDescription = null,
+                        modifier = Modifier.height(88.dp),
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text("Title")
+                }
             },
         )
         Tile(
