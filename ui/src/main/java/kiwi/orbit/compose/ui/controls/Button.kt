@@ -4,16 +4,19 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.LocalRoundedContainerScope
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.contentColorFor
 
@@ -243,6 +246,10 @@ internal fun ButtonLargePrimitive(
         true -> OrbitTheme.typography.bodySmallMedium.copy(textAlign = TextAlign.Center)
         false -> OrbitTheme.typography.bodyNormalMedium.copy(textAlign = TextAlign.Center)
     }
+    val shape = when (LocalRoundedContainerScope.current) {
+        true -> InRoundedContainerCornerShape
+        false -> OrbitTheme.shapes.normal
+    }
     ButtonPrimitive(
         onClick = onClick,
         backgroundColor = backgroundColor,
@@ -253,9 +260,12 @@ internal fun ButtonLargePrimitive(
         contentArrangement = contentArrangement,
         contentPadding = contentPadding,
         interactionSource = interactionSource,
+        shape = shape,
         content = content,
     )
 }
+
+private val InRoundedContainerCornerShape = RoundedCornerShape(3.dp)
 
 @OrbitPreviews
 @Composable
