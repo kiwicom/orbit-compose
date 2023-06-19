@@ -29,6 +29,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalColors
+import kiwi.orbit.compose.ui.foundation.LocalRoundedContainerScope
 import kiwi.orbit.compose.ui.foundation.LocalSmallButtonScope
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.asCriticalTheme
@@ -207,6 +208,7 @@ private fun AlertButtons(
     CompositionLocalProvider(
         LocalColors provides colors,
         LocalSmallButtonScope provides true,
+        LocalRoundedContainerScope provides true,
     ) {
         AlertButtonsLayout(topPadding, content)
     }
