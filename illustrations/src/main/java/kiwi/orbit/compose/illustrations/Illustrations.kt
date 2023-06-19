@@ -51,6 +51,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_cabin_baggage)
 
+    public val Cancelled: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_cancelled)
+
     public val Chatbot: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_chatbot)

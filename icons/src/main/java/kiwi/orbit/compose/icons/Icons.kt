@@ -507,6 +507,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_heart)
 
+    public val HeartOutline: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_heart_outline)
+
     public val History: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_history)
