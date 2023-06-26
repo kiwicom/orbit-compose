@@ -189,7 +189,7 @@ private fun TileGroupColumn(
             it.measure(looseConstraints)
         }
 
-        val columnWidth = placeables.maxOf { it.width }
+        val columnWidth = placeables.maxOfOrNull { it.width } ?: 0
         val columnHeight = placeables.sumOf { it.height }
 
         layout(columnWidth, columnHeight) {
