@@ -49,7 +49,7 @@ compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref 
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-layout = { module = "androidx.compose.foundation:foundation-layout" }
 compose-material = { module = "androidx.compose.material:material" }
-compose-material3 = "androidx.compose.material3:material3:1.1.0"
+compose-material3 = "androidx.compose.material3:material3:1.1.1"
 compose-materialRipple = { module = "androidx.compose.material:material-ripple" }
 compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.6.0" }
