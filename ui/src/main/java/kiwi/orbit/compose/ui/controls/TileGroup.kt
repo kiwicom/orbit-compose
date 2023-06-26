@@ -145,8 +145,9 @@ public fun TileGroupScope.Tile(
         ) { measurables, constraints ->
             val trailingWidth = measurables[1].maxIntrinsicWidth(Int.MAX_VALUE)
             val occupied = trailingWidth.takeIf { it != 0 }?.plus(12.dp.roundToPx()) ?: 0
+            val contentWidth = (constraints.maxWidth - occupied).coerceAtLeast(0)
             val contentPlaceable = measurables[0].measure(
-                Constraints.fixedWidth(width = constraints.maxWidth - occupied),
+                Constraints.fixedWidth(width = contentWidth),
             )
             val trailingPlaceable = measurables[1].measure(
                 Constraints.fixed(
