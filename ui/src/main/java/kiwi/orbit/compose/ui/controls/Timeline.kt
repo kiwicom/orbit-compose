@@ -272,14 +272,7 @@ private fun ItemLine(
     val width = with(LocalDensity.current) {
         20.sp.toDp()
     }
-    if (status in setOf(
-            TimelineItemStatus.InProgress,
-            TimelineItemStatus.CurrentSuccess,
-            TimelineItemStatus.CurrentWarning,
-            TimelineItemStatus.CurrentCritical,
-            TimelineItemStatus.Future,
-        )
-    ) {
+    if (status in TimelineItemStatusWithDashedBottomLine) {
         val color = OrbitTheme.colors.surface.normalAlt
         Canvas(modifier = Modifier.width(width)) {
             drawLine(
@@ -308,18 +301,12 @@ private fun ItemLine(
 private fun ItemTopLineGradient(
     status: TimelineItemStatus,
 ) {
-    if (status in setOf(
-            TimelineItemStatus.InProgress,
-            TimelineItemStatus.Future,
-        )
-    ) {
+    if (status in TimelineItemStatusWithGradientTopLine) {
         Box {}
         return
     }
 
-    val width = with(LocalDensity.current) {
-        20.sp.toDp()
-    }
+    val width = with(LocalDensity.current) { 20.sp.toDp() }
     val color = status.color
     val gradient = Brush.linearGradient(colors = listOf(Color.Transparent, color))
     Canvas(modifier = Modifier.width(width)) {
@@ -344,6 +331,19 @@ private val TimelineItemStatus.color: Color
         TimelineItemStatus.CurrentCritical -> OrbitTheme.colors.critical.normal
         TimelineItemStatus.Future -> OrbitTheme.colors.surface.normalAlt
     }
+
+private val TimelineItemStatusWithDashedBottomLine = setOf(
+    TimelineItemStatus.InProgress,
+    TimelineItemStatus.CurrentSuccess,
+    TimelineItemStatus.CurrentWarning,
+    TimelineItemStatus.CurrentCritical,
+    TimelineItemStatus.Future,
+)
+
+private val TimelineItemStatusWithGradientTopLine = setOf(
+    TimelineItemStatus.InProgress,
+    TimelineItemStatus.Future,
+)
 
 @OrbitPreviews
 @Composable
