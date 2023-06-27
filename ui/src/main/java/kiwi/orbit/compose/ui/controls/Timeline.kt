@@ -309,9 +309,7 @@ private fun ItemTopLineGradient(
     status: TimelineItemStatus,
 ) {
     if (status in setOf(
-            TimelineItemStatus.PastSuccess,
             TimelineItemStatus.InProgress,
-            TimelineItemStatus.CurrentSuccess,
             TimelineItemStatus.Future,
         )
     ) {
@@ -412,6 +410,10 @@ internal fun TimelineStatesPreview() {
             TimelineItem(
                 status = TimelineItemStatus.PastWarning,
                 title = { Text("Waiting for the airline even more") },
+            )
+            TimelineItem(
+                status = TimelineItemStatus.PastSuccess,
+                title = { Text("Something good happened") },
             )
             TimelineItem(
                 status = TimelineItemStatus.CurrentCritical,
