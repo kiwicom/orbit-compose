@@ -18,5 +18,7 @@
 1. [Slider](03-components/07-interaction/slider.mdx)
 1. [Stepper](03-components/07-interaction/stepper.mdx)
 1. [Tabs](03-components/02-structure/tabs.mdx)
+1. [TextField / PasswordTextField](03-components/05-input/inputfield.mdx)
+1. [Textarea](03-components/05-input/textarea.mdx)
 1. [Tile](03-components/02-structure/tile.mdx)
 1. [TileGroup](03-components/02-structure/tilegroup.mdx)
