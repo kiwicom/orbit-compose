@@ -15,6 +15,7 @@
 1. [Card](03-components/02-structure/card.mdx)
 1. [Collapse](03-components/07-interaction/collapse.mdx)
 1. [Loading / LinearProgressIndicator](03-components/10-progress-indicators/loading.mdx)
+1. [Radio](03-components/05-input/radio.mdx)
 1. [SelectField](03-components/05-input/select.mdx)
 1. [Slider](03-components/07-interaction/slider.mdx)
 1. [Stepper](03-components/07-interaction/stepper.mdx)
