@@ -13,6 +13,7 @@
 1. [ButtonPrimitive](03-components/15-primitives/buttonprimitive.mdx)
 1. [Button](03-components/01-action/button.mdx)
 1. [Card](03-components/02-structure/card.mdx)
+1. [ClickableField / InputFile](03-components/05-input/inputfile.mdx)
 1. [Collapse](03-components/07-interaction/collapse.mdx)
 1. [Loading / LinearProgressIndicator](03-components/10-progress-indicators/loading.mdx)
 1. [Radio](03-components/05-input/radio.mdx)
