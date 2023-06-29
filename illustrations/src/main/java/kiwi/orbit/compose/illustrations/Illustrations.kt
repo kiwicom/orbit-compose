@@ -203,6 +203,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_no_favorite_flights)
 
+    public val NoFlightChange: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_no_flight_change)
+
     public val NoNotification: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_no_notification)
