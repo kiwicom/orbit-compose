@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.8.22" apply false
     kotlin("android") version "1.8.22" apply false
+    kotlin("multiplatform") version "1.8.21" apply false
     kotlin("plugin.serialization") version "1.8.22" apply false
     id("com.android.library") version "8.0.2" apply false
     id("app.cash.paparazzi") version "1.3.0" apply false
