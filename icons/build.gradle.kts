@@ -1,11 +1,11 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
+@file:Suppress("UnstableApiUsage")
 
 plugins {
+    kotlin("android")
     id("com.android.library")
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotlinter)
-    alias(libs.plugins.mavenPublish)
+    id("org.jetbrains.dokka")
+    id("org.jmailen.kotlinter")
+    id("com.vanniktech.maven.publish.base")
 }
 
 android {

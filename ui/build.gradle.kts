@@ -1,14 +1,14 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
+@file:Suppress("UnstableApiUsage")
 
 import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
 
 plugins {
+    kotlin("android")
     id("com.android.library")
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotlinter)
-    alias(libs.plugins.mavenPublish)
-    alias(libs.plugins.paparazzi)
+    id("org.jetbrains.dokka")
+    id("org.jmailen.kotlinter")
+    id("com.vanniktech.maven.publish.base")
+    id("app.cash.paparazzi")
     id("io.gitlab.arturbosch.detekt")
 }
 
