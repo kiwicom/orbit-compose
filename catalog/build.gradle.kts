@@ -1,15 +1,15 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
+@file:Suppress("UnstableApiUsage")
 
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
+    kotlin("android")
+    kotlin("plugin.serialization")
     id("com.android.application")
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlinter)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.appDistribution)
-    id("kotlin-parcelize")
+    id("org.jmailen.kotlinter")
+    id("com.google.firebase.appdistribution")
+    kotlin("plugin.parcelize")
 }
 
 android {

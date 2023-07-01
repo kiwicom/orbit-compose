@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew lintKotlin
 
       - name: Tests & Detekt & Android lint
-        run: ./gradlew :catalog:assembleDebug lintDebug :ui:detektDebug :ui:testDebugUnitTest :lint:test
+        run: ./gradlew :catalog:assembleDebug lintDebug :ui:detektAndroidDebug :ui:testDebugUnitTest :lint:test
 
       - name: Run Screenshot Tests
         run: ./gradlew :ui:verifyPaparazziDebug

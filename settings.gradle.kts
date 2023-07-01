@@ -8,8 +8,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             when (requested.id.name) {
-                "com.android.application" -> useModule("com.android.tools.build:gradle")
-                "com.google.firebase.appdistribution" -> useModule("com.google.firebase:firebase-appdistribution-gradle")
+                "com.android.library" -> useModule("com.android.tools.build:gradle")
             }
         }
     }

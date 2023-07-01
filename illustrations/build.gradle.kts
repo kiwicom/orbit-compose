@@ -1,11 +1,19 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
+@file:Suppress("UnstableApiUsage")
 
 plugins {
+    kotlin("multiplatform")
     id("com.android.library")
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotlinter)
-    alias(libs.plugins.mavenPublish)
+    id("org.jetbrains.dokka")
+    id("org.jmailen.kotlinter")
+    id("com.vanniktech.maven.publish.base")
+}
+
+kotlin {
+    explicitApi()
+    android {}
+    sourceSets {
+        val androidMain by getting {}
+    }
 }
 
 android {
@@ -30,12 +38,6 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
-
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
-            add("-Xexplicit-api=strict")
-        }.toList()
     }
 
     lint {

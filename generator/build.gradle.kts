@@ -3,10 +3,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    kotlin("jvm")
+    kotlin("plugin.serialization")
     id("java")
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.kotlinter)
+    id("org.jmailen.kotlinter")
 }
 
 java {

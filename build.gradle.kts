@@ -1,5 +1,3 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
-
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
@@ -11,16 +9,17 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.agp.application) apply false
-    alias(libs.plugins.kotlinter) apply false
-    alias(libs.plugins.mavenPublish) apply false
-    alias(libs.plugins.paparazzi) apply false
-    alias(libs.plugins.appDistribution) apply false
+    kotlin("jvm") version "1.8.22" apply false
+    kotlin("android") version "1.8.22" apply false
+    kotlin("multiplatform") version "1.8.21" apply false
+    kotlin("plugin.serialization") version "1.8.22" apply false
+    id("com.android.library") version "8.0.2" apply false
+    id("app.cash.paparazzi") version "1.3.0" apply false
+    id("com.google.firebase.appdistribution") version "4.0.0" apply false
+    id("com.vanniktech.maven.publish.base") version "0.25.2" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.0" apply false
-    alias(libs.plugins.dokka)
+    id("org.jmailen.kotlinter") version "3.15.0" apply false
+    id("org.jetbrains.dokka") version "1.8.20"
 }
 
 buildscript {
