@@ -16,7 +16,7 @@ plugins {
     id("com.android.library") version "8.0.2" apply false
     id("app.cash.paparazzi") version "1.3.0" apply false
     id("com.google.firebase.appdistribution") version "4.0.0" apply false
-    id("com.vanniktech.maven.publish.base") version "0.25.2" apply false
+    id("com.vanniktech.maven.publish.base") version "0.25.3" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.0" apply false
     id("org.jmailen.kotlinter") version "3.15.0" apply false
     id("org.jetbrains.dokka") version "1.8.20"
