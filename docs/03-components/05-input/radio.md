@@ -53,7 +53,7 @@ fun Example() {
 
 ## UI testing
 
-Slotting API allows you to add testTag to particular component parts. Utilize `assertIsSelected`
+The Slotting API allows you to add a `testTag` to particular component parts. Utilize `assertIsSelected`
 and `assertIsNotSelected` to check the state.
 
 ```kotlin
