@@ -19,7 +19,7 @@ To customize Password field, you may want to show
 ## Usage
 
 `TextField` accepts a text value and a callback for its change. Read how to [manage text field state](https://medium.com/androiddevelopers/effective-state-management-for-textfield-in-compose-d6e5b070fbe5). 
-Provide a label, optionally you can pass a placeholder, leading & trailing icons, including their callbacks, an error or info message.
+Provide a label. Optionally, you may pass a placeholder, leading & trailing icons with their respective callbacks, or an error or an info message.
 
 ```kotlin
 @Composable
