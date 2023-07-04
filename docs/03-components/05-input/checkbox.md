@@ -7,7 +7,7 @@ title: Android
 `Checkbox` component is provided in two flavors, as a simple checkbox and as a row with an additional label and a description:
 
 - [`Checkbox`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-checkbox.html) - a simple checkbox
-- [`CheckboxField`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-checkbox-field.html) a checkbox with label and description
+- [`CheckboxField`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-checkbox-field.html) a checkbox with a label and a description
 
 ## Usage
 
