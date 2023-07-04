@@ -24,7 +24,7 @@ fun Example() {
 }
 ```
 
-`RadioField` has two additional slots - `description` and `label`.
+`RadioField` has two additional slots - a `description` and a `label`.
 
 ```kotlin
 @Composable
