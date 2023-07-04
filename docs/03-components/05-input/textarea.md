@@ -7,7 +7,7 @@ title: Android
 Support for a multi-line text input (textarea) is provided
 by [TextField composable](https://orbit.kiwi/components/input/inputfield/android/).
 
-Simply utilize `singleLine`. Optionally you cen set up the maximum of rendered lines by `maxLines` argument.
+Simply utilize `singleLine`. Optionally you may set up the maximum of rendered lines by the `maxLines` argument.
 
 ```kotlin
 @Composable
