@@ -10,7 +10,7 @@ title: Android
 
 ## Usage
 
-`SelectField` API is similar to `TextField`, it accepts the value, `label`, `error` and `info` slots, and more. Pass the `List<T>` options and define their rendering using `optionContent` slot. You may utilize `leadingIcon`, but it cannot be made clickable as the whole field is clickable and opens the popup list. 
+`SelectField` API is similar to `TextField`, it accepts the value, `label`, `error` and `info` slots, and more. Pass the `List<T>` options and define their rendering using the `optionContent` slot. You may utilize `leadingIcon`, but it cannot be made clickable as the whole field is clickable and opens the popup list.
 
 ```kotlin
 @Composable
