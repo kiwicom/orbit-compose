@@ -40,7 +40,7 @@ fun Example() {
 
 ## UI testing
 
-Slotting API allows you to add testTag to particular component parts. Utilize `assertIsOn` and `assertIsOff` to check the state.
+The slotting API allows you to add a testTag to particular component parts. Utilize `assertIsOn` and `assertIsOff` to check the state.
 
 ```kotlin
 composeTestRule.setContent {
