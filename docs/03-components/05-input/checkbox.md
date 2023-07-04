@@ -11,7 +11,7 @@ title: Android
 
 ## Usage
 
-`Checkbox` accepts a boolean state and a callback on its change.
+`Checkbox` accepts a `Boolean` state and a callback on its change.
 
 ```kotlin
 @Composable
