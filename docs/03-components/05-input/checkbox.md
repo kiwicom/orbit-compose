@@ -18,7 +18,7 @@ title: Android
 fun Example() {
     Checkbox(
         checked = false,
-        onCheckedChange = { /*...*/ },
+        onCheckedChange = {},
     )
 }
 ```
