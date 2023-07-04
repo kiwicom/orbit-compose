@@ -29,7 +29,7 @@ fun Example() {
 
 ## UI testing
 
-Slotting API allows you to add testTag to particular options. Utilize unmerged tree to click them. The select's value is exposed through EditableText semantic property.
+The slotting API allows you to add `testTag` to particular options. Utilize the unmerged tree to click them. The select's value is exposed through the `EditableText` semantic property.
 
 ```kotlin
 composeTestRule.setContent {
