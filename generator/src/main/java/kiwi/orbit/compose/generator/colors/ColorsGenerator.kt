@@ -19,6 +19,7 @@ import net.thisptr.jackson.jq.Scope
 import net.thisptr.jackson.jq.Versions
 import net.thisptr.jackson.jq.module.loaders.BuiltinModuleLoader
 
+@OptIn(ExperimentalStdlibApi::class)
 class ColorsGenerator {
     @Serializable
     private data class ColorDefinition(
@@ -39,6 +40,11 @@ class ColorsGenerator {
             val color: Color,
             val position: Float,
         )
+    }
+
+    private val hexFormat = HexFormat {
+        upperCase = true
+        number.prefix = "0x"
     }
 
     fun build(figmaToken: String, kotlinOutDir: Path) {
@@ -116,9 +122,9 @@ class ColorsGenerator {
 
             val property = PropertySpec.builder(name, colorType)
                 .initializer(
-                    "%T(0x%L)",
+                    "%T(%L)",
                     colorType,
-                    "%08x".format(colorValue).uppercase(),
+                    colorValue.toHexString(hexFormat),
                 )
                 .build()
             objectBuilder.addProperty(property)
