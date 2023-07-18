@@ -145,6 +145,10 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 "androidx.compose.material.TabRow",
                 "androidx.compose.material3.TabRow",
             ),
+            "kiwi.orbit.compose.ui.controls.ScrollableTabRow" to setOf(
+                "androidx.compose.material.ScrollableTabRow",
+                "androidx.compose.material3.ScrollableTabRow",
+            ),
             "kiwi.orbit.compose.ui.controls.Text" to setOf(
                 "androidx.compose.material.Text",
                 "androidx.compose.material3.Text",

@@ -7,11 +7,13 @@ title: Android
 `Tab` component is provided as a simple wrapping layout and tab item components:
 
 - [`TabRow`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-tab-row.html)
+- [`ScrollableTabRow`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-scrollable-tab-row.html)
 - [`Tab`](https://kiwicom.github.io/orbit-compose/ui/kiwi.orbit.compose.ui.controls/-tab.html)
 
 ## Usage
 
 `TabRow` layout takes a `content` slot with multiple `Tab`s. `TabRow` should utilize `TopAppBar`'s `extraContent` slot.
+`ScrollableTabRow` is a scrollable variant of the component, allowing for more tabs to be displayed off screen.
 
 ```kotlin
 @Composable
@@ -40,12 +42,14 @@ fun Example() {
 
 ## UI Testing
 
-`Tab` composable provides a standard interface for UI testing, e.g. it exposes `isSelected` semantics property to check which tab is selected.
+`Tab` composable provides a standard interface for UI testing, e.g. it exposes `isSelected` semantics property
+ to check which tab is selected. If your tabs are in a `ScrollableTabRow` you should first call
+ `performScrollTo()` before `performClick()` to make sure the tab is actually visible on screen.
 
 ```kotlin
 composeTestRule.setContent {
     var selectedPage by remember { mutableStateOf(0) }
-    TabRow(selectedTabIndex = selectedPage) {
+    ScrollableTabRow(selectedTabIndex = selectedPage) {
         Tab(
             modifier = Modifier.testTag("variantA"),
             selected = selectedPage == 0,
@@ -58,11 +62,17 @@ composeTestRule.setContent {
             onClick = { selectedPage = 1 },
             text = { Text("Variant B") },
         )
+        Tab(
+            modifier = Modifier.testTag("variantC"),
+            selected = selectedPage == 2,
+            onClick = { selectedPage = 2 },
+            text = { Text("Variant C") },
+        )
     }
 }
-composeTestRule.onNodeWithTag("variantB").performClick().assertIsSelected()
+composeTestRule.onNodeWithTag("variantC").performScrollTo().performClick().assertIsSelected()
 ```
 
 ## Customization
 
-`TabRow`/`Tab` appearance is not customizable.
+`TabRow`/`ScrollableTabRow`/`Tab` appearance is not customizable.

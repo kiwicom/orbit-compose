@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitElevations
@@ -34,6 +35,9 @@ public fun TabRow(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
+    divider: @Composable () -> Unit = @Composable {
+        Divider()
+    },
     tabs: @Composable () -> Unit,
 ) {
     OrbitElevations {
@@ -43,7 +47,36 @@ public fun TabRow(
             containerColor = OrbitTheme.colors.surface.main,
             contentColor = contentColorFor(OrbitTheme.colors.surface.main),
             indicator = indicator,
-            divider = { Divider() },
+            divider = divider,
+            tabs = tabs,
+        )
+    }
+}
+
+@Composable
+public fun ScrollableTabRow(
+    selectedTabIndex: Int,
+    modifier: Modifier = Modifier,
+    edgePadding: Dp = ScrollableTabRowPadding,
+    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
+        TabIndicator(
+            Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
+        )
+    },
+    divider: @Composable () -> Unit = @Composable {
+        Divider()
+    },
+    tabs: @Composable () -> Unit,
+) {
+    OrbitElevations {
+        androidx.compose.material3.ScrollableTabRow(
+            selectedTabIndex = selectedTabIndex,
+            modifier = modifier,
+            containerColor = OrbitTheme.colors.surface.main,
+            contentColor = contentColorFor(OrbitTheme.colors.surface.main),
+            edgePadding = edgePadding,
+            indicator = indicator,
+            divider = divider,
             tabs = tabs,
         )
     }
@@ -93,6 +126,11 @@ public fun TabIndicator(
     )
 }
 
+/**
+ * The default padding from the starting edge before a tab in a [ScrollableTabRow].
+ */
+private val ScrollableTabRowPadding = 52.dp
+
 @OrbitPreviews
 @Composable
 internal fun TabsPreview() {
@@ -102,6 +140,13 @@ internal fun TabsPreview() {
             Tab(selected = i == 0, onClick = { i = 0 }) { Text("Tab A") }
             Tab(selected = i == 1, onClick = { i = 1 }) { Text("Tab B") }
             Tab(selected = i == 2, onClick = { i = 2 }) { Text("Tab C") }
+        }
+        ScrollableTabRow(selectedTabIndex = i) {
+            Tab(selected = i == 0, onClick = { i = 0 }) { Text("Tab A") }
+            Tab(selected = i == 1, onClick = { i = 1 }) { Text("Tab B") }
+            Tab(selected = i == 2, onClick = { i = 2 }) { Text("Tab C") }
+            Tab(selected = i == 3, onClick = { i = 3 }) { Text("Tab D") }
+            Tab(selected = i == 4, onClick = { i = 4 }) { Text("Tab E") }
         }
     }
 }
