@@ -110,6 +110,7 @@ android {
 
     lint {
         disable.add("ObsoleteLintCustomCheck")
+        disable.add("GradleDependency")
         baseline = file("lint-baseline.xml")
         abortOnError = true
         warningsAsErrors = true
