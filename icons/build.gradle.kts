@@ -10,7 +10,7 @@ plugins {
 
 kotlin {
     explicitApi()
-    android {}
+    androidTarget {}
     sourceSets {
         val androidMain by getting {}
     }
