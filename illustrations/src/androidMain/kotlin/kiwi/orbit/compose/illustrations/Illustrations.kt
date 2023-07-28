@@ -23,6 +23,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_airport_transport_taxi)
 
+    public val Ambulance: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_ambulance)
+
     public val AppKiwi: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_app_kiwi)
@@ -142,6 +146,10 @@ public object Illustrations {
     public val Feedback: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_feedback)
+
+    public val FlexibleDates: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_flexible_dates)
 
     public val GroundTransport404: Painter
         @Composable
