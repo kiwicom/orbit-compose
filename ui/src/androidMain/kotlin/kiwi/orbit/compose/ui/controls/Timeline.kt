@@ -80,6 +80,9 @@ public fun Timeline(
         },
         modifier = modifier,
     ) { measurables, constraints ->
+
+        if (measurables.isEmpty()) return@Layout layout(0, 0) {}
+
         /**
          * Timeline expects the measurables in the following order:
          * 1. item 0
@@ -387,6 +390,9 @@ internal fun TimelineStatesPreview() {
                 status = TimelineItemStatus.CurrentWarning,
                 title = { Text("Waiting for the airline") },
             )
+        }
+        Timeline {
+            // empty
         }
         Timeline {
             TimelineItem(
