@@ -8,7 +8,7 @@ kotlin-lang = "1.9.0"
 kotlin-dokka = "1.8.20"
 
 kotlin-serialization = "1.5.1"
-android-sdkCommon = "31.0.2"
+android-sdkCommon = "31.1.0"
 android-lint = "31.1.0-rc01"
 androidx-activityCompose = "1.7.2"
 androidx-activityComposeCatalog = "1.7.2"
