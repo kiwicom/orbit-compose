@@ -157,7 +157,7 @@ internal object ColorTokens {
 
     public val White: UIColor = UIColor(0xFFFFFFFF)
 
-    public val WhiteActive: UIColor = UIColor(0xFFE5EAEF)
+    public val WhiteActive: UIColor = UIColor(0xFFE7ECF1)
 
-    public val WhiteHover: UIColor = UIColor(0xFFF5F7F9)
+    public val WhiteHover: UIColor = UIColor(0xFFF1F4F7)
 }
