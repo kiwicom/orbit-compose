@@ -1,5 +1,4 @@
 @file:Suppress("MatchingDeclarationName")
-// ktlint-disable filename
 
 package kiwi.orbit.compose.ui.controls
 
@@ -111,11 +110,17 @@ private fun StepperPrimitive(
         modifier = modifier.semantics(mergeDescendants = true) {
             if (isDecreaseValid) {
                 this[StepperSemanticsActions.DecreaseValue] =
-                    AccessibilityAction(null) { onValueChange.invoke(value - 1); true }
+                    AccessibilityAction(null) {
+                        onValueChange.invoke(value - 1)
+                        true
+                    }
             }
             if (isIncreaseValid) {
                 this[StepperSemanticsActions.IncreaseValue] =
-                    AccessibilityAction(null) { onValueChange.invoke(value + 1); true }
+                    AccessibilityAction(null) {
+                        onValueChange.invoke(value + 1)
+                        true
+                    }
             }
         },
         verticalAlignment = Alignment.CenterVertically,

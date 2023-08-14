@@ -33,7 +33,8 @@ public class SurfaceColors(
      *
      * - Orbit light-theme color: [ColorTokens.White].
      */
-    public var main: Color by mutableStateOf(main, structuralEqualityPolicy()); internal set
+    public var main: Color by mutableStateOf(main, structuralEqualityPolicy())
+        internal set
 
     /**
      * Subtle gray color, secondary color for backgrounds.
@@ -43,42 +44,48 @@ public class SurfaceColors(
      *
      * - Orbit light-theme color: [ColorTokens.CloudLight].
      */
-    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy())
+        internal set
 
     /**
      * Alt darker subtle gray color.
      *
      * - Orbit light-theme color: [ColorTokens.CloudLightHover].
      */
-    public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy()); internal set
+    public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Normal gray color for UI control backgrounds.
      *
      * - Orbit light-theme color: [ColorTokens.CloudNormal].
      */
-    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy())
+        internal set
 
     /**
      * Alt darker normal gray color.
      *
      * - Orbit light-theme color: [ColorTokens.CloudNormalHover].
      */
-    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy()); internal set
+    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Strong gray color.
      *
      * - Orbit light-theme color: [ColorTokens.CloudDark].
      */
-    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
+    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy())
+        internal set
 
     /**
      * Alt strong gray color.
      *
      * - Orbit light-theme color: [ColorTokens.CloudDarkHover].
      */
-    public var strongAlt: Color by mutableStateOf(strongAlt, structuralEqualityPolicy()); internal set
+    public var strongAlt: Color by mutableStateOf(strongAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Disabled surface color.
@@ -87,7 +94,8 @@ public class SurfaceColors(
      *
      * - Orbit light-theme color: [ColorTokens.CloudNormal].
      */
-    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
+    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy())
+        internal set
 
     public fun copy(
         main: Color = this.main,
@@ -126,7 +134,8 @@ public class ContentColors(
      *
      * - Orbit light-theme color: [ColorTokens.InkDark].
      */
-    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy())
+        internal set
 
     /**
      * Less important text color.
@@ -135,7 +144,8 @@ public class ContentColors(
      *
      * - Orbit light-theme color: [ColorTokens.InkNormal].
      */
-    public var minor: Color by mutableStateOf(minor, structuralEqualityPolicy()); internal set
+    public var minor: Color by mutableStateOf(minor, structuralEqualityPolicy())
+        internal set
 
     /**
      *
@@ -145,7 +155,8 @@ public class ContentColors(
      *
      * - Orbit light-theme color: [ColorTokens.InkLight].
      */
-    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy())
+        internal set
 
     /**
      * Highlighting text color.
@@ -154,14 +165,16 @@ public class ContentColors(
      *
      * - Orbit light-theme color: [ColorTokens.ProductDark].
      */
-    public var highlight: Color by mutableStateOf(highlight, structuralEqualityPolicy()); internal set
+    public var highlight: Color by mutableStateOf(highlight, structuralEqualityPolicy())
+        internal set
 
     /**
      * Disabled text color.
      *
      * - Orbit light-theme color: [ColorTokens.CloudDarkHover].
      */
-    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy()); internal set
+    public var disabled: Color by mutableStateOf(disabled, structuralEqualityPolicy())
+        internal set
 
     public fun copy(
         normal: Color = this.normal,
@@ -200,7 +213,8 @@ public class FeatureColors(
      * - Related content color: [onNormal].
      * - Orbit light-theme color example: [ColorTokens.RedNormal].
      */
-    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy()); internal set
+    public var normal: Color by mutableStateOf(normal, structuralEqualityPolicy())
+        internal set
 
     /**
      * Alternative (darker) full color of particular feature color set.
@@ -208,7 +222,8 @@ public class FeatureColors(
      * - Related content color: [onNormal].
      * - Orbit light-theme color example: [ColorTokens.RedNormalActive].
      */
-    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy()); internal set
+    public var normalAlt: Color by mutableStateOf(normalAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Light color of particular feature color set.
@@ -216,7 +231,8 @@ public class FeatureColors(
      * - Related content color: [onSubtle].
      * - Orbit light-theme color example: [ColorTokens.RedLight].
      */
-    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy()); internal set
+    public var subtle: Color by mutableStateOf(subtle, structuralEqualityPolicy())
+        internal set
 
     /**
      * Alternative (darker) light color of particular feature color set.
@@ -224,7 +240,8 @@ public class FeatureColors(
      * - Related content color: [onSubtleAlt].
      * - Orbit light-theme color example: [ColorTokens.RedLightHover].
      */
-    public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy()); internal set
+    public var subtleAlt: Color by mutableStateOf(subtleAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Dark color of particular feature color set.
@@ -232,7 +249,8 @@ public class FeatureColors(
      * - Related content color: [onNormal].
      * - Orbit light-theme color example: [ColorTokens.RedDark].
      */
-    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy()); internal set
+    public var strong: Color by mutableStateOf(strong, structuralEqualityPolicy())
+        internal set
 
     /**
      * Darker color of particular feature color set.
@@ -240,14 +258,16 @@ public class FeatureColors(
      * - Related content color: [onNormal].
      * - Orbit light-theme color example: [ColorTokens.RedDarkHover].
      */
-    public var strongAlt: Color by mutableStateOf(strongAlt, structuralEqualityPolicy()); internal set
+    public var strongAlt: Color by mutableStateOf(strongAlt, structuralEqualityPolicy())
+        internal set
 
     /**
      * Color for content on [normal], [strong] shades.
      *
      * - Orbit light-theme color example: [ColorTokens.White].
      */
-    public var onNormal: Color by mutableStateOf(onNormal, structuralEqualityPolicy()); internal set
+    public var onNormal: Color by mutableStateOf(onNormal, structuralEqualityPolicy())
+        internal set
 
     public fun copy(
         normal: Color = this.normal,
@@ -283,17 +303,25 @@ public class BundleColors(
     onMedium: Color,
     onTop: Color,
 ) {
-    public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy()); internal set
-    public var basicGradient: Brush by mutableStateOf(basicGradient, structuralEqualityPolicy()); internal set
-    public var medium: Color by mutableStateOf(medium, structuralEqualityPolicy()); internal set
+    public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy())
+        internal set
+    public var basicGradient: Brush by mutableStateOf(basicGradient, structuralEqualityPolicy())
+        internal set
+    public var medium: Color by mutableStateOf(medium, structuralEqualityPolicy())
+        internal set
     public var mediumGradient: Brush
         by mutableStateOf(mediumGradient, structuralEqualityPolicy())
         internal set
-    public var top: Color by mutableStateOf(top, structuralEqualityPolicy()); internal set
-    public var topGradient: Brush by mutableStateOf(topGradient, structuralEqualityPolicy()); internal set
-    public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy()); internal set
-    public var onMedium: Color by mutableStateOf(onMedium, structuralEqualityPolicy()); internal set
-    public var onTop: Color by mutableStateOf(onTop, structuralEqualityPolicy()); internal set
+    public var top: Color by mutableStateOf(top, structuralEqualityPolicy())
+        internal set
+    public var topGradient: Brush by mutableStateOf(topGradient, structuralEqualityPolicy())
+        internal set
+    public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy())
+        internal set
+    public var onMedium: Color by mutableStateOf(onMedium, structuralEqualityPolicy())
+        internal set
+    public var onTop: Color by mutableStateOf(onTop, structuralEqualityPolicy())
+        internal set
 
     public fun copy(
         basic: Color = this.basic,
@@ -343,7 +371,8 @@ public class Colors(
     public val bundle: BundleColors,
     isLight: Boolean,
 ) {
-    public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy()); internal set
+    public var isLight: Boolean by mutableStateOf(isLight, structuralEqualityPolicy())
+        internal set
 
     public fun copy(
         surface: SurfaceColors = this.surface,

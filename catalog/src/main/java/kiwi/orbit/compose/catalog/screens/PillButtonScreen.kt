@@ -74,8 +74,18 @@ private fun PillButtonScreenInner(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ButtonSecondary(onClick = { show = true; showIcon = false }) { Text("Show") }
-            ButtonSecondary(onClick = { show = true; showIcon = true }) { Text("Show with icon") }
+            ButtonSecondary(
+                onClick = {
+                    show = true
+                    showIcon = false
+                },
+            ) { Text("Show") }
+            ButtonSecondary(
+                onClick = {
+                    show = true
+                    showIcon = true
+                },
+            ) { Text("Show with icon") }
         }
     }
 }
