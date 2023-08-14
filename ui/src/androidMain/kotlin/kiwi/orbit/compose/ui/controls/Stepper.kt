@@ -133,31 +133,7 @@ private fun StepperPrimitive(
             Icon(Icons.Minus, contentDescription = removeContentDescription)
         }
 
-        AnimatedContent(
-            targetState = value,
-            transitionSpec = {
-                if (targetState > initialState) {
-                    slideInVertically { height -> height / 2 } + fadeIn() togetherWith
-                        slideOutVertically { height -> -height / 2 } + fadeOut()
-                } else {
-                    slideInVertically { height -> -height / 2 } + fadeIn() togetherWith
-                        slideOutVertically { height -> height / 2 } + fadeOut()
-                }.using(
-                    SizeTransform(clip = false),
-                )
-            },
-            label = "StepperValue",
-        ) { targetNumber ->
-            Text(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .widthIn(min = 20.dp),
-                text = targetNumber.toString(),
-                style = OrbitTheme.typography.bodyLargeMedium,
-                emphasis = ContentEmphasis.Normal,
-                textAlign = TextAlign.Center,
-            )
-        }
+        StepperLabel(value)
 
         StepperButton(
             onClick = { onValueChange.invoke(value + 1) },
@@ -166,6 +142,37 @@ private fun StepperPrimitive(
         ) {
             Icon(Icons.Plus, contentDescription = addContentDescription)
         }
+    }
+}
+
+@Composable
+private fun StepperLabel(
+    value: Int,
+) {
+    AnimatedContent(
+        targetState = value,
+        transitionSpec = {
+            if (targetState > initialState) {
+                slideInVertically { height -> height / 2 } + fadeIn() togetherWith
+                    slideOutVertically { height -> -height / 2 } + fadeOut()
+            } else {
+                slideInVertically { height -> -height / 2 } + fadeIn() togetherWith
+                    slideOutVertically { height -> height / 2 } + fadeOut()
+            }.using(
+                SizeTransform(clip = false),
+            )
+        },
+        label = "StepperValue",
+    ) { targetNumber ->
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .widthIn(min = 20.dp),
+            text = targetNumber.toString(),
+            style = OrbitTheme.typography.bodyLargeMedium,
+            emphasis = ContentEmphasis.Normal,
+            textAlign = TextAlign.Center,
+        )
     }
 }
 
