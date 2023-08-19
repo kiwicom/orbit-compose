@@ -1,5 +1,3 @@
-// ktlint-disable filename
-
 package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.ui.geometry.Offset
