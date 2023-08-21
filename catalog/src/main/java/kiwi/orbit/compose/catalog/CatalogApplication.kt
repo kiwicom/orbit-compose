@@ -1,5 +1,14 @@
 package kiwi.orbit.compose.catalog
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -8,6 +17,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -86,11 +98,16 @@ fun CatalogApplication() {
 private fun NavGraph(
     onToggleTheme: () -> Unit,
 ) {
+    val density = LocalDensity.current
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
         startDestination = createRoutePattern<Destinations.Main>(),
+        enterTransition = { SharedXAxisEnterTransition(density) },
+        exitTransition = { SharedXAxisExitTransition(density) },
+        popEnterTransition = { SharedXAxisPopEnterTransition(density) },
+        popExitTransition = { SharedXAxisPopExitTransition(density) },
     ) {
         composable<Destinations.Main> { MainScreen(navController::navigate, onToggleTheme) }
 
@@ -136,4 +153,32 @@ private fun NavGraph(
         composable<Destinations.Toast> { ToastScreen(navController::navigateUp) }
         topAppBarNavigation<Destinations.TopAppBar>(navController)
     }
+}
+
+private val SharedXAxisEnterTransition: (Density) -> EnterTransition = { density ->
+    fadeIn(animationSpec = tween(durationMillis = 210, delayMillis = 90, easing = LinearOutSlowInEasing)) +
+        slideInHorizontally(animationSpec = tween(durationMillis = 300)) {
+            with(density) { 30.dp.roundToPx() }
+        }
+}
+
+private val SharedXAxisPopEnterTransition: (Density) -> EnterTransition = { density ->
+    fadeIn(animationSpec = tween(durationMillis = 210, delayMillis = 90, easing = LinearOutSlowInEasing)) +
+        slideInHorizontally(animationSpec = tween(durationMillis = 300)) {
+            with(density) { (-30).dp.roundToPx() }
+        }
+}
+
+private val SharedXAxisExitTransition: (Density) -> ExitTransition = { density ->
+    fadeOut(animationSpec = tween(durationMillis = 90, easing = FastOutLinearInEasing)) +
+        slideOutHorizontally(animationSpec = tween(durationMillis = 300)) {
+            with(density) { (-30).dp.roundToPx() }
+        }
+}
+
+private val SharedXAxisPopExitTransition: (Density) -> ExitTransition = { density ->
+    fadeOut(animationSpec = tween(durationMillis = 90, easing = FastOutLinearInEasing)) +
+        slideOutHorizontally(animationSpec = tween(durationMillis = 300)) {
+            with(density) { 30.dp.roundToPx() }
+        }
 }
