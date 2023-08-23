@@ -53,6 +53,7 @@ import kiwi.orbit.compose.ui.controls.RadioFieldPreview
 import kiwi.orbit.compose.ui.controls.RadioPreview
 import kiwi.orbit.compose.ui.controls.RangeSliderPreview
 import kiwi.orbit.compose.ui.controls.ScaffoldPreview
+import kiwi.orbit.compose.ui.controls.ScaffoldWithFullScreenActionPreview
 import kiwi.orbit.compose.ui.controls.SeatLegendPreview
 import kiwi.orbit.compose.ui.controls.SeatPreview
 import kiwi.orbit.compose.ui.controls.SegmentedSwitchPreview
@@ -301,6 +302,13 @@ internal class ScreenshotTest {
             Box(Modifier.height(200.dp)) {
                 ScaffoldPreview()
             }
+        }
+    }
+
+    @Test
+    fun scaffoldFullScreenAction() {
+        snapshot {
+            ScaffoldWithFullScreenActionPreview()
         }
     }
 

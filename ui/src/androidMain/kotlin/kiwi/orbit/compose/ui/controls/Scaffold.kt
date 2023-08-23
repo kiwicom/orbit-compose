@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -91,31 +93,28 @@ private fun ScaffoldLayout(
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
         val topBarPlaceables = subcompose(SlotTopAppBar, topBar).map { it.measure(looseConstraints) }
-        val actionPlaceables = subcompose(SlotAction, action).map { it.measure(looseConstraints) }
-        val toastPlaceables = subcompose(SlotToast, toast).map { it.measure(looseConstraints) }
+        val topBarHeight = topBarPlaceables.maxOfOrNull { it.height } ?: 0
 
+        val maxActionRatio = 0.8f
+        val maxActionHeight = (layoutHeight - topBarHeight) * maxActionRatio
+        val actionConstraints = looseConstraints.copy(maxHeight = maxActionHeight.toInt())
+        val actionPlaceables = subcompose(SlotAction, action).map { it.measure(actionConstraints) }
         val actionHeight = actionPlaceables.maxOfOrNull { it.height } ?: 0
         val actionFadeHeight = actionPlaceables.firstOrNull()?.get(ActionFadeLine)?.let { value ->
             if (value == AlignmentLine.Unspecified) 0 else value
         } ?: 0
 
         val contentInsets = contentWindowInsets.asPaddingValues(this)
-        val contentTop = topBarPlaceables.maxOfOrNull { it.height } ?: 0
         val contentBottom = if (actionHeight > 0) {
-            (actionHeight - actionFadeHeight).coerceAtLeast(0)
+            (actionHeight - actionFadeHeight)
         } else {
-            if (imeOpened) {
-                contentInsets.calculateBottomPadding().roundToPx()
-            } else {
-                0
-            }
+            if (imeOpened) contentInsets.calculateBottomPadding().roundToPx() else 0
         }
         val contentConstraints = looseConstraints.copy(
-            maxHeight = layoutHeight - contentTop - contentBottom,
+            maxHeight = layoutHeight - topBarHeight - contentBottom,
         )
-
         val innerPadding = PaddingValues(
-            top = if (contentTop > 0) {
+            top = if (topBarHeight > 0) {
                 0.dp
             } else {
                 contentInsets.calculateTopPadding()
@@ -136,11 +135,13 @@ private fun ScaffoldLayout(
             content(innerPadding)
         }.map { it.measure(contentConstraints) }
 
+        val toastPlaceables = subcompose(SlotToast, toast).map { it.measure(looseConstraints) }
+
         layout(layoutWidth, layoutHeight) {
-            contentPlaceables.forEach { it.placeRelative(0, contentTop) }
+            contentPlaceables.forEach { it.placeRelative(0, topBarHeight) }
             topBarPlaceables.forEach { it.placeRelative(0, 0) }
             actionPlaceables.forEach { it.placeRelative(0, layoutHeight - actionHeight) }
-            toastPlaceables.forEach { it.placeRelative(0, contentTop) }
+            toastPlaceables.forEach { it.placeRelative(0, topBarHeight) }
         }
     }
 }
@@ -174,15 +175,19 @@ public fun ScaffoldAction(
         },
     ) { measurables, constraints ->
         val padding = 16.dp.roundToPx()
+        val top = fadeHeight.roundToPx()
         val action = measurables.first().measure(
-            constraints.offset(horizontal = padding * -2),
+            constraints
+                .offset(
+                    horizontal = padding * -2,
+                    vertical = -(padding + top),
+                ),
         )
 
         if (action.height == 0) {
             return@Layout layout(0, 0) {}
         }
 
-        val top = fadeHeight.roundToPx()
         val width = constraints.maxWidth
         val height = top + action.height + padding + inset.calculateBottomPadding().roundToPx()
 
@@ -214,6 +219,42 @@ internal fun ScaffoldPreview() {
         Scaffold(
             action = {
                 ButtonPrimary(onClick = {}) { Text("Test") }
+            },
+        ) {
+            CustomPlaceholder(Modifier.fillMaxSize())
+        }
+    }
+}
+
+@OrbitPreviews
+@Composable
+internal fun ScaffoldWithFullScreenActionPreview() {
+    Preview {
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text(text = "Title") })
+            },
+            action = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(OrbitTheme.colors.surface.normal),
+                ) {
+                    Text(
+                        text = "Custom full screen action",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize(),
+                    )
+                    ButtonPrimary(
+                        onClick = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.BottomCenter),
+                    ) {
+                        Text("Custom full screen action")
+                    }
+                }
             },
         ) {
             CustomPlaceholder(Modifier.fillMaxSize())
