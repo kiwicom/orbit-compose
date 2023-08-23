@@ -847,6 +847,10 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_power_plug_off)
 
+    public val PriceChange: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_price_change)
+
     public val PriorityBoarding: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_priority_boarding)
@@ -954,6 +958,10 @@ public object Icons {
     public val ShareAndroid: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_share_android)
+
+    public val ShareAndroidOutline: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_share_android_outline)
 
     public val ShareIos: Painter
         @Composable
