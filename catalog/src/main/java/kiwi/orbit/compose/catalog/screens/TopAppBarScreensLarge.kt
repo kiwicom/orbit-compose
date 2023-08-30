@@ -23,9 +23,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
@@ -43,6 +45,7 @@ internal fun TopAppBarLargeScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.testTag(TopAppBarScreenSemantics.LargeSimpleScreenTag),
         topBar = {
             TopAppBarLarge(
                 title = { Text("Simple") },

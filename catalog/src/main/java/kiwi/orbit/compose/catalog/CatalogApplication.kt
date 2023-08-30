@@ -16,8 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -93,7 +97,7 @@ fun CatalogApplication() {
     }
 }
 
-@OptIn(ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun NavGraph(
     onToggleTheme: () -> Unit,
@@ -104,6 +108,7 @@ private fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = createRoutePattern<Destinations.Main>(),
+        modifier = Modifier.semantics { testTagsAsResourceId = true },
         enterTransition = { SharedXAxisEnterTransition(density) },
         exitTransition = { SharedXAxisExitTransition(density) },
         popEnterTransition = { SharedXAxisPopEnterTransition(density) },

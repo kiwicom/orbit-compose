@@ -25,11 +25,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
+import kiwi.orbit.compose.catalog.semantics.ButtonScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonBundleBasic
@@ -63,6 +66,7 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
     val state = rememberPagerState(0) { 2 }
     val scope = rememberCoroutineScope()
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Buttons") },
@@ -72,11 +76,13 @@ internal fun ButtonScreen(onNavigateUp: () -> Unit) {
                         Tab(
                             selected = state.currentPage == 0,
                             onClick = { scope.launch { state.animateScrollToPage(0) } },
+                            modifier = Modifier.testTag(ButtonScreenSemantics.ButtonTabTag),
                             text = { Text("Button") },
                         )
                         Tab(
                             selected = state.currentPage == 1,
                             onClick = { scope.launch { state.animateScrollToPage(1) } },
+                            modifier = Modifier.testTag(ButtonScreenSemantics.ButtonLinkTabTag),
                             text = { Text("ButtonLink") },
                         )
                     }

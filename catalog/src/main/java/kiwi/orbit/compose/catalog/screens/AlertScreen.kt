@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +27,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.catalog.semantics.AlertScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.AlertCritical
@@ -52,6 +55,7 @@ internal fun AlertScreen(onNavigateUp: () -> Unit) {
     val state = rememberPagerState(0) { 3 }
     val scope = rememberCoroutineScope()
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Alert") },
@@ -61,16 +65,19 @@ internal fun AlertScreen(onNavigateUp: () -> Unit) {
                         Tab(
                             selected = state.currentPage == 0,
                             onClick = { scope.launch { state.animateScrollToPage(0) } },
+                            modifier = Modifier.testTag(AlertScreenSemantics.NormalTabTag),
                             text = { Text("Normal") },
                         )
                         Tab(
                             selected = state.currentPage == 1,
                             onClick = { scope.launch { state.animateScrollToPage(1) } },
+                            modifier = Modifier.testTag(AlertScreenSemantics.SuppressedTabTag),
                             text = { Text("Suppressed") },
                         )
                         Tab(
                             selected = state.currentPage == 2,
                             onClick = { scope.launch { state.animateScrollToPage(2) } },
+                            modifier = Modifier.testTag(AlertScreenSemantics.InlineTabTag),
                             text = { Text("Inline") },
                         )
                     }
