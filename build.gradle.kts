@@ -19,7 +19,7 @@ plugins {
     id("com.vanniktech.maven.publish.base") version "0.25.3" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.1" apply false
     id("org.jmailen.kotlinter") version "3.16.0" apply false
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.0"
 }
 
 buildscript {
