@@ -5,7 +5,7 @@ targetSdk = "33"
 minSdk = "23"
 
 kotlin-lang = "1.9.10"
-kotlin-dokka = "1.8.20"
+kotlin-dokka = "1.9.0"
 
 kotlin-serialization = "1.6.0"
 android-sdkCommon = "31.1.0"
@@ -20,7 +20,7 @@ square-kotlinPoet = "1.14.2"
 
 [libraries]
 
-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.1" }
 kotlin-dokka = { module = "org.jetbrains.dokka:dokka-base", version.ref = "kotlin-dokka" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-lang" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
