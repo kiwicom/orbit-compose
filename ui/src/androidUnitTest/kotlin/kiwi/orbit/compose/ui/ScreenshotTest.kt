@@ -31,7 +31,6 @@ import kiwi.orbit.compose.ui.controls.ButtonTextLinkPreview
 import kiwi.orbit.compose.ui.controls.CardPreview
 import kiwi.orbit.compose.ui.controls.CheckboxFieldPreview
 import kiwi.orbit.compose.ui.controls.CheckboxPreview
-import kiwi.orbit.compose.ui.controls.ChoiceTileCenteredPreview
 import kiwi.orbit.compose.ui.controls.ChoiceTilePreview
 import kiwi.orbit.compose.ui.controls.CircularProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
@@ -193,11 +192,6 @@ internal class ScreenshotTest {
     @Test
     fun choiceTile() {
         snapshot { ChoiceTilePreview() }
-    }
-
-    @Test
-    fun choiceTileCentered() {
-        snapshot { ChoiceTileCenteredPreview() }
     }
 
     @Test

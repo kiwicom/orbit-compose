@@ -1,6 +1,5 @@
 package kiwi.orbit.compose.catalog.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,16 +24,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.components.CustomPlaceholder
 import kiwi.orbit.compose.icons.Icons
-import kiwi.orbit.compose.illustrations.Illustrations
 import kiwi.orbit.compose.ui.controls.BadgeInfoSubtle
-import kiwi.orbit.compose.ui.controls.BadgeNeutral
 import kiwi.orbit.compose.ui.controls.ChoiceTile
-import kiwi.orbit.compose.ui.controls.ChoiceTileCentered
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Stepper
@@ -205,66 +200,5 @@ private fun ChoiceTileScreenInner() {
             onSelect = { selectedD = !selectedD },
             content = { },
         )
-
-        // Vertical padding to avoid clip issues on Android 12+ when over-scrolling.
-        // https://issuetracker.google.com/issues/215652703
-        var selectedE by rememberSaveable { mutableIntStateOf(-1) }
-        Row(
-            Modifier
-                .height(IntrinsicSize.Max)
-                .padding(horizontal = 16.dp)
-                .padding(top = 12.dp) // half of the badge
-                .padding(top = 2.dp, bottom = 4.dp), // over-scroll workaround
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            ChoiceTileCentered(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(1f),
-                selected = selectedE == 0,
-                onSelect = { selectedE = 0 },
-                title = { Text("Plus Support") },
-                description = { Text("Everyone sits together") },
-                price = { BadgeNeutral { Text("Included") } },
-            )
-
-            ChoiceTileCentered(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(1f),
-                selected = selectedE == 1,
-                onSelect = { selectedE = 1 },
-                icon = {
-                    Image(
-                        painter = Illustrations.Boarding,
-                        contentDescription = null,
-                        Modifier.height(60.dp),
-                    )
-                },
-                title = { Text("Plus Support") },
-                description = { Text("Everyone sits together") },
-                price = { Text("+ 10 €") },
-            )
-
-            ChoiceTileCentered(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(1f),
-                selected = selectedE == 2,
-                onSelect = { selectedE = 2 },
-                badgeContent = {
-                    Text(
-                        "Recommended Very Much",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                },
-                icon = { Icon(painter = Icons.BaggageSet, contentDescription = null) },
-                title = { Text("Plus Support") },
-                description = { Text("Everyone sits together") },
-                price = { Text("+ 10 €") },
-                largeHeading = false,
-            )
-        }
     }
 }
