@@ -6,9 +6,9 @@ import androidx.compose.runtime.remember
 
 @Composable
 internal fun rememberTextSelectionColors(colors: Colors): TextSelectionColors =
-    remember(colors.info.normal, colors.info.subtleAlt) {
+    remember(colors.info.normal) {
         TextSelectionColors(
             handleColor = colors.info.normal,
-            backgroundColor = colors.info.subtleAlt,
+            backgroundColor = colors.info.normal.copy(alpha = 0.2f),
         )
     }
