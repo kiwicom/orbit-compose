@@ -31,12 +31,19 @@ import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
+import kiwi.orbit.compose.ui.controls.field.LabelLastBaseLine
 import kiwi.orbit.compose.ui.controls.internal.ColumnWithMinConstraints
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
+/**
+ * TextFiled control allowing a text single-line or multi-line input.
+ *
+ * To align multiple text fields vertically next to each other, utilize
+ * [LabelLastBaseLine] alignment line.
+ */
 @Composable
 public fun TextField(
     value: String,
