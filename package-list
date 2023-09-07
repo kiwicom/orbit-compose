@@ -8,6 +8,7 @@ kiwi.orbit.compose.illustrations
 module:ui
 kiwi.orbit.compose.ui
 kiwi.orbit.compose.ui.controls
+kiwi.orbit.compose.ui.controls.field
 kiwi.orbit.compose.ui.foundation
 kiwi.orbit.compose.ui.layout
 kiwi.orbit.compose.ui.utils
