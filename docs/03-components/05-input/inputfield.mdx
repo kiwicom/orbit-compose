@@ -76,6 +76,20 @@ fun Example() {
 }
 ```
 
+Utilize `LabelLastBaseLine` alignment line to vertically align multiple text fields.
+
+```kotlin
+@Composable
+import kiwi.orbit.compose.ui.controls.field.LabelLastBaseLine
+
+fun Example() {
+    Row {
+        TextField(Modifier.alignBy(LabelLastBaseLine), ...)
+        TextField(Modifier.alignBy(LabelLastBaseLine), ...)
+    }
+}
+```
+
 ## UI testing
 
 Slotting API allows you to add testTag to particular component parts.

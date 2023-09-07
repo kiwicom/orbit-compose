@@ -42,6 +42,7 @@ import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TextField
 import kiwi.orbit.compose.ui.controls.TopAppBar
+import kiwi.orbit.compose.ui.controls.field.LabelLastBaseLine
 
 @Composable
 internal fun TextFieldScreen(onNavigateUp: () -> Unit) {
@@ -226,10 +227,25 @@ private fun TextFieldScreenInner() {
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             var v1 by rememberSaveable { mutableStateOf("") }
-            TextField(v1, { v1 = it }, label = { Text("A") }, modifier = Modifier.weight(1f))
+            TextField(
+                value = v1,
+                onValueChange = { v1 = it },
+                label = { Text("Very long label with many many words") },
+                modifier = Modifier
+                    .weight(1f)
+                    .alignBy(LabelLastBaseLine),
+            )
 
             var v2 by rememberSaveable { mutableStateOf("") }
-            TextField(v2, { v2 = it }, label = { Text("B") }, modifier = Modifier.weight(1f))
+            TextField(
+                value = v2,
+                onValueChange = { v2 = it },
+                label = { Text("B") },
+                error = { Text("Error") },
+                modifier = Modifier
+                    .weight(1f)
+                    .alignBy(LabelLastBaseLine),
+            )
         }
 
         Spacer(Modifier.height(8.dp))
