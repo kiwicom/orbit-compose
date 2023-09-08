@@ -13,7 +13,7 @@ plugins {
     kotlin("android") version "1.9.10" apply false
     kotlin("multiplatform") version "1.9.10" apply false
     kotlin("plugin.serialization") version "1.9.10" apply false
-    id("com.android.library") version "8.0.2" apply false
+    id("com.android.library") version "8.1.1" apply false
     id("app.cash.paparazzi") version "1.3.1" apply false
     id("com.google.firebase.appdistribution") version "4.0.0" apply false
     id("com.vanniktech.maven.publish.base") version "0.25.3" apply false
