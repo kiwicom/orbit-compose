@@ -5,6 +5,7 @@ import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("androidx.baselineprofile")
     id("org.jetbrains.dokka")
     id("org.jmailen.kotlinter")
     id("com.vanniktech.maven.publish.base")
@@ -77,6 +78,14 @@ tasks.withType<ConfigurableKtLintTask> {
     exclude { it.file.absoluteFile.endsWith("SwipeableV2.kt") }
 }
 
+baselineProfile {
+    baselineProfileOutputDir = "."
+
+    filter {
+        include("kiwi.orbit.compose.ui.**")
+    }
+}
+
 dependencies {
     implementation(platform(libs.compose.bom))
 
@@ -92,6 +101,8 @@ dependencies {
     implementation(libs.compose.toolingPreview)
     implementation(libs.compose.uiUtil)
     implementation(libs.kotlin.stdlib)
+
+    baselineProfile(projects.baselineprofile)
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.activityCompose)

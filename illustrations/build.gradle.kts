@@ -3,6 +3,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("androidx.baselineprofile")
     id("org.jetbrains.dokka")
     id("org.jmailen.kotlinter")
     id("com.vanniktech.maven.publish.base")
@@ -51,6 +52,14 @@ kotlinter {
     reporters = arrayOf("json")
 }
 
+baselineProfile {
+    baselineProfileOutputDir = "."
+
+    filter {
+        include("kiwi.orbit.compose.illustrations.**")
+    }
+}
+
 dependencies {
     implementation(platform(libs.compose.bom))
 
@@ -58,4 +67,6 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
+
+    baselineProfile(projects.baselineprofile)
 }

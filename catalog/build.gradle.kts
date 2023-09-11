@@ -7,6 +7,7 @@ plugins {
     kotlin("android")
     kotlin("plugin.serialization")
     id("com.android.application")
+    id("androidx.baselineprofile")
     id("org.jmailen.kotlinter")
     id("com.google.firebase.appdistribution")
     kotlin("plugin.parcelize")
@@ -127,6 +128,7 @@ dependencies {
     implementation(projects.ui)
     implementation(projects.icons)
     implementation(projects.illustrations)
+    implementation(projects.catalog.semantics)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.activityCompose)
@@ -152,6 +154,8 @@ dependencies {
     implementation(libs.accompanist.systemController)
     implementation(libs.kiwi.navigationComposeTyped)
 
+    baselineProfile(projects.baselineprofile)
+
     coreLibraryDesugaring(libs.android.desugarJdk)
 
     debugImplementation(libs.compose.tooling)
@@ -159,5 +163,5 @@ dependencies {
     debugImplementation(libs.androidx.customViewPoolingContainer)
 
     lintChecks(libs.slack.composeLintChecks)
-    lintChecks(project(":lint"))
+    lintChecks(projects.lint)
 }

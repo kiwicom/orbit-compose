@@ -15,7 +15,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.ToastScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -31,6 +34,7 @@ internal fun ToastScreen(
     val toastHostState = remember { ToastHostState() }
     val scope = rememberCoroutineScope()
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Toast") },
@@ -70,6 +74,7 @@ private fun ToastScreenInner(
             onClick = {
                 onToast("You’re signed in as jon.snow@wall.7k.") { Icons.CheckCircle }
             },
+            modifier = Modifier.testTag(ToastScreenSemantics.ToastSignedInButtonTag),
         ) { Text("Toast – signed in") }
 
         ButtonSecondary(

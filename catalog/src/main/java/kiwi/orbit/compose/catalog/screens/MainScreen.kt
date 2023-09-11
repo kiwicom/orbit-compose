@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.catalog.screens
 
+import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -40,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kiwi.navigationcompose.typed.Destination
@@ -57,10 +59,12 @@ import kiwi.orbit.compose.ui.utils.plus
 import kotlinx.serialization.ExperimentalSerializationApi
 import androidx.compose.material.icons.Icons.Outlined as OMIcons
 import androidx.compose.material.icons.Icons.Rounded as MIcons
+import kiwi.orbit.compose.catalog.semantics.MainScreenSemantics as Semantics
 
 private data class MenuItem(
     val title: String,
     val icon: Any,
+    val testTag: String,
     val onClick: () -> Unit,
 )
 
@@ -70,51 +74,60 @@ internal fun MainScreen(
     onNavigate: (Destination) -> Unit,
     onToggleTheme: () -> Unit,
 ) {
-    fun MenuItem(title: String, icon: Any, onNavigate: () -> Destination): MenuItem =
-        MenuItem(title, icon, onClick = { onNavigate(onNavigate()) })
+    fun MenuItem(title: String, icon: Any, testTag: String, onNavigate: () -> Destination): MenuItem =
+        MenuItem(title, icon, testTag, onClick = { onNavigate(onNavigate()) })
 
     val foundation = listOf(
-        MenuItem("Colors", MIcons.Palette) { Destinations.Colors },
-        MenuItem("Icons", Icons.Airplane) { Destinations.Icons },
-        MenuItem("Illustrations", Icons.Gallery) { Destinations.Illustrations },
-        MenuItem("Typography", MIcons.FormatSize) { Destinations.Typography },
+        MenuItem("Colors", MIcons.Palette, Semantics.ColorsItemTag) { Destinations.Colors },
+        MenuItem("Icons", Icons.Airplane, Semantics.IconsItemTag) { Destinations.Icons },
+        MenuItem("Illustrations", Icons.Gallery, Semantics.IllustrationsItemTag) {
+            Destinations.Illustrations
+        },
+        MenuItem("Typography", MIcons.FormatSize, Semantics.TypographyItemTag) { Destinations.Typography },
     )
     val controls = listOf(
-        MenuItem("Alert", Icons.Alert) { Destinations.Alert },
-        MenuItem("Badge", Icons.Deals) { Destinations.Badge },
-        MenuItem("BadgeList", Icons.List) { Destinations.BadgeList },
-        MenuItem("Button", MIcons.SmartButton) { Destinations.Button },
-        MenuItem("Card", MIcons.Rectangle) { Destinations.Card },
-        MenuItem("Checkbox", MIcons.CheckBox) { Destinations.Checkbox },
-        MenuItem("Choice Tile", MIcons.Ballot) { Destinations.ChoiceTile },
-        MenuItem("Collapse", Icons.ChevronDown) { Destinations.Collapse },
-        MenuItem("Dialog", Icons.Chat) { Destinations.Dialog },
-        MenuItem("EmptyState", MIcons.SignalWifiOff) { Destinations.EmptyState },
-        MenuItem("KeyValue", MIcons.DragHandle) { Destinations.KeyValue },
-        MenuItem("List", MIcons.DensitySmall) { Destinations.List },
-        MenuItem("ListChoice", Icons.MenuHamburger) { Destinations.ListChoice },
-        MenuItem("Loading", Icons.MenuMeatballs) { Destinations.Loading },
-        MenuItem("PillButton", MIcons.EditAttributes) { Destinations.PillButton },
-        MenuItem("Progress Indicator", OMIcons.ToggleOff) { Destinations.LinearProgressIndicator },
-        MenuItem("Radio", Icons.CircleFilled) { Destinations.Radio },
-        MenuItem("Seat", Icons.Seat) { Destinations.Seat },
-        MenuItem("Segmented Switch", MIcons.ToggleOn) { Destinations.SegmentedSwitch },
-        MenuItem("Select Field", MIcons.MenuOpen) { Destinations.SelectField },
-        MenuItem("Slider", MIcons.LinearScale) { Destinations.Slider },
-        MenuItem("Stepper", Icons.PlusCircle) { Destinations.Stepper },
-        MenuItem("SurfaceCard", MIcons.Article) { Destinations.SurfaceCard },
-        MenuItem("Switch", MIcons.ToggleOn) { Destinations.Switch },
-        MenuItem("Tabs", MIcons.Tab) { Destinations.Tabs },
-        MenuItem("Tag", MIcons.LabelImportant) { Destinations.Tag },
-        MenuItem("Text Field", MIcons.Keyboard) { Destinations.TextField },
-        MenuItem("Tile", MIcons.Crop169) { Destinations.Tile },
-        MenuItem("TileGroup", MIcons.ListAlt) { Destinations.TileGroup },
-        MenuItem("Timeline", Icons.RouteTwoStops) { Destinations.Timeline },
-        MenuItem("Toast", MIcons.Announcement) { Destinations.Toast },
-        MenuItem("TopAppBar", MIcons.WebAsset) { Destinations.TopAppBar },
+        MenuItem("Alert", Icons.Alert, Semantics.AlertItemTag) { Destinations.Alert },
+        MenuItem("Badge", Icons.Deals, Semantics.BadgeItemTag) { Destinations.Badge },
+        MenuItem("BadgeList", Icons.List, Semantics.BadgeListItemTag) { Destinations.BadgeList },
+        MenuItem("Button", MIcons.SmartButton, Semantics.ButtonItemTag) { Destinations.Button },
+        MenuItem("Card", MIcons.Rectangle, Semantics.CardItemTag) { Destinations.Card },
+        MenuItem("Checkbox", MIcons.CheckBox, Semantics.CheckboxItemTag) { Destinations.Checkbox },
+        MenuItem("Choice Tile", MIcons.Ballot, Semantics.ChoiceTileItemTag) { Destinations.ChoiceTile },
+        MenuItem("Collapse", Icons.ChevronDown, Semantics.CollapseItemTag) { Destinations.Collapse },
+        MenuItem("Dialog", Icons.Chat, Semantics.DialogItemTag) { Destinations.Dialog },
+        MenuItem("EmptyState", MIcons.SignalWifiOff, Semantics.EmptyStateItemTag) { Destinations.EmptyState },
+        MenuItem("KeyValue", MIcons.DragHandle, Semantics.KeyValueItemTag) { Destinations.KeyValue },
+        MenuItem("List", MIcons.DensitySmall, Semantics.ListItemTag) { Destinations.List },
+        MenuItem("ListChoice", Icons.MenuHamburger, Semantics.ListChoiceItemTag) { Destinations.ListChoice },
+        MenuItem("Loading", Icons.MenuMeatballs, Semantics.LoadingItemTag) { Destinations.Loading },
+        MenuItem("PillButton", MIcons.EditAttributes, Semantics.PillButtonItemTag) {
+            Destinations.PillButton
+        },
+        MenuItem("Progress Indicator", OMIcons.ToggleOff, Semantics.ProgressIndicatorItemTag) {
+            Destinations.LinearProgressIndicator
+        },
+        MenuItem("Radio", Icons.CircleFilled, Semantics.RadioItemTag) { Destinations.Radio },
+        MenuItem("Seat", Icons.Seat, Semantics.SeatItemTag) { Destinations.Seat },
+        MenuItem("Segmented Switch", MIcons.ToggleOn, Semantics.SegmentedSwitchItemTag) {
+            Destinations.SegmentedSwitch
+        },
+        MenuItem("Select Field", MIcons.MenuOpen, Semantics.SelectFieldItemTag) { Destinations.SelectField },
+        MenuItem("Slider", MIcons.LinearScale, Semantics.SliderItemTag) { Destinations.Slider },
+        MenuItem("Stepper", Icons.PlusCircle, Semantics.StepperItemTag) { Destinations.Stepper },
+        MenuItem("SurfaceCard", MIcons.Article, Semantics.SurfaceCardItemTag) { Destinations.SurfaceCard },
+        MenuItem("Switch", MIcons.ToggleOn, Semantics.SwitchItemTag) { Destinations.Switch },
+        MenuItem("Tabs", MIcons.Tab, Semantics.TabsItemTag) { Destinations.Tabs },
+        MenuItem("Tag", MIcons.LabelImportant, Semantics.TagItemTag) { Destinations.Tag },
+        MenuItem("Text Field", MIcons.Keyboard, Semantics.TextFieldItemTag) { Destinations.TextField },
+        MenuItem("Tile", MIcons.Crop169, Semantics.TileItemTag) { Destinations.Tile },
+        MenuItem("TileGroup", MIcons.ListAlt, Semantics.TileGroupItemTag) { Destinations.TileGroup },
+        MenuItem("Timeline", Icons.RouteTwoStops, Semantics.TimelineItemTag) { Destinations.Timeline },
+        MenuItem("Toast", MIcons.Announcement, Semantics.ToastItemTag) { Destinations.Toast },
+        MenuItem("TopAppBar", MIcons.WebAsset, Semantics.TopAppBarItemTag) { Destinations.TopAppBar },
     )
 
     Scaffold(
+        modifier = Modifier.testTag(Semantics.Tag),
         topBar = {
             TopAppBarLarge(
                 title = { Text("Orbit Compose Catalog") },
@@ -137,6 +150,8 @@ internal fun MainScreen(
             cardItems("Controls", controls)
         }
     }
+
+    ReportDrawn()
 }
 
 private fun LazyGridScope.cardItems(
@@ -156,7 +171,9 @@ private fun LazyGridScope.cardItems(
 @Composable
 private fun Item(menuItem: MenuItem) {
     SurfaceCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .testTag(menuItem.testTag)
+            .fillMaxWidth(),
         onClick = menuItem.onClick,
     ) {
         Row(

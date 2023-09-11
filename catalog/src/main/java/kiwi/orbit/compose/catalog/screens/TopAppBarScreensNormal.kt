@@ -16,8 +16,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.components.CustomPlaceholder
+import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
@@ -35,6 +37,7 @@ internal fun TopAppBarNormalScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.testTag(TopAppBarScreenSemantics.NormalSimpleScreenTag),
         topBar = {
             TopAppBar(
                 title = { Text("Simple") },

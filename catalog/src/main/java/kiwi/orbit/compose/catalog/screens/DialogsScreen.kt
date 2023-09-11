@@ -15,12 +15,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.kiwi.navigationcompose.typed.DialogResultEffect
 import com.kiwi.navigationcompose.typed.createRoutePattern
 import com.kiwi.navigationcompose.typed.navigate
 import kiwi.orbit.compose.catalog.Destinations
+import kiwi.orbit.compose.catalog.semantics.DialogScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
@@ -51,6 +54,7 @@ internal fun DialogsScreen(
     }
 
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Dialogs") },
@@ -90,11 +94,27 @@ private fun DialogsScreenInner(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ButtonSecondary(onClick = onShowOrbitDialog) { Text("Show Orbit Dialog") }
+        ButtonSecondary(
+            onClick = onShowOrbitDialog,
+            modifier = Modifier.testTag(DialogScreenSemantics.OrbitDialogButtonTag),
+            content = { Text("Show Orbit Dialog") },
+        )
         Separator(Modifier.padding(vertical = 16.dp))
-        ButtonSecondary(onClick = onShowMaterialDialog) { Text("Show M3 Dialog") }
-        ButtonSecondary(onClick = onShowMaterialTimePicker) { Text("Show M3 TimePicker") }
-        ButtonSecondary(onClick = onShowMaterialDatePicker) { Text("Show M3 DatePicker") }
+        ButtonSecondary(
+            onClick = onShowMaterialDialog,
+            modifier = Modifier.testTag(DialogScreenSemantics.M3DialogButtonTag),
+            content = { Text("Show M3 Dialog") },
+        )
+        ButtonSecondary(
+            onClick = onShowMaterialTimePicker,
+            modifier = Modifier.testTag(DialogScreenSemantics.M3TimePickerButtonTag),
+            content = { Text("Show M3 TimePicker") },
+        )
+        ButtonSecondary(
+            onClick = onShowMaterialDatePicker,
+            modifier = Modifier.testTag(DialogScreenSemantics.M3DatePickerButtonTag),
+            content = { Text("Show M3 DatePicker") },
+        )
         Text("Picked Time: $time")
         Text("Picked Date: $date")
     }

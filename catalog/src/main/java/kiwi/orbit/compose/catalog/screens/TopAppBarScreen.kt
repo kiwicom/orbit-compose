@@ -12,6 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -20,6 +21,8 @@ import com.kiwi.navigationcompose.typed.composable
 import com.kiwi.navigationcompose.typed.createRoutePattern
 import com.kiwi.navigationcompose.typed.navigate
 import com.kiwi.navigationcompose.typed.navigation
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -107,6 +110,7 @@ internal fun TopAppBarScreenInner(
     onSelect: (Destination) -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(title = { Text("TopAppBar") }, onNavigateUp = onNavigateUp)
         },
@@ -124,6 +128,7 @@ internal fun TopAppBarScreenInner(
             Text("Normal", style = OrbitTheme.typography.title3)
             ButtonSecondary(
                 onClick = { onSelect(TopAppBarDestination.Normal) },
+                modifier = Modifier.testTag(TopAppBarScreenSemantics.NormalSimpleButtonTag),
             ) {
                 Text("Simple")
             }
@@ -147,6 +152,7 @@ internal fun TopAppBarScreenInner(
             Text("Large", style = OrbitTheme.typography.title3)
             ButtonSecondary(
                 onClick = { onSelect(TopAppBarDestination.Large) },
+                modifier = Modifier.testTag(TopAppBarScreenSemantics.LargeSimpleButtonTag),
             ) {
                 Text("Simple")
             }

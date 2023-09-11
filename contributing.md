@@ -27,6 +27,7 @@ Our code review will focus on:
 - add catalog demonstration;
 - add entry into `component-status.yaml`;
 - add documentation to docs (component.mdx) including UI testing documentation; resolve the correct name using [the Orbit repo](https://github.com/kiwicom/orbit/tree/master/docs/src/documentation) and naming pattern using the dir name as a file name;
+- add baseline profile generating function to `BaselineProfileGenerator`; make sure the test uses all the code of the new component and is **stable**;
 
 ## Screenshot Testing
 

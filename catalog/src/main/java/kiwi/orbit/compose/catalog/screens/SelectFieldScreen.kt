@@ -17,8 +17,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.catalog.semantics.SelectFieldScreenSemantics
+import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.CountryFlag
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SelectField
@@ -29,6 +32,7 @@ import kotlinx.parcelize.Parcelize
 @Composable
 internal fun SelectFieldScreen(onNavigateUp: () -> Unit) {
     Scaffold(
+        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Select Field") },
@@ -78,7 +82,9 @@ private fun SelectFieldScreenInner() {
             placeholder = { Text("Select country") },
             onOptionSelect = { selected = it },
             label = { Text("Country") },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(SelectFieldScreenSemantics.CountrySelectFieldTag)
+                .fillMaxWidth(),
         ) { country ->
             CountryFlag(country.code, country.name)
             Spacer(Modifier.size(16.dp))
