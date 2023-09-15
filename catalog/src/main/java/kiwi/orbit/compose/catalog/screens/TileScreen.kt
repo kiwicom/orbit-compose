@@ -73,6 +73,7 @@ private fun TileScreenInner() {
             title = { Text("Title") },
             onClick = {},
             description = { Text("Description") },
+            backgroundColor = OrbitTheme.colors.info.subtle,
         )
         Tile(
             title = { Text("Title") },

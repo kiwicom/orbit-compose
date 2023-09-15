@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.CustomPlaceholder
@@ -30,6 +31,7 @@ public fun Tile(
     description: @Composable () -> Unit = {},
     trailingContent: @Composable RowScope.() -> Unit = { Icon(Icons.ChevronForward, null) },
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
 ) {
     TileGroup {
         Tile(
@@ -40,6 +42,7 @@ public fun Tile(
             description = description,
             trailingContent = trailingContent,
             interactionSource = interactionSource,
+            backgroundColor = backgroundColor,
         )
     }
 }
@@ -59,6 +62,7 @@ public fun Tile(
     modifier: Modifier = Modifier,
     trailingContent: @Composable RowScope.() -> Unit = { Icon(Icons.ChevronForward, null) },
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
     content: @Composable () -> Unit,
 ) {
     TileGroup {
@@ -68,6 +72,7 @@ public fun Tile(
             trailingContent = trailingContent,
             interactionSource = interactionSource,
             content = content,
+            backgroundColor = backgroundColor,
         )
     }
 }
@@ -89,6 +94,7 @@ internal fun TilePreview() {
             title = { Text("Title") },
             onClick = {},
             description = { Text("Description") },
+            backgroundColor = OrbitTheme.colors.info.subtle,
         )
         Tile(
             title = { Text("Title") },

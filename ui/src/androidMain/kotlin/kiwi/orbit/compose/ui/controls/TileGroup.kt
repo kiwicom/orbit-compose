@@ -13,6 +13,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
@@ -76,12 +77,14 @@ public fun TileGroupScope.Tile(
     icon: @Composable () -> Unit = {},
     description: @Composable () -> Unit = {},
     trailingContent: @Composable RowScope.() -> Unit = { Icon(Icons.ChevronForward, null) },
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     Tile(
         onClick = onClick,
         modifier = modifier,
         trailingContent = trailingContent,
+        backgroundColor = backgroundColor,
         interactionSource = interactionSource,
     ) {
         Row(
@@ -119,11 +122,13 @@ public fun TileGroupScope.Tile(
     modifier: Modifier = Modifier,
     trailingContent: @Composable RowScope.() -> Unit = { Icon(Icons.ChevronForward, null) },
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    backgroundColor: Color = OrbitTheme.colors.surface.main,
     content: @Composable () -> Unit,
 ) {
     Surface(
         onClick = onClick,
         modifier = modifier,
+        color = backgroundColor,
         interactionSource = interactionSource,
     ) {
         Layout(
