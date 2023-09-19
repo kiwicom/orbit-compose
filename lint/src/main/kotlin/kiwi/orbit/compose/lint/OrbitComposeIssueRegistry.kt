@@ -4,12 +4,14 @@ import com.android.tools.lint.client.api.IssueRegistry
 import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 import kiwi.orbit.compose.lint.detectors.MaterialDesignInsteadOrbitDesignDetector
+import kiwi.orbit.compose.lint.detectors.MaterialDialogWithOrbitButtonsDetector
 import kiwi.orbit.compose.lint.detectors.ScaffoldContentPaddingDetector
 
 @Suppress("UnstableApiUsage")
 class OrbitComposeIssueRegistry : IssueRegistry() {
     override val issues = listOf(
         MaterialDesignInsteadOrbitDesignDetector.ISSUE,
+        MaterialDialogWithOrbitButtonsDetector.ISSUE,
         ScaffoldContentPaddingDetector.ISSUE,
     )
 
