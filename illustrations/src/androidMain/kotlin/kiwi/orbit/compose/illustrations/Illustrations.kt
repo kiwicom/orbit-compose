@@ -103,6 +103,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_compass_travel_plan)
 
+    public val Damage: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_damage)
+
     public val DesktopSearch: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_desktop_search)
@@ -330,6 +334,10 @@ public object Illustrations {
     public val TransportTaxi: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_transport_taxi)
+
+    public val Wheelchair: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_wheelchair)
 
     public val WomanWithPhone: Painter
         @Composable
