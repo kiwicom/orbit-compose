@@ -15,10 +15,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.editableText
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.field.FieldContent
 import kiwi.orbit.compose.ui.controls.field.FieldLabel
 import kiwi.orbit.compose.ui.controls.field.FieldMessage
@@ -42,7 +48,15 @@ public fun ClickableField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    ColumnWithMinConstraints(modifier) {
+    val errorMessage = stringResource(R.string.orbit_field_default_error)
+    ColumnWithMinConstraints(
+        modifier.semantics(mergeDescendants = true) {
+            editableText = AnnotatedString(value)
+            if (error != null) {
+                error(errorMessage)
+            }
+        },
+    ) {
         if (label != null) {
             FieldLabel(label)
         }
