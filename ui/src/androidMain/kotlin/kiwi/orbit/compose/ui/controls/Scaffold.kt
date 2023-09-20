@@ -155,7 +155,7 @@ private fun ScaffoldLayout(
             ?.takeIf { it >= 0 } ?: 0
         val actionHeight = actionPlaceables.maxOfOrNull { it.height } ?: 0
 
-        // If there is fade, let's do not subtract it, we want content to be shown bellow it.
+        // If there is fade, let's do not subtract it, we want the content to be shown below it.
         val maxContentHeight = layoutHeight - topBarHeight - actionHeight + actionFadeHeight
         val contentConstraints = Constraints(maxHeight = maxContentHeight, maxWidth = layoutWidth)
 
