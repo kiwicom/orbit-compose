@@ -14,6 +14,10 @@ title: Android
 `Checkbox` accepts a `Boolean` state and a callback on its change.
 
 ```kotlin
+package test
+
+import androidx.compose.runtime.Composable
+
 @Composable
 fun Example() {
     Checkbox(

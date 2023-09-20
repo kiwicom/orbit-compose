@@ -25,7 +25,7 @@ This library allows developers to implement Orbit in a project
 using [Jetpack Compose](https://developer.android.com/jetpack/compose) for Android.
 
 Orbit Compose builds upon Material 3 library. If you need an integration with Material 2, see
-[Theming chapter](https://github.com/kiwicom/orbit-compose/blob/main/docs/02-foundation/04-color/theming.mdx).
+[Theming chapter](https://github.com/kiwicom/orbit-compose/blob/main/docs/02-foundation/04-color/theming.md).
 
 ## Setup
 
