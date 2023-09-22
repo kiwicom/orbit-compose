@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -35,10 +36,10 @@ public fun ButtonLinkPrimary(
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
+        modifier = modifier.fillMaxWidth(),
         onClick = onClick,
         backgroundColor = Color.Transparent,
         interactionSource = interactionSource,
-        modifier = modifier,
         contentColor = OrbitTheme.colors.primary.normal,
         content = content,
     )
@@ -79,10 +80,10 @@ public fun ButtonLinkSecondary(
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
+        modifier = modifier.fillMaxWidth(),
         onClick = onClick,
         backgroundColor = Color.Transparent,
         interactionSource = interactionSource,
-        modifier = modifier,
         contentColor = OrbitTheme.colors.content.normal,
         content = content,
     )
@@ -123,10 +124,10 @@ public fun ButtonLinkCritical(
     content: @Composable RowScope.() -> Unit,
 ) {
     ButtonLargePrimitive(
+        modifier = modifier.fillMaxWidth(),
         onClick = onClick,
         backgroundColor = Color.Transparent,
         interactionSource = interactionSource,
-        modifier = modifier,
         contentColor = OrbitTheme.colors.critical.normal,
         content = content,
     )
@@ -168,10 +169,12 @@ private fun ButtonTextLink(
         Text(
             text = text,
             style = OrbitTheme.typography.bodyNormalMedium,
+            lineHeight = 32.sp,
             modifier = modifier
+                .padding()
                 .expand(
                     horizontal = ButtonDefaults.ButtonSmallHorizontalPadding,
-                    vertical = ButtonDefaults.ButtonSmallVerticalPadding,
+                    vertical = ButtonTextLinkVerticalPadding,
                 )
                 .clip(OrbitTheme.shapes.normal)
                 .clickable(
@@ -182,20 +185,21 @@ private fun ButtonTextLink(
                 )
                 .padding(
                     horizontal = ButtonDefaults.ButtonSmallHorizontalPadding,
-                    vertical = ButtonDefaults.ButtonSmallVerticalPadding,
+                    vertical = ButtonTextLinkVerticalPadding,
                 ),
         )
     }
 }
 
+private val ButtonTextLinkVerticalPadding = 2.dp
+
 @OrbitPreviews
 @Composable
 internal fun ButtonLinkPreview() {
     Preview {
-        val mW = Modifier.fillMaxWidth()
-        ButtonLinkPrimary({}, mW) { Text("Action") }
-        ButtonLinkSecondary({}, mW) { Text("Action") }
-        ButtonLinkCritical({}, mW) { Text("Action") }
+        ButtonLinkPrimary({}) { Text("Action") }
+        ButtonLinkSecondary({}) { Text("Action") }
+        ButtonLinkCritical({}) { Text("Action") }
     }
 }
 

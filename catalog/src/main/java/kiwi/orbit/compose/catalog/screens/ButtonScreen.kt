@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -193,7 +194,7 @@ private fun ButtonLinkScreenInner() {
                 Text(
                     text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam sit amet magna in magna gravida vehicula. Nam quis nulla. Nam sed tellus id magna elementum tincidunt.",
                 )
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.height(4.dp))
                 ButtonTextLinkPrimary("Translate", onClick = {})
             }
         }
@@ -220,6 +221,16 @@ private fun ButtonScreenPreview() {
     AppTheme {
         Surface {
             ButtonScreenInner()
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun ButtonLinkScreenPreview() {
+    AppTheme {
+        Surface {
+            ButtonLinkScreenInner()
         }
     }
 }
