@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.toolingGraphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.LayoutModifier
@@ -43,6 +44,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.foundation.applyEmphasis
 import kiwi.orbit.compose.ui.layout.size
+import kotlin.math.roundToInt
 
 /**
  * Orbit Icon.
@@ -137,7 +139,8 @@ private data class DefaultSizeModifier(
         val size = defaultSize.roundToPx()
         val scaledConstraints = constraints.constrain(Constraints.fixed(size, size))
         val placeable = measurable.measure(scaledConstraints)
-        return layout(placeable.width, placeable.height) {
+        val baseline = (placeable.height * 0.75f).roundToInt()
+        return layout(placeable.width, placeable.height, mapOf(FirstBaseline to baseline)) {
             placeable.placeRelative(0, 0)
         }
     }
@@ -177,6 +180,15 @@ internal fun IconPreview() {
                 Icon(Icons.Cake, contentDescription = null, Modifier.size(22.dp))
                 Icon(Icons.Cake, contentDescription = null, Modifier.size(26.dp))
             }
+        }
+        Row {
+            Icon(Icons.Cake, contentDescription = null, Modifier.alignByBaseline())
+            Icon(Icons.Alert, contentDescription = null, Modifier.alignByBaseline())
+            Icon(Icons.Accommodation, contentDescription = null, Modifier.alignByBaseline())
+            Icon(Icons.Airplane, contentDescription = null, Modifier.alignByBaseline())
+            Text("Test", Modifier.alignByBaseline())
+            ButtonTextLinkPrimary(text = "Button", onClick = {}, Modifier.alignByBaseline())
+            Text("Out")
         }
     }
 }
