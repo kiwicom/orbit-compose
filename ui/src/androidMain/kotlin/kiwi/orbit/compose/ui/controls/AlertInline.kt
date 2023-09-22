@@ -128,20 +128,22 @@ private fun AlertInline(
             ProvideMergedTextStyle(OrbitTheme.typography.title5) {
                 if (icon != null) {
                     Icon(
-                        icon,
+                        painter = icon,
                         contentDescription = null,
-                        modifier = Modifier.padding(end = 8.dp),
+                        modifier = Modifier.padding(end = 8.dp).alignByBaseline(),
                         tint = OrbitTheme.colors.primary.normal,
                     )
                 } else {
                     Spacer(Modifier.width(4.dp))
                 }
-                Box(Modifier.weight(1f)) {
+                Box(Modifier.weight(1f).alignByBaseline()) {
                     title()
                 }
             }
             Spacer(Modifier.width(8.dp))
-            action()
+            Box(Modifier.alignByBaseline()) {
+                action()
+            }
         }
     }
 }
