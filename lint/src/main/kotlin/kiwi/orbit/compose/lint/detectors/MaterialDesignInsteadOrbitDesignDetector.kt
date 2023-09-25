@@ -10,10 +10,15 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.intellij.psi.PsiMember
 import com.intellij.psi.impl.source.PsiClassReferenceType
+import org.jetbrains.kotlin.psi.KtCallExpression
+import org.jetbrains.kotlin.psi.psiUtil.parents
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.USimpleNameReferenceExpression
+import org.jetbrains.uast.getContainingUClass
+import org.jetbrains.uast.toUElement
+import org.jetbrains.uast.tryResolveNamed
 
 class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanner {
     override fun getApplicableUastTypes(): List<Class<out UElement>> {
@@ -29,9 +34,24 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
             override fun visitCallExpression(node: UCallExpression) {
                 val name = node.methodName ?: return
                 val wrapperName = node.resolve()?.containingClass?.qualifiedName ?: return
-                val packageName = wrapperName.substring(0, wrapperName.lastIndexOf("."))
+                val packageName = getPackageName(wrapperName)
                 val fqn = "$packageName.$name"
                 val (preferredName) = METHOD_NAMES.entries.firstOrNull { it.value.contains(fqn) } ?: return
+
+                // check the potential violation against our allowlist
+                val allowedEntry = METHOD_ALLOWLIST_IN_PARENT.entries.find { it.key.contains(fqn) }
+                if (allowedEntry != null) {
+                    val parentExpression = node.sourcePsi?.parents?.find { it is KtCallExpression }
+                    val resolved = parentExpression.toUElement()?.tryResolveNamed()
+                    val parentName = resolved?.name
+                    val parentWrapper = resolved.toUElement()?.getContainingUClass()?.qualifiedName ?: ""
+                    val parentPackage = getPackageName(parentWrapper)
+                    val parentFqn = "$parentPackage.$parentName"
+                    if (allowedEntry.value.find { parentFqn.contains(it) } != null) {
+                        return
+                    }
+                }
+
                 reportIssue(context, node, "$packageName.$name", preferredName)
             }
 
@@ -63,6 +83,17 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
             implementation = Implementation(
                 MaterialDesignInsteadOrbitDesignDetector::class.java,
                 Scope.JAVA_FILE_SCOPE,
+            ),
+        )
+
+        private val METHOD_ALLOWLIST_IN_PARENT = mapOf(
+            "androidx.compose.material.TextButton" to setOf(
+                "androidx.compose.material.AlertDialog",
+                "androidx.compose.material3.AlertDialog",
+            ),
+            "androidx.compose.material3.TextButton" to setOf(
+                "androidx.compose.material.AlertDialog",
+                "androidx.compose.material3.AlertDialog",
             ),
         )
 
@@ -190,6 +221,10 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 ISSUE, node, context.getLocation(node),
                 "Using $name instead of $preferredName",
             )
+        }
+
+        private fun getPackageName(fullyQualifiedName: String): String {
+            return fullyQualifiedName.substring(0, fullyQualifiedName.lastIndexOf("."))
         }
     }
 }
