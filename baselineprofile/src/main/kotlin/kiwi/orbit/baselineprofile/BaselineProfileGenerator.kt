@@ -78,6 +78,7 @@ internal class BaselineProfileGenerator {
             profileSubScreen(MainScreenSemantics.CheckboxItemTag)
             profileSubScreen(MainScreenSemantics.ChoiceTileItemTag)
             profileSubScreen(MainScreenSemantics.CollapseItemTag)
+            profileSubScreen(MainScreenSemantics.CouponItemTag)
             profileSubScreen(MainScreenSemantics.DialogItemTag) {
                 device.findObject(By.res(DialogScreenSemantics.OrbitDialogButtonTag))
                     .clickAndWait(Until.newWindow(), TIMEOUT)

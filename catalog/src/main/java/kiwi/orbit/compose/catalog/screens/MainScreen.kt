@@ -94,6 +94,7 @@ internal fun MainScreen(
         MenuItem("Checkbox", MIcons.CheckBox, Semantics.CheckboxItemTag) { Destinations.Checkbox },
         MenuItem("Choice Tile", MIcons.Ballot, Semantics.ChoiceTileItemTag) { Destinations.ChoiceTile },
         MenuItem("Collapse", Icons.ChevronDown, Semantics.CollapseItemTag) { Destinations.Collapse },
+        MenuItem("Coupon", Icons.PromoCode, Semantics.CouponItemTag) { Destinations.Coupon },
         MenuItem("Dialog", Icons.Chat, Semantics.DialogItemTag) { Destinations.Dialog },
         MenuItem("EmptyState", MIcons.SignalWifiOff, Semantics.EmptyStateItemTag) { Destinations.EmptyState },
         MenuItem("KeyValue", MIcons.DragHandle, Semantics.KeyValueItemTag) { Destinations.KeyValue },

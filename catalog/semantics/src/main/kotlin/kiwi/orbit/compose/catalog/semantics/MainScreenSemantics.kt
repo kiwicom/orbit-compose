@@ -16,6 +16,7 @@ object MainScreenSemantics {
     const val CheckboxItemTag = "main_screen_checkbox_item"
     const val ChoiceTileItemTag = "main_screen_choice_tile_item"
     const val CollapseItemTag = "main_screen_collapse_item"
+    const val CouponItemTag = "main_screen_coupon_item"
     const val DialogItemTag = "main_screen_dialog_item"
     const val EmptyStateItemTag = "main_screen_empty_state_item"
     const val KeyValueItemTag = "main_screen_key_value_item"
