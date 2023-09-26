@@ -14,7 +14,6 @@ import java.io.File
 import org.junit.Assert
 import org.junit.Test
 
-@Suppress("UnstableApiUsage")
 class MaterialDesignInsteadOrbitDesignDetectorTest {
     @Test
     fun testDetector() {
@@ -25,9 +24,11 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 import androidx.compose.material.contentColorFor
                 import androidx.compose.material.Text
                 import androidx.compose.material.icons.Icons
+                import androidx.compose.material3.AlertDialog
                 import androidx.compose.material3.Card as Card3
                 import androidx.compose.material3.contentColorFor as contentColorFor3
                 import androidx.compose.material3.Text as Text3
+                import androidx.compose.material3.TextButton
                 import androidx.compose.material3.Divider
                 import androidx.compose.material3.LocalTextStyle
                 fun Test() {
@@ -43,7 +44,9 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                         LocalTextStyle.current
                         LocalTextStyle
                         LocalTextStyle.provides()
-                    }
+                        AlertDialog(confirmButton = { TextButton("test") })
+                    } 
+                    AlertDialog(confirmButton = { TextButton("test") })
                 }
             """.trimIndent(),
         )
@@ -52,6 +55,7 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 package androidx.compose.material
                 fun Card(content: () -> Unit) {}
                 fun Text(content: () -> Unit) {}
+                fun TextButton(content: String) {}
                 fun contentColorFor(backgroundColor: Color): Color = TODO()
             """.trimIndent(),
         )
@@ -60,7 +64,12 @@ class MaterialDesignInsteadOrbitDesignDetectorTest {
                 package androidx.compose.material3
                 fun Card(content: () -> Unit) {}
                 fun Text(content: () -> Unit) {}
+                fun TextButton(content: String) {}
                 fun Divider() {}
+                fun AlertDialog(
+                    confirmButton: () -> Unit,
+                    dismissButton: (() -> Unit)? = null,
+                ) {}
                 fun contentColorFor(backgroundColor: Color): Color = TODO()
                 @Stable
                 sealed class CompositionLocal<T> constructor(defaultFactory: () -> T) {
