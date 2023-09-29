@@ -10,11 +10,13 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -80,12 +82,15 @@ private fun FieldErrorInfoMessage(
     error: @Composable () -> Unit,
     info: @Composable () -> Unit,
 ) {
+    Snapshot.global {  }
     val state = when {
         showError -> Message.Error(error)
         showInfo -> Message.Info(info)
         else -> null
     }
+    Log.d("HRACH", "State $state")
     AnimatedContent(
+        modifier = Modifier.fillMaxWidth(),
         targetState = state,
         transitionSpec = {
             if (targetState == null || initialState == null) {
