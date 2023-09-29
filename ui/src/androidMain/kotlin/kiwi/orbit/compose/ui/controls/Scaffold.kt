@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
@@ -152,7 +153,7 @@ private fun ScaffoldLayout(
 
         // Calculate the space for content and toast.
         val actionFadeHeight = actionPlaceables.firstOrNull()?.get(ActionFadeLine)
-            ?.takeIf { it >= 0 } ?: 0
+            ?.takeIf { it != AlignmentLine.Unspecified } ?: 0
         val actionHeight = actionPlaceables.maxOfOrNull { it.height } ?: 0
 
         // If there is fade, let's do not subtract it, we want the content to be shown below it.
