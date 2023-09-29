@@ -16,7 +16,6 @@ import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.USimpleNameReferenceExpression
-import org.jetbrains.uast.getContainingUClass
 import org.jetbrains.uast.toUElement
 import org.jetbrains.uast.tryResolveNamed
 
@@ -33,8 +32,7 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
         return object : UElementHandler() {
             override fun visitCallExpression(node: UCallExpression) {
                 val name = node.methodName ?: return
-                val wrapperName = node.resolve()?.containingClass?.qualifiedName ?: return
-                val packageName = getPackageName(wrapperName)
+                val packageName = node.resolve()?.getPackageName()?: return
                 val fqn = "$packageName.$name"
                 val (preferredName) = METHOD_NAMES.entries.firstOrNull { it.value.contains(fqn) } ?: return
 
@@ -44,8 +42,7 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                     val parentExpression = node.sourcePsi?.parents?.find { it is KtCallExpression }
                     val resolved = parentExpression.toUElement()?.tryResolveNamed()
                     val parentName = resolved?.name
-                    val parentWrapper = resolved.toUElement()?.getContainingUClass()?.qualifiedName ?: ""
-                    val parentPackage = getPackageName(parentWrapper)
+                    val parentPackage = resolved?.getPackageName() ?: ""
                     val parentFqn = "$parentPackage.$parentName"
                     if (allowedEntry.value.find { parentFqn.contains(it) } != null) {
                         return
@@ -221,10 +218,6 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
                 ISSUE, node, context.getLocation(node),
                 "Using $name instead of $preferredName",
             )
-        }
-
-        private fun getPackageName(fullyQualifiedName: String): String {
-            return fullyQualifiedName.substring(0, fullyQualifiedName.lastIndexOf("."))
         }
     }
 }

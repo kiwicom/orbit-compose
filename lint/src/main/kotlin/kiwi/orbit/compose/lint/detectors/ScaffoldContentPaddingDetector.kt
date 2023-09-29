@@ -25,7 +25,6 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.android.tools.lint.detector.api.computeKotlinArgumentMapping
-import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiMethod
 import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
@@ -85,10 +84,5 @@ class ScaffoldContentPaddingDetector :
                 )
             }
         }
-    }
-
-    private fun PsiMethod.isInPackageName(packageName: String): Boolean {
-        val actual = (containingFile as? PsiJavaFile)?.packageName
-        return packageName == actual
     }
 }

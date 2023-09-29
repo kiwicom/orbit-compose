@@ -8,14 +8,10 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
-import com.android.tools.lint.detector.api.computeKotlinArgumentMapping
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiJavaFile
-import com.intellij.psi.PsiMember
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UBlockExpression
 import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.skipParenthesizedExprDown
 import org.jetbrains.uast.toUElement
 import org.jetbrains.uast.tryResolveNamed
@@ -75,7 +71,6 @@ class DialogButtonsInContentSlotDetector : Detector(), SourceCodeScanner {
                 )
             }
         }
-
     }
 
     private fun PsiElement.findAllBlockExpressionsInHierarchy(): List<UBlockExpression> {
@@ -86,27 +81,5 @@ class DialogButtonsInContentSlotDetector : Detector(), SourceCodeScanner {
         expressions.addAll(children.flatMap { it.findAllBlockExpressionsInHierarchy() })
 
         return expressions
-    }
-
-    private fun PsiMethod.getArgument(
-        node: UCallExpression,
-        argumentName: String,
-    ): ULambdaExpression? = computeKotlinArgumentMapping(node, this)
-        .orEmpty()
-        .filter { (_, parameter) ->
-            parameter.name == argumentName
-        }
-        .keys
-        .filterIsInstance<ULambdaExpression>()
-        .firstOrNull()
-
-    private fun PsiMethod.isInPackageName(packageName: String): Boolean {
-        val actual = (containingFile as? PsiJavaFile)?.packageName
-        return packageName == actual
-    }
-
-    private fun PsiElement.getPackageName(): String? = when (this) {
-        is PsiMember -> this.containingClass?.qualifiedName?.let { it.substring(0, it.lastIndexOf(".")) }
-        else -> null
     }
 }

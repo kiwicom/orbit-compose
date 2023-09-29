@@ -16,13 +16,44 @@
 
 package kiwi.orbit.compose.lint.detectors
 
+import com.android.tools.lint.detector.api.computeKotlinArgumentMapping
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiJavaFile
+import com.intellij.psi.PsiMember
+import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.psi.KtLambdaExpression
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
 import org.jetbrains.kotlin.psi.psiUtil.isAncestor
+import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.toUElement
+
+internal fun PsiMethod.isInPackageName(packageName: String): Boolean {
+    val actual = (containingFile as? PsiJavaFile)?.packageName
+    return packageName == actual
+}
+
+internal fun PsiElement.getPackageName(): String? = when (this) {
+    is PsiMember -> this.containingClass?.qualifiedName?.let { it.substring(0, it.lastIndexOf(".")) }
+    else -> null
+}
+
+/**
+ * Get arguments of a method. Useful for retrieving Compose Lambda expression used as arguments.
+ */
+internal fun PsiMethod.getArgument(
+    node: UCallExpression,
+    argumentName: String,
+): ULambdaExpression? = computeKotlinArgumentMapping(node, this)
+    .orEmpty()
+    .filter { (_, parameter) ->
+        parameter.name == argumentName
+    }
+    .keys
+    .filterIsInstance<ULambdaExpression>()
+    .firstOrNull()
 
 /**
  * Returns a list of unreferenced parameters in [this]. If no parameters have been specified, but
