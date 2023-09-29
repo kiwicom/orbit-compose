@@ -36,6 +36,7 @@ import kiwi.orbit.compose.ui.controls.CircularProgressIndicatorPreview
 import kiwi.orbit.compose.ui.controls.ClickableFieldPreview
 import kiwi.orbit.compose.ui.controls.CollapsePreview
 import kiwi.orbit.compose.ui.controls.CountryFlagPreview
+import kiwi.orbit.compose.ui.controls.CouponPreview
 import kiwi.orbit.compose.ui.controls.DialogPreview
 import kiwi.orbit.compose.ui.controls.EmptyStatePreview
 import kiwi.orbit.compose.ui.controls.IconPreview
@@ -218,6 +219,11 @@ internal class ScreenshotTest {
                 CountryFlagPreview()
             }
         }
+    }
+
+    @Test
+    fun coupon() {
+        snapshot { CouponPreview() }
     }
 
     @Test

@@ -8,131 +8,134 @@ import kotlinx.serialization.Serializable
 
 sealed interface Destinations : Destination {
     @Serializable
-    object Main : Destinations
+    data object Main : Destinations
 
     @Serializable
-    object Colors : Destinations
+    data object Colors : Destinations
 
     @Serializable
-    object Icons : Destinations
+    data object Icons : Destinations
 
     @Serializable
-    object Illustrations : Destinations
+    data object Illustrations : Destinations
 
     @Serializable
-    object Typography : Destinations
+    data object Typography : Destinations
 
     @Serializable
-    object Alert : Destinations
+    data object Alert : Destinations
 
     @Serializable
-    object Badge : Destinations
+    data object Badge : Destinations
 
     @Serializable
-    object BadgeList : Destinations
+    data object BadgeList : Destinations
 
     @Serializable
-    object Button : Destinations
+    data object Button : Destinations
 
     @Serializable
-    object Card : Destinations
+    data object Card : Destinations
 
     @Serializable
-    object Checkbox : Destinations
+    data object Checkbox : Destinations
 
     @Serializable
-    object ChoiceTile : Destinations
+    data object ChoiceTile : Destinations
 
     @Serializable
-    object Collapse : Destinations
+    data object Collapse : Destinations
 
     @Serializable
-    object Dialog : Destinations
+    data object Coupon : Destinations
 
     @Serializable
-    object DialogMaterial : Destinations
+    data object Dialog : Destinations
 
     @Serializable
-    object DialogMaterialTimePicker : Destinations, ResultDestination<DialogMaterialTimePicker.Result> {
+    data object DialogMaterial : Destinations
+
+    @Serializable
+    data object DialogMaterialTimePicker : Destinations, ResultDestination<DialogMaterialTimePicker.Result> {
         @Serializable
         data class Result(val time: LocalTime)
     }
 
     @Serializable
-    object DialogMaterialDatePicker : Destinations, ResultDestination<DialogMaterialDatePicker.Result> {
+    data object DialogMaterialDatePicker : Destinations, ResultDestination<DialogMaterialDatePicker.Result> {
         @Serializable
         data class Result(val date: LocalDate)
     }
 
     @Serializable
-    object DialogOrbit : Destinations
+    data object DialogOrbit : Destinations
 
     @Serializable
-    object EmptyState : Destinations
+    data object EmptyState : Destinations
 
     @Serializable
-    object KeyValue : Destinations
+    data object KeyValue : Destinations
 
     @Serializable
-    object LinearProgressIndicator : Destination
+    data object LinearProgressIndicator : Destination
 
     @Serializable
-    object List : Destinations
+    data object List : Destinations
 
     @Serializable
-    object ListChoice : Destinations
+    data object ListChoice : Destinations
 
     @Serializable
-    object Loading : Destinations
+    data object Loading : Destinations
 
     @Serializable
-    object Radio : Destinations
+    data object Radio : Destinations
 
     @Serializable
-    object PillButton : Destinations
+    data object PillButton : Destinations
 
     @Serializable
-    object Seat : Destinations
+    data object Seat : Destinations
 
     @Serializable
-    object SegmentedSwitch : Destinations
+    data object SegmentedSwitch : Destinations
 
     @Serializable
-    object SelectField : Destinations
+    data object SelectField : Destinations
 
     @Serializable
-    object Slider : Destinations
+    data object Slider : Destinations
 
     @Serializable
-    object Stepper : Destinations
+    data object Stepper : Destinations
 
     @Serializable
-    object SurfaceCard : Destinations
+    data object SurfaceCard : Destinations
 
     @Serializable
-    object Switch : Destinations
+    data object Switch : Destinations
 
     @Serializable
-    object Tabs : Destinations
+    data object Tabs : Destinations
 
     @Serializable
-    object Tag : Destinations
+    data object Tag : Destinations
 
     @Serializable
-    object TextField : Destinations
+    data object TextField : Destinations
 
     @Serializable
-    object Tile : Destinations
+    data object Tile : Destinations
 
     @Serializable
-    object TileGroup : Destinations
+    data object TileGroup : Destinations
 
     @Serializable
-    object Timeline : Destinations
+    data object Timeline : Destinations
 
     @Serializable
-    object Toast : Destinations
+    data object Toast : Destinations
 
     @Serializable
-    object TopAppBar : Destinations
+    data object TopAppBar : Destinations
 }
