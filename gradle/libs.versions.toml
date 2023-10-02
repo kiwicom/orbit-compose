@@ -9,7 +9,7 @@ kotlin-dokka = "1.9.0"
 
 kotlin-serialization = "1.6.0"
 android-sdkCommon = "31.1.1"
-android-lint = "31.1.1"
+android-lint = "31.1.2"
 androidx-activityCompose = "1.7.2"
 androidx-activityComposeCatalog = "1.7.2"
 androidx-core = "1.12.0"
