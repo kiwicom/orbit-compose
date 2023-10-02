@@ -16,6 +16,15 @@
       ],
     },
     {
+      "groupName": "AGP",
+      "matchPackagePrefixes": [
+        "com.android.library",
+        "com.android.test",
+        "com.android.tools",
+        "com.android.tools.lint",
+      ],
+    },
+    {
       "groupName": "AndroidX",
       "matchPackagePrefixes": [
         "androidx",
