@@ -14,7 +14,7 @@ plugins {
     kotlin("multiplatform") version "1.9.10" apply false
     kotlin("plugin.serialization") version "1.9.10" apply false
     id("com.android.library") version "8.1.1" apply false
-    id("com.android.test") version "8.1.1" apply false
+    id("com.android.test") version "8.1.2" apply false
     id("androidx.baselineprofile") version "1.2.0-rc01" apply false
     id("app.cash.paparazzi") version "1.3.1" apply false
     id("com.google.firebase.appdistribution") version "4.0.0" apply false
