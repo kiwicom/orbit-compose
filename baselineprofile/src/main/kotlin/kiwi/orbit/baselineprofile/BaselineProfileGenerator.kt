@@ -50,10 +50,13 @@ internal class BaselineProfileGenerator {
 
     @Test
     fun generate() {
+        // The rule tries to iterate several times to get stable list of classes. This is generally not needed
+        // as the flow remains the same regardless how many times it is ran. More iterations are also more
+        // likely to fail.
         rule.collect(
             packageName = "kiwi.orbit.compose.catalog",
-            maxIterations = 5,
-            stableIterations = 2,
+            maxIterations = 1,
+            stableIterations = 1,
         ) {
             pressHome()
             startActivityAndWait()
