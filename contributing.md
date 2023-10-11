@@ -54,9 +54,10 @@ The workflow also updates the next "drafted" release with the proper version tit
 
 ### Releasing the next version
 
-1. Edit the drafted release at https://github.com/kiwicom/orbit-compose/releases.
-2. Make edits in the description — if needed.
-3. Press "Publish release" button.
+1. Manually run workflow [Baseline Profile Updater](https://github.com/kiwicom/orbit-compose/actions/workflows/baseline-profile-updater.yml) and wait for it to finish.
+2. Edit the drafted release at https://github.com/kiwicom/orbit-compose/releases.
+3. Make edits in the description — if needed.
+4. Press "Publish release" button.
 
 This action will:
 - publish the GitHub release,

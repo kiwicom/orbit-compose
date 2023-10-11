@@ -1,0 +1,53 @@
+name: Baseline Profile Updater
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: 'true'
+
+      - name: Set up JDK 18
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 18
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Generate baseline profiles
+        run: |
+          ./gradlew :catalog:generateReleaseBaselineProfile :icons:generateBaselineProfile :illustrations:generateBaselineProfile :ui:generateBaselineProfile \
+            -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=baselineprofile
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --exit-code; then
+            echo "changes_exist=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes_exist=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push files
+        if: ${{ steps.check_changes.outputs.changes_exist == 'true' }}
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.GH_ACTION_DEPLOY_PRIVATE_KEY }}"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "Baseline and startup profiles generated."
+          git push git@github.com:$GITHUB_REPOSITORY.git
