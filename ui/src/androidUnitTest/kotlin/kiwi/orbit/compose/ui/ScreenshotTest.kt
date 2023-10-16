@@ -78,7 +78,6 @@ import org.junit.Rule
 import org.junit.Test
 
 internal class ScreenshotTest {
-
     @Before
     fun setUp() {
         mockkStatic(SdkExtensions::class)

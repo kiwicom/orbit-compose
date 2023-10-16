@@ -131,7 +131,9 @@ private fun AlertScreenInlineInner() {
         AlertsInlineInner(suppressed = true, withIcon = false)
         AlertInlineInfo(
             modifier = Modifier.padding(16.dp),
-            title = { Text("Informational message which is longer than expected. We should try avoid such a long copy.") },
+            title = {
+                Text("Informational message which is longer than expected. We should try avoid such a long copy.")
+            },
             action = { ButtonTextLinkPrimary("Primary", onClick = {}) },
         )
     }
@@ -145,7 +147,10 @@ private fun AlertsInner(suppressed: Boolean) {
             content = {
                 Text(
                     buildAnnotatedString {
-                        append("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID. ")
+                        append(
+                            "To avoid boarding complications, your entire name must be entered exactly" +
+                                " as it appears in your passport/ID. ",
+                        )
                         withStyle(
                             SpanStyle(
                                 color = OrbitTheme.colors.content.highlight,
@@ -190,7 +195,12 @@ private fun AlertsInner(suppressed: Boolean) {
 
         AlertWarning(
             title = { Text("Visa requirements check") },
-            content = { Text("The requirements found here are for reference purposes only. Contact the embassy or your foreign ministry for more information.") },
+            content = {
+                Text(
+                    "The requirements found here are for reference purposes only. " +
+                        "Contact the embassy or your foreign ministry for more information.",
+                )
+            },
             actions = {
                 ButtonPrimary(onClick = {}) {
                     Text("Check requirements")
@@ -206,7 +216,12 @@ private fun AlertsInner(suppressed: Boolean) {
 
         AlertCritical(
             title = { Text("No results loaded") },
-            content = { Text("There was an error while processing your request. Refresh the page to load the results.") },
+            content = {
+                Text(
+                    "There was an error while processing your request. " +
+                        "Refresh the page to load the results.",
+                )
+            },
             actions = {
                 ButtonPrimary(onClick = {}) {
                     Text("Refresh page")
@@ -224,7 +239,12 @@ private fun AlertsInner(suppressed: Boolean) {
 
         AlertInfo(
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must " +
+                        "be entered exactly as it appears in your passport/ID.",
+                )
+            },
             actions = {
                 ButtonPrimary(onClick = {}) {
                     Text("More info")
@@ -237,7 +257,12 @@ private fun AlertsInner(suppressed: Boolean) {
 
         AlertInfo(
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must " +
+                        "be entered exactly as it appears in your passport/ID.",
+                )
+            },
             actions = {
                 ButtonSecondary(onClick = {}) {
                     Text("Mark as checked")
@@ -250,7 +275,12 @@ private fun AlertsInner(suppressed: Boolean) {
 
         AlertInfo(
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must " +
+                        "be entered exactly as it appears in your passport/ID.",
+                )
+            },
             suppressed = suppressed,
         )
 
@@ -259,7 +289,12 @@ private fun AlertsInner(suppressed: Boolean) {
         AlertInfo(
             icon = null,
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must be " +
+                        "entered exactly as it appears in your passport/ID.",
+                )
+            },
             actions = {
                 ButtonPrimary(onClick = {}) {
                     Text("More info")
@@ -277,7 +312,10 @@ private fun AlertsInner(suppressed: Boolean) {
             icon = null,
             title = { Text("Re-check your credentials") },
             content = {
-                Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.")
+                Text(
+                    "To avoid boarding complications, your entire name must be " +
+                        "entered exactly as it appears in your passport/ID.",
+                )
                 Text("Alternatively, provide a second paragraph.")
             },
             actions = {
@@ -293,7 +331,12 @@ private fun AlertsInner(suppressed: Boolean) {
         AlertInfo(
             icon = null,
             title = { Text("Re-check your credentials") },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must be " +
+                        "entered exactly as it appears in your passport/ID.",
+                )
+            },
             suppressed = suppressed,
         )
 
@@ -311,7 +354,12 @@ private fun AlertsInner(suppressed: Boolean) {
         AlertInfo(
             icon = null,
             title = { },
-            content = { Text("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID.") },
+            content = {
+                Text(
+                    "To avoid boarding complications, your entire name must be " +
+                        "entered exactly as it appears in your passport/ID.",
+                )
+            },
             suppressed = suppressed,
         )
     }

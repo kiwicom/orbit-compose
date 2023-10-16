@@ -26,7 +26,12 @@ private fun DialogsOrbitDialog(
     Dialog(
         onDismissRequest = onClose,
         title = { Text("Kiwi.com would like to send you notifications.") },
-        text = { Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.") },
+        text = {
+            Text(
+                "Notifications may include alerts, sounds, and icon badges. " +
+                    "These can be configured in Settings.",
+            )
+        },
         buttons = {
             ButtonPrimary(
                 onClick = onClose,

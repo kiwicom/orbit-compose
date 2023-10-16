@@ -30,7 +30,6 @@ import org.junit.Test
  **/
 @LargeTest
 internal class StartupBenchmarks {
-
     @get:Rule
     val rule = MacrobenchmarkRule()
 

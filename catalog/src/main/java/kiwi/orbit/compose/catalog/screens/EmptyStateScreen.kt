@@ -48,7 +48,12 @@ private fun EmptyStateScreenInner(contentPadding: PaddingValues) {
     ) {
         EmptyState(
             illustration = { Image(Illustrations.NoResults, contentDescription = null) },
-            title = { Text(text = "Sorry, we couldn't find that connection. And let's make the title a bit longer, so we can see the text wrapping.") },
+            title = {
+                Text(
+                    text = "Sorry, we couldn't find that connection. " +
+                        "And let's make the title a bit longer, so we can see the text wrapping.",
+                )
+            },
         )
         Separator(Modifier.padding(vertical = 8.dp))
         EmptyState(

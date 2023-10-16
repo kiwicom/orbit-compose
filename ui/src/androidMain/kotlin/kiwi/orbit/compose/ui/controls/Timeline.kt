@@ -356,7 +356,12 @@ internal fun TimelinePreview() {
             TimelineItem(
                 status = TimelineItemStatus.PastSuccess,
                 title = { Text("Check-in details") },
-                description = { Text("To check you in, we need your passport/ID or some other details at least 3h before departure.") },
+                description = {
+                    Text(
+                        "To check you in, we need your passport/ID or some other details" +
+                            " at least 3h before departure.",
+                    )
+                },
             )
             TimelineItem(
                 status = TimelineItemStatus.PastSuccess,
@@ -371,7 +376,12 @@ internal fun TimelinePreview() {
             TimelineItem(
                 status = TimelineItemStatus.Future,
                 title = { Text("Boarding passes ready") },
-                description = { Text("You'll find your boarding passes here as soon as they’re ready at least 2h before your departure.") },
+                description = {
+                    Text(
+                        "You'll find your boarding passes here as soon as they’re ready" +
+                            " at least 2h before your departure.",
+                    )
+                },
             )
         }
     }
