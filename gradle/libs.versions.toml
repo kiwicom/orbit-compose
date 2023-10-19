@@ -33,7 +33,7 @@ android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "and
 android-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-lint" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-activityComposeCatalog = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityComposeCatalog" }
-androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version = "1.2.0-rc02" }
+androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version = "1.2.0" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
 androidx-customView = { module = "androidx.customview:customview", version = "1.1.0" }
