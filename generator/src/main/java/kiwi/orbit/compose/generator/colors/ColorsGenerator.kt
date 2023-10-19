@@ -11,7 +11,6 @@ import java.net.URL
 import java.nio.file.Path
 import kotlin.math.roundToInt
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import net.thisptr.jackson.jq.BuiltinFunctionLoader
 import net.thisptr.jackson.jq.JsonQuery
@@ -55,8 +54,8 @@ class ColorsGenerator {
     private fun downloadColors(
         figmaToken: String,
     ): List<Pair<String, ColorDefinition.Color>> {
-        val url =
-            "https://api.figma.com/v1/files/2rTHlBKKR6IWGeP6Dw6qbP/nodes?ids=2002%3A506,2002%3A448,2002%3A350,2002%3A767,2002%3A634,2002%3A709,2002%3A566,2002%3A836,2002%3A351"
+        val url = "https://api.figma.com/v1/files/2rTHlBKKR6IWGeP6Dw6qbP/nodes?" +
+            "ids=2002%3A506,2002%3A448,2002%3A350,2002%3A767,2002%3A634,2002%3A709,2002%3A566,2002%3A836,2002%3A351"
         val fullJson = URL(url)
             .openConnection()
             .apply {
@@ -72,7 +71,8 @@ class ColorsGenerator {
         rootScope.moduleLoader = BuiltinModuleLoader.getInstance()
         val childScope = Scope.newChildScope(rootScope)
         val query = JsonQuery.compile(
-            "[.. | select(.children?[0].name?==\"Color\") | {name: .name, color: .children[0].fills[0].color, gradient: .children[0].fills[0].gradientStops}]",
+            "[.. | select(.children?[0].name?==\"Color\") " +
+                "| {name: .name, color: .children[0].fills[0].color, gradient: .children[0].fills[0].gradientStops}]",
             Versions.JQ_1_6,
         )
         val out = arrayListOf<JsonNode>()

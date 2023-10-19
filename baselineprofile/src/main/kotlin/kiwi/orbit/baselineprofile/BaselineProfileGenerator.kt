@@ -40,7 +40,6 @@ import org.junit.Test
  **/
 @LargeTest
 internal class BaselineProfileGenerator {
-
     private companion object {
         const val TIMEOUT = 5000L
     }
@@ -83,16 +82,20 @@ internal class BaselineProfileGenerator {
             profileSubScreen(MainScreenSemantics.CollapseItemTag)
             profileSubScreen(MainScreenSemantics.CouponItemTag)
             profileSubScreen(MainScreenSemantics.DialogItemTag) {
-                device.findObject(By.res(DialogScreenSemantics.OrbitDialogButtonTag))
+                device
+                    .findObject(By.res(DialogScreenSemantics.OrbitDialogButtonTag))
                     .clickAndWait(Until.newWindow(), TIMEOUT)
                 device.pressBack()
-                device.findObject(By.res(DialogScreenSemantics.M3DialogButtonTag))
+                device
+                    .findObject(By.res(DialogScreenSemantics.M3DialogButtonTag))
                     .clickAndWait(Until.newWindow(), TIMEOUT)
                 device.pressBack()
-                device.findObject(By.res(DialogScreenSemantics.M3TimePickerButtonTag))
+                device
+                    .findObject(By.res(DialogScreenSemantics.M3TimePickerButtonTag))
                     .clickAndWait(Until.newWindow(), TIMEOUT)
                 device.pressBack()
-                device.findObject(By.res(DialogScreenSemantics.M3DatePickerButtonTag))
+                device
+                    .findObject(By.res(DialogScreenSemantics.M3DatePickerButtonTag))
                     .clickAndWait(Until.newWindow(), TIMEOUT)
                 device.pressBack()
             }

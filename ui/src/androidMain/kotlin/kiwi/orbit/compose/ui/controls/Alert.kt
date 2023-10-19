@@ -297,7 +297,10 @@ internal fun AlertInfoPreview() {
             content = {
                 Text(
                     buildAnnotatedString {
-                        append("To avoid boarding complications, your entire name must be entered exactly as it appears in your passport/ID. ")
+                        append(
+                            "To avoid boarding complications, your entire name must be entered " +
+                                "exactly as it appears in your passport/ID. ",
+                        )
                         withStyle(
                             SpanStyle(
                                 color = OrbitTheme.colors.content.highlight,

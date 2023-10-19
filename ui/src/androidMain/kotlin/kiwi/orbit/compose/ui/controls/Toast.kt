@@ -53,9 +53,13 @@ public interface ToastData {
     public val animationDuration: StateFlow<Int?>
 
     public suspend fun run(accessibilityManager: AccessibilityManager?)
+
     public fun pause()
+
     public fun resume()
+
     public fun dismiss()
+
     public fun dismissed()
 }
 

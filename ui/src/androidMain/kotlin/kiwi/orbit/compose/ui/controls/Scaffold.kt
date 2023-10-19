@@ -106,6 +106,7 @@ private fun ScaffoldLayout(
                 }
 
             override fun calculateTopPadding(): Dp = topContentPadding
+
             override fun calculateRightPadding(layoutDirection: LayoutDirection): Dp =
                 when (layoutDirection) {
                     LayoutDirection.Ltr -> endContentPadding

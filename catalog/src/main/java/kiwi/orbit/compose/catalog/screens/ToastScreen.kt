@@ -100,7 +100,9 @@ private fun ToastScreenInner(
 
         ButtonSecondary(
             onClick = {
-                onToast("On mobile there’s always a fixed width to make the Toast stand out a bit more.") { Icons.AirplaneLanding }
+                onToast("On mobile there’s always a fixed width to make the Toast stand out a bit more.") {
+                    Icons.AirplaneLanding
+                }
             },
         ) { Text("Toast – long message 2") }
     }

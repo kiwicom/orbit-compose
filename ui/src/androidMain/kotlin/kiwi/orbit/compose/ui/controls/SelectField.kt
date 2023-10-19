@@ -94,7 +94,9 @@ public fun <T> SelectField(
                     .menuAnchor()
                     .fillMaxWidth(),
             )
-            OrbitElevations(neutralize = 3.dp) { // MenuTokens.ContainerElevation
+            OrbitElevations(
+                neutralize = 3.dp, // MenuTokens.ContainerElevation
+            ) {
                 ExposedDropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },

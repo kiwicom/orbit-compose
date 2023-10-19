@@ -57,7 +57,7 @@ jobs:
         if: ${{ failure() }}
         with:
           name: shots-results
-          path: ui/out/failures
+          path: ui/build/paparazzi/failures
       - name: Build Dokka HTML
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |

@@ -18,27 +18,22 @@ public data class Typography internal constructor(
      * Orbit Title1 text style.
      */
     val title1: TextStyle,
-
     /**
      * Orbit Title2 text style.
      */
     val title2: TextStyle,
-
     /**
      * Orbit Title3 text style.
      */
     val title3: TextStyle,
-
     /**
      * Orbit Title4 text style.
      */
     val title4: TextStyle,
-
     /**
      * Orbit Title5 text style.
      */
     val title5: TextStyle,
-
     /**
      * Orbit Title6 text style.
      *
@@ -46,22 +41,18 @@ public data class Typography internal constructor(
      * via [String.uppercase] function.
      */
     val title6: TextStyle,
-
     /**
      * Orbit BodyExtraLarge with Normal font-weight.
      */
     val bodyExtraLarge: TextStyle,
-
     /**
      * Orbit BodyLarge with Normal font-weight.
      */
     val bodyLarge: TextStyle,
-
     /**
      * Orbit BodyNormal with normal font-weight.
      */
     val bodyNormal: TextStyle,
-
     /**
      * Orbit BodySmall with normal font-weight.
      */

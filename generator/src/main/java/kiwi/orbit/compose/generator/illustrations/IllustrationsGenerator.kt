@@ -191,6 +191,7 @@ class IllustrationsGenerator {
     }
 
     private fun String.toSnakeCase(): String = replace(humps, "_").lowercase()
+
     private fun String.toTitleCase(): String = split("_")
         .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
 }

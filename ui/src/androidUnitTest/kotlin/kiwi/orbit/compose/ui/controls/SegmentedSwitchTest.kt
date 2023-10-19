@@ -14,7 +14,6 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 internal class SegmentedSwitchTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 

@@ -417,15 +417,14 @@ public fun rememberTopAppBarState(
     initialOffsetLimit: Float = -Float.MAX_VALUE,
     initialOffset: Float = 0f,
     initialContentOffset: Float = 0f,
-): TopAppBarState {
-    return rememberSaveable(saver = TopAppBarState.Saver) {
+): TopAppBarState =
+    rememberSaveable(saver = TopAppBarState.Saver) {
         TopAppBarState(
             initialOffsetLimit,
             initialOffset,
             initialContentOffset,
         )
     }
-}
 
 /**
 A state object that can be hoisted to control and observe the top app bar state. The state is
@@ -500,12 +499,8 @@ public class TopAppBarState(
      */
     public val overlappedFraction: Float
         get() = if (heightOffsetLimit != 0f) {
-            1 - (
-                (heightOffsetLimit - contentOffset).coerceIn(
-                    minimumValue = heightOffsetLimit,
-                    maximumValue = 0f,
-                ) / heightOffsetLimit
-                )
+            val visibleHeight = (heightOffsetLimit - contentOffset).coerceIn(heightOffsetLimit, 0f)
+            1 - (visibleHeight / heightOffsetLimit)
         } else {
             0f
         }

@@ -170,30 +170,26 @@ private class FieldContentMeasurePolicy(
     override fun IntrinsicMeasureScope.maxIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
         width: Int,
-    ): Int {
-        return intrinsicHeight(measurables, width, IntrinsicMeasurable::maxIntrinsicHeight)
-    }
+    ): Int =
+        intrinsicHeight(measurables, width, IntrinsicMeasurable::maxIntrinsicHeight)
 
     override fun IntrinsicMeasureScope.minIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
         width: Int,
-    ): Int {
-        return intrinsicHeight(measurables, width, IntrinsicMeasurable::minIntrinsicHeight)
-    }
+    ): Int =
+        intrinsicHeight(measurables, width, IntrinsicMeasurable::minIntrinsicHeight)
 
     override fun IntrinsicMeasureScope.maxIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
         height: Int,
-    ): Int {
-        return intrinsicWidth(measurables, height, IntrinsicMeasurable::maxIntrinsicWidth)
-    }
+    ): Int =
+        intrinsicWidth(measurables, height, IntrinsicMeasurable::maxIntrinsicWidth)
 
     override fun IntrinsicMeasureScope.minIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
         height: Int,
-    ): Int {
-        return intrinsicWidth(measurables, height, IntrinsicMeasurable::minIntrinsicWidth)
-    }
+    ): Int =
+        intrinsicWidth(measurables, height, IntrinsicMeasurable::minIntrinsicWidth)
 
     private fun intrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
