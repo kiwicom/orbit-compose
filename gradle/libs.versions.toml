@@ -5,7 +5,7 @@ targetSdk = "33"
 minSdk = "23"
 
 kotlin-lang = "1.9.10"
-kotlin-dokka = "1.9.0"
+kotlin-dokka = "1.9.10"
 
 kotlin-serialization = "1.6.0"
 android-sdkCommon = "31.1.2"
