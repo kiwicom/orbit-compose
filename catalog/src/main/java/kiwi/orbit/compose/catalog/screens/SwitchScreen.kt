@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
 import kiwi.orbit.compose.ui.controls.Switch
@@ -57,6 +58,18 @@ private fun SwitchScreenInner() {
         Spacer(Modifier.height(8.dp))
 
         Switch(checked = !value, onCheckedChange = { value = !it })
+
+        Spacer(Modifier.height(16.dp))
+        Separator()
+        Spacer(Modifier.height(16.dp))
+
+        var iconValue by rememberSaveable { mutableStateOf(true) }
+
+        Switch(checked = iconValue, onCheckedChange = { iconValue = it }, icon = Icons.Notification)
+
+        Spacer(Modifier.height(8.dp))
+
+        Switch(checked = !iconValue, onCheckedChange = { iconValue = !it }, icon = Icons.NotificationOff)
 
         Spacer(Modifier.height(16.dp))
         Separator()
