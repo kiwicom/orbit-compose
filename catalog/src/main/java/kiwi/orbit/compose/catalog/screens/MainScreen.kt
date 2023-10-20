@@ -13,9 +13,12 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.automirrored.rounded.Announcement
+import androidx.compose.material.icons.automirrored.rounded.Article
+import androidx.compose.material.icons.automirrored.rounded.LabelImportant
+import androidx.compose.material.icons.automirrored.rounded.ListAlt
+import androidx.compose.material.icons.automirrored.rounded.MenuOpen
 import androidx.compose.material.icons.outlined.ToggleOff
-import androidx.compose.material.icons.rounded.Announcement
-import androidx.compose.material.icons.rounded.Article
 import androidx.compose.material.icons.rounded.Ballot
 import androidx.compose.material.icons.rounded.BrightnessMedium
 import androidx.compose.material.icons.rounded.CheckBox
@@ -25,10 +28,7 @@ import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.EditAttributes
 import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Keyboard
-import androidx.compose.material.icons.rounded.LabelImportant
 import androidx.compose.material.icons.rounded.LinearScale
-import androidx.compose.material.icons.rounded.ListAlt
-import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Rectangle
 import androidx.compose.material.icons.rounded.SignalWifiOff
@@ -66,6 +66,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.utils.plus
 import kotlinx.serialization.ExperimentalSerializationApi
+import androidx.compose.material.icons.Icons.AutoMirrored.Rounded as AMMIcons
 import androidx.compose.material.icons.Icons.Outlined as OMIcons
 import androidx.compose.material.icons.Icons.Rounded as MIcons
 import kiwi.orbit.compose.catalog.semantics.MainScreenSemantics as Semantics
@@ -121,18 +122,18 @@ internal fun MainScreen(
         MenuItem("Segmented Switch", MIcons.ToggleOn, Semantics.SegmentedSwitchItemTag) {
             Destinations.SegmentedSwitch
         },
-        MenuItem("Select Field", MIcons.MenuOpen, Semantics.SelectFieldItemTag) { Destinations.SelectField },
+        MenuItem("Select Field", AMMIcons.MenuOpen, Semantics.SelectFieldItemTag) { Destinations.SelectField },
         MenuItem("Slider", MIcons.LinearScale, Semantics.SliderItemTag) { Destinations.Slider },
         MenuItem("Stepper", Icons.PlusCircle, Semantics.StepperItemTag) { Destinations.Stepper },
-        MenuItem("SurfaceCard", MIcons.Article, Semantics.SurfaceCardItemTag) { Destinations.SurfaceCard },
+        MenuItem("SurfaceCard", AMMIcons.Article, Semantics.SurfaceCardItemTag) { Destinations.SurfaceCard },
         MenuItem("Switch", MIcons.ToggleOn, Semantics.SwitchItemTag) { Destinations.Switch },
         MenuItem("Tabs", MIcons.Tab, Semantics.TabsItemTag) { Destinations.Tabs },
-        MenuItem("Tag", MIcons.LabelImportant, Semantics.TagItemTag) { Destinations.Tag },
+        MenuItem("Tag", AMMIcons.LabelImportant, Semantics.TagItemTag) { Destinations.Tag },
         MenuItem("Text Field", MIcons.Keyboard, Semantics.TextFieldItemTag) { Destinations.TextField },
         MenuItem("Tile", MIcons.Crop169, Semantics.TileItemTag) { Destinations.Tile },
-        MenuItem("TileGroup", MIcons.ListAlt, Semantics.TileGroupItemTag) { Destinations.TileGroup },
+        MenuItem("TileGroup", AMMIcons.ListAlt, Semantics.TileGroupItemTag) { Destinations.TileGroup },
         MenuItem("Timeline", Icons.RouteTwoStops, Semantics.TimelineItemTag) { Destinations.Timeline },
-        MenuItem("Toast", MIcons.Announcement, Semantics.ToastItemTag) { Destinations.Toast },
+        MenuItem("Toast", AMMIcons.Announcement, Semantics.ToastItemTag) { Destinations.Toast },
         MenuItem("TopAppBar", MIcons.WebAsset, Semantics.TopAppBarItemTag) { Destinations.TopAppBar },
     )
 
