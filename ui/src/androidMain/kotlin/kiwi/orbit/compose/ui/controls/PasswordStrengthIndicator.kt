@@ -2,7 +2,7 @@ package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,7 +42,7 @@ public fun PasswordStrengthIndicator(
             LocalContentColor provides color,
             LocalTextStyle provides OrbitTheme.typography.bodySmallMedium,
         ) {
-            BoxWithConstraints(
+            Box(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.CenterEnd,
             ) {

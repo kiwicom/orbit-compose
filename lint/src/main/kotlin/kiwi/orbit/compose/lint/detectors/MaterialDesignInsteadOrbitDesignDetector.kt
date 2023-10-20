@@ -120,6 +120,7 @@ class MaterialDesignInsteadOrbitDesignDetector : Detector(), Detector.UastScanne
             "kiwi.orbit.compose.ui.controls.Separator" to setOf(
                 "androidx.compose.material.Divider",
                 "androidx.compose.material3.Divider",
+                "androidx.compose.material3.HorizontalDivider",
             ),
             "kiwi.orbit.compose.ui.controls.IconButton" to setOf(
                 "androidx.compose.material.IconButton",
