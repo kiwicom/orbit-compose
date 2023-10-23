@@ -37,13 +37,22 @@ import androidx.compose.material.icons.rounded.Tab
 import androidx.compose.material.icons.rounded.ToggleOn
 import androidx.compose.material.icons.rounded.WebAsset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toOffset
 import com.kiwi.navigationcompose.typed.Destination
 import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.icons.Icons
@@ -72,7 +81,7 @@ private data class MenuItem(
 @Composable
 internal fun MainScreen(
     onNavigate: (Destination) -> Unit,
-    onToggleTheme: () -> Unit,
+    onThemeToggle: (Offset) -> Unit,
 ) {
     fun MenuItem(title: String, icon: Any, testTag: String, onNavigate: () -> Destination): MenuItem =
         MenuItem(title, icon, testTag, onClick = { onNavigate(onNavigate()) })
@@ -133,7 +142,13 @@ internal fun MainScreen(
             TopAppBarLarge(
                 title = { Text("Orbit Compose Catalog") },
                 actions = {
-                    IconButton(onClick = onToggleTheme) {
+                    var offset by remember { mutableStateOf(Offset(0f, 0f)) }
+                    IconButton(
+                        modifier = Modifier.onGloballyPositioned {
+                            offset = it.positionInWindow() + it.size.center.toOffset()
+                        },
+                        onClick = { onThemeToggle(offset) },
+                    ) {
                         Icon(MIcons.BrightnessMedium, contentDescription = null)
                     }
                 },
