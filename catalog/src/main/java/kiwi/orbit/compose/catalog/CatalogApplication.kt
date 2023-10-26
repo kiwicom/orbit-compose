@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.semantics
@@ -79,8 +80,8 @@ import kotlinx.serialization.ExperimentalSerializationApi
 fun CatalogApplication() {
     val systemUiController = rememberSystemUiController()
 
-    var isLightTheme by rememberSaveable { mutableStateOf<Boolean?>(null) }
-    val isLightThemeFinal = isLightTheme ?: !isSystemInDarkTheme()
+    var isLightThemeUser by rememberSaveable { mutableStateOf<Boolean?>(null) }
+    val isLightThemeFinal = isLightThemeUser ?: !isSystemInDarkTheme()
 
     SideEffect {
         systemUiController.setSystemBarsColor(
@@ -89,19 +90,18 @@ fun CatalogApplication() {
         )
     }
 
-    AppTheme(isLightTheme = isLightThemeFinal) {
-        NavGraph(
-            onToggleTheme = {
-                isLightTheme = !isLightThemeFinal
-            },
-        )
+    AnimatedAppTheme(
+        isLightTheme = isLightThemeFinal,
+        onThemeToggle = { isLightThemeUser = it },
+    ) { onThemeToggle ->
+        NavGraph(onThemeToggle = onThemeToggle)
     }
 }
 
 @OptIn(ExperimentalSerializationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun NavGraph(
-    onToggleTheme: () -> Unit,
+    onThemeToggle: (offset: Offset) -> Unit,
 ) {
     val density = LocalDensity.current
     val navController = rememberNavController()
@@ -115,7 +115,7 @@ private fun NavGraph(
         popEnterTransition = { SharedXAxisPopEnterTransition(density) },
         popExitTransition = { SharedXAxisPopExitTransition(density) },
     ) {
-        composable<Destinations.Main> { MainScreen(navController::navigate, onToggleTheme) }
+        composable<Destinations.Main> { MainScreen(navController::navigate, onThemeToggle) }
 
         composable<Destinations.Colors> { ColorsScreen(navController::navigateUp) }
         composable<Destinations.Icons> { IconsScreen(navController::navigateUp) }
