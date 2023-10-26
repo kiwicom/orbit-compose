@@ -14,6 +14,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,17 +35,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -57,6 +63,25 @@ import kotlin.math.roundToInt
 public fun Switch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        icon = null,
+        enabled = enabled,
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+public fun Switch(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    icon: Painter?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -107,6 +132,7 @@ public fun Switch(
         SwitchImpl(
             checked = checked,
             enabled = enabled,
+            icon = icon,
             state = swipeableState,
             interactionSource = interactionSource,
         )
@@ -117,6 +143,7 @@ public fun Switch(
 private fun BoxScope.SwitchImpl(
     checked: Boolean,
     enabled: Boolean,
+    icon: Painter?,
     state: SwipeableV2State<Boolean>,
     interactionSource: InteractionSource,
 ) {
@@ -152,6 +179,12 @@ private fun BoxScope.SwitchImpl(
             }
         },
     )
+    SwitchTrack(mainColor)
+    SwitchThumb(state, interactionSource, enabled, elevation, icon, mainColor)
+}
+
+@Composable
+private fun BoxScope.SwitchTrack(mainColor: Color) {
     Canvas(
         Modifier
             .align(Alignment.Center)
@@ -159,6 +192,17 @@ private fun BoxScope.SwitchImpl(
     ) {
         drawTrack(mainColor, TrackWidth.toPx(), TrackStrokeWidth.toPx())
     }
+}
+
+@Composable
+private fun BoxScope.SwitchThumb(
+    state: SwipeableV2State<Boolean>,
+    interactionSource: InteractionSource,
+    enabled: Boolean,
+    elevation: Dp,
+    icon: Painter?,
+    mainColor: Color,
+) {
     Spacer(
         Modifier
             .align(Alignment.CenterStart)
@@ -186,7 +230,15 @@ private fun BoxScope.SwitchImpl(
             )
             .background(OrbitTheme.colors.surface.main, CircleShape)
             .padding((ThumbDiameter - ThumbInnerDiameter - ThumbStrokeWidth * 2) / 2)
-            .background(mainColor, CircleShape),
+            .then(
+                if (icon != null) {
+                    Modifier.paint(painter = icon, colorFilter = ColorFilter.tint(mainColor))
+                } else {
+                    Modifier
+                        .padding(ThumbInnerPadding)
+                        .background(mainColor, CircleShape)
+                },
+            ),
     )
 }
 
@@ -235,7 +287,8 @@ private val TrackWidth = SwitchWidth - SwitchPadding * 2
 private val TrackStrokeWidth = SwitchHeight - SwitchPadding * 2
 private val ThumbDiameter = SwitchHeight
 private val ThumbStrokeWidth = 0.5.dp
-private val ThumbInnerDiameter = 10.dp
+private val ThumbInnerDiameter = 16.dp
+private val ThumbInnerPadding = 3.dp
 private val ThumbRippleRadius = 24.dp
 
 private val AnimationSpec = TweenSpec<Float>(durationMillis = 100)
@@ -247,25 +300,52 @@ private val ThumbPressedElevation = 6.dp
 @Composable
 internal fun SwitchPreview() {
     Preview {
-        Row {
-            Switch(
-                checked = false,
-                onCheckedChange = {},
-            )
-            Switch(
-                checked = true,
-                onCheckedChange = {},
-            )
-            Switch(
-                checked = false,
-                enabled = false,
-                onCheckedChange = {},
-            )
-            Switch(
-                checked = true,
-                enabled = false,
-                onCheckedChange = {},
-            )
+        Column {
+            Row {
+                Switch(
+                    checked = false,
+                    onCheckedChange = {},
+                )
+                Switch(
+                    checked = true,
+                    onCheckedChange = {},
+                    icon = Icons.Circle,
+                )
+                Switch(
+                    checked = false,
+                    enabled = false,
+                    onCheckedChange = {},
+                )
+                Switch(
+                    checked = true,
+                    enabled = false,
+                    onCheckedChange = {},
+                )
+            }
+            Row {
+                Switch(
+                    checked = false,
+                    onCheckedChange = {},
+                    icon = Icons.LockOpen,
+                )
+                Switch(
+                    checked = true,
+                    onCheckedChange = {},
+                    icon = Icons.Lock,
+                )
+                Switch(
+                    checked = false,
+                    enabled = false,
+                    onCheckedChange = {},
+                    icon = Icons.VisibilityOff,
+                )
+                Switch(
+                    checked = true,
+                    enabled = false,
+                    onCheckedChange = {},
+                    icon = Icons.Visibility,
+                )
+            }
         }
     }
 }
