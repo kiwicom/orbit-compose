@@ -1,10 +1,11 @@
 package kiwi.orbit.compose.ui.controls
 
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,18 +13,25 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -120,7 +128,7 @@ internal fun TextField(
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
     val textFieldValue = textFieldValueState.copy(text = value)
 
-    // Reset input text style color to content color norma.
+    // Reset input text style color to content color normal.
     val textStyle = LocalTextStyle.current
     val inputTextStyle = textStyle.copy(color = OrbitTheme.colors.content.normal)
 
@@ -194,33 +202,20 @@ private fun TextFiledDecorationBox(
             }
 
             val isFocused = interactionSource.collectIsFocusedAsState().value
-            val inputState: InputState = when (isFocused) {
-                true -> when (error != null) {
-                    true -> InputState.FocusedError
-                    false -> InputState.Focused
-                }
-                false -> when (error != null) {
-                    true -> InputState.NormalError
-                    false -> InputState.Normal
-                }
-            }
+            val inputState = resolveInputState(isFocused, isError = error != null)
 
             val transition = updateTransition(inputState, "stateTransition")
-            val borderColor = transition.animateColor(
-                transitionSpec = { tween(durationMillis = AnimationDuration) },
-                label = "borderColor",
-            ) {
-                when (it) {
-                    InputState.Normal -> Color.Transparent
-                    InputState.Focused, InputState.FocusedError -> OrbitTheme.colors.info.normal
-                    InputState.NormalError -> OrbitTheme.colors.critical.normal
-                }
-            }
+            val borderColor by transition.animateBorderColor()
+            val glowWidth by transition.animateGlowWidth()
 
             FieldContent(
                 modifier = Modifier
-                    .border(1.dp, borderColor.value, OrbitTheme.shapes.normal)
-                    .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal),
+                    .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal)
+                    .borderWithGlow(
+                        provideBorderColor = { borderColor },
+                        provideGlowColor = { borderColor.copy(borderColor.alpha * GlowOpacity) },
+                        provideGlowWidth = { glowWidth },
+                    ),
                 fieldContent = innerTextField,
                 placeholder = when (textFieldValue.text.isEmpty()) {
                     true -> placeholder
@@ -243,6 +238,72 @@ private fun TextFiledDecorationBox(
     }
 }
 
+private fun resolveInputState(isFocused: Boolean, isError: Boolean): InputState =
+    when (isFocused) {
+        true -> when (isError) {
+            true -> InputState.FocusedError
+            false -> InputState.Focused
+        }
+        false -> when (isError) {
+            true -> InputState.NormalError
+            false -> InputState.Normal
+        }
+    }
+
+@Composable
+private fun Transition<InputState>.animateBorderColor(): State<Color> =
+    this.animateColor(
+        transitionSpec = { tween(AnimationDuration) },
+        label = "borderColor",
+    ) {
+        when (it) {
+            InputState.Normal -> Color.Transparent
+            InputState.Focused -> OrbitTheme.colors.info.normal
+            InputState.NormalError, InputState.FocusedError -> OrbitTheme.colors.critical.normal
+        }
+    }
+
+@Composable
+private fun Transition<InputState>.animateGlowWidth(): State<Dp> =
+    this.animateDp(
+        transitionSpec = { tween(AnimationDuration) },
+        label = "glowWidth",
+    ) {
+        when (it) {
+            InputState.Normal, InputState.NormalError -> 0.dp
+            InputState.Focused, InputState.FocusedError -> GlowWidth
+        }
+    }
+
+private fun Modifier.borderWithGlow(
+    provideBorderColor: () -> Color,
+    provideGlowColor: () -> Color,
+    provideGlowWidth: () -> Dp,
+): Modifier = drawWithCache {
+    val borderColor = provideBorderColor()
+    val glowColor = provideGlowColor()
+    val glowWidth = provideGlowWidth()
+
+    val cornerSizePx = CornerSize.toPx()
+    val borderWidthPx = BorderWidth.toPx()
+    val glowWidthPx = glowWidth.toPx()
+
+    val glowTopLeft = Offset(-glowWidthPx / 2f, -glowWidthPx / 2f)
+    val glowSize = Size(size.width + glowWidthPx, size.height + glowWidthPx)
+    val glowCornerRadius = CornerRadius(cornerSizePx + glowWidthPx / 2f)
+    val glowStyle = Stroke(glowWidthPx)
+
+    val borderTopLeft = Offset(borderWidthPx / 2f, borderWidthPx / 2f)
+    val borderSize = Size(size.width - borderWidthPx, size.height - borderWidthPx)
+    val borderCornerRadius = CornerRadius(cornerSizePx - borderWidthPx / 2f)
+    val borderStyle = Stroke(borderWidthPx)
+
+    onDrawBehind {
+        drawRoundRect(glowColor, glowTopLeft, glowSize, glowCornerRadius, glowStyle)
+        drawRoundRect(borderColor, borderTopLeft, borderSize, borderCornerRadius, borderStyle)
+    }
+}
+
 private enum class InputState {
     Normal,
     NormalError,
@@ -250,6 +311,11 @@ private enum class InputState {
     FocusedError,
 }
 
+private val BorderWidth = 2.dp
+private val GlowWidth = 2.dp
+private val CornerSize = 6.dp
+
+private const val GlowOpacity = 0.1f
 private const val AnimationDuration = 150
 
 @OrbitPreviews
