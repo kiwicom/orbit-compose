@@ -67,7 +67,7 @@ compose-viewBinding = { module = "androidx.compose.ui:ui-viewbinding" }
 hamcrest = { module = "org.hamcrest:hamcrest-all", version = "1.3" }
 javaJq = { module = "net.thisptr:jackson-jq", version = "1.0.0-preview.20230409" }
 junit = { module = "junit:junit", version = "4.13.2" }
-kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.7.0" }
+kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.8.2" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 robolectric = { module = "org.robolectric:robolectric", version = "4.11" }
 slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.2.0" }
