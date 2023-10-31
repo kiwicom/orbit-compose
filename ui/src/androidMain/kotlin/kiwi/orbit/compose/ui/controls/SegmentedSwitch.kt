@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -140,15 +139,17 @@ public fun SegmentedSwitch(
         Box(
             modifier = Modifier.height(IntrinsicSize.Min),
         ) {
-            val borderColor = if (error == null) {
-                OrbitTheme.colors.surface.strong
-            } else {
-                OrbitTheme.colors.critical.normal
-            }
+            val borderColor by animateColorAsState(
+                targetValue = when (error == null) {
+                    true -> OrbitTheme.colors.surface.normal
+                    false -> OrbitTheme.colors.critical.normal
+                },
+                label = "SegmentedSwitchBorderColor",
+            )
 
             Surface(
                 shape = OrbitTheme.shapes.normal,
-                border = BorderStroke(1.dp, borderColor),
+                border = BorderStroke(2.dp, borderColor),
             ) {
                 Row(
                     modifier = Modifier
@@ -183,10 +184,7 @@ public fun SegmentedSwitch(
                             CompositionLocalProvider(
                                 LocalTextStyle provides OrbitTheme.typography.bodyNormal
                                     .copy(textAlign = TextAlign.Center),
-                                LocalContentEmphasis provides when (selectedIndex) {
-                                    null, index -> ContentEmphasis.Normal
-                                    else -> ContentEmphasis.Minor
-                                },
+                                LocalContentEmphasis provides ContentEmphasis.Normal,
                             ) {
                                 option()
                             }
@@ -216,17 +214,18 @@ private fun VerticalDivider(
     index: Int,
     selectedIndex: Int?,
 ) {
+    val bordersSelected = selectedIndex == index - 1 || selectedIndex == index
     val color by animateColorAsState(
         targetValue = when {
             hasError -> OrbitTheme.colors.critical.normal
-            selectedIndex == index - 1 || selectedIndex == index -> Color.Unspecified
-            else -> OrbitTheme.colors.surface.strong
+            bordersSelected -> OrbitTheme.colors.surface.main.copy(alpha = 0f)
+            else -> OrbitTheme.colors.surface.normal
         },
         label = "SegmentedSwitchDividerColor",
     )
     Surface(
         modifier = Modifier
-            .width(1.dp)
+            .width(2.dp)
             .fillMaxHeight(),
         color = color,
         content = {},
