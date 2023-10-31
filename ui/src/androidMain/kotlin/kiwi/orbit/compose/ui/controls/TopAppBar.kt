@@ -17,6 +17,10 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -286,6 +290,25 @@ internal fun TopAppBarPreview() {
             actions = {
                 IconButton(onClick = {}) {
                     Icon(Icons.Security, contentDescription = null)
+                }
+            },
+        )
+        TopAppBar(
+            title = { Text("Title") },
+            onNavigateUp = {},
+            extraContent = {
+                var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+                TabRow(selectedTabIndex = selectedTabIndex) {
+                    Tab(
+                        selected = selectedTabIndex == 0,
+                        onClick = { selectedTabIndex = 0 },
+                        text = { Text("Tab A") },
+                    )
+                    Tab(
+                        selected = selectedTabIndex == 1,
+                        onClick = { selectedTabIndex = 1 },
+                        text = { Text("Tab B") },
+                    )
                 }
             },
         )

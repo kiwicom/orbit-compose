@@ -33,6 +33,8 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.IconButton
 import kiwi.orbit.compose.ui.controls.Scaffold
+import kiwi.orbit.compose.ui.controls.Tab
+import kiwi.orbit.compose.ui.controls.TabRow
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBarLarge
 import kiwi.orbit.compose.ui.controls.TopAppBarScrollBehavior
@@ -94,6 +96,39 @@ internal fun TopAppBarLargeScrollableElevatedScreen(
                 onNavigateUp = onNavigateUp,
                 scrollBehavior = scrollBehavior,
                 largeElevated = true,
+            )
+        },
+        content = { CustomContentPlaceholder(it) },
+    )
+}
+
+@Composable
+internal fun TopAppBarLargeWithTabsScreen(
+    onNavigateUp: () -> Unit,
+) {
+    val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBarLarge(
+                title = { Text("With Tabs") },
+                onNavigateUp = onNavigateUp,
+                extraContent = {
+                    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+                    TabRow(selectedTabIndex = selectedTabIndex) {
+                        Tab(
+                            selected = selectedTabIndex == 0,
+                            onClick = { selectedTabIndex = 0 },
+                            text = { Text("Normal") },
+                        )
+                        Tab(
+                            selected = selectedTabIndex == 1,
+                            onClick = { selectedTabIndex = 1 },
+                            text = { Text("Inline") },
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior,
             )
         },
         content = { CustomContentPlaceholder(it) },
