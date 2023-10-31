@@ -48,7 +48,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 /**
  * A segmented switch displaying two options.
  *
- * Renders a segmented switch displaying [optionFirst] and [optionSecond].
+ * Renders a segmented switch displaying [optionOne] and [optionTwo].
  * Modify via custom passed [modifier].
  * An information or error footer can be added to the field.
  *
@@ -57,8 +57,8 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  * ```
  * var selectedIndex by remember { mutableStateOf<Int?>(null) }
  * SegmentedSwitch(
- *   optionFirst = { Text("Off") },
- *   optionSecond = { Text("On") },
+ *   optionOne = { Text("Off") },
+ *   optionTwo = { Text("On") },
  *   selectedIndex = selectedIndex,
  *   onOptionClick = { index -> selectedIndex = index },
  *   label = { Text("Feature") },
@@ -69,8 +69,8 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 @Composable
 public fun SegmentedSwitch(
     onOptionClick: (selectedIndex: Int) -> Unit,
-    optionFirst: @Composable () -> Unit,
-    optionSecond: @Composable () -> Unit,
+    optionOne: @Composable () -> Unit,
+    optionTwo: @Composable () -> Unit,
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
@@ -79,7 +79,7 @@ public fun SegmentedSwitch(
 ) {
     SegmentedSwitch(
         onOptionClick = onOptionClick,
-        options = listOf(optionFirst, optionSecond),
+        options = listOf(optionOne, optionTwo),
         selectedIndex = selectedIndex,
         modifier = modifier,
         label = label,
@@ -287,8 +287,8 @@ internal fun SegmentedSwitchPreview() {
 private fun SegmentedSwitchUnselectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(null) }
     SegmentedSwitch(
-        optionFirst = { Text("Male") },
-        optionSecond = { Text("Female") },
+        optionOne = { Text("Male") },
+        optionTwo = { Text("Female") },
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
@@ -299,8 +299,8 @@ private fun SegmentedSwitchUnselectedPreview() {
 private fun SegmentedSwitchSelectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(0) }
     SegmentedSwitch(
-        optionFirst = { Text("Male") },
-        optionSecond = { Text("Female") },
+        optionOne = { Text("Male") },
+        optionTwo = { Text("Female") },
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
