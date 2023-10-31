@@ -54,8 +54,8 @@ private fun SegmentedSwitchScreenInner() {
     ) {
         var selectedIndexFirst by rememberSaveable { mutableStateOf<Int?>(null) }
         SegmentedSwitch(
-            optionFirst = { Text("Male") },
-            optionSecond = { Text("Female") },
+            optionOne = { Text("Male") },
+            optionTwo = { Text("Female") },
             selectedIndex = selectedIndexFirst,
             onOptionClick = { index ->
                 selectedIndexFirst = index.takeIf { index != selectedIndexFirst }

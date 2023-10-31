@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -49,7 +48,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 /**
  * A segmented switch displaying two options.
  *
- * Renders a segmented switch displaying [optionFirst] and [optionSecond].
+ * Renders a segmented switch displaying [optionOne] and [optionTwo].
  * Modify via custom passed [modifier].
  * An information or error footer can be added to the field.
  *
@@ -58,8 +57,8 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
  * ```
  * var selectedIndex by remember { mutableStateOf<Int?>(null) }
  * SegmentedSwitch(
- *   optionFirst = { Text("Off") },
- *   optionSecond = { Text("On") },
+ *   optionOne = { Text("Off") },
+ *   optionTwo = { Text("On") },
  *   selectedIndex = selectedIndex,
  *   onOptionClick = { index -> selectedIndex = index },
  *   label = { Text("Feature") },
@@ -70,8 +69,8 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 @Composable
 public fun SegmentedSwitch(
     onOptionClick: (selectedIndex: Int) -> Unit,
-    optionFirst: @Composable () -> Unit,
-    optionSecond: @Composable () -> Unit,
+    optionOne: @Composable () -> Unit,
+    optionTwo: @Composable () -> Unit,
     selectedIndex: Int?,
     modifier: Modifier = Modifier,
     label: @Composable () -> Unit = {},
@@ -80,7 +79,7 @@ public fun SegmentedSwitch(
 ) {
     SegmentedSwitch(
         onOptionClick = onOptionClick,
-        options = listOf(optionFirst, optionSecond),
+        options = listOf(optionOne, optionTwo),
         selectedIndex = selectedIndex,
         modifier = modifier,
         label = label,
@@ -140,15 +139,17 @@ public fun SegmentedSwitch(
         Box(
             modifier = Modifier.height(IntrinsicSize.Min),
         ) {
-            val borderColor = if (error == null) {
-                OrbitTheme.colors.surface.strong
-            } else {
-                OrbitTheme.colors.critical.normal
-            }
+            val borderColor by animateColorAsState(
+                targetValue = when (error == null) {
+                    true -> OrbitTheme.colors.surface.normal
+                    false -> OrbitTheme.colors.critical.normal
+                },
+                label = "SegmentedSwitchBorderColor",
+            )
 
             Surface(
                 shape = OrbitTheme.shapes.normal,
-                border = BorderStroke(1.dp, borderColor),
+                border = BorderStroke(2.dp, borderColor),
             ) {
                 Row(
                     modifier = Modifier
@@ -183,10 +184,7 @@ public fun SegmentedSwitch(
                             CompositionLocalProvider(
                                 LocalTextStyle provides OrbitTheme.typography.bodyNormal
                                     .copy(textAlign = TextAlign.Center),
-                                LocalContentEmphasis provides when (selectedIndex) {
-                                    null, index -> ContentEmphasis.Normal
-                                    else -> ContentEmphasis.Minor
-                                },
+                                LocalContentEmphasis provides ContentEmphasis.Normal,
                             ) {
                                 option()
                             }
@@ -216,17 +214,18 @@ private fun VerticalDivider(
     index: Int,
     selectedIndex: Int?,
 ) {
+    val bordersSelected = selectedIndex == index - 1 || selectedIndex == index
     val color by animateColorAsState(
         targetValue = when {
             hasError -> OrbitTheme.colors.critical.normal
-            selectedIndex == index - 1 || selectedIndex == index -> Color.Unspecified
-            else -> OrbitTheme.colors.surface.strong
+            bordersSelected -> OrbitTheme.colors.surface.main.copy(alpha = 0f)
+            else -> OrbitTheme.colors.surface.normal
         },
         label = "SegmentedSwitchDividerColor",
     )
     Surface(
         modifier = Modifier
-            .width(1.dp)
+            .width(2.dp)
             .fillMaxHeight(),
         color = color,
         content = {},
@@ -288,8 +287,8 @@ internal fun SegmentedSwitchPreview() {
 private fun SegmentedSwitchUnselectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(null) }
     SegmentedSwitch(
-        optionFirst = { Text("Male") },
-        optionSecond = { Text("Female") },
+        optionOne = { Text("Male") },
+        optionTwo = { Text("Female") },
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
@@ -300,8 +299,8 @@ private fun SegmentedSwitchUnselectedPreview() {
 private fun SegmentedSwitchSelectedPreview() {
     var selectedIndex by remember { mutableStateOf<Int?>(0) }
     SegmentedSwitch(
-        optionFirst = { Text("Male") },
-        optionSecond = { Text("Female") },
+        optionOne = { Text("Male") },
+        optionTwo = { Text("Female") },
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
