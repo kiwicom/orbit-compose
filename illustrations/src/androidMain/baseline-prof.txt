@@ -37,6 +37,7 @@ PLkiwi/orbit/compose/illustrations/Illustrations;->getFastTrack(Landroidx/compos
 PLkiwi/orbit/compose/illustrations/Illustrations;->getFastTrackMan(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/illustrations/Illustrations;->getFeedback(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/illustrations/Illustrations;->getFlexibleDates(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
+PLkiwi/orbit/compose/illustrations/Illustrations;->getFlightDisruptions(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/illustrations/Illustrations;->getGroundTransport404(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/illustrations/Illustrations;->getHelp(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/illustrations/Illustrations;->getImprove(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
