@@ -33,34 +33,37 @@ import kotlinx.serialization.Serializable
 
 sealed interface TopAppBarDestination : Destination {
     @Serializable
-    object Home : TopAppBarDestination
+    data object Home : TopAppBarDestination
 
     @Serializable
-    object Normal : TopAppBarDestination
+    data object Normal : TopAppBarDestination
 
     @Serializable
-    object NormalScrollable : TopAppBarDestination
+    data object NormalScrollable : TopAppBarDestination
 
     @Serializable
-    object NormalWithTabs : TopAppBarDestination
+    data object NormalWithTabs : TopAppBarDestination
 
     @Serializable
-    object NormalWithFilters : TopAppBarDestination
+    data object NormalWithFilters : TopAppBarDestination
 
     @Serializable
-    object Large : TopAppBarDestination
+    data object Large : TopAppBarDestination
 
     @Serializable
-    object LargeScrollable : TopAppBarDestination
+    data object LargeScrollable : TopAppBarDestination
 
     @Serializable
-    object LargeScrollableElevated : TopAppBarDestination
+    data object LargeScrollableElevated : TopAppBarDestination
 
     @Serializable
-    object LargeCustomContent : TopAppBarDestination
+    data object LargeWithTabs : TopAppBarDestination
 
     @Serializable
-    object LargePullRefresh : TopAppBarDestination
+    data object LargeCustomContent : TopAppBarDestination
+
+    @Serializable
+    data object LargePullRefresh : TopAppBarDestination
 }
 
 @ExperimentalSerializationApi
@@ -93,6 +96,9 @@ internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigatio
         }
         composable<TopAppBarDestination.LargeScrollableElevated> {
             TopAppBarLargeScrollableElevatedScreen(navController::navigateUp)
+        }
+        composable<TopAppBarDestination.LargeWithTabs> {
+            TopAppBarLargeWithTabsScreen(navController::navigateUp)
         }
         composable<TopAppBarDestination.LargeCustomContent> {
             TopAppBarLargeCustomContentScreen(navController::navigateUp)
@@ -165,6 +171,11 @@ internal fun TopAppBarScreenInner(
                 onClick = { onSelect(TopAppBarDestination.LargeScrollableElevated) },
             ) {
                 Text("Scrollable Elevated")
+            }
+            ButtonSecondary(
+                onClick = { onSelect(TopAppBarDestination.LargeWithTabs) },
+            ) {
+                Text("With Tabs")
             }
             ButtonSecondary(
                 onClick = { onSelect(TopAppBarDestination.LargeCustomContent) },

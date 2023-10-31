@@ -15,6 +15,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -43,6 +47,7 @@ public fun TopAppBarLarge(
     largeTitle: @Composable () -> Unit = title,
     navigationIcon: Painter = TopAppBarIcons.Back,
     actions: @Composable RowScope.() -> Unit = {},
+    extraContent: @Composable () -> Unit = {},
     largeElevated: Boolean = true,
     elevation: Dp = TopAppBarElevation,
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -62,6 +67,7 @@ public fun TopAppBarLarge(
         },
         largeTitle = largeTitle,
         actions = actions,
+        extraContent = extraContent,
         largeElevated = largeElevated,
         elevation = elevation,
         scrollBehavior = scrollBehavior,
@@ -75,6 +81,7 @@ public fun TopAppBarLarge(
     navigationIcon: @Composable () -> Unit = {},
     largeTitle: @Composable () -> Unit = title,
     actions: @Composable RowScope.() -> Unit = {},
+    extraContent: @Composable () -> Unit = {},
     largeElevated: Boolean = true,
     elevation: Dp = TopAppBarElevation,
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -106,6 +113,7 @@ public fun TopAppBarLarge(
                 content = actions,
             )
         },
+        extraContent = extraContent,
         largeElevated = largeElevated,
         elevation = elevation,
         scrollBehavior = scrollBehavior,
@@ -119,6 +127,7 @@ private fun TwoRowsTopAppBar(
     largeTitle: @Composable () -> Unit,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable () -> Unit,
+    extraContent: @Composable () -> Unit,
     largeElevated: Boolean,
     elevation: Dp,
     scrollBehavior: TopAppBarScrollBehavior?,
@@ -177,6 +186,7 @@ private fun TwoRowsTopAppBar(
                     hideTitleSemantics = hideBottomRowSemantics,
                     modifier = Modifier,
                 )
+                extraContent()
             }
         }
     } else {
@@ -210,6 +220,7 @@ private fun TwoRowsTopAppBar(
                     WindowInsets.systemBars.only(WindowInsetsSides.Horizontal),
                 ),
             )
+            extraContent()
         }
     }
 }
@@ -254,6 +265,25 @@ internal fun TopAppBarLargePreview() {
             actions = {
                 IconButton(onClick = {}) {
                     Icon(Icons.Security, contentDescription = null)
+                }
+            },
+        )
+        TopAppBarLarge(
+            title = { Text("Title") },
+            onNavigateUp = {},
+            extraContent = {
+                var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+                TabRow(selectedTabIndex = selectedTabIndex) {
+                    Tab(
+                        selected = selectedTabIndex == 0,
+                        onClick = { selectedTabIndex = 0 },
+                        text = { Text("Tab A") },
+                    )
+                    Tab(
+                        selected = selectedTabIndex == 1,
+                        onClick = { selectedTabIndex = 1 },
+                        text = { Text("Tab B") },
+                    )
                 }
             },
         )
