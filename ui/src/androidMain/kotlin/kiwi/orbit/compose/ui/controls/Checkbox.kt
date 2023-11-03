@@ -38,6 +38,7 @@ import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.R
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.utils.drawStrokeOutlineRoundRect
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
@@ -124,8 +125,6 @@ private fun DrawScope.drawCheckbox(borderColor: Color, backgroundColor: Color, e
     val errorShift = if (hasError) 0.5.dp.toPx() else 0f
 
     val checkboxSize = CheckboxSize.toPx()
-    val checkboxBorderWidth = CheckboxBorderWidth.toPx()
-    val checkboxBorderHalfWidth = checkboxBorderWidth / 2.0f
     val checkboxCornerRadius = CornerRadius(CheckboxCornerRadius.toPx())
     drawRoundRect(
         color = backgroundColor,
@@ -134,36 +133,31 @@ private fun DrawScope.drawCheckbox(borderColor: Color, backgroundColor: Color, e
         cornerRadius = checkboxCornerRadius,
         style = Fill,
     )
-    drawRoundRect(
+    drawStrokeOutlineRoundRect(
         color = borderColor,
-        topLeft = Offset(checkboxBorderHalfWidth, checkboxBorderHalfWidth),
-        size = Size(checkboxSize - checkboxBorderWidth, checkboxSize - checkboxBorderWidth),
+        topLeft = Offset.Zero,
+        size = Size(CheckboxSize.toPx(), CheckboxSize.toPx()),
         cornerRadius = checkboxCornerRadius,
-        style = Stroke(checkboxBorderWidth),
+        stroke = Stroke(CheckboxBorderWidth.toPx()),
     )
 }
 
 private fun DrawScope.drawError(borderColor: Color, shadowColor: Color, alpha: Float) {
     if (alpha == 0.0f) return
 
-    val shadowRectShift = (ErrorShadowWidth / 2.0f).toPx()
-    val shadowRectSize = (ErrorShadowSize - ErrorShadowWidth).toPx()
-    drawRoundRect(
+    drawStrokeOutlineRoundRect(
         color = shadowColor,
-        topLeft = Offset(-shadowRectShift, -shadowRectShift),
-        size = Size(shadowRectSize, shadowRectSize),
+        topLeft = Offset(-ErrorShadowWidth.toPx(), -ErrorShadowWidth.toPx()),
+        size = Size(ErrorShadowSize.toPx(), ErrorShadowSize.toPx()),
         cornerRadius = CornerRadius(ErrorShadowCornerRadius.toPx()),
-        style = Stroke(ErrorShadowWidth.toPx()),
+        stroke = Stroke(ErrorShadowWidth.toPx()),
     )
-
-    val errorRectShift = (CheckboxBorderWidth / 2.0f).toPx()
-    val errorRectSize = (CheckboxSize - CheckboxBorderWidth).toPx()
-    drawRoundRect(
+    drawStrokeOutlineRoundRect(
         color = borderColor,
-        topLeft = Offset(errorRectShift, errorRectShift),
-        size = Size(errorRectSize, errorRectSize),
+        topLeft = Offset.Zero,
+        size = Size(CheckboxSize.toPx(), CheckboxSize.toPx()),
         cornerRadius = CornerRadius(CheckboxCornerRadius.toPx()),
-        style = Stroke(CheckboxBorderWidth.toPx()),
+        stroke = Stroke(CheckboxBorderWidth.toPx()),
     )
 }
 
