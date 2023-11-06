@@ -19,7 +19,7 @@ plugins {
     id("app.cash.paparazzi") version "1.3.1" apply false
     id("com.google.firebase.appdistribution") version "4.0.1" apply false
     id("com.vanniktech.maven.publish.base") version "0.25.3" apply false
-    id("io.gitlab.arturbosch.detekt") version "1.23.1" apply false
+    id("io.gitlab.arturbosch.detekt") version "1.23.3" apply false
     id("org.jmailen.kotlinter") version "4.0.0" apply false
     id("org.jetbrains.dokka") version "1.9.10"
 }
