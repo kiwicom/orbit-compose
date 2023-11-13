@@ -41,6 +41,7 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
+import kotlin.time.Duration
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.StateFlow
@@ -50,7 +51,7 @@ public interface ToastData {
     public val message: String
     public val icon: @Composable (() -> Painter)?
 
-    public val animationDuration: StateFlow<Int?>
+    public val animationDuration: StateFlow<Duration?>
 
     public suspend fun run(accessibilityManager: AccessibilityManager?)
 
@@ -84,7 +85,7 @@ public fun Toast(
 private fun Toast(
     message: String,
     icon: @Composable (() -> Painter)?,
-    animateDuration: Int? = 0,
+    animateDuration: Duration? = Duration.ZERO,
     onPause: () -> Unit = {},
     onResume: () -> Unit = {},
     onDismissed: () -> Unit = {},
@@ -111,7 +112,7 @@ private fun Toast(
                 progress.animateTo(
                     targetValue = 1f,
                     animationSpec = tween(
-                        durationMillis = animateDuration,
+                        durationMillis = animateDuration.inWholeMilliseconds.toInt(),
                         easing = EaseOut,
                     ),
                 )
