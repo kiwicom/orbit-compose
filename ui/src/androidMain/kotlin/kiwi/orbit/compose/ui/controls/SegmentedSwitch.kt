@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
@@ -44,6 +43,7 @@ import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalContentEmphasis
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
+import kiwi.orbit.compose.ui.utils.drawStrokeOutlineRoundRect
 
 /**
  * A segmented switch displaying two options.
@@ -237,31 +237,32 @@ private fun SelectionOutline(
     selectedIndex: Int,
     optionsCount: Int,
 ) {
+    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val animatedOffset by animateFloatAsState(
-        targetValue = selectedIndex.toFloat(),
+        targetValue = when (isRtl) {
+            false -> selectedIndex.toFloat()
+            true -> optionsCount - 1 - selectedIndex.toFloat()
+        },
         label = "SegmentedSwitchSelectedOffset",
     )
     val brushColor = OrbitTheme.colors.info.normal
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val shape = OrbitTheme.shapes.normal
     Canvas(
-        modifier = Modifier
-            .padding(1.dp)
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         onDraw = {
-            val rectSize = size.copy(width = size.width / optionsCount)
+            val divWidth = 2.dp.toPx()
+            val itemSize = (size.width - optionsCount * divWidth) / optionsCount
+            val rectSize = size.copy(width = itemSize + 2 * divWidth)
             val topLeft = Offset(
-                x = when (isRtl) {
-                    false -> animatedOffset * rectSize.width
-                    true -> size.width - ((animatedOffset + 1) * rectSize.width)
-                },
+                x = animatedOffset * itemSize + (animatedOffset - 1).coerceAtLeast(0f) * divWidth,
                 y = 0f,
             )
-            drawRoundRect(
-                brush = SolidColor(brushColor),
+            drawStrokeOutlineRoundRect(
+                color = brushColor,
                 topLeft = topLeft,
                 size = rectSize,
-                cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx()),
-                style = Stroke(width = 2.dp.toPx()),
+                cornerRadius = CornerRadius(shape.topStart.toPx(rectSize, density = this)),
+                stroke = Stroke(width = divWidth),
             )
         },
     )
@@ -276,9 +277,13 @@ internal fun SegmentedSwitchPreview() {
     ) {
         SegmentedSwitchUnselectedPreview()
         SegmentedSwitchSelectedPreview()
-        SegmentedSwitchThreeOptionsUnselectedPreview()
         SegmentedSwitchThreeOptionsSelectedPreview()
         SegmentedSwitchWithInfoPreview()
+        CompositionLocalProvider(
+            LocalLayoutDirection provides LayoutDirection.Rtl,
+        ) {
+            SegmentedSwitchWithInfoPreview()
+        }
         SegmentedSwitchWithErrorPreview()
     }
 }
@@ -304,21 +309,6 @@ private fun SegmentedSwitchSelectedPreview() {
         selectedIndex = selectedIndex,
         onOptionClick = { index -> selectedIndex = index },
         label = { Text("Gender") },
-    )
-}
-
-@Composable
-private fun SegmentedSwitchThreeOptionsUnselectedPreview() {
-    var selectedIndex by remember { mutableStateOf<Int?>(null) }
-    SegmentedSwitch(
-        options = listOf(
-            { Text("Off") },
-            { Text("On") },
-            { Text("Remote") },
-        ),
-        selectedIndex = selectedIndex,
-        onOptionClick = { index -> selectedIndex = index },
-        label = { Text("Feature") },
     )
 }
 

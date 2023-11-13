@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -45,6 +46,8 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
+import kiwi.orbit.compose.ui.utils.ExpandedCornerSize
+import kiwi.orbit.compose.ui.utils.drawStrokeOutlineRoundRect
 
 /**
  * TextFiled control allowing a text single-line or multi-line input.
@@ -212,6 +215,7 @@ private fun TextFiledDecorationBox(
                 modifier = Modifier
                     .background(OrbitTheme.colors.surface.normal, OrbitTheme.shapes.normal)
                     .borderWithGlow(
+                        cornerSize = OrbitTheme.shapes.normal.topStart,
                         provideBorderColor = { borderColor },
                         provideGlowColor = { borderColor.copy(borderColor.alpha * GlowOpacity) },
                         provideGlowWidth = { glowWidth },
@@ -276,6 +280,7 @@ private fun Transition<InputState>.animateGlowWidth(): State<Dp> =
     }
 
 private fun Modifier.borderWithGlow(
+    cornerSize: CornerSize,
     provideBorderColor: () -> Color,
     provideGlowColor: () -> Color,
     provideGlowWidth: () -> Dp,
@@ -284,23 +289,23 @@ private fun Modifier.borderWithGlow(
     val glowColor = provideGlowColor()
     val glowWidth = provideGlowWidth()
 
-    val cornerSizePx = CornerSize.toPx()
     val borderWidthPx = BorderWidth.toPx()
     val glowWidthPx = glowWidth.toPx()
 
-    val glowTopLeft = Offset(-glowWidthPx / 2f, -glowWidthPx / 2f)
-    val glowSize = Size(size.width + glowWidthPx, size.height + glowWidthPx)
-    val glowCornerRadius = CornerRadius(cornerSizePx + glowWidthPx / 2f)
-    val glowStyle = Stroke(glowWidthPx)
+    val glowCornerSize = ExpandedCornerSize(cornerSize, extraSize = glowWidth)
+    val glowCornerRadius = CornerRadius(glowCornerSize.toPx(size, density = this))
+    val glowTopLeft = Offset(-glowWidthPx, -glowWidthPx)
+    val glowSize = Size(size.width + glowWidthPx * 2, size.height + glowWidthPx * 2)
+    val glowStroke = Stroke(glowWidthPx)
 
-    val borderTopLeft = Offset(borderWidthPx / 2f, borderWidthPx / 2f)
-    val borderSize = Size(size.width - borderWidthPx, size.height - borderWidthPx)
-    val borderCornerRadius = CornerRadius(cornerSizePx - borderWidthPx / 2f)
-    val borderStyle = Stroke(borderWidthPx)
+    val borderRadius = CornerRadius(cornerSize.toPx(size, density = this))
+    val borderTopLeft = Offset.Zero
+    val borderSize = size
+    val borderStroke = Stroke(borderWidthPx)
 
     onDrawBehind {
-        drawRoundRect(glowColor, glowTopLeft, glowSize, glowCornerRadius, glowStyle)
-        drawRoundRect(borderColor, borderTopLeft, borderSize, borderCornerRadius, borderStyle)
+        drawStrokeOutlineRoundRect(glowColor, glowTopLeft, glowSize, glowCornerRadius, glowStroke)
+        drawStrokeOutlineRoundRect(borderColor, borderTopLeft, borderSize, borderRadius, borderStroke)
     }
 }
 
@@ -313,7 +318,6 @@ private enum class InputState {
 
 private val BorderWidth = 2.dp
 private val GlowWidth = 2.dp
-private val CornerSize = 6.dp
 
 private const val GlowOpacity = 0.1f
 private const val AnimationDuration = 150

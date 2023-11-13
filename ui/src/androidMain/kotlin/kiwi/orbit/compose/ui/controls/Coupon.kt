@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -30,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
+import kiwi.orbit.compose.ui.utils.drawStrokeOutlineRoundRect
 
 /**
  * Simple component used for highlighting coupons / promo codes.
@@ -78,24 +78,24 @@ public fun Coupon(
 
 private fun Modifier.dashedBorder(
     color: Color,
-    strokeWidth: Dp = 1.dp,
-    strokeLength: Dp = 8.dp,
-    cornerRadius: Dp = 0.dp,
+    strokeWidth: Dp,
+    strokeLength: Dp,
+    cornerRadius: Dp,
 ): Modifier = drawWithCache {
-    val strokeWidthPx = strokeWidth.toPx()
     val strokeLengthPx = strokeLength.toPx()
 
     @Suppress("NAME_SHADOWING")
     val cornerRadius = CornerRadius(cornerRadius.toPx())
 
-    val topLeft = Offset(strokeWidthPx / 2f, strokeWidthPx / 2f)
-    val size = Size(size.width - strokeWidthPx, size.height - strokeWidthPx)
-    val style = Stroke(
-        width = strokeWidthPx,
+    val topLeft = Offset.Zero
+    val stroke = Stroke(
+        width = strokeWidth.toPx(),
         pathEffect = PathEffect.dashPathEffect(floatArrayOf(strokeLengthPx, strokeLengthPx)),
     )
 
-    onDrawBehind { drawRoundRect(color, topLeft, size, cornerRadius, style) }
+    onDrawBehind {
+        drawStrokeOutlineRoundRect(color, topLeft, size, cornerRadius, stroke)
+    }
 }
 
 @Preview
