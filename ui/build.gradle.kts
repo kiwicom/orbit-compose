@@ -1,10 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jmailen.gradle.kotlinter.tasks.ConfigurableKtLintTask
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("org.jetbrains.compose")
     id("androidx.baselineprofile")
     id("org.jetbrains.dokka")
     id("org.jmailen.kotlinter")
@@ -15,9 +17,44 @@ plugins {
 
 kotlin {
     explicitApi()
-    androidTarget {}
+
+    applyDefaultHierarchyTemplate()
+
+    androidTarget()
+    iosArm64()
+    iosSimulatorArm64()
+
     sourceSets {
-        val androidMain by getting {}
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.androidx.annotation)
+                implementation(compose.animationGraphics)
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
+                implementation("org.jetbrains.compose.ui:ui-util:1.5.10")
+
+                implementation(projects.icons)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.core)
+            }
+        }
+        val iosMain by getting {
+            dependencies {
+                implementation(compose.ui)
+            }
+        }
+    }
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    compilerOptions {
+        this.freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 }
 
@@ -87,27 +124,7 @@ baselineProfile {
 }
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-
-    implementation(projects.icons)
-
-    implementation(libs.androidx.core)
-    implementation(libs.coil)
-    implementation(libs.compose.animationGraphics)
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.materialRipple)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.toolingPreview)
-    implementation(libs.compose.uiUtil)
-    implementation(libs.kotlin.stdlib)
-
     baselineProfile(projects.baselineprofile)
-
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.androidx.activityCompose)
-    debugImplementation(libs.androidx.customView)
-    debugImplementation(libs.androidx.customViewPoolingContainer)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.robolectric)

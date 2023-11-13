@@ -31,6 +31,7 @@ android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "an
 android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-lint" }
 android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "android-lint" }
 android-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-lint" }
+androidx-annotation = "androidx.annotation:annotation:1.7.0"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-activityComposeCatalog = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityComposeCatalog" }
 androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version = "1.2.0" }
