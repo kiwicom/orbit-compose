@@ -162,6 +162,11 @@ class IconsGenerator {
                 .addMember("%S", "unused")
                 .build(),
         )
+        iconClass.addAnnotation(
+            AnnotationSpec.builder(ClassName("kotlin", "OptIn"))
+                .addMember("%L::class", MemberName("org.jetbrains.compose.resources", "ExperimentalResourceApi"))
+                .build(),
+        )
 
         icons.sortedBy { it.name }.forEach { icon ->
             val property = PropertySpec.builder(icon.name, painterType)
@@ -169,9 +174,9 @@ class IconsGenerator {
                     FunSpec.getterBuilder()
                         .addAnnotation(composableAnnotation)
                         .addStatement(
-                            "return %M(%L)",
-                            MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.${icon.resourceName}",
+                            "return %M(%S)",
+                            MemberName("org.jetbrains.compose.resources", "painterResource"),
+                            "${icon.resourceName}.xml",
                         )
                         .build(),
                 )

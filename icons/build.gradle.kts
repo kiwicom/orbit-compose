@@ -3,6 +3,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("org.jetbrains.compose")
     id("androidx.baselineprofile")
     id("org.jetbrains.dokka")
     id("org.jmailen.kotlinter")
@@ -10,10 +11,23 @@ plugins {
 }
 
 kotlin {
+    applyDefaultHierarchyTemplate()
+
     explicitApi()
-    androidTarget {}
+
+    androidTarget()
+    iosArm64()
+    iosSimulatorArm64()
+
     sourceSets {
-        val androidMain by getting {}
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.ui)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
+            }
+        }
     }
 }
 
@@ -48,6 +62,12 @@ android {
         disable.add("UnusedAttribute")
         abortOnError = true
         warningsAsErrors = true
+    }
+
+    sourceSets {
+        named("main") {
+            resources.srcDirs("src/commonMain/resources")
+        }
     }
 }
 
