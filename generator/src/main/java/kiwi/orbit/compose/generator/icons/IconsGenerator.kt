@@ -56,12 +56,12 @@ class IconsGenerator {
         }
 
         generateClass(
-            className = "Icons",
+            nameBase = "Icon",
             icons = groupedIcons[false]!!,
             dir = kotlinOutDir,
         )
         generateClass(
-            className = "ColoredIcons",
+            nameBase = "ColoredIcon",
             icons = groupedIcons[true]!!.map { it.copy(name = it.name.removePrefix("Colored")) },
             dir = kotlinOutDir,
             kdoc = """
@@ -147,43 +147,68 @@ class IconsGenerator {
         return icons
     }
 
-    private fun generateClass(className: String, icons: List<Icon>, dir: Path, kdoc: String? = null) {
-        val iconClassType = ClassName("kiwi.orbit.compose.icons", className)
+    private fun generateClass(nameBase: String, icons: List<Icon>, dir: Path, kdoc: String? = null) {
+        val iconsClassType = ClassName("kiwi.orbit.compose.icons", "${nameBase}s")
+        val iconNameClassType = ClassName("kiwi.orbit.compose.icons", "${nameBase}Name")
         val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
-        val iconClass = TypeSpec.objectBuilder(iconClassType)
+        val iconsClass = TypeSpec.objectBuilder(iconsClassType)
         if (kdoc != null) {
-            iconClass.addKdoc(kdoc)
+            iconsClass.addKdoc(kdoc)
         }
-        iconClass.addAnnotation(
+        iconsClass.addAnnotation(
             AnnotationSpec.builder(Suppress::class)
                 .addMember("%S", "unused")
                 .build(),
         )
 
+        val iconNameClass = TypeSpec.enumBuilder(iconNameClassType)
+        val painterFun = FunSpec.builder("painter")
+            .addAnnotation(composableAnnotation)
+            .receiver(iconNameClassType)
+            .returns(painterType)
+            .beginControlFlow("return when (this)")
+
         icons.sortedBy { it.name }.forEach { icon ->
-            val property = PropertySpec.builder(icon.name, painterType)
-                .getter(
-                    FunSpec.getterBuilder()
-                        .addAnnotation(composableAnnotation)
-                        .addStatement(
-                            "return %M(%L)",
-                            MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.${icon.resourceName}",
-                        )
-                        .build(),
-                )
-                .build()
-            iconClass.addProperty(property)
+            iconsClass.addProperty(
+                PropertySpec.builder(icon.name, painterType)
+                    .getter(
+                        FunSpec.getterBuilder()
+                            .addAnnotation(composableAnnotation)
+                            .addStatement(
+                                "return %M(%L)",
+                                MemberName("androidx.compose.ui.res", "painterResource"),
+                                "R.drawable.${icon.resourceName}",
+                            )
+                            .build(),
+                    )
+                    .build(),
+            )
+            iconNameClass.addEnumConstant(icon.name)
+            painterFun.addStatement(
+                "%T.%L -> %T.%L",
+                iconNameClassType,
+                icon.name,
+                iconsClassType,
+                icon.name,
+            )
         }
 
-        val file = FileSpec.builder("kiwi.orbit.compose.icons", className)
-            .addType(iconClass.build())
+        painterFun.endControlFlow()
+
+        FileSpec.builder("kiwi.orbit.compose.icons", iconsClassType.simpleName)
+            .addType(iconsClass.build())
             .indent("    ")
             .build()
+            .writeTo(dir)
 
-        file.writeTo(dir)
+        FileSpec.builder("kiwi.orbit.compose.icons", iconNameClassType.simpleName)
+            .addType(iconNameClass.build())
+            .addFunction(painterFun.build())
+            .indent("    ")
+            .build()
+            .writeTo(dir)
     }
 }
