@@ -65,7 +65,7 @@ public fun Scaffold(
             content = action,
         )
     },
-    toastHostState: ToastHostState = remember { ToastHostState() },
+    toastHostState: ToastHostState = rememberToastHostState(),
     toastHost: @Composable (ToastHostState) -> Unit = { ToastHost(it) },
     contentWindowInsets: WindowInsets = WindowInsets.ime,
     content: @Composable (contentPadding: PaddingValues) -> Unit,

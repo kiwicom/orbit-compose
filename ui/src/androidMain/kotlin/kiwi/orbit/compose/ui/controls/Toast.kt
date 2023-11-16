@@ -25,14 +25,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.platform.AccessibilityManager
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.IconName
+import kiwi.orbit.compose.icons.painter
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
 
 public interface ToastData {
     public val message: String
-    public val icon: @Composable (() -> Painter)?
+    public val iconName: IconName?
 
     public val animationDuration: StateFlow<Duration?>
 
@@ -72,7 +72,7 @@ public fun Toast(
     key(toastData) {
         Toast(
             message = toastData.message,
-            icon = toastData.icon,
+            iconName = toastData.iconName,
             animateDuration = animateDuration,
             onPause = toastData::pause,
             onResume = toastData::resume,
@@ -84,7 +84,7 @@ public fun Toast(
 @Composable
 private fun Toast(
     message: String,
-    icon: @Composable (() -> Painter)?,
+    iconName: IconName?,
     animateDuration: Duration? = Duration.ZERO,
     onPause: () -> Unit = {},
     onResume: () -> Unit = {},
@@ -135,9 +135,9 @@ private fun Toast(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-                if (icon != null) {
+                if (iconName != null) {
                     Icon(
-                        icon(),
+                        iconName.painter(),
                         contentDescription = null,
                     )
                 }
@@ -233,15 +233,15 @@ internal fun ToastPreview() {
     Preview {
         Toast(
             message = "Message",
-            icon = null,
+            iconName = null,
         )
         Toast(
             message = "Message with icon",
-            icon = { Icons.CheckCircle },
+            iconName = IconName.CheckCircle,
         )
         Toast(
             message = "Message with icon and very long message with many words.",
-            icon = { Icons.CheckCircle },
+            iconName = IconName.CheckCircle,
         )
     }
 }

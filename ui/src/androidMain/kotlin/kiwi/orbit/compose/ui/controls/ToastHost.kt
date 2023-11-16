@@ -14,20 +14,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.AccessibilityManager
 import androidx.compose.ui.platform.LocalAccessibilityManager
+import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.utils.durationScale
-import kotlin.coroutines.resume
 import kotlin.math.roundToLong
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
 import kotlin.time.TimeSource.Monotonic.ValueTimeMark
-import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,39 +37,73 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+
+@Composable
+public fun rememberToastHostState(
+    onDismiss: () -> Unit = {},
+): ToastHostState = rememberSaveable(
+    saver = ToastHostState.Saver(onDismiss),
+) {
+    ToastHostState(onDismiss)
+}
 
 @Stable
-public class ToastHostState {
-    private val mutex = Mutex()
+public class ToastHostState(
+    internal val onDismiss: () -> Unit,
+) {
+    internal companion object {
+        fun Saver(onDismiss: () -> Unit): Saver<ToastHostState, *> = listSaver(
+            save = { it.dataQueue.flatMap { data -> listOf(data.message, data.iconName) } },
+            restore = {
+                ToastHostState(onDismiss).apply {
+                    dataQueue.addAll(
+                        it.chunked(2) { data ->
+                            createData(
+                                message = data[0] as String,
+                                iconName = data[1] as IconName?,
+                            )
+                        },
+                    )
+                    currentData = dataQueue.firstOrNull()
+                }
+            },
+        )
+    }
 
-    public var currentData: ToastData? by mutableStateOf(null)
+    internal var currentData: ToastData? by mutableStateOf(null)
         private set
 
-    public suspend fun showToast(
-        message: String,
-        icon: @Composable (() -> Painter)?,
-    ): Unit = mutex.withLock {
-        try {
-            return suspendCancellableCoroutine { cont ->
-                currentData = ToastDataImpl(
-                    message,
-                    icon,
-                    cont,
-                )
+    private val dataQueue: MutableList<ToastData> = mutableListOf()
+
+    public fun showToast(message: String, iconName: IconName?) {
+        synchronized(this) {
+            dataQueue.add(createData(message, iconName))
+
+            if (currentData == null) {
+                currentData = dataQueue.firstOrNull()
             }
-        } finally {
-            currentData = null
         }
     }
+
+    private fun createData(message: String, iconName: IconName?): ToastData =
+        ToastDataImpl(
+            message = message,
+            iconName = iconName,
+            onDismiss = {
+                synchronized(this) {
+                    currentData = null
+                    dataQueue.remove(it)
+                    onDismiss()
+                    currentData = dataQueue.firstOrNull()
+                }
+            },
+        )
 
     @Stable
     private class ToastDataImpl(
         override val message: String,
-        override val icon: @Composable (() -> Painter)?,
-        private val continuation: CancellableContinuation<Unit>,
+        override val iconName: IconName?,
+        private val onDismiss: (ToastData) -> Unit,
     ) : ToastData {
         private var elapsed: Duration = Duration.ZERO
         private var started: ValueTimeMark? = null
@@ -79,7 +114,7 @@ public class ToastHostState {
 
         override suspend fun run(accessibilityManager: AccessibilityManager?) {
             duration = durationTimeout(
-                hasIcon = icon != null,
+                hasIcon = iconName != null,
                 accessibilityManager = accessibilityManager,
             )
 
@@ -131,9 +166,7 @@ public class ToastHostState {
         }
 
         override fun dismissed() {
-            if (continuation.isActive) {
-                continuation.resume(Unit)
-            }
+            onDismiss(this)
         }
     }
 }

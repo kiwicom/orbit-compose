@@ -10,29 +10,37 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.catalog.semantics.ToastScreenSemantics
-import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.controls.ToastHostState
 import kiwi.orbit.compose.ui.controls.TopAppBar
-import kotlinx.coroutines.launch
+import kiwi.orbit.compose.ui.controls.rememberToastHostState
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @Composable
 internal fun ToastScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val toastHostState = remember { ToastHostState() }
-    val scope = rememberCoroutineScope()
+    var dismissedText by remember { mutableStateOf("") }
+    val toastHostState = rememberToastHostState(
+        onDismiss = {
+            val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+            dismissedText = "Last toast dismissed at ${now.hour}:${now.minute}:${now.second}"
+        },
+    )
     Scaffold(
         modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
@@ -48,10 +56,8 @@ internal fun ToastScreen(
                 .fillMaxSize()
                 .padding(contentPadding),
         ) {
-            ToastScreenInner { message, icon ->
-                scope.launch {
-                    toastHostState.showToast(message, icon)
-                }
+            ToastScreenInner(dismissedText) { message, iconName ->
+                toastHostState.showToast(message, iconName)
             }
         }
     }
@@ -59,7 +65,8 @@ internal fun ToastScreen(
 
 @Composable
 private fun ToastScreenInner(
-    onToast: (String, @Composable (() -> Painter)?) -> Unit,
+    dismissedText: String,
+    onToast: (String, IconName?) -> Unit,
 ) {
     Column(
         Modifier
@@ -71,39 +78,36 @@ private fun ToastScreenInner(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ButtonSecondary(
-            onClick = {
-                onToast("You’re signed in as jon.snow@wall.7k.") { Icons.CheckCircle }
-            },
+            onClick = { onToast("You’re signed in as jon.snow@wall.7k.", IconName.CheckCircle) },
             modifier = Modifier.testTag(ToastScreenSemantics.ToastSignedInButtonTag),
-        ) { Text("Toast – signed in") }
-
+            content = { Text("Toast – signed in") },
+        )
+        ButtonSecondary(
+            onClick = { onToast("Price alert was removed.", IconName.NotificationOff) },
+            content = { Text("Toast – price alert") },
+        )
+        ButtonSecondary(
+            onClick = { onToast("We’ll notify you when the price changes.", IconName.Notification) },
+            content = { Text("Toast – price alert created") },
+        )
         ButtonSecondary(
             onClick = {
-                onToast("Price alert was removed.") { Icons.NotificationOff }
+                onToast("On mobile there’s always a fixed width to make the Toast stand out a bit more.", null)
             },
-        ) { Text("Toast – price alert") }
-
-        ButtonSecondary(
-            onClick = {
-                onToast("We’ll notify you when the price changes.") { Icons.Notification }
-            },
-        ) { Text("Toast – price alert created") }
-
+            content = { Text("Toast – long message") },
+        )
         ButtonSecondary(
             onClick = {
                 onToast(
                     "On mobile there’s always a fixed width to make the Toast stand out a bit more.",
-                    null,
+                    IconName.AirplaneLanding,
                 )
             },
-        ) { Text("Toast – long message") }
-
-        ButtonSecondary(
-            onClick = {
-                onToast("On mobile there’s always a fixed width to make the Toast stand out a bit more.") {
-                    Icons.AirplaneLanding
-                }
-            },
-        ) { Text("Toast – long message 2") }
+            content = { Text("Toast – long message 2") },
+        )
+        Text(
+            text = dismissedText,
+            modifier = Modifier.padding(top = 24.dp),
+        )
     }
 }
