@@ -10,17 +10,16 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
-import kiwi.orbit.compose.icons.ColoredIcons
-import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.ColoredIconName
+import kiwi.orbit.compose.icons.IconName
+import kiwi.orbit.compose.icons.painter
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -28,7 +27,6 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kiwi.orbit.compose.ui.foundation.ContentEmphasis
 import kiwi.orbit.compose.ui.utils.plus
-import kotlin.reflect.full.memberProperties
 
 @Composable
 internal fun IconsScreen(onNavigateUp: () -> Unit) {
@@ -47,13 +45,6 @@ internal fun IconsScreen(onNavigateUp: () -> Unit) {
 
 @Composable
 private fun IconsScreenInner(contentPadding: PaddingValues) {
-    val icons: List<Pair<String, Painter>> = Icons::class.memberProperties.map {
-        it.name to (it.getter.call(Icons, currentComposer, 0) as Painter)
-    }
-    val coloredIcons: List<Pair<String, Painter>> = ColoredIcons::class.memberProperties.map {
-        it.name to (it.getter.call(ColoredIcons, currentComposer, 0) as Painter)
-    }
-
     LazyVerticalGrid(
         columns = GridCells.Adaptive(120.dp),
         contentPadding = contentPadding + PaddingValues(8.dp),
@@ -68,8 +59,8 @@ private fun IconsScreenInner(contentPadding: PaddingValues) {
                 )
             }
         }
-        items(icons) { (name, icon) ->
-            Icon({ Icon(painter = icon, contentDescription = name) }, name)
+        items(IconName.values()) { icon ->
+            Icon({ Icon(icon.painter(), contentDescription = icon.name) }, icon.name)
         }
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column(Modifier.padding(horizontal = 4.dp, vertical = 8.dp)) {
@@ -81,8 +72,8 @@ private fun IconsScreenInner(contentPadding: PaddingValues) {
                 )
             }
         }
-        items(coloredIcons) { (name, icon) ->
-            Icon({ Image(painter = icon, contentDescription = name) }, name)
+        items(ColoredIconName.values()) { icon ->
+            Icon({ Image(icon.painter(), contentDescription = icon.name) }, icon.name)
         }
     }
 }

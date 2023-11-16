@@ -148,7 +148,6 @@ dependencies {
     implementation(libs.kotlin.datetime)
     implementation(libs.kotlin.serialization.core)
     implementation(libs.kotlin.stdlib)
-    implementation(libs.kotlin.reflect)
 
     implementation(libs.coil)
     implementation(libs.accompanist.systemController)

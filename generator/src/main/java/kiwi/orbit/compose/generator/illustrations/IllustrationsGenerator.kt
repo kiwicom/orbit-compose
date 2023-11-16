@@ -136,40 +136,65 @@ class IllustrationsGenerator {
     }
 
     private fun generateClass(illustrations: List<Pair<String, String>>, dir: Path) {
-        val illustrationClassType = ClassName("kiwi.orbit.compose.illustrations", "Illustrations")
+        val illustrationsClassType = ClassName("kiwi.orbit.compose.illustrations", "Illustrations")
+        val illustrationNameClassType = ClassName("kiwi.orbit.compose.illustrations", "IllustrationName")
         val painterType = ClassName("androidx.compose.ui.graphics.painter", "Painter")
         val composable = ClassName("androidx.compose.runtime", "Composable")
         val composableAnnotation = AnnotationSpec.builder(composable).build()
 
-        val illustrationClass = TypeSpec.objectBuilder(illustrationClassType)
-        illustrationClass.addAnnotation(
+        val illustrationsClass = TypeSpec.objectBuilder(illustrationsClassType)
+        illustrationsClass.addAnnotation(
             AnnotationSpec.builder(Suppress::class)
                 .addMember("%S", "unused")
                 .build(),
         )
 
+        val illustrationNameClass = TypeSpec.enumBuilder(illustrationNameClassType)
+        val painterFun = FunSpec.builder("painter")
+            .addAnnotation(composableAnnotation)
+            .receiver(illustrationNameClassType)
+            .returns(painterType)
+            .beginControlFlow("return when (this)")
+
         illustrations.sortedBy { it.first }.forEach { (illustrationName, illustrationResource) ->
-            val property = PropertySpec.builder(illustrationName, painterType)
-                .getter(
-                    FunSpec.getterBuilder()
-                        .addAnnotation(composableAnnotation)
-                        .addStatement(
-                            "return %M(%L)",
-                            MemberName("androidx.compose.ui.res", "painterResource"),
-                            "R.drawable.$illustrationResource",
-                        )
-                        .build(),
-                )
-                .build()
-            illustrationClass.addProperty(property)
+            illustrationsClass.addProperty(
+                PropertySpec.builder(illustrationName, painterType)
+                    .getter(
+                        FunSpec.getterBuilder()
+                            .addAnnotation(composableAnnotation)
+                            .addStatement(
+                                "return %M(%L)",
+                                MemberName("androidx.compose.ui.res", "painterResource"),
+                                "R.drawable.$illustrationResource",
+                            )
+                            .build(),
+                    )
+                    .build(),
+            )
+            illustrationNameClass.addEnumConstant(illustrationName)
+            painterFun.addStatement(
+                "%T.%L -> %T.%L",
+                illustrationNameClassType,
+                illustrationName,
+                illustrationsClassType,
+                illustrationName,
+            )
         }
 
-        val file = FileSpec.builder("kiwi.orbit.compose.illustrations", "Illustrations")
-            .addType(illustrationClass.build())
+        painterFun.endControlFlow()
+
+        FileSpec.builder("kiwi.orbit.compose.illustrations", illustrationsClassType.simpleName)
+            .addType(illustrationsClass.build())
             .indent("    ")
             .build()
+            .writeTo(dir)
 
-        file.writeTo(dir)
+        FileSpec.builder("kiwi.orbit.compose.illustrations", illustrationNameClassType.simpleName)
+            .addType(illustrationNameClass.build())
+            .addFunction(painterFun.build())
+            .indent("    ")
+            .build()
+            .writeTo(dir)
     }
 
     @Suppress("NAME_SHADOWING", "SameParameterValue")
