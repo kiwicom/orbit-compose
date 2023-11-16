@@ -22,6 +22,11 @@ import androidx.compose.ui.platform.LocalAccessibilityManager
 import kiwi.orbit.compose.ui.utils.durationScale
 import kotlin.coroutines.resume
 import kotlin.math.roundToLong
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.TimeSource
+import kotlin.time.TimeSource.Monotonic.ValueTimeMark
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -65,11 +70,12 @@ public class ToastHostState {
         override val icon: @Composable (() -> Painter)?,
         private val continuation: CancellableContinuation<Unit>,
     ) : ToastData {
-        private var elapsed = 0L
-        private var started = 0L
-        private var duration = 0L
-        private val _state = MutableStateFlow<Int?>(null)
-        override val animationDuration: StateFlow<Int?> = _state.asStateFlow()
+        private var elapsed: Duration = Duration.ZERO
+        private var started: ValueTimeMark? = null
+        private var duration: Duration = Duration.ZERO
+
+        private val _state = MutableStateFlow<Duration?>(null)
+        override val animationDuration: StateFlow<Duration?> = _state.asStateFlow()
 
         override suspend fun run(accessibilityManager: AccessibilityManager?) {
             duration = durationTimeout(
@@ -79,7 +85,7 @@ public class ToastHostState {
 
             // Accessibility decided to show forever
             // Let's await explicit dismiss, do not run animation.
-            if (duration == Long.MAX_VALUE) {
+            if (duration == Duration.INFINITE) {
                 delay(duration)
                 return
             }
@@ -90,16 +96,16 @@ public class ToastHostState {
                     animationDuration.collectLatest { duration ->
                         val animationScale = coroutineContext.durationScale
                         if (duration != null) {
-                            started = System.currentTimeMillis()
+                            started = TimeSource.Monotonic.markNow()
                             // When animations are turned off, simply show, wait and hide.
                             val finalDuration = when (animationScale) {
-                                0f -> duration.toLong()
-                                else -> (duration.toLong() * animationScale).roundToLong()
+                                0f -> duration.inWholeMilliseconds
+                                else -> (duration.inWholeMilliseconds * animationScale).roundToLong()
                             }
                             delay(finalDuration)
                             this@launch.cancel()
                         } else {
-                            elapsed += System.currentTimeMillis() - started
+                            elapsed += started?.elapsedNow() ?: Duration.ZERO
                             delay(Long.MAX_VALUE)
                         }
                     }
@@ -112,8 +118,8 @@ public class ToastHostState {
         }
 
         override fun resume() {
-            val remains = (duration - elapsed).toInt()
-            if (remains > 0) {
+            val remains = duration - elapsed
+            if (remains.isPositive()) {
                 _state.value = remains
             } else {
                 dismiss()
@@ -121,7 +127,7 @@ public class ToastHostState {
         }
 
         override fun dismiss() {
-            _state.value = 0
+            _state.value = Duration.ZERO
         }
 
         override fun dismissed() {
@@ -175,13 +181,14 @@ public fun ToastHost(
 internal fun durationTimeout(
     hasIcon: Boolean,
     accessibilityManager: AccessibilityManager?,
-): Long {
-    val timeout = 5000L
+): Duration {
+    val timeout = 5.seconds
     if (accessibilityManager == null) return timeout
-    return accessibilityManager.calculateRecommendedTimeoutMillis(
-        originalTimeoutMillis = timeout,
+    val millis = accessibilityManager.calculateRecommendedTimeoutMillis(
+        originalTimeoutMillis = timeout.inWholeMilliseconds,
         containsIcons = hasIcon,
         containsText = true,
         containsControls = false,
     )
+    return if (millis == Long.MAX_VALUE) Duration.INFINITE else millis.milliseconds
 }
