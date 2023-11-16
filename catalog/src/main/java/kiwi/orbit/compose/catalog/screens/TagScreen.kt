@@ -12,8 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -21,18 +19,18 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
-import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Tag
 import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.ToastHostState
 import kiwi.orbit.compose.ui.controls.TopAppBar
-import kotlinx.coroutines.launch
+import kiwi.orbit.compose.ui.controls.rememberToastHostState
 
 @Composable
 internal fun TagScreen(onNavigateUp: () -> Unit) {
-    val toastHostState = remember { ToastHostState() }
+    val toastHostState = rememberToastHostState()
     Scaffold(
         modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
@@ -57,11 +55,8 @@ internal fun TagScreen(onNavigateUp: () -> Unit) {
 @Composable
 private fun TagScreenInner(toastHostState: ToastHostState) {
     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        val scope = rememberCoroutineScope()
         val onRemove: () -> Unit = {
-            scope.launch {
-                toastHostState.showToast("Tag removed.") { Icons.InformationCircle }
-            }
+            toastHostState.showToast("Tag removed.", IconName.InformationCircle)
         }
 
         Text("Non-interactive", style = OrbitTheme.typography.title4)

@@ -5,37 +5,57 @@ import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.splineBasedDecay
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.verticalDrag
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.AccessibilityManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.icons.Icons
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import kiwi.orbit.compose.icons.IconName
+import kiwi.orbit.compose.icons.painter
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
+import kiwi.orbit.compose.ui.foundation.LocalColors
 import kiwi.orbit.compose.ui.foundation.LocalContentColor
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 import kiwi.orbit.compose.ui.utils.durationScale
@@ -49,11 +69,16 @@ import kotlinx.coroutines.launch
 
 public interface ToastData {
     public val message: String
-    public val icon: @Composable (() -> Painter)?
+    public val iconName: IconName?
+    public val imageUrl: String?
+    public val actionLabel: String?
+    public val toastId: String
 
     public val animationDuration: StateFlow<Duration?>
 
     public suspend fun run(accessibilityManager: AccessibilityManager?)
+
+    public fun performAction()
 
     public fun pause()
 
@@ -71,24 +96,31 @@ public fun Toast(
     val animateDuration by toastData.animationDuration.collectAsState()
     key(toastData) {
         Toast(
-            message = toastData.message,
-            icon = toastData.icon,
             animateDuration = animateDuration,
             onPause = toastData::pause,
             onResume = toastData::resume,
             onDismissed = toastData::dismissed,
-        )
+        ) {
+            ToastContent(
+                message = toastData.message,
+                iconName = toastData.iconName,
+                imageUrl = toastData.imageUrl,
+                actionLabel = toastData.actionLabel,
+                onActionClick = toastData::performAction,
+                onPause = toastData::pause,
+                onResume = toastData::resume,
+            )
+        }
     }
 }
 
 @Composable
 private fun Toast(
-    message: String,
-    icon: @Composable (() -> Painter)?,
     animateDuration: Duration? = Duration.ZERO,
     onPause: () -> Unit = {},
     onResume: () -> Unit = {},
     onDismissed: () -> Unit = {},
+    content: @Composable RowScope.() -> Unit,
 ) {
     val shape = OrbitTheme.shapes.normal
     Surface(
@@ -121,7 +153,8 @@ private fun Toast(
 
         val color = LocalContentColor.current
         Row(
-            Modifier
+            modifier = Modifier
+                .height(IntrinsicSize.Max)
                 .drawBehind {
                     val fraction = progress.value * size.width
                     drawRoundRect(
@@ -130,20 +163,70 @@ private fun Toast(
                         cornerRadius = CornerRadius(6.dp.toPx()),
                         alpha = 0.1f,
                     )
-                }
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                },
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             ProvideMergedTextStyle(OrbitTheme.typography.bodyNormal) {
-                if (icon != null) {
-                    Icon(
-                        icon(),
-                        contentDescription = null,
-                    )
-                }
-                Text(message)
+                content()
             }
         }
+    }
+}
+
+@Composable
+private fun RowScope.ToastContent(
+    message: String,
+    iconName: IconName? = null,
+    imageUrl: String? = null,
+    actionLabel: String? = null,
+    onActionClick: () -> Unit = {},
+    onPause: () -> Unit = {},
+    onResume: () -> Unit = {},
+) {
+    when {
+        iconName != null -> Icon(
+            painter = iconName.painter(),
+            contentDescription = null,
+            modifier = Modifier.padding(start = 12.dp, end = 8.dp),
+        )
+        imageUrl != null -> AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(start = 6.dp, top = 6.dp, bottom = 6.dp, end = 12.dp)
+                .size(52.dp)
+                .clip(RoundedCornerShape(3.dp))
+                .background(LocalColors.current.content.subtle),
+            contentScale = ContentScale.Crop,
+        )
+        else -> Spacer(Modifier.width(12.dp))
+    }
+    Text(
+        text = message,
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+            .weight(1f),
+    )
+    if (actionLabel != null) {
+        Text(
+            text = actionLabel,
+            modifier = Modifier
+                .fillMaxHeight()
+                .clip(RoundedCornerShape(topEnd = 6.dp, bottomEnd = 6.dp))
+                .clickable(
+                    role = Role.Button,
+                    onClick = onActionClick,
+                )
+                .toastActionGesturesDetector(onPause, onResume)
+                .padding(horizontal = 12.dp)
+                .wrapContentHeight(),
+            fontWeight = FontWeight.Medium,
+        )
+    } else {
+        Spacer(Modifier.width(12.dp))
     }
 }
 
@@ -227,21 +310,38 @@ private fun Modifier.toastGesturesDetector(
         .alpha(alpha.value)
 }
 
+private fun Modifier.toastActionGesturesDetector(
+    onPause: () -> Unit,
+    onResume: () -> Unit,
+): Modifier = pointerInput(Unit) {
+    while (true) {
+        awaitPointerEventScope {
+            awaitFirstDown()
+            onPause()
+            waitForUpOrCancellation()
+            onResume()
+        }
+    }
+}
+
 @OrbitPreviews
 @Composable
 internal fun ToastPreview() {
     Preview {
-        Toast(
-            message = "Message",
-            icon = null,
-        )
-        Toast(
-            message = "Message with icon",
-            icon = { Icons.CheckCircle },
-        )
-        Toast(
-            message = "Message with icon and very long message with many words.",
-            icon = { Icons.CheckCircle },
-        )
+        Toast {
+            ToastContent("Message")
+        }
+        Toast {
+            ToastContent(
+                message = "Message with icon",
+                iconName = IconName.CheckCircle,
+            )
+        }
+        Toast {
+            ToastContent(
+                message = "Message with icon and very long message with many words.",
+                iconName = IconName.CheckCircle,
+            )
+        }
     }
 }

@@ -9,29 +9,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
-import kiwi.orbit.compose.icons.Icons
+import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.controls.Coupon
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Text
-import kiwi.orbit.compose.ui.controls.ToastHostState
 import kiwi.orbit.compose.ui.controls.TopAppBar
-import kotlinx.coroutines.launch
+import kiwi.orbit.compose.ui.controls.rememberToastHostState
 
 @Composable
 internal fun CouponScreen(
     onNavigateUp: () -> Unit,
 ) {
-    val toastHostState = remember { ToastHostState() }
-    val coroutineScope = rememberCoroutineScope()
-
+    val toastHostState = rememberToastHostState()
     Scaffold(
         modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
@@ -50,9 +45,7 @@ internal fun CouponScreen(
         ) {
             CouponScreenInner(
                 onCouponCopied = {
-                    coroutineScope.launch {
-                        toastHostState.showToast("Copied to clipboard!") { Icons.Copy }
-                    }
+                    toastHostState.showToast("Copied to clipboard!", IconName.Copy)
                 },
             )
         }
