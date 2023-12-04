@@ -255,6 +255,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_parking)
 
+    public val PassportUpdate: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_passport_update)
+
     public val Pets: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_pets)

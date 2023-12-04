@@ -66,6 +66,7 @@ public enum class IllustrationName {
     OnlineCheckIn,
     OpenSearch,
     Parking,
+    PassportUpdate,
     Pets,
     PlaceholderAirport,
     PlaceholderDestination,
@@ -155,6 +156,7 @@ public fun IllustrationName.painter(): Painter = when (this) {
     IllustrationName.OnlineCheckIn -> Illustrations.OnlineCheckIn
     IllustrationName.OpenSearch -> Illustrations.OpenSearch
     IllustrationName.Parking -> Illustrations.Parking
+    IllustrationName.PassportUpdate -> Illustrations.PassportUpdate
     IllustrationName.Pets -> Illustrations.Pets
     IllustrationName.PlaceholderAirport -> Illustrations.PlaceholderAirport
     IllustrationName.PlaceholderDestination -> Illustrations.PlaceholderDestination
