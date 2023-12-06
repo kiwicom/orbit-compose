@@ -9,10 +9,10 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.20" apply false
-    kotlin("android") version "1.9.20" apply false
-    kotlin("multiplatform") version "1.9.20" apply false
-    kotlin("plugin.serialization") version "1.9.20" apply false
+    kotlin("jvm") version "1.9.21" apply false
+    kotlin("android") version "1.9.21" apply false
+    kotlin("multiplatform") version "1.9.21" apply false
+    kotlin("plugin.serialization") version "1.9.21" apply false
     id("com.android.library") version "8.2.0" apply false
     id("com.android.test") version "8.2.0" apply false
     id("androidx.baselineprofile") version "1.2.2" apply false
