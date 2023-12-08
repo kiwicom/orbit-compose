@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material3.Divider
 import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.contentColorFor
@@ -30,14 +29,12 @@ import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 public fun TabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
+    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = { tabPositions ->
         TabIndicator(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
-    divider: @Composable () -> Unit = @Composable {
-        Divider()
-    },
+    divider: @Composable () -> Unit = { Separator() },
     tabs: @Composable () -> Unit,
 ) {
     OrbitElevations {
@@ -58,14 +55,12 @@ public fun ScrollableTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     edgePadding: Dp = ScrollableTabRowPadding,
-    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
+    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = { tabPositions ->
         TabIndicator(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
-    divider: @Composable () -> Unit = @Composable {
-        Divider()
-    },
+    divider: @Composable () -> Unit = { Separator() },
     tabs: @Composable () -> Unit,
 ) {
     OrbitElevations {

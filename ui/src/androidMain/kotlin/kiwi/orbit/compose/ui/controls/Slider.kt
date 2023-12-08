@@ -24,7 +24,8 @@ import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
-import androidx.compose.material3.SliderPositions
+import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -41,8 +42,9 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.lerp
-import androidx.compose.ui.graphics.PointMode
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
@@ -109,8 +111,8 @@ public fun Slider(
                     enabled = enabled,
                 )
             },
-            track = { sliderPositions ->
-                Track(enabled, sliderPositions)
+            track = { sliderState ->
+                Track(sliderState, enabled)
             },
         )
     }
@@ -166,8 +168,8 @@ public fun RangeSlider(
                     enabled = enabled,
                 )
             },
-            track = { sliderPositions ->
-                Track(enabled, sliderPositions)
+            track = { sliderState ->
+                Track(sliderState, enabled)
             },
             steps = steps,
         )
@@ -280,8 +282,65 @@ private fun Thumb(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Track(enabled: Boolean, sliderPositions: SliderPositions) {
+private fun Track(
+    sliderState: SliderState,
+    enabled: Boolean,
+) {
+    Track(
+        steps = sliderState.steps,
+        activeRangeStart = {
+            calcFraction(
+                sliderState.valueRange.start,
+                sliderState.valueRange.endInclusive,
+                0f,
+            )
+        },
+        activeRangeEnd = {
+            calcFraction(
+                sliderState.valueRange.start,
+                sliderState.valueRange.endInclusive,
+                0f,
+            )
+        },
+        enabled = enabled,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun Track(
+    rangeSliderState: RangeSliderState,
+    enabled: Boolean,
+) {
+    Track(
+        steps = rangeSliderState.steps,
+        activeRangeStart = {
+            calcFraction(
+                rangeSliderState.valueRange.start,
+                rangeSliderState.valueRange.endInclusive,
+                rangeSliderState.activeRangeStart,
+            )
+        },
+        activeRangeEnd = {
+            calcFraction(
+                rangeSliderState.valueRange.start,
+                rangeSliderState.valueRange.endInclusive,
+                rangeSliderState.activeRangeEnd,
+            )
+        },
+        enabled = enabled,
+    )
+}
+
+@Composable
+private fun Track(
+    steps: Int,
+    activeRangeStart: () -> Float,
+    activeRangeEnd: () -> Float,
+    enabled: Boolean,
+) {
     val activeTrackColor = when (enabled) {
         true -> OrbitTheme.colors.info.normal
         false -> OrbitTheme.colors.content.disabled.copy(alpha = 0.38f)
@@ -298,60 +357,80 @@ private fun Track(enabled: Boolean, sliderPositions: SliderPositions) {
         true -> contentColorFor(inactiveTrackColor).copy(alpha = 0.38f)
         false -> contentColorFor(OrbitTheme.colors.surface.strong).copy(alpha = 0.24f)
     }
+    val tickFractions = remember(steps) {
+        if (steps == 0) floatArrayOf() else FloatArray(steps + 2) { it.toFloat() / (steps + 1) }
+    }
     Canvas(
         Modifier
             .fillMaxWidth()
-            .height(TrackSize),
+            .height(TrackHeight),
     ) {
-        val isRtl = layoutDirection == LayoutDirection.Rtl
-        val sliderLeft = Offset(0f - 9.9.dp.roundToPx(), center.y)
-        val sliderRight = Offset(size.width + 9.9.dp.roundToPx(), center.y)
-        val sliderStart = if (isRtl) sliderRight else sliderLeft
-        val sliderEnd = if (isRtl) sliderLeft else sliderRight
-        val dotStart = if (isRtl) Offset(size.width, center.y) else Offset(0f, center.y)
-        val dotEnd = if (isRtl) Offset(0f, center.y) else Offset(size.width, center.y)
-        val tickSize = TickSize.toPx()
-        val trackStrokeWidth = TrackSize.toPx()
-        drawLine(
+        drawTrack(
+            tickFractions,
+            activeRangeStart(),
+            activeRangeEnd(),
             inactiveTrackColor,
-            sliderStart,
-            sliderEnd,
-            trackStrokeWidth,
-            StrokeCap.Round,
-        )
-        val sliderValueEnd = Offset(
-            sliderStart.x +
-                (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.endInclusive,
-            center.y,
-        )
-
-        val sliderValueStart = Offset(
-            sliderStart.x +
-                (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.start,
-            center.y,
-        )
-
-        drawLine(
             activeTrackColor,
-            sliderValueStart,
-            sliderValueEnd,
-            trackStrokeWidth,
-            StrokeCap.Round,
+            inactiveTickColor,
+            activeTickColor,
         )
-        sliderPositions.tickFractions.groupBy {
-            it > sliderPositions.activeRange.endInclusive ||
-                it < sliderPositions.activeRange.start
-        }.forEach { (outsideFraction, list) ->
-            drawPoints(
-                list.map {
-                    Offset(lerp(dotStart, dotEnd, it).x, center.y)
-                },
-                PointMode.Points,
-                (if (outsideFraction) inactiveTickColor else activeTickColor),
-                tickSize,
-                StrokeCap.Round,
-            )
-        }
+    }
+}
+
+private fun calcFraction(a: Float, b: Float, pos: Float) =
+    (if (b - a == 0f) 0f else (pos - a) / (b - a)).coerceIn(0f, 1f)
+
+private fun DrawScope.drawTrack(
+    tickFractions: FloatArray,
+    activeRangeStart: Float,
+    activeRangeEnd: Float,
+    inactiveTrackColor: Color,
+    activeTrackColor: Color,
+    inactiveTickColor: Color,
+    activeTickColor: Color,
+) {
+    val isRtl = layoutDirection == LayoutDirection.Rtl
+    val sliderLeft = Offset(0f - 9.9.dp.roundToPx(), center.y)
+    val sliderRight = Offset(size.width + 9.9.dp.roundToPx(), center.y)
+    val sliderStart = if (isRtl) sliderRight else sliderLeft
+    val sliderEnd = if (isRtl) sliderLeft else sliderRight
+    val dotStart = if (isRtl) Offset(size.width, center.y) else Offset(0f, center.y)
+    val dotEnd = if (isRtl) Offset(0f, center.y) else Offset(size.width, center.y)
+    val tickSize = TickSize.toPx()
+    val trackStrokeWidth = TrackHeight.toPx()
+    drawLine(
+        inactiveTrackColor,
+        sliderStart,
+        sliderEnd,
+        trackStrokeWidth,
+        StrokeCap.Round,
+    )
+    val sliderValueEnd = Offset(
+        sliderStart.x +
+            (sliderEnd.x - sliderStart.x) * activeRangeEnd,
+        center.y,
+    )
+
+    val sliderValueStart = Offset(
+        sliderStart.x +
+            (sliderEnd.x - sliderStart.x) * activeRangeStart,
+        center.y,
+    )
+
+    drawLine(
+        activeTrackColor,
+        sliderValueStart,
+        sliderValueEnd,
+        trackStrokeWidth,
+        StrokeCap.Round,
+    )
+    for (tick in tickFractions) {
+        val outsideFraction = tick > activeRangeEnd || tick < activeRangeStart
+        drawCircle(
+            color = if (outsideFraction) inactiveTickColor else activeTickColor,
+            center = Offset(lerp(dotStart, dotEnd, tick).x, center.y),
+            radius = tickSize / 2f,
+        )
     }
 }
 
@@ -419,7 +498,7 @@ private fun Modifier.sliderSystemGestureExclusion(enabled: Boolean): Modifier {
     }
 }
 
-private val TrackSize = 4.dp
+private val TrackHeight = 4.dp
 private val TickSize = 2.dp
 
 @OrbitPreviews

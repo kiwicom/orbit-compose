@@ -48,7 +48,7 @@ public fun LinearProgressIndicator(
         label = "LinearProgressWidth",
     )
     androidx.compose.material3.LinearProgressIndicator(
-        progress = animatedProgress,
+        progress = { animatedProgress },
         modifier = modifier.fillMaxWidth(),
         color = color,
         trackColor = backgroundColor,
