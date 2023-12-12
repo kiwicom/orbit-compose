@@ -15,7 +15,7 @@ import kiwi.orbit.compose.ui.foundation.LocalTextStyle
 public fun Modifier.alignByLineHeight(
     textStyle: TextStyle? = null,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
-): Modifier = composed {
+): Modifier = this.composed {
     val style: TextStyle = textStyle ?: LocalTextStyle.current
     val density = LocalDensity.current
     val height = with(density) { style.lineHeight.toDp() }

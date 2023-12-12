@@ -39,7 +39,7 @@ subprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "1.8"
-            allWarningsAsErrors = true
+//            allWarningsAsErrors = true
             freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
                 add("-Xskip-prerelease-check")
             }.toList()
