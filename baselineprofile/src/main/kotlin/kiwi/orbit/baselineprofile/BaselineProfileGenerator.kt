@@ -127,7 +127,7 @@ internal class BaselineProfileGenerator {
             profileSubScreen(MainScreenSemantics.TileGroupItemTag)
             profileSubScreen(MainScreenSemantics.TimelineItemTag)
             profileSubScreen(MainScreenSemantics.ToastItemTag) {
-                device.findObject(By.res(ToastScreenSemantics.ToastSignedInButtonTag)).click()
+                device.findObject(By.res(ToastScreenSemantics.ToastAddToTripWithImageButtonTag)).click()
             }
             profileSubScreen(MainScreenSemantics.TopAppBarItemTag) {
                 device.findObject(By.res(TopAppBarScreenSemantics.NormalSimpleButtonTag)).click()

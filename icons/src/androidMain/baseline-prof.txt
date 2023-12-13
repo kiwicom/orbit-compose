@@ -8,15 +8,14 @@ PLkiwi/orbit/compose/icons/IconName;-><init>(Ljava/lang/String;I)V
 PLkiwi/orbit/compose/icons/IconName;->values()[Lkiwi/orbit/compose/icons/IconName;
 PLkiwi/orbit/compose/icons/IconNameKt;->painter(Lkiwi/orbit/compose/icons/IconName;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/IconNameKt$WhenMappings;-><clinit>()V
-Lkiwi/orbit/compose/icons/Icons;
-HSPLkiwi/orbit/compose/icons/Icons;-><clinit>()V
-HSPLkiwi/orbit/compose/icons/Icons;-><init>()V
+PLkiwi/orbit/compose/icons/Icons;-><clinit>()V
+PLkiwi/orbit/compose/icons/Icons;-><init>()V
 PLkiwi/orbit/compose/icons/Icons;->getAccommodation(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAccountCircle(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAdmin(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAi(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAirConditioning(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
-HSPLkiwi/orbit/compose/icons/Icons;->getAirplane(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
+PLkiwi/orbit/compose/icons/Icons;->getAirplane(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAirplaneDown(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAirplaneLanding(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getAirplaneReturn(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
@@ -60,7 +59,7 @@ PLkiwi/orbit/compose/icons/Icons;->getClose(Landroidx/compose/runtime/Composer;I
 PLkiwi/orbit/compose/icons/Icons;->getCloseCircle(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getDeals(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getEmail(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
-HSPLkiwi/orbit/compose/icons/Icons;->getGallery(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
+PLkiwi/orbit/compose/icons/Icons;->getGallery(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getInformationCircle(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getLinkedin(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getList(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
@@ -80,7 +79,6 @@ PLkiwi/orbit/compose/icons/Icons;->getTerminal(Landroidx/compose/runtime/Compose
 PLkiwi/orbit/compose/icons/Icons;->getThumbDown(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getTrip(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 PLkiwi/orbit/compose/icons/Icons;->getVisibility(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
-Lkiwi/orbit/compose/icons/R$drawable;
 PLkiwi/orbit/compose/icons/TopAppBarIcons;-><clinit>()V
 PLkiwi/orbit/compose/icons/TopAppBarIcons;-><init>()V
 PLkiwi/orbit/compose/icons/TopAppBarIcons;->getBack(Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
