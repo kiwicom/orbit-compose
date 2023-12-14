@@ -339,6 +339,13 @@ public class Colors(
             outline = surface.strong,
             outlineVariant = surface.normal,
             scrim = surface.strong,
+            surfaceBright = Color.Unspecified,
+            surfaceDim = Color.Unspecified,
+            surfaceContainerHighest = surface.main,
+            surfaceContainerHigh = surface.main,
+            surfaceContainer = surface.main,
+            surfaceContainerLow = surface.main,
+            surfaceContainerLowest = surface.main,
         )
 }
 
