@@ -41,7 +41,7 @@ androidx-customViewPoolingContainer = { module = "androidx.customview:customview
 androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
 androidx-test-uiAutomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.2.0" }
 accompanist-systemController = "com.google.accompanist:accompanist-systemuicontroller:0.32.0"
-coil = { module = "io.coil-kt:coil-compose", version = "2.4.0" }
+coil = { module = "io.coil-kt:coil-compose", version = "2.5.0" }
 compose-animation = { module = "androidx.compose.animation:animation" }
 compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics" }
 compose-bom = "dev.chrisbanes.compose:compose-bom:2023.12.00-alpha03"
