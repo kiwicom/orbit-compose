@@ -19,7 +19,7 @@ jobs:
         run: git lfs fsck --pointers
 
       - name: set up JDK 18
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 18
@@ -53,7 +53,7 @@ jobs:
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=icons/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' icons/build/reports/ktlint/main-lint.json || true
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=illustrations/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' illustrations/build/reports/ktlint/main-lint.json || true
           jq --raw-output '[.[] | ({ f: .file } + ( .errors[] | { l: .line, c: .column, m: .message, r: .rule } )) | "::error file=ui/\(.f),line=\(.l),col=\(.c)::\(.m) [\(.r)]" ] | join("\n")' ui/build/reports/ktlint/main-lint.json || true
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ failure() }}
         with:
           name: shots-results
