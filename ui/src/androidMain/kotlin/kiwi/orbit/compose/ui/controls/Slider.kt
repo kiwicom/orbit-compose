@@ -290,18 +290,13 @@ private fun Track(
 ) {
     Track(
         steps = sliderState.steps,
-        activeRangeStart = {
-            calcFraction(
-                sliderState.valueRange.start,
-                sliderState.valueRange.endInclusive,
-                0f,
-            )
-        },
+        activeRangeStart = { 0f },
         activeRangeEnd = {
+            val valueRange = sliderState.valueRange
             calcFraction(
-                sliderState.valueRange.start,
-                sliderState.valueRange.endInclusive,
-                0f,
+                valueRange.start,
+                valueRange.endInclusive,
+                sliderState.value.coerceIn(valueRange.start, valueRange.endInclusive),
             )
         },
         enabled = enabled,
