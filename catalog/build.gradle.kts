@@ -109,6 +109,8 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
+    experimentalProperties["android.experimental.r8.dex-startup-optimization"] = true
+
     lint {
         disable.add("ObsoleteLintCustomCheck")
         disable.add("GradleDependency")
