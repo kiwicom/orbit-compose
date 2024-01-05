@@ -118,6 +118,10 @@ android {
         abortOnError = true
         warningsAsErrors = true
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 kotlinter {

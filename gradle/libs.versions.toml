@@ -22,10 +22,13 @@ square-kotlinPoet = "1.15.3"
 
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.5.0" }
 kotlin-dokka = { module = "org.jetbrains.dokka:dokka-base", version.ref = "kotlin-dokka" }
+kotlin-dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin-dokka" }
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-lang" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-lang" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+agp = "com.android.tools.build:gradle:8.2.0"
 android-desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.4" }
 android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "android-sdkCommon" }
 android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-lint" }
@@ -72,5 +75,6 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
 slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.2.0" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
+vannitktech-mavenPublish-gradle = "com.vanniktech:gradle-maven-publish-plugin:0.26.0"
 
 [bundles]

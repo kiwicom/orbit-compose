@@ -2,6 +2,8 @@
 
 rootProject.name = "OrbitCompose"
 
+includeBuild("./build-logic")
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
