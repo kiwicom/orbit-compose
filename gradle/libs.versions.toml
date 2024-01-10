@@ -4,7 +4,7 @@ compileSdk = "34"
 targetSdk = "33"
 minSdk = "23"
 
-kotlin-lang = "1.9.21"
+kotlin-lang = "1.9.22"
 kotlin-dokka = "1.9.10"
 
 kotlin-serialization = "1.6.2"
@@ -14,7 +14,7 @@ androidx-activityCompose = "1.8.2"
 androidx-activityComposeCatalog = "1.8.2"
 androidx-core = "1.12.0"
 androidx-constraint-layout = "1.0.1"
-compose-compiler = "1.5.6"
+compose-compiler = "1.5.8"
 mockk = "1.13.9"
 square-kotlinPoet = "1.15.3"
 
