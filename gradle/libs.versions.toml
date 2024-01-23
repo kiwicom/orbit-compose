@@ -16,7 +16,7 @@ androidx-core = "1.12.0"
 androidx-constraint-layout = "1.0.1"
 compose-compiler = "1.5.8"
 mockk = "1.13.9"
-square-kotlinPoet = "1.15.3"
+square-kotlinPoet = "1.16.0"
 
 [libraries]
 
