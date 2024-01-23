@@ -14,3 +14,4 @@ ktlint_standard_function-naming = disabled
 ktlint_standard_string-template-indent = disabled # due to multiline-expression-wrapping dependency
 ktlint_standard_class-signature = disabled # due to discouraged-comment-location
 ktlint_standard_if-else-wrapping = disabled # due to discouraged-comment-location
+ktlint_standard_value-argument-comment = disabled # due to discouraged-comment-location
