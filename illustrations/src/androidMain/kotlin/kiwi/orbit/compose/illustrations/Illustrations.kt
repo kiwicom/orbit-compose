@@ -107,6 +107,18 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_damage)
 
+    public val DepartureBoard: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_departure_board)
+
+    public val DepartureBoardBadge: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_departure_board_badge)
+
+    public val DepartureBoardLounge: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_departure_board_lounge)
+
     public val DesktopSearch: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_desktop_search)

@@ -29,6 +29,9 @@ public enum class IllustrationName {
     CompassSaveOnBooking,
     CompassTravelPlan,
     Damage,
+    DepartureBoard,
+    DepartureBoardBadge,
+    DepartureBoardLounge,
     DesktopSearch,
     EVisa,
     EnjoyApp,
@@ -119,6 +122,9 @@ public fun IllustrationName.painter(): Painter = when (this) {
     IllustrationName.CompassSaveOnBooking -> Illustrations.CompassSaveOnBooking
     IllustrationName.CompassTravelPlan -> Illustrations.CompassTravelPlan
     IllustrationName.Damage -> Illustrations.Damage
+    IllustrationName.DepartureBoard -> Illustrations.DepartureBoard
+    IllustrationName.DepartureBoardBadge -> Illustrations.DepartureBoardBadge
+    IllustrationName.DepartureBoardLounge -> Illustrations.DepartureBoardLounge
     IllustrationName.DesktopSearch -> Illustrations.DesktopSearch
     IllustrationName.EVisa -> Illustrations.EVisa
     IllustrationName.EnjoyApp -> Illustrations.EnjoyApp
