@@ -36,7 +36,7 @@ android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "and
 android-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-lint" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-activityComposeCatalog = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityComposeCatalog" }
-androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version = "1.2.2" }
+androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version = "1.2.3" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraint-layout" }
 androidx-customView = { module = "androidx.customview:customview", version = "1.1.0" }
@@ -53,7 +53,7 @@ compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref 
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-layout = { module = "androidx.compose.foundation:foundation-layout" }
 compose-material = { module = "androidx.compose.material:material" }
-compose-material3 = "androidx.compose.material3:material3:1.2.0-beta02"
+compose-material3 = "androidx.compose.material3:material3:1.2.0-rc01"
 compose-materialRipple = { module = "androidx.compose.material:material-ripple" }
 compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.7.6" }
