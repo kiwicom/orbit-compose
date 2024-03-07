@@ -3,10 +3,10 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 
 plugins {
-    kotlin("jvm") version "1.9.22" apply false
-    kotlin("android") version "1.9.22" apply false
-    kotlin("multiplatform") version "1.9.22" apply false
-    kotlin("plugin.serialization") version "1.9.22" apply false
+    kotlin("jvm") version "1.9.23" apply false
+    kotlin("android") version "1.9.23" apply false
+    kotlin("multiplatform") version "1.9.23" apply false
+    kotlin("plugin.serialization") version "1.9.23" apply false
     id("com.android.library") version "8.2.2" apply false
     id("com.android.test") version "8.2.2" apply false
     id("androidx.baselineprofile") version "1.2.3" apply false
@@ -15,7 +15,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.27.0" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.4" apply false
     id("org.jmailen.kotlinter") version "4.2.0" apply false
-    id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 buildscript {
