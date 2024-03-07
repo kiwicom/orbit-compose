@@ -11,7 +11,6 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -19,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
@@ -27,7 +25,6 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kiwi.navigationcompose.typed.composable
 import com.kiwi.navigationcompose.typed.createRoutePattern
 import com.kiwi.navigationcompose.typed.dialog
@@ -77,22 +74,16 @@ import kiwi.orbit.compose.catalog.screens.topAppBarNavigation
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @Composable
-fun CatalogApplication() {
-    val systemUiController = rememberSystemUiController()
-
+fun CatalogApplication(activity: MainActivity) {
     var isLightThemeUser by rememberSaveable { mutableStateOf<Boolean?>(null) }
     val isLightThemeFinal = isLightThemeUser ?: !isSystemInDarkTheme()
 
-    SideEffect {
-        systemUiController.setSystemBarsColor(
-            color = Color.Transparent,
-            darkIcons = isLightThemeFinal,
-        )
-    }
-
     AnimatedAppTheme(
         isLightTheme = isLightThemeFinal,
-        onThemeToggle = { isLightThemeUser = it },
+        onThemeToggle = { isLight ->
+            isLightThemeUser = isLight
+            activity.setUiMode(isLight)
+        },
     ) { onThemeToggle ->
         NavGraph(onThemeToggle = onThemeToggle)
     }

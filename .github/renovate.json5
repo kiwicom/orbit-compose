@@ -32,10 +32,9 @@
       ],
     },
     {
-      "groupName": "Compose & Accompanist",
+      "groupName": "Compose",
       "matchPackageNames": [
         "androidx.compose",
-        "com.google.accompanist",
       ],
     },
     {

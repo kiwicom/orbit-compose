@@ -137,6 +137,7 @@ dependencies {
     implementation(projects.catalog.semantics)
 
     implementation(libs.androidx.core)
+    implementation(libs.androidx.appCompat)
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.activityComposeCatalog)
 
@@ -155,7 +156,6 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     implementation(libs.coil)
-    implementation(libs.accompanist.systemController)
     implementation(libs.kiwi.navigationComposeTyped)
 
     baselineProfile(projects.baselineprofile)
