@@ -1,5 +1,6 @@
 package kiwi.orbit.compose.buildlogic
 
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import java.time.Year
@@ -33,11 +34,14 @@ class PublishPlugin : Plugin<Project> {
             }
         }
 
+        @Suppress("UnstableApiUsage")
         extensions.configure<MavenPublishBaseExtension> {
             group = requireNotNull(project.findProperty("GROUP"))
             version = requireNotNull(project.findProperty("VERSION_NAME"))
+
             publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
             signAllPublications()
+            configure(AndroidSingleVariantLibrary())
         }
 
         tasks.withType<DokkaTaskPartial>().configureEach {
