@@ -167,6 +167,10 @@ public object Illustrations {
         @Composable
         get() = painterResource(R.drawable.il_orbit_flexible_dates)
 
+    public val FlightChange: Painter
+        @Composable
+        get() = painterResource(R.drawable.il_orbit_flight_change)
+
     public val FlightDisruptions: Painter
         @Composable
         get() = painterResource(R.drawable.il_orbit_flight_disruptions)
