@@ -44,6 +44,7 @@ public enum class IllustrationName {
     FastTrackMan,
     Feedback,
     FlexibleDates,
+    FlightChange,
     FlightDisruptions,
     GroundTransport404,
     Help,
@@ -137,6 +138,7 @@ public fun IllustrationName.painter(): Painter = when (this) {
     IllustrationName.FastTrackMan -> Illustrations.FastTrackMan
     IllustrationName.Feedback -> Illustrations.Feedback
     IllustrationName.FlexibleDates -> Illustrations.FlexibleDates
+    IllustrationName.FlightChange -> Illustrations.FlightChange
     IllustrationName.FlightDisruptions -> Illustrations.FlightDisruptions
     IllustrationName.GroundTransport404 -> Illustrations.GroundTransport404
     IllustrationName.Help -> Illustrations.Help
