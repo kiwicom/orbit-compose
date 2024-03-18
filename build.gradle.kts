@@ -12,7 +12,7 @@ plugins {
     id("androidx.baselineprofile") version "1.2.3" apply false
     id("app.cash.paparazzi") version "1.3.2" apply false
     id("com.google.firebase.appdistribution") version "4.2.0" apply false
-    id("com.vanniktech.maven.publish") version "0.27.0" apply false
+    id("com.vanniktech.maven.publish") version "0.28.0" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.5" apply false
     id("org.jmailen.kotlinter") version "4.2.0" apply false
     id("org.jetbrains.dokka") version "1.9.20"
