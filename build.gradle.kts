@@ -3,10 +3,10 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 
 plugins {
-    kotlin("jvm") version "1.9.22" apply false
-    kotlin("android") version "1.9.22" apply false
-    kotlin("multiplatform") version "1.9.22" apply false
-    kotlin("plugin.serialization") version "1.9.22" apply false
+    kotlin("jvm") version "1.9.23" apply false
+    kotlin("android") version "1.9.23" apply false
+    kotlin("multiplatform") version "1.9.23" apply false
+    kotlin("plugin.serialization") version "1.9.23" apply false
     id("com.android.library") version "8.2.2" apply false
     id("com.android.test") version "8.2.2" apply false
     id("androidx.baselineprofile") version "1.2.3" apply false
