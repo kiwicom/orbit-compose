@@ -182,7 +182,7 @@ internal fun Modifier.scrollBehaviorLayout(
     if (scrollBehavior.state.heightOffsetLimit != heightOffsetLimit) {
         scrollBehavior.state.heightOffsetLimit = heightOffsetLimit
     }
-    val height = placeable.height + scrollBehavior.state.heightOffset.roundToInt()
+    val height = (placeable.height + scrollBehavior.state.heightOffset.roundToInt()).coerceAtLeast(0)
     layout(placeable.width, height) {
         placeable.place(0, height - placeable.height)
     }
