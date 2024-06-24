@@ -30,15 +30,24 @@ public enum class IconName {
     Atm,
     Attachment,
     BaggageCabin,
+    BaggageCabinLight,
     BaggageCabinNone,
+    BaggageCabinNoneLight,
     BaggageChecked10,
+    BaggageChecked10Light,
     BaggageChecked20,
+    BaggageChecked20Light,
     BaggageChecked30,
+    BaggageChecked30Light,
     BaggageCheckedNone,
+    BaggageCheckedNoneLight,
     BaggagePersonal,
+    BaggagePersonalLight,
     BaggagePersonalNone,
+    BaggagePersonalNoneLight,
     BaggageRecheck,
     BaggageSet,
+    BaggageSetLight,
     BaggageStorage,
     Bank,
     BillingDetails,
@@ -222,7 +231,11 @@ public enum class IconName {
     QuestionCircle,
     Radar,
     RadiusSearch,
+    RebookingLight,
+    RebookingNoneLight,
     Refund,
+    RefundLight,
+    RefundNoneLight,
     Relax,
     Reload,
     Remove,
@@ -235,6 +248,7 @@ public enum class IconName {
     Seat,
     SeatAisle,
     SeatExtraLegroom,
+    SeatLight,
     SeatWindow,
     Security,
     SelfTransfer,
@@ -321,15 +335,24 @@ public fun IconName.painter(): Painter = when (this) {
     IconName.Atm -> Icons.Atm
     IconName.Attachment -> Icons.Attachment
     IconName.BaggageCabin -> Icons.BaggageCabin
+    IconName.BaggageCabinLight -> Icons.BaggageCabinLight
     IconName.BaggageCabinNone -> Icons.BaggageCabinNone
+    IconName.BaggageCabinNoneLight -> Icons.BaggageCabinNoneLight
     IconName.BaggageChecked10 -> Icons.BaggageChecked10
+    IconName.BaggageChecked10Light -> Icons.BaggageChecked10Light
     IconName.BaggageChecked20 -> Icons.BaggageChecked20
+    IconName.BaggageChecked20Light -> Icons.BaggageChecked20Light
     IconName.BaggageChecked30 -> Icons.BaggageChecked30
+    IconName.BaggageChecked30Light -> Icons.BaggageChecked30Light
     IconName.BaggageCheckedNone -> Icons.BaggageCheckedNone
+    IconName.BaggageCheckedNoneLight -> Icons.BaggageCheckedNoneLight
     IconName.BaggagePersonal -> Icons.BaggagePersonal
+    IconName.BaggagePersonalLight -> Icons.BaggagePersonalLight
     IconName.BaggagePersonalNone -> Icons.BaggagePersonalNone
+    IconName.BaggagePersonalNoneLight -> Icons.BaggagePersonalNoneLight
     IconName.BaggageRecheck -> Icons.BaggageRecheck
     IconName.BaggageSet -> Icons.BaggageSet
+    IconName.BaggageSetLight -> Icons.BaggageSetLight
     IconName.BaggageStorage -> Icons.BaggageStorage
     IconName.Bank -> Icons.Bank
     IconName.BillingDetails -> Icons.BillingDetails
@@ -513,7 +536,11 @@ public fun IconName.painter(): Painter = when (this) {
     IconName.QuestionCircle -> Icons.QuestionCircle
     IconName.Radar -> Icons.Radar
     IconName.RadiusSearch -> Icons.RadiusSearch
+    IconName.RebookingLight -> Icons.RebookingLight
+    IconName.RebookingNoneLight -> Icons.RebookingNoneLight
     IconName.Refund -> Icons.Refund
+    IconName.RefundLight -> Icons.RefundLight
+    IconName.RefundNoneLight -> Icons.RefundNoneLight
     IconName.Relax -> Icons.Relax
     IconName.Reload -> Icons.Reload
     IconName.Remove -> Icons.Remove
@@ -526,6 +553,7 @@ public fun IconName.painter(): Painter = when (this) {
     IconName.Seat -> Icons.Seat
     IconName.SeatAisle -> Icons.SeatAisle
     IconName.SeatExtraLegroom -> Icons.SeatExtraLegroom
+    IconName.SeatLight -> Icons.SeatLight
     IconName.SeatWindow -> Icons.SeatWindow
     IconName.Security -> Icons.Security
     IconName.SelfTransfer -> Icons.SelfTransfer

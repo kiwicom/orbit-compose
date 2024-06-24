@@ -111,33 +111,65 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_cabin)
 
+    public val BaggageCabinLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_cabin_light)
+
     public val BaggageCabinNone: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_cabin_none)
+
+    public val BaggageCabinNoneLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_cabin_none_light)
 
     public val BaggageChecked10: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_checked_10)
 
+    public val BaggageChecked10Light: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_checked_10_light)
+
     public val BaggageChecked20: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_checked_20)
+
+    public val BaggageChecked20Light: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_checked_20_light)
 
     public val BaggageChecked30: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_checked_30)
 
+    public val BaggageChecked30Light: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_checked_30_light)
+
     public val BaggageCheckedNone: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_checked_none)
+
+    public val BaggageCheckedNoneLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_checked_none_light)
 
     public val BaggagePersonal: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_personal)
 
+    public val BaggagePersonalLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_personal_light)
+
     public val BaggagePersonalNone: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_personal_none)
+
+    public val BaggagePersonalNoneLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_personal_none_light)
 
     public val BaggageRecheck: Painter
         @Composable
@@ -146,6 +178,10 @@ public object Icons {
     public val BaggageSet: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_baggage_set)
+
+    public val BaggageSetLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_baggage_set_light)
 
     public val BaggageStorage: Painter
         @Composable
@@ -879,9 +915,25 @@ public object Icons {
         @Composable
         get() = painterResource(R.drawable.ic_orbit_radius_search)
 
+    public val RebookingLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_rebooking_light)
+
+    public val RebookingNoneLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_rebooking_none_light)
+
     public val Refund: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_refund)
+
+    public val RefundLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_refund_light)
+
+    public val RefundNoneLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_refund_none_light)
 
     public val Relax: Painter
         @Composable
@@ -930,6 +982,10 @@ public object Icons {
     public val SeatExtraLegroom: Painter
         @Composable
         get() = painterResource(R.drawable.ic_orbit_seat_extra_legroom)
+
+    public val SeatLight: Painter
+        @Composable
+        get() = painterResource(R.drawable.ic_orbit_seat_light)
 
     public val SeatWindow: Painter
         @Composable
