@@ -73,7 +73,7 @@ junit = { module = "junit:junit", version = "4.13.2" }
 kiwi-navigationComposeTyped = { module = "com.kiwi.navigation-compose.typed:core", version = "0.10.0" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
-slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.2.0" }
+slack-composeLintChecks = { module = "com.slack.lint.compose:compose-lint-checks", version = "1.4.2" }
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 vannitktech-mavenPublish-gradle = "com.vanniktech:gradle-maven-publish-plugin:0.28.0"
 
