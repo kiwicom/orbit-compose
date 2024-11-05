@@ -26,6 +26,7 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
 import org.jetbrains.kotlin.psi.psiUtil.isAncestor
+import org.jetbrains.kotlin.utils.addToStdlib.lastIndexOfOrNull
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.toUElement
@@ -36,7 +37,11 @@ internal fun PsiMethod.isInPackageName(packageName: String): Boolean {
 }
 
 internal fun PsiElement.getPackageName(): String? = when (this) {
-    is PsiMember -> this.containingClass?.qualifiedName?.let { it.substring(0, it.lastIndexOf(".")) }
+    is PsiMember -> this.containingClass?.qualifiedName?.let {
+        it.lastIndexOfOrNull('.')?.let { endIndex ->
+            it.substring(0, endIndex)
+        }
+    }
     else -> null
 }
 
