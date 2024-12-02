@@ -14,7 +14,7 @@ plugins {
     id("com.google.firebase.appdistribution") version "4.2.0" apply false
     id("com.vanniktech.maven.publish") version "0.28.0" apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.5" apply false
-    id("org.jmailen.kotlinter") version "4.2.0" apply false
+    id("org.jmailen.kotlinter") version "4.5.0" apply false
     id("org.jetbrains.dokka") version "1.9.20"
 }
 
