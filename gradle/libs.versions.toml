@@ -8,8 +8,8 @@ kotlin-lang = "1.9.23"
 kotlin-dokka = "1.9.20"
 
 kotlin-serialization = "1.6.3"
-android-sdkCommon = "31.2.2"
-android-lint = "31.2.2"
+android-sdkCommon = "31.10.0"
+android-lint = "31.10.0"
 androidx-activityCompose = "1.9.0"
 androidx-activityComposeCatalog = "1.9.0"
 androidx-core = "1.13.0"
@@ -28,8 +28,8 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-lang" }
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
-agp = "com.android.tools.build:gradle:8.2.2"
-android-desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.4" }
+agp = "com.android.tools.build:gradle:8.10.0"
+android-desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
 android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "android-sdkCommon" }
 android-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-lint" }
 android-lint-impl = { module = "com.android.tools.lint:lint", version.ref = "android-lint" }
