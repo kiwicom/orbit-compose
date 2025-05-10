@@ -4,23 +4,23 @@ compileSdk = "34"
 targetSdk = "34"
 minSdk = "23"
 
-kotlin-lang = "1.9.23"
+kotlin-lang = "1.9.25"
 kotlin-dokka = "1.9.20"
 
-kotlin-serialization = "1.6.3"
+kotlin-serialization = "1.8.1"
 android-sdkCommon = "31.2.2"
 android-lint = "31.2.2"
 androidx-activityCompose = "1.9.0"
 androidx-activityComposeCatalog = "1.9.0"
 androidx-core = "1.13.0"
 androidx-constraint-layout = "1.0.1"
-compose-compiler = "1.5.12"
+compose-compiler = "1.5.15"
 mockk = "1.13.9"
 square-kotlinPoet = "1.16.0"
 
 [libraries]
 
-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.5.0" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.2" }
 kotlin-dokka = { module = "org.jetbrains.dokka:dokka-base", version.ref = "kotlin-dokka" }
 kotlin-dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin-dokka" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-lang" }
